@@ -18,6 +18,8 @@ model Company {
   name                 String                 @db.VarChar(50)
   PaymentAuthorization PaymentAuthorization[]
   ExpenseClaim         ExpenseClaim[]
+
+  @@map("Companies")
 }
 
 model Department {
@@ -113,12 +115,16 @@ model PaymentAuthorizationApproval {
   approvalStatus         ApprovalStatus?
   updatedAt              DateTime?            @db.Timestamp()
   paymentAuthorizationId Int
+
+  @@map("PaymentAuthorizationApprovals")
 }
 
 model ExpenseType {
   id               Int                @id @default(autoincrement())
   name             String             @db.VarChar(30) // toll charge, fuel, food, parking
   ExpenseClaimItem ExpenseClaimItem[]
+
+  @@map("ExpenseTypes")
 }
 
 model ExpenseClaim {
@@ -136,6 +142,8 @@ model ExpenseClaim {
   ExpenseClaimApproval   ExpenseClaimApproval[]
   Company                Company                  @relation(fields: [companyId], references: [id])
   companyId              Int
+
+  @@map("ExpenseClaims")
 }
 
 model ExpenseClaimItem {
@@ -145,6 +153,8 @@ model ExpenseClaimItem {
   expenseTypeId Int
   description   String      @db.Text
   amount        BigInt      @db.BigInt
+
+  @@map("ExpenseClaimItems")
 }
 
 model ExpenseClaimAttachment {
@@ -155,6 +165,8 @@ model ExpenseClaimAttachment {
   filePath       String       @db.Text
   fileSize       BigInt       @db.BigInt
   description    String?      @db.VarChar(255)
+
+  @@map("ExpenseClaimAttachments")
 }
 
 model ExpenseClaimApproval {
@@ -165,6 +177,8 @@ model ExpenseClaimApproval {
   userId         Int
   approvalStatus ApprovalStatus?
   updatedAt      DateTime        @db.Timestamp()
+
+  @@map("ExpenseClaimApproval")
 }
 
 enum Role {
