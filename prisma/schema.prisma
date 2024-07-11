@@ -79,7 +79,9 @@ model PaymentAuthorization {
   bankId                       Int
   grossAmount                  BigInt                         @db.BigInt
   deduction                    BigInt                         @db.BigInt
-  netAmount                    BigInt                         @db.BigInt
+  netAmount                    BigInt                         @db.BigInt // yg harus ditransfer/dikembalikan, if < 0, dikembalikan ke perusahaan
+  amount                       BigInt                         @db.BigInt // real amount
+  cashAdvance                  BigInt                         @default(0) @db.BigInt
   description                  String                         @db.Text
   status                       PaymentStatus                  @default(DRAFT)
   createdAt                    DateTime                       @db.Timestamp() // todo kasih default
@@ -94,7 +96,7 @@ model PaymentAuthorization {
 
 model PaymentAuthorizationItem {
   id                     Int                   @id @default(autoincrement())
-  date                   DateTime?             @db.Date
+  date                   DateTime              @db.Date
   description            String                @db.Text
   amount                 BigInt                @db.BigInt
   PaymentAuthorization   PaymentAuthorization? @relation(fields: [paymentAuthorizationId], references: [id])
