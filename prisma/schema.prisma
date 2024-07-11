@@ -143,17 +143,20 @@ model ExpenseClaim {
   ExpenseClaimApproval   ExpenseClaimApproval[]
   Company                Company                  @relation(fields: [companyId], references: [id])
   companyId              Int
+  ExpenseClaimItem       ExpenseClaimItem[]
 
   @@map("ExpenseClaims")
 }
 
 model ExpenseClaimItem {
-  id            Int         @id @default(autoincrement())
-  date          DateTime    @db.Date
-  ExpenseType   ExpenseType @relation(fields: [expenseTypeId], references: [id])
-  expenseTypeId Int
-  description   String      @db.Text
-  amount        BigInt      @db.BigInt
+  id             Int          @id @default(autoincrement())
+  ExpenseClaim   ExpenseClaim @relation(fields: [expenseClaimId], references: [id])
+  date           DateTime     @db.Date
+  ExpenseType    ExpenseType  @relation(fields: [expenseTypeId], references: [id])
+  expenseTypeId  Int
+  description    String       @db.Text
+  amount         BigInt       @db.BigInt
+  expenseClaimId Int
 
   @@map("ExpenseClaimItems")
 }
