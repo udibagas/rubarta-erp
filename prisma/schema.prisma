@@ -13,10 +13,18 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Company {
+  id                   Int                    @id @default(autoincrement())
+  name                 String                 @db.VarChar(50)
+  PaymentAuthorization PaymentAuthorization[]
+  ExpenseClaim         ExpenseClaim[]
+}
+
 model Department {
-  id   Int    @id @default(autoincrement())
-  name String @db.VarChar(50)
-  User User[]
+  id           Int            @id @default(autoincrement())
+  name         String         @db.VarChar(50)
+  User         User[]
+  ExpenseClaim ExpenseClaim[]
 
   @@map("Departments")
 }
@@ -41,10 +49,12 @@ model User {
   Balance                      UserBalance?
   Bank                         Bank?                          @relation(fields: [bankId], references: [id])
   bankId                       Int?
-  department                   Department                     @relation(fields: [departmentId], references: [id])
+  Department                   Department                     @relation(fields: [departmentId], references: [id])
   departmentId                 Int
   PaymentAuthorization         PaymentAuthorization[]
   PaymentAuthorizationApproval PaymentAuthorizationApproval[]
+  ExpenseClaim                 ExpenseClaim[]
+  ExpenseClaimApproval         ExpenseClaimApproval[]
 
   @@map("Users")
 }
@@ -53,7 +63,7 @@ model UserBalance {
   id        Int      @id @default(autoincrement())
   user      User     @relation(fields: [userId], references: [id])
   userId    Int      @unique
-  balance   BigInt   @default(0) @db.BigInt()
+  balance   BigInt   @default(0) @db.BigInt
   updatedAt DateTime @db.Timestamp()
 
   @@map("UserBalances")
@@ -61,27 +71,31 @@ model UserBalance {
 
 model PaymentAuthorization {
   id                           Int                            @id @default(autoincrement())
-  Requester                    User                           @relation(fields: [requesterId], references: [id])
-  requesterId                  Int
+  date                         DateTime                       @db.Date
+  number                       String                         @db.VarChar(50)
+  User                         User                           @relation(fields: [userId], references: [id])
+  userId                       Int
   Bank                         Bank                           @relation(fields: [bankId], references: [id])
   bankId                       Int
-  grossAmount                  BigInt                         @db.BigInt()
-  deduction                    BigInt                         @db.BigInt()
-  netAmount                    BigInt                         @db.BigInt()
-  description                  String                         @db.Text()
-  status                       ClaimStatus                    @default(DRAFT)
+  grossAmount                  BigInt                         @db.BigInt
+  deduction                    BigInt                         @db.BigInt
+  netAmount                    BigInt                         @db.BigInt
+  description                  String                         @db.Text
+  status                       PaymentStatus                  @default(DRAFT)
   createdAt                    DateTime                       @db.Timestamp() // todo kasih default
   updatedAt                    DateTime                       @db.Timestamp()
   PaymentAuthorizationItem     PaymentAuthorizationItem[]
   PaymentAuthorizationApproval PaymentAuthorizationApproval[]
+  Company                      Company                        @relation(fields: [companyId], references: [id])
+  companyId                    Int
 
   @@map("PaymentAuthorizations")
 }
 
 model PaymentAuthorizationItem {
   id                     Int                   @id @default(autoincrement())
-  date                   DateTime              @db.Date
-  description            String                @db.Text()
+  date                   DateTime?             @db.Date
+  description            String                @db.Text
   amount                 BigInt                @db.BigInt
   PaymentAuthorization   PaymentAuthorization? @relation(fields: [paymentAuthorizationId], references: [id])
   paymentAuthorizationId Int
@@ -95,8 +109,60 @@ model PaymentAuthorizationApproval {
   userId                 Int
   PaymentAuthorization   PaymentAuthorization @relation(fields: [paymentAuthorizationId], references: [id])
   approvalStatus         ApprovalStatus?
-  updatedAt              DateTime?            @db.DateTime()
+  updatedAt              DateTime?            @db.Timestamp()
   paymentAuthorizationId Int
+}
+
+model ExpenseType {
+  id               Int                @id @default(autoincrement())
+  name             String             @db.VarChar(30) // toll charge, fuel, food, parking
+  ExpenseClaimItem ExpenseClaimItem[]
+}
+
+model ExpenseClaim {
+  id                     Int                      @id @default(autoincrement())
+  date                   DateTime                 @db.Date
+  User                   User                     @relation(fields: [userId], references: [id])
+  userId                 Int
+  Department             Department               @relation(fields: [departmentId], references: [id])
+  departmentId           Int
+  amount                 BigInt                   @db.BigInt
+  cashAdvance            BigInt                   @db.BigInt
+  claim                  BigInt                   @db.BigInt // if < 0 = refund
+  status                 ClaimStatus              @default(DRAFT)
+  ExpenseClaimAttachment ExpenseClaimAttachment[]
+  ExpenseClaimApproval   ExpenseClaimApproval[]
+  Company                Company                  @relation(fields: [companyId], references: [id])
+  companyId              Int
+}
+
+model ExpenseClaimItem {
+  id            Int         @id @default(autoincrement())
+  date          DateTime    @db.Date
+  ExpenseType   ExpenseType @relation(fields: [expenseTypeId], references: [id])
+  expenseTypeId Int
+  description   String      @db.Text
+  amount        BigInt      @db.BigInt
+}
+
+model ExpenseClaimAttachment {
+  id             Int          @id @default(autoincrement())
+  ExpenseClaim   ExpenseClaim @relation(fields: [expenseClaimId], references: [id])
+  expenseClaimId Int
+  fileName       String       @db.VarChar(255)
+  filePath       String       @db.Text
+  fileSize       BigInt       @db.BigInt
+  description    String?      @db.VarChar(255)
+}
+
+model ExpenseClaimApproval {
+  id             Int             @id @default(autoincrement())
+  ExpenseClaim   ExpenseClaim    @relation(fields: [expenseClaimId], references: [id])
+  expenseClaimId Int
+  User           User            @relation(fields: [userId], references: [id])
+  userId         Int
+  approvalStatus ApprovalStatus?
+  updatedAt      DateTime        @db.Timestamp()
 }
 
 enum Role {
@@ -108,6 +174,17 @@ enum Role {
 }
 
 enum ClaimStatus {
+  DRAFT
+  SUBMITTED
+  APPROVED
+  PARTIIALLY_APPROVED
+  REJECTED
+  VERIFIED
+  CANCELLED
+  PAID
+}
+
+enum PaymentStatus {
   DRAFT
   SUBMITTED
   APPROVED
