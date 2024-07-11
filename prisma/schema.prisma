@@ -51,7 +51,7 @@ model User {
   Balance                      UserBalance?
   Bank                         Bank?                          @relation(fields: [bankId], references: [id])
   bankId                       Int?
-  Department                   Department                     @relation(fields: [departmentId], references: [id])
+  Department                   Department?                    @relation(fields: [departmentId], references: [id])
   departmentId                 Int
   PaymentAuthorization         PaymentAuthorization[]
   PaymentAuthorizationApproval PaymentAuthorizationApproval[]
