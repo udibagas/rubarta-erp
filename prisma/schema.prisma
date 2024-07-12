@@ -47,7 +47,7 @@ model Bank {
 model User {
   id                           Int                            @id @default(autoincrement())
   name                         String                         @db.VarChar(50)
-  email                        String                         @db.VarChar(50)
+  email                        String                         @unique @db.VarChar(50)
   password                     String                         @db.VarChar(100)
   role                         Role                           @default(USER)
   active                       Boolean                        @default(true)
