@@ -15,15 +15,18 @@ datasource db {
 
 model Company {
   id                   Int                    @id @default(autoincrement())
+  code                 String                 @db.VarChar(10)
   name                 String                 @db.VarChar(50)
   PaymentAuthorization PaymentAuthorization[]
   ExpenseClaim         ExpenseClaim[]
+  ApprovalSetting      ApprovalSetting[]
 
   @@map("Companies")
 }
 
 model Department {
   id           Int            @id @default(autoincrement())
+  code         String         @db.VarChar(10)
   name         String         @db.VarChar(50)
   User         User[]
   ExpenseClaim ExpenseClaim[]
@@ -33,8 +36,8 @@ model Department {
 
 model Bank {
   id                   Int                    @id @default(autoincrement())
-  name                 String                 @db.VarChar(50)
   code                 String                 @db.VarChar(10)
+  name                 String                 @db.VarChar(50)
   User                 User[]
   PaymentAuthorization PaymentAuthorization[]
 
@@ -51,12 +54,16 @@ model User {
   Balance                      UserBalance?
   Bank                         Bank?                          @relation(fields: [bankId], references: [id])
   bankId                       Int?
+  bankAccount                  String?                        @db.VarChar(30)
   Department                   Department?                    @relation(fields: [departmentId], references: [id])
-  departmentId                 Int
+  departmentId                 Int?
+  signatureSpeciment           String?                        @db.VarChar(255)
   PaymentAuthorization         PaymentAuthorization[]
   PaymentAuthorizationApproval PaymentAuthorizationApproval[]
   ExpenseClaim                 ExpenseClaim[]
   ExpenseClaimApproval         ExpenseClaimApproval[]
+  ApprovalSettingItem          ApprovalSettingItem[]
+  Notification                 Notification[]
 
   @@map("Users")
 }
@@ -66,7 +73,7 @@ model UserBalance {
   user      User      @relation(fields: [userId], references: [id])
   userId    Int       @unique
   balance   BigInt    @default(0) @db.BigInt
-  updatedAt DateTime? @updatedAt
+  updatedAt DateTime? @updatedAt // kirim notifikasi apabila ada balance > 0 belum dilaporkan >= 7 hari
 
   @@map("UserBalances")
 }
@@ -85,6 +92,8 @@ model PaymentAuthorization {
   amount                       BigInt                         @db.BigInt // real amount
   cashAdvance                  BigInt                         @default(0) @db.BigInt
   description                  String                         @db.Text
+  ExpenseClaim                 ExpenseClaim?                  @relation(fields: [expenseClaimId], references: [id])
+  expenseClaimId               Int?                           @unique
   status                       PaymentStatus                  @default(DRAFT)
   createdAt                    DateTime                       @default(now())
   updatedAt                    DateTime?                      @updatedAt
@@ -112,7 +121,7 @@ model PaymentAuthorizationApproval {
   User                   User                 @relation(fields: [userId], references: [id])
   userId                 Int
   PaymentAuthorization   PaymentAuthorization @relation(fields: [paymentAuthorizationId], references: [id])
-  approvalStatus         ApprovalStatus?
+  approvalStatus         ApprovalStatus? // kirim notifikasi per hari jika status null
   createdAt              DateTime             @default(now())
   updatedAt              DateTime?            @updatedAt
   paymentAuthorizationId Int
@@ -135,7 +144,7 @@ model ExpenseClaim {
   userId                 Int
   Department             Department               @relation(fields: [departmentId], references: [id])
   departmentId           Int
-  amount                 BigInt                   @db.BigInt
+  totalAmount            BigInt                   @db.BigInt
   cashAdvance            BigInt                   @db.BigInt
   claim                  BigInt                   @db.BigInt // if < 0 = refund
   status                 ClaimStatus              @default(DRAFT)
@@ -144,6 +153,7 @@ model ExpenseClaim {
   Company                Company                  @relation(fields: [companyId], references: [id])
   companyId              Int
   ExpenseClaimItem       ExpenseClaimItem[]
+  PaymentAuthorization   PaymentAuthorization?
 
   @@map("ExpenseClaims")
 }
@@ -165,10 +175,12 @@ model ExpenseClaimAttachment {
   id             Int          @id @default(autoincrement())
   ExpenseClaim   ExpenseClaim @relation(fields: [expenseClaimId], references: [id])
   expenseClaimId Int
-  fileName       String       @db.VarChar(255)
-  filePath       String       @db.Text
-  fileSize       BigInt       @db.BigInt
   description    String?      @db.VarChar(255)
+
+  fileName String @db.VarChar(255)
+  filePath String @db.Text
+  fileSize BigInt @db.BigInt
+  fileType String @db.VarChar(30)
 
   @@map("ExpenseClaimAttachments")
 }
@@ -179,11 +191,46 @@ model ExpenseClaimApproval {
   expenseClaimId Int
   User           User            @relation(fields: [userId], references: [id])
   userId         Int
-  approvalStatus ApprovalStatus?
+  approvalStatus ApprovalStatus? // kirim notifikasi per hari jika status null
   createdAt      DateTime        @default(now())
   updatedAt      DateTime?       @updatedAt
 
   @@map("ExpenseClaimApproval")
+}
+
+model ApprovalSetting {
+  id                  Int                   @id @default(autoincrement())
+  Company             Company               @relation(fields: [companyId], references: [id])
+  companyId           Int
+  approvalType        ApprovalType
+  ApprovalSettingItem ApprovalSettingItem[]
+
+  @@unique([companyId, approvalType]) // ga boleh ada setting yg sama
+  @@map("ApprovalSettings")
+}
+
+model ApprovalSettingItem {
+  id                Int             @id @default(autoincrement())
+  ApprovalSetting   ApprovalSetting @relation(fields: [approvalSettingId], references: [id])
+  approvalSettingId Int
+  level             Int             @db.SmallInt
+  User              User            @relation(fields: [userId], references: [id])
+  userId            Int
+
+  @@unique([approvalSettingId, level, userId]) // ga boleh ada setting yg sama
+  @@map("ApprovalSettingItems")
+}
+
+// kirim juga notifikasi ini ke email dengan redaksi yang sama
+model Notification {
+  id          BigInt    @id @default(autoincrement()) @db.BigInt
+  User        User      @relation(fields: [userId], references: [id])
+  userId      Int
+  message     String    @db.Text
+  redirectUrl String?   @db.VarChar(255)
+  readAt      DateTime? @db.Timestamp()
+
+  @@map("Notifications")
 }
 
 enum Role {
@@ -191,6 +238,7 @@ enum Role {
   CASHIER
   FINANCE
   ACCOUNTING
+  GA
   ADMIN
 }
 
@@ -218,4 +266,9 @@ enum PaymentStatus {
 enum ApprovalStatus {
   APPROVED
   REJECTED
+}
+
+enum ApprovalType {
+  PAYMENT_AUTHORIZATION
+  EXPENSE_CLAIM
 }
