@@ -1,0 +1,61 @@
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
+import { CompaniesService } from './companies.service';
+import { CreateCompanyDto } from './dto/create-company.dto';
+import { UpdateCompanyDto } from './dto/update-company.dto';
+import {
+  ApiBearerAuth,
+  ApiCreatedResponse,
+  ApiOkResponse,
+  ApiTags,
+} from '@nestjs/swagger';
+import { Roles } from 'src/auth/role.decorator';
+import { Role } from '@prisma/client';
+import { Company } from './entities/company.entity';
+
+@ApiTags('Companies')
+@ApiBearerAuth()
+@Controller('api/companies')
+export class CompaniesController {
+  constructor(private readonly companiesService: CompaniesService) {}
+
+  @Post()
+  @Roles(Role.ADMIN)
+  @ApiCreatedResponse({ type: Company })
+  create(@Body() createCompanyDto: CreateCompanyDto) {
+    return this.companiesService.create(createCompanyDto);
+  }
+
+  @Get()
+  @ApiOkResponse({ type: Company, isArray: true })
+  findAll() {
+    return this.companiesService.findAll();
+  }
+
+  @Get(':id')
+  @ApiOkResponse({ type: Company })
+  findOne(@Param('id') id: string) {
+    return this.companiesService.findOne(+id);
+  }
+
+  @Patch(':id')
+  @Roles(Role.ADMIN)
+  @ApiOkResponse({ type: Company })
+  update(@Param('id') id: string, @Body() updateCompanyDto: UpdateCompanyDto) {
+    return this.companiesService.update(+id, updateCompanyDto);
+  }
+
+  @Delete(':id')
+  @Roles(Role.ADMIN)
+  @ApiOkResponse({ type: Company })
+  remove(@Param('id') id: string) {
+    return this.companiesService.remove(+id);
+  }
+}
