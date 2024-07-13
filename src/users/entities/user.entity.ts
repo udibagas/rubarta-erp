@@ -1,6 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Role } from '@prisma/client';
-import * as bcrypt from 'bcrypt';
+import { Exclude } from 'class-transformer';
 
 export class User {
   @ApiProperty()
@@ -12,13 +11,12 @@ export class User {
   @ApiProperty()
   email: string;
 
+  @Exclude()
+  @ApiProperty()
   password: string;
 
   @ApiProperty({ required: false, nullable: true })
   bankAccount: string;
-
-  @ApiProperty()
-  role: Role;
 
   @ApiProperty()
   active: boolean;
@@ -32,7 +30,6 @@ export class User {
   @ApiProperty({ required: false, nullable: true })
   signatureSpeciment: string;
 
-  verify(password): Promise<boolean> {
-    return bcrypt.compare(password, this.password);
-  }
+  @ApiProperty()
+  roles: string[];
 }

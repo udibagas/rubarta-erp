@@ -12,7 +12,7 @@ export class CreateApprovalSettingDto {
   // @IsIn([ApprovalType.EXPENSE_CLAIM, ApprovalType.PAYMENT_AUTHORIZATION])
   approvalType: ApprovalType;
 
-  // @ApiProperty()
-  // @IsNotEmpty()
-  // approvalSettingItem: ApprovalSettingItem;
+  @ApiProperty()
+  @IsNotEmpty()
+  approvalSettingItem: ApprovalSettingItem;
 }

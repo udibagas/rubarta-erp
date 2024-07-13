@@ -10,6 +10,4 @@ export class ApprovalSetting {
 
   @ApiProperty()
   approvalType: ApprovalType;
-
-  approvalSettingItem: ApprovalSettingItem;
 }

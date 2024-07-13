@@ -1,6 +1,17 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Role } from '@prisma/client';
-import { IsEmail, IsNotEmpty, IsOptional, Length } from 'class-validator';
+import {
+  IsEmail,
+  IsNotEmpty,
+  IsOptional,
+  Length,
+  ValidateNested,
+} from 'class-validator';
+
+export class UserRole {
+  @IsNotEmpty()
+  role: string;
+}
 
 export class CreateUserDto {
   @ApiProperty()
@@ -10,10 +21,6 @@ export class CreateUserDto {
   @ApiProperty()
   @IsEmail({}, { message: 'Invalid email' })
   email: string;
-
-  @ApiProperty()
-  @IsOptional()
-  role: Role;
 
   @ApiProperty()
   @IsNotEmpty({ message: 'Password is required' })
@@ -28,7 +35,7 @@ export class CreateUserDto {
   @IsOptional()
   bankAccount: string;
 
-  // @ApiProperty()
-  // @IsOptional()
-  // departmentId: string;
+  @ApiProperty()
+  @IsNotEmpty({ each: true })
+  roles: Role[];
 }
