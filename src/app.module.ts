@@ -6,6 +6,7 @@ import { AuthModule } from './auth/auth.module';
 import { BanksModule } from './banks/banks.module';
 import { CompaniesModule } from './companies/companies.module';
 import { DepartmentsModule } from './departments/departments.module';
+import { ExpenseTypesModule } from './expense-types/expense-types.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { DepartmentsModule } from './departments/departments.module';
     BanksModule,
     CompaniesModule,
     DepartmentsModule,
+    ExpenseTypesModule,
   ],
   controllers: [],
   providers: [],
