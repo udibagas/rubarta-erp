@@ -6,6 +6,7 @@ import {
   Patch,
   Param,
   Delete,
+  ParseIntPipe,
 } from '@nestjs/common';
 import { CompaniesService } from './companies.service';
 import { CreateCompanyDto } from './dto/create-company.dto';
@@ -41,24 +42,24 @@ export class CompaniesController {
 
   @Get(':id')
   @ApiOkResponse({ type: Company })
-  findOne(@Param('id') id: string): Promise<Company> {
-    return this.companiesService.findOne(+id);
+  findOne(@Param('id', ParseIntPipe) id: number): Promise<Company> {
+    return this.companiesService.findOne(id);
   }
 
   @Patch(':id')
   @Roles(Role.ADMIN)
   @ApiOkResponse({ type: Company })
   update(
-    @Param('id') id: string,
+    @Param('id', ParseIntPipe) id: number,
     @Body() updateCompanyDto: UpdateCompanyDto,
   ): Promise<Company> {
-    return this.companiesService.update(+id, updateCompanyDto);
+    return this.companiesService.update(id, updateCompanyDto);
   }
 
   @Delete(':id')
   @Roles(Role.ADMIN)
   @ApiOkResponse({ type: Company })
-  remove(@Param('id') id: string): Promise<Company> {
-    return this.companiesService.remove(+id);
+  remove(@Param('id', ParseIntPipe) id: number): Promise<Company> {
+    return this.companiesService.remove(id);
   }
 }

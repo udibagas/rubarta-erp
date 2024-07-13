@@ -6,6 +6,7 @@ import {
   Patch,
   Param,
   Delete,
+  ParseIntPipe,
 } from '@nestjs/common';
 import { BanksService } from './banks.service';
 import { CreateBankDto } from './dto/create-bank.dto';
@@ -31,20 +32,20 @@ export class BanksController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string): Promise<Bank> {
-    return this.banksService.findOne(+id);
+  findOne(@Param('id', ParseIntPipe) id: number): Promise<Bank> {
+    return this.banksService.findOne(id);
   }
 
   @Patch(':id')
   update(
-    @Param('id') id: string,
+    @Param('id', ParseIntPipe) id: number,
     @Body() updateBankDto: UpdateBankDto,
   ): Promise<Bank> {
-    return this.banksService.update(+id, updateBankDto);
+    return this.banksService.update(id, updateBankDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string): Promise<Bank> {
-    return this.banksService.remove(+id);
+  remove(@Param('id', ParseIntPipe) id: number): Promise<Bank> {
+    return this.banksService.remove(id);
   }
 }

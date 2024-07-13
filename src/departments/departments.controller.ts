@@ -6,6 +6,7 @@ import {
   Patch,
   Param,
   Delete,
+  ParseIntPipe,
 } from '@nestjs/common';
 import { DepartmentsService } from './departments.service';
 import { CreateDepartmentDto } from './dto/create-department.dto';
@@ -43,24 +44,24 @@ export class DepartmentsController {
 
   @Get(':id')
   @ApiOkResponse({ type: Department })
-  findOne(@Param('id') id: string): Promise<Department> {
-    return this.departmentsService.findOne(+id);
+  findOne(@Param('id', ParseIntPipe) id: number): Promise<Department> {
+    return this.departmentsService.findOne(id);
   }
 
   @Patch(':id')
   @Roles(Role.ADMIN)
   @ApiOkResponse({ type: Department })
   update(
-    @Param('id') id: string,
+    @Param('id', ParseIntPipe) id: number,
     @Body() updateDepartmentDto: UpdateDepartmentDto,
   ): Promise<Department> {
-    return this.departmentsService.update(+id, updateDepartmentDto);
+    return this.departmentsService.update(id, updateDepartmentDto);
   }
 
   @Delete(':id')
   @Roles(Role.ADMIN)
   @ApiOkResponse({ type: Department })
-  remove(@Param('id') id: string): Promise<Department> {
-    return this.departmentsService.remove(+id);
+  remove(@Param('id', ParseIntPipe) id: number): Promise<Department> {
+    return this.departmentsService.remove(id);
   }
 }

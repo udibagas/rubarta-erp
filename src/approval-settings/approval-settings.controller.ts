@@ -6,6 +6,7 @@ import {
   Patch,
   Param,
   Delete,
+  ParseIntPipe,
 } from '@nestjs/common';
 import { ApprovalSettingsService } from './approval-settings.service';
 import { CreateApprovalSettingDto } from './dto/create-approval-setting.dto';
@@ -45,24 +46,24 @@ export class ApprovalSettingsController {
 
   @Get(':id')
   @ApiOkResponse({ type: ApprovalSetting })
-  findOne(@Param('id') id: string): Promise<ApprovalSetting> {
-    return this.approvalSettingsService.findOne(+id);
+  findOne(@Param('id', ParseIntPipe) id: number): Promise<ApprovalSetting> {
+    return this.approvalSettingsService.findOne(id);
   }
 
   @Patch(':id')
   @Roles(Role.ADMIN)
   @ApiOkResponse({ type: ApprovalSetting })
   update(
-    @Param('id') id: string,
+    @Param('id', ParseIntPipe) id: number,
     @Body() updateApprovalSettingDto: UpdateApprovalSettingDto,
   ): Promise<ApprovalSetting> {
-    return this.approvalSettingsService.update(+id, updateApprovalSettingDto);
+    return this.approvalSettingsService.update(id, updateApprovalSettingDto);
   }
 
   @Delete(':id')
   @Roles(Role.ADMIN)
   @ApiOkResponse({ type: ApprovalSetting })
-  remove(@Param('id') id: string): Promise<ApprovalSetting> {
-    return this.approvalSettingsService.remove(+id);
+  remove(@Param('id', ParseIntPipe) id: number): Promise<ApprovalSetting> {
+    return this.approvalSettingsService.remove(id);
   }
 }

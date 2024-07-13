@@ -6,6 +6,7 @@ import {
   Patch,
   Param,
   Delete,
+  ParseIntPipe,
 } from '@nestjs/common';
 import { ExpenseTypesService } from './expense-types.service';
 import { CreateExpenseTypeDto } from './dto/create-expense-type.dto';
@@ -43,24 +44,24 @@ export class ExpenseTypesController {
 
   @Get(':id')
   @ApiOkResponse({ type: ExpenseType })
-  findOne(@Param('id') id: string): Promise<ExpenseType> {
-    return this.expenseTypesService.findOne(+id);
+  findOne(@Param('id', ParseIntPipe) id: number): Promise<ExpenseType> {
+    return this.expenseTypesService.findOne(id);
   }
 
   @Patch(':id')
   @Roles(Role.ADMIN)
   @ApiOkResponse({ type: ExpenseType })
   update(
-    @Param('id') id: string,
+    @Param('id', ParseIntPipe) id: number,
     @Body() updateExpenseTypeDto: UpdateExpenseTypeDto,
   ): Promise<ExpenseType> {
-    return this.expenseTypesService.update(+id, updateExpenseTypeDto);
+    return this.expenseTypesService.update(id, updateExpenseTypeDto);
   }
 
   @Delete(':id')
   @Roles(Role.ADMIN)
   @ApiOkResponse({ type: ExpenseType })
-  remove(@Param('id') id: string): Promise<ExpenseType> {
-    return this.expenseTypesService.remove(+id);
+  remove(@Param('id', ParseIntPipe) id: number): Promise<ExpenseType> {
+    return this.expenseTypesService.remove(id);
   }
 }
