@@ -10,18 +10,33 @@ export class UsersService {
 
   create(createUserDto: CreateUserDto) {
     createUserDto.password = bcrypt.hashSync(createUserDto.password, 10);
-    return this.prisma.user.create({ data: createUserDto });
+    return this.prisma.user.create({
+      data: createUserDto,
+      include: {
+        roles: true,
+      },
+    });
   }
 
   findAll() {
     return this.prisma.user.findMany({
       orderBy: { name: 'asc' },
+      include: {
+        roles: true,
+      },
     });
   }
 
   async findOne(id: number) {
-    const user = await this.prisma.user.findUnique({ where: { id } });
+    const user = await this.prisma.user.findUnique({
+      where: { id },
+      include: {
+        roles: true,
+      },
+    });
+
     if (!user) throw new NotFoundException();
+
     return user;
   }
 
@@ -34,6 +49,9 @@ export class UsersService {
     return this.prisma.user.update({
       data: updateUserDto,
       where: { id },
+      include: {
+        roles: true,
+      },
     });
   }
 
@@ -43,6 +61,11 @@ export class UsersService {
   }
 
   findByEmail(email: string) {
-    return this.prisma.user.findFirst({ where: { email } });
+    return this.prisma.user.findFirst({
+      where: { email },
+      include: {
+        roles: true,
+      },
+    });
   }
 }
