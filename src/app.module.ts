@@ -7,6 +7,7 @@ import { BanksModule } from './banks/banks.module';
 import { CompaniesModule } from './companies/companies.module';
 import { DepartmentsModule } from './departments/departments.module';
 import { ExpenseTypesModule } from './expense-types/expense-types.module';
+import { ApprovalSettingsModule } from './approval-settings/approval-settings.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { ExpenseTypesModule } from './expense-types/expense-types.module';
     CompaniesModule,
     DepartmentsModule,
     ExpenseTypesModule,
+    ApprovalSettingsModule,
   ],
   controllers: [],
   providers: [],
