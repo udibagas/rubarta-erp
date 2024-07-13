@@ -1,11 +1,12 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Role } from '@prisma/client';
 import {
+  IsArray,
   IsEmail,
+  IsEnum,
   IsNotEmpty,
   IsOptional,
   Length,
-  ValidateNested,
 } from 'class-validator';
 
 export class UserRole {
@@ -36,6 +37,8 @@ export class CreateUserDto {
   bankAccount: string;
 
   @ApiProperty()
+  @IsArray()
   @IsNotEmpty({ each: true })
+  @IsEnum(Role, { each: true })
   roles: Role[];
 }
