@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { ApprovalType } from '@prisma/client';
+import { ApprovalSettingItem, ApprovalType } from '@prisma/client';
 import { IsIn, IsNotEmpty } from 'class-validator';
 
 export class CreateApprovalSettingDto {
@@ -11,4 +11,8 @@ export class CreateApprovalSettingDto {
   @IsNotEmpty()
   // @IsIn([ApprovalType.EXPENSE_CLAIM, ApprovalType.PAYMENT_AUTHORIZATION])
   approvalType: ApprovalType;
+
+  // @ApiProperty()
+  // @IsNotEmpty()
+  // approvalSettingItem: ApprovalSettingItem;
 }

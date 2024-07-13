@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { ApprovalType } from '@prisma/client';
+import { ApprovalSettingItem, ApprovalType } from '@prisma/client';
 
 export class ApprovalSetting {
   @ApiProperty()
@@ -10,4 +10,6 @@ export class ApprovalSetting {
 
   @ApiProperty()
   approvalType: ApprovalType;
+
+  approvalSettingItem: ApprovalSettingItem;
 }
