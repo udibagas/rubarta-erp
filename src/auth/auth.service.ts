@@ -15,8 +15,8 @@ export class AuthService {
     if (!user) throw new UnauthorizedException();
     const verified = await bcrypt.compare(password, user.password);
     if (!verified) throw new UnauthorizedException();
-    const { id: sub, name, role } = user;
-    const payload = { sub, name, role };
+    const { id: sub, name, roles } = user;
+    const payload = { sub, name, email, roles: roles.map((r) => r.role) };
     const token = this.jwtService.sign(payload);
     return { token };
   }
