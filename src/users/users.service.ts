@@ -12,18 +12,27 @@ export class UsersService {
     createUserDto.password = bcrypt.hashSync(createUserDto.password, 10);
     return this.prisma.user.create({
       data: createUserDto,
+      omit: {
+        password: true,
+      },
     });
   }
 
   findAll() {
     return this.prisma.user.findMany({
       orderBy: { name: 'asc' },
+      omit: {
+        password: true,
+      },
     });
   }
 
   async findOne(id: number) {
     const user = await this.prisma.user.findUnique({
       where: { id },
+      omit: {
+        password: true,
+      },
     });
 
     if (!user) throw new NotFoundException();
@@ -40,12 +49,20 @@ export class UsersService {
     return this.prisma.user.update({
       data: updateUserDto,
       where: { id },
+      omit: {
+        password: true,
+      },
     });
   }
 
   async remove(id: number) {
     await this.findOne(id);
-    return this.prisma.user.delete({ where: { id } });
+    return this.prisma.user.delete({
+      where: { id },
+      omit: {
+        password: true,
+      },
+    });
   }
 
   findByEmail(email: string) {
