@@ -29,33 +29,36 @@ export class CompaniesController {
   @Post()
   @Roles(Role.ADMIN)
   @ApiCreatedResponse({ type: Company })
-  create(@Body() createCompanyDto: CreateCompanyDto) {
+  create(@Body() createCompanyDto: CreateCompanyDto): Promise<Company> {
     return this.companiesService.create(createCompanyDto);
   }
 
   @Get()
   @ApiOkResponse({ type: Company, isArray: true })
-  findAll() {
+  findAll(): Promise<Company[]> {
     return this.companiesService.findAll();
   }
 
   @Get(':id')
   @ApiOkResponse({ type: Company })
-  findOne(@Param('id') id: string) {
+  findOne(@Param('id') id: string): Promise<Company> {
     return this.companiesService.findOne(+id);
   }
 
   @Patch(':id')
   @Roles(Role.ADMIN)
   @ApiOkResponse({ type: Company })
-  update(@Param('id') id: string, @Body() updateCompanyDto: UpdateCompanyDto) {
+  update(
+    @Param('id') id: string,
+    @Body() updateCompanyDto: UpdateCompanyDto,
+  ): Promise<Company> {
     return this.companiesService.update(+id, updateCompanyDto);
   }
 
   @Delete(':id')
   @Roles(Role.ADMIN)
   @ApiOkResponse({ type: Company })
-  remove(@Param('id') id: string) {
+  remove(@Param('id') id: string): Promise<Company> {
     return this.companiesService.remove(+id);
   }
 }
