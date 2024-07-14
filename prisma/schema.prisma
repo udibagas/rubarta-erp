@@ -67,6 +67,7 @@ model User {
   ApprovalSettingItem          ApprovalSettingItem[]
   PaymentAuthorization         PaymentAuthorization[]         @relation(name: "PaymentAuthorization")
   PaymentAuthorizationRequest  PaymentAuthorization[]         @relation(name: "PaymentAuthorizationRequest")
+  PaymentAuthorizationLog      PaymentAuthorizationLog[]
 
   @@index([bankId, departmentId])
   @@map("Users")
@@ -114,6 +115,7 @@ model PaymentAuthorization {
   PaymentAuthorizationApproval PaymentAuthorizationApproval[]
   Company                      Company                        @relation(fields: [companyId], references: [id])
   companyId                    Int
+  PaymentAuthorizationLog      PaymentAuthorizationLog[]
 
   @@index([employeeId, requesterId, bankId, expenseClaimId, companyId])
   @@map("PaymentAuthorizations")
@@ -145,6 +147,20 @@ model PaymentAuthorizationApproval {
   @@unique([userId, paymentAuthorizationId])
   @@index([userId, paymentAuthorizationId])
   @@map("PaymentAuthorizationApprovals")
+}
+
+model PaymentAuthorizationLog {
+  id                     Int                  @id @default(autoincrement())
+  User                   User                 @relation(fields: [userId], references: [id])
+  PaymentAuthorization   PaymentAuthorization @relation(fields: [paymentAuthorizationId], references: [id])
+  status                 ApprovalStatus
+  note                   String?              @db.VarChar(100)
+  updatedAt              DateTime             @updatedAt
+  userId                 Int
+  paymentAuthorizationId Int
+
+  @@index([userId, paymentAuthorizationId])
+  @@map("PaymentAuthorizationLogs")
 }
 
 model ExpenseType {
@@ -219,7 +235,7 @@ model ExpenseClaimApproval {
 
   @@unique([expenseClaimId, userId])
   @@index([expenseClaimId, userId])
-  @@map("ExpenseClaimApproval")
+  @@map("ExpenseClaimApprovals")
 }
 
 model ApprovalSetting {
@@ -227,6 +243,7 @@ model ApprovalSetting {
   Company             Company               @relation(fields: [companyId], references: [id])
   companyId           Int
   approvalType        ApprovalType
+  approvalActionType  ApprovalActionType    @default(APPROVAL)
   ApprovalSettingItem ApprovalSettingItem[]
 
   @@unique([companyId, approvalType]) // ga boleh ada setting yg sama
@@ -235,12 +252,13 @@ model ApprovalSetting {
 }
 
 model ApprovalSettingItem {
-  id                Int             @id @default(autoincrement())
-  ApprovalSetting   ApprovalSetting @relation(fields: [approvalSettingId], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  approvalSettingId Int
-  level             Int             @db.SmallInt
-  User              User            @relation(fields: [userId], references: [id])
-  userId            Int
+  id                 Int                @id @default(autoincrement())
+  ApprovalSetting    ApprovalSetting    @relation(fields: [approvalSettingId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  approvalSettingId  Int
+  level              Int                @db.SmallInt
+  User               User               @relation(fields: [userId], references: [id])
+  userId             Int
+  approvalActionType ApprovalActionType @default(APPROVAL)
 
   @@unique([approvalSettingId, level, userId]) // ga boleh ada setting yg sama
   @@index([approvalSettingId, userId])
@@ -300,4 +318,10 @@ enum ApprovalStatus {
 enum ApprovalType {
   PAYMENT_AUTHORIZATION
   EXPENSE_CLAIM
+}
+
+enum ApprovalActionType {
+  APPROVAL
+  VERIFICATION
+  PAYMENT
 }
