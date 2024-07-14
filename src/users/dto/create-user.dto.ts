@@ -1,6 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Role } from '@prisma/client';
 import {
+  ArrayNotEmpty,
   IsArray,
   IsEmail,
   IsEnum,
@@ -38,7 +39,7 @@ export class CreateUserDto {
 
   @ApiProperty()
   @IsArray()
-  @IsNotEmpty({ each: true })
-  @IsEnum(Role, { each: true })
+  @ArrayNotEmpty()
+  @IsEnum(Role, { each: true, message: 'Invalid Role' })
   roles: Role[];
 }
