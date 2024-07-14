@@ -15,22 +15,18 @@ export class ExpenseTypesService {
     return this.prisma.expenseType.findMany({ orderBy: { name: 'asc' } });
   }
 
-  async findOne(id: number) {
-    const data = await this.prisma.expenseType.findUnique({ where: { id } });
-    if (!data) throw new NotFoundException();
-    return data;
+  findOne(id: number) {
+    return this.prisma.expenseType.findUnique({ where: { id } });
   }
 
-  async update(id: number, updateExpenseTypeDto: UpdateExpenseTypeDto) {
-    await this.findOne(id);
+  update(id: number, updateExpenseTypeDto: UpdateExpenseTypeDto) {
     return this.prisma.expenseType.update({
       data: updateExpenseTypeDto,
       where: { id },
     });
   }
 
-  async remove(id: number) {
-    await this.findOne(id);
+  remove(id: number) {
     return this.prisma.expenseType.delete({ where: { id } });
   }
 }

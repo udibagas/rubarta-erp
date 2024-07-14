@@ -22,22 +22,18 @@ export class BanksService {
     });
   }
 
-  async findOne(id: number) {
-    const bank = await this.prisma.bank.findUnique({ where: { id } });
-    if (!bank) throw new NotFoundException();
-    return bank;
+  findOne(id: number) {
+    return this.prisma.bank.findUnique({ where: { id } });
   }
 
-  async update(id: number, updateBankDto: UpdateBankDto) {
-    await this.findOne(id);
+  update(id: number, updateBankDto: UpdateBankDto) {
     return this.prisma.bank.update({
       data: updateBankDto,
       where: { id },
     });
   }
 
-  async remove(id: number) {
-    return await this.findOne(id);
+  remove(id: number) {
     return this.prisma.bank.delete({ where: { id } });
   }
 }

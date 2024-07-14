@@ -13,29 +13,22 @@ export class CompaniesService {
 
   findAll() {
     return this.prisma.company.findMany({
-      orderBy: {
-        code: 'asc',
-        name: 'asc',
-      },
+      orderBy: { code: 'asc' },
     });
   }
 
-  async findOne(id: number) {
-    const company = await this.prisma.company.findUnique({ where: { id } });
-    if (!company) throw new NotFoundException();
-    return company;
+  findOne(id: number) {
+    return this.prisma.company.findUniqueOrThrow({ where: { id } });
   }
 
-  async update(id: number, updateCompanyDto: UpdateCompanyDto) {
-    await this.findOne(id);
+  update(id: number, updateCompanyDto: UpdateCompanyDto) {
     return this.prisma.company.update({
       data: updateCompanyDto,
       where: { id },
     });
   }
 
-  async remove(id: number) {
-    await this.findOne(id);
+  remove(id: number) {
     return this.prisma.company.delete({ where: { id } });
   }
 }

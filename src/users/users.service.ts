@@ -27,25 +27,20 @@ export class UsersService {
     });
   }
 
-  async findOne(id: number) {
-    const user = await this.prisma.user.findUnique({
+  findOne(id: number) {
+    return this.prisma.user.findUniqueOrThrow({
       where: { id },
       omit: {
         password: true,
       },
     });
-
-    if (!user) throw new NotFoundException();
-
-    return user;
   }
 
-  async update(id: number, updateUserDto: UpdateUserDto) {
+  update(id: number, updateUserDto: UpdateUserDto) {
     if (updateUserDto.password) {
       updateUserDto.password = bcrypt.hashSync(updateUserDto.password, 10);
     }
 
-    await this.findOne(id);
     return this.prisma.user.update({
       data: updateUserDto,
       where: { id },
@@ -55,8 +50,7 @@ export class UsersService {
     });
   }
 
-  async remove(id: number) {
-    await this.findOne(id);
+  remove(id: number) {
     return this.prisma.user.delete({
       where: { id },
       omit: {
