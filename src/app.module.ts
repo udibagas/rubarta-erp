@@ -10,6 +10,7 @@ import { ExpenseTypesModule } from './expense-types/expense-types.module';
 import { ApprovalSettingsModule } from './approval-settings/approval-settings.module';
 import { PaymentAuthorizationsModule } from './payment-authorizations/payment-authorizations.module';
 import { EventEmitterModule } from '@nestjs/event-emitter';
+import { ExpenseClaimsModule } from './expense-claims/expense-claims.module';
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { EventEmitterModule } from '@nestjs/event-emitter';
     ExpenseTypesModule,
     ApprovalSettingsModule,
     PaymentAuthorizationsModule,
+    ExpenseClaimsModule,
   ],
   controllers: [],
   providers: [],
