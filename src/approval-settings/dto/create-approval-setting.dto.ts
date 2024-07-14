@@ -1,6 +1,26 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { ApprovalSettingItem, ApprovalType } from '@prisma/client';
-import { IsIn, IsNotEmpty } from 'class-validator';
+import { ApprovalType } from '@prisma/client';
+import { Type } from 'class-transformer';
+import {
+  ArrayNotEmpty,
+  IsArray,
+  IsEnum,
+  IsNotEmpty,
+  IsNumber,
+  ValidateNested,
+} from 'class-validator';
+
+export class CreateApprovalSettingItemDto {
+  @ApiProperty()
+  @IsNotEmpty()
+  @IsNumber()
+  userId: number;
+
+  @ApiProperty()
+  @IsNotEmpty()
+  @IsNumber()
+  level: number;
+}
 
 export class CreateApprovalSettingDto {
   @ApiProperty()
@@ -9,10 +29,14 @@ export class CreateApprovalSettingDto {
 
   @ApiProperty()
   @IsNotEmpty()
-  // @IsIn([ApprovalType.EXPENSE_CLAIM, ApprovalType.PAYMENT_AUTHORIZATION])
+  @IsEnum(ApprovalType)
   approvalType: ApprovalType;
 
   @ApiProperty()
   @IsNotEmpty()
-  approvalSettingItem: ApprovalSettingItem;
+  @IsArray()
+  @ArrayNotEmpty()
+  @Type(() => CreateApprovalSettingItemDto)
+  @ValidateNested({ each: true })
+  approvalSettingItem: CreateApprovalSettingItemDto[];
 }
