@@ -8,18 +8,29 @@ export class ApprovalSettingsService {
   constructor(private prisma: PrismaService) {}
 
   create(createApprovalSettingDto: CreateApprovalSettingDto) {
+    const { approvalSettingItem, ...data } = createApprovalSettingDto;
     return this.prisma.approvalSetting.create({
-      data: createApprovalSettingDto,
+      data: { ...data, ApprovalSettingItem: { create: approvalSettingItem } },
+      include: {
+        ApprovalSettingItem: true,
+      },
     });
   }
 
   findAll() {
-    return this.prisma.approvalSetting.findMany();
+    return this.prisma.approvalSetting.findMany({
+      include: {
+        ApprovalSettingItem: true,
+      },
+    });
   }
 
   async findOne(id: number) {
     const data = await this.prisma.approvalSetting.findUnique({
       where: { id },
+      include: {
+        ApprovalSettingItem: true,
+      },
     });
     if (!data) throw new NotFoundException();
     return data;
@@ -30,6 +41,9 @@ export class ApprovalSettingsService {
     return this.prisma.approvalSetting.update({
       data: updateApprovalSettingDto,
       where: { id },
+      include: {
+        ApprovalSettingItem: true,
+      },
     });
   }
 
