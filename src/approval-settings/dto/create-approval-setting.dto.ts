@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { ApprovalType } from '@prisma/client';
+import { ApprovalActionType, ApprovalType } from '@prisma/client';
 import { Type } from 'class-transformer';
 import {
   ArrayNotEmpty,
@@ -20,6 +20,11 @@ export class CreateApprovalSettingItemDto {
   @IsNotEmpty()
   @IsNumber()
   level: number;
+
+  @ApiProperty()
+  @IsNotEmpty()
+  @IsEnum(ApprovalActionType)
+  approvalActionType: ApprovalActionType;
 }
 
 export class CreateApprovalSettingDto {
@@ -35,7 +40,13 @@ export class CreateApprovalSettingDto {
   @ApiProperty({
     description: 'Approval setting item',
     type: Array,
-    example: [{ userId: 1, level: 1 }],
+    example: [
+      {
+        userId: 1,
+        level: 1,
+        approvalActionType: 'APPROVAL | VERIFICATION | PAYMENT',
+      },
+    ],
   })
   @IsNotEmpty()
   @IsArray()
