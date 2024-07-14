@@ -18,6 +18,12 @@ export class PrismaClientExceptionFilter
     const message = exception.message.replace(/\n/g, '');
 
     switch (exception.code) {
+      case 'P2000': {
+        const statusCode = HttpStatus.BAD_REQUEST;
+        response.status(statusCode).json({ statusCode, message });
+        break;
+      }
+
       case 'P2002': {
         const statusCode = HttpStatus.CONFLICT;
         const message = `${exception.meta.target[0]} has been taken`;
