@@ -11,10 +11,6 @@ export class User {
   @ApiProperty()
   email: string;
 
-  @Exclude()
-  @ApiProperty()
-  password: string;
-
   @ApiProperty({ required: false, nullable: true })
   bankAccount: string;
 
