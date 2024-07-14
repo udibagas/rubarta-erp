@@ -64,25 +64,33 @@ export class PaymentAuthorizationsController {
 
   @Post('approve/:id')
   @HttpCode(HttpStatus.OK)
-  approve(@Param('id', ParseIntPipe) id: number) {
-    this.paymentAuthorizationsService.approve(id);
+  approve(
+    @Param('id', ParseIntPipe) id: number,
+    @Request() { user },
+    @Body('note') note: string,
+  ) {
+    this.paymentAuthorizationsService.approve(id, user, note);
   }
 
   @Post('reject/:id')
   @HttpCode(HttpStatus.OK)
-  reject(@Param('id', ParseIntPipe) id: number) {
-    this.paymentAuthorizationsService.reject(id);
+  reject(
+    @Param('id', ParseIntPipe) id: number,
+    @Request() { user },
+    @Body('note') note: string,
+  ) {
+    this.paymentAuthorizationsService.reject(id, user, note);
   }
 
   @Post('verify/:id')
   @HttpCode(HttpStatus.OK)
-  verify(@Param('id', ParseIntPipe) id: number) {
-    this.paymentAuthorizationsService.verify(id);
+  verify(@Param('id', ParseIntPipe) id: number, @Request() { user }) {
+    this.paymentAuthorizationsService.verify(id, user);
   }
 
   @Post('pay/:id')
   @HttpCode(HttpStatus.OK)
-  pay(@Param('id', ParseIntPipe) id: number) {
-    this.paymentAuthorizationsService.pay(id);
+  pay(@Param('id', ParseIntPipe) id: number, @Request() { user }) {
+    this.paymentAuthorizationsService.pay(id, user);
   }
 }

@@ -59,10 +59,16 @@ export class PaymentAuthorizationsService {
   ) {
     const data = await this.findOne(id);
     if (data.status !== PaymentStatus.DRAFT) throw new ForbiddenException();
-    return this.prisma.paymentAuthorization.update({
+
+    const savedData = await this.prisma.paymentAuthorization.update({
       where: { id },
       data: updatePaymentAuthorizationDto,
     });
+
+    if (savedData.status == PaymentStatus.SUBMITTED)
+      this.eventEmitter.emit('paymentAuthorization.submitted', savedData);
+
+    return savedData;
   }
 
   async remove(id: number) {
@@ -73,9 +79,53 @@ export class PaymentAuthorizationsService {
     });
   }
 
-  async approve(id: number) {
+  async approve(id: number, user: User, note?: string) {
+    const approvals = await this.prisma.paymentAuthorizationApproval.findMany({
+      where: { paymentAuthorizationId: id },
+    });
+
+    if (approvals.length == 0)
+      throw new ForbiddenException(
+        'No approval set for this payment authorization',
+      );
+
+    const approval = await this.prisma.paymentAuthorizationApproval.findFirst({
+      where: { paymentAuthorizationId: id, userId: user.id },
+    });
+
+    if (!approval)
+      throw new ForbiddenException(
+        'You can not approve this payment authorization',
+      );
+
+    if (approval.approvalStatus == ApprovalStatus.APPROVED)
+      throw new ForbiddenException(
+        'You have approved this payment authorization',
+      );
+
+    if (approval.approvalStatus == ApprovalStatus.REJECTED)
+      throw new ForbiddenException(
+        'You have rejected this payment authorization',
+      );
+
+    await this.prisma.paymentAuthorizationApproval.update({
+      data: { approvalStatus: ApprovalStatus.APPROVED, note: note },
+      where: {
+        id: approval.id,
+      },
+    });
+
+    const approvedCount = await this.prisma.paymentAuthorizationApproval.count({
+      where: { approvalStatus: ApprovalStatus.APPROVED },
+    });
+
+    const status =
+      approvals.length == approvedCount
+        ? PaymentStatus.APPROVED
+        : PaymentStatus.PARTIIALLY_APPROVED;
+
     const data = await this.prisma.paymentAuthorization.update({
-      data: { status: PaymentStatus.APPROVED },
+      data: { status },
       where: { id },
     });
 
@@ -83,7 +133,7 @@ export class PaymentAuthorizationsService {
     return data;
   }
 
-  async verify(id: number) {
+  async verify(id: number, user: User) {
     const data = await this.prisma.paymentAuthorization.update({
       data: { status: PaymentStatus.VERIFIED },
       where: { id },
@@ -93,7 +143,7 @@ export class PaymentAuthorizationsService {
     return data;
   }
 
-  async reject(id: number) {
+  async reject(id: number, user: User, note?: string) {
     const data = await this.prisma.paymentAuthorization.update({
       data: { status: PaymentStatus.REJECTED },
       where: { id },
@@ -103,7 +153,7 @@ export class PaymentAuthorizationsService {
     return data;
   }
 
-  async pay(id: number) {
+  async pay(id: number, user: User) {
     const data = await this.prisma.paymentAuthorization.update({
       data: { status: PaymentStatus.PAID },
       where: { id },
@@ -185,6 +235,8 @@ export class PaymentAuthorizationsService {
             };
           }),
         });
+
+      // TODO: kirim notifikasi ke masing2 approver
     }
   }
 
