@@ -7,6 +7,23 @@ import {
 } from '@nestjs/common';
 import helmet from 'helmet';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { ValidationError } from 'class-validator';
+
+function parseValidationError(errors: ValidationError[]) {
+  return errors.map((error) => {
+    const e = { property: error.property, error: '', children: [] };
+
+    if (error.constraints) {
+      e.error = Object.values(error.constraints).join(', ');
+    } else delete e.error;
+
+    if (error.children && error.children.length > 0) {
+      e.children = parseValidationError(error.children);
+    } else delete e.children;
+
+    return e;
+  });
+}
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -40,23 +57,17 @@ async function bootstrap() {
         value: false,
       },
       exceptionFactory: (errors) => {
-        const error = {};
-
-        errors.forEach((e) => {
-          error[e.property] = Object.values(e.constraints)[0];
-        });
-
+        const error = parseValidationError(errors);
         throw new BadRequestException({
           statusCode: 400,
           message: 'Bad Request',
-          error: error,
+          errors: error,
         });
       },
     }),
   );
 
   app.useGlobalInterceptors(new ClassSerializerInterceptor(app.get(Reflector)));
-
   await app.listen(3000);
 }
 bootstrap();
