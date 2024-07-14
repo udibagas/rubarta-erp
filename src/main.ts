@@ -30,7 +30,7 @@ async function bootstrap() {
 
   const config = new DocumentBuilder()
     .setTitle('Rubarta ERP')
-    .setDescription('Rubarta ERD Documentation')
+    .setDescription('Rubarta ERP Documentation')
     .setVersion('1.0')
     .addBearerAuth({
       type: 'http',
