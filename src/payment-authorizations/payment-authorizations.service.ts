@@ -27,7 +27,7 @@ export class PaymentAuthorizationsService {
     }
 
     const savedData = await this.prisma.paymentAuthorization.create({
-      include: { PaymentAuthorizationItem: true },
+      include: { PaymentAuthorizationItem: true, Requester: true },
       data: {
         ...data,
         number,
@@ -37,6 +37,13 @@ export class PaymentAuthorizationsService {
 
     if (savedData.status == PaymentStatus.SUBMITTED) {
       this.eventEmitter.emit('paymentAuthorization.submitted', savedData);
+      this.eventEmitter.emit(
+        'paymentAuthorization.updated',
+        savedData,
+        savedData.Requester,
+        PaymentStatus.SUBMITTED,
+        'Submitted',
+      );
     }
 
     return savedData;
@@ -125,11 +132,19 @@ export class PaymentAuthorizationsService {
         : PaymentStatus.PARTIIALLY_APPROVED;
 
     const data = await this.prisma.paymentAuthorization.update({
+      include: { Requester: true },
       data: { status },
       where: { id },
     });
 
     this.eventEmitter.emit('paymentAuthorization.approved', data);
+    this.eventEmitter.emit(
+      'paymentAuthorization.updated',
+      data,
+      data.Requester,
+      PaymentStatus.APPROVED,
+      note,
+    );
     return data;
   }
 
@@ -228,16 +243,34 @@ export class PaymentAuthorizationsService {
     if (approval) {
       const approvals =
         await this.prisma.paymentAuthorizationApproval.createMany({
-          data: approval.ApprovalSettingItem.map(({ userId }) => {
-            return {
-              userId,
-              paymentAuthorizationId: data.id,
-            };
-          }),
+          data: approval.ApprovalSettingItem.map((el) => ({
+            userId: el.userId,
+            approvalActionType: el.approvalActionType,
+            level: el.level,
+            paymentAuthorizationId: data.id,
+          })),
         });
 
       // TODO: kirim notifikasi ke masing2 approver
+      this.eventEmitter.emit('paymentAuthorization.notify', data, approvals);
     }
+  }
+
+  @OnEvent('paymentAuthorization.updated')
+  async updateLog(
+    data: PaymentAuthorization,
+    user: User,
+    status: PaymentStatus,
+    note?: string,
+  ) {
+    await this.prisma.paymentAuthorizationLog.create({
+      data: {
+        paymentAuthorizationId: data.id,
+        status: status,
+        userId: user.id,
+        note: note,
+      },
+    });
   }
 
   @OnEvent('paymentAuthorization.notifiy')
