@@ -32,11 +32,15 @@ export class CreateApprovalSettingDto {
   @IsEnum(ApprovalType)
   approvalType: ApprovalType;
 
-  @ApiProperty()
+  @ApiProperty({
+    description: 'Approval setting item',
+    type: Array,
+    example: [{ userId: 1, level: 1 }],
+  })
   @IsNotEmpty()
   @IsArray()
   @ArrayNotEmpty()
   @Type(() => CreateApprovalSettingItemDto)
   @ValidateNested({ each: true })
-  approvalSettingItem: CreateApprovalSettingItemDto[];
+  items: CreateApprovalSettingItemDto[];
 }

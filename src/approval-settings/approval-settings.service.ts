@@ -8,9 +8,9 @@ export class ApprovalSettingsService {
   constructor(private prisma: PrismaService) {}
 
   create(createApprovalSettingDto: CreateApprovalSettingDto) {
-    const { approvalSettingItem, ...data } = createApprovalSettingDto;
+    const { items, ...data } = createApprovalSettingDto;
     return this.prisma.approvalSetting.create({
-      data: { ...data, ApprovalSettingItem: { create: approvalSettingItem } },
+      data: { ...data, ApprovalSettingItem: { create: items } },
       include: {
         ApprovalSettingItem: true,
       },
