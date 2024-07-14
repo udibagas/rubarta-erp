@@ -8,10 +8,13 @@ import { CompaniesModule } from './companies/companies.module';
 import { DepartmentsModule } from './departments/departments.module';
 import { ExpenseTypesModule } from './expense-types/expense-types.module';
 import { ApprovalSettingsModule } from './approval-settings/approval-settings.module';
+import { PaymentAuthorizationsModule } from './payment-authorizations/payment-authorizations.module';
+import { EventEmitterModule } from '@nestjs/event-emitter';
 
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
+    EventEmitterModule.forRoot(),
     UsersModule,
     PrismaModule,
     AuthModule,
@@ -20,6 +23,7 @@ import { ApprovalSettingsModule } from './approval-settings/approval-settings.mo
     DepartmentsModule,
     ExpenseTypesModule,
     ApprovalSettingsModule,
+    PaymentAuthorizationsModule,
   ],
   controllers: [],
   providers: [],
