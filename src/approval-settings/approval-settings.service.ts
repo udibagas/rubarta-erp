@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { CreateApprovalSettingDto } from './dto/create-approval-setting.dto';
 import { UpdateApprovalSettingDto } from './dto/update-approval-setting.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
@@ -25,19 +25,16 @@ export class ApprovalSettingsService {
     });
   }
 
-  async findOne(id: number) {
-    const data = await this.prisma.approvalSetting.findUnique({
+  findOne(id: number) {
+    return this.prisma.approvalSetting.findUniqueOrThrow({
       where: { id },
       include: {
         ApprovalSettingItem: true,
       },
     });
-    if (!data) throw new NotFoundException();
-    return data;
   }
 
-  async update(id: number, updateApprovalSettingDto: UpdateApprovalSettingDto) {
-    await this.findOne(id);
+  update(id: number, updateApprovalSettingDto: UpdateApprovalSettingDto) {
     return this.prisma.approvalSetting.update({
       data: updateApprovalSettingDto,
       where: { id },
@@ -47,8 +44,7 @@ export class ApprovalSettingsService {
     });
   }
 
-  async remove(id: number) {
-    await this.findOne(id);
+  remove(id: number) {
     return this.prisma.approvalSetting.delete({ where: { id } });
   }
 }
