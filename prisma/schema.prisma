@@ -68,6 +68,7 @@ model User {
   PaymentAuthorization         PaymentAuthorization[]         @relation(name: "PaymentAuthorization")
   PaymentAuthorizationRequest  PaymentAuthorization[]         @relation(name: "PaymentAuthorizationRequest")
 
+  @@index([bankId, departmentId])
   @@map("Users")
 }
 
@@ -78,6 +79,7 @@ model UserBalance {
   balance   BigInt    @default(0) @db.BigInt
   updatedAt DateTime? @updatedAt // kirim notifikasi apabila ada balance > 0 belum dilaporkan >= 7 hari
 
+  @@index([userId])
   @@map("UserBalances")
 }
 
@@ -108,6 +110,7 @@ model PaymentAuthorization {
   Company                      Company                        @relation(fields: [companyId], references: [id])
   companyId                    Int
 
+  @@index([employeeId, requesterId, bankId, expenseClaimId, companyId])
   @@map("PaymentAuthorizations")
 }
 
@@ -119,6 +122,7 @@ model PaymentAuthorizationItem {
   PaymentAuthorization   PaymentAuthorization? @relation(fields: [paymentAuthorizationId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   paymentAuthorizationId Int
 
+  @@index([paymentAuthorizationId])
   @@map("PaymentAuthorizationItems")
 }
 
@@ -133,6 +137,7 @@ model PaymentAuthorizationApproval {
   updatedAt              DateTime?            @updatedAt
   paymentAuthorizationId Int
 
+  @@index([userId, paymentAuthorizationId])
   @@map("PaymentAuthorizationApprovals")
 }
 
@@ -162,6 +167,7 @@ model ExpenseClaim {
   ExpenseClaimItem       ExpenseClaimItem[]
   PaymentAuthorization   PaymentAuthorization?
 
+  @@index([userId, departmentId, companyId])
   @@map("ExpenseClaims")
 }
 
@@ -175,6 +181,7 @@ model ExpenseClaimItem {
   amount         BigInt       @db.BigInt
   expenseClaimId Int
 
+  @@index([expenseTypeId, expenseClaimId])
   @@map("ExpenseClaimItems")
 }
 
@@ -189,6 +196,7 @@ model ExpenseClaimAttachment {
   fileSize BigInt @db.BigInt
   fileType String @db.VarChar(30)
 
+  @@index([expenseClaimId])
   @@map("ExpenseClaimAttachments")
 }
 
@@ -203,6 +211,7 @@ model ExpenseClaimApproval {
   createdAt      DateTime        @default(now())
   updatedAt      DateTime?       @updatedAt
 
+  @@index([expenseClaimId, userId])
   @@map("ExpenseClaimApproval")
 }
 
@@ -214,6 +223,7 @@ model ApprovalSetting {
   ApprovalSettingItem ApprovalSettingItem[]
 
   @@unique([companyId, approvalType]) // ga boleh ada setting yg sama
+  @@index([companyId])
   @@map("ApprovalSettings")
 }
 
@@ -226,6 +236,7 @@ model ApprovalSettingItem {
   userId            Int
 
   @@unique([approvalSettingId, level, userId]) // ga boleh ada setting yg sama
+  @@index([approvalSettingId, userId])
   @@map("ApprovalSettingItems")
 }
 
@@ -238,6 +249,7 @@ model Notification {
   redirectUrl String?   @db.VarChar(255)
   readAt      DateTime? @db.Timestamp()
 
+  @@index([userId])
   @@map("Notifications")
 }
 
