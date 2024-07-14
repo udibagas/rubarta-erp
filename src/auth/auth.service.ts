@@ -12,9 +12,9 @@ export class AuthService {
 
   async signIn(email: string, password: string) {
     const user = await this.userService.findByEmail(email);
-    if (!user) throw new UnauthorizedException();
+    if (!user) throw new UnauthorizedException('Email not registered');
     const verified = await bcrypt.compare(password, user.password);
-    if (!verified) throw new UnauthorizedException();
+    if (!verified) throw new UnauthorizedException('Invalid password');
     const { id: sub, name, roles } = user;
     const payload = { sub, name, email, roles };
     const token = this.jwtService.sign(payload);
