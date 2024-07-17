@@ -12,10 +12,9 @@ import {
   ParseIntPipe,
 } from '@nestjs/common';
 import { PaymentAuthorizationsService } from './payment-authorizations.service';
-import { CreatePaymentAuthorizationDto } from './dto/create-payment-authorization.dto';
-import { UpdatePaymentAuthorizationDto } from './dto/update-payment-authorization.dto';
-import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiBody, ApiTags } from '@nestjs/swagger';
 import { PaymentAuthorization } from './entities/payment-authorization.entity';
+import { PaymentAuthorizationDto } from './dto/payment-authorization.dto';
 
 @ApiTags('Payment Authorizations')
 @ApiBearerAuth()
@@ -27,11 +26,11 @@ export class PaymentAuthorizationsController {
 
   @Post()
   create(
-    @Body() createPaymentAuthorizationDto: CreatePaymentAuthorizationDto,
+    @Body() paymentAuthorizationDto: PaymentAuthorizationDto,
     @Request() { user },
   ) {
     return this.paymentAuthorizationsService.create({
-      ...createPaymentAuthorizationDto,
+      ...paymentAuthorizationDto,
       requesterId: user.id,
     });
   }
@@ -49,17 +48,25 @@ export class PaymentAuthorizationsController {
   @Patch(':id')
   update(
     @Param('id', ParseIntPipe) id: number,
-    @Body() updatePaymentAuthorizationDto: UpdatePaymentAuthorizationDto,
+    @Body() paymentAuthorizationDto: PaymentAuthorizationDto,
   ) {
     return this.paymentAuthorizationsService.update(
-      +id,
-      updatePaymentAuthorizationDto,
+      id,
+      paymentAuthorizationDto,
     );
   }
 
   @Delete(':id')
   remove(@Param('id', ParseIntPipe) id: number) {
     return this.paymentAuthorizationsService.remove(+id);
+  }
+
+  @Delete(':id/:itemId')
+  removeItem(
+    @Param('id', ParseIntPipe) id: number,
+    @Param('itemId', ParseIntPipe) itemId: number,
+  ) {
+    return this.paymentAuthorizationsService.removeItem(id, itemId);
   }
 
   @Post('approve/:id')

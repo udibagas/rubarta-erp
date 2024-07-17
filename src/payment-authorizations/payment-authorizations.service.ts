@@ -1,6 +1,5 @@
 import { ForbiddenException, Injectable } from '@nestjs/common';
-import { CreatePaymentAuthorizationDto } from './dto/create-payment-authorization.dto';
-import { UpdatePaymentAuthorizationDto } from './dto/update-payment-authorization.dto';
+import { PaymentAuthorizationDto } from './dto/payment-authorization.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
 import {
   ApprovalStatus,
@@ -18,8 +17,8 @@ export class PaymentAuthorizationsService {
     private eventEmitter: EventEmitter2,
   ) {}
 
-  async create(createPaymentAuthorizationDto: CreatePaymentAuthorizationDto) {
-    const { items, ...data } = createPaymentAuthorizationDto;
+  async create(paymentAuthorizationDto: PaymentAuthorizationDto) {
+    const { items, ...data } = paymentAuthorizationDto;
     let number = 'DRAFT';
 
     if (data.status == PaymentStatus.SUBMITTED) {
@@ -57,19 +56,33 @@ export class PaymentAuthorizationsService {
   findOne(id: number) {
     return this.prisma.paymentAuthorization.findUniqueOrThrow({
       where: { id },
+      include: {
+        PaymentAuthorizationItem: true,
+        PaymentAuthorizationApproval: {
+          include: { User: true },
+        },
+        Requester: true,
+        Employee: true,
+        ExpenseClaim: true,
+      },
     });
   }
 
-  async update(
-    id: number,
-    updatePaymentAuthorizationDto: UpdatePaymentAuthorizationDto,
-  ) {
-    const data = await this.findOne(id);
-    if (data.status !== PaymentStatus.DRAFT) throw new ForbiddenException();
+  async update(id: number, paymentAuthorizationDto: PaymentAuthorizationDto) {
+    const existingData = await this.findOne(id);
+    if (existingData.status !== PaymentStatus.DRAFT)
+      throw new ForbiddenException();
 
+    const { items, ...data } = paymentAuthorizationDto;
     const savedData = await this.prisma.paymentAuthorization.update({
       where: { id },
-      data: updatePaymentAuthorizationDto,
+      data: {
+        ...data,
+        PaymentAuthorizationItem: { deleteMany: {}, create: items },
+      },
+      include: {
+        PaymentAuthorizationItem: true,
+      },
     });
 
     if (savedData.status == PaymentStatus.SUBMITTED)
@@ -83,6 +96,14 @@ export class PaymentAuthorizationsService {
     if (data.status !== PaymentStatus.DRAFT) throw new ForbiddenException();
     return this.prisma.paymentAuthorization.delete({
       where: { id },
+    });
+  }
+
+  async removeItem(id: number, itemId: number) {
+    const data = await this.findOne(id);
+    if (data.status !== PaymentStatus.DRAFT) throw new ForbiddenException();
+    return this.prisma.paymentAuthorizationItem.delete({
+      where: { id: itemId },
     });
   }
 
