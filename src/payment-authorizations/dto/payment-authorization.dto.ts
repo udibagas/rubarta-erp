@@ -11,9 +11,8 @@ import {
   IsOptional,
   ValidateNested,
 } from 'class-validator';
-import { PaymentAuthorizationItemDto } from './payment-authorization-item.dto';
 
-export class CreatePaymentAuthorizationDto {
+export class PaymentAuthorizationDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsNumber()
@@ -87,4 +86,18 @@ export class CreatePaymentAuthorizationDto {
   @Type(() => PaymentAuthorizationItemDto)
   @ValidateNested({ each: true })
   items: PaymentAuthorizationItemDto[];
+}
+
+export class PaymentAuthorizationItemDto {
+  @ApiProperty()
+  @IsDate()
+  date: Date;
+
+  @ApiProperty()
+  @IsNotEmpty()
+  description: string;
+
+  @ApiProperty()
+  @IsNumber()
+  amount: number;
 }

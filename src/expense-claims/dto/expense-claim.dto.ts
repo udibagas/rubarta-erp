@@ -8,10 +8,11 @@ import {
   IsEnum,
   IsNotEmpty,
   IsNumber,
+  IsOptional,
   ValidateNested,
 } from 'class-validator';
 
-export class CreateExpenseClaimDto {
+export class ExpenseClaimDto {
   @ApiProperty()
   @IsNumber({}, { message: 'Invalid User' })
   @IsNotEmpty()
@@ -46,7 +47,16 @@ export class CreateExpenseClaimDto {
   @IsNotEmpty()
   companyId: number;
 
-  @ApiProperty()
+  @ApiProperty({
+    example: [
+      {
+        date: '2024-07-01',
+        expenseTypeId: 1,
+        description: 'BBM Pertamax 20 Liter',
+        amount: 200_000,
+      },
+    ],
+  })
   @IsArray()
   @ArrayNotEmpty()
   @Type(() => ExpenseClaimItemDto)
@@ -60,6 +70,7 @@ export class ExpenseClaimItemDto {
   })
   @IsDate()
   date: Date;
+
   @ApiProperty()
   @IsNumber({}, { message: 'Invalid expense type' })
   expenseTypeId: number;
@@ -70,7 +81,7 @@ export class ExpenseClaimItemDto {
   @IsNotEmpty({ message: 'Description is required' })
   description: string;
 
-  @ApiProperty({ example: 150_000 })
+  @ApiProperty({ example: 200_000 })
   @IsNumber({}, { message: 'Invalid amount' })
   amount: number;
 }
