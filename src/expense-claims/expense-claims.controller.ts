@@ -9,8 +9,7 @@ import {
   ParseIntPipe,
 } from '@nestjs/common';
 import { ExpenseClaimsService } from './expense-claims.service';
-import { CreateExpenseClaimDto } from './dto/create-expense-claim.dto';
-import { UpdateExpenseClaimDto } from './dto/update-expense-claim.dto';
+import { ExpenseClaimDto } from './dto/expense-claim.dto';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('Expense Claims')
@@ -20,13 +19,13 @@ export class ExpenseClaimsController {
   constructor(private readonly expenseClaimsService: ExpenseClaimsService) {}
 
   @Post()
-  create(@Body() createExpenseClaimDto: CreateExpenseClaimDto) {
-    return this.expenseClaimsService.create(createExpenseClaimDto);
+  create(@Body() expenseClaimDto: ExpenseClaimDto) {
+    return this.expenseClaimsService.create(expenseClaimDto);
   }
 
   @Get()
   findAll() {
-    return this.expenseClaimsService.findAll();
+    return this.expenseClaimsService.findAll({});
   }
 
   @Get(':id')
@@ -37,13 +36,21 @@ export class ExpenseClaimsController {
   @Patch(':id')
   update(
     @Param('id', ParseIntPipe) id: number,
-    @Body() updateExpenseClaimDto: UpdateExpenseClaimDto,
+    @Body() expenseClaimDto: ExpenseClaimDto,
   ) {
-    return this.expenseClaimsService.update(id, updateExpenseClaimDto);
+    return this.expenseClaimsService.update(id, expenseClaimDto);
   }
 
   @Delete(':id')
   remove(@Param('id', ParseIntPipe) id: number) {
     return this.expenseClaimsService.remove(id);
+  }
+
+  @Delete(':id/:itemId')
+  removeItem(
+    @Param('id', ParseIntPipe) id: number,
+    @Param('itemId', ParseIntPipe) itemId: number,
+  ) {
+    return this.expenseClaimsService.removeItem(id, itemId);
   }
 }
