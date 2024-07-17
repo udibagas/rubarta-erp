@@ -103,7 +103,10 @@ export class PaymentAuthorizationsService {
     const data = await this.findOne(id);
     if (data.status !== PaymentStatus.DRAFT) throw new ForbiddenException();
     return this.prisma.paymentAuthorizationItem.delete({
-      where: { id: itemId },
+      where: {
+        id: itemId,
+        paymentAuthorizationId: id,
+      },
     });
   }
 
