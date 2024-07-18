@@ -2,30 +2,34 @@ import { ApiProperty } from '@nestjs/swagger';
 import { Exclude } from 'class-transformer';
 
 export class User {
-  @ApiProperty()
+  @ApiProperty({ example: 1 })
   id: number;
 
-  @ApiProperty()
+  @ApiProperty({ example: 'Bagas Udi' })
   name: string;
 
-  @ApiProperty()
+  @ApiProperty({ example: 'bagas@mail.com' })
   email: string;
 
-  @ApiProperty({ required: false, nullable: true })
+  @ApiProperty({ required: false, nullable: true, example: '2411191***' })
   bankAccount: string;
 
-  @ApiProperty()
+  @ApiProperty({ example: true })
   active: boolean;
 
-  @ApiProperty({ required: false, nullable: true })
+  @ApiProperty({ required: false, nullable: true, example: 1 })
   bankId: number;
 
-  @ApiProperty({ required: false, nullable: true })
+  @ApiProperty({ required: false, nullable: true, example: 1 })
   departmentId: number;
 
-  @ApiProperty({ required: false, nullable: true })
+  @ApiProperty({
+    required: false,
+    nullable: true,
+    example: 'path/to/signature.png',
+  })
   signatureSpeciment: string;
 
-  @ApiProperty()
+  @ApiProperty({ example: ['APPROVER', 'VERIFIER'] })
   roles: string[];
 }

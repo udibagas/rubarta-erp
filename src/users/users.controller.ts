@@ -33,17 +33,6 @@ export class UsersController {
   @ApiCreatedResponse({
     type: User,
     description: 'Created user',
-    example: {
-      id: 1,
-      name: 'Bagas Udi',
-      email: 'bagas@mail.com',
-      bankAccount: '2411191***',
-      active: true,
-      bankId: 1,
-      departmentId: 1,
-      signatureSpeciment: '/path/to/signature.png',
-      roles: ['APPROVER', 'VERIFIER'],
-    },
   })
   @ApiOperation({ summary: 'Create new user' })
   create(@Body() createUserDto: CreateUserDto): Promise<User> {
