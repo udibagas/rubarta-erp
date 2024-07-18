@@ -12,10 +12,18 @@ import { PaymentAuthorizationsModule } from './payment-authorizations/payment-au
 import { EventEmitterModule } from '@nestjs/event-emitter';
 import { ExpenseClaimsModule } from './expense-claims/expense-claims.module';
 import { ExpenseNotesModule } from './expense-notes/expense-notes.module';
+import { ThrottlerModule, ThrottlerGuard } from '@nestjs/throttler';
+import { APP_GUARD } from '@nestjs/core';
 
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
+    ThrottlerModule.forRoot([
+      {
+        ttl: 60000, // 1 minute
+        limit: 10, // max request per minute
+      },
+    ]),
     EventEmitterModule.forRoot(),
     UsersModule,
     PrismaModule,
@@ -30,6 +38,11 @@ import { ExpenseNotesModule } from './expense-notes/expense-notes.module';
     ExpenseNotesModule,
   ],
   controllers: [],
-  providers: [],
+  providers: [
+    {
+      provide: APP_GUARD,
+      useClass: ThrottlerGuard,
+    },
+  ],
 })
 export class AppModule {}
