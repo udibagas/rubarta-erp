@@ -30,12 +30,4 @@ export class ExpenseNote {
     },
   })
   attachment?: JsonValue;
-
-  toJSON() {
-    return {
-      ...this,
-      id: this.id.toString(),
-      amount: this.amount.toString(),
-    };
-  }
 }
