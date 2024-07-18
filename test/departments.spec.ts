@@ -79,6 +79,6 @@ describe('DepartmentsController', () => {
 
   afterAll(async () => {
     await testService.deleteUser();
-    await testService.deleteCompanies();
+    await testService.deleteDepartments();
   });
 });
