@@ -9,8 +9,7 @@ import {
   ParseIntPipe,
 } from '@nestjs/common';
 import { ApprovalSettingsService } from './approval-settings.service';
-import { CreateApprovalSettingDto } from './dto/create-approval-setting.dto';
-import { UpdateApprovalSettingDto } from './dto/update-approval-setting.dto';
+import { ApprovalSettingDto } from './dto/approval-setting.dto';
 import {
   ApiBearerAuth,
   ApiCreatedResponse,
@@ -35,9 +34,9 @@ export class ApprovalSettingsController {
   @ApiOperation({ summary: 'Create new approval setting' })
   @ApiCreatedResponse({ type: ApprovalSetting })
   create(
-    @Body() createApprovalSettingDto: CreateApprovalSettingDto,
+    @Body() approvalSettingDto: ApprovalSettingDto,
   ): Promise<ApprovalSetting> {
-    return this.approvalSettingsService.create(createApprovalSettingDto);
+    return this.approvalSettingsService.create(approvalSettingDto);
   }
 
   @Get()
@@ -60,9 +59,9 @@ export class ApprovalSettingsController {
   @ApiOkResponse({ type: ApprovalSetting })
   update(
     @Param('id', ParseIntPipe) id: number,
-    @Body() updateApprovalSettingDto: UpdateApprovalSettingDto,
+    @Body() approvalSettingDto: ApprovalSettingDto,
   ): Promise<ApprovalSetting> {
-    return this.approvalSettingsService.update(id, updateApprovalSettingDto);
+    return this.approvalSettingsService.update(id, approvalSettingDto);
   }
 
   @Delete(':id')

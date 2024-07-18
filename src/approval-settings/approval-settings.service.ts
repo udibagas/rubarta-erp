@@ -1,14 +1,13 @@
 import { Injectable } from '@nestjs/common';
-import { CreateApprovalSettingDto } from './dto/create-approval-setting.dto';
-import { UpdateApprovalSettingDto } from './dto/update-approval-setting.dto';
+import { ApprovalSettingDto } from './dto/approval-setting.dto';
 import { PrismaService } from '../prisma/prisma.service';
 
 @Injectable()
 export class ApprovalSettingsService {
   constructor(private prisma: PrismaService) {}
 
-  create(createApprovalSettingDto: CreateApprovalSettingDto) {
-    const { items, ...data } = createApprovalSettingDto;
+  create(approvalSettingDto: ApprovalSettingDto) {
+    const { items, ...data } = approvalSettingDto;
     return this.prisma.approvalSetting.create({
       data: { ...data, ApprovalSettingItem: { create: items } },
       include: {
@@ -34,9 +33,9 @@ export class ApprovalSettingsService {
     });
   }
 
-  update(id: number, updateApprovalSettingDto: UpdateApprovalSettingDto) {
+  update(id: number, approvalSettingDto: ApprovalSettingDto) {
     return this.prisma.approvalSetting.update({
-      data: updateApprovalSettingDto,
+      data: approvalSettingDto,
       where: { id },
       include: {
         ApprovalSettingItem: true,

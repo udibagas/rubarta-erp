@@ -10,7 +10,7 @@ import {
   ValidateNested,
 } from 'class-validator';
 
-export class CreateApprovalSettingItemDto {
+export class ApprovalSettingItemDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsNumber()
@@ -27,7 +27,7 @@ export class CreateApprovalSettingItemDto {
   approvalActionType: ApprovalActionType;
 }
 
-export class CreateApprovalSettingDto {
+export class ApprovalSettingDto {
   @ApiProperty()
   @IsNotEmpty()
   companyId: number;
@@ -51,7 +51,7 @@ export class CreateApprovalSettingDto {
   @IsNotEmpty()
   @IsArray()
   @ArrayNotEmpty()
-  @Type(() => CreateApprovalSettingItemDto)
+  @Type(() => ApprovalSettingItemDto)
   @ValidateNested({ each: true })
-  items: CreateApprovalSettingItemDto[];
+  items: ApprovalSettingItemDto[];
 }
