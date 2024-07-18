@@ -16,28 +16,34 @@ export class UserRole {
 }
 
 export class CreateUserDto {
-  @ApiProperty()
+  @ApiProperty({
+    example: 'Bagas Udi S.',
+  })
   @IsNotEmpty({ message: 'Name is required' })
   name: string;
 
-  @ApiProperty()
+  @ApiProperty({
+    example: 'bagas@mail.com',
+  })
   @IsEmail({}, { message: 'Invalid email' })
   email: string;
 
-  @ApiProperty()
+  @ApiProperty({
+    example: 'secret123',
+  })
   @IsNotEmpty({ message: 'Password is required' })
   @Length(8, undefined, { message: 'Minimum password 8 is characters' })
   password: string;
 
-  @ApiProperty({ required: false })
+  @ApiProperty({ required: false, example: 1 })
   @IsOptional()
   bankId: number;
 
-  @ApiProperty({ required: false })
+  @ApiProperty({ required: false, example: '2411191***' })
   @IsOptional()
   bankAccount: string;
 
-  @ApiProperty()
+  @ApiProperty({ example: ['APPROVER', 'VERIFIER'], enum: Role })
   @IsArray()
   @ArrayNotEmpty()
   @IsEnum(Role, { each: true, message: 'Invalid Role' })
