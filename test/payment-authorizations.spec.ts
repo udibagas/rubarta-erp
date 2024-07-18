@@ -4,7 +4,7 @@ import { AppModule } from '../src/app.module';
 import * as request from 'supertest';
 import { TestModule } from './test.module';
 import { TestService } from './test.service';
-import { ApprovalType } from '@prisma/client';
+import { ApprovalType, PaymentStatus } from '@prisma/client';
 
 describe('PaymentAuthorizationsController', () => {
   let app: INestApplication;
@@ -78,7 +78,7 @@ describe('PaymentAuthorizationsController', () => {
         amount: 2_000_000,
         cashAdvance: 0,
         description: 'Cash Advance for Bagas for 3 days',
-        status: 'SUBMITTED',
+        status: PaymentStatus.DRAFT,
         items: [
           {
             date: new Date('2024-07-19'),
@@ -93,7 +93,7 @@ describe('PaymentAuthorizationsController', () => {
     console.log(paymentAuthorization);
     expect(response.statusCode).toBe(HttpStatus.CREATED);
     expect(response.body.description).toBe('Cash Advance for Bagas for 3 days');
-    expect(response.body.netAmount).toBe(3_000_000);
+    expect(response.body.netAmount).toBe(2_000_000);
   });
 
   it('GET /api/payment-authorizations', async () => {
@@ -125,8 +125,8 @@ describe('PaymentAuthorizationsController', () => {
         netAmount: 3_000_000,
         amount: 3_000_000,
         cashAdvance: 0,
-        description: 'Cash Advance for Bagas for 3 days',
-        status: 'SUBMITTED',
+        description: 'Cash Advance for Bagas for 4 days',
+        status: PaymentStatus.DRAFT,
         items: [
           {
             date: new Date('2024-07-20'),
