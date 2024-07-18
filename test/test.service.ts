@@ -41,4 +41,12 @@ export class TestService {
   deleteCompanies() {
     return this.prisma.company.deleteMany({});
   }
+
+  deleteDepartments() {
+    return this.prisma.department.deleteMany({});
+  }
+
+  deleteBanks() {
+    return this.prisma.bank.deleteMany({});
+  }
 }
