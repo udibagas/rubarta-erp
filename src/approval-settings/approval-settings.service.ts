@@ -9,9 +9,17 @@ export class ApprovalSettingsService {
   create(approvalSettingDto: ApprovalSettingDto) {
     const { items, ...data } = approvalSettingDto;
     return this.prisma.approvalSetting.create({
-      data: { ...data, ApprovalSettingItem: { create: items } },
+      data: {
+        ...data,
+        ApprovalSettingItem: {
+          create: items,
+        },
+      },
       include: {
-        ApprovalSettingItem: true,
+        Company: true,
+        ApprovalSettingItem: {
+          include: { User: true },
+        },
       },
     });
   }
@@ -19,7 +27,10 @@ export class ApprovalSettingsService {
   findAll() {
     return this.prisma.approvalSetting.findMany({
       include: {
-        ApprovalSettingItem: true,
+        Company: true,
+        ApprovalSettingItem: {
+          include: { User: true },
+        },
       },
     });
   }
@@ -28,17 +39,31 @@ export class ApprovalSettingsService {
     return this.prisma.approvalSetting.findUniqueOrThrow({
       where: { id },
       include: {
-        ApprovalSettingItem: true,
+        Company: true,
+        ApprovalSettingItem: {
+          include: { User: true },
+        },
       },
     });
   }
 
   update(id: number, approvalSettingDto: ApprovalSettingDto) {
+    const { items, ...data } = approvalSettingDto;
+
     return this.prisma.approvalSetting.update({
-      data: approvalSettingDto,
+      data: {
+        ...data,
+        ApprovalSettingItem: {
+          deleteMany: {},
+          create: items,
+        },
+      },
       where: { id },
       include: {
-        ApprovalSettingItem: true,
+        Company: true,
+        ApprovalSettingItem: {
+          include: { User: true },
+        },
       },
     });
   }

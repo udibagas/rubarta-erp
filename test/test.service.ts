@@ -28,6 +28,13 @@ export class TestService {
     return user;
   }
 
+  createToken() {
+    const { id: sub, name, roles, email } = this.user;
+    const payload = { sub, name, email, roles };
+    const token = this.jwtService.sign(payload);
+    return token;
+  }
+
   async createDummyUser(name, roles = [Role.USER]) {
     const password = await bcrypt.hash('password', 10);
     return this.prisma.user.create({
@@ -40,15 +47,47 @@ export class TestService {
     });
   }
 
-  createToken() {
-    const { id: sub, name, roles, email } = this.user;
-    const payload = { sub, name, email, roles };
-    const token = this.jwtService.sign(payload);
-    return token;
+  createCompany() {
+    return this.prisma.company.create({
+      data: {
+        code: 'RPA',
+        name: 'PT Rubarta Prima Abadi',
+      },
+    });
+  }
+
+  createDepartment() {
+    return this.prisma.department.create({
+      data: {
+        code: 'OPS',
+        name: 'Operational',
+      },
+    });
+  }
+
+  createBank() {
+    return this.prisma.bank.create({
+      data: {
+        code: 'BCA',
+        name: 'Bank Central Asia',
+      },
+    });
+  }
+
+  createExpenseType() {
+    return this.prisma.expenseType.create({
+      data: {
+        name: 'FUEL',
+      },
+    });
   }
 
   deleteUser() {
     return this.prisma.user.deleteMany({});
+  }
+
+  deleteBanks() {
+    return this.prisma.bank.deleteMany({});
   }
 
   deleteCompanies() {
@@ -59,7 +98,11 @@ export class TestService {
     return this.prisma.department.deleteMany({});
   }
 
-  deleteBanks() {
-    return this.prisma.bank.deleteMany({});
+  deleteExpenseTypes() {
+    return this.prisma.expenseType.deleteMany({});
+  }
+
+  deleteApprovalSettings() {
+    return this.prisma.approvalSetting.deleteMany({});
   }
 }
