@@ -105,4 +105,8 @@ export class TestService {
   deleteApprovalSettings() {
     return this.prisma.approvalSetting.deleteMany({});
   }
+
+  deleteExpenseNotes() {
+    return this.prisma.expenseNote.deleteMany({});
+  }
 }
