@@ -11,6 +11,7 @@ import { ApprovalSettingsModule } from './approval-settings/approval-settings.mo
 import { PaymentAuthorizationsModule } from './payment-authorizations/payment-authorizations.module';
 import { EventEmitterModule } from '@nestjs/event-emitter';
 import { ExpenseClaimsModule } from './expense-claims/expense-claims.module';
+import { ExpenseNotesModule } from './expense-notes/expense-notes.module';
 
 @Module({
   imports: [
@@ -26,6 +27,7 @@ import { ExpenseClaimsModule } from './expense-claims/expense-claims.module';
     ApprovalSettingsModule,
     PaymentAuthorizationsModule,
     ExpenseClaimsModule,
+    ExpenseNotesModule,
   ],
   controllers: [],
   providers: [],
