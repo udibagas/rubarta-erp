@@ -12,6 +12,22 @@ import {
   ValidateNested,
 } from 'class-validator';
 
+export class PaymentAuthorizationItemDto {
+  @ApiProperty({
+    example: new Date(),
+  })
+  @IsDate()
+  date: Date;
+
+  @ApiProperty({ example: 'BBM Pertalite 10 Liter' })
+  @IsNotEmpty()
+  description: string;
+
+  @ApiProperty({ example: 100_000 })
+  @IsNumber()
+  amount: number;
+}
+
 export class PaymentAuthorizationDto {
   @ApiProperty({ example: 1, description: 'Company ID' })
   @IsNotEmpty()
@@ -74,14 +90,8 @@ export class PaymentAuthorizationDto {
 
   @ApiProperty({
     description: 'Items',
-    type: Array,
-    example: [
-      {
-        date: '2024-01-02',
-        description: 'BBM Pertalite 10 Liter',
-        amount: 100_000,
-      },
-    ],
+    type: PaymentAuthorizationItemDto,
+    isArray: true,
   })
   @IsNotEmpty()
   @IsArray()
@@ -89,18 +99,4 @@ export class PaymentAuthorizationDto {
   @Type(() => PaymentAuthorizationItemDto)
   @ValidateNested({ each: true })
   items: PaymentAuthorizationItemDto[];
-}
-
-export class PaymentAuthorizationItemDto {
-  @ApiProperty()
-  @IsDate()
-  date: Date;
-
-  @ApiProperty()
-  @IsNotEmpty()
-  description: string;
-
-  @ApiProperty()
-  @IsNumber()
-  amount: number;
 }
