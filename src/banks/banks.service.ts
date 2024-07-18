@@ -15,10 +15,7 @@ export class BanksService {
 
   findAll() {
     return this.prisma.bank.findMany({
-      orderBy: {
-        code: 'asc',
-        name: 'asc',
-      },
+      orderBy: { code: 'asc' },
     });
   }
 
