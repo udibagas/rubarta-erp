@@ -5,7 +5,7 @@ import { AppModule } from '../src/app.module';
 import { TestService } from './test.service';
 import { TestModule } from './test.module';
 
-describe('AuthController (e2e)', () => {
+describe('AuthController', () => {
   let app: INestApplication;
   let testService: TestService;
   let token;
