@@ -15,10 +15,11 @@ import {
   ApiBearerAuth,
   ApiCreatedResponse,
   ApiOkResponse,
+  ApiOperation,
   ApiTags,
 } from '@nestjs/swagger';
 import { ExpenseType } from './entities/expense-type.entity';
-import { Roles } from 'src/auth/role.decorator';
+import { Roles } from '../auth/role.decorator';
 import { Role } from '@prisma/client';
 
 @ApiTags('Expense Types')
@@ -29,6 +30,7 @@ export class ExpenseTypesController {
 
   @Post()
   @Roles(Role.ADMIN)
+  @ApiOperation({ summary: 'Create new expense type' })
   @ApiCreatedResponse({ type: ExpenseType })
   create(
     @Body() createExpenseTypeDto: CreateExpenseTypeDto,
@@ -37,12 +39,14 @@ export class ExpenseTypesController {
   }
 
   @Get()
+  @ApiOperation({ summary: 'Get all expense typey' })
   @ApiOkResponse({ type: ExpenseType, isArray: true })
   findAll(): Promise<ExpenseType[]> {
     return this.expenseTypesService.findAll();
   }
 
   @Get(':id')
+  @ApiOperation({ summary: 'Get single expense type by id' })
   @ApiOkResponse({ type: ExpenseType })
   findOne(@Param('id', ParseIntPipe) id: number): Promise<ExpenseType> {
     return this.expenseTypesService.findOne(id);
@@ -50,6 +54,7 @@ export class ExpenseTypesController {
 
   @Patch(':id')
   @Roles(Role.ADMIN)
+  @ApiOperation({ summary: 'Update expense type by id' })
   @ApiOkResponse({ type: ExpenseType })
   update(
     @Param('id', ParseIntPipe) id: number,
@@ -60,6 +65,7 @@ export class ExpenseTypesController {
 
   @Delete(':id')
   @Roles(Role.ADMIN)
+  @ApiOperation({ summary: 'Delete expense type by id' })
   @ApiOkResponse({ type: ExpenseType })
   remove(@Param('id', ParseIntPipe) id: number): Promise<ExpenseType> {
     return this.expenseTypesService.remove(id);

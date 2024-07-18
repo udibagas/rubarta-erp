@@ -15,9 +15,10 @@ import {
   ApiBearerAuth,
   ApiCreatedResponse,
   ApiOkResponse,
+  ApiOperation,
   ApiTags,
 } from '@nestjs/swagger';
-import { Roles } from 'src/auth/role.decorator';
+import { Roles } from '../auth/role.decorator';
 import { Role } from '@prisma/client';
 import { Department } from './entities/department.entity';
 
@@ -29,6 +30,7 @@ export class DepartmentsController {
 
   @Post()
   @Roles(Role.ADMIN)
+  @ApiOperation({ summary: 'Create new department' })
   @ApiCreatedResponse({ type: Department })
   create(
     @Body() createDepartmentDto: CreateDepartmentDto,
@@ -37,12 +39,14 @@ export class DepartmentsController {
   }
 
   @Get()
+  @ApiOperation({ summary: 'Get all department' })
   @ApiOkResponse({ type: Department, isArray: true })
   findAll(): Promise<Department[]> {
     return this.departmentsService.findAll();
   }
 
   @Get(':id')
+  @ApiOperation({ summary: 'Get single department by id' })
   @ApiOkResponse({ type: Department })
   findOne(@Param('id', ParseIntPipe) id: number): Promise<Department> {
     return this.departmentsService.findOne(id);
@@ -50,6 +54,7 @@ export class DepartmentsController {
 
   @Patch(':id')
   @Roles(Role.ADMIN)
+  @ApiOperation({ summary: 'Update department by id' })
   @ApiOkResponse({ type: Department })
   update(
     @Param('id', ParseIntPipe) id: number,
@@ -60,6 +65,7 @@ export class DepartmentsController {
 
   @Delete(':id')
   @Roles(Role.ADMIN)
+  @ApiOperation({ summary: 'Delete department by id' })
   @ApiOkResponse({ type: Department })
   remove(@Param('id', ParseIntPipe) id: number): Promise<Department> {
     return this.departmentsService.remove(id);

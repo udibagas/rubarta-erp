@@ -15,9 +15,10 @@ import {
   ApiBearerAuth,
   ApiCreatedResponse,
   ApiOkResponse,
+  ApiOperation,
   ApiTags,
 } from '@nestjs/swagger';
-import { Roles } from 'src/auth/role.decorator';
+import { Roles } from '../auth/role.decorator';
 import { Role } from '@prisma/client';
 import { ApprovalSetting } from './entities/approval-setting.entity';
 
@@ -31,6 +32,7 @@ export class ApprovalSettingsController {
 
   @Post()
   @Roles(Role.ADMIN)
+  @ApiOperation({ summary: 'Create new approval setting' })
   @ApiCreatedResponse({ type: ApprovalSetting })
   create(
     @Body() createApprovalSettingDto: CreateApprovalSettingDto,
@@ -39,12 +41,14 @@ export class ApprovalSettingsController {
   }
 
   @Get()
+  @ApiOperation({ summary: 'Get all approval settings' })
   @ApiOkResponse({ type: ApprovalSetting, isArray: true })
   findAll(): Promise<ApprovalSetting[]> {
     return this.approvalSettingsService.findAll();
   }
 
   @Get(':id')
+  @ApiOperation({ summary: 'Get single approval setting by id' })
   @ApiOkResponse({ type: ApprovalSetting })
   findOne(@Param('id', ParseIntPipe) id: number): Promise<ApprovalSetting> {
     return this.approvalSettingsService.findOne(id);
@@ -52,6 +56,7 @@ export class ApprovalSettingsController {
 
   @Patch(':id')
   @Roles(Role.ADMIN)
+  @ApiOperation({ summary: 'Update approval setting by id' })
   @ApiOkResponse({ type: ApprovalSetting })
   update(
     @Param('id', ParseIntPipe) id: number,
@@ -62,6 +67,7 @@ export class ApprovalSettingsController {
 
   @Delete(':id')
   @Roles(Role.ADMIN)
+  @ApiOperation({ summary: 'Delete approval setting by id' })
   @ApiOkResponse({ type: ApprovalSetting })
   remove(@Param('id', ParseIntPipe) id: number): Promise<ApprovalSetting> {
     return this.approvalSettingsService.remove(id);

@@ -15,9 +15,10 @@ import {
   ApiBearerAuth,
   ApiCreatedResponse,
   ApiOkResponse,
+  ApiOperation,
   ApiTags,
 } from '@nestjs/swagger';
-import { Roles } from 'src/auth/role.decorator';
+import { Roles } from '../auth/role.decorator';
 import { Role } from '@prisma/client';
 import { Company } from './entities/company.entity';
 
@@ -29,18 +30,21 @@ export class CompaniesController {
 
   @Post()
   @Roles(Role.ADMIN)
+  @ApiOperation({ summary: 'Create new company' })
   @ApiCreatedResponse({ type: Company })
   create(@Body() createCompanyDto: CreateCompanyDto): Promise<Company> {
     return this.companiesService.create(createCompanyDto);
   }
 
   @Get()
+  @ApiOperation({ summary: 'Get all companies' })
   @ApiOkResponse({ type: Company, isArray: true })
   findAll(): Promise<Company[]> {
     return this.companiesService.findAll();
   }
 
   @Get(':id')
+  @ApiOperation({ summary: 'Get single company by id' })
   @ApiOkResponse({ type: Company })
   findOne(@Param('id', ParseIntPipe) id: number): Promise<Company> {
     return this.companiesService.findOne(id);
@@ -48,6 +52,7 @@ export class CompaniesController {
 
   @Patch(':id')
   @Roles(Role.ADMIN)
+  @ApiOperation({ summary: 'Update company by id' })
   @ApiOkResponse({ type: Company })
   update(
     @Param('id', ParseIntPipe) id: number,
@@ -58,6 +63,7 @@ export class CompaniesController {
 
   @Delete(':id')
   @Roles(Role.ADMIN)
+  @ApiOperation({ summary: 'Delete company by id' })
   @ApiOkResponse({ type: Company })
   remove(@Param('id', ParseIntPipe) id: number): Promise<Company> {
     return this.companiesService.remove(id);
