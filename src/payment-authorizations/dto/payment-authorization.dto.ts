@@ -13,41 +13,41 @@ import {
 } from 'class-validator';
 
 export class PaymentAuthorizationDto {
-  @ApiProperty()
+  @ApiProperty({ example: 1, description: 'Company ID' })
   @IsNotEmpty()
   @IsNumber()
   companyId: number;
 
-  @ApiProperty()
+  @ApiProperty({ example: 1, description: 'Employee ID' })
   @IsNotEmpty()
   @IsNumber()
   employeeId: number;
 
   requesterId?: number; // di set by system
 
-  @ApiProperty()
+  @ApiProperty({ example: 1, description: 'Bank ID' })
   @IsNotEmpty()
   @IsNumber()
   bankId: number;
 
-  @ApiProperty()
+  @ApiProperty({ example: '2411191***', description: 'Bank Account' })
   @IsNotEmpty()
   bankAccount: string;
 
-  @ApiProperty()
+  @ApiProperty({ example: 2_000_000, description: 'Amount before deduction' })
   @IsNumber()
   grossAmount: number;
 
-  @ApiProperty()
+  @ApiProperty({ example: 100_000, description: 'Deduction' })
   @IsOptional()
   @IsNumber()
   deduction: number;
 
-  @ApiProperty()
+  @ApiProperty({ example: 1_900_000, description: 'Amount after deduction' })
   @IsNumber()
   netAmount: number;
 
-  @ApiProperty()
+  @ApiProperty({ example: 2_000_000, description: 'Amount based on items' })
   @IsNumber()
   amount: number;
 
@@ -56,7 +56,10 @@ export class PaymentAuthorizationDto {
   @IsNumber()
   cashAdvance?: number;
 
-  @ApiProperty()
+  @ApiProperty({
+    example: 'Cash Advance for Bagas for 3 days',
+    description: 'Description',
+  })
   @IsNotEmpty()
   description: string;
 
@@ -65,7 +68,7 @@ export class PaymentAuthorizationDto {
   @IsNumber()
   expenseClaimId?: number;
 
-  @ApiProperty()
+  @ApiProperty({ example: 'SUBMITTED', description: 'Status' })
   @IsEnum(PaymentStatus)
   status: PaymentStatus;
 
