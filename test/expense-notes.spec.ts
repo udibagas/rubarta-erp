@@ -40,7 +40,7 @@ describe('ExpenseNotesController', () => {
     expenseNote = response.body;
     expect(response.statusCode).toBe(HttpStatus.CREATED);
     expect(response.body.description).toBe('BBM Pertamax 10 Liter');
-    expect(response.body.amount).toBe('100000');
+    expect(response.body.amount).toBe(100_000);
   });
 
   it('GET /api/expense-notes', async () => {
@@ -72,7 +72,7 @@ describe('ExpenseNotesController', () => {
 
     expect(response.statusCode).toBe(HttpStatus.OK);
     expect(response.body.description).toBe('BBM Pertamax 20 Liter');
-    expect(response.body.amount).toBe('200000');
+    expect(response.body.amount).toBe(200_000);
   });
 
   it('DELETE /api/expense-notes/:id', async () => {
