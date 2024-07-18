@@ -1,4 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { Role } from '@prisma/client';
 import { Exclude } from 'class-transformer';
 
 export class User {
@@ -31,5 +32,5 @@ export class User {
   signatureSpeciment: string;
 
   @ApiProperty({ example: ['APPROVER', 'VERIFIER'] })
-  roles: string[];
+  roles: Role[];
 }
