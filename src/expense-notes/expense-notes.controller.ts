@@ -33,7 +33,11 @@ export class ExpenseNotesController {
 
   @Get()
   @ApiOperation({ summary: 'Get all expense notes' })
-  @ApiOkResponse({ type: [ExpenseNote], description: 'Array of expense notes' })
+  @ApiOkResponse({
+    type: ExpenseNote,
+    isArray: true,
+    description: 'Array of expense notes',
+  })
   findAll(): Promise<ExpenseNote[]> {
     return this.expenseNotesService.findAll();
   }
