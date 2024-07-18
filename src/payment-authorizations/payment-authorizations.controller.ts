@@ -21,6 +21,8 @@ import {
 } from '@nestjs/swagger';
 import { PaymentAuthorization } from './entities/payment-authorization.entity';
 import { PaymentAuthorizationDto } from './dto/payment-authorization.dto';
+import { Auth } from '../auth/auth.decorator';
+import { User } from '@prisma/client';
 
 @ApiTags('Payment Authorizations')
 @ApiBearerAuth()
@@ -61,7 +63,7 @@ export class PaymentAuthorizationsController {
   })
   create(
     @Body() paymentAuthorizationDto: PaymentAuthorizationDto,
-    @Request() { user },
+    @Auth() user: User,
   ) {
     return this.paymentAuthorizationsService.create({
       ...paymentAuthorizationDto,
@@ -71,7 +73,7 @@ export class PaymentAuthorizationsController {
 
   @Get()
   @ApiOperation({
-    summary: 'Gel all payment authorizations (nota kuasa pembayaran)',
+    summary: 'Get all payment authorizations (nota kuasa pembayaran)',
   })
   findAll() {
     return this.paymentAuthorizationsService.findAll();
@@ -82,7 +84,7 @@ export class PaymentAuthorizationsController {
     summary: 'Get single payment authorization by id (nota kuasa pembayaran)',
   })
   findOne(@Param('id', ParseIntPipe) id: number) {
-    return this.paymentAuthorizationsService.findOne(+id);
+    return this.paymentAuthorizationsService.findOne(id);
   }
 
   @Patch(':id')
@@ -104,7 +106,7 @@ export class PaymentAuthorizationsController {
     summary: 'Delete payment authorization by id (nota kuasa pembayaran)',
   })
   remove(@Param('id', ParseIntPipe) id: number) {
-    return this.paymentAuthorizationsService.remove(+id);
+    return this.paymentAuthorizationsService.remove(id);
   }
 
   @Delete(':id/:itemId')

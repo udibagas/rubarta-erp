@@ -59,6 +59,9 @@ export class PaymentAuthorizationItem {
   id: number;
 
   @ApiProperty()
+  userId: number;
+
+  @ApiProperty()
   date: Date;
 
   @ApiProperty()

@@ -275,12 +275,12 @@ export class PaymentAuthorizationsService {
           })),
         });
 
-      // TODO: kirim notifikasi ke masing2 approver
-      this.eventEmitter.emit('paymentAuthorization.notify', data, approvals);
+      // TODO: kirim notifikasi ke approver pertama
+      this.eventEmitter.emit('paymentAuthorization.notify', data, approvals[0]);
     }
   }
 
-  @OnEvent('paymentAuthorization.updated')
+  @OnEvent('paymentAuthorization.updated', { async: true })
   async updateLog(
     data: PaymentAuthorization,
     user: User,
@@ -297,7 +297,7 @@ export class PaymentAuthorizationsService {
     });
   }
 
-  @OnEvent('paymentAuthorization.notifiy')
+  @OnEvent('paymentAuthorization.notifiy', { async: true })
   async sendNotification(user: User, data: PaymentAuthorization) {
     // TODO: create notification and send email
   }

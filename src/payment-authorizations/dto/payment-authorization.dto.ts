@@ -23,7 +23,7 @@ export class PaymentAuthorizationDto {
   @IsNumber()
   employeeId: number;
 
-  requesterId?: number; // di set by system
+  requesterId: number;
 
   @ApiProperty({ example: 1, description: 'Bank ID' })
   @IsNotEmpty()
