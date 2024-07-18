@@ -10,7 +10,16 @@ export class ExpenseClaimsService {
   create(expenseClaimDto: ExpenseClaimDto) {
     const { items, ...data } = expenseClaimDto;
     return this.prisma.expenseClaim.create({
-      data: { ...data, ExpenseClaimItem: { create: items } },
+      data: {
+        ...data,
+        ExpenseClaimItem: {
+          create: items,
+        },
+      },
+      include: {
+        ExpenseClaimItem: true,
+        ExpenseClaimAttachment: true,
+      },
     });
   }
 
@@ -28,6 +37,7 @@ export class ExpenseClaimsService {
       cursor,
       where,
       orderBy,
+      include: { ExpenseClaimItem: true },
     });
   }
 
