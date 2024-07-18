@@ -5,7 +5,7 @@ import * as request from 'supertest';
 import { TestModule } from './test.module';
 import { TestService } from './test.service';
 
-describe('UsersController', () => {
+describe('CompaniesController', () => {
   let app: INestApplication;
   let testService: TestService;
   let company;
