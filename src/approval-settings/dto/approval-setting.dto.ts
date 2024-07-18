@@ -21,18 +21,32 @@ export class ApprovalSettingItemDto {
   @IsNumber()
   level: number;
 
-  @ApiProperty()
+  @ApiProperty({
+    example: [
+      {
+        userId: 1,
+        level: 1,
+        approvalActionType: 'APPROVAL | VERIFICATION | PAYMENT',
+      },
+    ],
+  })
   @IsNotEmpty()
   @IsEnum(ApprovalActionType)
   approvalActionType: ApprovalActionType;
 }
 
 export class ApprovalSettingDto {
-  @ApiProperty()
+  @ApiProperty({
+    description: 'Company ID',
+    example: 1,
+  })
   @IsNotEmpty()
   companyId: number;
 
-  @ApiProperty()
+  @ApiProperty({
+    description: 'Approval type',
+    example: ApprovalType.PAYMENT_AUTHORIZATION,
+  })
   @IsNotEmpty()
   @IsEnum(ApprovalType)
   approvalType: ApprovalType;

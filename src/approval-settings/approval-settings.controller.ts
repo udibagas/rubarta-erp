@@ -18,7 +18,7 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import { Roles } from '../auth/role.decorator';
-import { Role } from '@prisma/client';
+import { ApprovalType, Role } from '@prisma/client';
 import { ApprovalSetting } from './entities/approval-setting.entity';
 
 @ApiTags('Approval Setting')
@@ -32,7 +32,21 @@ export class ApprovalSettingsController {
   @Post()
   @Roles(Role.ADMIN)
   @ApiOperation({ summary: 'Create new approval setting' })
-  @ApiCreatedResponse({ type: ApprovalSetting })
+  @ApiCreatedResponse({
+    type: ApprovalSetting,
+    description: 'Created approval setting',
+    example: {
+      companyId: 1,
+      approvalType: ApprovalType.PAYMENT_AUTHORIZATION,
+      items: [
+        {
+          userId: 1,
+          level: 1,
+          approvalActionType: 'APPROVAL',
+        },
+      ],
+    },
+  })
   create(
     @Body() approvalSettingDto: ApprovalSettingDto,
   ): Promise<ApprovalSetting> {
