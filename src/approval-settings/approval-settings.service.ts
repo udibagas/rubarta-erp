@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { CreateApprovalSettingDto } from './dto/create-approval-setting.dto';
 import { UpdateApprovalSettingDto } from './dto/update-approval-setting.dto';
-import { PrismaService } from 'src/prisma/prisma.service';
+import { PrismaService } from '../prisma/prisma.service';
 
 @Injectable()
 export class ApprovalSettingsService {
