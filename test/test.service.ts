@@ -109,4 +109,9 @@ export class TestService {
   deleteExpenseNotes() {
     return this.prisma.expenseNote.deleteMany({});
   }
+
+  async deletePaymentAuthorizations() {
+    await this.prisma.paymentAuthorizationApproval.deleteMany({});
+    return this.prisma.paymentAuthorization.deleteMany({});
+  }
 }
