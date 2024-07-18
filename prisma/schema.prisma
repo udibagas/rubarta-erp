@@ -155,7 +155,7 @@ model PaymentAuthorizationApproval {
 model PaymentAuthorizationLog {
   id                     Int                  @id @default(autoincrement())
   User                   User                 @relation(fields: [userId], references: [id])
-  PaymentAuthorization   PaymentAuthorization @relation(fields: [paymentAuthorizationId], references: [id])
+  PaymentAuthorization   PaymentAuthorization @relation(fields: [paymentAuthorizationId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   status                 PaymentStatus
   note                   String?              @db.VarChar(100)
   updatedAt              DateTime?            @default(now())
@@ -247,7 +247,6 @@ model ApprovalSetting {
   Company             Company               @relation(fields: [companyId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   companyId           Int
   approvalType        ApprovalType
-  approvalActionType  ApprovalActionType    @default(APPROVAL)
   ApprovalSettingItem ApprovalSettingItem[]
 
   @@unique([companyId, approvalType]) // ga boleh ada setting yg sama
