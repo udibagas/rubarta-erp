@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../src/prisma/prisma.service';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
+import { Role } from '@prisma/client';
 
 @Injectable()
 export class TestService {
@@ -25,6 +26,18 @@ export class TestService {
 
     this.user = user;
     return user;
+  }
+
+  async createDummyUser(name, roles = [Role.USER]) {
+    const password = await bcrypt.hash('password', 10);
+    return this.prisma.user.create({
+      data: {
+        name: name,
+        email: `${name}@mail.com`,
+        password: password,
+        roles: roles,
+      },
+    });
   }
 
   createToken() {
