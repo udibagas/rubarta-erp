@@ -285,8 +285,8 @@ model Notification {
 // untuk di convert ke expense claim
 model ExpenseNote {
   id            BigInt      @id @default(autoincrement()) @db.BigInt
-  User          User        @relation(fields: [userId], references: [id])
-  userId        Int
+  User          User?       @relation(fields: [userId], references: [id])
+  userId        Int?
   date          DateTime    @db.Date
   expenseType   ExpenseType @relation(fields: [expenseTypeId], references: [id])
   expenseTypeId Int
