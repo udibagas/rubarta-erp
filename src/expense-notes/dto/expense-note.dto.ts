@@ -3,6 +3,11 @@ import { JsonValue } from '@prisma/client/runtime/library';
 import { IsDate, IsNotEmpty, IsNumber } from 'class-validator';
 
 export class ExpenseNoteDto {
+  @ApiProperty({ description: 'User ID', example: 1 })
+  @IsNumber()
+  @IsNotEmpty()
+  userId: number;
+
   @ApiProperty({ description: 'Date', example: '2024-07-01' })
   @IsDate()
   @IsNotEmpty()

@@ -1,3 +1,4 @@
+import { Auth } from './../auth/auth.decorator';
 import {
   Controller,
   Get,
@@ -17,6 +18,8 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import { ExpenseNote } from './entities/expense-note.entity';
+import { User } from '@prisma/client';
+import { plainToInstance } from 'class-transformer';
 
 @ApiTags('Expense Notes')
 @ApiBearerAuth()
@@ -27,8 +30,13 @@ export class ExpenseNotesController {
   @Post()
   @ApiOperation({ summary: 'Create new expense note' })
   @ApiOkResponse({ type: ExpenseNote, description: 'Created expense note' })
-  create(@Body() expenseNoteDto: ExpenseNoteDto): Promise<ExpenseNote> {
-    return this.expenseNotesService.create(expenseNoteDto);
+  async create(@Body() expenseNoteDto: ExpenseNoteDto, @Auth() user: User) {
+    const data = await this.expenseNotesService.create({
+      ...expenseNoteDto,
+      userId: user.id,
+    });
+
+    return plainToInstance(ExpenseNote, data);
   }
 
   @Get()
@@ -38,31 +46,40 @@ export class ExpenseNotesController {
     isArray: true,
     description: 'Array of expense notes',
   })
-  findAll(): Promise<ExpenseNote[]> {
-    return this.expenseNotesService.findAll();
+  async findAll(@Auth() user: User) {
+    const data = this.expenseNotesService.findAll();
+    return plainToInstance(ExpenseNote, data);
   }
 
   @Get(':id')
   @ApiOperation({ summary: 'Get single expense note by id' })
   @ApiOkResponse({ type: ExpenseNote, description: 'Expense note' })
-  findOne(@Param('id', ParseIntPipe) id: number): Promise<ExpenseNote> {
-    return this.expenseNotesService.findOne(id);
+  async findOne(@Param('id', ParseIntPipe) id: number, @Auth() user: User) {
+    const data = await this.expenseNotesService.findOne(id);
+    return plainToInstance(ExpenseNote, data);
   }
 
   @Patch(':id')
   @ApiOperation({ summary: 'Update expense note by id' })
   @ApiOkResponse({ type: ExpenseNote, description: 'Updated expense note' })
-  update(
+  async update(
     @Param('id', ParseIntPipe) id: number,
     @Body() expenseNoteDto: ExpenseNoteDto,
-  ): Promise<ExpenseNote> {
-    return this.expenseNotesService.update(id, expenseNoteDto);
+    @Auth() user: User,
+  ) {
+    const data = await this.expenseNotesService.update(id, {
+      ...expenseNoteDto,
+      userId: user.id,
+    });
+
+    return plainToInstance(ExpenseNote, data);
   }
 
   @Delete(':id')
   @ApiOperation({ summary: 'Delete expense note by id' })
   @ApiOkResponse({ type: ExpenseNote, description: 'Deleted expense note' })
-  remove(@Param('id', ParseIntPipe) id: number): Promise<ExpenseNote> {
-    return this.expenseNotesService.remove(id);
+  async remove(@Param('id', ParseIntPipe) id: number, @Auth() user: User) {
+    const data = await this.expenseNotesService.remove(id);
+    return plainToInstance(ExpenseNote, data);
   }
 }

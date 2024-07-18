@@ -3,7 +3,7 @@ import { JsonValue } from '@prisma/client/runtime/library';
 
 export class ExpenseNote {
   @ApiProperty({ description: 'Expense Note ID', example: 1 })
-  id: bigint;
+  id: number;
 
   @ApiProperty({ description: 'User ID', example: 1 })
   userId: number;
@@ -18,7 +18,7 @@ export class ExpenseNote {
   description: string;
 
   @ApiProperty({ description: 'Expense amount', example: 200_0000 })
-  amount: bigint;
+  amount: number;
 
   @ApiProperty({
     description: 'Attachments object',
@@ -30,4 +30,12 @@ export class ExpenseNote {
     },
   })
   attachment?: JsonValue;
+
+  toJSON() {
+    return {
+      ...this,
+      id: this.id.toString(),
+      amount: this.amount.toString(),
+    };
+  }
 }
