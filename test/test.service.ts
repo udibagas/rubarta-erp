@@ -117,4 +117,27 @@ export class TestService {
   deleteExpenseClaims() {
     return this.prisma.expenseClaim.deleteMany({});
   }
+
+  createNotification(userId) {
+    return this.prisma.notification.createManyAndReturn({
+      data: [
+        {
+          userId,
+          message: 'Test message 1',
+        },
+        {
+          userId,
+          message: 'Test message 2',
+        },
+        {
+          userId,
+          message: 'Test message 3',
+        },
+      ],
+    });
+  }
+
+  deleteNotifications() {
+    return this.prisma.notification.deleteMany({});
+  }
 }

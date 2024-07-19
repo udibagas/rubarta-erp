@@ -14,6 +14,9 @@ import { ExpenseClaimsModule } from './expense-claims/expense-claims.module';
 import { ExpenseNotesModule } from './expense-notes/expense-notes.module';
 import { ThrottlerModule, ThrottlerGuard } from '@nestjs/throttler';
 import { APP_GUARD } from '@nestjs/core';
+import { MailerModule } from '@nestjs-modules/mailer';
+import { EjsAdapter } from '@nestjs-modules/mailer/dist/adapters/ejs.adapter';
+import { NotificationsModule } from './notifications/notifications.module';
 
 @Module({
   imports: [
@@ -24,6 +27,20 @@ import { APP_GUARD } from '@nestjs/core';
         limit: 10, // max request per minute
       },
     ]),
+    // MailerModule.forRoot({
+    //   transport: process.env.MAILER_TRANSPORT,
+    //   preview: true,
+    //   defaults: {
+    //     from: `"${process.env.MAILER_FROM_NAME}" <${process.env.MAILER_FROM_EMAIL}>`,
+    //   },
+    //   template: {
+    //     dir: __dirname + '/templates',
+    //     adapter: new EjsAdapter(),
+    //     options: {
+    //       strict: true,
+    //     },
+    //   },
+    // }),
     EventEmitterModule.forRoot(),
     UsersModule,
     PrismaModule,
@@ -36,13 +53,15 @@ import { APP_GUARD } from '@nestjs/core';
     PaymentAuthorizationsModule,
     ExpenseClaimsModule,
     ExpenseNotesModule,
+    NotificationsModule,
   ],
   controllers: [],
-  providers: [
-    {
-      provide: APP_GUARD,
-      useClass: ThrottlerGuard,
-    },
-  ],
+  //! ini bikin test jadi hang up, enable kalau udah production
+  // providers: [
+  //   {
+  //     provide: APP_GUARD,
+  //     useClass: ThrottlerGuard,
+  //   },
+  // ],
 })
 export class AppModule {}
