@@ -15,7 +15,7 @@ import { ExpenseNotesModule } from './expense-notes/expense-notes.module';
 import { ThrottlerModule, ThrottlerGuard } from '@nestjs/throttler';
 import { APP_GUARD } from '@nestjs/core';
 import { MailerModule } from '@nestjs-modules/mailer';
-import { EjsAdapter } from '@nestjs-modules/mailer/dist/adapters/ejs.adapter';
+import { EjsAdapter } from '@nestjs-modules/mailer/dist/adapters/ejs.adapter'; //?
 import { NotificationsModule } from './notifications/notifications.module';
 
 @Module({
@@ -27,20 +27,28 @@ import { NotificationsModule } from './notifications/notifications.module';
         limit: 10, // max request per minute
       },
     ]),
-    // MailerModule.forRoot({
-    //   transport: process.env.MAILER_TRANSPORT,
-    //   preview: true,
-    //   defaults: {
-    //     from: `"${process.env.MAILER_FROM_NAME}" <${process.env.MAILER_FROM_EMAIL}>`,
-    //   },
-    //   template: {
-    //     dir: __dirname + '/templates',
-    //     adapter: new EjsAdapter(),
-    //     options: {
-    //       strict: true,
-    //     },
-    //   },
-    // }),
+    MailerModule.forRoot({
+      transport: {
+        host: process.env.MAILER_HOST,
+        port: process.env.MAILER_PORT,
+        secure: false,
+        auth: {
+          user: process.env.MAILER_USER,
+          pass: process.env.MAILER_PASS,
+        },
+      },
+      // preview: true,
+      defaults: {
+        from: `"${process.env.MAILER_FROM_NAME}" <${process.env.MAILER_FROM_EMAIL}>`,
+      },
+      template: {
+        dir: __dirname + '/../../templates',
+        adapter: new EjsAdapter(),
+        options: {
+          strict: false,
+        },
+      },
+    }),
     EventEmitterModule.forRoot(),
     UsersModule,
     PrismaModule,
@@ -56,6 +64,7 @@ import { NotificationsModule } from './notifications/notifications.module';
     NotificationsModule,
   ],
   controllers: [],
+  providers: [],
   //! ini bikin test jadi hang up, enable kalau udah production
   // providers: [
   //   {

@@ -5,6 +5,7 @@ import {
   Param,
   ParseIntPipe,
   Patch,
+  Post,
 } from '@nestjs/common';
 import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { Auth } from '../auth/auth.decorator';
@@ -52,5 +53,14 @@ export class NotificationsController {
   @ApiOperation({ summary: 'Delete all notifications' })
   removeAll(@Auth() user: User) {
     return this.notificationsService.removeAll(user.id);
+  }
+
+  @Post('/test')
+  test(@Auth() user: User) {
+    return this.notificationsService.send({
+      userId: user.id,
+      title: 'TEST',
+      message: 'Ini test notification',
+    });
   }
 }

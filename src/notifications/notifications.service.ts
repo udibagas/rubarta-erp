@@ -6,7 +6,7 @@ import { PrismaService } from '../prisma/prisma.service';
 @Injectable()
 export class NotificationsService {
   constructor(
-    // private readonly mailerService: MailerService,
+    private readonly mailerService: MailerService,
     private readonly prisma: PrismaService,
   ) {}
 
@@ -42,25 +42,27 @@ export class NotificationsService {
     });
   }
 
-  // async send(notificationDto: NotificationDto) {
-  //   const { userId, subject, message, redirectUrl } = notificationDto;
+  async send(notificationDto: NotificationDto) {
+    const { userId, title: subject, message, redirectUrl } = notificationDto;
 
-  //   const user = await this.prisma.user.findUniqueOrThrow({
-  //     where: { id: userId },
-  //   });
+    const user = await this.prisma.user.findUniqueOrThrow({
+      where: { id: userId },
+    });
 
-  //   return this.mailerService.sendMail({
-  //     to: user.email,
-  //     subject,
-  //     template: 'notification',
-  //     context: {
-  //       subject,
-  //       message,
-  //       redirectUrl,
-  //       user,
-  //     },
-  //   });
-  // }
+    console.log(`Sending notification to ${user.email}`);
+
+    return this.mailerService.sendMail({
+      to: user.email,
+      subject,
+      template: 'notification',
+      context: {
+        subject,
+        message,
+        redirectUrl,
+        user,
+      },
+    });
+  }
 
   create(notificationDto: NotificationDto) {
     return this.prisma.notification.create({
@@ -70,6 +72,6 @@ export class NotificationsService {
 
   notify(notificationDto: NotificationDto) {
     this.create(notificationDto);
-    // this.send(notificationDto);
+    this.send(notificationDto);
   }
 }

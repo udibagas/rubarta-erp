@@ -3,6 +3,7 @@ import { PrismaService } from '../src/prisma/prisma.service';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
 import { Role } from '@prisma/client';
+import { NotificationsService } from '../src/notifications/notifications.service';
 
 @Injectable()
 export class TestService {
@@ -11,14 +12,15 @@ export class TestService {
   constructor(
     private prisma: PrismaService,
     private jwtService: JwtService,
+    private notificationService: NotificationsService,
   ) {}
 
   async createUser() {
     const password = await bcrypt.hash('password', 10);
     const user = await this.prisma.user.create({
       data: {
-        name: 'Admin',
-        email: 'admin@mail.com',
+        name: 'Bagas Udi Sahsangka',
+        email: 'udibagas@gmail.com',
         password: password,
         roles: ['ADMIN'],
       },
@@ -123,14 +125,17 @@ export class TestService {
       data: [
         {
           userId,
+          title: 'Test',
           message: 'Test message 1',
         },
         {
           userId,
+          title: 'Test',
           message: 'Test message 2',
         },
         {
           userId,
+          title: 'Test',
           message: 'Test message 3',
         },
       ],
@@ -139,5 +144,9 @@ export class TestService {
 
   deleteNotifications() {
     return this.prisma.notification.deleteMany({});
+  }
+
+  sendNotification(notification) {
+    return this.notificationService.send(notification);
   }
 }

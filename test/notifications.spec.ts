@@ -10,6 +10,7 @@ describe('NotificationsController', () => {
   let testService: TestService;
   let token;
   let notifications;
+  let user;
 
   beforeAll(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
@@ -20,9 +21,19 @@ describe('NotificationsController', () => {
     await app.init();
 
     testService = app.get(TestService);
-    const user = await testService.createUser();
+    user = await testService.createUser();
     token = testService.createToken();
     notifications = await testService.createNotification(user.id);
+  });
+
+  it('can send notification', async () => {
+    const result = await testService.sendNotification({
+      userId: user.id,
+      title: 'Test',
+      message: 'Ini test message',
+    });
+    console.log(result);
+    // expect().toBeDefined()
   });
 
   it('GET /api/notifications', async () => {

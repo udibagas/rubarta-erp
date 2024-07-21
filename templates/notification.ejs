@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Notification</title>
+  </head>
+  <body>
+    <h3>Dear <%= user.name %>,</h3>
+
+    <p><%= message %></p>
+
+    <% if (redirectUrl) { %>
+    <p>
+      Silakan klik link di bawah ini untuk melihat detail:
+      <br />
+      <a href="<%= redirectUrl %>">LIHAT DETAIL</a>
+    </p>
+    <% } %>
+
+    <p>
+      Regards, <br />
+      Rubarta ERP System
+    </p>
+  </body>
+</html>
