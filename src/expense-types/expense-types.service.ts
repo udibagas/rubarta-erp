@@ -1,14 +1,13 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { CreateExpenseTypeDto } from './dto/create-expense-type.dto';
-import { UpdateExpenseTypeDto } from './dto/update-expense-type.dto';
+import { ExpenseTypeDto } from './expense-type.dto';
 import { PrismaService } from '../prisma/prisma.service';
 
 @Injectable()
 export class ExpenseTypesService {
   constructor(private prisma: PrismaService) {}
 
-  create(createExpenseTypeDto: CreateExpenseTypeDto) {
-    return this.prisma.expenseType.create({ data: createExpenseTypeDto });
+  create(expenseTypeDto: ExpenseTypeDto) {
+    return this.prisma.expenseType.create({ data: expenseTypeDto });
   }
 
   findAll() {
@@ -19,9 +18,9 @@ export class ExpenseTypesService {
     return this.prisma.expenseType.findUnique({ where: { id } });
   }
 
-  update(id: number, updateExpenseTypeDto: UpdateExpenseTypeDto) {
+  update(id: number, expenseTypeDto: ExpenseTypeDto) {
     return this.prisma.expenseType.update({
-      data: updateExpenseTypeDto,
+      data: expenseTypeDto,
       where: { id },
     });
   }

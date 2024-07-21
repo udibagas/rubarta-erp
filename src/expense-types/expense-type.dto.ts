@@ -1,8 +1,8 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty } from 'class-validator';
 
-export class CreateExpenseTypeDto {
+export class ExpenseTypeDto {
   @ApiProperty()
-  @IsNotEmpty()
+  @IsNotEmpty({ message: 'Name is required' })
   name: string;
 }

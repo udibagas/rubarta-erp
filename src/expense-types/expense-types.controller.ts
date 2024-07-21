@@ -9,8 +9,7 @@ import {
   ParseIntPipe,
 } from '@nestjs/common';
 import { ExpenseTypesService } from './expense-types.service';
-import { CreateExpenseTypeDto } from './dto/create-expense-type.dto';
-import { UpdateExpenseTypeDto } from './dto/update-expense-type.dto';
+import { ExpenseTypeDto } from './expense-type.dto';
 import {
   ApiBearerAuth,
   ApiCreatedResponse,
@@ -32,10 +31,8 @@ export class ExpenseTypesController {
   @Roles(Role.ADMIN)
   @ApiOperation({ summary: 'Create new expense type' })
   @ApiCreatedResponse({ type: ExpenseType })
-  create(
-    @Body() createExpenseTypeDto: CreateExpenseTypeDto,
-  ): Promise<ExpenseType> {
-    return this.expenseTypesService.create(createExpenseTypeDto);
+  create(@Body() expenseTypeDto: ExpenseTypeDto): Promise<ExpenseType> {
+    return this.expenseTypesService.create(expenseTypeDto);
   }
 
   @Get()
@@ -58,9 +55,9 @@ export class ExpenseTypesController {
   @ApiOkResponse({ type: ExpenseType })
   update(
     @Param('id', ParseIntPipe) id: number,
-    @Body() updateExpenseTypeDto: UpdateExpenseTypeDto,
+    @Body() expenseTypeDto: ExpenseTypeDto,
   ): Promise<ExpenseType> {
-    return this.expenseTypesService.update(id, updateExpenseTypeDto);
+    return this.expenseTypesService.update(id, expenseTypeDto);
   }
 
   @Delete(':id')
