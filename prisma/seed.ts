@@ -4,9 +4,9 @@ const bcrypt = require('bcrypt');
 const prisma = new PrismaClient();
 
 const admin = {
-  name: 'Admin',
-  email: 'admin@mail.com',
-  password: bcrypt.hashSync('Bismillah1@#$%', 10),
+  name: 'Bagas Udi Sahsangka',
+  email: 'udibagas@gmail.com',
+  password: bcrypt.hashSync('rahasia123', 10),
   roles: ['ADMIN'],
 };
 
