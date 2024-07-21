@@ -273,6 +273,7 @@ model Notification {
   id          Int       @id @default(autoincrement())
   User        User      @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   userId      Int
+  title       String    @db.VarChar(255)
   message     String    @db.Text
   redirectUrl String?   @db.VarChar(255)
   readAt      DateTime? @db.Timestamp()
