@@ -26,7 +26,7 @@ export class ApprovalSettingItemDto {
       {
         userId: 1,
         level: 1,
-        approvalActionType: 'APPROVAL | VERIFICATION | PAYMENT',
+        approvalActionType: 'APPROVAL | VERIFICATION | AUTHORIZATION',
       },
     ],
   })
@@ -67,5 +67,5 @@ export class ApprovalSettingDto {
   @ArrayNotEmpty()
   @Type(() => ApprovalSettingItemDto)
   @ValidateNested({ each: true })
-  items: ApprovalSettingItemDto[];
+  ApprovalSettingItem: ApprovalSettingItemDto[];
 }

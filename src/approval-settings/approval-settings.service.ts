@@ -7,7 +7,7 @@ export class ApprovalSettingsService {
   constructor(private prisma: PrismaService) {}
 
   create(approvalSettingDto: ApprovalSettingDto) {
-    const { items, ...data } = approvalSettingDto;
+    const { ApprovalSettingItem: items, ...data } = approvalSettingDto;
     return this.prisma.approvalSetting.create({
       data: {
         ...data,
@@ -48,7 +48,7 @@ export class ApprovalSettingsService {
   }
 
   update(id: number, approvalSettingDto: ApprovalSettingDto) {
-    const { items, ...data } = approvalSettingDto;
+    const { ApprovalSettingItem: items, ...data } = approvalSettingDto;
 
     return this.prisma.approvalSetting.update({
       data: {
@@ -70,5 +70,11 @@ export class ApprovalSettingsService {
 
   remove(id: number) {
     return this.prisma.approvalSetting.delete({ where: { id } });
+  }
+
+  removeItem(id: number) {
+    return this.prisma.approvalSettingItem.delete({
+      where: { id },
+    });
   }
 }

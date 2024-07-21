@@ -85,4 +85,9 @@ export class ApprovalSettingsController {
   remove(@Param('id', ParseIntPipe) id: number): Promise<ApprovalSetting> {
     return this.approvalSettingsService.remove(id);
   }
+
+  @Delete(':id/:itemId')
+  removeItem(@Param('itemId', ParseIntPipe) itemId: number) {
+    return this.approvalSettingsService.removeItem(itemId);
+  }
 }
