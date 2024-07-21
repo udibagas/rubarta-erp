@@ -9,15 +9,14 @@ import {
   ParseIntPipe,
 } from '@nestjs/common';
 import { BanksService } from './banks.service';
-import { CreateBankDto } from './dto/create-bank.dto';
-import { UpdateBankDto } from './dto/update-bank.dto';
+import { BankDto } from './bank.dto';
 import {
   ApiBearerAuth,
   ApiCreatedResponse,
   ApiOperation,
   ApiTags,
 } from '@nestjs/swagger';
-import { Bank } from './entities/bank.entity';
+import { Bank } from './bank.entity';
 import { Roles } from '../auth/role.decorator';
 import { Role } from '@prisma/client';
 
@@ -31,8 +30,8 @@ export class BanksController {
   @Roles(Role.ADMIN)
   @ApiOperation({ summary: 'Create new bank' })
   @ApiCreatedResponse({ type: Bank })
-  create(@Body() createBankDto: CreateBankDto): Promise<Bank> {
-    return this.banksService.create(createBankDto);
+  create(@Body() bankDto: BankDto): Promise<Bank> {
+    return this.banksService.create(bankDto);
   }
 
   @Get()
@@ -52,9 +51,9 @@ export class BanksController {
   @ApiOperation({ summary: 'Update bank by id' })
   update(
     @Param('id', ParseIntPipe) id: number,
-    @Body() updateBankDto: UpdateBankDto,
+    @Body() bankDto: BankDto,
   ): Promise<Bank> {
-    return this.banksService.update(id, updateBankDto);
+    return this.banksService.update(id, bankDto);
   }
 
   @Delete(':id')

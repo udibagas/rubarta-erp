@@ -1,12 +1,12 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty } from 'class-validator';
 
-export class CreateBankDto {
+export class BankDto {
   @ApiProperty()
-  @IsNotEmpty()
+  @IsNotEmpty({ message: 'Code is required' })
   code: string;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsNotEmpty({ message: 'Name is required' })
   name: string;
 }
