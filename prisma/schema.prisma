@@ -168,7 +168,7 @@ model PaymentAuthorizationLog {
 
 model ExpenseType {
   id               Int                @id @default(autoincrement())
-  name             String             @db.VarChar(30) // toll charge, fuel, food, parking
+  name             String             @unique @db.VarChar(30) // toll charge, fuel, food, parking
   ExpenseClaimItem ExpenseClaimItem[]
   ExpenseNote      ExpenseNote[]
 
