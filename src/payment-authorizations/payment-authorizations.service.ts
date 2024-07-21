@@ -152,7 +152,7 @@ export class PaymentAuthorizationsService {
 
     const status =
       approvals.length == approvedCount
-        ? PaymentStatus.APPROVED
+        ? PaymentStatus.FULLY_APPROVED
         : PaymentStatus.PARTIIALLY_APPROVED;
 
     const data = await this.prisma.paymentAuthorization.update({
@@ -166,7 +166,7 @@ export class PaymentAuthorizationsService {
       'paymentAuthorization.updated',
       data,
       data.Requester,
-      PaymentStatus.APPROVED,
+      PaymentStatus.FULLY_APPROVED,
       note,
     );
     return data;

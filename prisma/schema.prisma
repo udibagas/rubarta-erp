@@ -312,8 +312,8 @@ enum Role {
 enum ClaimStatus {
   DRAFT
   SUBMITTED
-  APPROVED
   PARTIIALLY_APPROVED
+  FULLY_APPROVED
   REJECTED
   VERIFIED
   CANCELLED
@@ -323,10 +323,11 @@ enum ClaimStatus {
 enum PaymentStatus {
   DRAFT
   SUBMITTED
-  APPROVED
   PARTIIALLY_APPROVED
+  FULLY_APPROVED
   REJECTED
   VERIFIED
+  AUTHORIZED
   PAID
 }
 
@@ -343,5 +344,5 @@ enum ApprovalType {
 enum ApprovalActionType {
   APPROVAL
   VERIFICATION
-  PAYMENT
+  AUTHORIZATION
 }

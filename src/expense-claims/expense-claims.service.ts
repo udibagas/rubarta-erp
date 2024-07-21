@@ -90,7 +90,7 @@ export class ExpenseClaimsService {
 
     const savedData = await this.prisma.expenseClaim.update({
       data: {
-        status: ClaimStatus.APPROVED,
+        status: ClaimStatus.FULLY_APPROVED,
       },
       where: { id },
     });
