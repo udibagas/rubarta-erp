@@ -1,14 +1,13 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { CreateDepartmentDto } from './dto/create-department.dto';
-import { UpdateDepartmentDto } from './dto/update-department.dto';
+import { DepartmentDto } from './department.dto';
 import { PrismaService } from '../prisma/prisma.service';
 
 @Injectable()
 export class DepartmentsService {
   constructor(private prisma: PrismaService) {}
 
-  create(createDepartmentDto: CreateDepartmentDto) {
-    return this.prisma.department.create({ data: createDepartmentDto });
+  create(departmentDto: DepartmentDto) {
+    return this.prisma.department.create({ data: departmentDto });
   }
 
   findAll() {
@@ -23,9 +22,9 @@ export class DepartmentsService {
     });
   }
 
-  update(id: number, updateDepartmentDto: UpdateDepartmentDto) {
+  update(id: number, departmentDto: DepartmentDto) {
     return this.prisma.department.update({
-      data: updateDepartmentDto,
+      data: departmentDto,
       where: { id },
     });
   }

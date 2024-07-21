@@ -9,8 +9,7 @@ import {
   ParseIntPipe,
 } from '@nestjs/common';
 import { DepartmentsService } from './departments.service';
-import { CreateDepartmentDto } from './dto/create-department.dto';
-import { UpdateDepartmentDto } from './dto/update-department.dto';
+import { DepartmentDto } from './department.dto';
 import {
   ApiBearerAuth,
   ApiCreatedResponse,
@@ -20,7 +19,7 @@ import {
 } from '@nestjs/swagger';
 import { Roles } from '../auth/role.decorator';
 import { Role } from '@prisma/client';
-import { Department } from './entities/department.entity';
+import { Department } from './department.entity';
 
 @Controller('api/departments')
 @ApiTags('Departments')
@@ -32,10 +31,8 @@ export class DepartmentsController {
   @Roles(Role.ADMIN)
   @ApiOperation({ summary: 'Create new department' })
   @ApiCreatedResponse({ type: Department })
-  create(
-    @Body() createDepartmentDto: CreateDepartmentDto,
-  ): Promise<Department> {
-    return this.departmentsService.create(createDepartmentDto);
+  create(@Body() departmentDto: DepartmentDto): Promise<Department> {
+    return this.departmentsService.create(departmentDto);
   }
 
   @Get()
@@ -58,9 +55,9 @@ export class DepartmentsController {
   @ApiOkResponse({ type: Department })
   update(
     @Param('id', ParseIntPipe) id: number,
-    @Body() updateDepartmentDto: UpdateDepartmentDto,
+    @Body() departmentDto: DepartmentDto,
   ): Promise<Department> {
-    return this.departmentsService.update(id, updateDepartmentDto);
+    return this.departmentsService.update(id, departmentDto);
   }
 
   @Delete(':id')
