@@ -98,5 +98,5 @@ export class PaymentAuthorizationDto {
   @ArrayNotEmpty()
   @Type(() => PaymentAuthorizationItemDto)
   @ValidateNested({ each: true })
-  items: PaymentAuthorizationItemDto[];
+  PaymentAuthorizationItem: PaymentAuthorizationItemDto[];
 }

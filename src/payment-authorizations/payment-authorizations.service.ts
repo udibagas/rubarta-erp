@@ -18,7 +18,8 @@ export class PaymentAuthorizationsService {
   ) {}
 
   async create(paymentAuthorizationDto: PaymentAuthorizationDto) {
-    const { items, ...data } = paymentAuthorizationDto;
+    const { PaymentAuthorizationItem: items, ...data } =
+      paymentAuthorizationDto;
     let number = 'DRAFT';
 
     if (data.status == PaymentStatus.SUBMITTED) {
@@ -73,7 +74,8 @@ export class PaymentAuthorizationsService {
     if (existingData.status !== PaymentStatus.DRAFT)
       throw new ForbiddenException();
 
-    const { items, ...data } = paymentAuthorizationDto;
+    const { PaymentAuthorizationItem: items, ...data } =
+      paymentAuthorizationDto;
     const savedData = await this.prisma.paymentAuthorization.update({
       where: { id },
       data: {
@@ -99,14 +101,11 @@ export class PaymentAuthorizationsService {
     });
   }
 
-  async removeItem(id: number, itemId: number) {
+  async removeItem(id: number) {
     const data = await this.findOne(id);
     if (data.status !== PaymentStatus.DRAFT) throw new ForbiddenException();
     return this.prisma.paymentAuthorizationItem.delete({
-      where: {
-        id: itemId,
-        paymentAuthorizationId: id,
-      },
+      where: { id },
     });
   }
 
