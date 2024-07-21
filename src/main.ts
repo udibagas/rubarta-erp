@@ -6,6 +6,8 @@ import {
   ValidationPipe,
 } from '@nestjs/common';
 import helmet from 'helmet';
+import { nestCsrf, CsrfFilter } from 'ncsrf';
+import * as cookieParser from 'cookie-parser';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { ValidationError } from 'class-validator';
 import { PrismaClientExceptionFilter } from './prisma/prisma-client-exception.filter';
@@ -27,7 +29,12 @@ function parseValidationError(errors: ValidationError[]) {
 }
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule, { cors: true });
+  const app = await NestFactory.create(AppModule, {
+    cors: {
+      credentials: true,
+      origin: 'http://localhost:4000',
+    },
+  });
 
   const config = new DocumentBuilder()
     .setTitle('Rubarta ERP')
@@ -45,6 +52,10 @@ async function bootstrap() {
   SwaggerModule.setup('api', app, document);
 
   app.use(helmet());
+  app.use(cookieParser());
+  app.use(nestCsrf());
+
+  app.useGlobalFilters(new CsrfFilter());
 
   app.useGlobalPipes(
     new ValidationPipe({
