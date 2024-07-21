@@ -21,8 +21,10 @@ export class UsersService {
   findAll() {
     return this.prisma.user.findMany({
       orderBy: { name: 'asc' },
-      omit: {
-        password: true,
+      omit: { password: true },
+      include: {
+        Department: true,
+        Bank: true,
       },
     });
   }
@@ -30,8 +32,10 @@ export class UsersService {
   findOne(id: number) {
     return this.prisma.user.findUniqueOrThrow({
       where: { id },
-      omit: {
-        password: true,
+      omit: { password: true },
+      include: {
+        Department: true,
+        Bank: true,
       },
     });
   }
@@ -44,18 +48,14 @@ export class UsersService {
     return this.prisma.user.update({
       data: updateUserDto,
       where: { id },
-      omit: {
-        password: true,
-      },
+      omit: { password: true },
     });
   }
 
   remove(id: number) {
     return this.prisma.user.delete({
       where: { id },
-      omit: {
-        password: true,
-      },
+      omit: { password: true },
     });
   }
 
