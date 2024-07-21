@@ -25,9 +25,14 @@ export class PrismaClientExceptionFilter
       }
 
       case 'P2002': {
-        const statusCode = HttpStatus.CONFLICT;
-        const message = `${exception.meta.target[0]} has been taken`;
-        response.status(statusCode).json({ statusCode, message });
+        const statusCode = HttpStatus.BAD_REQUEST;
+        const property = exception.meta.target[0];
+        const error = `${property} has been taken`;
+        response.status(statusCode).json({
+          statusCode,
+          message: 'Bad Request',
+          errors: [{ property, error }],
+        });
         break;
       }
 
