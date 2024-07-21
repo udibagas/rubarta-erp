@@ -9,8 +9,7 @@ import {
   ParseIntPipe,
 } from '@nestjs/common';
 import { CompaniesService } from './companies.service';
-import { CreateCompanyDto } from './dto/create-company.dto';
-import { UpdateCompanyDto } from './dto/update-company.dto';
+import { CompanyDto } from './company.dto';
 import {
   ApiBearerAuth,
   ApiCreatedResponse,
@@ -20,7 +19,7 @@ import {
 } from '@nestjs/swagger';
 import { Roles } from '../auth/role.decorator';
 import { Role } from '@prisma/client';
-import { Company } from './entities/company.entity';
+import { Company } from './company.entity';
 
 @ApiTags('Companies')
 @ApiBearerAuth()
@@ -32,8 +31,8 @@ export class CompaniesController {
   @Roles(Role.ADMIN)
   @ApiOperation({ summary: 'Create new company' })
   @ApiCreatedResponse({ type: Company })
-  create(@Body() createCompanyDto: CreateCompanyDto): Promise<Company> {
-    return this.companiesService.create(createCompanyDto);
+  create(@Body() companyDto: CompanyDto): Promise<Company> {
+    return this.companiesService.create(companyDto);
   }
 
   @Get()
@@ -56,9 +55,9 @@ export class CompaniesController {
   @ApiOkResponse({ type: Company })
   update(
     @Param('id', ParseIntPipe) id: number,
-    @Body() updateCompanyDto: UpdateCompanyDto,
+    @Body() companyDto: CompanyDto,
   ): Promise<Company> {
-    return this.companiesService.update(id, updateCompanyDto);
+    return this.companiesService.update(id, companyDto);
   }
 
   @Delete(':id')
