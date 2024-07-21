@@ -62,7 +62,7 @@ async function bootstrap() {
       enableDebugMessages: true,
       transform: true,
       whitelist: true,
-      forbidNonWhitelisted: true,
+      // forbidNonWhitelisted: true,
       stopAtFirstError: true,
       validationError: {
         target: false,
