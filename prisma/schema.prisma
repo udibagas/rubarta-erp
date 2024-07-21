@@ -305,6 +305,7 @@ enum Role {
   GA
   APPROVER
   VERIFIER
+  AUTHORIZER
   ADMIN
 }
 
