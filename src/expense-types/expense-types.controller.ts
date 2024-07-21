@@ -17,7 +17,7 @@ import {
   ApiOperation,
   ApiTags,
 } from '@nestjs/swagger';
-import { ExpenseType } from './entities/expense-type.entity';
+import { ExpenseType } from './expense-type.entity';
 import { Roles } from '../auth/role.decorator';
 import { Role } from '@prisma/client';
 

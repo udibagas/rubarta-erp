@@ -3,6 +3,7 @@ import { Role } from '@prisma/client';
 import {
   ArrayNotEmpty,
   IsArray,
+  IsBoolean,
   IsEmail,
   IsEnum,
   IsNotEmpty,
@@ -43,9 +44,22 @@ export class CreateUserDto {
   @IsOptional()
   bankAccount: string;
 
+  @ApiProperty({ required: false, example: 1 })
+  @IsOptional()
+  departmentId?: number;
+
+  @ApiProperty({ required: false, example: 'path/to/signature.png' })
+  @IsOptional()
+  signatureSpeciment?: string;
+
   @ApiProperty({ example: ['APPROVER', 'VERIFIER'], enum: Role })
   @IsArray()
   @ArrayNotEmpty()
   @IsEnum(Role, { each: true, message: 'Invalid Role' })
   roles: Role[];
+
+  @ApiProperty({ description: 'User status', example: true })
+  @IsBoolean({ message: 'Invalid status' })
+  @IsOptional()
+  active?: boolean;
 }

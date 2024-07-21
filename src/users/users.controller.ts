@@ -19,7 +19,7 @@ import {
   ApiOperation,
   ApiTags,
 } from '@nestjs/swagger';
-import { User } from './entities/user.entity';
+import { User } from './user.entity';
 import { Role } from '@prisma/client';
 
 @ApiTags('Users')

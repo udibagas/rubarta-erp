@@ -1,15 +1,14 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { CreateBankDto } from './bank.dto';
-import { UpdateBankDto } from './dto/update-bank.dto';
+import { BankDto } from './bank.dto';
 import { PrismaService } from '../prisma/prisma.service';
 
 @Injectable()
 export class BanksService {
   constructor(private prisma: PrismaService) {}
 
-  create(createBankDto: CreateBankDto) {
+  create(bankDto: BankDto) {
     return this.prisma.bank.create({
-      data: createBankDto,
+      data: bankDto,
     });
   }
 
@@ -23,9 +22,9 @@ export class BanksService {
     return this.prisma.bank.findUnique({ where: { id } });
   }
 
-  update(id: number, updateBankDto: UpdateBankDto) {
+  update(id: number, bankDto: BankDto) {
     return this.prisma.bank.update({
-      data: updateBankDto,
+      data: bankDto,
       where: { id },
     });
   }
