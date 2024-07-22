@@ -1,11 +1,12 @@
 import { ForbiddenException, Injectable } from '@nestjs/common';
-import { PaymentAuthorizationDto } from './dto/payment-authorization.dto';
+import { PaymentAuthorizationDto } from './payment-authorization.dto';
 import { PrismaService } from '../prisma/prisma.service';
 import {
   ApprovalStatus,
   ApprovalType,
   PaymentAuthorization,
   PaymentStatus,
+  Prisma,
   User,
 } from '@prisma/client';
 import { EventEmitter2, OnEvent } from '@nestjs/event-emitter';
@@ -49,9 +50,39 @@ export class PaymentAuthorizationsService {
     return savedData;
   }
 
-  findAll() {
-    // TODO: implement pagination & filter
-    return this.prisma.paymentAuthorization.findMany();
+  async findAll(page: number = 1, pageSize: number = 10, keyword?: string) {
+    const where: Prisma.PaymentAuthorizationWhereInput = {};
+
+    if (keyword) {
+      where.OR = [
+        { number: { contains: keyword, mode: 'insensitive' } },
+        { description: { contains: keyword, mode: 'insensitive' } },
+        {
+          Employee: {
+            name: { contains: keyword, mode: 'insensitive' },
+          },
+        },
+      ];
+    }
+
+    const data = await this.prisma.paymentAuthorization.findMany({
+      take: pageSize,
+      skip: (page - 1) * pageSize,
+      where,
+      include: {
+        PaymentAuthorizationItem: true,
+        Employee: true,
+        Requester: true,
+      },
+    });
+
+    const total = await this.prisma.paymentAuthorization.count({ where });
+
+    return {
+      data,
+      page,
+      total,
+    };
   }
 
   findOne(id: number) {

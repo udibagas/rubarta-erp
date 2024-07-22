@@ -10,6 +10,7 @@ import {
   HttpCode,
   HttpStatus,
   ParseIntPipe,
+  Query,
 } from '@nestjs/common';
 import { PaymentAuthorizationsService } from './payment-authorizations.service';
 import {
@@ -19,8 +20,8 @@ import {
   ApiOperation,
   ApiTags,
 } from '@nestjs/swagger';
-import { PaymentAuthorization } from './entities/payment-authorization.entity';
-import { PaymentAuthorizationDto } from './dto/payment-authorization.dto';
+import { PaymentAuthorization } from './payment-authorization.entity';
+import { PaymentAuthorizationDto } from './payment-authorization.dto';
 import { Auth } from '../auth/auth.decorator';
 import { User } from '@prisma/client';
 
@@ -75,8 +76,12 @@ export class PaymentAuthorizationsController {
   @ApiOperation({
     summary: 'Get all payment authorizations (nota kuasa pembayaran)',
   })
-  findAll() {
-    return this.paymentAuthorizationsService.findAll();
+  findAll(
+    @Query('page', ParseIntPipe) page?: number,
+    @Query('pageSize', ParseIntPipe) pageSize?: number,
+    @Query('keyword') keyword?: string,
+  ) {
+    return this.paymentAuthorizationsService.findAll(page, pageSize, keyword);
   }
 
   @Get(':id')
