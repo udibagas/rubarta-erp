@@ -47,7 +47,7 @@ export class ExpenseNotesController {
     description: 'Array of expense notes',
   })
   async findAll(@Auth() user: User) {
-    const data = this.expenseNotesService.findAll();
+    const data = this.expenseNotesService.findAll(user.id);
     return plainToInstance(ExpenseNote, data);
   }
 

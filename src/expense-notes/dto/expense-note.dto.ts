@@ -1,29 +1,26 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { JsonValue } from '@prisma/client/runtime/library';
-import { IsDate, IsNotEmpty, IsNumber } from 'class-validator';
+import { IsDate, IsDateString, IsNotEmpty, IsNumber } from 'class-validator';
 
 export class ExpenseNoteDto {
-  @ApiProperty({ description: 'User ID', example: 1 })
-  @IsNumber()
-  @IsNotEmpty()
   userId: number;
 
   @ApiProperty({ description: 'Date', example: '2024-07-01' })
-  @IsDate()
-  @IsNotEmpty()
+  @IsDateString()
+  @IsNotEmpty({ message: 'Date is required' })
   date: Date;
 
   @ApiProperty({ description: 'Expense Type ID', example: 1 })
   @IsNumber()
-  @IsNotEmpty()
+  @IsNotEmpty({ message: 'Expense type is required' })
   expenseTypeId: number;
 
   @ApiProperty({ description: 'Expense description', example: 'BBM 20 Liter' })
-  @IsNotEmpty()
+  @IsNotEmpty({ message: 'Description is required' })
   description: string;
 
   @ApiProperty({ description: 'Expense amount', example: 200_0000 })
-  @IsNumber()
+  @IsNumber({}, { message: 'Amount must be a number' })
   amount: number;
 
   @ApiProperty({

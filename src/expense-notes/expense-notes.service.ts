@@ -10,8 +10,12 @@ export class ExpenseNotesService {
     return this.prisma.expenseNote.create({ data: expenseNoteDto });
   }
 
-  findAll() {
-    return this.prisma.expenseNote.findMany();
+  findAll(userId: number) {
+    return this.prisma.expenseNote.findMany({
+      where: { userId },
+      include: { expenseType: true },
+      orderBy: { date: 'asc' },
+    });
   }
 
   findOne(id: number) {
