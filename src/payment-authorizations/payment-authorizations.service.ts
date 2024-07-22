@@ -73,6 +73,7 @@ export class PaymentAuthorizationsService {
         PaymentAuthorizationItem: true,
         Employee: true,
         Requester: true,
+        Bank: true,
       },
     });
 
