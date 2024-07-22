@@ -3,6 +3,7 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { PrismaService } from '../prisma/prisma.service';
 import * as bcrypt from 'bcrypt';
+import { Prisma } from '@prisma/client';
 
 @Injectable()
 export class UsersService {
@@ -18,10 +19,20 @@ export class UsersService {
     });
   }
 
-  findAll() {
+  findAll(keyword?: string) {
+    const where: Prisma.UserWhereInput = {};
+
+    if (keyword) {
+      where.OR = [
+        { name: { contains: keyword, mode: 'insensitive' } },
+        { email: { contains: keyword, mode: 'insensitive' } },
+      ];
+    }
+
     return this.prisma.user.findMany({
       orderBy: { name: 'asc' },
       omit: { password: true },
+      where,
       include: {
         Department: true,
         Bank: true,
