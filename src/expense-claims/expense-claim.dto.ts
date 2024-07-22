@@ -40,26 +40,26 @@ export class ExpenseClaimDto {
 
   @ApiProperty({ example: 1 })
   @IsNumber({}, { message: 'Invalid Department' })
-  @IsNotEmpty()
+  @IsNotEmpty({ message: 'Department is required' })
   departmentId: number;
 
   @ApiProperty({ example: 2_000_000 })
   @IsNumber()
-  @IsNotEmpty()
+  @IsNotEmpty({ message: 'Total amount is required' })
   totalAmount: number;
 
   @ApiProperty({ example: 1_000_000 })
   @IsNumber()
-  @IsNotEmpty()
+  @IsNotEmpty({ message: 'Cash advance is required' })
   cashAdvance: number;
 
   @ApiProperty({ example: 1_000_000 })
   @IsNumber()
-  @IsNotEmpty()
+  @IsNotEmpty({ message: 'Claim is required' })
   claim: number;
 
   @ApiProperty({ example: 'DRAFT | SUBMITTED' })
-  @IsEnum(ClaimStatus)
+  @IsEnum(ClaimStatus, { message: 'Invalid status' })
   status: ClaimStatus;
 
   @ApiProperty({ example: 1 })
@@ -75,5 +75,5 @@ export class ExpenseClaimDto {
   @ArrayNotEmpty()
   @Type(() => ExpenseClaimItemDto)
   @ValidateNested({ each: true })
-  items: ExpenseClaimItemDto[];
+  ExpenseClaimItem: ExpenseClaimItemDto[];
 }

@@ -1,6 +1,6 @@
 import { PrismaService } from './../prisma/prisma.service';
 import { ForbiddenException, Injectable } from '@nestjs/common';
-import { ExpenseClaimDto } from './dto/expense-claim.dto';
+import { ExpenseClaimDto } from './expense-claim.dto';
 import { ClaimStatus, Prisma } from '@prisma/client';
 
 @Injectable()
@@ -8,7 +8,7 @@ export class ExpenseClaimsService {
   constructor(private prisma: PrismaService) {}
 
   create(expenseClaimDto: ExpenseClaimDto) {
-    const { items, ...data } = expenseClaimDto;
+    const { ExpenseClaimItem: items, ...data } = expenseClaimDto;
     return this.prisma.expenseClaim.create({
       data: {
         ...data,
@@ -53,7 +53,7 @@ export class ExpenseClaimsService {
   }
 
   update(id: number, expenseClaimDto: ExpenseClaimDto) {
-    const { items, ...data } = expenseClaimDto;
+    const { ExpenseClaimItem: items, ...data } = expenseClaimDto;
     return this.prisma.expenseClaim.update({
       data: {
         ...data,

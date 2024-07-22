@@ -11,7 +11,7 @@ import {
   HttpCode,
 } from '@nestjs/common';
 import { ExpenseClaimsService } from './expense-claims.service';
-import { ExpenseClaimDto } from './dto/expense-claim.dto';
+import { ExpenseClaimDto } from './expense-claim.dto';
 import {
   ApiBearerAuth,
   ApiOkResponse,
