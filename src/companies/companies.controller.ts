@@ -7,6 +7,7 @@ import {
   Param,
   Delete,
   ParseIntPipe,
+  Res,
 } from '@nestjs/common';
 import { CompaniesService } from './companies.service';
 import { CompanyDto } from './company.dto';
@@ -20,6 +21,7 @@ import {
 import { Roles } from '../auth/role.decorator';
 import { Role } from '@prisma/client';
 import { Company } from './company.entity';
+import { Response } from 'express';
 
 @ApiTags('Companies')
 @ApiBearerAuth()
@@ -66,5 +68,14 @@ export class CompaniesController {
   @ApiOkResponse({ type: Company })
   remove(@Param('id', ParseIntPipe) id: number): Promise<Company> {
     return this.companiesService.remove(id);
+  }
+
+  @Post('set/:id')
+  setCompany(
+    @Param('id', ParseIntPipe) id: number,
+    @Res({ passthrough: true }) res: Response,
+  ) {
+    res.cookie('companyId', id);
+    return { message: 'OK' };
   }
 }
