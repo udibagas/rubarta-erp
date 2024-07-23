@@ -23,22 +23,36 @@ export class ExpenseClaimsService {
     });
   }
 
-  findAll(params: {
-    take?: number;
-    skip?: number;
-    cursor?: Prisma.ExpenseClaimWhereUniqueInput;
-    where?: Prisma.ExpenseClaimWhereInput;
-    orderBy?: Prisma.ExpenseClaimOrderByWithRelationInput;
+  async findAll(params: {
+    pageSize?: number;
+    page?: number;
+    companyId?: number;
+    keyword?: string;
   }) {
-    const { skip, take, cursor, where, orderBy } = params;
-    return this.prisma.expenseClaim.findMany({
-      skip,
-      take,
-      cursor,
+    const { page, pageSize, keyword, companyId } = params;
+    const where: Prisma.ExpenseClaimWhereInput = {};
+
+    if (companyId) {
+      where.companyId = companyId;
+    }
+
+    if (keyword) {
+      // TODO: tambahin searching
+    }
+
+    const data = await this.prisma.expenseClaim.findMany({
+      skip: (page - 1) * pageSize,
+      take: pageSize,
       where,
-      orderBy,
-      include: { ExpenseClaimItem: true },
+      include: {
+        ExpenseClaimItem: true,
+        Department: true,
+        User: true,
+      },
     });
+
+    const total = await this.prisma.expenseClaim.count({ where });
+    return { data, page, total };
   }
 
   findOne(id: number) {

@@ -4,20 +4,19 @@ import { Type } from 'class-transformer';
 import {
   ArrayNotEmpty,
   IsArray,
-  IsDate,
+  IsDateString,
   IsEnum,
   IsNotEmpty,
   IsNumber,
-  IsOptional,
   ValidateNested,
 } from 'class-validator';
 
 export class ExpenseClaimItemDto {
   @ApiProperty({
-    description: 'Date object',
-    example: new Date('2024-07-01'),
+    description: 'Date string',
+    example: '2024-07-01',
   })
-  @IsDate({ message: 'Invalid date. Please use date object' })
+  @IsDateString({}, { message: 'Invalid date string' })
   date: Date;
 
   @ApiProperty({ example: 1 })

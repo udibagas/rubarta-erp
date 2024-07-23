@@ -50,8 +50,17 @@ export class PaymentAuthorizationsService {
     return savedData;
   }
 
-  async findAll(page: number = 1, pageSize: number = 10, keyword?: string) {
+  async findAll(
+    page: number = 1,
+    pageSize: number = 10,
+    companyId?: number,
+    keyword?: string,
+  ) {
     const where: Prisma.PaymentAuthorizationWhereInput = {};
+
+    if (companyId) {
+      where.companyId = companyId;
+    }
 
     if (keyword) {
       where.OR = [

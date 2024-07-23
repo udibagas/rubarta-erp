@@ -9,6 +9,7 @@ import {
   ParseIntPipe,
   HttpStatus,
   HttpCode,
+  Query,
 } from '@nestjs/common';
 import { ExpenseClaimsService } from './expense-claims.service';
 import { ExpenseClaimDto } from './expense-claim.dto';
@@ -39,8 +40,18 @@ export class ExpenseClaimsController {
 
   @Get()
   @ApiOperation({ summary: 'Gel all expense claims' })
-  findAll() {
-    return this.expenseClaimsService.findAll({});
+  findAll(
+    @Query('page', ParseIntPipe) page: number,
+    @Query('pageSize', ParseIntPipe) pageSize: number,
+    @Query('keyword') keyword: string,
+    @Query('companyId', ParseIntPipe) companyId: number,
+  ) {
+    return this.expenseClaimsService.findAll({
+      page,
+      pageSize,
+      companyId,
+      keyword,
+    });
   }
 
   @Get(':id')
