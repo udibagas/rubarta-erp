@@ -9,7 +9,7 @@ import {
   ParseIntPipe,
 } from '@nestjs/common';
 import { ApprovalSettingsService } from './approval-settings.service';
-import { ApprovalSettingDto } from './dto/approval-setting.dto';
+import { ApprovalSettingDto } from './approval-setting.dto';
 import {
   ApiBearerAuth,
   ApiCreatedResponse,
@@ -19,7 +19,7 @@ import {
 } from '@nestjs/swagger';
 import { Roles } from '../auth/role.decorator';
 import { ApprovalType, Role } from '@prisma/client';
-import { ApprovalSetting } from './entities/approval-setting.entity';
+import { ApprovalSetting } from './approval-setting.entity';
 
 @ApiTags('Approval Setting')
 @ApiBearerAuth()

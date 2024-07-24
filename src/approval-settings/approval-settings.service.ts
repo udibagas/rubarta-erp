@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { ApprovalSettingDto } from './dto/approval-setting.dto';
+import { ApprovalSettingDto } from './approval-setting.dto';
 import { PrismaService } from '../prisma/prisma.service';
 
 @Injectable()
