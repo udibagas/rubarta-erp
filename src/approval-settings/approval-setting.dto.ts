@@ -40,15 +40,15 @@ export class ApprovalSettingDto {
     description: 'Company ID',
     example: 1,
   })
-  @IsNotEmpty()
+  @IsNotEmpty({ message: 'Company is required' })
   companyId: number;
 
   @ApiProperty({
     description: 'Approval type',
     example: ApprovalType.PAYMENT_AUTHORIZATION,
   })
-  @IsNotEmpty()
-  @IsEnum(ApprovalType)
+  @IsNotEmpty({ message: 'Approval type is required' })
+  @IsEnum(ApprovalType, { message: 'Invalid approval type' })
   approvalType: ApprovalType;
 
   @ApiProperty({
