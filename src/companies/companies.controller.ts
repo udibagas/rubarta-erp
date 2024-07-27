@@ -8,6 +8,8 @@ import {
   Delete,
   ParseIntPipe,
   Res,
+  HttpCode,
+  HttpStatus,
 } from '@nestjs/common';
 import { CompaniesService } from './companies.service';
 import { CompanyDto } from './company.dto';
@@ -71,6 +73,7 @@ export class CompaniesController {
   }
 
   @Post('set/:id')
+  @HttpCode(HttpStatus.OK)
   setCompany(
     @Param('id', ParseIntPipe) id: number,
     @Res({ passthrough: true }) res: Response,
