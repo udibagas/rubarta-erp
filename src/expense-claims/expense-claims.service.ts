@@ -48,6 +48,7 @@ export class ExpenseClaimsService {
         ExpenseClaimItem: true,
         Department: true,
         User: true,
+        Company: true,
       },
     });
 
