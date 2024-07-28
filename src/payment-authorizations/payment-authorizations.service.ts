@@ -83,6 +83,7 @@ export class PaymentAuthorizationsService {
         Employee: true,
         Requester: true,
         Bank: true,
+        Company: true,
       },
     });
 
@@ -106,6 +107,7 @@ export class PaymentAuthorizationsService {
         Requester: true,
         Employee: true,
         ExpenseClaim: true,
+        Company: true,
       },
     });
   }
