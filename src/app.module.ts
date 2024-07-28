@@ -17,6 +17,7 @@ import { APP_GUARD } from '@nestjs/core';
 import { MailerModule } from '@nestjs-modules/mailer';
 import { EjsAdapter } from '@nestjs-modules/mailer/dist/adapters/ejs.adapter'; //?
 import { NotificationsModule } from './notifications/notifications.module';
+import { FileModule } from './file/file.module';
 
 @Module({
   imports: [
@@ -62,6 +63,7 @@ import { NotificationsModule } from './notifications/notifications.module';
     ExpenseClaimsModule,
     ExpenseNotesModule,
     NotificationsModule,
+    FileModule,
   ],
   controllers: [],
   providers: [],
