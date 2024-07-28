@@ -124,8 +124,11 @@ export class PaymentAuthorizationsController {
   @ApiOperation({
     summary: 'Delete payment authorization item by id',
   })
-  removeItem(@Param('itemId', ParseIntPipe) itemId: number) {
-    return this.paymentAuthorizationsService.removeItem(itemId);
+  removeItem(
+    @Param('id', ParseIntPipe) id: number,
+    @Param('itemId', ParseIntPipe) itemId: number,
+  ) {
+    return this.paymentAuthorizationsService.removeItem(id, itemId);
   }
 
   @Post('approve/:id')

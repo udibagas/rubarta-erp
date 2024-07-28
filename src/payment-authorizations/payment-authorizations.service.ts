@@ -142,11 +142,11 @@ export class PaymentAuthorizationsService {
     });
   }
 
-  async removeItem(id: number) {
+  async removeItem(id: number, itemId: number) {
     const data = await this.findOne(id);
     if (data.status !== PaymentStatus.DRAFT) throw new ForbiddenException();
     return this.prisma.paymentAuthorizationItem.delete({
-      where: { id },
+      where: { id: itemId },
     });
   }
 
