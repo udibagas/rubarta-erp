@@ -46,6 +46,12 @@ export class NotificationsService {
     return this.prisma.notification.findUniqueOrThrow({ where: { id } });
   }
 
+  getUnreadCount(userId: number) {
+    return this.prisma.notification.count({
+      where: { readAt: null, userId },
+    });
+  }
+
   remove(id: number) {
     return this.prisma.notification.delete({ where: { id } });
   }

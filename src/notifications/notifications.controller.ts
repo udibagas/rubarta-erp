@@ -36,6 +36,12 @@ export class NotificationsController {
     });
   }
 
+  @Get('/unread')
+  @ApiOperation({ summary: 'Get number of unread message' })
+  getUnreadCount(@Auth() user: User) {
+    return this.notificationsService.getUnreadCount(user.id);
+  }
+
   @Get(':id')
   @ApiOperation({ summary: 'Get single notification by id' })
   findOne(@Param('id', ParseIntPipe) id: number) {
