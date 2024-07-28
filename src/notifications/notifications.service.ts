@@ -2,6 +2,7 @@ import { NotificationDto } from './notification.dto';
 import { MailerService } from '@nestjs-modules/mailer';
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
+import { Prisma } from '@prisma/client';
 
 @Injectable()
 export class NotificationsService {
@@ -10,10 +11,35 @@ export class NotificationsService {
     private readonly prisma: PrismaService,
   ) {}
 
-  findAll(userId: number) {
-    return this.prisma.notification.findMany({
-      where: { userId },
+  async findAll(params: {
+    userId?: number;
+    keyword?: string;
+    page?: number;
+    pageSize?: number;
+  }) {
+    const { userId, keyword, page, pageSize } = params;
+    const where: Prisma.NotificationWhereInput = {};
+
+    if (userId) {
+      where.userId = userId;
+    }
+
+    if (keyword) {
+      where.OR = [
+        { title: { contains: keyword, mode: 'insensitive' } },
+        { message: { contains: keyword, mode: 'insensitive' } },
+      ];
+    }
+
+    const data = await this.prisma.notification.findMany({
+      orderBy: { date: 'desc' },
+      where,
+      take: pageSize,
+      skip: (page - 1) * pageSize,
     });
+
+    const total = await this.prisma.notification.count({ where });
+    return { data, page, total };
   }
 
   findOne(id: number) {
@@ -28,7 +54,9 @@ export class NotificationsService {
     return this.prisma.notification.deleteMany({ where: { userId } });
   }
 
-  read(id: number) {
+  async read(id: number) {
+    const notification = await this.findOne(id);
+    if (notification.readAt) return notification;
     return this.prisma.notification.update({
       data: { readAt: new Date() },
       where: { id },

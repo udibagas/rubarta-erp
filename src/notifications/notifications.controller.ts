@@ -6,6 +6,7 @@ import {
   ParseIntPipe,
   Patch,
   Post,
+  Query,
 } from '@nestjs/common';
 import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { Auth } from '../auth/auth.decorator';
@@ -21,8 +22,18 @@ export class NotificationsController {
 
   @Get()
   @ApiOperation({ summary: 'Get all current user notifications' })
-  findAll(@Auth() user: User) {
-    return this.notificationsService.findAll(user.id);
+  findAll(
+    @Auth() user: User,
+    @Query('keyword') keyword: string,
+    @Query('page', ParseIntPipe) page: number,
+    @Query('pageSize', ParseIntPipe) pageSize: number,
+  ) {
+    return this.notificationsService.findAll({
+      userId: user.id,
+      keyword,
+      page,
+      pageSize,
+    });
   }
 
   @Get(':id')
