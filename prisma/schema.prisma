@@ -271,6 +271,7 @@ model ApprovalSettingItem {
 // kirim juga notifikasi ini ke email dengan redaksi yang sama
 model Notification {
   id          Int       @id @default(autoincrement())
+  date        DateTime  @default(now())
   User        User      @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   userId      Int
   title       String    @db.VarChar(255)
