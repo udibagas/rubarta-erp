@@ -30,13 +30,8 @@ export class ExpenseNotesController {
   @Post()
   @ApiOperation({ summary: 'Create new expense note' })
   @ApiOkResponse({ type: ExpenseNote, description: 'Created expense note' })
-  async create(@Body() expenseNoteDto: ExpenseNoteDto, @Auth() user: User) {
-    const data = await this.expenseNotesService.create({
-      ...expenseNoteDto,
-      userId: user.id,
-    });
-
-    return plainToInstance(ExpenseNote, data);
+  async create(@Body() data, @Auth() user: User) {
+    return await this.expenseNotesService.create({ ...data, userId: user.id });
   }
 
   @Get()
