@@ -1,7 +1,7 @@
 import {
   Controller,
   Delete,
-  Param,
+  Get,
   Post,
   Query,
   UploadedFile,
@@ -37,5 +37,11 @@ export class FileController {
   async removeFile(@Query('path') path: string) {
     await fs.unlink(path);
     return { message: 'File has beed deleted' };
+  }
+
+  @Get()
+  async getBase64StringByPath(@Query('path') path: string) {
+    const buffer = await fs.readFile(path);
+    return buffer.toString('base64');
   }
 }
