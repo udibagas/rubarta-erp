@@ -32,7 +32,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
     cors: {
       credentials: true,
-      origin: 'http://localhost:4000',
+      origin: 'http://localhost:4000', // TODO: ini harus disesuaikan kalau production
     },
   });
 
@@ -51,7 +51,11 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
 
-  app.use(helmet());
+  app.use(
+    helmet({
+      crossOriginResourcePolicy: false, // biar bisa dapetin static content
+    }),
+  );
   app.use(cookieParser());
   app.use(nestCsrf());
 
