@@ -8,13 +8,17 @@ export class ExpenseClaimsService {
   constructor(private prisma: PrismaService) {}
 
   create(expenseClaimDto: ExpenseClaimDto) {
-    const { ExpenseClaimItem: items, ...data } = expenseClaimDto;
+    const {
+      ExpenseClaimItem: items,
+      ExpenseClaimAttachment: attachments,
+      ...data
+    } = expenseClaimDto;
+
     return this.prisma.expenseClaim.create({
       data: {
         ...data,
-        ExpenseClaimItem: {
-          create: items,
-        },
+        ExpenseClaimItem: { create: items },
+        ExpenseClaimAttachment: { create: attachments },
       },
       include: {
         ExpenseClaimItem: true,
@@ -51,6 +55,7 @@ export class ExpenseClaimsService {
         Department: true,
         User: true,
         Company: true,
+        ExpenseClaimAttachment: true,
       },
     });
 
@@ -73,13 +78,21 @@ export class ExpenseClaimsService {
   }
 
   update(id: number, expenseClaimDto: ExpenseClaimDto) {
-    const { ExpenseClaimItem: items, ...data } = expenseClaimDto;
+    const {
+      ExpenseClaimItem: items,
+      ExpenseClaimAttachment: attachments,
+      ...data
+    } = expenseClaimDto;
     return this.prisma.expenseClaim.update({
       data: {
         ...data,
         ExpenseClaimItem: {
           deleteMany: {}, // hapus semua data item untuk di create lagi
           create: items,
+        },
+        ExpenseClaimAttachment: {
+          deleteMany: {},
+          create: attachments,
         },
       },
       where: { id },

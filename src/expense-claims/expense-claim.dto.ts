@@ -34,6 +34,20 @@ export class ExpenseClaimItemDto {
   amount: number;
 }
 
+export class ExpenseClaimAttachmentDto {
+  @IsNotEmpty()
+  fileName: string;
+
+  @IsNotEmpty()
+  filePath: string;
+
+  @IsNotEmpty()
+  fileType: string;
+
+  @IsNumber()
+  fileSize: number;
+}
+
 export class ExpenseClaimDto {
   userId: number;
 
@@ -75,4 +89,13 @@ export class ExpenseClaimDto {
   @Type(() => ExpenseClaimItemDto)
   @ValidateNested({ each: true })
   ExpenseClaimItem: ExpenseClaimItemDto[];
+
+  @ApiProperty({
+    type: ExpenseClaimAttachmentDto,
+    isArray: true,
+  })
+  @IsArray()
+  @Type(() => ExpenseClaimAttachmentDto)
+  @ValidateNested({ each: true })
+  ExpenseClaimAttachment?: ExpenseClaimAttachmentDto[];
 }
