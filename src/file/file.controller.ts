@@ -1,6 +1,9 @@
 import {
   Controller,
+  Delete,
+  Param,
   Post,
+  Query,
   UploadedFile,
   UseInterceptors,
 } from '@nestjs/common';
@@ -22,10 +25,18 @@ export class FileController {
       })
       .split('/');
 
+    const timestamp = Date.now();
+
     const path = [year, month, day].join('/');
     await fs.mkdir(`./uploads/${path}`, { recursive: true });
-    const filePath = `./uploads/${path}/${fileName}`;
+    const filePath = `./uploads/${path}/${timestamp}-${fileName}`;
     await fs.writeFile(filePath, file.buffer);
     return { fileName, filePath, fileSize, fileType };
+  }
+
+  @Delete()
+  async removeFile(@Query('path') path: string) {
+    await fs.unlink(path);
+    return { message: 'File has beed deleted' };
   }
 }
