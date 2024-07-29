@@ -18,6 +18,8 @@ import { MailerModule } from '@nestjs-modules/mailer';
 import { EjsAdapter } from '@nestjs-modules/mailer/dist/adapters/ejs.adapter'; //?
 import { NotificationsModule } from './notifications/notifications.module';
 import { FileModule } from './file/file.module';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
 
 @Module({
   imports: [
@@ -49,6 +51,9 @@ import { FileModule } from './file/file.module';
           strict: false,
         },
       },
+    }),
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', 'public'),
     }),
     EventEmitterModule.forRoot(),
     UsersModule,
