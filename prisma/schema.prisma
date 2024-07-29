@@ -58,7 +58,7 @@ model User {
   bankAccount        String?      @db.VarChar(30)
   Department         Department?  @relation(fields: [departmentId], references: [id])
   departmentId       Int?
-  signatureSpeciment String?      @db.VarChar(255)
+  signatureSpeciment Json?        @db.JsonB
 
   Notification                 Notification[]
   PaymentAuthorizationApproval PaymentAuthorizationApproval[]

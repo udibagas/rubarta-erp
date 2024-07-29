@@ -1,5 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Role } from '@prisma/client';
+import { JsonObject } from '@prisma/client/runtime/library';
 import {
   ArrayNotEmpty,
   IsArray,
@@ -7,6 +8,7 @@ import {
   IsEmail,
   IsEnum,
   IsNotEmpty,
+  IsObject,
   IsOptional,
   Length,
 } from 'class-validator';
@@ -48,9 +50,10 @@ export class CreateUserDto {
   @IsOptional()
   departmentId?: number;
 
-  @ApiProperty({ required: false, example: 'path/to/signature.png' })
+  @ApiProperty({ description: 'Signature' })
   @IsOptional()
-  signatureSpeciment?: string;
+  @IsObject({ message: 'Invalid object' })
+  signatureSpeciment?: JsonObject;
 
   @ApiProperty({ example: ['APPROVER', 'VERIFIER'], enum: Role })
   @IsArray()

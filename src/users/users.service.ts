@@ -3,6 +3,7 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { PrismaService } from '../prisma/prisma.service';
 import * as bcrypt from 'bcrypt';
+import * as fs from 'node:fs/promises';
 import { Prisma } from '@prisma/client';
 
 @Injectable()
@@ -63,7 +64,16 @@ export class UsersService {
     });
   }
 
-  remove(id: number) {
+  async remove(id: number) {
+    const data = await this.findOne(id);
+
+    if (data.signatureSpeciment) {
+      const signatureSpeciment = data.signatureSpeciment as {
+        filePath: string;
+      };
+      await fs.unlink(signatureSpeciment.filePath);
+    }
+
     return this.prisma.user.delete({
       where: { id },
       omit: { password: true },

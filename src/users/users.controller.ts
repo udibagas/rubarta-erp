@@ -36,21 +36,21 @@ export class UsersController {
     description: 'Created user',
   })
   @ApiOperation({ summary: 'Create new user' })
-  create(@Body() createUserDto: CreateUserDto): Promise<User> {
+  create(@Body() createUserDto: CreateUserDto) {
     return this.usersService.create(createUserDto);
   }
 
   @Get()
   @ApiOperation({ summary: 'Get all users' })
   @ApiOkResponse({ type: User, isArray: true })
-  findAll(@Query('keyword') keyword?: string): Promise<User[]> {
+  findAll(@Query('keyword') keyword?: string) {
     return this.usersService.findAll(keyword);
   }
 
   @Get(':id')
   @ApiOperation({ summary: 'Get single user by id' })
   @ApiOkResponse({ type: User })
-  findOne(@Param('id', ParseIntPipe) id: number): Promise<User> {
+  findOne(@Param('id', ParseIntPipe) id: number) {
     return this.usersService.findOne(id);
   }
 
@@ -60,7 +60,7 @@ export class UsersController {
   update(
     @Param('id', ParseIntPipe) id: number,
     @Body() updateUserDto: UpdateUserDto,
-  ): Promise<User> {
+  ) {
     return this.usersService.update(id, updateUserDto);
   }
 
@@ -68,7 +68,7 @@ export class UsersController {
   @Roles(Role.ADMIN)
   @ApiOperation({ summary: 'Delete user by id' })
   @ApiOkResponse({ type: User })
-  remove(@Param('id', ParseIntPipe) id: number): Promise<User> {
+  remove(@Param('id', ParseIntPipe) id: number) {
     return this.usersService.remove(id);
   }
 }
