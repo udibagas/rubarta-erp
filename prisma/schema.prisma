@@ -293,7 +293,7 @@ model ExpenseNote {
   expenseTypeId Int
   description   String      @db.Text
   amount        Int         @db.Integer
-  attachment    Json?       @db.Json
+  attachment    Json?       @db.JsonB
 
   @@map("ExpenseNotes")
 }
