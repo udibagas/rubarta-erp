@@ -26,7 +26,6 @@ export class FileController {
       .split('/');
 
     const timestamp = Date.now();
-
     const path = [year, month, day].join('/');
     await fs.mkdir(`./uploads/${path}`, { recursive: true });
     const filePath = `./uploads/${path}/${timestamp}-${fileName}`;
