@@ -30,7 +30,8 @@ export class ExpenseNotesController {
   @Post()
   @ApiOperation({ summary: 'Create new expense note' })
   @ApiOkResponse({ type: ExpenseNote, description: 'Created expense note' })
-  async create(@Body() data, @Auth() user: User) {
+  async create(@Body() data: ExpenseNoteDto, @Auth() user: User) {
+    console.log(data);
     return await this.expenseNotesService.create({ ...data, userId: user.id });
   }
 
@@ -59,15 +60,9 @@ export class ExpenseNotesController {
   @ApiOkResponse({ type: ExpenseNote, description: 'Updated expense note' })
   async update(
     @Param('id', ParseIntPipe) id: number,
-    @Body() expenseNoteDto: ExpenseNoteDto,
-    @Auth() user: User,
+    @Body() data: ExpenseNoteDto,
   ) {
-    const data = await this.expenseNotesService.update(id, {
-      ...expenseNoteDto,
-      userId: user.id,
-    });
-
-    return plainToInstance(ExpenseNote, data);
+    return await this.expenseNotesService.update(id, data);
   }
 
   @Delete(':id')

@@ -1,15 +1,13 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { JsonValue } from '@prisma/client/runtime/library';
-import { Type } from 'class-transformer';
-// import { JsonValue } from '@prisma/client/runtime/library';
-import { IsDateString, IsNotEmpty, IsNumber } from 'class-validator';
-
-export class Attachment {
-  fileName: string;
-  filePath: string;
-  fileSize: number;
-  fileType: string;
-}
+import { JsonObject } from '@prisma/client/runtime/library';
+import {
+  IsDateString,
+  IsJSON,
+  IsNotEmpty,
+  IsNumber,
+  IsObject,
+  IsOptional,
+} from 'class-validator';
 
 export class ExpenseNoteDto {
   userId: number;
@@ -33,6 +31,7 @@ export class ExpenseNoteDto {
   amount: number;
 
   @ApiProperty({ description: 'Attachment object' })
-  @Type(() => Attachment)
-  attachment?: Attachment;
+  @IsOptional()
+  @IsObject({ message: 'Invalid object' })
+  attachment: JsonObject;
 }
