@@ -1,37 +1,17 @@
-const { PrismaClient } = require('@prisma/client');
-const bcrypt = require('bcrypt');
+import { PrismaClient, Role } from '@prisma/client';
+import * as bcrypt from 'bcrypt';
 
 const prisma = new PrismaClient();
 
 const admin = {
   name: 'Bagas Udi Sahsangka',
   email: 'udibagas@gmail.com',
-  password: bcrypt.hashSync('rahasia123', 10),
-  roles: ['ADMIN'],
+  password: bcrypt.hashSync('bismillah', 10),
+  roles: [Role.ADMIN],
 };
 
-const user = {
-  name: 'User',
-  email: 'user@mail.com',
-  password: bcrypt.hashSync('user123', 10),
-  roles: ['USER'],
-};
-
-prisma.user
-  .deleteMany()
-  .then(() => {
-    console.log('Users table truncated');
-    return prisma.user.create({
-      data: admin,
-    });
-  })
-  .then((res) => {
-    console.log('Admin user created', res);
-    return prisma.user.create({
-      data: user,
-    });
-  })
-  .then((data) => {
-    console.log('User created', data);
-  })
-  .catch((e) => console.log(e));
+prisma.user.upsert({
+  where: { email: admin.email },
+  update: {},
+  create: admin,
+});
