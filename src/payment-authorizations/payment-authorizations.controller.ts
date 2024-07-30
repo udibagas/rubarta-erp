@@ -82,12 +82,12 @@ export class PaymentAuthorizationsController {
     @Query('keyword') keyword?: string,
     @Query('companyId', ParseIntPipe) companyId?: number,
   ) {
-    return this.paymentAuthorizationsService.findAll(
+    return this.paymentAuthorizationsService.findAll({
       page,
       pageSize,
       companyId,
       keyword,
-    );
+    });
   }
 
   @Get(':id')
