@@ -36,6 +36,8 @@ async function bootstrap() {
         'http://localhost:4000',
         'http://erp.rubarta.co.id',
         'http://nkp.rubarta.co.id',
+        'https://erp.rubarta.co.id',
+        'https://nkp.rubarta.co.id',
       ],
     },
   });
