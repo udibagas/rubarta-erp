@@ -10,8 +10,7 @@ const admin = {
   roles: [Role.ADMIN],
 };
 
-prisma.user.upsert({
-  where: { email: admin.email },
-  update: {},
-  create: admin,
-});
+prisma.user
+  .create({ data: admin })
+  .then((r) => console.log(r))
+  .catch((err) => console.error(err));
