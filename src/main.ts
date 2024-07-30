@@ -32,7 +32,11 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
     cors: {
       credentials: true,
-      origin: 'http://localhost:4000', // TODO: ini harus disesuaikan kalau production
+      origin: [
+        'http://localhost:4000',
+        'http://erp.rubarta.co.id',
+        'http://nkp.rubarta.co.id',
+      ],
     },
   });
 
