@@ -29,9 +29,9 @@ export class FileController {
             })
             .split('/');
 
-          const path = [year, month, day].join('/');
-          await fs.mkdir(`./uploads/${path}`, { recursive: true });
-          callback(null, `./uploads/${path}`);
+          const path = './uploads/' + [year, month, day].join('/');
+          await fs.mkdir(path, { recursive: true });
+          callback(null, path);
         },
         filename(req, file, callback) {
           callback(null, `${Date.now()}-${file.originalname}`);
