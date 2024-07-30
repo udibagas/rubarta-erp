@@ -60,6 +60,7 @@ async function bootstrap() {
   app.use(
     helmet({
       crossOriginResourcePolicy: false, // biar bisa dapetin static content
+      contentSecurityPolicy: false,
     }),
   );
   app.use(cookieParser());
