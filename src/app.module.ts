@@ -55,8 +55,14 @@ import { join } from 'path';
         },
       },
     }),
+    // FOR UPLOAD FILE
     ServeStaticModule.forRoot({
-      rootPath: join(__dirname, '..', 'public'),
+      rootPath: join(__dirname, '../..', 'uploads'),
+      serveRoot: '/uploads',
+    }),
+    // FOR SPA
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '../..', 'public'),
     }),
     EventEmitterModule.forRoot(),
     UsersModule,
