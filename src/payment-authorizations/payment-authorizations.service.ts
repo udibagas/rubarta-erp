@@ -40,6 +40,7 @@ export class PaymentAuthorizationsService {
     });
 
     if (savedData.status == PaymentStatus.SUBMITTED) {
+      // TODO: throw error kalau belum ada setting approval
       this.eventEmitter.emit('paymentAuthorization.submitted', savedData);
       this.eventEmitter.emit('paymentAuthorization.updated', {
         data: savedData,
@@ -83,10 +84,11 @@ export class PaymentAuthorizationsService {
       where,
       include: {
         PaymentAuthorizationItem: true,
-        Employee: true,
-        Requester: true,
-        Bank: true,
-        Company: true,
+        PaymentAuthorizationApproval: true,
+        Employee: { select: { name: true } },
+        Requester: { select: { name: true } },
+        Bank: { select: { code: true, name: true } },
+        Company: { select: { name: true } },
       },
     });
 
@@ -110,17 +112,22 @@ export class PaymentAuthorizationsService {
     });
   }
 
-  async update(id: number, paymentAuthorizationDto: PaymentAuthorizationDto) {
+  async update(id: number, dto: PaymentAuthorizationDto) {
     const existingData = await this.findOne(id);
     if (existingData.status !== PaymentStatus.DRAFT)
       throw new ForbiddenException();
 
-    const { PaymentAuthorizationItem: items, ...data } =
-      paymentAuthorizationDto;
+    let number = 'DRAFT';
+    if (dto.status == PaymentStatus.SUBMITTED) {
+      number = await this.generateNumber(dto.companyId);
+    }
+
+    const { PaymentAuthorizationItem: items, ...data } = dto;
     const savedData = await this.prisma.paymentAuthorization.update({
       where: { id },
       data: {
         ...data,
+        number,
         PaymentAuthorizationItem: { deleteMany: {}, create: items },
       },
       include: {
