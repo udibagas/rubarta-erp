@@ -5,17 +5,20 @@ import {
   ApprovalStatus,
   ApprovalType,
   PaymentAuthorization,
+  PaymentAuthorizationApproval,
   PaymentStatus,
   Prisma,
   User,
 } from '@prisma/client';
 import { EventEmitter2, OnEvent } from '@nestjs/event-emitter';
+import { NotificationsService } from 'src/notifications/notifications.service';
 
 @Injectable()
 export class PaymentAuthorizationsService {
   constructor(
     private prisma: PrismaService,
     private eventEmitter: EventEmitter2,
+    private notification: NotificationsService,
   ) {}
 
   async create(paymentAuthorizationDto: PaymentAuthorizationDto) {
@@ -38,13 +41,12 @@ export class PaymentAuthorizationsService {
 
     if (savedData.status == PaymentStatus.SUBMITTED) {
       this.eventEmitter.emit('paymentAuthorization.submitted', savedData);
-      this.eventEmitter.emit(
-        'paymentAuthorization.updated',
-        savedData,
-        savedData.Requester,
-        PaymentStatus.SUBMITTED,
-        'Submitted',
-      );
+      this.eventEmitter.emit('paymentAuthorization.updated', {
+        data: savedData,
+        user: savedData.Requester,
+        status: PaymentStatus.SUBMITTED,
+        note: 'Request is submitted',
+      });
     }
 
     return savedData;
@@ -89,12 +91,7 @@ export class PaymentAuthorizationsService {
     });
 
     const total = await this.prisma.paymentAuthorization.count({ where });
-
-    return {
-      data,
-      page,
-      total,
-    };
+    return { data, page, total };
   }
 
   findOne(id: number) {
@@ -128,11 +125,19 @@ export class PaymentAuthorizationsService {
       },
       include: {
         PaymentAuthorizationItem: true,
+        Requester: true,
       },
     });
 
-    if (savedData.status == PaymentStatus.SUBMITTED)
+    if (savedData.status == PaymentStatus.SUBMITTED) {
       this.eventEmitter.emit('paymentAuthorization.submitted', savedData);
+      this.eventEmitter.emit('paymentAuthorization.updated', {
+        data: savedData,
+        user: savedData.Requester,
+        status: PaymentStatus.SUBMITTED,
+        note: 'Request is submitted',
+      });
+    }
 
     return savedData;
   }
@@ -301,36 +306,48 @@ export class PaymentAuthorizationsService {
         approvalType: ApprovalType.PAYMENT_AUTHORIZATION,
         companyId: data.companyId,
       },
-      include: {
-        ApprovalSettingItem: true,
-      },
+      include: { ApprovalSettingItem: true },
     });
 
-    // set approval
     if (approval) {
-      const approvals =
-        await this.prisma.paymentAuthorizationApproval.createMany({
-          data: approval.ApprovalSettingItem.map((el) => ({
-            userId: el.userId,
-            approvalActionType: el.approvalActionType,
-            level: el.level,
+      await this.prisma.paymentAuthorizationApproval.createMany({
+        data: approval.ApprovalSettingItem.map((el) => ({
+          userId: el.userId,
+          approvalActionType: el.approvalActionType,
+          level: el.level,
+          paymentAuthorizationId: data.id,
+        })),
+      });
+
+      // Ambil user approval dengan level 1
+      const firstLevelApprovals =
+        await this.prisma.paymentAuthorizationApproval.findMany({
+          where: {
             paymentAuthorizationId: data.id,
-          })),
+            level: 1,
+          },
         });
 
-      // TODO: kirim notifikasi ke approver pertama
-      this.eventEmitter.emit('paymentAuthorization.notify', data, approvals[0]);
+      if (firstLevelApprovals.length > 0) {
+        firstLevelApprovals.forEach((approval) => {
+          this.eventEmitter.emit('paymentAuthorization.notify', {
+            data,
+            approval,
+          });
+        });
+      }
     }
   }
 
   @OnEvent('paymentAuthorization.updated', { async: true })
-  async updateLog(
-    data: PaymentAuthorization,
-    user: User,
-    status: PaymentStatus,
-    note?: string,
-  ) {
-    await this.prisma.paymentAuthorizationLog.create({
+  updateLog(params: {
+    data: PaymentAuthorization;
+    user: User;
+    status: PaymentStatus;
+    note?: string;
+  }) {
+    const { data, user, status, note } = params;
+    return this.prisma.paymentAuthorizationLog.create({
       data: {
         paymentAuthorizationId: data.id,
         status: status,
@@ -340,8 +357,17 @@ export class PaymentAuthorizationsService {
     });
   }
 
-  @OnEvent('paymentAuthorization.notifiy', { async: true })
-  async sendNotification(user: User, data: PaymentAuthorization) {
-    // TODO: create notification and send email
+  @OnEvent('paymentAuthorization.notify', { async: true })
+  sendNotification(params: {
+    data: PaymentAuthorization;
+    approval: PaymentAuthorizationApproval;
+  }) {
+    const { data, approval } = params;
+    this.notification.notify({
+      userId: approval.userId,
+      title: `Permintaan Persetujuan: ${data.number}`,
+      message: `Anda mendapatkan permintaan persetujuan untuk Nota Kuasa Pembayaran dengan nomor ${data.number}.`,
+      redirectUrl: 'https://erp.rubarta.co.id/payment-authorizations',
+    });
   }
 }
