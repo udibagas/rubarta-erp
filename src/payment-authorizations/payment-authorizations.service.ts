@@ -84,7 +84,12 @@ export class PaymentAuthorizationsService {
       where,
       include: {
         PaymentAuthorizationItem: true,
-        PaymentAuthorizationApproval: true,
+        PaymentAuthorizationApproval: {
+          include: {
+            User: { select: { name: true, signatureSpeciment: true } },
+          },
+          orderBy: { level: 'asc' },
+        },
         Employee: { select: { name: true } },
         Requester: { select: { name: true } },
         Bank: { select: { code: true, name: true } },
@@ -165,7 +170,7 @@ export class PaymentAuthorizationsService {
     });
   }
 
-  async approve(id: number, user: User, note?: string) {
+  async approve(id: number, userId: number, note?: string) {
     const approvals = await this.prisma.paymentAuthorizationApproval.findMany({
       where: { paymentAuthorizationId: id },
     });
@@ -176,7 +181,7 @@ export class PaymentAuthorizationsService {
       );
 
     const approval = await this.prisma.paymentAuthorizationApproval.findFirst({
-      where: { paymentAuthorizationId: id, userId: user.id },
+      where: { paymentAuthorizationId: id, userId },
     });
 
     if (!approval)
@@ -201,29 +206,42 @@ export class PaymentAuthorizationsService {
       },
     });
 
-    const approvedCount = await this.prisma.paymentAuthorizationApproval.count({
-      where: { approvalStatus: ApprovalStatus.APPROVED },
-    });
+    const pendingApprovalCount =
+      await this.prisma.paymentAuthorizationApproval.count({
+        where: { paymentAuthorizationId: id, approvalStatus: null },
+      });
 
-    const status =
-      approvals.length == approvedCount
-        ? PaymentStatus.FULLY_APPROVED
-        : PaymentStatus.PARTIIALLY_APPROVED;
+    const status = pendingApprovalCount
+      ? PaymentStatus.PARTIIALLY_APPROVED
+      : PaymentStatus.FULLY_APPROVED;
 
     const data = await this.prisma.paymentAuthorization.update({
-      include: { Requester: true },
       data: { status },
       where: { id },
+      include: {
+        PaymentAuthorizationItem: true,
+        PaymentAuthorizationApproval: {
+          include: {
+            User: { select: { name: true, signatureSpeciment: true } },
+          },
+          orderBy: { level: 'asc' },
+        },
+        Employee: { select: { name: true } },
+        Requester: { select: { name: true } },
+        Bank: { select: { code: true, name: true } },
+        Company: { select: { name: true } },
+      },
     });
 
-    this.eventEmitter.emit('paymentAuthorization.approved', data);
-    this.eventEmitter.emit(
-      'paymentAuthorization.updated',
-      data,
-      data.Requester,
-      PaymentStatus.FULLY_APPROVED,
-      note,
-    );
+    // TODO: Lanjut ke approval berikutnya
+    // this.eventEmitter.emit('paymentAuthorization.approved', data);
+    // this.eventEmitter.emit(
+    //   'paymentAuthorization.updated',
+    //   data,
+    //   data.Requester,
+    //   PaymentStatus.FULLY_APPROVED,
+    //   note,
+    // );
     return data;
   }
 
@@ -331,7 +349,7 @@ export class PaymentAuthorizationsService {
         await this.prisma.paymentAuthorizationApproval.findMany({
           where: {
             paymentAuthorizationId: data.id,
-            level: 1,
+            // level: 1, // TODO: harusnya berjenjang, sementara paralel untuk testing
           },
         });
 
