@@ -21,11 +21,15 @@ import { AuthEntity } from './auth.entity';
 import { Auth } from './auth.decorator';
 import { User } from '@prisma/client';
 import { Response } from 'express';
+import { PrismaService } from 'src/prisma/prisma.service';
 
 @ApiTags('Auth')
 @Controller('auth')
 export class AuthController {
-  constructor(private authService: AuthService) {}
+  constructor(
+    private authService: AuthService,
+    private prisma: PrismaService,
+  ) {}
 
   @Public()
   @Post()
@@ -41,7 +45,10 @@ export class AuthController {
       credential.password,
     );
 
+    const company = await this.prisma.company.findFirst();
+    if (company) res.cookie('companyId', company.id);
     res.cookie('token', data.token);
+
     return data;
   }
 
