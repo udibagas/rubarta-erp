@@ -31,7 +31,7 @@ export class PaymentAuthorizationsService {
     }
 
     const savedData = await this.prisma.paymentAuthorization.create({
-      include: { PaymentAuthorizationItem: true, Requester: true },
+      include: { Requester: true },
       data: {
         ...data,
         number,
@@ -83,13 +83,6 @@ export class PaymentAuthorizationsService {
       skip: (page - 1) * pageSize,
       where,
       include: {
-        PaymentAuthorizationItem: true,
-        PaymentAuthorizationApproval: {
-          include: {
-            User: { select: { name: true, signatureSpeciment: true } },
-          },
-          orderBy: { level: 'asc' },
-        },
         Employee: { select: { name: true } },
         Requester: { select: { name: true } },
         Bank: { select: { code: true, name: true } },
@@ -107,12 +100,26 @@ export class PaymentAuthorizationsService {
       include: {
         PaymentAuthorizationItem: true,
         PaymentAuthorizationApproval: {
-          include: { User: true },
+          orderBy: { level: 'asc' },
+          include: {
+            User: {
+              select: { name: true, signatureSpeciment: true },
+            },
+          },
         },
-        Requester: true,
-        Employee: true,
+        Requester: {
+          select: { name: true },
+        },
+        Employee: {
+          select: { name: true },
+        },
         ExpenseClaim: true,
-        Company: true,
+        Company: {
+          select: { name: true },
+        },
+        Bank: {
+          select: { name: true },
+        },
       },
     });
   }
