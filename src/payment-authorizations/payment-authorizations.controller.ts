@@ -138,10 +138,10 @@ export class PaymentAuthorizationsController {
   })
   approve(
     @Param('id', ParseIntPipe) id: number,
-    @Request() { user },
+    @Auth() user: User,
     @Body('note') note: string,
   ) {
-    this.paymentAuthorizationsService.approve(id, user, note);
+    return this.paymentAuthorizationsService.approve(id, user.id, note);
   }
 
   @Post('reject/:id')
