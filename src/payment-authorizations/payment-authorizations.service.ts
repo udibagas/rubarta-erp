@@ -275,7 +275,7 @@ export class PaymentAuthorizationsService {
     return data;
   }
 
-  private async generateNumber(companyId) {
+  private async generateNumber(companyId: number): Promise<string> {
     const { code } = await this.prisma.company.findUniqueOrThrow({
       where: { id: companyId },
     });
@@ -325,7 +325,6 @@ export class PaymentAuthorizationsService {
 
   @OnEvent('paymentAuthorization.submitted')
   async requestForApproval(data: PaymentAuthorization) {
-    // get approval setting
     const approval = await this.prisma.approvalSetting.findFirst({
       where: {
         approvalType: ApprovalType.PAYMENT_AUTHORIZATION,
@@ -334,33 +333,35 @@ export class PaymentAuthorizationsService {
       include: { ApprovalSettingItem: true },
     });
 
-    if (approval) {
-      await this.prisma.paymentAuthorizationApproval.createMany({
-        data: approval.ApprovalSettingItem.map((el) => ({
-          userId: el.userId,
-          approvalActionType: el.approvalActionType,
-          level: el.level,
+    if (!approval) {
+      return console.log('No approval setting');
+    }
+
+    await this.prisma.paymentAuthorizationApproval.createMany({
+      data: approval.ApprovalSettingItem.map((el) => ({
+        userId: el.userId,
+        approvalActionType: el.approvalActionType,
+        level: el.level,
+        paymentAuthorizationId: data.id,
+      })),
+    });
+
+    // Ambil user approval dengan level 1
+    const firstLevelApprovals =
+      await this.prisma.paymentAuthorizationApproval.findMany({
+        where: {
           paymentAuthorizationId: data.id,
-        })),
+          // level: 1, // TODO: harusnya berjenjang, sementara paralel untuk testing
+        },
       });
 
-      // Ambil user approval dengan level 1
-      const firstLevelApprovals =
-        await this.prisma.paymentAuthorizationApproval.findMany({
-          where: {
-            paymentAuthorizationId: data.id,
-            // level: 1, // TODO: harusnya berjenjang, sementara paralel untuk testing
-          },
+    if (firstLevelApprovals.length > 0) {
+      firstLevelApprovals.forEach((approval) => {
+        this.eventEmitter.emit('paymentAuthorization.notify', {
+          data,
+          approval,
         });
-
-      if (firstLevelApprovals.length > 0) {
-        firstLevelApprovals.forEach((approval) => {
-          this.eventEmitter.emit('paymentAuthorization.notify', {
-            data,
-            approval,
-          });
-        });
-      }
+      });
     }
   }
 
@@ -388,10 +389,18 @@ export class PaymentAuthorizationsService {
     approval: PaymentAuthorizationApproval;
   }) {
     const { data, approval } = params;
+    const approvalAction = {
+      APPROVAL: 'Persetujuan',
+      VERIFICATION: 'Verifikasi',
+      AUTHORIZATION: 'Otorisasi',
+    };
+
+    const action = `${approvalAction[approval.approvalActionType]}`;
+
     this.notification.notify({
       userId: approval.userId,
-      title: `Permintaan Persetujuan: ${data.number}`,
-      message: `Anda mendapatkan permintaan persetujuan untuk Nota Kuasa Pembayaran dengan nomor ${data.number}.`,
+      title: `Permintaan ${action}: ${data.number}`,
+      message: `Anda mendapatkan permintaan ${action} untuk Nota Kuasa Pembayaran dengan nomor ${data.number}.`,
       redirectUrl: 'https://erp.rubarta.co.id/payment-authorizations',
     });
   }
