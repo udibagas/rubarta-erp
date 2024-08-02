@@ -206,7 +206,7 @@ export class PaymentAuthorizationsService {
         'You have rejected this payment authorization',
       );
 
-    await this.prisma.paymentAuthorizationApproval.update({
+    const data = await this.prisma.paymentAuthorizationApproval.update({
       data: { approvalStatus: ApprovalStatus.APPROVED, note: note },
       where: {
         id: approval.id,
@@ -222,22 +222,9 @@ export class PaymentAuthorizationsService {
       ? PaymentStatus.PARTIIALLY_APPROVED
       : PaymentStatus.FULLY_APPROVED;
 
-    const data = await this.prisma.paymentAuthorization.update({
+    await this.prisma.paymentAuthorization.update({
       data: { status },
       where: { id },
-      include: {
-        PaymentAuthorizationItem: true,
-        PaymentAuthorizationApproval: {
-          include: {
-            User: { select: { name: true, signatureSpeciment: true } },
-          },
-          orderBy: { level: 'asc' },
-        },
-        Employee: { select: { name: true } },
-        Requester: { select: { name: true } },
-        Bank: { select: { code: true, name: true } },
-        Company: { select: { name: true } },
-      },
     });
 
     // TODO: Lanjut ke approval berikutnya
