@@ -49,13 +49,9 @@ export class ExpenseClaimsService {
       take: pageSize,
       where,
       include: {
-        ExpenseClaimItem: {
-          include: { ExpenseType: true },
-        },
-        Department: true,
-        User: true,
-        Company: true,
-        ExpenseClaimAttachment: true,
+        Department: { select: { name: true } },
+        User: { select: { name: true } },
+        Company: { select: { name: true } },
       },
     });
 
@@ -67,12 +63,18 @@ export class ExpenseClaimsService {
     return this.prisma.expenseClaim.findUniqueOrThrow({
       where: { id },
       include: {
+        Department: { select: { name: true } },
+        User: { select: { name: true } },
+        Company: { select: { name: true } },
         ExpenseClaimItem: {
           include: { ExpenseType: true },
         },
         ExpenseClaimAttachment: true,
-        ExpenseClaimApproval: true,
-        Department: true,
+        ExpenseClaimApproval: {
+          include: {
+            User: { select: { name: true } },
+          },
+        },
       },
     });
   }
