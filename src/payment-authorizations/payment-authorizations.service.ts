@@ -407,8 +407,8 @@ export class PaymentAuthorizationsService {
     this.notification.notify({
       userId: approval.userId,
       title: `Permintaan ${action}: ${data.number}`,
-      message: `Anda mendapatkan permintaan ${action} untuk Nota Kuasa Pembayaran dengan nomor ${data.number}.`,
-      redirectUrl: 'https://erp.rubarta.co.id/payment-authorizations',
+      message: `Anda mendapatkan permintaan ${action} untuk <b>Nota Kuasa Pembayaran</b> dengan nomor <b>${data.number}</b>.`,
+      redirectUrl: `https://erp.rubarta.co.id/payment-authorizations?number=${data.number}`,
     });
   }
 }
