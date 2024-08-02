@@ -98,10 +98,20 @@ export class ExpenseClaimsController {
   }
 
   @Post('approve/:id')
-  @HttpCode(HttpStatus.OK)
   @ApiOperation({ summary: 'Approve expense claim by id' })
-  approve() {
-    // TODO
+  @HttpCode(HttpStatus.OK)
+  @ApiParam({
+    name: 'id',
+    description: 'Expense Claim ID',
+    example: 1,
+  })
+  @ApiOperation({ summary: 'Approve expense claim by id' })
+  approve(
+    @Param('id', ParseIntPipe) id: number,
+    @Auth() user: User,
+    @Body('note') note?: string,
+  ) {
+    return this.expenseClaimsService.approve(id, user.id, note);
   }
 
   @Post('reject/:id')

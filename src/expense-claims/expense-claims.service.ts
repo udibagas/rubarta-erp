@@ -67,7 +67,14 @@ export class ExpenseClaimsService {
     }
 
     if (keyword) {
-      // TODO: tambahin searching
+      where.OR = [
+        { number: { contains: keyword, mode: 'insensitive' } },
+        {
+          User: {
+            name: { contains: keyword, mode: 'insensitive' },
+          },
+        },
+      ];
     }
 
     const data = await this.prisma.expenseClaim.findMany({
@@ -98,7 +105,7 @@ export class ExpenseClaimsService {
         ExpenseClaimAttachment: true,
         ExpenseClaimApproval: {
           include: {
-            User: { select: { name: true } },
+            User: { select: { name: true, signatureSpeciment: true } },
           },
         },
       },
@@ -216,7 +223,7 @@ export class ExpenseClaimsService {
     this.notification.notify({
       userId: approval.userId,
       title: `Permintaan ${action}: ${data.number}`,
-      message: `Anda mendapatkan permintaan ${action} untuk <b>Klaim Pengeluaran</b> dengan nomor <b>${data.number}</b>.`,
+      message: `Anda mendapatkan permintaan ${action} untuk Klaim Pengeluaran dengan nomor ${data.number}.`,
       redirectUrl: `https://erp.rubarta.co.id/expense-claims?number=${data.number}`,
     });
   }
@@ -283,20 +290,14 @@ export class ExpenseClaimsService {
       throw new ForbiddenException('You can not approve this expense claim');
 
     if (approval.approvalStatus == ApprovalStatus.APPROVED)
-      throw new ForbiddenException(
-        'You have approved this payment authorization',
-      );
+      throw new ForbiddenException('You have approved this expense claim');
 
     if (approval.approvalStatus == ApprovalStatus.REJECTED)
-      throw new ForbiddenException(
-        'You have rejected this payment authorization',
-      );
+      throw new ForbiddenException('You have rejected this expense claim');
 
-    await this.prisma.expenseClaimApproval.update({
+    const data = await this.prisma.expenseClaimApproval.update({
       data: { approvalStatus: ApprovalStatus.APPROVED, note: note },
-      where: {
-        id: approval.id,
-      },
+      where: { id: approval.id },
     });
 
     const pendingApprovalCount = await this.prisma.expenseClaimApproval.count({
@@ -307,21 +308,9 @@ export class ExpenseClaimsService {
       ? ClaimStatus.PARTIIALLY_APPROVED
       : ClaimStatus.FULLY_APPROVED;
 
-    const data = await this.prisma.expenseClaim.update({
+    await this.prisma.expenseClaim.update({
       data: { status },
       where: { id },
-      include: {
-        ExpenseClaimItem: true,
-        ExpenseClaimAttachment: true,
-        ExpenseClaimApproval: {
-          include: {
-            User: { select: { name: true, signatureSpeciment: true } },
-          },
-          orderBy: { level: 'asc' },
-        },
-        User: { select: { name: true } },
-        Company: { select: { name: true } },
-      },
     });
 
     // TODO: Lanjut ke approval berikutnya
