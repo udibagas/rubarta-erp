@@ -112,6 +112,13 @@ export class PaymentAuthorizationsController {
     );
   }
 
+  @Post('submit/:id')
+  @ApiOperation({ summary: 'Submit data' })
+  @HttpCode(HttpStatus.OK)
+  submit(@Param('id', ParseIntPipe) id: number, @Auth() user: User) {
+    return this.paymentAuthorizationsService.submit(id, user.id);
+  }
+
   @Delete(':id')
   @ApiOperation({
     summary: 'Delete payment authorization by id (nota kuasa pembayaran)',

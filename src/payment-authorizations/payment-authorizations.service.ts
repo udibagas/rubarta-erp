@@ -161,6 +161,22 @@ export class PaymentAuthorizationsService {
     return savedData;
   }
 
+  async submit(id: number, requesterId: number) {
+    const data = await this.findOne(id);
+    const number = await this.generateNumber(data.companyId);
+
+    const savedData = await this.prisma.paymentAuthorization.update({
+      where: { id, requesterId },
+      data: {
+        number,
+        status: PaymentStatus.SUBMITTED,
+      },
+    });
+
+    this.eventEmitter.emit('paymentAuthorization.submitted', savedData);
+    return savedData;
+  }
+
   async remove(id: number) {
     const data = await this.findOne(id);
     if (data.status !== PaymentStatus.DRAFT) throw new ForbiddenException();
@@ -228,14 +244,6 @@ export class PaymentAuthorizationsService {
     });
 
     // TODO: Lanjut ke approval berikutnya
-    // this.eventEmitter.emit('paymentAuthorization.approved', data);
-    // this.eventEmitter.emit(
-    //   'paymentAuthorization.updated',
-    //   data,
-    //   data.Requester,
-    //   PaymentStatus.FULLY_APPROVED,
-    //   note,
-    // );
     return data;
   }
 

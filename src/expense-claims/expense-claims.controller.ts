@@ -114,10 +114,10 @@ export class ExpenseClaimsController {
     return this.expenseClaimsService.approve(id, user.id, note);
   }
 
-  @Post('reject/:id')
+  @Post('submit/:id')
+  @ApiOperation({ summary: 'Submit data' })
   @HttpCode(HttpStatus.OK)
-  @ApiOperation({ summary: 'Reject expense claim by id' })
-  reject() {
-    // todo
+  submit(@Param('id', ParseIntPipe) id: number, @Auth() user: User) {
+    return this.expenseClaimsService.submit(id, user.id);
   }
 }

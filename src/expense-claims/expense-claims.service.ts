@@ -147,6 +147,22 @@ export class ExpenseClaimsService {
     return savedData;
   }
 
+  async submit(id: number, userId: number) {
+    const data = await this.findOne(id);
+    const number = await this.generateNumber(data.companyId);
+
+    const savedData = await this.prisma.expenseClaim.update({
+      where: { id, userId },
+      data: {
+        number,
+        status: ClaimStatus.SUBMITTED,
+      },
+    });
+
+    this.eventEmitter.emit('expenseClaim.submitted', savedData);
+    return savedData;
+  }
+
   remove(id: number) {
     return this.prisma.expenseClaim.delete({ where: { id } });
   }
@@ -314,23 +330,6 @@ export class ExpenseClaimsService {
     });
 
     // TODO: Lanjut ke approval berikutnya
-    // this.eventEmitter.emit('paymentAuthorization.approved', data);
-    // this.eventEmitter.emit(
-    //   'paymentAuthorization.updated',
-    //   data,
-    //   data.Requester,
-    //   PaymentStatus.FULLY_APPROVED,
-    //   note,
-    // );
     return data;
-  }
-
-  reject(id: number) {
-    return this.prisma.expenseClaim.update({
-      data: {
-        status: ClaimStatus.REJECTED,
-      },
-      where: { id },
-    });
   }
 }
