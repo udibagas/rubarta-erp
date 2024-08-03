@@ -194,39 +194,14 @@ export class PaymentAuthorizationsService {
   }
 
   async approve(id: number, userId: number, note?: string) {
-    const approvals = await this.prisma.paymentAuthorizationApproval.findMany({
-      where: { paymentAuthorizationId: id },
-    });
-
-    if (approvals.length == 0)
-      throw new ForbiddenException(
-        'No approval set for this payment authorization',
-      );
-
-    const approval = await this.prisma.paymentAuthorizationApproval.findFirst({
-      where: { paymentAuthorizationId: id, userId },
-    });
-
-    if (!approval)
-      throw new ForbiddenException(
-        'You can not approve this payment authorization',
-      );
-
-    if (approval.approvalStatus == ApprovalStatus.APPROVED)
-      throw new ForbiddenException(
-        'You have approved this payment authorization',
-      );
-
-    if (approval.approvalStatus == ApprovalStatus.REJECTED)
-      throw new ForbiddenException(
-        'You have rejected this payment authorization',
-      );
+    const approval =
+      await this.prisma.paymentAuthorizationApproval.findFirstOrThrow({
+        where: { paymentAuthorizationId: id, userId, approvalStatus: null },
+      });
 
     const data = await this.prisma.paymentAuthorizationApproval.update({
       data: { approvalStatus: ApprovalStatus.APPROVED, note: note },
-      where: {
-        id: approval.id,
-      },
+      where: { id: approval.id },
     });
 
     const pendingApprovalCount =
