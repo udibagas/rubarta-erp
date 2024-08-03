@@ -15,7 +15,7 @@ export class ExpenseNotesService {
   findAll(userId: number) {
     return this.prisma.expenseNote.findMany({
       where: { userId },
-      include: { expenseType: true },
+      include: { ExpenseType: true },
       orderBy: { date: 'asc' },
     });
   }
