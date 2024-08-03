@@ -321,7 +321,7 @@ export class ExpenseClaimsService {
     });
 
     const status = pendingApprovalCount
-      ? ClaimStatus.PARTIIALLY_APPROVED
+      ? ClaimStatus.PARTIALLY_APPROVED
       : ClaimStatus.FULLY_APPROVED;
 
     await this.prisma.expenseClaim.update({

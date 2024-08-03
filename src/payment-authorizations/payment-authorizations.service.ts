@@ -235,7 +235,7 @@ export class PaymentAuthorizationsService {
       });
 
     const status = pendingApprovalCount
-      ? PaymentStatus.PARTIIALLY_APPROVED
+      ? PaymentStatus.PARTIALLY_APPROVED
       : PaymentStatus.FULLY_APPROVED;
 
     await this.prisma.paymentAuthorization.update({
