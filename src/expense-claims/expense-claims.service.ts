@@ -291,25 +291,9 @@ export class ExpenseClaimsService {
   }
 
   async approve(id: number, userId: number, note?: string) {
-    const approvals = await this.prisma.expenseClaimApproval.findMany({
-      where: { expenseClaimId: id },
+    const approval = await this.prisma.expenseClaimApproval.findFirstOrThrow({
+      where: { expenseClaimId: id, userId, approvalStatus: null },
     });
-
-    if (approvals.length == 0)
-      throw new ForbiddenException('No approval set for this expense claim');
-
-    const approval = await this.prisma.expenseClaimApproval.findFirst({
-      where: { expenseClaimId: id, userId },
-    });
-
-    if (!approval)
-      throw new ForbiddenException('You can not approve this expense claim');
-
-    if (approval.approvalStatus == ApprovalStatus.APPROVED)
-      throw new ForbiddenException('You have approved this expense claim');
-
-    if (approval.approvalStatus == ApprovalStatus.REJECTED)
-      throw new ForbiddenException('You have rejected this expense claim');
 
     const data = await this.prisma.expenseClaimApproval.update({
       data: { approvalStatus: ApprovalStatus.APPROVED, note: note },
