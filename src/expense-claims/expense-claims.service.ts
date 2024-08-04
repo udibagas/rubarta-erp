@@ -81,6 +81,7 @@ export class ExpenseClaimsService {
       skip: (page - 1) * pageSize,
       take: pageSize,
       where,
+      orderBy: { updatedAt: 'desc' },
       include: {
         Department: { select: { name: true } },
         User: { select: { name: true } },
@@ -159,7 +160,7 @@ export class ExpenseClaimsService {
       },
     });
 
-    this.eventEmitter.emit('expenseClaim.submitted', savedData);
+    await this.eventEmitter.emit('expenseClaim.submitted', savedData);
     return savedData;
   }
 
