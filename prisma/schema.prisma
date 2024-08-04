@@ -193,6 +193,7 @@ model ExpenseClaim {
   companyId              Int
   ExpenseClaimItem       ExpenseClaimItem[]
   PaymentAuthorization   PaymentAuthorization?
+  updatedAt              DateTime                 @default(now()) @updatedAt
 
   @@index([userId, departmentId, companyId])
   @@map("ExpenseClaims")
