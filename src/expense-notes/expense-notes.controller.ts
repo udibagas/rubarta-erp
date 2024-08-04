@@ -71,4 +71,9 @@ export class ExpenseNotesController {
     const data = await this.expenseNotesService.remove(id);
     return plainToInstance(ExpenseNote, data);
   }
+
+  @Delete()
+  removeAll(@Auth() user: User) {
+    return this.expenseNotesService.removeAll(user.id);
+  }
 }

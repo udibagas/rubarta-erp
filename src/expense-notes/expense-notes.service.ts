@@ -41,4 +41,11 @@ export class ExpenseNotesService {
 
     return this.prisma.expenseNote.delete({ where: { id } });
   }
+
+  // ini asumsinya dipanggil waktu convert jadi expense claim,
+  // jadi attachment-nya ga boleh dihapus
+  // karena akan dijadikan attachment di expense claim
+  removeAll(userId: number) {
+    return this.prisma.expenseNote.deleteMany({ where: { userId } });
+  }
 }
