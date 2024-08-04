@@ -82,6 +82,7 @@ export class PaymentAuthorizationsService {
       take: pageSize,
       skip: (page - 1) * pageSize,
       where,
+      orderBy: { updatedAt: 'desc' },
       include: {
         Employee: { select: { name: true } },
         Requester: { select: { name: true } },
