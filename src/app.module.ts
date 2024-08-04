@@ -20,6 +20,7 @@ import { NotificationsModule } from './notifications/notifications.module';
 import { FileModule } from './file/file.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
+import { ReportModule } from './report/report.module';
 
 @Module({
   imports: [
@@ -78,6 +79,7 @@ import { join } from 'path';
     ExpenseNotesModule,
     NotificationsModule,
     FileModule,
+    ReportModule,
   ],
   controllers: [],
   providers: [],
