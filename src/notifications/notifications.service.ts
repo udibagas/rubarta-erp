@@ -83,8 +83,6 @@ export class NotificationsService {
       where: { id: userId },
     });
 
-    console.log(`Sending notification to ${user.email}`);
-
     return this.mailerService.sendMail({
       to: user.email,
       subject,
@@ -104,8 +102,8 @@ export class NotificationsService {
     });
   }
 
-  notify(notificationDto: NotificationDto) {
-    this.create(notificationDto);
+  async notify(notificationDto: NotificationDto) {
+    await this.create(notificationDto);
     this.send(notificationDto);
   }
 }
