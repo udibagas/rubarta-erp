@@ -36,6 +36,7 @@ export class NotificationsService {
       where,
       take: pageSize,
       skip: (page - 1) * pageSize,
+      include: { User: { select: { name: true } } },
     });
 
     const total = await this.prisma.notification.count({ where });
