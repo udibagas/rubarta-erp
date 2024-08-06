@@ -105,6 +105,7 @@ export class ExpenseClaimsService {
         },
         ExpenseClaimAttachment: true,
         ExpenseClaimApproval: {
+          orderBy: { level: 'asc' },
           include: {
             User: { select: { name: true, signatureSpeciment: true } },
           },
