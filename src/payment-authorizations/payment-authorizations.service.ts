@@ -4,6 +4,7 @@ import { PrismaService } from '../prisma/prisma.service';
 import {
   ApprovalStatus,
   ApprovalType,
+  ClaimStatus,
   PaymentAuthorization,
   PaymentAuthorizationApproval,
   PaymentStatus,
@@ -21,9 +22,8 @@ export class PaymentAuthorizationsService {
     private notification: NotificationsService,
   ) {}
 
-  async create(paymentAuthorizationDto: PaymentAuthorizationDto) {
-    const { PaymentAuthorizationItem: items, ...data } =
-      paymentAuthorizationDto;
+  async create(dto: PaymentAuthorizationDto) {
+    const { PaymentAuthorizationItem: items, expenseClaimId, ...data } = dto;
     let number = 'DRAFT';
 
     if (data.status == PaymentStatus.SUBMITTED) {
@@ -40,13 +40,13 @@ export class PaymentAuthorizationsService {
     });
 
     if (savedData.status == PaymentStatus.SUBMITTED) {
-      // TODO: throw error kalau belum ada setting approval
       this.eventEmitter.emit('paymentAuthorization.submitted', savedData);
-      this.eventEmitter.emit('paymentAuthorization.updated', {
-        data: savedData,
-        user: savedData.Requester,
-        status: PaymentStatus.SUBMITTED,
-        note: 'Request is submitted',
+    }
+
+    if (expenseClaimId) {
+      await this.prisma.expenseClaim.update({
+        where: { id: expenseClaimId },
+        data: { status: ClaimStatus.IN_PROCESS },
       });
     }
 
