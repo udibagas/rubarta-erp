@@ -21,6 +21,13 @@ import { FileModule } from './file/file.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import { ReportModule } from './report/report.module';
+import { SuppliersModule } from './suppliers/suppliers.module';
+import { TransactionsModule } from './transactions/transactions.module';
+import { InvoicesModule } from './invoices/invoices.module';
+import { PaymentsModule } from './payments/payments.module';
+import { ExpensesModule } from './expenses/expenses.module';
+import { CustomersModule } from './customers/customers.module';
+import { AccountsModule } from './accounts/accounts.module';
 
 @Module({
   imports: [
@@ -80,6 +87,13 @@ import { ReportModule } from './report/report.module';
     NotificationsModule,
     FileModule,
     ReportModule,
+    SuppliersModule,
+    AccountsModule,
+    TransactionsModule,
+    InvoicesModule,
+    PaymentsModule,
+    ExpensesModule,
+    CustomersModule,
   ],
   controllers: [],
   providers: [],
