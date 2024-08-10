@@ -20,7 +20,10 @@ import {
   ApiOperation,
   ApiTags,
 } from '@nestjs/swagger';
-import { PaymentAuthorizationDto } from './payment-authorization.dto';
+import {
+  CloseNkpDto,
+  PaymentAuthorizationDto,
+} from './payment-authorization.dto';
 import { Auth } from '../auth/auth.decorator';
 import { PaymentType, User } from '@prisma/client';
 
@@ -160,8 +163,8 @@ export class PaymentAuthorizationsController {
   close(
     @Param('id', ParseIntPipe) id: number,
     @Auth() user: User,
-    @Body('bankRefNo') bankRefNo: string,
+    @Body() data: CloseNkpDto,
   ) {
-    this.paymentAuthorizationsService.close(id, bankRefNo, user);
+    this.paymentAuthorizationsService.close(id, data, user);
   }
 }

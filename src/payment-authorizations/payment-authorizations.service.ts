@@ -1,5 +1,8 @@
 import { ForbiddenException, Injectable } from '@nestjs/common';
-import { PaymentAuthorizationDto } from './payment-authorization.dto';
+import {
+  CloseNkpDto,
+  PaymentAuthorizationDto,
+} from './payment-authorization.dto';
 import { PrismaService } from '../prisma/prisma.service';
 import {
   ApprovalStatus,
@@ -224,8 +227,9 @@ export class PaymentAuthorizationsService {
     return data;
   }
 
-  close(id: number, bankRefNo: string, user: User) {
+  close(id: number, data: CloseNkpDto, user: User) {
     // TODO : cek authorisasi
+    const { bankRefNo } = data;
     return this.prisma.paymentAuthorization.update({
       data: { status: PaymentStatus.CLOSED, bankRefNo },
       where: { id },

@@ -124,3 +124,8 @@ export class PaymentAuthorizationDto {
   @ValidateNested({ each: true })
   PaymentAuthorizationItem: PaymentAuthorizationItemDto[];
 }
+
+export class CloseNkpDto {
+  @IsNotEmpty({ message: 'Bank Ref Number is required' })
+  bankRefNo: string;
+}
