@@ -116,7 +116,6 @@ model PaymentAuthorization {
   grossAmount  Int  @db.Integer
   deduction    Int  @default(0) @db.Integer
   tax          Int  @default(0) @db.Integer
-  cashAdvance  Int  @default(0) @db.Integer
   downPayment  Int  @default(0) @db.Integer
   netAmount    Int  @db.Integer
   finalPayment Int? @db.Integer
