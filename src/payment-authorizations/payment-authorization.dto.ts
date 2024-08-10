@@ -4,7 +4,6 @@ import { Type } from 'class-transformer';
 import {
   ArrayNotEmpty,
   IsArray,
-  IsDate,
   IsEnum,
   IsNotEmpty,
   IsNumber,
