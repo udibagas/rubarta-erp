@@ -17,7 +17,7 @@ export class DepartmentsService {
   }
 
   findOne(id: number) {
-    return this.prisma.department.findUnique({
+    return this.prisma.department.findUniqueOrThrow({
       where: { id },
     });
   }
