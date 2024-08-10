@@ -31,6 +31,6 @@ export class SupplierDto {
   @IsString({ message: 'Bank Account is required' })
   bankAccount: string;
 
-  @IsEnum(Currency)
+  @IsEnum(Currency, { message: 'Invalid currency' })
   currency: Currency;
 }
