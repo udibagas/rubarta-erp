@@ -10,8 +10,11 @@ import {
 } from '@nestjs/common';
 import { SuppliersService } from './suppliers.service';
 import { SupplierDto } from './supplier.dto';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
-@Controller('suppliers')
+@ApiTags('Suppliers')
+@ApiBearerAuth()
+@Controller('api/suppliers')
 export class SuppliersController {
   constructor(private readonly suppliersService: SuppliersService) {}
 
