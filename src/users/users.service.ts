@@ -10,13 +10,12 @@ import { Prisma } from '@prisma/client';
 export class UsersService {
   constructor(private prisma: PrismaService) {}
 
-  create(createUserDto: CreateUserDto) {
-    createUserDto.password = bcrypt.hashSync(createUserDto.password, 10);
+  async create(data: CreateUserDto) {
+    data.code = await this.generateCode();
+    data.password = bcrypt.hashSync(data.password, 10);
     return this.prisma.user.create({
-      data: createUserDto,
-      omit: {
-        password: true,
-      },
+      omit: { password: true },
+      data,
     });
   }
 
@@ -84,5 +83,19 @@ export class UsersService {
     return this.prisma.user.findFirst({
       where: { email },
     });
+  }
+
+  async generateCode(): Promise<string> {
+    let code = '0001';
+
+    const lastData = await this.prisma.user.findFirst({
+      orderBy: { code: 'desc' },
+    });
+
+    if (lastData) {
+      code = (Number(lastData.code) + 1).toString().padStart(4, '0');
+    }
+
+    return code;
   }
 }

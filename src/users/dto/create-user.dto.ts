@@ -19,6 +19,8 @@ export class UserRole {
 }
 
 export class CreateUserDto {
+  code: string;
+
   @ApiProperty({
     example: 'Bagas Udi S.',
   })
