@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Role } from '@prisma/client';
+import { Currency, Role } from '@prisma/client';
 import { JsonObject } from '@prisma/client/runtime/library';
 import {
   ArrayNotEmpty,
@@ -45,6 +45,9 @@ export class CreateUserDto {
   @ApiProperty({ required: false, example: '2411191***' })
   @IsOptional()
   bankAccount: string;
+
+  @IsEnum(Currency, { message: 'Invalid currency' })
+  currency: Currency;
 
   @ApiProperty({ required: false, example: 1 })
   @IsOptional()
