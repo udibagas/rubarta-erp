@@ -1,0 +1,102 @@
+enum Currency {
+  IDR
+  USD
+}
+
+model Customer {
+  id          Int           @id @default(autoincrement())
+  name        String
+  address     String
+  phone       String
+  email       String
+  Transaction Transaction[]
+  Invoice     Invoice[]
+
+  @@map("Customers")
+}
+
+model Supplier {
+  id                   Int                    @id @default(autoincrement())
+  code                 String?                @db.Char(6)
+  name                 String
+  address              String
+  phone                String?
+  email                String?
+  Bank                 Bank                   @relation(fields: [bankId], references: [id])
+  bankAccount          String
+  currency             Currency
+  Transaction          Transaction[]
+  bankId               Int
+  PaymentAuthorization PaymentAuthorization[]
+
+  @@map("Suppliers")
+}
+
+model Account {
+  id                Int                 @id @default(autoincrement())
+  code              String              @unique
+  name              String
+  type              String
+  balance           Decimal
+  TransactionDetail TransactionDetail[]
+  Expense           Expense[]
+
+  @@map("Accounts")
+}
+
+model Transaction {
+  id                Int                 @id @default(autoincrement())
+  date              DateTime
+  description       String
+  amount            Decimal
+  customerId        Int
+  supplierId        Int
+  userId            Int
+  customer          Customer            @relation(fields: [customerId], references: [id])
+  supplier          Supplier            @relation(fields: [supplierId], references: [id])
+  user              User                @relation(fields: [userId], references: [id])
+  TransactionDetail TransactionDetail[]
+
+  @@map("Transactions")
+}
+
+model TransactionDetail {
+  id            Int         @id @default(autoincrement())
+  transactionId Int
+  accountId     Int
+  debit         Decimal
+  credit        Decimal
+  transaction   Transaction @relation(fields: [transactionId], references: [id])
+  account       Account     @relation(fields: [accountId], references: [id])
+
+  @@map("TransactionDetails")
+}
+
+model Invoice {
+  id          Int       @id @default(autoincrement())
+  date        DateTime
+  customerId  Int
+  totalAmount Decimal
+  status      String
+  customer    Customer  @relation(fields: [customerId], references: [id])
+  Payment     Payment[]
+
+  @@map("Invoices")
+}
+
+model Payment {
+  id         Int      @id @default(autoincrement())
+  date       DateTime
+  invoiceId  Int
+  amountPaid Decimal
+  invoice    Invoice  @relation(fields: [invoiceId], references: [id])
+}
+
+model Expense {
+  id          Int      @id @default(autoincrement())
+  date        DateTime
+  description String
+  amount      Decimal
+  accountId   Int
+  account     Account  @relation(fields: [accountId], references: [id])
+}
