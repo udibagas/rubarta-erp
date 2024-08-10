@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { PaymentStatus } from '@prisma/client';
+import { Currency, PaymentStatus, PaymentType } from '@prisma/client';
 import { Type } from 'class-transformer';
 import {
   ArrayNotEmpty,
@@ -25,6 +25,9 @@ export class PaymentAuthorizationItemDto {
   @ApiProperty({ example: 100_000 })
   @IsNumber()
   amount: number;
+
+  @IsEnum(Currency, { message: 'Invalid currency' })
+  currency: Currency;
 }
 
 export class PaymentAuthorizationDto {
@@ -33,10 +36,16 @@ export class PaymentAuthorizationDto {
   @IsNumber()
   companyId: number;
 
+  @IsEnum(PaymentType, { message: 'Invalid payment type' })
+  paymentType: PaymentType;
+
   @ApiProperty({ example: 1, description: 'Employee ID' })
-  @IsNotEmpty({ message: 'Employee is required' })
-  @IsNumber()
+  @IsOptional()
   employeeId: number;
+
+  @ApiProperty({ example: 1, description: 'Vendor ID' })
+  @IsOptional()
+  supplierId: number;
 
   requesterId: number;
 
@@ -49,9 +58,17 @@ export class PaymentAuthorizationDto {
   @IsNotEmpty({ message: 'Bank account is required' })
   bankAccount: string;
 
+  @IsEnum(Currency, { message: 'Invalid currency' })
+  currency: Currency;
+
   @ApiProperty({ example: 2_000_000, description: 'Amount before deduction' })
   @IsNumber({}, { message: 'Gross amount must be a number' })
   grossAmount: number;
+
+  @ApiProperty({ example: 100_000, description: 'Tax' })
+  @IsOptional()
+  @IsNumber({}, { message: 'Tax must be a number' })
+  tax: number;
 
   @ApiProperty({ example: 100_000, description: 'Deduction' })
   @IsOptional()
@@ -62,9 +79,17 @@ export class PaymentAuthorizationDto {
   @IsNumber({}, { message: 'Net amount must be a number' })
   netAmount: number;
 
-  @ApiProperty({ example: 2_000_000, description: 'Amount based on items' })
-  @IsNumber({}, { message: 'Amount must be a number' })
-  amount: number;
+  @ApiProperty({ example: 2_000_000, description: 'DP based on items' })
+  @IsNumber({}, { message: 'DP must be a number' })
+  @IsOptional()
+  downPayment: number;
+
+  @ApiProperty({
+    example: 2_000_000,
+    description: 'Final Payment based on items',
+  })
+  @IsNumber({}, { message: 'Final Payment must be a number' })
+  finalPayment: number;
 
   @ApiProperty()
   @IsOptional()

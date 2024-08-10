@@ -8,6 +8,7 @@ import {
   PaymentAuthorization,
   PaymentAuthorizationApproval,
   PaymentStatus,
+  PaymentType,
   Prisma,
   User,
 } from '@prisma/client';
@@ -57,13 +58,18 @@ export class PaymentAuthorizationsService {
     page: number;
     pageSize: number;
     companyId?: number;
+    paymentType?: PaymentType;
     keyword?: string;
   }) {
-    const { page, pageSize, companyId, keyword } = params;
+    const { page, pageSize, companyId, keyword, paymentType } = params;
     const where: Prisma.PaymentAuthorizationWhereInput = {};
 
     if (companyId) {
       where.companyId = companyId;
+    }
+
+    if (paymentType) {
+      where.paymentType = paymentType;
     }
 
     if (keyword) {
@@ -85,6 +91,7 @@ export class PaymentAuthorizationsService {
       orderBy: { updatedAt: 'desc' },
       include: {
         Employee: { select: { name: true } },
+        Supplier: { select: { name: true } },
         Requester: { select: { name: true } },
         Bank: { select: { code: true, name: true } },
         Company: { select: { name: true } },

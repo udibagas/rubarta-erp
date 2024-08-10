@@ -20,10 +20,9 @@ import {
   ApiOperation,
   ApiTags,
 } from '@nestjs/swagger';
-import { PaymentAuthorization } from './payment-authorization.entity';
 import { PaymentAuthorizationDto } from './payment-authorization.dto';
 import { Auth } from '../auth/auth.decorator';
-import { User } from '@prisma/client';
+import { PaymentType, User } from '@prisma/client';
 
 @ApiTags('Payment Authorizations')
 @ApiBearerAuth()
@@ -81,11 +80,13 @@ export class PaymentAuthorizationsController {
     @Query('pageSize', ParseIntPipe) pageSize?: number,
     @Query('keyword') keyword?: string,
     @Query('companyId', ParseIntPipe) companyId?: number,
+    @Query('paymentType') paymentType?: PaymentType,
   ) {
     return this.paymentAuthorizationsService.findAll({
       page,
       pageSize,
       companyId,
+      paymentType,
       keyword,
     });
   }
