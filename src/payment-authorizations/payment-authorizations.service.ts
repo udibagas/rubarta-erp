@@ -379,7 +379,7 @@ export class PaymentAuthorizationsService {
       userId: approval.userId,
       title: `Permintaan ${action}: ${data.number}`,
       message: `Anda mendapatkan permintaan ${action} untuk Nota Kuasa Pembayaran dengan nomor ${data.number}.`,
-      redirectUrl: `https://erp.rubarta.co.id/payment-authorizations?number=${data.number}`,
+      redirectUrl: `https://erp.rubarta.co.id/nkp?number=${data.number}`,
     });
   }
 }

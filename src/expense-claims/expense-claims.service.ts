@@ -242,7 +242,7 @@ export class ExpenseClaimsService {
       userId: approval.userId,
       title: `Permintaan ${action}: ${data.number}`,
       message: `Anda mendapatkan permintaan ${action} untuk Klaim Pengeluaran dengan nomor ${data.number}.`,
-      redirectUrl: `https://erp.rubarta.co.id/expense-claims?number=${data.number}`,
+      redirectUrl: `https://erp.rubarta.co.id/nkp-declaration?number=${data.number}`,
     });
   }
 
