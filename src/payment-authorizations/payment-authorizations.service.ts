@@ -158,12 +158,6 @@ export class PaymentAuthorizationsService {
 
     if (savedData.status == PaymentStatus.SUBMITTED) {
       this.eventEmitter.emit('paymentAuthorization.submitted', savedData);
-      this.eventEmitter.emit('paymentAuthorization.updated', {
-        data: savedData,
-        user: savedData.Requester,
-        status: PaymentStatus.SUBMITTED,
-        note: 'Request is submitted',
-      });
     }
 
     return savedData;
@@ -230,34 +224,12 @@ export class PaymentAuthorizationsService {
     return data;
   }
 
-  async verify(id: number, user: User) {
-    const data = await this.prisma.paymentAuthorization.update({
-      data: { status: PaymentStatus.VERIFIED },
+  close(id: number, bankRefNo: string, user: User) {
+    // TODO : cek authorisasi
+    return this.prisma.paymentAuthorization.update({
+      data: { status: PaymentStatus.CLOSED, bankRefNo },
       where: { id },
     });
-
-    this.eventEmitter.emit('paymentAuthorization.verified', data);
-    return data;
-  }
-
-  async reject(id: number, user: User, note?: string) {
-    const data = await this.prisma.paymentAuthorization.update({
-      data: { status: PaymentStatus.REJECTED },
-      where: { id },
-    });
-
-    this.eventEmitter.emit('paymentAuthorization.rejected', data);
-    return data;
-  }
-
-  async pay(id: number, user: User) {
-    const data = await this.prisma.paymentAuthorization.update({
-      data: { status: PaymentStatus.PAID },
-      where: { id },
-    });
-
-    this.eventEmitter.emit('paymentAuthorization.paid', data);
-    return data;
   }
 
   private async generateNumber(companyId: number): Promise<string> {
@@ -318,10 +290,6 @@ export class PaymentAuthorizationsService {
       include: { ApprovalSettingItem: true },
     });
 
-    if (!approval) {
-      return console.log('No approval setting');
-    }
-
     await this.prisma.paymentAuthorizationApproval.createMany({
       data: approval.ApprovalSettingItem.map((el) => ({
         userId: el.userId,
@@ -348,24 +316,6 @@ export class PaymentAuthorizationsService {
         });
       });
     }
-  }
-
-  @OnEvent('paymentAuthorization.updated', { async: true })
-  updateLog(params: {
-    data: PaymentAuthorization;
-    user: User;
-    status: PaymentStatus;
-    note?: string;
-  }) {
-    const { data, user, status, note } = params;
-    return this.prisma.paymentAuthorizationLog.create({
-      data: {
-        paymentAuthorizationId: data.id,
-        status: status,
-        userId: user.id,
-        note: note,
-      },
-    });
   }
 
   @OnEvent('paymentAuthorization.notify', { async: true })

@@ -152,34 +152,16 @@ export class PaymentAuthorizationsController {
     return this.paymentAuthorizationsService.approve(id, user.id, note);
   }
 
-  @Post('reject/:id')
+  @Post('close/:id')
   @HttpCode(HttpStatus.OK)
   @ApiOperation({
-    summary: 'Reject payment authorization item by id',
+    summary: 'Close payment authorization item by id',
   })
-  reject(
+  close(
     @Param('id', ParseIntPipe) id: number,
-    @Request() { user },
-    @Body('note') note: string,
+    @Auth() user: User,
+    @Body('bankRefNo') bankRefNo: string,
   ) {
-    this.paymentAuthorizationsService.reject(id, user, note);
-  }
-
-  @Post('verify/:id')
-  @HttpCode(HttpStatus.OK)
-  @ApiOperation({
-    summary: 'Verify payment authorization item by id',
-  })
-  verify(@Param('id', ParseIntPipe) id: number, @Request() { user }) {
-    this.paymentAuthorizationsService.verify(id, user);
-  }
-
-  @Post('pay/:id')
-  @HttpCode(HttpStatus.OK)
-  @ApiOperation({
-    summary: 'Proceed payment authorization item by id',
-  })
-  pay(@Param('id', ParseIntPipe) id: number, @Request() { user }) {
-    this.paymentAuthorizationsService.pay(id, user);
+    this.paymentAuthorizationsService.close(id, bankRefNo, user);
   }
 }
