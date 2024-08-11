@@ -36,9 +36,7 @@ export class PaymentAuthorizationsController {
   ) {}
 
   @Post()
-  @ApiOperation({
-    summary: 'Create new payment authorization (nota kuasa pembayaran)',
-  })
+  @ApiOperation({ summary: 'Create new NKP' })
   @ApiOkResponse({
     description: 'Created payment authorizaton include the items',
     example: {
@@ -64,20 +62,15 @@ export class PaymentAuthorizationsController {
       ],
     },
   })
-  create(
-    @Body() paymentAuthorizationDto: PaymentAuthorizationDto,
-    @Auth() user: User,
-  ) {
+  create(@Body() data: PaymentAuthorizationDto, @Auth() user: User) {
     return this.paymentAuthorizationsService.create({
-      ...paymentAuthorizationDto,
+      ...data,
       requesterId: user.id,
     });
   }
 
   @Get()
-  @ApiOperation({
-    summary: 'Get all payment authorizations (nota kuasa pembayaran)',
-  })
+  @ApiOperation({ summary: 'Get all NKP' })
   findAll(
     @Query('page', ParseIntPipe) page?: number,
     @Query('pageSize', ParseIntPipe) pageSize?: number,
@@ -94,26 +87,26 @@ export class PaymentAuthorizationsController {
     });
   }
 
+  @Get('get-by-number')
+  @ApiOperation({ summary: 'Get NKP by number' })
+  findOneByNumber(@Query('number') number: string) {
+    console.log(number);
+    return this.paymentAuthorizationsService.findOne(number);
+  }
+
   @Get(':id')
-  @ApiOperation({
-    summary: 'Get single payment authorization by id (nota kuasa pembayaran)',
-  })
+  @ApiOperation({ summary: 'Get NKP by id' })
   findOne(@Param('id', ParseIntPipe) id: number) {
     return this.paymentAuthorizationsService.findOne(id);
   }
 
   @Patch(':id')
-  @ApiOperation({
-    summary: 'Update payment authorization by id (nota kuasa pembayaran)',
-  })
+  @ApiOperation({ summary: 'Update NKP by id' })
   update(
     @Param('id', ParseIntPipe) id: number,
-    @Body() paymentAuthorizationDto: PaymentAuthorizationDto,
+    @Body() data: PaymentAuthorizationDto,
   ) {
-    return this.paymentAuthorizationsService.update(
-      id,
-      paymentAuthorizationDto,
-    );
+    return this.paymentAuthorizationsService.update(id, data);
   }
 
   @Post('submit/:id')
@@ -124,17 +117,13 @@ export class PaymentAuthorizationsController {
   }
 
   @Delete(':id')
-  @ApiOperation({
-    summary: 'Delete payment authorization by id (nota kuasa pembayaran)',
-  })
+  @ApiOperation({ summary: 'Delete NKP by id' })
   remove(@Param('id', ParseIntPipe) id: number) {
     return this.paymentAuthorizationsService.remove(id);
   }
 
   @Delete(':id/:itemId')
-  @ApiOperation({
-    summary: 'Delete payment authorization item by id',
-  })
+  @ApiOperation({ summary: 'Delete NKP item by id' })
   removeItem(
     @Param('id', ParseIntPipe) id: number,
     @Param('itemId', ParseIntPipe) itemId: number,
@@ -144,9 +133,7 @@ export class PaymentAuthorizationsController {
 
   @Post('approve/:id')
   @HttpCode(HttpStatus.OK)
-  @ApiOperation({
-    summary: 'Approve payment authorization item by id',
-  })
+  @ApiOperation({ summary: 'Approve NKP item by id' })
   approve(
     @Param('id', ParseIntPipe) id: number,
     @Auth() user: User,
@@ -157,9 +144,7 @@ export class PaymentAuthorizationsController {
 
   @Post('close/:id')
   @HttpCode(HttpStatus.OK)
-  @ApiOperation({
-    summary: 'Close payment authorization item by id',
-  })
+  @ApiOperation({ summary: 'Close NKP item by id' })
   close(
     @Param('id', ParseIntPipe) id: number,
     @Auth() user: User,

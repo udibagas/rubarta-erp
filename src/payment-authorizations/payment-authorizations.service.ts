@@ -105,9 +105,13 @@ export class PaymentAuthorizationsService {
     return { data, page, total };
   }
 
-  findOne(id: number) {
-    return this.prisma.paymentAuthorization.findUniqueOrThrow({
-      where: { id },
+  findOne(id: any) {
+    const where: Prisma.PaymentAuthorizationWhereInput = {};
+    if (typeof id == 'number') where.id = id;
+    if (typeof id == 'string') where.number = id;
+
+    return this.prisma.paymentAuthorization.findFirstOrThrow({
+      where,
       include: {
         PaymentAuthorizationItem: true,
         PaymentAuthorizationApproval: {

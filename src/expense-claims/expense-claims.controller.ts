@@ -54,6 +54,13 @@ export class ExpenseClaimsController {
     });
   }
 
+  @Get('get-by-number')
+  @ApiOperation({ summary: 'Get NKP Declaration by number' })
+  findOneByNumber(@Query('number') number: string) {
+    console.log(number);
+    return this.expenseClaimsService.findOne(number);
+  }
+
   @Get(':id')
   @ApiOperation({ summary: 'Get single expense claim by id' })
   findOne(@Param('id', ParseIntPipe) id: number) {

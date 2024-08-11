@@ -93,9 +93,13 @@ export class ExpenseClaimsService {
     return { data, page, total };
   }
 
-  findOne(id: number) {
-    return this.prisma.expenseClaim.findUniqueOrThrow({
-      where: { id },
+  findOne(id: any) {
+    const where: Prisma.ExpenseClaimWhereInput = {};
+    if (typeof id == 'number') where.id = id;
+    if (typeof id == 'string') where.number = id;
+
+    return this.prisma.expenseClaim.findFirstOrThrow({
+      where,
       include: {
         Department: { select: { name: true } },
         User: { select: { name: true } },
