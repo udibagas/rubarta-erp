@@ -165,6 +165,6 @@ export class PaymentAuthorizationsController {
     @Auth() user: User,
     @Body() data: CloseNkpDto,
   ) {
-    this.paymentAuthorizationsService.close(id, data, user);
+    return this.paymentAuthorizationsService.close(id, data, user);
   }
 }

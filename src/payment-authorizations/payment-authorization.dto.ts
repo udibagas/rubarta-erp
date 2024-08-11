@@ -36,7 +36,7 @@ export class PaymentAuthorizationDto {
   @IsNumber()
   companyId: number;
 
-  @IsEnum(PaymentType, { message: 'Invalid payment type' })
+  @IsEnum(PaymentType, { message: 'Please select payment type' })
   paymentType: PaymentType;
 
   @ApiProperty({ example: 1, description: 'Employee ID' })
@@ -63,7 +63,7 @@ export class PaymentAuthorizationDto {
 
   @ApiProperty({ example: 2_000_000, description: 'Amount before deduction' })
   @IsNumber({}, { message: 'Gross amount must be a number' })
-  grossAmount: number;
+  grandTotal: number;
 
   @ApiProperty({ example: 100_000, description: 'Tax' })
   @IsOptional()
@@ -94,7 +94,7 @@ export class PaymentAuthorizationDto {
   @ApiProperty()
   @IsOptional()
   @IsNumber({}, { message: 'Cash advance must be a number' })
-  cashAdvance?: number;
+  cashAdvance: number;
 
   @ApiProperty({
     example: 'Cash Advance for Bagas for 3 days',
