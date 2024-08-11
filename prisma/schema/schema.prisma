@@ -113,10 +113,11 @@ model PaymentAuthorization {
   bankRefNo   String?  @db.VarChar(30)
 
   // amount related
-  grossAmount  Int  @db.Integer
+  grandTotal   Int  @db.Integer
   deduction    Int  @default(0) @db.Integer
   tax          Int  @default(0) @db.Integer
   downPayment  Int  @default(0) @db.Integer
+  cashAdvance  Int  @default(0) @db.Integer
   netAmount    Int  @db.Integer
   finalPayment Int? @db.Integer
 
@@ -351,6 +352,7 @@ enum PaymentStatus {
   VERIFIED
   AUTHORIZED
   PAID
+  CLOSED
 }
 
 enum ApprovalStatus {
