@@ -1,0 +1,170 @@
+model Customer {
+  id           Int            @id @default(autoincrement())
+  name         String
+  address      String
+  phone        String
+  email        String
+  Transaction  Transaction[]
+  Invoice      Invoice[]
+  Contact      Contact[]
+  Lead         Lead[]
+  Opportunity  Opportunity[]
+  Task         Task[]
+  Interaction  Interaction[]
+  Order        Order[]
+  CustomerNote CustomerNote[]
+  CustomerFile CustomerFile[]
+
+  @@map("Customers")
+}
+
+model Contact {
+  id         Int      @id @default(autoincrement())
+  customerId Int
+  firstName  String
+  lastName   String
+  email      String
+  phone      String
+  position   String
+  notes      String?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  // Relationships
+  Customer Customer @relation(fields: [customerId], references: [id])
+
+  @@map("Contacts")
+}
+
+model Lead {
+  id         Int      @id @default(autoincrement())
+  customerId Int
+  source     String
+  status     String
+  notes      String?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  // Relationships
+  Customer Customer @relation(fields: [customerId], references: [id])
+
+  @@map("Leads")
+}
+
+model Opportunity {
+  id                  Int      @id @default(autoincrement())
+  customerId          Int
+  name                String
+  amount              Float
+  stage               String
+  expected_close_date DateTime
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+
+  // Relationships
+  Customer Customer @relation(fields: [customerId], references: [id])
+
+  @@map("Opportunities")
+}
+
+model Task {
+  id          Int      @id @default(autoincrement())
+  userId      Int
+  customerId  Int
+  title       String
+  description String?
+  dueDate     DateTime
+  status      String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relationships
+  User     User     @relation(fields: [userId], references: [id])
+  Customer Customer @relation(fields: [customerId], references: [id])
+
+  @@map("Tasks")
+}
+
+model Interaction {
+  id         Int      @id @default(autoincrement())
+  customerId Int
+  userId     Int
+  type       String
+  date       DateTime
+  notes      String?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt @map("updatedAt")
+
+  // Relationships
+  Customer Customer @relation(fields: [customerId], references: [id])
+  User     User     @relation(fields: [userId], references: [id])
+
+  @@map("Interactions")
+}
+
+model Product {
+  id          Int      @id @default(autoincrement())
+  name        String
+  description String?
+  price       Float
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relationships
+  Orders Order[]
+
+  @@map("Products")
+}
+
+model Order {
+  id           Int      @id @default(autoincrement())
+  customerId   Int
+  productId    Int
+  quantity     Int
+  total_amount Float
+  order_date   DateTime
+  status       String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  // Relationships
+  Customer Customer @relation(fields: [customerId], references: [id])
+  Product  Product  @relation(fields: [productId], references: [id])
+  Invoice  Invoice?
+
+  @@map("Orders")
+}
+
+model CustomerNote {
+  id         Int      @id @default(autoincrement())
+  customerId Int
+  userId     Int
+  content    String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  // Relationships
+  Customer Customer @relation(fields: [customerId], references: [id])
+  User     User     @relation(fields: [userId], references: [id])
+
+  @@map("CustomerNotes")
+}
+
+model CustomerFile {
+  id          Int     @id @default(autoincrement())
+  customerId  Int
+  description String?
+
+  fileName String @db.VarChar(255)
+  filePath String @db.Text
+  fileSize Int    @db.Integer
+  fileType String @db.VarChar(30)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relationships
+  Customer Customer @relation(fields: [customerId], references: [id])
+
+  @@map("CustomerFiles")
+}

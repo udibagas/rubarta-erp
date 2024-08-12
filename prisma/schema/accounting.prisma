@@ -3,18 +3,6 @@ enum Currency {
   USD
 }
 
-model Customer {
-  id          Int           @id @default(autoincrement())
-  name        String
-  address     String
-  phone       String
-  email       String
-  Transaction Transaction[]
-  Invoice     Invoice[]
-
-  @@map("Customers")
-}
-
 model Supplier {
   id                   Int                    @id @default(autoincrement())
   code                 String?                @db.Char(6)
@@ -75,11 +63,14 @@ model TransactionDetail {
 model Invoice {
   id          Int       @id @default(autoincrement())
   date        DateTime
+  dueDate     DateTime
   customerId  Int
   totalAmount Decimal
   status      String
   customer    Customer  @relation(fields: [customerId], references: [id])
   Payment     Payment[]
+  Order       Order     @relation(fields: [orderId], references: [id])
+  orderId     Int       @unique
 
   @@map("Invoices")
 }
