@@ -128,6 +128,9 @@ export class PaymentAuthorizationsService {
         Employee: {
           select: { name: true },
         },
+        Supplier: {
+          select: { name: true },
+        },
         ExpenseClaim: true,
         Company: {
           select: { name: true },
