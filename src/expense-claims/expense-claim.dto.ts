@@ -49,7 +49,9 @@ export class ExpenseClaimAttachmentDto {
 }
 
 export class ExpenseClaimDto {
-  userId: number;
+  @IsNumber({}, { message: 'Invalid Employee' })
+  @IsNotEmpty({ message: 'Employee is required' })
+  employeeId: number;
 
   @ApiProperty({ example: 1 })
   @IsNumber({}, { message: 'Invalid Department' })

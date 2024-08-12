@@ -70,7 +70,7 @@ export class ExpenseClaimsService {
       where.OR = [
         { number: { contains: keyword, mode: 'insensitive' } },
         {
-          User: {
+          Employee: {
             name: { contains: keyword, mode: 'insensitive' },
           },
         },
@@ -84,7 +84,7 @@ export class ExpenseClaimsService {
       orderBy: { updatedAt: 'desc' },
       include: {
         Department: { select: { name: true } },
-        User: { select: { name: true } },
+        Employee: { select: { name: true } },
         Company: { select: { name: true } },
       },
     });
@@ -102,7 +102,7 @@ export class ExpenseClaimsService {
       where,
       include: {
         Department: { select: { name: true } },
-        User: { select: { name: true } },
+        Employee: { select: { name: true } },
         Company: { select: { name: true } },
         ExpenseClaimItem: {
           include: { ExpenseType: true },
@@ -153,12 +153,12 @@ export class ExpenseClaimsService {
     return savedData;
   }
 
-  async submit(id: number, userId: number) {
+  async submit(id: number, employeeId: number) {
     const data = await this.findOne(id);
     const number = await this.generateNumber(data.companyId);
 
     const savedData = await this.prisma.expenseClaim.update({
-      where: { id, userId },
+      where: { id },
       data: {
         number,
         status: ClaimStatus.SUBMITTED,

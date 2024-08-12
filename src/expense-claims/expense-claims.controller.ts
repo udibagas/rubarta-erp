@@ -31,11 +31,8 @@ export class ExpenseClaimsController {
 
   @Post()
   @ApiOperation({ summary: 'Create new expense claim' })
-  create(@Body() expenseClaimDto: ExpenseClaimDto, @Auth() user: User) {
-    return this.expenseClaimsService.create({
-      ...expenseClaimDto,
-      userId: user.id,
-    });
+  create(@Body() data: ExpenseClaimDto) {
+    return this.expenseClaimsService.create(data);
   }
 
   @Get()
