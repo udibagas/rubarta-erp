@@ -136,7 +136,7 @@ export class PaymentAuthorizationsService {
           select: { name: true },
         },
         Bank: {
-          select: { name: true },
+          select: { code: true, name: true },
         },
       },
     });

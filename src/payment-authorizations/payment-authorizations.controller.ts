@@ -6,16 +6,15 @@ import {
   Patch,
   Param,
   Delete,
-  Request,
   HttpCode,
   HttpStatus,
   ParseIntPipe,
   Query,
+  Res,
 } from '@nestjs/common';
 import { PaymentAuthorizationsService } from './payment-authorizations.service';
 import {
   ApiBearerAuth,
-  ApiBody,
   ApiOkResponse,
   ApiOperation,
   ApiTags,
@@ -26,6 +25,11 @@ import {
 } from './payment-authorization.dto';
 import { Auth } from '../auth/auth.decorator';
 import { PaymentType, User } from '@prisma/client';
+// import * as htmlToPdf from 'html-pdf-node';
+import { Public } from 'src/auth/public.decorator';
+import { terbilang, toCurrency, toDecimal } from 'src/helpers/number';
+import { formatDate } from 'src/helpers/date';
+import { Response } from 'express';
 
 @ApiTags('Payment Authorizations')
 @ApiBearerAuth()
@@ -151,5 +155,26 @@ export class PaymentAuthorizationsController {
     @Body() data: CloseNkpDto,
   ) {
     return this.paymentAuthorizationsService.close(id, data, user);
+  }
+
+  @Public()
+  @Get('/print/:id')
+  async print(@Param('id', ParseIntPipe) id: number, @Res() res: Response) {
+    const data = await this.paymentAuthorizationsService.findOne(id);
+
+    const actions = {
+      APPROVAL: 'APPROVED BY',
+      VERIFICATION: 'VERIFIED BY',
+      AUTHORIZATION: 'AUTHORIZED BY',
+    };
+
+    res.render('nkp', {
+      data,
+      toCurrency,
+      formatDate,
+      toDecimal,
+      terbilang,
+      actions,
+    });
   }
 }

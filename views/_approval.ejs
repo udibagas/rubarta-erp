@@ -1,0 +1,32 @@
+<div class="flex border-gray-400 border-4 mt-10 justify-evenly justify-items-center items-center text-center p-4">
+<% approvals.forEach(approval => { %>
+  <div>
+    <strong><%= actions[approval.approvalActionType] %></strong>
+    <div style="height: 60px; line-height: 60px" class="text-center">
+
+      <% if (approval.approvalStatus == 'APPROVED') { %>
+        <% if (approval.User.signatureSpeciment) { %>
+          <img
+            src="/<%= approval.User.signatureSpeciment.filePath %>"
+            style="height: 60px; margin: 0 auto"
+          />
+        <% } else { %>
+          <div class="p-4 border-radius-4 font-white bg-green-700">APPROVED</div>
+        <% } %>
+      <% } %>
+
+      <% if (approval.approvalStatus == null) { %>
+         <div class="p-4 border-radius-4 font-white bg-gray-700">PENDING</div>
+      <% } %>
+    </div>
+
+    <div class="strong">
+      <%= approval.User?.name %>
+    </div>
+    <div>
+      <%= approval.approvalStatus ? formatDate(approval.updatedAt) : '-' %>
+    </div>
+  </div>
+<% }) %>
+  
+</div>
