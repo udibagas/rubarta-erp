@@ -68,6 +68,11 @@ import { join } from 'path';
       rootPath: join(__dirname, '../..', 'uploads'),
       serveRoot: '/uploads',
     }),
+    // FOR CSS
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '../..', 'css'),
+      serveRoot: '/css',
+    }),
     // FOR SPA
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '../..', 'public'),

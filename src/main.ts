@@ -11,6 +11,8 @@ import * as cookieParser from 'cookie-parser';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { ValidationError } from 'class-validator';
 import { PrismaClientExceptionFilter } from './prisma/prisma-client-exception.filter';
+import { NestExpressApplication } from '@nestjs/platform-express';
+import { join } from 'path';
 
 function parseValidationError(errors: ValidationError[]) {
   return errors.map((error) => {
@@ -29,7 +31,7 @@ function parseValidationError(errors: ValidationError[]) {
 }
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule, {
+  const app = await NestFactory.create<NestExpressApplication>(AppModule, {
     cors: {
       credentials: true,
       origin: [
@@ -41,6 +43,9 @@ async function bootstrap() {
       ],
     },
   });
+
+  app.setBaseViewsDir(join(__dirname, '../..', 'views'));
+  app.setViewEngine('ejs');
 
   const config = new DocumentBuilder()
     .setTitle('Rubarta ERP')
