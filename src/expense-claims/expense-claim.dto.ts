@@ -70,8 +70,8 @@ export class ExpenseClaimDto {
 
   @ApiProperty({ example: 1_000_000 })
   @IsNumber()
-  @IsNotEmpty({ message: 'Claim is required' })
-  claim: number;
+  @IsNotEmpty({ message: 'Balance is required' })
+  balance: number;
 
   @ApiProperty({ example: 'DRAFT | SUBMITTED' })
   @IsEnum(ClaimStatus, { message: 'Invalid status' })

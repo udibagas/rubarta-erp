@@ -205,7 +205,7 @@ model ExpenseClaim {
   departmentId           Int
   totalAmount            Int                      @db.Integer
   cashAdvance            Int                      @db.Integer
-  claim                  Int                      @db.Integer // if < 0 = refund
+  balance                Int                      @default(0) @db.Integer
   status                 ClaimStatus              @default(DRAFT)
   ExpenseClaimAttachment ExpenseClaimAttachment[]
   ExpenseClaimApproval   ExpenseClaimApproval[]
