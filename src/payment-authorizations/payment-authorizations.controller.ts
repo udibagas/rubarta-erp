@@ -28,7 +28,7 @@ import { PaymentType, User } from '@prisma/client';
 // import * as htmlToPdf from 'html-pdf-node';
 import { Public } from 'src/auth/public.decorator';
 import { terbilang, toCurrency, toDecimal } from 'src/helpers/number';
-import { formatDate } from 'src/helpers/date';
+import { formatDate, formatDateNumeric } from 'src/helpers/date';
 import { Response } from 'express';
 
 @ApiTags('Payment Authorizations')
@@ -172,6 +172,7 @@ export class PaymentAuthorizationsController {
       data,
       toCurrency,
       formatDate,
+      formatDateNumeric,
       toDecimal,
       terbilang,
       actions,

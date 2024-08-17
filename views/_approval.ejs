@@ -1,8 +1,8 @@
-<div class="flex border-gray-400 border-4 mt-10 justify-evenly justify-items-center items-center text-center p-4">
+<div class="flex border-black border mt-10 justify-evenly justify-items-center items-center text-center p-2">
 <% approvals.forEach(approval => { %>
   <div>
     <strong><%= actions[approval.approvalActionType] %></strong>
-    <div style="height: 60px; line-height: 60px" class="text-center">
+    <div style="height: 80px; line-height: 60px; padding: 10px 0" class="text-center">
 
       <% if (approval.approvalStatus == 'APPROVED') { %>
         <% if (approval.User.signatureSpeciment) { %>
@@ -20,12 +20,13 @@
       <% } %>
     </div>
 
-    <div class="strong">
-      <%= approval.User?.name %>
-    </div>
     <div>
-      <%= approval.approvalStatus ? formatDate(approval.updatedAt) : '-' %>
+      <%= approval.approvalStatus ? formatDateNumeric(approval.updatedAt) : ' ' %>
     </div>
+    <div class="font-bold">
+      (<%= approval.User?.name %>)
+    </div>
+    
   </div>
 <% }) %>
   
