@@ -168,7 +168,7 @@ export class PaymentAuthorizationsController {
       AUTHORIZATION: 'AUTHORIZED BY',
     };
 
-    res.render('nkp', {
+    res.render('nkp/show', {
       data,
       toCurrency,
       formatDate,

@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= data.number %></title>
+    <link rel="stylesheet" href="/css/main.css" />
+    <style>
+      * {
+        font-size: 0.9rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="flex justify-center items-center">
+      <div
+        style="width: 1000px; height:1024px"
+        class="border-solid border-4 border-gray-400 p-6"
+      >
+        <div class="flex flex-col items-center">
+          <div class="text-2xl border-black border-b">
+            NOTA KUASA PEMBAYARAN
+          </div>
+          <div class="text-xl border-black border-b mt-2 font-bold">
+            <%= data.Company.name.toUpperCase() %>
+          </div>
+        </div>
+
+        <table class="border border-black font-bold mt-10">
+          <tbody>
+            <tr class="border-b border-black">
+              <td class="w-1/3 p-1">NKP NO</td>
+              <td class="p-1">: <%= data.number %></td>
+            </tr>
+            <tr>
+              <td class="p-1">NKP DATE</td>
+              <td class="p-1">: <%= formatDate(data.date) %></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <table class="w-full font-bold mt-10">
+          <tbody>
+            <tr>
+              <td class="w-1/4">COMPANY</td>
+              <td class="border-b border-black">
+                : <%= data.Company.name %>
+              </td>
+            </tr>
+            <tr>
+              <td>NKP TYPE</td>
+              <td class="border-b border-black">
+                : <%= data.paymentType %>
+              </td>
+            </tr>
+             <tr>
+              <td><%= data.paymentType %></td>
+              <td class="border-b border-black">
+                : <%= data.paymentType == 'EMPLOYEE' ?
+                data.Employee?.name?.toUpperCase() :
+                data.Supplier?.name?.toUpperCase() %>
+              </td>
+            </tr>
+            <tr>
+              <td>BANK NAME</td>
+              <td class="border-b border-black">
+                : <%= data.Bank.code %> - <%= data.Bank.name %>
+              </td>
+            </tr>
+            <tr>
+              <td>CURRENCY</td>
+              <td class="border-b border-black">
+                : <%= data.currency %>
+              </td>
+            </tr>
+            <tr>
+              <td>BANK ACCOUNT</td>
+              <td class="border-b border-black">
+                : <%= data.bankAccount %>
+              </td>
+            </tr>
+            <tr>
+              <td>BANK REF NO</td>
+              <td class="border-b border-black">
+                : <%= data.bankRefNo %>
+              </td>
+            </tr>
+            <tr>
+              <td>DESCRIPTION</td>
+              <td class="border-b border-black">: <%= data.description %></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <%- include('_items', { items: data.PaymentAuthorizationItem }) %>
+        <%- include('../_approval', { approvals: data.PaymentAuthorizationApproval }) %>
+      </div>
+    </div>
+
+    <script>
+      window.print()
+    </script>
+  </body>
+</html>

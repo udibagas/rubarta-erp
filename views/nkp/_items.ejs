@@ -1,0 +1,79 @@
+<table class="mt-10 border border-black w-full">
+  <thead>
+    <tr>
+      <th class="border-b border-r border-black">NO</th>
+      <th class="border-b border-r border-black">DATE</th>
+      <th class="border-b border-r border-black">DESCRIPTION</th>
+      <th class="border-b border-r border-black">AMOUNT</th>
+      <th class="border-b border-r border-black">CURR</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% items.forEach((el, i) => { %>
+    <tr>
+      <td class="border-b border-r border-black text-center"><%= ++i %></td>
+      <td class="border-b border-r border-black text-center"><%= formatDateNumeric(el.date) %></td>
+      <td class="border-b border-r border-black pl-2"><%= el.description %></td>
+      <td class="border-b border-r border-black text-right pr-2"><%= toDecimal(el.amount) %></td>
+      <td class="border-b border-r border-black text-center"><%= el.currency %></td>
+    </tr>
+    <% }) %>
+  </tbody>
+
+  <tfoot>
+
+    <tr>
+      <td colspan="3" class="border-b border-r border-black text-right pr-2 font-bold">GRAND TOTAL</td>
+      <td class="border-b border-r border-black text-right pr-2 font-bold"><%= toDecimal(data.grandTotal) %></td>
+      <td class="border-b border-black text-center"><%= data.currency %></td>
+    </tr>
+
+    <% if (data.paymentType == 'VENDOR') { %>
+      <tr>
+        <td colspan="3" class="border-b border-r border-black text-right pr-2 font-bold">TAX</td>
+        <td class="border-b border-r border-black text-right pr-2 font-bold"><%= toDecimal(data.tax) %></td>
+        <td class="border-b border-r border-black text-center"><%= data.currency %></td>
+      </tr>
+
+      <tr>
+        <td colspan="3" class="border-b border-r border-black text-right pr-2 font-bold">DEDUCTION</td>
+        <td class="border-b border-r border-black text-right pr-2 font-bold"><%= toDecimal(data.deduction) %></td>
+        <td class="border-b border-r border-black text-center"><%= data.currency %></td>
+      </tr>
+
+      <tr>
+        <td colspan="3" class="border-b border-r border-black text-right pr-2 font-bold">NET AMOUNT</td>
+        <td class="border-b border-r border-black text-right pr-2 font-bold"><%= toDecimal(data.netAmount) %></td>
+        <td class="border-b border-r border-black text-center"><%= data.currency %></td>
+      </tr>
+
+      <tr>
+        <td colspan="3" class="border-b border-r border-black text-right pr-2 font-bold">DOWN PAYMENT</td>
+        <td class="border-b border-r border-black text-right pr-2 font-bold"><%= toDecimal(data.downPayment) %></td>
+        <td class="border-b border-r border-black text-center"><%= data.currency %></td>
+      </tr>
+      
+    <% } %>
+
+    <% if (data.paymentType == 'EMPLOYEE') { %>
+      <tr>
+        <td colspan="3" class="border-b border-r border-black text-right pr-2 font-bold">CASH ADVANCE</td>
+        <td class="border-b border-r border-black text-right pr-2 font-bold"><%= toDecimal(data.cashAdvance) %></td>
+        <td class="border-b border-r border-black text-center"><%= data.currency %></td>
+      </tr>
+    <% } %>
+
+    <tr>
+      <td colspan="3" class="border-b border-r border-black text-right pr-2 font-bold">FINAL PAYMENT</td>
+      <td class="border-b border-r border-black text-right pr-2 font-bold <%= data.finalPayment > 0 ? 'text-green-700' : 'text-red-700' %> ">
+        <%= toDecimal(data.finalPayment) %>
+      </td>
+      <td class="border-b border-r border-black text-center"><%= data.currency %></td>
+    </tr>
+    
+    <tr>
+      <td colspan="4" class="font-bold px-2 border-r border-black">TERBILANG : <%= terbilang(data.finalPayment).toUpperCase() %></td>
+      <td class="text-center"><%= data.currency  %></td>
+    </tr>
+  </tfoot>
+</table>
