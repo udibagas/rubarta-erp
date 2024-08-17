@@ -1,9 +1,8 @@
 <div class="flex mt-10 justify-evenly items-stretch text-center">
 <% approvals.forEach(approval => { %>
-  <div class="border border-black grow">
+  <div class="border border-black grow text-center">
     <div class="border-b border-black p-2 font-bold"><%= actions[approval.approvalActionType] %></div>
-    <div style="height: 80px; padding: 10px 0" class="text-center">
-
+    <div style="height: 80px; padding: 10px">
       <% if (approval.approvalStatus == 'APPROVED') { %>
         <% if (approval.User.signatureSpeciment) { %>
           <img
@@ -11,12 +10,12 @@
             style="height: 60px; margin: 0 auto"
           />
         <% } else { %>
-          <div class="mt-3 p-2 rounded-full text-white bg-green-400">APPROVED</div>
+          <div class="mt-3 p-2 rounded-full text-white bg-green-400 w-[120px] m-auto">APPROVED</div>
         <% } %>
       <% } %>
 
       <% if (approval.approvalStatus == null) { %>
-         <div class="mt-3 p-2 rounded-full text-white bg-gray-400">PENDING</div>
+         <div class="mt-3 p-2 rounded-full text-white bg-gray-400 w-[120px] m-auto">PENDING</div>
       <% } %>
     </div>
 
