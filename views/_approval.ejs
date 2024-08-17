@@ -1,7 +1,7 @@
-<div class="flex border-black border mt-10 justify-evenly justify-items-center items-center text-center p-2">
+<div class="flex mt-10 justify-evenly items-stretch text-center">
 <% approvals.forEach(approval => { %>
-  <div>
-    <strong><%= actions[approval.approvalActionType] %></strong>
+  <div class="border border-black grow">
+    <div class="border-b border-black p-2 font-bold"><%= actions[approval.approvalActionType] %></div>
     <div style="height: 80px; padding: 10px 0" class="text-center">
 
       <% if (approval.approvalStatus == 'APPROVED') { %>
@@ -20,10 +20,10 @@
       <% } %>
     </div>
 
-    <div>
+    <div class="mb-2">
       <%= approval.approvalStatus ? formatDateNumeric(approval.updatedAt) : ' ' %>
     </div>
-    <div class="font-bold">
+    <div class="font-bold border-t border-black p-2">
       (<%= approval.User?.name %>)
     </div>
     
