@@ -47,7 +47,7 @@ export class ExpenseClaimsService {
     });
 
     if (savedData.status == ClaimStatus.SUBMITTED) {
-      this.eventEmitter.emit('expenseClaim.submitted', savedData);
+      await this.eventEmitter.emit('expenseClaim.submitted', savedData);
     }
 
     return savedData;
@@ -147,7 +147,7 @@ export class ExpenseClaimsService {
     });
 
     if (savedData.status == ClaimStatus.SUBMITTED) {
-      this.eventEmitter.emit('expenseClaim.submitted', savedData);
+      await this.eventEmitter.emit('expenseClaim.submitted', savedData);
     }
 
     return savedData;
