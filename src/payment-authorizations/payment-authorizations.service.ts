@@ -44,7 +44,7 @@ export class PaymentAuthorizationsService {
     });
 
     if (savedData.status == PaymentStatus.SUBMITTED) {
-      this.eventEmitter.emit('paymentAuthorization.submitted', savedData);
+      await this.eventEmitter.emit('paymentAuthorization.submitted', savedData);
     }
 
     if (expenseClaimId) {
@@ -167,7 +167,7 @@ export class PaymentAuthorizationsService {
     });
 
     if (savedData.status == PaymentStatus.SUBMITTED) {
-      this.eventEmitter.emit('paymentAuthorization.submitted', savedData);
+      await this.eventEmitter.emit('paymentAuthorization.submitted', savedData);
     }
 
     return savedData;
@@ -185,7 +185,7 @@ export class PaymentAuthorizationsService {
       },
     });
 
-    this.eventEmitter.emit('paymentAuthorization.submitted', savedData);
+    await this.eventEmitter.emit('paymentAuthorization.submitted', savedData);
     return savedData;
   }
 
