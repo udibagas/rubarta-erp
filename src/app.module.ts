@@ -25,9 +25,10 @@ import { SuppliersModule } from './suppliers/suppliers.module';
 // import { InvoicesModule } from './invoices/invoices.module';
 // import { PaymentsModule } from './payments/payments.module';
 // import { ExpensesModule } from './expenses/expenses.module';
-// import { CustomersModule } from './customers/customers.module';
+import { CustomersModule } from './customers/customers.module';
 // import { AccountsModule } from './accounts/accounts.module';
 import { join } from 'path';
+import { ContactsModule } from './contacts/contacts.module';
 
 @Module({
   imports: [
@@ -98,7 +99,8 @@ import { join } from 'path';
     // InvoicesModule,
     // PaymentsModule,
     // ExpensesModule,
-    // CustomersModule,
+    CustomersModule,
+    ContactsModule,
   ],
   controllers: [],
   providers: [],

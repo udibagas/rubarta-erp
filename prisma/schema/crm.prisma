@@ -21,11 +21,10 @@ model Customer {
 model Contact {
   id         Int      @id @default(autoincrement())
   customerId Int
-  firstName  String
-  lastName   String
-  email      String
+  name       String
+  email      String?  @unique
   phone      String
-  position   String
+  position   String?
   notes      String?
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
