@@ -29,6 +29,7 @@ import { CustomersModule } from './customers/customers.module';
 // import { AccountsModule } from './accounts/accounts.module';
 import { join } from 'path';
 import { ContactsModule } from './contacts/contacts.module';
+import { LeadsModule } from './leads/leads.module';
 
 @Module({
   imports: [
@@ -101,6 +102,7 @@ import { ContactsModule } from './contacts/contacts.module';
     // ExpensesModule,
     CustomersModule,
     ContactsModule,
+    LeadsModule,
   ],
   controllers: [],
   providers: [],

@@ -35,14 +35,30 @@ model Contact {
   @@map("Contacts")
 }
 
+enum LeadStatus {
+  New
+  Contacted
+  Qualified
+  Unqualified
+  Converted
+}
+
+enum LeadSource {
+  Referral
+  Advertisement
+  SocialMedia
+  Website
+  Other
+}
+
 model Lead {
-  id         Int      @id @default(autoincrement())
+  id         Int        @id @default(autoincrement())
   customerId Int
-  source     String
-  status     String
+  source     LeadSource
+  status     LeadStatus @default(New)
   notes      String?
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+  createdAt  DateTime   @default(now())
+  updatedAt  DateTime   @updatedAt
 
   // Relationships
   Customer Customer @relation(fields: [customerId], references: [id])
