@@ -37,6 +37,7 @@ export class AuthController {
   @ApiOperation({ summary: 'Sign in by email and password' })
   @ApiOkResponse({ type: AuthEntity })
   async signIn(
+    @Req() req,
     @Body() credential: LoginDto,
     @Res({ passthrough: true }) res: Response,
   ): Promise<AuthEntity> {
@@ -48,7 +49,7 @@ export class AuthController {
     const company = await this.prisma.company.findFirst();
     if (company) res.cookie('companyId', company.id);
     res.cookie('token', data.token);
-
+    res.cookie('_csrf', req.csrfToken());
     return data;
   }
 
@@ -63,6 +64,7 @@ export class AuthController {
   @Get('/csrf')
   getCsrfToken(@Req() req, @Res({ passthrough: true }) res: Response): any {
     const token = req.csrfToken();
+    res.cookie('_csrf', req.csrfToken());
     return { token };
   }
 

@@ -30,6 +30,20 @@ export class PaymentAuthorizationItemDto {
   currency: Currency;
 }
 
+export class PaymentAuthorizationAttachmentDto {
+  @IsNotEmpty()
+  fileName: string;
+
+  @IsNotEmpty()
+  filePath: string;
+
+  @IsNotEmpty()
+  fileType: string;
+
+  @IsNumber()
+  fileSize: number;
+}
+
 export class PaymentAuthorizationDto {
   @ApiProperty({ example: 1, description: 'Company ID' })
   @IsNotEmpty({ message: 'Company is required' })
@@ -106,7 +120,7 @@ export class PaymentAuthorizationDto {
   @ApiProperty()
   @IsOptional()
   @IsNumber()
-  expenseClaimId?: number;
+  parentId?: number;
 
   @ApiProperty({ example: 'SUBMITTED', description: 'Status' })
   @IsEnum(PaymentStatus)
@@ -123,9 +137,22 @@ export class PaymentAuthorizationDto {
   @Type(() => PaymentAuthorizationItemDto)
   @ValidateNested({ each: true })
   PaymentAuthorizationItem: PaymentAuthorizationItemDto[];
+
+  @ApiProperty({
+    type: PaymentAuthorizationAttachmentDto,
+    isArray: true,
+  })
+  @IsArray()
+  @Type(() => PaymentAuthorizationAttachmentDto)
+  @ValidateNested({ each: true })
+  PaymentAuthorizationAttachment: PaymentAuthorizationAttachmentDto[];
 }
 
 export class CloseNkpDto {
   @IsNotEmpty({ message: 'Bank Ref Number is required' })
   bankRefNo: string;
+
+  @IsArray()
+  @Type(() => PaymentAuthorizationAttachmentDto)
+  attachments: PaymentAuthorizationAttachmentDto[];
 }

@@ -1,14 +1,13 @@
-GET http://localhost:3000/api/users
-Content-Type: application/json
-
 ###
-POST http://localhost:3000/api/users
+POST http://localhost:3000/auth
 Content-Type: application/json
 
 {
-  "name": "Test",
-  "email": "test@mail.com",
-  "password": "rahasia",
-  "role": "USER",
-  "bankAccount": "12345678"
+  "email": "udibagas@gmail.com",
+  "password": "bismillah12345"
 }
+
+###
+POST http://localhost:3000/api/notifications/testNotif
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjY1LCJuYW1lIjoiQmFnYXMgVWRpIFNhaHNhbmdrYSIsImVtYWlsIjoidWRpYmFnYXNAZ21haWwuY29tIiwicm9sZXMiOlsiQURNSU4iXSwiaWF0IjoxNzIyMzMwNjQ3LCJleHAiOjE3MjI5MzU0NDd9.mM0FxGoZh44ccJM1iZvWVmHYhx4KO0YYFDHbQtlhY9I

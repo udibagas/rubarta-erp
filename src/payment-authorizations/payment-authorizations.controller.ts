@@ -55,7 +55,7 @@ export class PaymentAuthorizationsController {
       amount: 2000000,
       cashAdvance: 0,
       description: 'Cash Advance for Bagas for 3 days',
-      expenseClaimId: 0,
+      parentId: 1,
       status: 'SUBMITTED',
       items: [
         {

@@ -2,7 +2,6 @@ import {
   Controller,
   Delete,
   FileTypeValidator,
-  Get,
   MaxFileSizeValidator,
   ParseFilePipe,
   Post,
@@ -13,6 +12,7 @@ import {
 import { FileInterceptor } from '@nestjs/platform-express';
 import * as multer from 'multer';
 import * as fs from 'node:fs/promises';
+import { FileDto } from './fle.dto';
 
 @Controller('api/file')
 export class FileController {
@@ -44,12 +44,12 @@ export class FileController {
       new ParseFilePipe({
         validators: [
           new MaxFileSizeValidator({ maxSize: 2000000 }),
-          new FileTypeValidator({ fileType: 'image' }),
+          new FileTypeValidator({ fileType: 'image|pdf' }),
         ],
       }),
     )
     file: Express.Multer.File,
-  ) {
+  ): Promise<FileDto> {
     const {
       originalname: fileName,
       size: fileSize,

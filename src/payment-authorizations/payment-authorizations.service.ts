@@ -7,7 +7,6 @@ import { PrismaService } from '../prisma/prisma.service';
 import {
   ApprovalStatus,
   ApprovalType,
-  ClaimStatus,
   PaymentAuthorization,
   PaymentAuthorizationApproval,
   PaymentStatus,
@@ -27,7 +26,11 @@ export class PaymentAuthorizationsService {
   ) {}
 
   async create(dto: PaymentAuthorizationDto) {
-    const { PaymentAuthorizationItem: items, expenseClaimId, ...data } = dto;
+    const {
+      PaymentAuthorizationItem: items,
+      PaymentAuthorizationAttachment: attachments,
+      ...data
+    } = dto;
     let number = 'DRAFT';
 
     if (data.status == PaymentStatus.SUBMITTED) {
@@ -40,18 +43,12 @@ export class PaymentAuthorizationsService {
         ...data,
         number,
         PaymentAuthorizationItem: { create: items },
+        PaymentAuthorizationAttachment: { create: attachments },
       },
     });
 
     if (savedData.status == PaymentStatus.SUBMITTED) {
-      await this.eventEmitter.emit('paymentAuthorization.submitted', savedData);
-    }
-
-    if (expenseClaimId) {
-      await this.prisma.expenseClaim.update({
-        where: { id: expenseClaimId },
-        data: { status: ClaimStatus.IN_PROCESS },
-      });
+      this.eventEmitter.emit('paymentAuthorization.submitted', savedData);
     }
 
     return savedData;
@@ -98,6 +95,16 @@ export class PaymentAuthorizationsService {
         Requester: { select: { name: true } },
         Bank: { select: { code: true, name: true } },
         Company: { select: { name: true } },
+        Child: { select: { id: true, number: true, finalPayment: true } },
+        Parent: { select: { id: true, number: true, finalPayment: true } },
+        PaymentAuthorizationAttachment: {
+          select: {
+            fileName: true,
+            fileType: true,
+            filePath: true,
+            fileSize: true,
+          },
+        },
       },
     });
 
@@ -122,21 +129,20 @@ export class PaymentAuthorizationsService {
             },
           },
         },
-        Requester: {
-          select: { name: true },
-        },
-        Employee: {
-          select: { name: true },
-        },
-        Supplier: {
-          select: { name: true },
-        },
-        ExpenseClaim: true,
-        Company: {
-          select: { name: true },
-        },
-        Bank: {
-          select: { code: true, name: true },
+        Requester: { select: { name: true } },
+        Employee: { select: { name: true } },
+        Supplier: { select: { name: true } },
+        Company: { select: { name: true } },
+        Bank: { select: { code: true, name: true } },
+        Child: { select: { id: true, number: true, finalPayment: true } },
+        Parent: { select: { id: true, number: true, finalPayment: true } },
+        PaymentAuthorizationAttachment: {
+          select: {
+            fileName: true,
+            fileType: true,
+            filePath: true,
+            fileSize: true,
+          },
         },
       },
     });
@@ -152,13 +158,18 @@ export class PaymentAuthorizationsService {
       number = await this.generateNumber(dto.companyId);
     }
 
-    const { PaymentAuthorizationItem: items, ...data } = dto;
+    const {
+      PaymentAuthorizationItem: items,
+      PaymentAuthorizationAttachment: attachments,
+      ...data
+    } = dto;
     const savedData = await this.prisma.paymentAuthorization.update({
       where: { id },
       data: {
         ...data,
         number,
         PaymentAuthorizationItem: { deleteMany: {}, create: items },
+        PaymentAuthorizationAttachment: { deleteMany: {}, create: attachments },
       },
       include: {
         PaymentAuthorizationItem: true,
@@ -167,7 +178,7 @@ export class PaymentAuthorizationsService {
     });
 
     if (savedData.status == PaymentStatus.SUBMITTED) {
-      await this.eventEmitter.emit('paymentAuthorization.submitted', savedData);
+      this.eventEmitter.emit('paymentAuthorization.submitted', savedData);
     }
 
     return savedData;
@@ -185,7 +196,7 @@ export class PaymentAuthorizationsService {
       },
     });
 
-    await this.eventEmitter.emit('paymentAuthorization.submitted', savedData);
+    this.eventEmitter.emit('paymentAuthorization.submitted', savedData);
     return savedData;
   }
 
@@ -235,10 +246,18 @@ export class PaymentAuthorizationsService {
   }
 
   close(id: number, data: CloseNkpDto, user: User) {
+    console.log(user);
     // TODO : cek authorisasi
-    const { bankRefNo } = data;
+    const { bankRefNo, attachments } = data;
+
     return this.prisma.paymentAuthorization.update({
-      data: { status: PaymentStatus.CLOSED, bankRefNo },
+      data: {
+        status: PaymentStatus.CLOSED,
+        bankRefNo,
+        PaymentAuthorizationAttachment: attachments.length
+          ? { createMany: { data: attachments } }
+          : {},
+      },
       where: { id },
     });
   }
@@ -291,11 +310,11 @@ export class PaymentAuthorizationsService {
     return `${number}/NKP-${bank}-${code}/${romanMonth}/${year}`;
   }
 
-  @OnEvent('paymentAuthorization.submitted')
+  @OnEvent('paymentAuthorization.submitted', { async: true })
   async requestForApproval(data: PaymentAuthorization) {
     const approval = await this.prisma.approvalSetting.findFirst({
       where: {
-        approvalType: ApprovalType.PAYMENT_AUTHORIZATION,
+        approvalType: ApprovalType.NKP,
         companyId: data.companyId,
       },
       include: { ApprovalSettingItem: true },

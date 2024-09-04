@@ -6,14 +6,11 @@ import { AuthModule } from './auth/auth.module';
 import { BanksModule } from './banks/banks.module';
 import { CompaniesModule } from './companies/companies.module';
 import { DepartmentsModule } from './departments/departments.module';
-import { ExpenseTypesModule } from './expense-types/expense-types.module';
 import { ApprovalSettingsModule } from './approval-settings/approval-settings.module';
 import { PaymentAuthorizationsModule } from './payment-authorizations/payment-authorizations.module';
 import { EventEmitterModule } from '@nestjs/event-emitter';
-import { ExpenseClaimsModule } from './expense-claims/expense-claims.module';
-import { ExpenseNotesModule } from './expense-notes/expense-notes.module';
-import { ThrottlerModule, ThrottlerGuard } from '@nestjs/throttler';
-import { APP_GUARD } from '@nestjs/core';
+import { ThrottlerModule } from '@nestjs/throttler';
+// import { APP_GUARD } from '@nestjs/core';
 import { MailerModule } from '@nestjs-modules/mailer';
 import { EjsAdapter } from '@nestjs-modules/mailer/dist/adapters/ejs.adapter'; //?
 import { NotificationsModule } from './notifications/notifications.module';
@@ -86,11 +83,8 @@ import { LeadsModule } from './leads/leads.module';
     BanksModule,
     CompaniesModule,
     DepartmentsModule,
-    ExpenseTypesModule,
     ApprovalSettingsModule,
     PaymentAuthorizationsModule,
-    ExpenseClaimsModule,
-    ExpenseNotesModule,
     NotificationsModule,
     FileModule,
     SuppliersModule,

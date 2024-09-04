@@ -33,20 +33,20 @@ const banks = [
   { code: 'BSI', name: 'Bank Syariah Indonesia' },
 ];
 
-const expenseTypes = [
-  { name: 'Rent' },
-  { name: 'Utilities' },
-  { name: 'Office Supplies' },
-  { name: 'Maintenance and Repairs' },
-  { name: 'Marketing and Advertising' },
-  { name: 'Raw Materials' },
-  { name: 'Travel and Entertainment' },
-  { name: 'Licenses and Permits' },
-  { name: 'Subscriptions and Memberships' },
-  { name: 'Fuel' },
-  { name: 'Toll' },
-  { name: 'Others' },
-];
+// const expenseTypes = [
+//   { name: 'Rent' },
+//   { name: 'Utilities' },
+//   { name: 'Office Supplies' },
+//   { name: 'Maintenance and Repairs' },
+//   { name: 'Marketing and Advertising' },
+//   { name: 'Raw Materials' },
+//   { name: 'Travel and Entertainment' },
+//   { name: 'Licenses and Permits' },
+//   { name: 'Subscriptions and Memberships' },
+//   { name: 'Fuel' },
+//   { name: 'Toll' },
+//   { name: 'Others' },
+// ];
 
 prisma.user
   .create({ data: admin })
@@ -63,10 +63,10 @@ prisma.department
   .then((r) => console.log(r))
   .catch((err) => console.error(err));
 
-prisma.expenseType
-  .createMany({ data: expenseTypes })
-  .then((r) => console.log(r))
-  .catch((err) => console.error(err));
+// prisma.expenseType
+//   .createMany({ data: expenseTypes })
+//   .then((r) => console.log(r))
+//   .catch((err) => console.error(err));
 
 prisma.bank
   .createMany({ data: banks })
