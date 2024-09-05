@@ -94,6 +94,11 @@ export class PaymentAuthorizationsService {
       where.date = { gte: new Date(start), lte: new Date(end) };
     }
 
+    // kalau ga ada page asumsi dari report
+    if (action) {
+      where.status = { not: 'DRAFT' };
+    }
+
     if (keyword) {
       where.OR = [
         { number: { contains: keyword, mode: 'insensitive' } },
@@ -107,9 +112,7 @@ export class PaymentAuthorizationsService {
       ];
     }
 
-    const data = await this.prisma.paymentAuthorization.findMany({
-      take: pageSize || undefined,
-      skip: page ? (page - 1) * pageSize : 0,
+    const options: Prisma.PaymentAuthorizationFindManyArgs = {
       where,
       orderBy: { updatedAt: 'desc' },
       include: {
@@ -129,7 +132,14 @@ export class PaymentAuthorizationsService {
           },
         },
       },
-    });
+    };
+
+    if (!action) {
+      options.take = pageSize;
+      options.skip = (page - 1) * pageSize;
+    }
+
+    const data = await this.prisma.paymentAuthorization.findMany(options);
 
     if (action == 'download') {
       if (format == 'pdf') {
