@@ -330,14 +330,14 @@ export class PaymentAuthorizationsService {
     return data;
   }
 
-  close(id: number, data: CloseNkpDto, user: User) {
+  async close(id: number, data: CloseNkpDto, user: User) {
     if (!user.roles.includes('ADMIN')) {
       throw new ForbiddenException('Anda tidak boleh melakukan aksi ini');
     }
 
     const { bankRefNo, attachments } = data;
 
-    return this.prisma.paymentAuthorization.update({
+    const request = await this.prisma.paymentAuthorization.update({
       data: {
         status: PaymentStatus.CLOSED,
         bankRefNo,
@@ -347,6 +347,18 @@ export class PaymentAuthorizationsService {
       },
       where: { id },
     });
+
+    this.notification.notify({
+      userId:
+        request.paymentType == 'EMPLOYEE'
+          ? request.employeeId
+          : request.requesterId,
+      title: `NKP Nomor ${request.number} Telah Selesai Diproses`,
+      message: `NKP Nomor ${request.number} telah selesai diproses dengan nomor referensi bank sebagai berikut: ${request.bankRefNo}`,
+      redirectUrl: `https://erp.rubarta.co.id/nkp?number=${request.number}`,
+    });
+
+    return request;
   }
 
   private async generateNumber(companyId: number): Promise<string> {
