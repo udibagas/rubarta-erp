@@ -60,8 +60,9 @@ export class PaymentAuthorizationsService {
     companyId?: number;
     paymentType?: PaymentType;
     keyword?: string;
-    dateRange?: [string, string];
+    dateRange?: any;
     action?: string;
+    format?: string;
   }) {
     const {
       page,
@@ -71,6 +72,7 @@ export class PaymentAuthorizationsService {
       paymentType,
       dateRange,
       action,
+      format,
     } = params;
 
     const where: Prisma.PaymentAuthorizationWhereInput = {};
@@ -86,8 +88,9 @@ export class PaymentAuthorizationsService {
       where.paymentType = paymentType;
     }
 
-    if (dateRange) {
-      const [start, end] = dateRange;
+    if (dateRange && dateRange !== 'null') {
+      const [start, end] =
+        typeof dateRange == 'object' ? dateRange : dateRange.split(',');
       where.date = { gte: new Date(start), lte: new Date(end) };
     }
 
@@ -129,7 +132,15 @@ export class PaymentAuthorizationsService {
     });
 
     if (action == 'download') {
-      return data;
+      if (format == 'pdf') {
+        const company = await this.prisma.company.findUniqueOrThrow({
+          where: { id: companyId },
+        });
+
+        return { data, company };
+      }
+
+      if (format == 'excel') return data;
     }
 
     const total = await this.prisma.paymentAuthorization.count({ where });

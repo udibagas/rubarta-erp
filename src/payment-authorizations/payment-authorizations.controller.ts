@@ -26,7 +26,6 @@ import {
 import { Auth } from '../auth/auth.decorator';
 import { PaymentType, User } from '@prisma/client';
 // import * as htmlToPdf from 'html-pdf-node';
-import { Public } from 'src/auth/public.decorator';
 import { terbilang, toCurrency, toDecimal } from 'src/helpers/number';
 import { formatDate, formatDateNumeric } from 'src/helpers/date';
 import { Response } from 'express';
@@ -76,35 +75,38 @@ export class PaymentAuthorizationsController {
   @Get()
   @ApiOperation({ summary: 'Get all NKP' })
   async findAll(
-    @Query('page', ParseIntPipe) page?: number,
-    @Query('pageSize', ParseIntPipe) pageSize?: number,
+    @Res() res: Response,
+    @Query('page') page?: string,
+    @Query('pageSize') pageSize?: string,
     @Query('keyword') keyword?: string,
     @Query('companyId', ParseIntPipe) companyId?: number,
     @Query('paymentType') paymentType?: PaymentType,
     @Query('action') action?: string,
     @Query('format') format?: string,
-    @Query('dateRange') dateRange?: [string, string],
+    @Query('dateRange') dateRange?: any,
   ) {
     const data = await this.paymentAuthorizationsService.findAll({
-      page,
-      pageSize,
+      page: Number(page),
+      pageSize: Number(pageSize),
       companyId,
       paymentType,
       keyword,
       action,
+      format,
       dateRange,
     });
 
-    if (action == 'download') {
-      if (format == 'pdf') {
-        return 'pdf';
-      }
-      if (format == 'excel') {
-        return 'excel';
-      }
+    if (action == 'download' && format == 'pdf') {
+      return res.render('nkp/report', {
+        data,
+        paymentType,
+        dateRange,
+        formatDateNumeric,
+        toDecimal,
+      });
     }
 
-    return data;
+    res.json(data);
   }
 
   @Get('get-by-number')
@@ -173,7 +175,6 @@ export class PaymentAuthorizationsController {
     return this.paymentAuthorizationsService.close(id, data, user);
   }
 
-  @Public()
   @Get('/print/:id')
   async print(@Param('id', ParseIntPipe) id: number, @Res() res: Response) {
     const data = await this.paymentAuthorizationsService.findOne(id);
