@@ -266,7 +266,7 @@ export class PaymentAuthorizationsService {
     const approval =
       await this.prisma.paymentAuthorizationApproval.findFirstOrThrow({
         where: { paymentAuthorizationId: id, userId, approvalStatus: null },
-        include: { PaymentAuthorization: true },
+        include: { PaymentAuthorization: true, User: true },
       });
 
     const data = await this.prisma.paymentAuthorizationApproval.update({
@@ -289,23 +289,38 @@ export class PaymentAuthorizationsService {
     });
 
     // TODO: Lanjut ke approval berikutnya
+    const request = approval.PaymentAuthorization;
+
+    // NOTIFIKASI KE EMPLOYEE ATAU KE REQUESTER
+    const { paymentType, employeeId, requesterId } =
+      approval.PaymentAuthorization;
+
+    this.notification.notify({
+      userId: paymentType == 'EMPLOYEE' ? employeeId : requesterId,
+      title: `NKP Nomor ${request.number} Telah Disetujui`,
+      message: `NKP Nomor ${request.number} telah disetujui oleh ${approval.User.name}`,
+      redirectUrl: `https://erp.rubarta.co.id/nkp?number=${request.number}`,
+    });
 
     if (!pendingApprovalCount) {
-      const request = approval.PaymentAuthorization;
+      // NOTIFIKASI KE EMPLOYEE ATAU KE REQUESTER
+      this.notification.notify({
+        userId: 'EMPLOYEE' ? employeeId : requesterId,
+        title: `NKP Nomor ${request.number} Telah Disetujui Sepenuhnya`,
+        message: `NKP Nomor ${request.number} telah disetujui sepenuhnya. Proses pembayaran akan segera diproses. Mohon tunggu.`,
+        redirectUrl: `https://erp.rubarta.co.id/nkp?number=${request.number}`,
+      });
 
+      // NOTIFIKASI KE ADMIN UNTUK PROSES PEMBAYARAN & CLOSING
       // sementara kirim ke ke semua admin
       const admins = await this.prisma.user.findMany({
-        where: {
-          roles: {
-            hasSome: [Role.ADMIN],
-          },
-        },
+        where: { roles: { hasSome: [Role.ADMIN] } },
       });
 
       admins.forEach((user) => {
         this.notification.notify({
           userId: user.id,
-          title: `NKP Nomor ${request.number} telah disetujui sepenuhnya`,
+          title: `NKP Nomor ${request.number} Telah Disetujui Sepenuhnya`,
           message: `NKP Nomor ${request.number} telah disetujui sepenuhnya. Silakan lanjutkan ke proses berikutnya`,
           redirectUrl: `https://erp.rubarta.co.id/nkp?number=${request.number}`,
         });
