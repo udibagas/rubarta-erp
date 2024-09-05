@@ -60,22 +60,42 @@ export class PaymentAuthorizationsService {
     companyId?: number;
     paymentType?: PaymentType;
     keyword?: string;
+    dateRange?: [string, string];
+    action?: string;
   }) {
-    const { page, pageSize, companyId, keyword, paymentType } = params;
+    const {
+      page,
+      pageSize,
+      companyId,
+      keyword,
+      paymentType,
+      dateRange,
+      action,
+    } = params;
+
     const where: Prisma.PaymentAuthorizationWhereInput = {};
 
     if (companyId) {
       where.companyId = companyId;
     }
 
-    if (paymentType) {
+    if (
+      paymentType &&
+      [PaymentType.EMPLOYEE, PaymentType.VENDOR].includes(paymentType)
+    ) {
       where.paymentType = paymentType;
+    }
+
+    if (dateRange) {
+      const [start, end] = dateRange;
+      where.date = { gte: new Date(start), lte: new Date(end) };
     }
 
     if (keyword) {
       where.OR = [
         { number: { contains: keyword, mode: 'insensitive' } },
         { description: { contains: keyword, mode: 'insensitive' } },
+        { bankRefNo: { contains: keyword, mode: 'insensitive' } },
         {
           Employee: {
             name: { contains: keyword, mode: 'insensitive' },
@@ -85,8 +105,8 @@ export class PaymentAuthorizationsService {
     }
 
     const data = await this.prisma.paymentAuthorization.findMany({
-      take: pageSize,
-      skip: (page - 1) * pageSize,
+      take: pageSize || undefined,
+      skip: page ? (page - 1) * pageSize : 0,
       where,
       orderBy: { updatedAt: 'desc' },
       include: {
@@ -107,6 +127,10 @@ export class PaymentAuthorizationsService {
         },
       },
     });
+
+    if (action == 'download') {
+      return data;
+    }
 
     const total = await this.prisma.paymentAuthorization.count({ where });
     return { data, page, total };

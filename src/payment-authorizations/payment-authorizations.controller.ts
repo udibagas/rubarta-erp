@@ -75,20 +75,36 @@ export class PaymentAuthorizationsController {
 
   @Get()
   @ApiOperation({ summary: 'Get all NKP' })
-  findAll(
+  async findAll(
     @Query('page', ParseIntPipe) page?: number,
     @Query('pageSize', ParseIntPipe) pageSize?: number,
     @Query('keyword') keyword?: string,
     @Query('companyId', ParseIntPipe) companyId?: number,
     @Query('paymentType') paymentType?: PaymentType,
+    @Query('action') action?: string,
+    @Query('format') format?: string,
+    @Query('dateRange') dateRange?: [string, string],
   ) {
-    return this.paymentAuthorizationsService.findAll({
+    const data = await this.paymentAuthorizationsService.findAll({
       page,
       pageSize,
       companyId,
       paymentType,
       keyword,
+      action,
+      dateRange,
     });
+
+    if (action == 'download') {
+      if (format == 'pdf') {
+        return 'pdf';
+      }
+      if (format == 'excel') {
+        return 'excel';
+      }
+    }
+
+    return data;
   }
 
   @Get('get-by-number')
