@@ -11,7 +11,7 @@ describe('PaymentAuthorizationsController', () => {
   let testService: TestService;
   let paymentAuthorization;
   let token;
-  let users = [];
+  const users = [];
   let company;
   let bank;
 
