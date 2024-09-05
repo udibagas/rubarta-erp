@@ -266,12 +266,12 @@ export class PaymentAuthorizationsService {
     const approval =
       await this.prisma.paymentAuthorizationApproval.findFirstOrThrow({
         where: { paymentAuthorizationId: id, userId, approvalStatus: null },
+        include: { PaymentAuthorization: true },
       });
 
     const data = await this.prisma.paymentAuthorizationApproval.update({
       data: { approvalStatus: ApprovalStatus.APPROVED, note: note },
       where: { id: approval.id },
-      include: { PaymentAuthorization: true },
     });
 
     const pendingApprovalCount =
@@ -291,7 +291,7 @@ export class PaymentAuthorizationsService {
     // TODO: Lanjut ke approval berikutnya
 
     if (!pendingApprovalCount) {
-      const request = data.PaymentAuthorization;
+      const request = approval.PaymentAuthorization;
 
       // sementara kirim ke ke semua admin
       const admins = await this.prisma.user.findMany({
