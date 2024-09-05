@@ -20,7 +20,7 @@
     </div>
 
     <div class="mb-2">
-      <%= approval.approvalStatus ? formatDateNumeric(approval.updatedAt) : ' ' %>
+      <%= approval.approvalStatus ? formatDateNumeric(approval.updatedAt) : '-' %>
     </div>
     <div class="font-bold border-t border-black p-2">
       (<%= approval.User?.name %>)
