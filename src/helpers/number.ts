@@ -17,6 +17,8 @@ export function toDecimal(number: number): string {
 }
 
 export function terbilang(a: number): string {
+  a = Math.abs(a);
+
   const bilangan = [
     '',
     'Satu',
