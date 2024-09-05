@@ -12,6 +12,7 @@ import {
   PaymentStatus,
   PaymentType,
   Prisma,
+  Role,
   User,
 } from '@prisma/client';
 import { EventEmitter2, OnEvent } from '@nestjs/event-emitter';
@@ -270,6 +271,7 @@ export class PaymentAuthorizationsService {
     const data = await this.prisma.paymentAuthorizationApproval.update({
       data: { approvalStatus: ApprovalStatus.APPROVED, note: note },
       where: { id: approval.id },
+      include: { PaymentAuthorization: true },
     });
 
     const pendingApprovalCount =
@@ -287,12 +289,37 @@ export class PaymentAuthorizationsService {
     });
 
     // TODO: Lanjut ke approval berikutnya
+
+    if (!pendingApprovalCount) {
+      const request = data.PaymentAuthorization;
+
+      // sementara kirim ke ke semua admin
+      const admins = await this.prisma.user.findMany({
+        where: {
+          roles: {
+            hasSome: [Role.ADMIN],
+          },
+        },
+      });
+
+      admins.forEach((user) => {
+        this.notification.notify({
+          userId: user.id,
+          title: `NKP Nomor ${request.number} telah disetujui sepenuhnya`,
+          message: `NKP Nomor ${request.number} telah disetujui sepenuhnya. Silakan lanjutkan ke proses berikutnya`,
+          redirectUrl: `https://erp.rubarta.co.id/nkp?number=${request.number}`,
+        });
+      });
+    }
+
     return data;
   }
 
   close(id: number, data: CloseNkpDto, user: User) {
-    console.log(user);
-    // TODO : cek authorisasi
+    if (!user.roles.includes('ADMIN')) {
+      throw new ForbiddenException('Anda tidak boleh melakukan aksi ini');
+    }
+
     const { bankRefNo, attachments } = data;
 
     return this.prisma.paymentAuthorization.update({
