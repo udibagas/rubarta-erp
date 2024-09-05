@@ -305,7 +305,7 @@ export class PaymentAuthorizationsService {
     if (!pendingApprovalCount) {
       // NOTIFIKASI KE EMPLOYEE ATAU KE REQUESTER
       this.notification.notify({
-        userId: 'EMPLOYEE' ? employeeId : requesterId,
+        userId: paymentType == 'EMPLOYEE' ? employeeId : requesterId,
         title: `NKP Nomor ${request.number} Telah Disetujui Sepenuhnya`,
         message: `NKP Nomor ${request.number} telah disetujui sepenuhnya. Proses pembayaran akan segera diproses. Mohon tunggu.`,
         redirectUrl: `https://erp.rubarta.co.id/nkp?number=${request.number}`,
