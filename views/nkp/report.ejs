@@ -44,6 +44,8 @@
             <tr>
               <th class="border-b border-r border-black">NO</th>
               <th class="border-b border-r border-black">DATE</th>
+              <th class="border-b border-r border-black">NUMBER</th>
+              <th class="border-b border-r border-black">BANK REF NO</th>
               <th class="border-b border-r border-black">DESCRIPTION</th>
               <th class="border-b border-r border-black">AMOUNT</th>
               <th class="border-b border-r border-black">CURR</th>
@@ -54,8 +56,10 @@
             <tr>
               <td class="border-b border-r border-black text-center"><%= ++i %></td>
               <td class="border-b border-r border-black text-center"><%= formatDateNumeric(el.date) %></td>
+              <td class="border-b border-r border-black text-center"><%= el.number %></td>
+              <td class="border-b border-r border-black text-center"><%= el.bankRefNo %></td>
               <td class="border-b border-r border-black pl-2"><%= el.description %></td>
-              <td class="border-b border-r border-black text-right pr-2"><%= toDecimal(el.finalPayment) %></td>
+              <td class="border-b border-r border-black text-right pr-2"><%= toDecimal(el.finalPayment > 0 ? el.finalPayment : el.grandTotal) %></td>
               <td class="border-b border-r border-black text-center"><%= el.currency %></td>
             </tr>
             <% }) %>
