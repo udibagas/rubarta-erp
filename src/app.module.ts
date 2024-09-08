@@ -27,6 +27,7 @@ import { CustomersModule } from './customers/customers.module';
 import { join } from 'path';
 import { ContactsModule } from './contacts/contacts.module';
 import { LeadsModule } from './leads/leads.module';
+import { OpportunitiesModule } from './opportunities/opportunities.module';
 
 @Module({
   imports: [
@@ -97,6 +98,7 @@ import { LeadsModule } from './leads/leads.module';
     CustomersModule,
     ContactsModule,
     LeadsModule,
+    OpportunitiesModule,
   ],
   controllers: [],
   providers: [],
