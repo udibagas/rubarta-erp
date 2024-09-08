@@ -135,7 +135,7 @@ export class PaymentAuthorizationsService {
       },
     };
 
-    if (!action) {
+    if (!action || action == 'report') {
       options.take = pageSize;
       options.skip = (page - 1) * pageSize;
     }
