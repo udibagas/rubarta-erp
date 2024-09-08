@@ -55,21 +55,34 @@
       
     <% } %>
 
-    <% if (data.paymentType == 'EMPLOYEE') { %>
+    <% if (data.paymentType == 'EMPLOYEE' && data.parentId) { %>
       <tr>
         <td colspan="3" class="border-b border-r border-black text-right pr-2 font-bold">CASH ADVANCE</td>
         <td class="border-b border-r border-black text-right pr-2 font-bold"><%= toDecimal(data.cashAdvance) %></td>
         <td class="border-b border-r border-black text-center"><%= data.currency %></td>
       </tr>
-    <% } %>
 
-    <tr>
-      <td colspan="3" class="border-b border-r border-black text-right pr-2 font-bold">FINAL PAYMENT</td>
-      <td class="border-b border-r border-black text-right pr-2 font-bold">
-        <%= toDecimal(data.finalPayment) %>
-      </td>
-      <td class="border-b border-r border-black text-center"><%= data.currency %></td>
-    </tr>
+      <tr>
+        <td colspan="3" class="border-b border-r border-black text-right pr-2 font-bold">
+          KEMBALI KE <%= data.finalPayment > 0 ? 'KARYAWAN' : 'PERUSAHAAN' %>
+        </td>
+        <td class="border-b border-r border-black text-right pr-2 font-bold">
+          <%= toDecimal(data.grandTotal) %>
+        </td>
+        <td class="border-b border-r border-black text-center"><%= data.currency %></td>
+      </tr>
+    <% } %>
+      
+    <% if (data.paymentType == 'VENDOR') { %>
+      <tr>
+        <td colspan="3" class="border-b border-r border-black text-right pr-2 font-bold">FINAL PAYMENT</td>
+        <td class="border-b border-r border-black text-right pr-2 font-bold">
+          <%= toDecimal(data.finalPayment) %>
+        </td>
+        <td class="border-b border-r border-black text-center"><%= data.currency %></td>
+      </tr>
+    <% } %>
+    
     
     <tr>
       <td colspan="4" class="font-bold px-2 border-r border-black">TERBILANG : <%= terbilang(data.finalPayment).toUpperCase() %></td>
