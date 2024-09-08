@@ -1,7 +1,9 @@
 import { LeadSource, LeadStatus } from '@prisma/client';
-import { isEnum, IsEnum, IsNotEmpty, IsNumber } from 'class-validator';
+import { IsEnum, IsNotEmpty, IsNumber } from 'class-validator';
 
 export class CreateLeadDto {
+  userId: number;
+
   @IsNumber({}, { message: 'Invalid customer' })
   customerId: number;
 
@@ -13,5 +15,5 @@ export class CreateLeadDto {
   status: LeadStatus;
 
   @IsNotEmpty({ message: 'Not is required' })
-  note: string;
+  notes: string;
 }

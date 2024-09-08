@@ -53,6 +53,7 @@ enum LeadSource {
 
 model Lead {
   id         Int        @id @default(autoincrement())
+  User       User       @relation(fields: [userId], references: [id])
   customerId Int
   source     LeadSource
   status     LeadStatus @default(New)
@@ -62,22 +63,25 @@ model Lead {
 
   // Relationships
   Customer Customer @relation(fields: [customerId], references: [id])
+  userId   Int
 
   @@map("Leads")
 }
 
 model Opportunity {
-  id                  Int      @id @default(autoincrement())
-  customerId          Int
-  name                String
-  amount              Float
-  stage               String
-  expected_close_date DateTime
-  createdAt           DateTime @default(now())
-  updatedAt           DateTime @updatedAt
+  id                Int      @id @default(autoincrement())
+  customerId        Int
+  userId            Int
+  name              String
+  amount            Float
+  stage             String
+  expectedCloseDate DateTime
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
 
   // Relationships
   Customer Customer @relation(fields: [customerId], references: [id])
+  User     User     @relation(fields: [userId], references: [id])
 
   @@map("Opportunities")
 }

@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { CreateLeadDto } from './dto/create-lead.dto';
 import { UpdateLeadDto } from './dto/update-lead.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
+import { Prisma } from '@prisma/client';
 
 @Injectable()
 export class LeadsService {
@@ -11,12 +12,51 @@ export class LeadsService {
     return this.prisma.lead.create({ data });
   }
 
-  findAll() {
-    return this.prisma.lead.findMany();
+  async findAll(params: {
+    page?: number;
+    pageSize?: number;
+    keyword?: string;
+  }) {
+    const where: Prisma.LeadWhereInput = {};
+    const { page, pageSize, keyword } = params;
+
+    if (keyword) {
+      where.OR = [
+        {
+          Customer: {
+            name: {
+              contains: keyword,
+              mode: 'insensitive',
+            },
+          },
+          notes: {
+            contains: keyword,
+            mode: 'insensitive',
+          },
+        },
+      ];
+    }
+
+    const data = await this.prisma.lead.findMany({
+      where,
+      take: pageSize,
+      skip: (page - 1) * pageSize,
+      orderBy: { updatedAt: 'desc' },
+      include: {
+        Customer: { select: { name: true } },
+        User: { select: { name: true } },
+      },
+    });
+
+    const total = await this.prisma.lead.count({ where });
+    return { data, page, total };
   }
 
   findOne(id: number) {
-    return this.prisma.lead.findUniqueOrThrow({ where: { id } });
+    return this.prisma.lead.findUniqueOrThrow({
+      where: { id },
+      include: { Customer: { select: { name: true } } },
+    });
   }
 
   update(id: number, data: UpdateLeadDto) {

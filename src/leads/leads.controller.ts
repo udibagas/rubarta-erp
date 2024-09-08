@@ -7,23 +7,30 @@ import {
   Param,
   Delete,
   ParseIntPipe,
+  Query,
 } from '@nestjs/common';
 import { LeadsService } from './leads.service';
 import { CreateLeadDto } from './dto/create-lead.dto';
 import { UpdateLeadDto } from './dto/update-lead.dto';
+import { Auth } from 'src/auth/auth.decorator';
+import { User } from '@prisma/client';
 
-@Controller('leads')
+@Controller('api/leads')
 export class LeadsController {
   constructor(private readonly leadsService: LeadsService) {}
 
   @Post()
-  create(@Body() createLeadDto: CreateLeadDto) {
-    return this.leadsService.create(createLeadDto);
+  create(@Body() data: CreateLeadDto, @Auth() user: User) {
+    return this.leadsService.create({ ...data, userId: user.id });
   }
 
   @Get()
-  findAll() {
-    return this.leadsService.findAll();
+  findAll(
+    @Query('page', ParseIntPipe) page?: number,
+    @Query('pageSize', ParseIntPipe) pageSize?: number,
+    @Query('keyword') keyword?: string,
+  ) {
+    return this.leadsService.findAll({ page, pageSize, keyword });
   }
 
   @Get(':id')

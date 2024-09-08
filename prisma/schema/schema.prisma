@@ -70,6 +70,8 @@ model User {
   Task                         Task[]
   Interaction                  Interaction[]
   CustomerNote                 CustomerNote[]
+  Lead                         Lead[]
+  Opportunity                  Opportunity[]
 
   @@index([bankId, departmentId])
   @@map("Users")
