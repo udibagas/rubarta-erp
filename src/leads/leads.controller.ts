@@ -28,9 +28,10 @@ export class LeadsController {
   findAll(
     @Query('page', ParseIntPipe) page?: number,
     @Query('pageSize', ParseIntPipe) pageSize?: number,
+    @Query('companyId', ParseIntPipe) companyId?: number,
     @Query('keyword') keyword?: string,
   ) {
-    return this.leadsService.findAll({ page, pageSize, keyword });
+    return this.leadsService.findAll({ page, pageSize, keyword, companyId });
   }
 
   @Get(':id')
@@ -39,11 +40,8 @@ export class LeadsController {
   }
 
   @Patch(':id')
-  update(
-    @Param('id', ParseIntPipe) id: number,
-    @Body() updateLeadDto: UpdateLeadDto,
-  ) {
-    return this.leadsService.update(id, updateLeadDto);
+  update(@Param('id', ParseIntPipe) id: number, @Body() data: UpdateLeadDto) {
+    return this.leadsService.update(id, data);
   }
 
   @Delete(':id')

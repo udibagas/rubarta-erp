@@ -51,10 +51,20 @@ enum LeadSource {
   Other
 }
 
+enum OpportunityStages {
+  Prospecting
+  Negotiation
+  Proposal_Sent
+  Closed_Won
+  Closed_Lost
+}
+
 model Lead {
-  id         Int        @id @default(autoincrement())
-  User       User       @relation(fields: [userId], references: [id])
+  id Int @id @default(autoincrement())
+
   customerId Int
+  companyId  Int
+  userId     Int
   source     LeadSource
   status     LeadStatus @default(New)
   notes      String?
@@ -63,25 +73,28 @@ model Lead {
 
   // Relationships
   Customer Customer @relation(fields: [customerId], references: [id])
-  userId   Int
+  Company  Company  @relation(fields: [companyId], references: [id])
+  User     User     @relation(fields: [userId], references: [id])
 
   @@map("Leads")
 }
 
 model Opportunity {
-  id                Int      @id @default(autoincrement())
+  id                Int               @id @default(autoincrement())
   customerId        Int
+  companyId         Int
   userId            Int
   name              String
   amount            Float
-  stage             String
+  stage             OpportunityStages
   expectedCloseDate DateTime
-  createdAt         DateTime @default(now())
-  updatedAt         DateTime @updatedAt
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
 
   // Relationships
   Customer Customer @relation(fields: [customerId], references: [id])
   User     User     @relation(fields: [userId], references: [id])
+  Company  Company  @relation(fields: [companyId], references: [id])
 
   @@map("Opportunities")
 }

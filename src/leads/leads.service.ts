@@ -16,9 +16,14 @@ export class LeadsService {
     page?: number;
     pageSize?: number;
     keyword?: string;
+    companyId?: number;
   }) {
     const where: Prisma.LeadWhereInput = {};
-    const { page, pageSize, keyword } = params;
+    const { page, pageSize, keyword, companyId } = params;
+
+    if (companyId) {
+      where.companyId = companyId;
+    }
 
     if (keyword) {
       where.OR = [
@@ -43,6 +48,7 @@ export class LeadsService {
       skip: (page - 1) * pageSize,
       orderBy: { updatedAt: 'desc' },
       include: {
+        Company: { select: { name: true } },
         Customer: { select: { name: true } },
         User: { select: { name: true } },
       },
@@ -55,7 +61,11 @@ export class LeadsService {
   findOne(id: number) {
     return this.prisma.lead.findUniqueOrThrow({
       where: { id },
-      include: { Customer: { select: { name: true } } },
+      include: {
+        Company: { select: { name: true } },
+        Customer: { select: { name: true } },
+        User: { select: { name: true } },
+      },
     });
   }
 

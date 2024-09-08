@@ -20,6 +20,8 @@ model Company {
   name                 String                 @db.VarChar(50)
   PaymentAuthorization PaymentAuthorization[]
   ApprovalSetting      ApprovalSetting[]
+  Opportunity          Opportunity[]
+  Lead                 Lead[]
 
   @@map("Companies")
 }
