@@ -34,6 +34,8 @@ export class LeadsService {
               mode: 'insensitive',
             },
           },
+        },
+        {
           notes: {
             contains: keyword,
             mode: 'insensitive',
