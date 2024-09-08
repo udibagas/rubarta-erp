@@ -17,13 +17,15 @@ export class ContactsService {
     const { keyword } = params;
 
     if (keyword) {
-      where.name = {
-        contains: keyword,
-      };
+      where.OR = [
+        { name: { contains: keyword, mode: 'insensitive' } },
+        { Customer: { name: { contains: keyword, mode: 'insensitive' } } },
+      ];
     }
 
     return this.prisma.contact.findMany({
       where,
+      orderBy: { name: 'asc' },
       include: {
         Customer: {
           select: { name: true },

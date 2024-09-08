@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Customer } from '@prisma/client';
+import { Customer, Prisma } from '@prisma/client';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CustomerDto } from './customer.dto';
 
@@ -7,8 +7,15 @@ import { CustomerDto } from './customer.dto';
 export class CustomersService {
   constructor(private readonly prisma: PrismaService) {}
 
-  async findAll(): Promise<Customer[]> {
-    return this.prisma.customer.findMany();
+  async findAll(params: { keyword: string }): Promise<Customer[]> {
+    const { keyword } = params;
+    const where: Prisma.CustomerWhereInput = {};
+
+    if (keyword) {
+      where.name = { contains: keyword, mode: 'insensitive' };
+    }
+
+    return this.prisma.customer.findMany({ where, orderBy: { name: 'asc' } });
   }
 
   async findOne(id: number): Promise<Customer> {

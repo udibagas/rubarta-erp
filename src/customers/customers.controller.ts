@@ -2,11 +2,11 @@ import {
   Controller,
   Get,
   Post,
-  Put,
   Delete,
   Param,
   Body,
   Patch,
+  Query,
 } from '@nestjs/common';
 import { Customer } from '@prisma/client';
 import { CustomersService } from './customers.service';
@@ -17,8 +17,8 @@ export class CustomersController {
   constructor(private readonly customersService: CustomersService) {}
 
   @Get()
-  async findAll(): Promise<Customer[]> {
-    return this.customersService.findAll();
+  async findAll(@Query('keyword') keyword: string): Promise<Customer[]> {
+    return this.customersService.findAll({ keyword });
   }
 
   @Get(':id')
