@@ -1,14 +1,11 @@
 import { ForbiddenException, Injectable } from '@nestjs/common';
-import {
-  CloseNkpDto,
-  PaymentAuthorizationDto,
-} from './payment-authorization.dto';
+import { CloseNkpDto, NkpDto } from './nkp.dto';
 import { PrismaService } from '../prisma/prisma.service';
 import {
   ApprovalStatus,
   ApprovalType,
-  PaymentAuthorization,
-  PaymentAuthorizationApproval,
+  Nkp,
+  NkpApproval,
   PaymentStatus,
   PaymentType,
   Prisma,
@@ -19,37 +16,33 @@ import { EventEmitter2, OnEvent } from '@nestjs/event-emitter';
 import { NotificationsService } from 'src/notifications/notifications.service';
 
 @Injectable()
-export class PaymentAuthorizationsService {
+export class NkpService {
   constructor(
     private prisma: PrismaService,
     private eventEmitter: EventEmitter2,
     private notification: NotificationsService,
   ) {}
 
-  async create(dto: PaymentAuthorizationDto) {
-    const {
-      PaymentAuthorizationItem: items,
-      PaymentAuthorizationAttachment: attachments,
-      ...data
-    } = dto;
+  async create(dto: NkpDto) {
+    const { NkpItem: items, NkpAttachment: attachments, ...data } = dto;
     let number = 'DRAFT';
 
     if (data.status == PaymentStatus.SUBMITTED) {
       number = await this.generateNumber(data.companyId);
     }
 
-    const savedData = await this.prisma.paymentAuthorization.create({
+    const savedData = await this.prisma.nkp.create({
       include: { Requester: true },
       data: {
         ...data,
         number,
-        PaymentAuthorizationItem: { create: items },
-        PaymentAuthorizationAttachment: { create: attachments },
+        NkpItem: { create: items },
+        NkpAttachment: { create: attachments },
       },
     });
 
     if (savedData.status == PaymentStatus.SUBMITTED) {
-      this.eventEmitter.emit('paymentAuthorization.submitted', savedData);
+      this.eventEmitter.emit('nkp.submitted', savedData);
     }
 
     return savedData;
@@ -76,7 +69,7 @@ export class PaymentAuthorizationsService {
       format,
     } = params;
 
-    const where: Prisma.PaymentAuthorizationWhereInput = {};
+    const where: Prisma.NkpWhereInput = {};
 
     if (companyId) {
       where.companyId = companyId;
@@ -113,7 +106,7 @@ export class PaymentAuthorizationsService {
       ];
     }
 
-    const options: Prisma.PaymentAuthorizationFindManyArgs = {
+    const options: Prisma.NkpFindManyArgs = {
       where,
       orderBy: { updatedAt: 'desc' },
       include: {
@@ -124,7 +117,7 @@ export class PaymentAuthorizationsService {
         Company: { select: { name: true } },
         Child: { select: { id: true, number: true, finalPayment: true } },
         Parent: { select: { id: true, number: true, finalPayment: true } },
-        PaymentAuthorizationAttachment: {
+        NkpAttachment: {
           select: {
             fileName: true,
             fileType: true,
@@ -140,7 +133,7 @@ export class PaymentAuthorizationsService {
       options.skip = (page - 1) * pageSize;
     }
 
-    const data = await this.prisma.paymentAuthorization.findMany(options);
+    const data = await this.prisma.nkp.findMany(options);
 
     if (action == 'download') {
       if (format == 'pdf') {
@@ -154,20 +147,20 @@ export class PaymentAuthorizationsService {
       if (format == 'excel') return data;
     }
 
-    const total = await this.prisma.paymentAuthorization.count({ where });
+    const total = await this.prisma.nkp.count({ where });
     return { data, page, total };
   }
 
   findOne(id: any) {
-    const where: Prisma.PaymentAuthorizationWhereInput = {};
+    const where: Prisma.NkpWhereInput = {};
     if (typeof id == 'number') where.id = id;
     if (typeof id == 'string') where.number = id;
 
-    return this.prisma.paymentAuthorization.findFirstOrThrow({
+    return this.prisma.nkp.findFirstOrThrow({
       where,
       include: {
-        PaymentAuthorizationItem: true,
-        PaymentAuthorizationApproval: {
+        NkpItem: true,
+        NkpApproval: {
           orderBy: { level: 'asc' },
           include: {
             User: {
@@ -182,7 +175,7 @@ export class PaymentAuthorizationsService {
         Bank: { select: { code: true, name: true } },
         Child: { select: { id: true, number: true, finalPayment: true } },
         Parent: { select: { id: true, number: true, finalPayment: true } },
-        PaymentAuthorizationAttachment: {
+        NkpAttachment: {
           select: {
             fileName: true,
             fileType: true,
@@ -194,7 +187,7 @@ export class PaymentAuthorizationsService {
     });
   }
 
-  async update(id: number, dto: PaymentAuthorizationDto) {
+  async update(id: number, dto: NkpDto) {
     const existingData = await this.findOne(id);
     if (existingData.status !== PaymentStatus.DRAFT)
       throw new ForbiddenException();
@@ -204,27 +197,23 @@ export class PaymentAuthorizationsService {
       number = await this.generateNumber(dto.companyId);
     }
 
-    const {
-      PaymentAuthorizationItem: items,
-      PaymentAuthorizationAttachment: attachments,
-      ...data
-    } = dto;
-    const savedData = await this.prisma.paymentAuthorization.update({
+    const { NkpItem: items, NkpAttachment: attachments, ...data } = dto;
+    const savedData = await this.prisma.nkp.update({
       where: { id },
       data: {
         ...data,
         number,
-        PaymentAuthorizationItem: { deleteMany: {}, create: items },
-        PaymentAuthorizationAttachment: { deleteMany: {}, create: attachments },
+        NkpItem: { deleteMany: {}, create: items },
+        NkpAttachment: { deleteMany: {}, create: attachments },
       },
       include: {
-        PaymentAuthorizationItem: true,
+        NkpItem: true,
         Requester: true,
       },
     });
 
     if (savedData.status == PaymentStatus.SUBMITTED) {
-      this.eventEmitter.emit('paymentAuthorization.submitted', savedData);
+      this.eventEmitter.emit('nkp.submitted', savedData);
     }
 
     return savedData;
@@ -234,7 +223,7 @@ export class PaymentAuthorizationsService {
     const data = await this.findOne(id);
     const number = await this.generateNumber(data.companyId);
 
-    const savedData = await this.prisma.paymentAuthorization.update({
+    const savedData = await this.prisma.nkp.update({
       where: { id, requesterId },
       data: {
         number,
@@ -242,14 +231,14 @@ export class PaymentAuthorizationsService {
       },
     });
 
-    this.eventEmitter.emit('paymentAuthorization.submitted', savedData);
+    this.eventEmitter.emit('nkp.submitted', savedData);
     return savedData;
   }
 
   async remove(id: number) {
     const data = await this.findOne(id);
     if (data.status !== PaymentStatus.DRAFT) throw new ForbiddenException();
-    return this.prisma.paymentAuthorization.delete({
+    return this.prisma.nkp.delete({
       where: { id },
     });
   }
@@ -257,43 +246,40 @@ export class PaymentAuthorizationsService {
   async removeItem(id: number, itemId: number) {
     const data = await this.findOne(id);
     if (data.status !== PaymentStatus.DRAFT) throw new ForbiddenException();
-    return this.prisma.paymentAuthorizationItem.delete({
+    return this.prisma.nkpItem.delete({
       where: { id: itemId },
     });
   }
 
   async approve(id: number, userId: number, note?: string) {
-    const approval =
-      await this.prisma.paymentAuthorizationApproval.findFirstOrThrow({
-        where: { paymentAuthorizationId: id, userId, approvalStatus: null },
-        include: { PaymentAuthorization: true, User: true },
-      });
+    const approval = await this.prisma.nkpApproval.findFirstOrThrow({
+      where: { nkpId: id, userId, approvalStatus: null },
+      include: { Nkp: true, User: true },
+    });
 
-    const data = await this.prisma.paymentAuthorizationApproval.update({
+    const data = await this.prisma.nkpApproval.update({
       data: { approvalStatus: ApprovalStatus.APPROVED, note: note },
       where: { id: approval.id },
     });
 
-    const pendingApprovalCount =
-      await this.prisma.paymentAuthorizationApproval.count({
-        where: { paymentAuthorizationId: id, approvalStatus: null },
-      });
+    const pendingApprovalCount = await this.prisma.nkpApproval.count({
+      where: { nkpId: id, approvalStatus: null },
+    });
 
     const status = pendingApprovalCount
       ? PaymentStatus.PARTIALLY_APPROVED
       : PaymentStatus.FULLY_APPROVED;
 
-    await this.prisma.paymentAuthorization.update({
+    await this.prisma.nkp.update({
       data: { status },
       where: { id },
     });
 
     // TODO: Lanjut ke approval berikutnya
-    const request = approval.PaymentAuthorization;
+    const request = approval.Nkp;
 
     // NOTIFIKASI KE EMPLOYEE ATAU KE REQUESTER
-    const { paymentType, employeeId, requesterId } =
-      approval.PaymentAuthorization;
+    const { paymentType, employeeId, requesterId } = approval.Nkp;
 
     this.notification.notify({
       userId: paymentType == 'EMPLOYEE' ? employeeId : requesterId,
@@ -337,11 +323,11 @@ export class PaymentAuthorizationsService {
 
     const { bankRefNo, attachments } = data;
 
-    const request = await this.prisma.paymentAuthorization.update({
+    const request = await this.prisma.nkp.update({
       data: {
         status: PaymentStatus.CLOSED,
         bankRefNo,
-        PaymentAuthorizationAttachment: attachments.length
+        NkpAttachment: attachments.length
           ? { createMany: { data: attachments } }
           : {},
       },
@@ -375,7 +361,7 @@ export class PaymentAuthorizationsService {
       })
       .split('/');
 
-    const lastData = await this.prisma.paymentAuthorization.findFirst({
+    const lastData = await this.prisma.nkp.findFirst({
       orderBy: { number: 'desc' },
       where: {
         number: { endsWith: year },
@@ -409,8 +395,8 @@ export class PaymentAuthorizationsService {
     return `${number}/NKP-${bank}-${code}/${romanMonth}/${year}`;
   }
 
-  @OnEvent('paymentAuthorization.submitted', { async: true })
-  async requestForApproval(data: PaymentAuthorization) {
+  @OnEvent('nkp.submitted', { async: true })
+  async requestForApproval(data: Nkp) {
     const approval = await this.prisma.approvalSetting.findFirst({
       where: {
         approvalType: ApprovalType.NKP,
@@ -419,27 +405,26 @@ export class PaymentAuthorizationsService {
       include: { ApprovalSettingItem: true },
     });
 
-    await this.prisma.paymentAuthorizationApproval.createMany({
+    await this.prisma.nkpApproval.createMany({
       data: approval.ApprovalSettingItem.map((el) => ({
         userId: el.userId,
         approvalActionType: el.approvalActionType,
         level: el.level,
-        paymentAuthorizationId: data.id,
+        nkpId: data.id,
       })),
     });
 
     // Ambil user approval dengan level 1
-    const firstLevelApprovals =
-      await this.prisma.paymentAuthorizationApproval.findMany({
-        where: {
-          paymentAuthorizationId: data.id,
-          // level: 1, // TODO: harusnya berjenjang, sementara paralel untuk testing
-        },
-      });
+    const firstLevelApprovals = await this.prisma.nkpApproval.findMany({
+      where: {
+        nkpId: data.id,
+        // level: 1, // TODO: harusnya berjenjang, sementara paralel untuk testing
+      },
+    });
 
     if (firstLevelApprovals.length > 0) {
       firstLevelApprovals.forEach((approval) => {
-        this.eventEmitter.emit('paymentAuthorization.notify', {
+        this.eventEmitter.emit('nkp.notify', {
           data,
           approval,
         });
@@ -447,11 +432,8 @@ export class PaymentAuthorizationsService {
     }
   }
 
-  @OnEvent('paymentAuthorization.notify', { async: true })
-  sendNotification(params: {
-    data: PaymentAuthorization;
-    approval: PaymentAuthorizationApproval;
-  }) {
+  @OnEvent('nkp.notify', { async: true })
+  sendNotification(params: { data: Nkp; approval: NkpApproval }) {
     const { data, approval } = params;
     const approvalAction = {
       APPROVAL: 'Persetujuan',

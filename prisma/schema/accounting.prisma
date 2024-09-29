@@ -4,18 +4,18 @@ enum Currency {
 }
 
 model Supplier {
-  id                   Int                    @id @default(autoincrement())
-  code                 String?                @db.Char(6)
-  name                 String
-  address              String
-  phone                String?
-  email                String?
-  Bank                 Bank                   @relation(fields: [bankId], references: [id])
-  bankAccount          String
-  currency             Currency
-  Transaction          Transaction[]
-  bankId               Int
-  PaymentAuthorization PaymentAuthorization[]
+  id          Int           @id @default(autoincrement())
+  code        String?       @db.Char(6)
+  name        String
+  address     String
+  phone       String?
+  email       String?
+  Bank        Bank          @relation(fields: [bankId], references: [id])
+  bankAccount String
+  currency    Currency
+  Transaction Transaction[]
+  bankId      Int
+  Nkp         Nkp[]
 
   @@map("Suppliers")
 }

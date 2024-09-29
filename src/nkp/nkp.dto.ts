@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Currency, PaymentStatus, PaymentType } from '@prisma/client';
+import { Currency, NkpType, PaymentStatus, PaymentType } from '@prisma/client';
 import { Type } from 'class-transformer';
 import {
   ArrayNotEmpty,
@@ -11,7 +11,7 @@ import {
   ValidateNested,
 } from 'class-validator';
 
-export class PaymentAuthorizationItemDto {
+export class NkpItemDto {
   @ApiProperty({
     example: new Date(),
   })
@@ -30,7 +30,7 @@ export class PaymentAuthorizationItemDto {
   currency: Currency;
 }
 
-export class PaymentAuthorizationAttachmentDto {
+export class NkpAttachmentDto {
   @IsNotEmpty()
   fileName: string;
 
@@ -44,7 +44,7 @@ export class PaymentAuthorizationAttachmentDto {
   fileSize: number;
 }
 
-export class PaymentAuthorizationDto {
+export class NkpDto {
   @ApiProperty({ example: 1, description: 'Company ID' })
   @IsNotEmpty({ message: 'Company is required' })
   @IsNumber()
@@ -52,6 +52,9 @@ export class PaymentAuthorizationDto {
 
   @IsEnum(PaymentType, { message: 'Please select payment type' })
   paymentType: PaymentType;
+
+  @IsEnum(NkpType, { message: 'Please select payment type' })
+  nkpType: NkpType;
 
   @ApiProperty({ example: 1, description: 'Employee ID' })
   @IsOptional()
@@ -128,24 +131,24 @@ export class PaymentAuthorizationDto {
 
   @ApiProperty({
     description: 'Items',
-    type: PaymentAuthorizationItemDto,
+    type: NkpItemDto,
     isArray: true,
   })
   @IsNotEmpty()
   @IsArray()
   @ArrayNotEmpty()
-  @Type(() => PaymentAuthorizationItemDto)
+  @Type(() => NkpItemDto)
   @ValidateNested({ each: true })
-  PaymentAuthorizationItem: PaymentAuthorizationItemDto[];
+  NkpItem: NkpItemDto[];
 
   @ApiProperty({
-    type: PaymentAuthorizationAttachmentDto,
+    type: NkpAttachmentDto,
     isArray: true,
   })
   @IsArray()
-  @Type(() => PaymentAuthorizationAttachmentDto)
+  @Type(() => NkpAttachmentDto)
   @ValidateNested({ each: true })
-  PaymentAuthorizationAttachment: PaymentAuthorizationAttachmentDto[];
+  NkpAttachment: NkpAttachmentDto[];
 }
 
 export class CloseNkpDto {
@@ -153,6 +156,6 @@ export class CloseNkpDto {
   bankRefNo: string;
 
   @IsArray()
-  @Type(() => PaymentAuthorizationAttachmentDto)
-  attachments: PaymentAuthorizationAttachmentDto[];
+  @Type(() => NkpAttachmentDto)
+  attachments: NkpAttachmentDto[];
 }

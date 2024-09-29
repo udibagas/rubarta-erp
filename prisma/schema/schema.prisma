@@ -15,13 +15,13 @@ datasource db {
 }
 
 model Company {
-  id                   Int                    @id @default(autoincrement())
-  code                 String                 @unique @db.VarChar(10)
-  name                 String                 @db.VarChar(50)
-  PaymentAuthorization PaymentAuthorization[]
-  ApprovalSetting      ApprovalSetting[]
-  Opportunity          Opportunity[]
-  Lead                 Lead[]
+  id              Int               @id @default(autoincrement())
+  code            String            @unique @db.VarChar(10)
+  name            String            @db.VarChar(50)
+  Nkp             Nkp[]
+  ApprovalSetting ApprovalSetting[]
+  Opportunity     Opportunity[]
+  Lead            Lead[]
 
   @@map("Companies")
 }
@@ -36,12 +36,12 @@ model Department {
 }
 
 model Bank {
-  id                   Int                    @id @default(autoincrement())
-  code                 String                 @unique @db.VarChar(10)
-  name                 String                 @db.VarChar(50)
-  User                 User[]
-  PaymentAuthorization PaymentAuthorization[]
-  Supplier             Supplier[]
+  id       Int        @id @default(autoincrement())
+  code     String     @unique @db.VarChar(10)
+  name     String     @db.VarChar(50)
+  User     User[]
+  Nkp      Nkp[]
+  Supplier Supplier[]
 
   @@map("Banks")
 }
@@ -63,17 +63,17 @@ model User {
   departmentId       Int?
   signatureSpeciment Json?        @db.JsonB
 
-  Notification                 Notification[]
-  PaymentAuthorizationApproval PaymentAuthorizationApproval[]
-  ApprovalSettingItem          ApprovalSettingItem[]
-  PaymentAuthorization         PaymentAuthorization[]         @relation(name: "PaymentAuthorization")
-  PaymentAuthorizationRequest  PaymentAuthorization[]         @relation(name: "PaymentAuthorizationRequest")
-  Transaction                  Transaction[]
-  Task                         Task[]
-  Interaction                  Interaction[]
-  CustomerNote                 CustomerNote[]
-  Lead                         Lead[]
-  Opportunity                  Opportunity[]
+  Notification        Notification[]
+  NkpApproval         NkpApproval[]
+  ApprovalSettingItem ApprovalSettingItem[]
+  Nkp                 Nkp[]                 @relation(name: "Nkp")
+  NkpRequest          Nkp[]                 @relation(name: "NkpRequest")
+  Transaction         Transaction[]
+  Task                Task[]
+  Interaction         Interaction[]
+  CustomerNote        CustomerNote[]
+  Lead                Lead[]
+  Opportunity         Opportunity[]
 
   @@index([bankId, departmentId])
   @@map("Users")
@@ -95,9 +95,11 @@ model ApprovalSetting {
   Company             Company               @relation(fields: [companyId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   companyId           Int
   approvalType        ApprovalType
+  paymentType         PaymentType?
+  nkpType             NkpType?
   ApprovalSettingItem ApprovalSettingItem[]
 
-  @@unique([companyId, approvalType]) // ga boleh ada setting yg sama
+  @@unique([companyId, approvalType, paymentType, nkpType]) // ga boleh ada setting yg sama
   @@index([companyId])
   @@map("ApprovalSettings")
 }
@@ -158,8 +160,6 @@ enum ApprovalStatus {
 
 enum ApprovalType {
   NKP
-  PAYMENT_AUTHORIZATION
-  EXPENSE_CLAIM
 }
 
 enum ApprovalActionType {
@@ -171,4 +171,11 @@ enum ApprovalActionType {
 enum PaymentType {
   EMPLOYEE
   VENDOR
+}
+
+enum NkpType {
+  CASH_ADVANCE
+  DECLARATION
+  DOWN_PAYMENT
+  SETTLEMENT
 }

@@ -6,22 +6,21 @@ export class ReportService {
   constructor(private readonly prisma: PrismaService) {}
 
   async summary(userId: number) {
-    const nkpDraft = await this.prisma.paymentAuthorization.count({
+    const nkpDraft = await this.prisma.nkp.count({
       where: { status: 'DRAFT' },
     });
 
-    const nkpClosed = await this.prisma.paymentAuthorization.count({
+    const nkpClosed = await this.prisma.nkp.count({
       where: { status: 'CLOSED' },
     });
 
-    const nkpOpen = await this.prisma.paymentAuthorization.count({
+    const nkpOpen = await this.prisma.nkp.count({
       where: { status: { notIn: ['CLOSED', 'DRAFT'] } },
     });
 
-    const pendingApprovalCount =
-      await this.prisma.paymentAuthorizationApproval.count({
-        where: { userId, approvalStatus: null },
-      });
+    const pendingApprovalCount = await this.prisma.nkpApproval.count({
+      where: { userId, approvalStatus: null },
+    });
 
     return {
       nkpDraft,

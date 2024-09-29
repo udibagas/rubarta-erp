@@ -12,17 +12,14 @@ import {
   Query,
   Res,
 } from '@nestjs/common';
-import { PaymentAuthorizationsService } from './payment-authorizations.service';
+import { NkpService } from './nkp.service';
 import {
   ApiBearerAuth,
   ApiOkResponse,
   ApiOperation,
   ApiTags,
 } from '@nestjs/swagger';
-import {
-  CloseNkpDto,
-  PaymentAuthorizationDto,
-} from './payment-authorization.dto';
+import { CloseNkpDto, NkpDto } from './nkp.dto';
 import { Auth } from '../auth/auth.decorator';
 import { PaymentType, User } from '@prisma/client';
 // import * as htmlToPdf from 'html-pdf-node';
@@ -32,11 +29,9 @@ import { Response } from 'express';
 
 @ApiTags('Payment Authorizations')
 @ApiBearerAuth()
-@Controller('api/payment-authorizations')
-export class PaymentAuthorizationsController {
-  constructor(
-    private readonly paymentAuthorizationsService: PaymentAuthorizationsService,
-  ) {}
+@Controller('api/nkp')
+export class NkpController {
+  constructor(private readonly nkpService: NkpService) {}
 
   @Post()
   @ApiOperation({ summary: 'Create new NKP' })
@@ -65,8 +60,8 @@ export class PaymentAuthorizationsController {
       ],
     },
   })
-  create(@Body() data: PaymentAuthorizationDto, @Auth() user: User) {
-    return this.paymentAuthorizationsService.create({
+  create(@Body() data: NkpDto, @Auth() user: User) {
+    return this.nkpService.create({
       ...data,
       requesterId: user.id,
     });
@@ -85,7 +80,7 @@ export class PaymentAuthorizationsController {
     @Query('format') format?: string,
     @Query('dateRange') dateRange?: any,
   ) {
-    const data = await this.paymentAuthorizationsService.findAll({
+    const data = await this.nkpService.findAll({
       page: Number(page),
       pageSize: Number(pageSize),
       companyId,
@@ -113,35 +108,32 @@ export class PaymentAuthorizationsController {
   @ApiOperation({ summary: 'Get NKP by number' })
   findOneByNumber(@Query('number') number: string) {
     console.log(number);
-    return this.paymentAuthorizationsService.findOne(number);
+    return this.nkpService.findOne(number);
   }
 
   @Get(':id')
   @ApiOperation({ summary: 'Get NKP by id' })
   findOne(@Param('id', ParseIntPipe) id: number) {
-    return this.paymentAuthorizationsService.findOne(id);
+    return this.nkpService.findOne(id);
   }
 
   @Patch(':id')
   @ApiOperation({ summary: 'Update NKP by id' })
-  update(
-    @Param('id', ParseIntPipe) id: number,
-    @Body() data: PaymentAuthorizationDto,
-  ) {
-    return this.paymentAuthorizationsService.update(id, data);
+  update(@Param('id', ParseIntPipe) id: number, @Body() data: NkpDto) {
+    return this.nkpService.update(id, data);
   }
 
   @Post('submit/:id')
   @ApiOperation({ summary: 'Submit data' })
   @HttpCode(HttpStatus.OK)
   submit(@Param('id', ParseIntPipe) id: number, @Auth() user: User) {
-    return this.paymentAuthorizationsService.submit(id, user.id);
+    return this.nkpService.submit(id, user.id);
   }
 
   @Delete(':id')
   @ApiOperation({ summary: 'Delete NKP by id' })
   remove(@Param('id', ParseIntPipe) id: number) {
-    return this.paymentAuthorizationsService.remove(id);
+    return this.nkpService.remove(id);
   }
 
   @Delete(':id/:itemId')
@@ -150,7 +142,7 @@ export class PaymentAuthorizationsController {
     @Param('id', ParseIntPipe) id: number,
     @Param('itemId', ParseIntPipe) itemId: number,
   ) {
-    return this.paymentAuthorizationsService.removeItem(id, itemId);
+    return this.nkpService.removeItem(id, itemId);
   }
 
   @Post('approve/:id')
@@ -161,7 +153,7 @@ export class PaymentAuthorizationsController {
     @Auth() user: User,
     @Body('note') note: string,
   ) {
-    return this.paymentAuthorizationsService.approve(id, user.id, note);
+    return this.nkpService.approve(id, user.id, note);
   }
 
   @Post('close/:id')
@@ -172,12 +164,12 @@ export class PaymentAuthorizationsController {
     @Auth() user: User,
     @Body() data: CloseNkpDto,
   ) {
-    return this.paymentAuthorizationsService.close(id, data, user);
+    return this.nkpService.close(id, data, user);
   }
 
   @Get('/print/:id')
   async print(@Param('id', ParseIntPipe) id: number, @Res() res: Response) {
-    const data = await this.paymentAuthorizationsService.findOne(id);
+    const data = await this.nkpService.findOne(id);
 
     const actions = {
       APPROVAL: 'APPROVED BY',

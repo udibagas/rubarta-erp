@@ -37,7 +37,7 @@ export class ApprovalSettingsController {
     description: 'Created approval setting',
     example: {
       companyId: 1,
-      approvalType: ApprovalType.PAYMENT_AUTHORIZATION,
+      approvalType: ApprovalType.NKP,
       items: [
         {
           userId: 1,

@@ -7,7 +7,7 @@ import { BanksModule } from './banks/banks.module';
 import { CompaniesModule } from './companies/companies.module';
 import { DepartmentsModule } from './departments/departments.module';
 import { ApprovalSettingsModule } from './approval-settings/approval-settings.module';
-import { PaymentAuthorizationsModule } from './payment-authorizations/payment-authorizations.module';
+import { NkpModule } from './nkp/nkp.module';
 import { EventEmitterModule } from '@nestjs/event-emitter';
 import { ThrottlerModule } from '@nestjs/throttler';
 // import { APP_GUARD } from '@nestjs/core';
@@ -85,7 +85,7 @@ import { OpportunitiesModule } from './opportunities/opportunities.module';
     CompaniesModule,
     DepartmentsModule,
     ApprovalSettingsModule,
-    PaymentAuthorizationsModule,
+    NkpModule,
     NotificationsModule,
     FileModule,
     SuppliersModule,

@@ -47,8 +47,9 @@ export class ApprovalSettingsService {
     });
   }
 
-  update(id: number, approvalSettingDto: ApprovalSettingDto) {
-    const { ApprovalSettingItem: items, ...data } = approvalSettingDto;
+  update(id: number, dto: ApprovalSettingDto) {
+    console.log(dto);
+    const { ApprovalSettingItem: items, ...data } = dto;
 
     return this.prisma.approvalSetting.update({
       data: {
