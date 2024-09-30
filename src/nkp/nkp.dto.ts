@@ -50,7 +50,7 @@ export class NkpDto {
   @IsNumber()
   companyId: number;
 
-  @IsEnum(PaymentType, { message: 'Please select payment type' })
+  @IsEnum(PaymentType, { message: 'Please select payment target' })
   paymentType: PaymentType;
 
   @IsEnum(NkpType, { message: 'Please select payment type' })
