@@ -57,11 +57,11 @@ export class ApprovalSettingDto {
   approvalType: ApprovalType;
 
   @ApiProperty({
-    description: 'Payment type',
+    description: 'Payment target',
     example: PaymentType.EMPLOYEE,
   })
-  @IsNotEmpty({ message: 'Payment type is required' })
-  @IsEnum(PaymentType, { message: 'Invalid payment type' })
+  @IsNotEmpty({ message: 'Payment target is required' })
+  @IsEnum(PaymentType, { message: 'Invalid payment target' })
   paymentType: PaymentType;
 
   @ApiProperty({
