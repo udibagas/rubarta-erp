@@ -6,6 +6,7 @@ import {
   ApprovalType,
   Nkp,
   NkpApproval,
+  NkpType,
   PaymentStatus,
   PaymentType,
   Prisma,
@@ -28,7 +29,13 @@ export class NkpService {
     let number = 'DRAFT';
 
     if (data.status == PaymentStatus.SUBMITTED) {
-      number = await this.generateNumber(data.companyId);
+      const { companyId, paymentType, nkpType, parentId } = data;
+      number = await this.generateNumber({
+        companyId,
+        paymentType,
+        nkpType,
+        parentId,
+      });
     }
 
     const savedData = await this.prisma.nkp.create({
@@ -194,7 +201,13 @@ export class NkpService {
 
     let number = 'DRAFT';
     if (dto.status == PaymentStatus.SUBMITTED) {
-      number = await this.generateNumber(dto.companyId);
+      const { companyId, paymentType, nkpType, parentId } = dto;
+      number = await this.generateNumber({
+        companyId,
+        paymentType,
+        nkpType,
+        parentId,
+      });
     }
 
     const { NkpItem: items, NkpAttachment: attachments, ...data } = dto;
@@ -221,7 +234,13 @@ export class NkpService {
 
   async submit(id: number, requesterId: number) {
     const data = await this.findOne(id);
-    const number = await this.generateNumber(data.companyId);
+    const { companyId, paymentType, nkpType, parentId } = data;
+    const number = await this.generateNumber({
+      companyId,
+      paymentType,
+      nkpType,
+      parentId,
+    });
 
     const savedData = await this.prisma.nkp.update({
       where: { id, requesterId },
@@ -347,12 +366,36 @@ export class NkpService {
     return request;
   }
 
-  private async generateNumber(companyId: number): Promise<string> {
+  private async generateNumber({
+    companyId,
+    paymentType,
+    nkpType,
+    parentId,
+  }: {
+    companyId: number;
+    paymentType: PaymentType;
+    nkpType: NkpType;
+    parentId: number | undefined;
+  }): Promise<string> {
     const { code } = await this.prisma.company.findUniqueOrThrow({
       where: { id: companyId },
     });
 
-    const bank = 'DNM'; // TODO: apakah harusnya dinamis? DNM = Bank Danamon
+    // const bank = 'DNM'; // TODO: apakah harusnya dinamis? DNM = Bank Danamon
+
+    const paymentTypes = {
+      [PaymentType.EMPLOYEE]: 'EMP',
+      [PaymentType.VENDOR]: 'VEN',
+    };
+
+    const nkpTypes = {
+      [NkpType.CASH_ADVANCE]: 'CA',
+      [NkpType.DECLARATION]: 'DCL',
+      [NkpType.DOWN_PAYMENT]: 'DP',
+      [NkpType.SETTLEMENT]: 'SET',
+    };
+
+    const type = `${paymentTypes[paymentType]}-${nkpTypes[nkpType]}`;
 
     const [month, year] = new Date()
       .toLocaleString('id-ID', {
@@ -373,7 +416,9 @@ export class NkpService {
 
     if (lastData) {
       const [lastNumber] = lastData.number.split('/');
-      number = (Number(lastNumber) + 1).toString().padStart(3, '0');
+      number = (Number(lastNumber) + (parentId ? 1 : 0))
+        .toString()
+        .padStart(3, '0');
     }
 
     const romanMonth = [
@@ -392,7 +437,7 @@ export class NkpService {
       'XII',
     ][+month];
 
-    return `${number}/NKP-${bank}-${code}/${romanMonth}/${year}`;
+    return `${number}/NKP-${type}-${code}/${romanMonth}/${year}`;
   }
 
   @OnEvent('nkp.submitted', { async: true })
