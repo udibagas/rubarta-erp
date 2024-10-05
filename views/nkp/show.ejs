@@ -48,9 +48,9 @@
               </td>
             </tr>
             <tr>
-              <td>NKP TYPE</td>
+              <td>TYPE</td>
               <td class="border-b border-black">
-                : <%= data.paymentType %>
+                : <%= data.paymentType %> / <%= data.nkpType %>
               </td>
             </tr>
              <tr>
@@ -92,8 +92,8 @@
           </tbody>
         </table>
 
-        <%- include('_items', { items: data.PaymentAuthorizationItem }) %>
-        <%- include('../_approval', { approvals: data.PaymentAuthorizationApproval }) %>
+        <%- include('_items', { items: data.NkpItem }) %>
+        <%- include('../_approval', { approvals: data.NkpApproval }) %>
       </div>
     </div>
 

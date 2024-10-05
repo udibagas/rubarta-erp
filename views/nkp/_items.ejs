@@ -47,12 +47,13 @@
         <td class="border-b border-r border-black text-center"><%= data.currency %></td>
       </tr>
 
-      <tr>
-        <td colspan="3" class="border-b border-r border-black text-right pr-2 font-bold">DOWN PAYMENT</td>
-        <td class="border-b border-r border-black text-right pr-2 font-bold"><%= toDecimal(data.downPayment) %></td>
-        <td class="border-b border-r border-black text-center"><%= data.currency %></td>
-      </tr>
-      
+      <% if (data.nkpType == 'SETTLEMENT') { %>
+       <tr>
+          <td colspan="3" class="border-b border-r border-black text-right pr-2 font-bold">DOWN PAYMENT</td>
+          <td class="border-b border-r border-black text-right pr-2 font-bold"><%= toDecimal(data.downPayment) %></td>
+          <td class="border-b border-r border-black text-center"><%= data.currency %></td>
+        </tr>
+      <% } %>
     <% } %>
 
     <% if (data.paymentType == 'EMPLOYEE' && data.parentId) { %>
