@@ -392,7 +392,7 @@ export class NkpService {
       [NkpType.CASH_ADVANCE]: 'CA',
       [NkpType.DECLARATION]: 'DCL',
       [NkpType.DOWN_PAYMENT]: 'DP',
-      [NkpType.SETTLEMENT]: 'SET',
+      [NkpType.SETTLEMENT]: 'STL',
     };
 
     const type = `${paymentTypes[paymentType]}-${nkpTypes[nkpType]}`;
@@ -404,21 +404,24 @@ export class NkpService {
       })
       .split('/');
 
-    const lastData = await this.prisma.nkp.findFirst({
-      orderBy: { number: 'desc' },
-      where: {
-        number: { endsWith: year },
-        companyId,
-      },
-    });
-
     let number = '001';
 
-    if (lastData) {
-      const [lastNumber] = lastData.number.split('/');
-      number = (Number(lastNumber) + (parentId ? 1 : 0))
-        .toString()
-        .padStart(3, '0');
+    if (parentId) {
+      const parent = await this.findOne(parentId);
+      number = parent.number.split('/')[0];
+    } else {
+      const lastData = await this.prisma.nkp.findFirst({
+        orderBy: { number: 'desc' },
+        where: {
+          number: { endsWith: year },
+          companyId,
+        },
+      });
+
+      if (lastData) {
+        const [lastNumber] = lastData.number.split('/');
+        number = (Number(lastNumber) + 1).toString().padStart(3, '0');
+      }
     }
 
     const romanMonth = [
