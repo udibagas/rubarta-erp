@@ -26,6 +26,7 @@ export class ApprovalSettingsService {
 
   findAll() {
     return this.prisma.approvalSetting.findMany({
+      orderBy: { companyId: 'asc' },
       include: {
         Company: true,
         ApprovalSettingItem: {
