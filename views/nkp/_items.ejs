@@ -56,22 +56,39 @@
       <% } %>
     <% } %>
 
-    <% if (data.paymentType == 'EMPLOYEE' && data.parentId) { %>
-      <tr>
-        <td colspan="3" class="border-b border-r border-black text-right pr-2 font-bold">CASH ADVANCE</td>
-        <td class="border-b border-r border-black text-right pr-2 font-bold"><%= toDecimal(data.cashAdvance) %></td>
-        <td class="border-b border-r border-black text-center"><%= data.currency %></td>
-      </tr>
+    <% if (data.paymentType == 'EMPLOYEE') { %>
 
-      <tr>
-        <td colspan="3" class="border-b border-r border-black text-right pr-2 font-bold">
-          KEMBALI KE <%= data.finalPayment > 0 ? 'KARYAWAN' : 'PERUSAHAAN' %>
-        </td>
-        <td class="border-b border-r border-black text-right pr-2 font-bold">
-          <%= toDecimal(data.grandTotal) %>
-        </td>
-        <td class="border-b border-r border-black text-center"><%= data.currency %></td>
-      </tr>
+      <% if (data.cashAdvanceBalance) { %>
+        <tr>
+          <td colspan="3" class="border-b border-r border-black text-right pr-2 font-bold">CASH ADVANCE BALANCE</td>
+          <td class="border-b border-r border-black text-right pr-2 font-bold"><%= toDecimal(data.cashAdvanceBalance) %></td>
+          <td class="border-b border-r border-black text-center"><%= data.currency %></td>
+        </tr>
+      <% } %>
+      
+      <% if (data.nkpType == 'CASH_ADVANCE') { %>
+        <tr>
+          <td colspan="3" class="border-b border-r border-black text-right pr-2 font-bold">
+            TRANSFER KE KARYAWAN
+          </td>
+          <td class="border-b border-r border-black text-right pr-2 font-bold">
+            <%= toDecimal(Math.abs(data.finalPayment)) %>
+          </td>
+          <td class="border-b border-r border-black text-center"><%= data.currency %></td>
+        </tr>
+      <% } %>
+
+      <% if (data.nkpType == 'DECLARATION') { %>
+        <tr>
+          <td colspan="3" class="border-b border-r border-black text-right pr-2 font-bold">
+            KEMBALI KE <%= data.finalPayment > 0 ? 'KARYAWAN' : 'PERUSAHAAN' %>
+          </td>
+          <td class="border-b border-r border-black text-right pr-2 font-bold">
+            <%= toDecimal(Math.abs(data.finalPayment)) %>
+          </td>
+          <td class="border-b border-r border-black text-center"><%= data.currency %></td>
+        </tr>
+      <% } %>
     <% } %>
       
     <% if (data.paymentType == 'VENDOR') { %>
