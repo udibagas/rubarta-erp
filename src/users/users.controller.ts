@@ -47,6 +47,12 @@ export class UsersController {
     return this.usersService.findAll(keyword);
   }
 
+  @Get('balance')
+  @Roles(Role.ADMIN)
+  balance() {
+    return this.usersService.getBalance();
+  }
+
   @Get(':id')
   @ApiOperation({ summary: 'Get single user by id' })
   @ApiOkResponse({ type: User })

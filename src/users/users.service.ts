@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { PrismaService } from '../prisma/prisma.service';
@@ -97,5 +97,18 @@ export class UsersService {
     }
 
     return code;
+  }
+
+  getBalance() {
+    return this.prisma.userBalance.findMany({
+      orderBy: { userId: 'asc' },
+      include: {
+        user: {
+          select: {
+            name: true,
+          },
+        },
+      },
+    });
   }
 }
