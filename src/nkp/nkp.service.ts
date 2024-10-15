@@ -390,12 +390,14 @@ export class NkpService {
 
     // kalau dia deklarasi dan ada yg harus dikebmalikan ke perusahaan
     // update balance sesuai dengan jumlah yang harus dikembalikan ke perusahaan
-    if (nkp.nkpType == NkpType.DECLARATION && nkp.finalPayment < 0) {
+    if (nkp.nkpType == NkpType.DECLARATION) {
       await this.prisma.userBalance.update({
         where: { userId: nkp.employeeId },
         data: {
           description: nkp.number,
-          balance: Math.abs(nkp.finalPayment),
+          // kalau kembali ke perusahaan jadikan sebagai balance
+          // kalau pas atau kembali ke karyawan berarti balance habis
+          balance: nkp.finalPayment < 0 ? Math.abs(nkp.finalPayment) : 0,
         },
       });
     }
