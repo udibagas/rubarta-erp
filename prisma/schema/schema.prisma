@@ -80,11 +80,12 @@ model User {
 }
 
 model UserBalance {
-  id        Int       @id @default(autoincrement())
-  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  userId    Int       @unique
-  balance   Int       @default(0) @db.Integer
-  updatedAt DateTime? @updatedAt // kirim notifikasi apabila ada balance > 0 belum dilaporkan >= 7 hari
+  id          Int       @id @default(autoincrement())
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  userId      Int       @unique
+  balance     Int       @default(0) @db.Integer
+  description String?   @db.VarChar()
+  updatedAt   DateTime? @updatedAt // kirim notifikasi apabila ada balance > 0 belum dilaporkan >= 7 hari
 
   @@index([userId])
   @@map("UserBalances")

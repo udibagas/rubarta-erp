@@ -363,6 +363,43 @@ export class NkpService {
       redirectUrl: `https://erp.rubarta.co.id/nkp?number=${request.number}`,
     });
 
+    // add to employee balance
+    const nkp = await this.prisma.nkp.findFirst({
+      where: { id },
+      include: { Employee: true },
+    });
+
+    const employeeBalance = await this.prisma.userBalance.upsert({
+      where: { userId: nkp.employeeId },
+      update: {},
+      create: { userId: nkp.employeeId, balance: 0 },
+    });
+
+    const balance = employeeBalance.balance;
+
+    // kalau dia cash advance tambahin balance
+    if (nkp.nkpType == NkpType.CASH_ADVANCE) {
+      await this.prisma.userBalance.update({
+        where: { userId: nkp.employeeId },
+        data: {
+          description: nkp.number,
+          balance: balance + nkp.finalPayment,
+        },
+      });
+    }
+
+    // kalau dia deklarasi dan ada yg harus dikebmalikan ke perusahaan
+    // update balance sesuai dengan jumlah yang harus dikembalikan ke perusahaan
+    if (nkp.nkpType == NkpType.DECLARATION && nkp.finalPayment < 0) {
+      await this.prisma.userBalance.update({
+        where: { userId: nkp.employeeId },
+        data: {
+          description: nkp.number,
+          balance: Math.abs(nkp.finalPayment),
+        },
+      });
+    }
+
     return request;
   }
 
@@ -449,6 +486,8 @@ export class NkpService {
       where: {
         approvalType: ApprovalType.NKP,
         companyId: data.companyId,
+        paymentType: data.paymentType,
+        nkpType: data.nkpType,
       },
       include: { ApprovalSettingItem: true },
     });
