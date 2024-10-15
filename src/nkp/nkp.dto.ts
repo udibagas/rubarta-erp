@@ -99,6 +99,11 @@ export class NkpDto {
   @IsNumber({}, { message: 'Net amount must be a number' })
   netAmount: number;
 
+  @ApiProperty({ example: 2_000_000, description: 'Total Amount' })
+  @IsNumber({}, { message: 'Total amount must be a number' })
+  @IsOptional()
+  totalAmount: number;
+
   @ApiProperty({ example: 2_000_000, description: 'DP based on items' })
   @IsNumber({}, { message: 'DP must be a number' })
   @IsOptional()

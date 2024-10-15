@@ -29,6 +29,7 @@ model Nkp {
   cashAdvanceBalance Int  @default(0) @db.Integer
   netAmount          Int  @db.Integer
   finalPayment       Int? @db.Integer
+  totalAmount        Int? @db.Integer // only for vendor
 
   // timestamp
   createdAt DateTime  @default(now())
