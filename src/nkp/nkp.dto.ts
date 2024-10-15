@@ -114,7 +114,7 @@ export class NkpDto {
   @ApiProperty()
   @IsOptional()
   @IsNumber({}, { message: 'Cash advance must be a number' })
-  cashAdvance: number;
+  cashAdvanceBalance: number;
 
   @ApiProperty({
     example: 'Cash Advance for Bagas for 3 days',
