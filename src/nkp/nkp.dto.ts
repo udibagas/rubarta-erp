@@ -56,6 +56,9 @@ export class NkpDto {
   @IsEnum(NkpType, { message: 'Please select payment type' })
   nkpType: NkpType;
 
+  @IsOptional()
+  invoiceNumber?: string;
+
   @ApiProperty({ example: 1, description: 'Employee ID' })
   @IsOptional()
   employeeId: number;
