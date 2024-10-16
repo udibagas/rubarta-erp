@@ -369,42 +369,45 @@ export class NkpService {
       include: { Employee: true },
     });
 
-    if (nkp.paymentType == PaymentType.EMPLOYEE) {
-      const employeeBalance = await this.prisma.userBalance.upsert({
-        where: { userId: nkp.employeeId },
-        update: {},
-        create: { userId: nkp.employeeId, balance: 0 },
-      });
-
-      const balance = employeeBalance.balance;
-
-      // kalau dia cash advance tambahin balance
-      if (nkp.nkpType == NkpType.CASH_ADVANCE) {
-        await this.prisma.userBalance.update({
-          where: { userId: nkp.employeeId },
-          data: {
-            description: nkp.number,
-            balance: balance + nkp.finalPayment,
-          },
-        });
-      }
-
-      // kalau dia deklarasi dan ada yg harus dikebmalikan ke perusahaan
-      // update balance sesuai dengan jumlah yang harus dikembalikan ke perusahaan
-      if (nkp.nkpType == NkpType.DECLARATION) {
-        await this.prisma.userBalance.update({
-          where: { userId: nkp.employeeId },
-          data: {
-            description: nkp.number,
-            // kalau kembali ke perusahaan jadikan sebagai balance
-            // kalau pas atau kembali ke karyawan berarti balance habis
-            balance: nkp.finalPayment < 0 ? Math.abs(nkp.finalPayment) : 0,
-          },
-        });
-      }
-    }
+    if (nkp.paymentType == PaymentType.EMPLOYEE)
+      await this.updateUserBalance(nkp);
 
     return request;
+  }
+
+  private async updateUserBalance(nkp: Nkp) {
+    const employeeBalance = await this.prisma.userBalance.upsert({
+      where: { userId: nkp.employeeId },
+      update: {},
+      create: { userId: nkp.employeeId, balance: 0 },
+    });
+
+    const balance = employeeBalance.balance;
+
+    // kalau dia cash advance tambahin balance
+    if (nkp.nkpType == NkpType.CASH_ADVANCE) {
+      await this.prisma.userBalance.update({
+        where: { userId: nkp.employeeId },
+        data: {
+          description: nkp.number,
+          balance: balance + nkp.finalPayment,
+        },
+      });
+    }
+
+    // kalau dia deklarasi dan ada yg harus dikebmalikan ke perusahaan
+    // update balance sesuai dengan jumlah yang harus dikembalikan ke perusahaan
+    if (nkp.nkpType == NkpType.DECLARATION) {
+      await this.prisma.userBalance.update({
+        where: { userId: nkp.employeeId },
+        data: {
+          description: nkp.number,
+          // kalau kembali ke perusahaan jadikan sebagai balance
+          // kalau pas atau kembali ke karyawan berarti balance habis
+          balance: nkp.finalPayment < 0 ? Math.abs(nkp.finalPayment) : 0,
+        },
+      });
+    }
   }
 
   private async generateNumber({
