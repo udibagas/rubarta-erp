@@ -7,6 +7,7 @@ import {
   Param,
   Delete,
   ParseIntPipe,
+  Query,
 } from '@nestjs/common';
 import { ApprovalSettingsService } from './approval-settings.service';
 import { ApprovalSettingDto } from './approval-setting.dto';
@@ -56,8 +57,10 @@ export class ApprovalSettingsController {
   @Get()
   @ApiOperation({ summary: 'Get all approval settings' })
   @ApiOkResponse({ type: ApprovalSetting, isArray: true })
-  findAll(): Promise<ApprovalSetting[]> {
-    return this.approvalSettingsService.findAll();
+  findAll(
+    @Query('companyId', ParseIntPipe) companyId: number,
+  ): Promise<ApprovalSetting[]> {
+    return this.approvalSettingsService.findAll(companyId);
   }
 
   @Get(':id')

@@ -24,9 +24,14 @@ export class ApprovalSettingsService {
     });
   }
 
-  findAll() {
+  findAll(companyId: number) {
     return this.prisma.approvalSetting.findMany({
-      orderBy: { companyId: 'asc' },
+      where: { companyId },
+      orderBy: [
+        { approvalType: 'asc' },
+        { paymentType: 'asc' },
+        { nkpType: 'asc' },
+      ],
       include: {
         Company: true,
         ApprovalSettingItem: {
