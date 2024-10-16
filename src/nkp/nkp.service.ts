@@ -105,6 +105,7 @@ export class NkpService {
         { number: { contains: keyword, mode: 'insensitive' } },
         { description: { contains: keyword, mode: 'insensitive' } },
         { bankRefNo: { contains: keyword, mode: 'insensitive' } },
+        { invoiceNumber: { contains: keyword, mode: 'insensitive' } },
         {
           Employee: {
             name: { contains: keyword, mode: 'insensitive' },
