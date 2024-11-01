@@ -317,10 +317,19 @@ export class NkpService {
         redirectUrl: `https://erp.rubarta.co.id/nkp?number=${request.number}`,
       });
 
+      const approvers = await this.prisma.nkpApproval.findMany({
+        where: {
+          nkpId: id,
+        },
+      });
+
       // NOTIFIKASI KE ADMIN UNTUK PROSES PEMBAYARAN & CLOSING
-      // sementara kirim ke ke semua admin
+      // ke admin yg related
       const admins = await this.prisma.user.findMany({
-        where: { roles: { hasSome: [Role.ADMIN] } },
+        where: {
+          roles: { hasSome: [Role.ADMIN] },
+          id: { in: approvers.map((a) => a.userId) },
+        },
       });
 
       admins.forEach((user) => {
