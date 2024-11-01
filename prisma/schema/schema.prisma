@@ -172,6 +172,7 @@ enum ApprovalActionType {
 enum PaymentType {
   EMPLOYEE
   VENDOR
+  MUTATION
 }
 
 enum NkpType {
@@ -179,4 +180,5 @@ enum NkpType {
   DECLARATION
   DOWN_PAYMENT
   SETTLEMENT
+  MUTATION
 }
