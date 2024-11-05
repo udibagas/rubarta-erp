@@ -133,6 +133,10 @@ export class NkpDto {
   @IsNumber()
   parentId?: number;
 
+  @ApiProperty()
+  @IsOptional()
+  sourceBank?: string;
+
   @ApiProperty({ example: 'SUBMITTED', description: 'Status' })
   @IsEnum(PaymentStatus)
   status: PaymentStatus;

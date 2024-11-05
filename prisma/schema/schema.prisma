@@ -172,7 +172,7 @@ enum ApprovalActionType {
 enum PaymentType {
   EMPLOYEE
   VENDOR
-  MUTATION
+  COMPANY
 }
 
 enum NkpType {

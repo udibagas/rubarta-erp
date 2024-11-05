@@ -84,7 +84,7 @@ export class NkpService {
 
     if (
       paymentType &&
-      [PaymentType.EMPLOYEE, PaymentType.VENDOR, PaymentType.MUTATION].includes(
+      [PaymentType.EMPLOYEE, PaymentType.VENDOR, PaymentType.COMPANY].includes(
         paymentType,
       )
     ) {

@@ -19,7 +19,7 @@ model Nkp {
   bankId      Int
   bankAccount String   @db.VarChar(30)
   currency    Currency @default(IDR)
-  bankRefNo   String?  @db.VarChar(30)
+  bankRefNo   String?  @db.VarChar(100)
 
   // amount related
   grandTotal         Int  @db.Integer
@@ -44,6 +44,9 @@ model Nkp {
   Parent   Nkp? @relation("Parent", fields: [parentId], references: [id])
   Child    Nkp? @relation("Parent")
   parentId Int? @unique
+
+  // untuk mutation
+  sourceBankId Int?
 
   @@index([employeeId, requesterId, bankId, companyId])
   @@map("Nkp")
