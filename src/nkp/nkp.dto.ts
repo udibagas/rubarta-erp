@@ -8,6 +8,7 @@ import {
   IsNotEmpty,
   IsNumber,
   IsOptional,
+  MaxLength,
   ValidateNested,
 } from 'class-validator';
 
@@ -76,6 +77,7 @@ export class NkpDto {
 
   @ApiProperty({ example: '2411191***', description: 'Bank Account' })
   @IsNotEmpty({ message: 'Bank account is required' })
+  @MaxLength(30, { message: 'Max bank account is 30 characters' })
   bankAccount: string;
 
   @IsEnum(Currency, { message: 'Invalid currency' })
