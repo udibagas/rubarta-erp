@@ -171,5 +171,6 @@ export class CloseNkpDto {
 
   @IsArray()
   @Type(() => NkpAttachmentDto)
+  @ArrayNotEmpty({ message: 'Please attach proof of transfer' })
   attachments: NkpAttachmentDto[];
 }
