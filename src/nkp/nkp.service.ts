@@ -84,9 +84,13 @@ export class NkpService {
 
     if (
       paymentType &&
-      [PaymentType.EMPLOYEE, PaymentType.VENDOR, PaymentType.COMPANY].includes(
-        paymentType,
-      )
+      [
+        PaymentType.EMPLOYEE,
+        PaymentType.VENDOR,
+        PaymentType.TRANSFER_BALANCE,
+        PaymentType.TAX,
+        PaymentType.BILL,
+      ].includes(paymentType)
     ) {
       where.paymentType = paymentType;
     }
@@ -447,6 +451,7 @@ export class NkpService {
     const nkpTypes = {
       [NkpType.CASH_ADVANCE]: 'CA',
       [NkpType.DECLARATION]: 'DCL',
+      [NkpType.SALARY]: 'SLR',
       [NkpType.DOWN_PAYMENT]: 'DP',
       [NkpType.SETTLEMENT]: 'STL',
     };
