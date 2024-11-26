@@ -167,6 +167,11 @@ export class NkpController {
     return this.nkpService.close(id, data, user);
   }
 
+  @Get('getDownPayment/:id')
+  getDownPayment(@Param('id', ParseIntPipe) id: number) {
+    return this.nkpService.getDownPayment(id);
+  }
+
   @Get('/print/:id')
   async print(@Param('id', ParseIntPipe) id: number, @Res() res: Response) {
     const data = await this.nkpService.findOne(id);

@@ -426,6 +426,22 @@ export class NkpService {
     }
   }
 
+  async getDownPayment(id: number) {
+    const nkp = await this.prisma.nkp.findFirst({ where: { id } });
+
+    if (nkp) {
+      console.log(nkp.number);
+      return (
+        await this.prisma.nkp.aggregate({
+          _sum: { finalPayment: true },
+          where: { number: nkp.number, nkpType: 'DOWN_PAYMENT' },
+        })
+      )._sum.finalPayment;
+    }
+
+    return 0;
+  }
+
   private async generateNumber({
     companyId,
     paymentType,
