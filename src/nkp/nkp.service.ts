@@ -43,7 +43,12 @@ export class NkpService {
       data: {
         ...data,
         number,
-        NkpItem: { create: items },
+        NkpItem: {
+          create: items.map((i) => ({
+            ...i,
+            date: new Date(i.date),
+          })),
+        },
         NkpAttachment: { create: attachments },
       },
     });
@@ -223,7 +228,13 @@ export class NkpService {
       data: {
         ...data,
         number,
-        NkpItem: { deleteMany: {}, create: items },
+        NkpItem: {
+          deleteMany: {},
+          create: items.map((i) => ({
+            ...i,
+            date: new Date(i.date),
+          })),
+        },
         NkpAttachment: { deleteMany: {}, create: attachments },
       },
       include: {
