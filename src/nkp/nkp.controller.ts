@@ -27,7 +27,7 @@ import { terbilang, toCurrency, toDecimal } from 'src/helpers/number';
 import { formatDate, formatDateNumeric } from 'src/helpers/date';
 import { Response } from 'express';
 
-@ApiTags('Payment Authorizations')
+@ApiTags('Nota Kuasa Pembayaran')
 @ApiBearerAuth()
 @Controller('api/nkp')
 export class NkpController {
