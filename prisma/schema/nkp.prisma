@@ -22,14 +22,14 @@ model Nkp {
   bankRefNo   String?  @db.VarChar(100)
 
   // amount related
-  grandTotal         Decimal  @db.Decimal(20, 2)
-  deduction          Decimal  @default(0) @db.Decimal(20, 2)
-  tax                Decimal  @default(0) @db.Decimal(20, 2)
-  downPayment        Decimal  @default(0) @db.Decimal(20, 2)
-  cashAdvanceBalance Decimal  @default(0) @db.Decimal(20, 2)
-  netAmount          Decimal  @db.Decimal(20, 2)
-  finalPayment       Decimal? @db.Decimal(20, 2)
-  totalAmount        Decimal? @db.Decimal(20, 2) // only for vendor
+  grandTotal         Int  @db.Integer
+  deduction          Int  @default(0) @db.Integer
+  tax                Int  @default(0) @db.Integer
+  downPayment        Int  @default(0) @db.Integer
+  cashAdvanceBalance Int  @default(0) @db.Integer
+  netAmount          Int  @db.Integer
+  finalPayment       Int? @db.Integer
+  totalAmount        Int? @db.Integer // only for vendor
 
   // timestamp
   createdAt DateTime  @default(now())
@@ -56,7 +56,7 @@ model NkpItem {
   id          Int      @id @default(autoincrement())
   date        DateTime @db.Date
   description String   @db.Text
-  amount      Decimal  @db.Decimal(20, 2)
+  amount      Int      @db.Integer
   currency    Currency @default(IDR)
   Nkp         Nkp?     @relation(fields: [nkpId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   nkpId       Int
