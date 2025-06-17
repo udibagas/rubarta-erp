@@ -417,7 +417,7 @@ export class NkpService {
         where: { userId: nkp.employeeId },
         data: {
           description: nkp.number,
-          balance: balance + nkp.finalPayment,
+          balance: balance.add(nkp.finalPayment),
         },
       });
     }
@@ -431,7 +431,9 @@ export class NkpService {
           description: nkp.number,
           // kalau kembali ke perusahaan jadikan sebagai balance
           // kalau pas atau kembali ke karyawan berarti balance habis
-          balance: nkp.finalPayment < 0 ? Math.abs(nkp.finalPayment) : 0,
+          balance: nkp.finalPayment.lt(0)
+            ? nkp.finalPayment.abs().toNumber()
+            : 0,
         },
       });
     }
