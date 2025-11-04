@@ -16,6 +16,7 @@ model Supplier {
   Transaction Transaction[]
   bankId      Int
   Nkp         Nkp[]
+  Material    Material[]
 
   @@map("Suppliers")
 }
@@ -60,27 +61,78 @@ model TransactionDetail {
   @@map("TransactionDetails")
 }
 
+enum InvoiceStatus {
+  Draft
+  Pending
+  Paid
+  Overdue
+}
+
 model Invoice {
-  id          Int       @id @default(autoincrement())
+  id          Int           @id @default(autoincrement())
+  number      String        @unique
   date        DateTime
   dueDate     DateTime
-  customerId  Int
-  totalAmount Decimal
-  status      String
-  customer    Customer  @relation(fields: [customerId], references: [id])
-  Payment     Payment[]
-  Order       Order     @relation(fields: [orderId], references: [id])
-  orderId     Int       @unique
+  status      InvoiceStatus
+  attachments Json?         @db.JsonB // Attachments related to the invoice
+
+  // financials
+  totalAmount Float
+  vatAmount   Float
+  grandTotal  Float
+
+  // Relationships
+  userId     Int
+  orderId    Int @unique
+  customerId Int
+
+  Customer     Customer      @relation(fields: [customerId], references: [id])
+  Payments     Payment[]
+  Order        Order         @relation(fields: [orderId], references: [id])
+  User         User          @relation(fields: [userId], references: [id])
+  InvoiceItems InvoiceItem[]
+
+  // Timestamps
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@map("Invoices")
 }
 
+model InvoiceItem {
+  id          Int     @id @default(autoincrement())
+  invoiceId   Int
+  description String
+  quantity    Int
+  unitPrice   Float
+  totalPrice  Float
+  vat         Boolean @default(false) // Indicates if VAT is applicable
+
+  // Relationships
+  Invoice Invoice @relation(fields: [invoiceId], references: [id])
+
+  @@map("InvoiceItems")
+}
+
 model Payment {
-  id         Int      @id @default(autoincrement())
-  date       DateTime
-  invoiceId  Int
-  amountPaid Decimal
-  invoice    Invoice  @relation(fields: [invoiceId], references: [id])
+  id          Int      @id @default(autoincrement())
+  date        DateTime
+  amountPaid  Decimal
+  remarks     String?
+  attachments Json?    @db.JsonB // Attachments related to the payment
+
+  // Relationships
+  invoiceId Int
+  userId    Int
+
+  Invoice Invoice @relation(fields: [invoiceId], references: [id])
+  User    User    @relation(fields: [userId], references: [id])
+
+  // Timestamps
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("Payments")
 }
 
 model Expense {

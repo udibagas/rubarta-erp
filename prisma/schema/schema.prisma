@@ -68,12 +68,15 @@ model User {
   ApprovalSettingItem ApprovalSettingItem[]
   Nkp                 Nkp[]                 @relation(name: "Nkp")
   NkpRequest          Nkp[]                 @relation(name: "NkpRequest")
-  Transaction         Transaction[]
-  Task                Task[]
-  Interaction         Interaction[]
-  CustomerNote        CustomerNote[]
-  Lead                Lead[]
-  Opportunity         Opportunity[]
+  Transactions        Transaction[]
+  Tasks               Task[]
+  Interactions        Interaction[]
+  CustomerNotes       CustomerNote[]
+  Leads               Lead[]
+  Opportunities       Opportunity[]
+  Quotations          Quotation[]
+  Invoices            Invoice[]
+  Payments            Payment[]
 
   @@index([bankId, departmentId])
   @@map("Users")

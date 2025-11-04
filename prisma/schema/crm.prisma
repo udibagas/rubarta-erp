@@ -1,19 +1,20 @@
 model Customer {
-  id           Int            @id @default(autoincrement())
-  name         String
-  address      String
-  phone        String
-  email        String
-  Transaction  Transaction[]
-  Invoice      Invoice[]
-  Contact      Contact[]
-  Lead         Lead[]
-  Opportunity  Opportunity[]
-  Task         Task[]
-  Interaction  Interaction[]
-  Order        Order[]
-  CustomerNote CustomerNote[]
-  CustomerFile CustomerFile[]
+  id            Int            @id @default(autoincrement())
+  name          String
+  address       String
+  phone         String
+  email         String
+  Transactions  Transaction[]
+  Invoices      Invoice[]
+  Contacts      Contact[]
+  Leads         Lead[]
+  Opportunities Opportunity[]
+  Tasks         Task[]
+  Interactions  Interaction[]
+  Orders        Order[]
+  CustomerNote  CustomerNote[]
+  CustomerFile  CustomerFile[]
+  Quotation     Quotation[]
 
   @@map("Customers")
 }
@@ -36,11 +37,11 @@ model Contact {
 }
 
 enum LeadStatus {
-  New
-  Contacted
-  Qualified
-  Unqualified
-  Converted
+  New // Newly created lead
+  Contacted // Initial contact made
+  Qualified // Interested and a good fit
+  Unqualified // Not interested or not a good fit
+  Converted // Converted to Opportunity
 }
 
 enum LeadSource {
@@ -52,11 +53,19 @@ enum LeadSource {
 }
 
 enum OpportunityStages {
-  Prospecting
-  Negotiation
-  Proposal_Sent
-  Closed_Won
-  Closed_Lost
+  Prospecting // Initial stage of identifying potential customers
+  Negotiation // Discussing terms and conditions
+  Proposal_Sent // Proposal has been sent to the customer
+  Closed_Won // Opportunity has been won
+  Closed_Lost // Opportunity has been lost
+}
+
+enum QuotationStatus {
+  Draft // Quotation is being prepared
+  Sent // Quotation has been sent to the customer
+  Accepted // Customer has accepted the quotation
+  Rejected // Customer has rejected the quotation
+  Expired // Quotation validity period has expired
 }
 
 model Lead {
@@ -68,8 +77,10 @@ model Lead {
   source     LeadSource
   status     LeadStatus @default(New)
   notes      String?
-  createdAt  DateTime   @default(now())
-  updatedAt  DateTime   @updatedAt
+
+  // Timestamps
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   // Relationships
   Customer Customer @relation(fields: [customerId], references: [id])
@@ -92,11 +103,58 @@ model Opportunity {
   updatedAt         DateTime          @updatedAt
 
   // Relationships
-  Customer Customer @relation(fields: [customerId], references: [id])
-  User     User     @relation(fields: [userId], references: [id])
-  Company  Company  @relation(fields: [companyId], references: [id])
+  Customer   Customer    @relation(fields: [customerId], references: [id])
+  User       User        @relation(fields: [userId], references: [id])
+  Company    Company     @relation(fields: [companyId], references: [id])
+  Quotations Quotation[]
 
   @@map("Opportunities")
+}
+
+model Quotation {
+  id          Int             @id @default(autoincrement())
+  number      String          @unique
+  title       String
+  totalAmount Float
+  vatAmount   Float           @default(0)
+  grandTotal  Float
+  status      QuotationStatus @default(Draft)
+  currency    Currency        @default(IDR) // Currency code, e.g., IDR, USD
+  validity    Int             @default(30) // Validity period in days
+  validUntil  DateTime
+
+  // Timestamps
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Foreign Keys
+  customerId    Int
+  userId        Int
+  opportunityId Int?
+
+  // Relationships
+  Opportunity    Opportunity?    @relation(fields: [opportunityId], references: [id])
+  Customer       Customer        @relation(fields: [customerId], references: [id])
+  User           User            @relation(fields: [userId], references: [id])
+  QuotationItems QuotationItem[]
+
+  @@map("Quotations")
+}
+
+model QuotationItem {
+  id          Int     @id @default(autoincrement())
+  quotationId Int
+  partNumber  String
+  description String
+  quantity    Int
+  unitPrice   Float
+  totalPrice  Float
+  vat         Boolean @default(false) // Indicates if VAT is applicable
+
+  // Relationships
+  Quotation Quotation @relation(fields: [quotationId], references: [id])
+
+  @@map("QuotationItems")
 }
 
 model Task {
@@ -134,37 +192,49 @@ model Interaction {
   @@map("Interactions")
 }
 
-model Product {
-  id          Int      @id @default(autoincrement())
-  name        String
-  description String?
-  price       Float
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-
-  // Relationships
-  Orders Order[]
-
-  @@map("Products")
+enum OrderStatus {
+  Pending
+  Processing
+  Completed
+  Cancelled
 }
 
 model Order {
-  id           Int      @id @default(autoincrement())
-  customerId   Int
-  productId    Int
-  quantity     Int
-  total_amount Float
-  order_date   DateTime
-  status       String
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+  id          Int         @id @default(autoincrement())
+  number      String      @unique
+  date        DateTime
+  customerId  Int
+  totalAmount Float
+  vatAmount   Float       @default(0)
+  grandTotal  Float
+  status      OrderStatus
+
+  // Timestamps
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   // Relationships
-  Customer Customer @relation(fields: [customerId], references: [id])
-  Product  Product  @relation(fields: [productId], references: [id])
-  Invoice  Invoice?
+  Customer   Customer    @relation(fields: [customerId], references: [id])
+  Invoice    Invoice?
+  OrderItems OrderItem[]
 
   @@map("Orders")
+}
+
+model OrderItem {
+  id          Int     @id @default(autoincrement())
+  orderId     Int
+  partNumber  String
+  description String
+  quantity    Int
+  unitPrice   Float
+  totalPrice  Float
+  vat         Boolean @default(false) // Indicates if VAT is applicable
+
+  // Relationships
+  Order Order @relation(fields: [orderId], references: [id])
+
+  @@map("OrderItems")
 }
 
 model CustomerNote {
@@ -199,4 +269,24 @@ model CustomerFile {
   Customer Customer @relation(fields: [customerId], references: [id])
 
   @@map("CustomerFiles")
+}
+
+model Material {
+  id            Int     @id @default(autoincrement())
+  partNumber    String  @unique
+  name          String
+  description   String?
+  unit          String // e.g., pcs, kg, liter
+  purchasePrice Float?
+  sellingPrice  Float?
+  supplierId    Int?
+
+  // Timestamps
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relationships
+  Supplier Supplier? @relation(fields: [supplierId], references: [id])
+
+  @@map("Materials")
 }
