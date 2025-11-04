@@ -5,8 +5,7 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider        = "prisma-client-js"
-  previewFeatures = ["omitApi", "prismaSchemaFolder"]
+  provider = "prisma-client-js"
 }
 
 datasource db {
@@ -68,7 +67,6 @@ model User {
   ApprovalSettingItem ApprovalSettingItem[]
   Nkp                 Nkp[]                 @relation(name: "Nkp")
   NkpRequest          Nkp[]                 @relation(name: "NkpRequest")
-  Transactions        Transaction[]
   Tasks               Task[]
   Interactions        Interaction[]
   CustomerNotes       CustomerNote[]

@@ -18,7 +18,6 @@ import { FileModule } from './file/file.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { SuppliersModule } from './suppliers/suppliers.module';
 import { ReportModule } from './report/report.module';
-// import { TransactionsModule } from './transactions/transactions.module';
 // import { InvoicesModule } from './invoices/invoices.module';
 // import { PaymentsModule } from './payments/payments.module';
 // import { ExpensesModule } from './expenses/expenses.module';
@@ -91,7 +90,6 @@ import { OpportunitiesModule } from './opportunities/opportunities.module';
     SuppliersModule,
     ReportModule,
     // AccountsModule,
-    // TransactionsModule,
     // InvoicesModule,
     // PaymentsModule,
     // ExpensesModule,

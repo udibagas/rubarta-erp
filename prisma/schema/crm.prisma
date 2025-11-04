@@ -4,7 +4,6 @@ model Customer {
   address       String
   phone         String
   email         String
-  Transactions  Transaction[]
   Invoices      Invoice[]
   Contacts      Contact[]
   Leads         Lead[]

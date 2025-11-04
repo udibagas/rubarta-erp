@@ -32,7 +32,7 @@ export class AuthController {
   ) {}
 
   @Public()
-  @Post()
+  @Post('login')
   @HttpCode(HttpStatus.OK)
   @ApiOperation({ summary: 'Sign in by email and password' })
   @ApiOkResponse({ type: AuthEntity })
@@ -53,7 +53,7 @@ export class AuthController {
     return data;
   }
 
-  @Get()
+  @Get('me')
   @ApiBearerAuth()
   @ApiOperation({ summary: 'Get current user' })
   me(@Auth() user: User) {

@@ -17,3 +17,10 @@
 ### Approval
 
 - Berjenjang
+
+- balance employee
+- invoice_number
+- total amount
+- final payment / transfer to vendor
+
+- \_items.ejs belum selesai untuk employee (cash advance)

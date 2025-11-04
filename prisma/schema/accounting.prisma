@@ -4,16 +4,15 @@ enum Currency {
 }
 
 model Supplier {
-  id          Int           @id @default(autoincrement())
-  code        String?       @db.Char(6)
+  id          Int        @id @default(autoincrement())
+  code        String?    @db.Char(6)
   name        String
   address     String
   phone       String?
   email       String?
-  Bank        Bank          @relation(fields: [bankId], references: [id])
+  Bank        Bank       @relation(fields: [bankId], references: [id])
   bankAccount String
   currency    Currency
-  Transaction Transaction[]
   bankId      Int
   Nkp         Nkp[]
   Material    Material[]
@@ -22,43 +21,14 @@ model Supplier {
 }
 
 model Account {
-  id                Int                 @id @default(autoincrement())
-  code              String              @unique
-  name              String
-  type              String
-  balance           Decimal
-  TransactionDetail TransactionDetail[]
-  Expense           Expense[]
+  id      Int       @id @default(autoincrement())
+  code    String    @unique
+  name    String
+  type    String
+  balance Decimal
+  Expense Expense[]
 
   @@map("Accounts")
-}
-
-model Transaction {
-  id                Int                 @id @default(autoincrement())
-  date              DateTime
-  description       String
-  amount            Decimal
-  customerId        Int
-  supplierId        Int
-  userId            Int
-  customer          Customer            @relation(fields: [customerId], references: [id])
-  supplier          Supplier            @relation(fields: [supplierId], references: [id])
-  user              User                @relation(fields: [userId], references: [id])
-  TransactionDetail TransactionDetail[]
-
-  @@map("Transactions")
-}
-
-model TransactionDetail {
-  id            Int         @id @default(autoincrement())
-  transactionId Int
-  accountId     Int
-  debit         Decimal
-  credit        Decimal
-  transaction   Transaction @relation(fields: [transactionId], references: [id])
-  account       Account     @relation(fields: [accountId], references: [id])
-
-  @@map("TransactionDetails")
 }
 
 enum InvoiceStatus {
