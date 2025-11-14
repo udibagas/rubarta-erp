@@ -16,6 +16,9 @@ npm install
 # Run database migrations
 npm run db:push
 
+# Build the project
+npm run build
+
 # Restart the service
 pm2 restart erp
 
