@@ -84,7 +84,7 @@ model UserBalance {
   id          Int       @id @default(autoincrement())
   user        User      @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   userId      Int       @unique
-  balance     Int       @default(0) @db.Integer
+  balance     Float     @default(0) @db.DoublePrecision
   description String?   @db.VarChar()
   updatedAt   DateTime? @updatedAt // kirim notifikasi apabila ada balance > 0 belum dilaporkan >= 7 hari
 
