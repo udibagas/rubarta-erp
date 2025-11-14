@@ -5,7 +5,7 @@ git push origin main
 ssh 103.157.26.67 << 'ENDSSH'
 
 # Navigate to the project directory
-cd /home/apps/rubarta-erp
+cd /home/app/rubarta-erp
 
 # Pull the latest changes
 git pull origin main

@@ -24,7 +24,7 @@ import { Response } from 'express';
 import { PrismaService } from 'src/prisma/prisma.service';
 
 @ApiTags('Auth')
-@Controller('auth')
+@Controller('api/auth')
 export class AuthController {
   constructor(
     private authService: AuthService,
@@ -61,7 +61,7 @@ export class AuthController {
   }
 
   @Public()
-  @Get('/csrf')
+  @Get('csrf')
   getCsrfToken(@Req() req, @Res({ passthrough: true }) res: Response): any {
     const token = req.csrfToken();
     res.cookie('_csrf', req.csrfToken());
