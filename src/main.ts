@@ -40,6 +40,7 @@ async function bootstrap() {
         'http://nkp.rubarta.co.id',
         'https://erp.rubarta.co.id',
         'https://nkp.rubarta.co.id',
+        'https://rubarta-erp-client-production.up.railway.app',
       ],
     },
   });
