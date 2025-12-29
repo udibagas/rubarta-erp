@@ -73,9 +73,9 @@ import { OpportunitiesModule } from './opportunities/opportunities.module';
       serveRoot: '/css',
     }),
     // FOR SPA
-    ServeStaticModule.forRoot({
-      rootPath: join(__dirname, '../..', 'public'),
-    }),
+    // ServeStaticModule.forRoot({
+    //   rootPath: join(__dirname, '../..', 'public'),
+    // }),
     EventEmitterModule.forRoot(),
     UsersModule,
     PrismaModule,
