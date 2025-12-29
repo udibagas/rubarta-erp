@@ -91,7 +91,23 @@ export class FileController {
       }),
     }),
   )
-  async moveFile() {
-    return { message: 'Test endpoint works' };
+  async moveFile(
+    @UploadedFile(
+      new ParseFilePipe({
+        validators: [
+          new MaxFileSizeValidator({ maxSize: 10000000 }),
+          // new FileTypeValidator({ fileType: 'image/jpeg' }),
+        ],
+      }),
+    )
+    file: Express.Multer.File,
+  ): Promise<FileDto> {
+    const {
+      originalname: fileName,
+      size: fileSize,
+      mimetype: fileType,
+      path: filePath,
+    } = file;
+    return { fileName, fileSize, fileType, filePath };
   }
 }
