@@ -13,9 +13,12 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import * as multer from 'multer';
 import * as fs from 'node:fs/promises';
 import { FileDto } from './fle.dto';
+import { FileService } from './file.service';
 
 @Controller('api/file')
 export class FileController {
+  constructor(private readonly fileService: FileService) {}
+
   @Post()
   @UseInterceptors(
     FileInterceptor('file', {
@@ -63,5 +66,32 @@ export class FileController {
   async removeFile(@Query('path') path: string) {
     await fs.unlink(path);
     return { message: 'File has beed deleted' };
+  }
+
+  @Post('move-file')
+  @UseInterceptors(
+    FileInterceptor('file', {
+      storage: multer.diskStorage({
+        async destination(req, file, callback) {
+          const attachment = await this.fileService.getPathByName(
+            file.originalname,
+          );
+
+          if (!attachment) {
+            return callback(new Error('File not found in database'), null);
+          }
+
+          const path = attachment.filePath.split('/').slice(0, -1).join('/');
+          await fs.mkdir(`./${path}`, { recursive: true });
+          callback(null, `./${path}`);
+        },
+        filename(req, file, callback) {
+          callback(null, file.originalname);
+        },
+      }),
+    }),
+  )
+  async moveFile() {
+    return { message: 'Test endpoint works' };
   }
 }
