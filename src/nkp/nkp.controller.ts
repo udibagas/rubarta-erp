@@ -112,15 +112,15 @@ export class NkpController {
 
       // Define columns
       worksheet.columns = [
-        { header: 'No', key: 'no', width: 10 },
+        { header: 'No', key: 'no', width: 5 },
         { header: 'Date', key: 'date', width: 15 },
-        { header: 'Number', key: 'number', width: 20 },
-        { header: 'Type', key: 'type', width: 25 },
-        { header: 'Bank Ref No.', key: 'bankRefNo', width: 25 },
-        { header: 'Invoice No.', key: 'invoiceNumber', width: 25 },
-        { header: 'Description', key: 'description', width: 35 },
+        { header: 'Number', key: 'number', width: 30 },
+        { header: 'Type', key: 'type', width: 30 },
+        { header: 'Bank Ref No.', key: 'bankRefNo', width: 30 },
+        { header: 'Invoice No.', key: 'invoiceNumber', width: 30 },
+        { header: 'Description', key: 'description', width: 50 },
         { header: 'Amount', key: 'amount', width: 15 },
-        { header: 'Curr', key: 'curr', width: 15 },
+        { header: 'Curr', key: 'curr', width: 10 },
       ];
 
       // Style header row
@@ -134,7 +134,7 @@ export class NkpController {
       // Add data rows
       const items = Array.isArray(data) ? data : data.data || [];
       items.forEach((item: any, index: number) => {
-        worksheet.addRow({
+        const row = worksheet.addRow({
           no: index + 1,
           date: item.createdAt ? formatDateNumeric(item.createdAt) : '',
           number: item.number || '',
@@ -145,6 +145,15 @@ export class NkpController {
           amount: item.finalPayment > 0 ? item.finalPayment : item.grandTotal,
           curr: item.currency || '',
         });
+
+        // Apply alternating background color
+        if (index % 2 === 1) {
+          row.fill = {
+            type: 'pattern',
+            pattern: 'solid',
+            fgColor: { argb: 'FFF5F5F5' },
+          };
+        }
       });
 
       // Set response headers
