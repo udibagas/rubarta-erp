@@ -26,6 +26,7 @@ import { PaymentType, Prisma, User } from '@prisma/client';
 import { terbilang, toCurrency, toDecimal } from 'src/helpers/number';
 import { formatDate, formatDateNumeric } from 'src/helpers/date';
 import { Response } from 'express';
+import * as ExcelJS from 'exceljs';
 
 @ApiTags('Nota Kuasa Pembayaran')
 @ApiBearerAuth()
@@ -103,6 +104,63 @@ export class NkpController {
         formatDateNumeric,
         toDecimal,
       });
+    }
+
+    if (action == 'download' && format == 'excel') {
+      const workbook = new ExcelJS.Workbook();
+      const worksheet = workbook.addWorksheet('NKP Report');
+
+      // Define columns
+      worksheet.columns = [
+        { header: 'No', key: 'no', width: 10 },
+        { header: 'Date', key: 'date', width: 15 },
+        { header: 'Number', key: 'number', width: 20 },
+        { header: 'Type', key: 'type', width: 25 },
+        { header: 'Bank Ref No.', key: 'bankRefNo', width: 25 },
+        { header: 'Invoice No.', key: 'invoiceNumber', width: 25 },
+        { header: 'Description', key: 'description', width: 35 },
+        { header: 'Amount', key: 'amount', width: 15 },
+        { header: 'Curr', key: 'curr', width: 15 },
+      ];
+
+      // Style header row
+      worksheet.getRow(1).font = { bold: true };
+      worksheet.getRow(1).fill = {
+        type: 'pattern',
+        pattern: 'solid',
+        fgColor: { argb: 'FFD3D3D3' },
+      };
+
+      // Add data rows
+      const items = Array.isArray(data) ? data : data.data || [];
+      items.forEach((item: any, index: number) => {
+        worksheet.addRow({
+          no: index + 1,
+          date: item.createdAt ? formatDateNumeric(item.createdAt) : '',
+          number: item.number || '',
+          type: `${item.paymentType} / ${item.nkpType}` || '',
+          bankRefNo: item.bankRefNo || '',
+          invoiceNumber: item.invoiceNumber || '',
+          description: item.description || '',
+          amount: item.finalPayment > 0 ? item.finalPayment : item.grandTotal,
+          curr: item.currency || '',
+        });
+      });
+
+      // Set response headers
+      const filename = `NKP_Report_${formatDateNumeric(new Date())}.xlsx`;
+      res.setHeader(
+        'Content-Type',
+        'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+      );
+      res.setHeader(
+        'Content-Disposition',
+        `attachment; filename="${filename}"`,
+      );
+
+      // Write to response
+      await workbook.xlsx.write(res);
+      return res.end();
     }
 
     res.json(data);
