@@ -21,7 +21,7 @@ import {
 } from '@nestjs/swagger';
 import { CloseNkpDto, NkpDto } from './nkp.dto';
 import { Auth } from '../auth/auth.decorator';
-import { PaymentType, User } from '@prisma/client';
+import { PaymentType, Prisma, User } from '@prisma/client';
 // import * as htmlToPdf from 'html-pdf-node';
 import { terbilang, toCurrency, toDecimal } from 'src/helpers/number';
 import { formatDate, formatDateNumeric } from 'src/helpers/date';
@@ -79,6 +79,8 @@ export class NkpController {
     @Query('action') action?: string,
     @Query('format') format?: string,
     @Query('dateRange') dateRange?: any,
+    @Query('orderBy') orderBy?: string,
+    @Query('orderDirection') orderDirection?: 'asc' | 'desc',
   ) {
     const data = await this.nkpService.findAll({
       page: Number(page),
@@ -89,6 +91,8 @@ export class NkpController {
       action,
       format,
       dateRange,
+      orderBy,
+      orderDirection,
     });
 
     if (action == 'download' && format == 'pdf') {

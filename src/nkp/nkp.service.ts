@@ -69,6 +69,8 @@ export class NkpService {
     dateRange?: any;
     action?: string;
     format?: string;
+    orderBy?: string;
+    orderDirection?: 'asc' | 'desc';
   }) {
     const {
       page,
@@ -79,6 +81,8 @@ export class NkpService {
       dateRange,
       action,
       format,
+      orderBy = 'updatedAt',
+      orderDirection = 'asc',
     } = params;
 
     const where: Prisma.NkpWhereInput = {};
@@ -146,6 +150,12 @@ export class NkpService {
         },
       },
     };
+
+    if (orderBy) {
+      options.orderBy = {
+        [orderBy]: orderDirection,
+      };
+    }
 
     if (!action || action == 'report') {
       options.take = pageSize;
