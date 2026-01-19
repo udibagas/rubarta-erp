@@ -48,7 +48,6 @@ export class UsersController {
   }
 
   @Get('balance')
-  @Roles(Role.ADMIN)
   balance() {
     return this.usersService.getBalance();
   }
