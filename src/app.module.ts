@@ -49,6 +49,9 @@ import { OpportunitiesModule } from './opportunities/opportunities.module';
         tls: {
           rejectUnauthorized: false,
         },
+        connectionTimeout: 10000, // 10 seconds
+        greetingTimeout: 10000,
+        socketTimeout: 10000,
       },
       // preview: true,
       defaults: {
