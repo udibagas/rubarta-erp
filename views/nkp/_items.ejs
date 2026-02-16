@@ -14,7 +14,7 @@
       <td class="border-b border-r border-black text-center"><%= ++i %></td>
       <td class="border-b border-r border-black text-center"><%= formatDateNumeric(el.date) %></td>
       <td class="border-b border-r border-black pl-2"><%= el.description %></td>
-      <td class="border-b border-r border-black text-right pr-2"><%= toDecimal(el.amount, data.currency == 'USD' ? 2 : 0) %></td>
+      <td class="border-b border-r border-black text-right pr-2"><%= toDecimal(el.amount, data.currency == 'IDR' ? 0 : 2) %></td>
       <td class="border-b border-r border-black text-center"><%= el.currency %></td>
     </tr>
     <% }) %>
@@ -24,33 +24,33 @@
 
     <tr>
       <td colspan="3" class="border-b border-r border-black text-right pr-2 font-bold">GRAND TOTAL</td>
-      <td class="border-b border-r border-black text-right pr-2 font-bold"><%= toDecimal(data.grandTotal, data.currency == 'USD' ? 2 : 0) %></td>
+      <td class="border-b border-r border-black text-right pr-2 font-bold"><%= toDecimal(data.grandTotal, data.currency == 'IDR' ? 0 : 2) %></td>
       <td class="border-b border-black text-center"><%= data.currency %></td>
     </tr>
 
     <% if (data.paymentType == 'VENDOR') { %>
       <tr>
         <td colspan="3" class="border-b border-r border-black text-right pr-2 font-bold">TAX</td>
-        <td class="border-b border-r border-black text-right pr-2 font-bold"><%= toDecimal(data.tax, data.currency == 'USD' ? 2 : 0) %></td>
+        <td class="border-b border-r border-black text-right pr-2 font-bold"><%= toDecimal(data.tax, data.currency == 'IDR' ? 0 : 2) %></td>
         <td class="border-b border-r border-black text-center"><%= data.currency %></td>
       </tr>
 
       <tr>
         <td colspan="3" class="border-b border-r border-black text-right pr-2 font-bold">DEDUCTION</td>
-        <td class="border-b border-r border-black text-right pr-2 font-bold"><%= toDecimal(data.deduction, data.currency == 'USD' ? 2 : 0) %></td>
+        <td class="border-b border-r border-black text-right pr-2 font-bold"><%= toDecimal(data.deduction, data.currency == 'IDR' ? 0 : 2) %></td>
         <td class="border-b border-r border-black text-center"><%= data.currency %></td>
       </tr>
 
       <tr>
         <td colspan="3" class="border-b border-r border-black text-right pr-2 font-bold">NET AMOUNT</td>
-        <td class="border-b border-r border-black text-right pr-2 font-bold"><%= toDecimal(data.netAmount, data.currency == 'USD' ? 2 : 0) %></td>
+        <td class="border-b border-r border-black text-right pr-2 font-bold"><%= toDecimal(data.netAmount, data.currency == 'IDR' ? 0 : 2) %></td>
         <td class="border-b border-r border-black text-center"><%= data.currency %></td>
       </tr>
 
       <% if (data.nkpType == 'SETTLEMENT') { %>
        <tr>
           <td colspan="3" class="border-b border-r border-black text-right pr-2 font-bold">DOWN PAYMENT</td>
-          <td class="border-b border-r border-black text-right pr-2 font-bold"><%= toDecimal(data.downPayment, data.currency == 'USD' ? 2 : 0) %></td>
+          <td class="border-b border-r border-black text-right pr-2 font-bold"><%= toDecimal(data.downPayment, data.currency == 'IDR' ? 0 : 2) %></td>
           <td class="border-b border-r border-black text-center"><%= data.currency %></td>
         </tr>
       <% } %>
@@ -61,7 +61,7 @@
       <% if (data.cashAdvanceBalance) { %>
         <tr>
           <td colspan="3" class="border-b border-r border-black text-right pr-2 font-bold">CASH ADVANCE BALANCE</td>
-          <td class="border-b border-r border-black text-right pr-2 font-bold"><%= toDecimal(data.cashAdvanceBalance, data.currency == 'USD' ? 2 : 0) %></td>
+          <td class="border-b border-r border-black text-right pr-2 font-bold"><%= toDecimal(data.cashAdvanceBalance, data.currency == 'IDR' ? 0 : 2) %></td>
           <td class="border-b border-r border-black text-center"><%= data.currency %></td>
         </tr>
       <% } %>
@@ -72,7 +72,7 @@
             TRANSFER KE KARYAWAN
           </td>
           <td class="border-b border-r border-black text-right pr-2 font-bold">
-            <%= toDecimal(Math.abs(data.finalPayment), data.currency == 'USD' ? 2 : 0) %>
+            <%= toDecimal(Math.abs(data.finalPayment), data.currency == 'IDR' ? 0 : 2) %>
           </td>
           <td class="border-b border-r border-black text-center"><%= data.currency %></td>
         </tr>
@@ -84,7 +84,7 @@
             KEMBALI KE <%= data.finalPayment > 0 ? 'KARYAWAN' : 'PERUSAHAAN' %>
           </td>
           <td class="border-b border-r border-black text-right pr-2 font-bold">
-            <%= toDecimal(Math.abs(data.finalPayment), data.currency == 'USD' ? 2 : 0) %>
+            <%= toDecimal(Math.abs(data.finalPayment), data.currency == 'IDR' ? 0 : 2) %>
           </td>
           <td class="border-b border-r border-black text-center"><%= data.currency %></td>
         </tr>
@@ -95,7 +95,7 @@
       <tr>
         <td colspan="3" class="border-b border-r border-black text-right pr-2 font-bold">FINAL PAYMENT</td>
         <td class="border-b border-r border-black text-right pr-2 font-bold">
-          <%= toDecimal(data.finalPayment, data.currency == 'USD' ? 2 : 0) %>
+          <%= toDecimal(data.finalPayment, data.currency == 'IDR' ? 0 : 2) %>
         </td>
         <td class="border-b border-r border-black text-center"><%= data.currency %></td>
       </tr>
