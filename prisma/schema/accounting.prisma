@@ -1,6 +1,7 @@
 enum Currency {
   IDR
   USD
+  AUD
 }
 
 model Supplier {
