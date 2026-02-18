@@ -40,7 +40,7 @@ import { OpportunitiesModule } from './opportunities/opportunities.module';
     MailerModule.forRoot({
       transport: {
         host: process.env.MAILER_HOST,
-        port: process.env.MAILER_PORT,
+        port: Number(process.env.MAILER_PORT),
         secure: true,
         auth: {
           user: process.env.MAILER_USER,
@@ -49,9 +49,9 @@ import { OpportunitiesModule } from './opportunities/opportunities.module';
         tls: {
           rejectUnauthorized: false,
         },
-        connectionTimeout: 10000, // 10 seconds
-        greetingTimeout: 10000,
-        socketTimeout: 10000,
+        // connectionTimeout: 10000, // 10 seconds
+        // greetingTimeout: 10000,
+        // socketTimeout: 10000,
       },
       // preview: true,
       defaults: {
