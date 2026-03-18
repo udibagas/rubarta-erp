@@ -71,7 +71,7 @@ model NkpApproval {
   userId             Int
   approvalActionType ApprovalActionType
   level              Int                @db.SmallInt
-  Nkp                Nkp                @relation(fields: [nkpId], references: [id])
+  Nkp                Nkp                @relation(fields: [nkpId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   approvalStatus     ApprovalStatus? // kirim notifikasi per hari jika status null
   note               String?            @db.VarChar(255)
   createdAt          DateTime           @default(now())
