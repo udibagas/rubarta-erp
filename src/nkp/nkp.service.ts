@@ -284,7 +284,8 @@ export class NkpService {
 
   async remove(id: number) {
     const data = await this.findOne(id);
-    if (data.status !== PaymentStatus.DRAFT) throw new ForbiddenException();
+    if (!['DRAFT', 'SUBMITTED'].includes(data.status))
+      throw new ForbiddenException();
     return this.prisma.nkp.delete({
       where: { id },
     });
@@ -292,7 +293,8 @@ export class NkpService {
 
   async removeItem(id: number, itemId: number) {
     const data = await this.findOne(id);
-    if (data.status !== PaymentStatus.DRAFT) throw new ForbiddenException();
+    if (!['DRAFT', 'SUBMITTED'].includes(data.status))
+      throw new ForbiddenException();
     return this.prisma.nkpItem.delete({
       where: { id: itemId },
     });
