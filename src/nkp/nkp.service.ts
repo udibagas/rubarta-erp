@@ -504,7 +504,7 @@ export class NkpService {
       })
       .split('/');
 
-    let number = '001';
+    let number = '0001';
 
     if (parentId) {
       const parent = await this.findOne(parentId);
@@ -520,7 +520,7 @@ export class NkpService {
 
       if (lastData) {
         const [lastNumber] = lastData.number.split('/');
-        number = (Number(lastNumber) + 1).toString().padStart(3, '0');
+        number = (Number(lastNumber) + 1).toString().padStart(4, '0');
       }
     }
 
