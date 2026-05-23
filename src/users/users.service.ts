@@ -4,7 +4,7 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { PrismaService } from '../prisma/prisma.service';
 import * as bcrypt from 'bcrypt';
 import * as fs from 'node:fs/promises';
-import { Prisma } from '@prisma/client';
+import { Prisma } from '../prisma/client/client';
 
 @Injectable()
 export class UsersService {

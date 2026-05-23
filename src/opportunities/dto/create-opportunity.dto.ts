@@ -1,4 +1,4 @@
-import { OpportunityStages } from '@prisma/client';
+import { OpportunityStages } from '../../prisma/client/client';
 import { IsEnum, IsNotEmpty, IsNumber } from 'class-validator';
 
 export class CreateOpportunityDto {

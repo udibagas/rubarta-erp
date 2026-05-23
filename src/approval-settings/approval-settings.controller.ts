@@ -19,7 +19,7 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import { Roles } from '../auth/role.decorator';
-import { ApprovalType, Role } from '@prisma/client';
+import { ApprovalType, Role } from '../prisma/client/client';
 import { ApprovalSetting } from './approval-setting.entity';
 
 @ApiTags('Approval Setting')

@@ -4,7 +4,7 @@ import { AppModule } from '../src/app.module';
 import * as request from 'supertest';
 import { TestModule } from './test.module';
 import { TestService } from './test.service';
-import { ApprovalType, PaymentStatus } from '@prisma/client';
+import { ApprovalType, PaymentStatus } from '../prisma/client/client';
 
 describe('PaymentAuthorizationsController', () => {
   let app: INestApplication;

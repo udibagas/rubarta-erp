@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Currency, Role } from '@prisma/client';
-import { JsonObject } from '@prisma/client/runtime/library';
+import { Currency, Role } from '../../prisma/client/client';
+import { JsonObject } from 'type-fest';
 import {
   ArrayNotEmpty,
   IsArray,

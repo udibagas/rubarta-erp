@@ -10,7 +10,7 @@ import {
 } from '@nestjs/common';
 import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { Auth } from '../auth/auth.decorator';
-import { User } from '@prisma/client';
+import { User } from '../prisma/client/client';
 import { NotificationsService } from './notifications.service';
 
 @ApiTags('Notifications')

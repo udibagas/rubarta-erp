@@ -21,7 +21,7 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import { User } from './user.entity';
-import { Role } from '@prisma/client';
+import { Role } from '../prisma/client/client';
 
 @ApiTags('Users')
 @ApiBearerAuth()

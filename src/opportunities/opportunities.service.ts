@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { CreateOpportunityDto } from './dto/create-opportunity.dto';
 import { UpdateOpportunityDto } from './dto/update-opportunity.dto';
-import { PrismaService } from 'src/prisma/prisma.service';
-import { Prisma } from '@prisma/client';
+import { PrismaService } from '../prisma/prisma.service';
+import { Prisma } from '../prisma/client/client';
 
 @Injectable()
 export class OpportunitiesService {

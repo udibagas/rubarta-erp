@@ -1,13 +1,18 @@
+@TOKEN=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsIm5hbWUiOiJCYWdhcyBVZGkgU2Foc2FuZ2thIiwiZW1haWwiOiJ1ZGliYWdhc0BnbWFpbC5jb20iLCJyb2xlcyI6WyJBRE1JTiJdLCJpYXQiOjE3NzEzNzYxNTQsImV4cCI6MTc3MTk4MDk1NH0.Cl6CrAglQFxN1PoIucn8YlGyKSxJSNbH3B9KROk8mJc
+@BASE_URL=https://api.erp.rubarta.co.id
+# @BASE_URL=http://localhost:3000
+# @TOKEN=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsIm5hbWUiOiJCYWdhcyBVZGkgU2Foc2FuZ2thIiwiZW1haWwiOiJ1ZGliYWdhc0BnbWFpbC5jb20iLCJyb2xlcyI6WyJBRE1JTiJdLCJpYXQiOjE3NzEzNzYzNjIsImV4cCI6MTc3MTk4MTE2Mn0.n33wi0Vc55bGGns1TtBgiK7tlZK1Ls6_nux9e2_hMC4
+
 ###
-POST http://localhost:3000/auth
+POST {{BASE_URL}}/api/auth/login
 Content-Type: application/json
 
 {
   "email": "udibagas@gmail.com",
-  "password": "bismillah12345"
+  "password": "bismillah"
 }
 
 ###
-POST http://localhost:3000/api/notifications/testNotif
+POST {{BASE_URL}}/api/notifications/test
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjY1LCJuYW1lIjoiQmFnYXMgVWRpIFNhaHNhbmdrYSIsImVtYWlsIjoidWRpYmFnYXNAZ21haWwuY29tIiwicm9sZXMiOlsiQURNSU4iXSwiaWF0IjoxNzIyMzMwNjQ3LCJleHAiOjE3MjI5MzU0NDd9.mM0FxGoZh44ccJM1iZvWVmHYhx4KO0YYFDHbQtlhY9I
+Authorization: Bearer {{TOKEN}}

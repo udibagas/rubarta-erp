@@ -1,4 +1,4 @@
-import { Currency } from '@prisma/client';
+import { Currency } from '../prisma/client/client';
 import {
   IsEmail,
   IsEnum,

@@ -8,7 +8,7 @@ import {
   Patch,
   Query,
 } from '@nestjs/common';
-import { Customer } from '@prisma/client';
+import { Customer } from '../prisma/client/client';
 import { CustomersService } from './customers.service';
 import { CustomerDto } from './customer.dto';
 

@@ -2,7 +2,7 @@ import { NotificationDto } from './notification.dto';
 import { MailerService } from '@nestjs-modules/mailer';
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
-import { Prisma } from '@prisma/client';
+import { Prisma } from '../prisma/client/client';
 
 @Injectable()
 export class NotificationsService {

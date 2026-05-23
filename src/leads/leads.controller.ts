@@ -12,8 +12,8 @@ import {
 import { LeadsService } from './leads.service';
 import { CreateLeadDto } from './dto/create-lead.dto';
 import { UpdateLeadDto } from './dto/update-lead.dto';
-import { Auth } from 'src/auth/auth.decorator';
-import { User } from '@prisma/client';
+import { Auth } from '../auth/auth.decorator';
+import { User } from '../prisma/client/client';
 
 @Controller('api/leads')
 export class LeadsController {

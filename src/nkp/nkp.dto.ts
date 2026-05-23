@@ -1,5 +1,10 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Currency, NkpType, PaymentStatus, PaymentType } from '@prisma/client';
+import {
+  Currency,
+  NkpType,
+  PaymentStatus,
+  PaymentType,
+} from '../prisma/client/client';
 import { Type } from 'class-transformer';
 import {
   ArrayNotEmpty,

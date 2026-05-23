@@ -21,10 +21,10 @@ import {
 } from '@nestjs/swagger';
 import { CloseNkpDto, NkpDto } from './nkp.dto';
 import { Auth } from '../auth/auth.decorator';
-import { PaymentType, Prisma, User } from '@prisma/client';
+import { PaymentType, Prisma, User } from '../prisma/client/client';
 // import * as htmlToPdf from 'html-pdf-node';
-import { terbilang, toCurrency, toDecimal } from 'src/helpers/number';
-import { formatDate, formatDateNumeric } from 'src/helpers/date';
+import { terbilang, toCurrency, toDecimal } from '../helpers/number';
+import { formatDate, formatDateNumeric } from '../helpers/date';
 import { Response } from 'express';
 import * as ExcelJS from 'exceljs';
 

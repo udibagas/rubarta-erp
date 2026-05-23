@@ -1,4 +1,4 @@
-import { LeadSource, LeadStatus } from '@prisma/client';
+import { LeadSource, LeadStatus } from '../../prisma/client/client';
 import { IsEnum, IsNotEmpty, IsNumber } from 'class-validator';
 
 export class CreateLeadDto {

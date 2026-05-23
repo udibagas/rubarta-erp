@@ -18,7 +18,7 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import { Roles } from '../auth/role.decorator';
-import { Role } from '@prisma/client';
+import { Role } from '../prisma/client/client';
 import { Department } from './department.entity';
 
 @Controller('api/departments')

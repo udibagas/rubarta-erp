@@ -1,7 +1,7 @@
 import { Controller, Get } from '@nestjs/common';
 import { ReportService } from './report.service';
-import { Auth } from 'src/auth/auth.decorator';
-import { User } from '@prisma/client';
+import { Auth } from '../auth/auth.decorator';
+import { User } from '../prisma/client/client';
 
 @Controller('api/report')
 export class ReportController {

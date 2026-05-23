@@ -4,7 +4,7 @@ import {
   ApprovalType,
   NkpType,
   PaymentType,
-} from '@prisma/client';
+} from '../prisma/client/client';
 import { Type } from 'class-transformer';
 import {
   ArrayNotEmpty,

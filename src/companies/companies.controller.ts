@@ -21,7 +21,7 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import { Roles } from '../auth/role.decorator';
-import { Role } from '@prisma/client';
+import { Role } from '../prisma/client/client';
 import { Company } from './company.entity';
 import { Response } from 'express';
 

@@ -18,7 +18,7 @@ import {
 } from '@nestjs/swagger';
 import { Bank } from './bank.entity';
 import { Roles } from '../auth/role.decorator';
-import { Role } from '@prisma/client';
+import { Role } from '../prisma/client/client';
 
 @ApiTags('Banks')
 @ApiBearerAuth()

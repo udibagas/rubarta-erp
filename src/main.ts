@@ -7,7 +7,7 @@ import {
 } from '@nestjs/common';
 import helmet from 'helmet';
 import { nestCsrf, CsrfFilter } from 'ncsrf';
-import * as cookieParser from 'cookie-parser';
+import cookieParser from 'cookie-parser';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { ValidationError } from 'class-validator';
 import { PrismaClientExceptionFilter } from './prisma/prisma-client-exception.filter';

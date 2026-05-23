@@ -14,7 +14,7 @@ import * as multer from 'multer';
 import * as fs from 'node:fs/promises';
 import { FileDto } from './fle.dto';
 import { FileService } from './file.service';
-import { Public } from 'src/auth/public.decorator';
+import { Public } from '../auth/public.decorator';
 
 @Controller('api/file')
 export class FileController {

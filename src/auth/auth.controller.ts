@@ -19,9 +19,9 @@ import {
 } from '@nestjs/swagger';
 import { AuthEntity } from './auth.entity';
 import { Auth } from './auth.decorator';
-import { User } from '@prisma/client';
+import { User } from '../prisma/client/client';
 import { Response } from 'express';
-import { PrismaService } from 'src/prisma/prisma.service';
+import { PrismaService } from '../prisma/prisma.service';
 
 @ApiTags('Auth')
 @Controller('api/auth')

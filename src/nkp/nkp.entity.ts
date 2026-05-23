@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { PaymentStatus } from '@prisma/client';
+import { PaymentStatus } from '../prisma/client/client';
 
 export class PaymentAuthorization {
   @ApiProperty()

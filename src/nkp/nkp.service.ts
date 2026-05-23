@@ -12,9 +12,9 @@ import {
   Prisma,
   Role,
   User,
-} from '@prisma/client';
+} from '../prisma/client/client';
 import { EventEmitter2, OnEvent } from '@nestjs/event-emitter';
-import { NotificationsService } from 'src/notifications/notifications.service';
+import { NotificationsService } from '../notifications/notifications.service';
 
 @Injectable()
 export class NkpService {
