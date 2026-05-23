@@ -9,4 +9,7 @@ export class Company {
 
   @ApiProperty()
   name: string;
+
+  @ApiProperty()
+  isDefault: boolean;
 }

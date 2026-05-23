@@ -3123,7 +3123,8 @@ export type NkpAttachmentScalarFieldEnum = (typeof NkpAttachmentScalarFieldEnum)
 export const CompanyScalarFieldEnum = {
   id: 'id',
   code: 'code',
-  name: 'name'
+  name: 'name',
+  isDefault: 'isDefault'
 } as const
 
 export type CompanyScalarFieldEnum = (typeof CompanyScalarFieldEnum)[keyof typeof CompanyScalarFieldEnum]

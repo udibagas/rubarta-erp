@@ -9,4 +9,7 @@ export class CompanyDto {
   @ApiProperty()
   @IsNotEmpty({ message: 'Name is required' })
   name: string;
+
+  @ApiProperty({ default: false })
+  isDefault: boolean;
 }

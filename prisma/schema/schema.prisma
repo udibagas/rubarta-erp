@@ -18,6 +18,7 @@ model Company {
   id              Int               @id @default(autoincrement())
   code            String            @unique @db.VarChar(10)
   name            String            @db.VarChar(50)
+  isDefault       Boolean           @default(false)
   Nkp             Nkp[]
   ApprovalSetting ApprovalSetting[]
   Opportunity     Opportunity[]
