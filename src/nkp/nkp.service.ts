@@ -511,7 +511,7 @@ export class NkpService {
       number = parent.number.split('/')[0];
     } else {
       const lastData = await this.prisma.nkp.findFirst({
-        orderBy: { id: 'desc' },
+        orderBy: { number: 'desc' },
         where: {
           companyId,
           AND: [{ number: { endsWith: year } }, { number: { not: 'DRAFT' } }],
