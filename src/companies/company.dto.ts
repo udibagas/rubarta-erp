@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty } from 'class-validator';
+import { IsBoolean, IsNotEmpty } from 'class-validator';
 
 export class CompanyDto {
   @ApiProperty()
@@ -11,5 +11,6 @@ export class CompanyDto {
   name: string;
 
   @ApiProperty({ default: false })
+  @IsBoolean({ message: 'Is Default must be a boolean' })
   isDefault: boolean;
 }
