@@ -20,10 +20,17 @@ export class CompaniesService {
     return this.prisma.company.findUniqueOrThrow({ where: { id } });
   }
 
-  update(id: number, companyDto: CompanyDto) {
+  async update(id: number, companyDto: CompanyDto) {
+    if (companyDto.isDefault) {
+      await this.prisma.company.updateMany({
+        data: { isDefault: false },
+        where: { isDefault: true },
+      });
+    }
+
     return this.prisma.company.update({
-      data: companyDto,
       where: { id },
+      data: companyDto,
     });
   }
 
