@@ -46,7 +46,11 @@ export class AuthController {
       credential.password,
     );
 
-    const company = await this.prisma.company.findFirst();
+    const company = await this.prisma.company.findFirst({
+      where: {
+        isDefault: true,
+      },
+    });
     if (company) res.cookie('companyId', company.id);
     res.cookie('token', data.token);
     res.cookie('_csrf', req.csrfToken());
