@@ -32,6 +32,7 @@ export type OpportunityAvgAggregateOutputType = {
   companyId: number | null
   userId: number | null
   amount: number | null
+  probability: number | null
 }
 
 export type OpportunitySumAggregateOutputType = {
@@ -40,6 +41,7 @@ export type OpportunitySumAggregateOutputType = {
   companyId: number | null
   userId: number | null
   amount: number | null
+  probability: number | null
 }
 
 export type OpportunityMinAggregateOutputType = {
@@ -48,9 +50,14 @@ export type OpportunityMinAggregateOutputType = {
   companyId: number | null
   userId: number | null
   name: string | null
+  description: string | null
   amount: number | null
+  probability: number | null
   stage: $Enums.OpportunityStages | null
   expectedCloseDate: Date | null
+  actualCloseDate: Date | null
+  lostReason: string | null
+  deletedAt: Date | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -61,9 +68,14 @@ export type OpportunityMaxAggregateOutputType = {
   companyId: number | null
   userId: number | null
   name: string | null
+  description: string | null
   amount: number | null
+  probability: number | null
   stage: $Enums.OpportunityStages | null
   expectedCloseDate: Date | null
+  actualCloseDate: Date | null
+  lostReason: string | null
+  deletedAt: Date | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -74,9 +86,14 @@ export type OpportunityCountAggregateOutputType = {
   companyId: number
   userId: number
   name: number
+  description: number
   amount: number
+  probability: number
   stage: number
   expectedCloseDate: number
+  actualCloseDate: number
+  lostReason: number
+  deletedAt: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -89,6 +106,7 @@ export type OpportunityAvgAggregateInputType = {
   companyId?: true
   userId?: true
   amount?: true
+  probability?: true
 }
 
 export type OpportunitySumAggregateInputType = {
@@ -97,6 +115,7 @@ export type OpportunitySumAggregateInputType = {
   companyId?: true
   userId?: true
   amount?: true
+  probability?: true
 }
 
 export type OpportunityMinAggregateInputType = {
@@ -105,9 +124,14 @@ export type OpportunityMinAggregateInputType = {
   companyId?: true
   userId?: true
   name?: true
+  description?: true
   amount?: true
+  probability?: true
   stage?: true
   expectedCloseDate?: true
+  actualCloseDate?: true
+  lostReason?: true
+  deletedAt?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -118,9 +142,14 @@ export type OpportunityMaxAggregateInputType = {
   companyId?: true
   userId?: true
   name?: true
+  description?: true
   amount?: true
+  probability?: true
   stage?: true
   expectedCloseDate?: true
+  actualCloseDate?: true
+  lostReason?: true
+  deletedAt?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -131,9 +160,14 @@ export type OpportunityCountAggregateInputType = {
   companyId?: true
   userId?: true
   name?: true
+  description?: true
   amount?: true
+  probability?: true
   stage?: true
   expectedCloseDate?: true
+  actualCloseDate?: true
+  lostReason?: true
+  deletedAt?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -231,11 +265,16 @@ export type OpportunityGroupByOutputType = {
   companyId: number
   userId: number
   name: string
+  description: string | null
   amount: number
+  probability: number | null
   stage: $Enums.OpportunityStages
   expectedCloseDate: Date
+  actualCloseDate: Date | null
+  lostReason: string | null
+  deletedAt: Date | null
   createdAt: Date
-  updatedAt: Date
+  updatedAt: Date | null
   _count: OpportunityCountAggregateOutputType | null
   _avg: OpportunityAvgAggregateOutputType | null
   _sum: OpportunitySumAggregateOutputType | null
@@ -267,11 +306,16 @@ export type OpportunityWhereInput = {
   companyId?: Prisma.IntFilter<"Opportunity"> | number
   userId?: Prisma.IntFilter<"Opportunity"> | number
   name?: Prisma.StringFilter<"Opportunity"> | string
+  description?: Prisma.StringNullableFilter<"Opportunity"> | string | null
   amount?: Prisma.FloatFilter<"Opportunity"> | number
+  probability?: Prisma.IntNullableFilter<"Opportunity"> | number | null
   stage?: Prisma.EnumOpportunityStagesFilter<"Opportunity"> | $Enums.OpportunityStages
   expectedCloseDate?: Prisma.DateTimeFilter<"Opportunity"> | Date | string
+  actualCloseDate?: Prisma.DateTimeNullableFilter<"Opportunity"> | Date | string | null
+  lostReason?: Prisma.StringNullableFilter<"Opportunity"> | string | null
+  deletedAt?: Prisma.DateTimeNullableFilter<"Opportunity"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Opportunity"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"Opportunity"> | Date | string
+  updatedAt?: Prisma.DateTimeNullableFilter<"Opportunity"> | Date | string | null
   Customer?: Prisma.XOR<Prisma.CustomerScalarRelationFilter, Prisma.CustomerWhereInput>
   User?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   Company?: Prisma.XOR<Prisma.CompanyScalarRelationFilter, Prisma.CompanyWhereInput>
@@ -284,11 +328,16 @@ export type OpportunityOrderByWithRelationInput = {
   companyId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  description?: Prisma.SortOrderInput | Prisma.SortOrder
   amount?: Prisma.SortOrder
+  probability?: Prisma.SortOrderInput | Prisma.SortOrder
   stage?: Prisma.SortOrder
   expectedCloseDate?: Prisma.SortOrder
+  actualCloseDate?: Prisma.SortOrderInput | Prisma.SortOrder
+  lostReason?: Prisma.SortOrderInput | Prisma.SortOrder
+  deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   Customer?: Prisma.CustomerOrderByWithRelationInput
   User?: Prisma.UserOrderByWithRelationInput
   Company?: Prisma.CompanyOrderByWithRelationInput
@@ -304,11 +353,16 @@ export type OpportunityWhereUniqueInput = Prisma.AtLeast<{
   companyId?: Prisma.IntFilter<"Opportunity"> | number
   userId?: Prisma.IntFilter<"Opportunity"> | number
   name?: Prisma.StringFilter<"Opportunity"> | string
+  description?: Prisma.StringNullableFilter<"Opportunity"> | string | null
   amount?: Prisma.FloatFilter<"Opportunity"> | number
+  probability?: Prisma.IntNullableFilter<"Opportunity"> | number | null
   stage?: Prisma.EnumOpportunityStagesFilter<"Opportunity"> | $Enums.OpportunityStages
   expectedCloseDate?: Prisma.DateTimeFilter<"Opportunity"> | Date | string
+  actualCloseDate?: Prisma.DateTimeNullableFilter<"Opportunity"> | Date | string | null
+  lostReason?: Prisma.StringNullableFilter<"Opportunity"> | string | null
+  deletedAt?: Prisma.DateTimeNullableFilter<"Opportunity"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Opportunity"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"Opportunity"> | Date | string
+  updatedAt?: Prisma.DateTimeNullableFilter<"Opportunity"> | Date | string | null
   Customer?: Prisma.XOR<Prisma.CustomerScalarRelationFilter, Prisma.CustomerWhereInput>
   User?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   Company?: Prisma.XOR<Prisma.CompanyScalarRelationFilter, Prisma.CompanyWhereInput>
@@ -321,11 +375,16 @@ export type OpportunityOrderByWithAggregationInput = {
   companyId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  description?: Prisma.SortOrderInput | Prisma.SortOrder
   amount?: Prisma.SortOrder
+  probability?: Prisma.SortOrderInput | Prisma.SortOrder
   stage?: Prisma.SortOrder
   expectedCloseDate?: Prisma.SortOrder
+  actualCloseDate?: Prisma.SortOrderInput | Prisma.SortOrder
+  lostReason?: Prisma.SortOrderInput | Prisma.SortOrder
+  deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.OpportunityCountOrderByAggregateInput
   _avg?: Prisma.OpportunityAvgOrderByAggregateInput
   _max?: Prisma.OpportunityMaxOrderByAggregateInput
@@ -342,20 +401,30 @@ export type OpportunityScalarWhereWithAggregatesInput = {
   companyId?: Prisma.IntWithAggregatesFilter<"Opportunity"> | number
   userId?: Prisma.IntWithAggregatesFilter<"Opportunity"> | number
   name?: Prisma.StringWithAggregatesFilter<"Opportunity"> | string
+  description?: Prisma.StringNullableWithAggregatesFilter<"Opportunity"> | string | null
   amount?: Prisma.FloatWithAggregatesFilter<"Opportunity"> | number
+  probability?: Prisma.IntNullableWithAggregatesFilter<"Opportunity"> | number | null
   stage?: Prisma.EnumOpportunityStagesWithAggregatesFilter<"Opportunity"> | $Enums.OpportunityStages
   expectedCloseDate?: Prisma.DateTimeWithAggregatesFilter<"Opportunity"> | Date | string
+  actualCloseDate?: Prisma.DateTimeNullableWithAggregatesFilter<"Opportunity"> | Date | string | null
+  lostReason?: Prisma.StringNullableWithAggregatesFilter<"Opportunity"> | string | null
+  deletedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Opportunity"> | Date | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Opportunity"> | Date | string
-  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Opportunity"> | Date | string
+  updatedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Opportunity"> | Date | string | null
 }
 
 export type OpportunityCreateInput = {
   name: string
+  description?: string | null
   amount: number
+  probability?: number | null
   stage: $Enums.OpportunityStages
   expectedCloseDate: Date | string
+  actualCloseDate?: Date | string | null
+  lostReason?: string | null
+  deletedAt?: Date | string | null
   createdAt?: Date | string
-  updatedAt?: Date | string
+  updatedAt?: Date | string | null
   Customer: Prisma.CustomerCreateNestedOneWithoutOpportunitiesInput
   User: Prisma.UserCreateNestedOneWithoutOpportunitiesInput
   Company: Prisma.CompanyCreateNestedOneWithoutOpportunityInput
@@ -368,21 +437,31 @@ export type OpportunityUncheckedCreateInput = {
   companyId: number
   userId: number
   name: string
+  description?: string | null
   amount: number
+  probability?: number | null
   stage: $Enums.OpportunityStages
   expectedCloseDate: Date | string
+  actualCloseDate?: Date | string | null
+  lostReason?: string | null
+  deletedAt?: Date | string | null
   createdAt?: Date | string
-  updatedAt?: Date | string
+  updatedAt?: Date | string | null
   Quotations?: Prisma.QuotationUncheckedCreateNestedManyWithoutOpportunityInput
 }
 
 export type OpportunityUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   amount?: Prisma.FloatFieldUpdateOperationsInput | number
+  probability?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   stage?: Prisma.EnumOpportunityStagesFieldUpdateOperationsInput | $Enums.OpportunityStages
   expectedCloseDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  actualCloseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lostReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Customer?: Prisma.CustomerUpdateOneRequiredWithoutOpportunitiesNestedInput
   User?: Prisma.UserUpdateOneRequiredWithoutOpportunitiesNestedInput
   Company?: Prisma.CompanyUpdateOneRequiredWithoutOpportunityNestedInput
@@ -395,11 +474,16 @@ export type OpportunityUncheckedUpdateInput = {
   companyId?: Prisma.IntFieldUpdateOperationsInput | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   amount?: Prisma.FloatFieldUpdateOperationsInput | number
+  probability?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   stage?: Prisma.EnumOpportunityStagesFieldUpdateOperationsInput | $Enums.OpportunityStages
   expectedCloseDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  actualCloseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lostReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Quotations?: Prisma.QuotationUncheckedUpdateManyWithoutOpportunityNestedInput
 }
 
@@ -409,20 +493,30 @@ export type OpportunityCreateManyInput = {
   companyId: number
   userId: number
   name: string
+  description?: string | null
   amount: number
+  probability?: number | null
   stage: $Enums.OpportunityStages
   expectedCloseDate: Date | string
+  actualCloseDate?: Date | string | null
+  lostReason?: string | null
+  deletedAt?: Date | string | null
   createdAt?: Date | string
-  updatedAt?: Date | string
+  updatedAt?: Date | string | null
 }
 
 export type OpportunityUpdateManyMutationInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   amount?: Prisma.FloatFieldUpdateOperationsInput | number
+  probability?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   stage?: Prisma.EnumOpportunityStagesFieldUpdateOperationsInput | $Enums.OpportunityStages
   expectedCloseDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  actualCloseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lostReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type OpportunityUncheckedUpdateManyInput = {
@@ -431,11 +525,16 @@ export type OpportunityUncheckedUpdateManyInput = {
   companyId?: Prisma.IntFieldUpdateOperationsInput | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   amount?: Prisma.FloatFieldUpdateOperationsInput | number
+  probability?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   stage?: Prisma.EnumOpportunityStagesFieldUpdateOperationsInput | $Enums.OpportunityStages
   expectedCloseDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  actualCloseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lostReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type OpportunityListRelationFilter = {
@@ -454,9 +553,14 @@ export type OpportunityCountOrderByAggregateInput = {
   companyId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  description?: Prisma.SortOrder
   amount?: Prisma.SortOrder
+  probability?: Prisma.SortOrder
   stage?: Prisma.SortOrder
   expectedCloseDate?: Prisma.SortOrder
+  actualCloseDate?: Prisma.SortOrder
+  lostReason?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -467,6 +571,7 @@ export type OpportunityAvgOrderByAggregateInput = {
   companyId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   amount?: Prisma.SortOrder
+  probability?: Prisma.SortOrder
 }
 
 export type OpportunityMaxOrderByAggregateInput = {
@@ -475,9 +580,14 @@ export type OpportunityMaxOrderByAggregateInput = {
   companyId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  description?: Prisma.SortOrder
   amount?: Prisma.SortOrder
+  probability?: Prisma.SortOrder
   stage?: Prisma.SortOrder
   expectedCloseDate?: Prisma.SortOrder
+  actualCloseDate?: Prisma.SortOrder
+  lostReason?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -488,9 +598,14 @@ export type OpportunityMinOrderByAggregateInput = {
   companyId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  description?: Prisma.SortOrder
   amount?: Prisma.SortOrder
+  probability?: Prisma.SortOrder
   stage?: Prisma.SortOrder
   expectedCloseDate?: Prisma.SortOrder
+  actualCloseDate?: Prisma.SortOrder
+  lostReason?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -501,6 +616,7 @@ export type OpportunitySumOrderByAggregateInput = {
   companyId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   amount?: Prisma.SortOrder
+  probability?: Prisma.SortOrder
 }
 
 export type OpportunityNullableScalarRelationFilter = {
@@ -656,11 +772,16 @@ export type OpportunityUncheckedUpdateManyWithoutUserNestedInput = {
 
 export type OpportunityCreateWithoutCustomerInput = {
   name: string
+  description?: string | null
   amount: number
+  probability?: number | null
   stage: $Enums.OpportunityStages
   expectedCloseDate: Date | string
+  actualCloseDate?: Date | string | null
+  lostReason?: string | null
+  deletedAt?: Date | string | null
   createdAt?: Date | string
-  updatedAt?: Date | string
+  updatedAt?: Date | string | null
   User: Prisma.UserCreateNestedOneWithoutOpportunitiesInput
   Company: Prisma.CompanyCreateNestedOneWithoutOpportunityInput
   Quotations?: Prisma.QuotationCreateNestedManyWithoutOpportunityInput
@@ -671,11 +792,16 @@ export type OpportunityUncheckedCreateWithoutCustomerInput = {
   companyId: number
   userId: number
   name: string
+  description?: string | null
   amount: number
+  probability?: number | null
   stage: $Enums.OpportunityStages
   expectedCloseDate: Date | string
+  actualCloseDate?: Date | string | null
+  lostReason?: string | null
+  deletedAt?: Date | string | null
   createdAt?: Date | string
-  updatedAt?: Date | string
+  updatedAt?: Date | string | null
   Quotations?: Prisma.QuotationUncheckedCreateNestedManyWithoutOpportunityInput
 }
 
@@ -714,20 +840,30 @@ export type OpportunityScalarWhereInput = {
   companyId?: Prisma.IntFilter<"Opportunity"> | number
   userId?: Prisma.IntFilter<"Opportunity"> | number
   name?: Prisma.StringFilter<"Opportunity"> | string
+  description?: Prisma.StringNullableFilter<"Opportunity"> | string | null
   amount?: Prisma.FloatFilter<"Opportunity"> | number
+  probability?: Prisma.IntNullableFilter<"Opportunity"> | number | null
   stage?: Prisma.EnumOpportunityStagesFilter<"Opportunity"> | $Enums.OpportunityStages
   expectedCloseDate?: Prisma.DateTimeFilter<"Opportunity"> | Date | string
+  actualCloseDate?: Prisma.DateTimeNullableFilter<"Opportunity"> | Date | string | null
+  lostReason?: Prisma.StringNullableFilter<"Opportunity"> | string | null
+  deletedAt?: Prisma.DateTimeNullableFilter<"Opportunity"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Opportunity"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"Opportunity"> | Date | string
+  updatedAt?: Prisma.DateTimeNullableFilter<"Opportunity"> | Date | string | null
 }
 
 export type OpportunityCreateWithoutQuotationsInput = {
   name: string
+  description?: string | null
   amount: number
+  probability?: number | null
   stage: $Enums.OpportunityStages
   expectedCloseDate: Date | string
+  actualCloseDate?: Date | string | null
+  lostReason?: string | null
+  deletedAt?: Date | string | null
   createdAt?: Date | string
-  updatedAt?: Date | string
+  updatedAt?: Date | string | null
   Customer: Prisma.CustomerCreateNestedOneWithoutOpportunitiesInput
   User: Prisma.UserCreateNestedOneWithoutOpportunitiesInput
   Company: Prisma.CompanyCreateNestedOneWithoutOpportunityInput
@@ -739,11 +875,16 @@ export type OpportunityUncheckedCreateWithoutQuotationsInput = {
   companyId: number
   userId: number
   name: string
+  description?: string | null
   amount: number
+  probability?: number | null
   stage: $Enums.OpportunityStages
   expectedCloseDate: Date | string
+  actualCloseDate?: Date | string | null
+  lostReason?: string | null
+  deletedAt?: Date | string | null
   createdAt?: Date | string
-  updatedAt?: Date | string
+  updatedAt?: Date | string | null
 }
 
 export type OpportunityCreateOrConnectWithoutQuotationsInput = {
@@ -764,11 +905,16 @@ export type OpportunityUpdateToOneWithWhereWithoutQuotationsInput = {
 
 export type OpportunityUpdateWithoutQuotationsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   amount?: Prisma.FloatFieldUpdateOperationsInput | number
+  probability?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   stage?: Prisma.EnumOpportunityStagesFieldUpdateOperationsInput | $Enums.OpportunityStages
   expectedCloseDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  actualCloseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lostReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Customer?: Prisma.CustomerUpdateOneRequiredWithoutOpportunitiesNestedInput
   User?: Prisma.UserUpdateOneRequiredWithoutOpportunitiesNestedInput
   Company?: Prisma.CompanyUpdateOneRequiredWithoutOpportunityNestedInput
@@ -780,20 +926,30 @@ export type OpportunityUncheckedUpdateWithoutQuotationsInput = {
   companyId?: Prisma.IntFieldUpdateOperationsInput | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   amount?: Prisma.FloatFieldUpdateOperationsInput | number
+  probability?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   stage?: Prisma.EnumOpportunityStagesFieldUpdateOperationsInput | $Enums.OpportunityStages
   expectedCloseDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  actualCloseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lostReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type OpportunityCreateWithoutCompanyInput = {
   name: string
+  description?: string | null
   amount: number
+  probability?: number | null
   stage: $Enums.OpportunityStages
   expectedCloseDate: Date | string
+  actualCloseDate?: Date | string | null
+  lostReason?: string | null
+  deletedAt?: Date | string | null
   createdAt?: Date | string
-  updatedAt?: Date | string
+  updatedAt?: Date | string | null
   Customer: Prisma.CustomerCreateNestedOneWithoutOpportunitiesInput
   User: Prisma.UserCreateNestedOneWithoutOpportunitiesInput
   Quotations?: Prisma.QuotationCreateNestedManyWithoutOpportunityInput
@@ -804,11 +960,16 @@ export type OpportunityUncheckedCreateWithoutCompanyInput = {
   customerId: number
   userId: number
   name: string
+  description?: string | null
   amount: number
+  probability?: number | null
   stage: $Enums.OpportunityStages
   expectedCloseDate: Date | string
+  actualCloseDate?: Date | string | null
+  lostReason?: string | null
+  deletedAt?: Date | string | null
   createdAt?: Date | string
-  updatedAt?: Date | string
+  updatedAt?: Date | string | null
   Quotations?: Prisma.QuotationUncheckedCreateNestedManyWithoutOpportunityInput
 }
 
@@ -840,11 +1001,16 @@ export type OpportunityUpdateManyWithWhereWithoutCompanyInput = {
 
 export type OpportunityCreateWithoutUserInput = {
   name: string
+  description?: string | null
   amount: number
+  probability?: number | null
   stage: $Enums.OpportunityStages
   expectedCloseDate: Date | string
+  actualCloseDate?: Date | string | null
+  lostReason?: string | null
+  deletedAt?: Date | string | null
   createdAt?: Date | string
-  updatedAt?: Date | string
+  updatedAt?: Date | string | null
   Customer: Prisma.CustomerCreateNestedOneWithoutOpportunitiesInput
   Company: Prisma.CompanyCreateNestedOneWithoutOpportunityInput
   Quotations?: Prisma.QuotationCreateNestedManyWithoutOpportunityInput
@@ -855,11 +1021,16 @@ export type OpportunityUncheckedCreateWithoutUserInput = {
   customerId: number
   companyId: number
   name: string
+  description?: string | null
   amount: number
+  probability?: number | null
   stage: $Enums.OpportunityStages
   expectedCloseDate: Date | string
+  actualCloseDate?: Date | string | null
+  lostReason?: string | null
+  deletedAt?: Date | string | null
   createdAt?: Date | string
-  updatedAt?: Date | string
+  updatedAt?: Date | string | null
   Quotations?: Prisma.QuotationUncheckedCreateNestedManyWithoutOpportunityInput
 }
 
@@ -894,20 +1065,30 @@ export type OpportunityCreateManyCustomerInput = {
   companyId: number
   userId: number
   name: string
+  description?: string | null
   amount: number
+  probability?: number | null
   stage: $Enums.OpportunityStages
   expectedCloseDate: Date | string
+  actualCloseDate?: Date | string | null
+  lostReason?: string | null
+  deletedAt?: Date | string | null
   createdAt?: Date | string
-  updatedAt?: Date | string
+  updatedAt?: Date | string | null
 }
 
 export type OpportunityUpdateWithoutCustomerInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   amount?: Prisma.FloatFieldUpdateOperationsInput | number
+  probability?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   stage?: Prisma.EnumOpportunityStagesFieldUpdateOperationsInput | $Enums.OpportunityStages
   expectedCloseDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  actualCloseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lostReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   User?: Prisma.UserUpdateOneRequiredWithoutOpportunitiesNestedInput
   Company?: Prisma.CompanyUpdateOneRequiredWithoutOpportunityNestedInput
   Quotations?: Prisma.QuotationUpdateManyWithoutOpportunityNestedInput
@@ -918,11 +1099,16 @@ export type OpportunityUncheckedUpdateWithoutCustomerInput = {
   companyId?: Prisma.IntFieldUpdateOperationsInput | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   amount?: Prisma.FloatFieldUpdateOperationsInput | number
+  probability?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   stage?: Prisma.EnumOpportunityStagesFieldUpdateOperationsInput | $Enums.OpportunityStages
   expectedCloseDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  actualCloseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lostReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Quotations?: Prisma.QuotationUncheckedUpdateManyWithoutOpportunityNestedInput
 }
 
@@ -931,11 +1117,16 @@ export type OpportunityUncheckedUpdateManyWithoutCustomerInput = {
   companyId?: Prisma.IntFieldUpdateOperationsInput | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   amount?: Prisma.FloatFieldUpdateOperationsInput | number
+  probability?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   stage?: Prisma.EnumOpportunityStagesFieldUpdateOperationsInput | $Enums.OpportunityStages
   expectedCloseDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  actualCloseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lostReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type OpportunityCreateManyCompanyInput = {
@@ -943,20 +1134,30 @@ export type OpportunityCreateManyCompanyInput = {
   customerId: number
   userId: number
   name: string
+  description?: string | null
   amount: number
+  probability?: number | null
   stage: $Enums.OpportunityStages
   expectedCloseDate: Date | string
+  actualCloseDate?: Date | string | null
+  lostReason?: string | null
+  deletedAt?: Date | string | null
   createdAt?: Date | string
-  updatedAt?: Date | string
+  updatedAt?: Date | string | null
 }
 
 export type OpportunityUpdateWithoutCompanyInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   amount?: Prisma.FloatFieldUpdateOperationsInput | number
+  probability?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   stage?: Prisma.EnumOpportunityStagesFieldUpdateOperationsInput | $Enums.OpportunityStages
   expectedCloseDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  actualCloseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lostReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Customer?: Prisma.CustomerUpdateOneRequiredWithoutOpportunitiesNestedInput
   User?: Prisma.UserUpdateOneRequiredWithoutOpportunitiesNestedInput
   Quotations?: Prisma.QuotationUpdateManyWithoutOpportunityNestedInput
@@ -967,11 +1168,16 @@ export type OpportunityUncheckedUpdateWithoutCompanyInput = {
   customerId?: Prisma.IntFieldUpdateOperationsInput | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   amount?: Prisma.FloatFieldUpdateOperationsInput | number
+  probability?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   stage?: Prisma.EnumOpportunityStagesFieldUpdateOperationsInput | $Enums.OpportunityStages
   expectedCloseDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  actualCloseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lostReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Quotations?: Prisma.QuotationUncheckedUpdateManyWithoutOpportunityNestedInput
 }
 
@@ -980,11 +1186,16 @@ export type OpportunityUncheckedUpdateManyWithoutCompanyInput = {
   customerId?: Prisma.IntFieldUpdateOperationsInput | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   amount?: Prisma.FloatFieldUpdateOperationsInput | number
+  probability?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   stage?: Prisma.EnumOpportunityStagesFieldUpdateOperationsInput | $Enums.OpportunityStages
   expectedCloseDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  actualCloseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lostReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type OpportunityCreateManyUserInput = {
@@ -992,20 +1203,30 @@ export type OpportunityCreateManyUserInput = {
   customerId: number
   companyId: number
   name: string
+  description?: string | null
   amount: number
+  probability?: number | null
   stage: $Enums.OpportunityStages
   expectedCloseDate: Date | string
+  actualCloseDate?: Date | string | null
+  lostReason?: string | null
+  deletedAt?: Date | string | null
   createdAt?: Date | string
-  updatedAt?: Date | string
+  updatedAt?: Date | string | null
 }
 
 export type OpportunityUpdateWithoutUserInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   amount?: Prisma.FloatFieldUpdateOperationsInput | number
+  probability?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   stage?: Prisma.EnumOpportunityStagesFieldUpdateOperationsInput | $Enums.OpportunityStages
   expectedCloseDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  actualCloseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lostReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Customer?: Prisma.CustomerUpdateOneRequiredWithoutOpportunitiesNestedInput
   Company?: Prisma.CompanyUpdateOneRequiredWithoutOpportunityNestedInput
   Quotations?: Prisma.QuotationUpdateManyWithoutOpportunityNestedInput
@@ -1016,11 +1237,16 @@ export type OpportunityUncheckedUpdateWithoutUserInput = {
   customerId?: Prisma.IntFieldUpdateOperationsInput | number
   companyId?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   amount?: Prisma.FloatFieldUpdateOperationsInput | number
+  probability?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   stage?: Prisma.EnumOpportunityStagesFieldUpdateOperationsInput | $Enums.OpportunityStages
   expectedCloseDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  actualCloseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lostReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Quotations?: Prisma.QuotationUncheckedUpdateManyWithoutOpportunityNestedInput
 }
 
@@ -1029,11 +1255,16 @@ export type OpportunityUncheckedUpdateManyWithoutUserInput = {
   customerId?: Prisma.IntFieldUpdateOperationsInput | number
   companyId?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   amount?: Prisma.FloatFieldUpdateOperationsInput | number
+  probability?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   stage?: Prisma.EnumOpportunityStagesFieldUpdateOperationsInput | $Enums.OpportunityStages
   expectedCloseDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  actualCloseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lostReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 
@@ -1073,9 +1304,14 @@ export type OpportunitySelect<ExtArgs extends runtime.Types.Extensions.InternalA
   companyId?: boolean
   userId?: boolean
   name?: boolean
+  description?: boolean
   amount?: boolean
+  probability?: boolean
   stage?: boolean
   expectedCloseDate?: boolean
+  actualCloseDate?: boolean
+  lostReason?: boolean
+  deletedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   Customer?: boolean | Prisma.CustomerDefaultArgs<ExtArgs>
@@ -1091,9 +1327,14 @@ export type OpportunitySelectCreateManyAndReturn<ExtArgs extends runtime.Types.E
   companyId?: boolean
   userId?: boolean
   name?: boolean
+  description?: boolean
   amount?: boolean
+  probability?: boolean
   stage?: boolean
   expectedCloseDate?: boolean
+  actualCloseDate?: boolean
+  lostReason?: boolean
+  deletedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   Customer?: boolean | Prisma.CustomerDefaultArgs<ExtArgs>
@@ -1107,9 +1348,14 @@ export type OpportunitySelectUpdateManyAndReturn<ExtArgs extends runtime.Types.E
   companyId?: boolean
   userId?: boolean
   name?: boolean
+  description?: boolean
   amount?: boolean
+  probability?: boolean
   stage?: boolean
   expectedCloseDate?: boolean
+  actualCloseDate?: boolean
+  lostReason?: boolean
+  deletedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   Customer?: boolean | Prisma.CustomerDefaultArgs<ExtArgs>
@@ -1123,14 +1369,19 @@ export type OpportunitySelectScalar = {
   companyId?: boolean
   userId?: boolean
   name?: boolean
+  description?: boolean
   amount?: boolean
+  probability?: boolean
   stage?: boolean
   expectedCloseDate?: boolean
+  actualCloseDate?: boolean
+  lostReason?: boolean
+  deletedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type OpportunityOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "customerId" | "companyId" | "userId" | "name" | "amount" | "stage" | "expectedCloseDate" | "createdAt" | "updatedAt", ExtArgs["result"]["opportunity"]>
+export type OpportunityOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "customerId" | "companyId" | "userId" | "name" | "description" | "amount" | "probability" | "stage" | "expectedCloseDate" | "actualCloseDate" | "lostReason" | "deletedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["opportunity"]>
 export type OpportunityInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   Customer?: boolean | Prisma.CustomerDefaultArgs<ExtArgs>
   User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -1163,11 +1414,16 @@ export type $OpportunityPayload<ExtArgs extends runtime.Types.Extensions.Interna
     companyId: number
     userId: number
     name: string
+    description: string | null
     amount: number
+    probability: number | null
     stage: $Enums.OpportunityStages
     expectedCloseDate: Date
+    actualCloseDate: Date | null
+    lostReason: string | null
+    deletedAt: Date | null
     createdAt: Date
-    updatedAt: Date
+    updatedAt: Date | null
   }, ExtArgs["result"]["opportunity"]>
   composites: {}
 }
@@ -1600,9 +1856,14 @@ export interface OpportunityFieldRefs {
   readonly companyId: Prisma.FieldRef<"Opportunity", 'Int'>
   readonly userId: Prisma.FieldRef<"Opportunity", 'Int'>
   readonly name: Prisma.FieldRef<"Opportunity", 'String'>
+  readonly description: Prisma.FieldRef<"Opportunity", 'String'>
   readonly amount: Prisma.FieldRef<"Opportunity", 'Float'>
+  readonly probability: Prisma.FieldRef<"Opportunity", 'Int'>
   readonly stage: Prisma.FieldRef<"Opportunity", 'OpportunityStages'>
   readonly expectedCloseDate: Prisma.FieldRef<"Opportunity", 'DateTime'>
+  readonly actualCloseDate: Prisma.FieldRef<"Opportunity", 'DateTime'>
+  readonly lostReason: Prisma.FieldRef<"Opportunity", 'String'>
+  readonly deletedAt: Prisma.FieldRef<"Opportunity", 'DateTime'>
   readonly createdAt: Prisma.FieldRef<"Opportunity", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Opportunity", 'DateTime'>
 }

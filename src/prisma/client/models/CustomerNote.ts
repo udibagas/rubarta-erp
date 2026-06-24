@@ -43,6 +43,8 @@ export type CustomerNoteMinAggregateOutputType = {
   customerId: number | null
   userId: number | null
   content: string | null
+  isPinned: boolean | null
+  deletedAt: Date | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -52,6 +54,8 @@ export type CustomerNoteMaxAggregateOutputType = {
   customerId: number | null
   userId: number | null
   content: string | null
+  isPinned: boolean | null
+  deletedAt: Date | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -61,6 +65,8 @@ export type CustomerNoteCountAggregateOutputType = {
   customerId: number
   userId: number
   content: number
+  isPinned: number
+  deletedAt: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -84,6 +90,8 @@ export type CustomerNoteMinAggregateInputType = {
   customerId?: true
   userId?: true
   content?: true
+  isPinned?: true
+  deletedAt?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -93,6 +101,8 @@ export type CustomerNoteMaxAggregateInputType = {
   customerId?: true
   userId?: true
   content?: true
+  isPinned?: true
+  deletedAt?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -102,6 +112,8 @@ export type CustomerNoteCountAggregateInputType = {
   customerId?: true
   userId?: true
   content?: true
+  isPinned?: true
+  deletedAt?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -198,8 +210,10 @@ export type CustomerNoteGroupByOutputType = {
   customerId: number
   userId: number
   content: string
+  isPinned: boolean
+  deletedAt: Date | null
   createdAt: Date
-  updatedAt: Date
+  updatedAt: Date | null
   _count: CustomerNoteCountAggregateOutputType | null
   _avg: CustomerNoteAvgAggregateOutputType | null
   _sum: CustomerNoteSumAggregateOutputType | null
@@ -230,8 +244,10 @@ export type CustomerNoteWhereInput = {
   customerId?: Prisma.IntFilter<"CustomerNote"> | number
   userId?: Prisma.IntFilter<"CustomerNote"> | number
   content?: Prisma.StringFilter<"CustomerNote"> | string
+  isPinned?: Prisma.BoolFilter<"CustomerNote"> | boolean
+  deletedAt?: Prisma.DateTimeNullableFilter<"CustomerNote"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"CustomerNote"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"CustomerNote"> | Date | string
+  updatedAt?: Prisma.DateTimeNullableFilter<"CustomerNote"> | Date | string | null
   Customer?: Prisma.XOR<Prisma.CustomerScalarRelationFilter, Prisma.CustomerWhereInput>
   User?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }
@@ -241,8 +257,10 @@ export type CustomerNoteOrderByWithRelationInput = {
   customerId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   content?: Prisma.SortOrder
+  isPinned?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   Customer?: Prisma.CustomerOrderByWithRelationInput
   User?: Prisma.UserOrderByWithRelationInput
 }
@@ -255,8 +273,10 @@ export type CustomerNoteWhereUniqueInput = Prisma.AtLeast<{
   customerId?: Prisma.IntFilter<"CustomerNote"> | number
   userId?: Prisma.IntFilter<"CustomerNote"> | number
   content?: Prisma.StringFilter<"CustomerNote"> | string
+  isPinned?: Prisma.BoolFilter<"CustomerNote"> | boolean
+  deletedAt?: Prisma.DateTimeNullableFilter<"CustomerNote"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"CustomerNote"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"CustomerNote"> | Date | string
+  updatedAt?: Prisma.DateTimeNullableFilter<"CustomerNote"> | Date | string | null
   Customer?: Prisma.XOR<Prisma.CustomerScalarRelationFilter, Prisma.CustomerWhereInput>
   User?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }, "id">
@@ -266,8 +286,10 @@ export type CustomerNoteOrderByWithAggregationInput = {
   customerId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   content?: Prisma.SortOrder
+  isPinned?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.CustomerNoteCountOrderByAggregateInput
   _avg?: Prisma.CustomerNoteAvgOrderByAggregateInput
   _max?: Prisma.CustomerNoteMaxOrderByAggregateInput
@@ -283,15 +305,19 @@ export type CustomerNoteScalarWhereWithAggregatesInput = {
   customerId?: Prisma.IntWithAggregatesFilter<"CustomerNote"> | number
   userId?: Prisma.IntWithAggregatesFilter<"CustomerNote"> | number
   content?: Prisma.StringWithAggregatesFilter<"CustomerNote"> | string
+  isPinned?: Prisma.BoolWithAggregatesFilter<"CustomerNote"> | boolean
+  deletedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"CustomerNote"> | Date | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"CustomerNote"> | Date | string
-  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"CustomerNote"> | Date | string
+  updatedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"CustomerNote"> | Date | string | null
 }
 
 export type CustomerNoteCreateInput = {
   content: string
+  isPinned?: boolean
+  deletedAt?: Date | string | null
   createdAt?: Date | string
-  updatedAt?: Date | string
-  Customer: Prisma.CustomerCreateNestedOneWithoutCustomerNoteInput
+  updatedAt?: Date | string | null
+  Customer: Prisma.CustomerCreateNestedOneWithoutCustomerNotesInput
   User: Prisma.UserCreateNestedOneWithoutCustomerNotesInput
 }
 
@@ -300,15 +326,19 @@ export type CustomerNoteUncheckedCreateInput = {
   customerId: number
   userId: number
   content: string
+  isPinned?: boolean
+  deletedAt?: Date | string | null
   createdAt?: Date | string
-  updatedAt?: Date | string
+  updatedAt?: Date | string | null
 }
 
 export type CustomerNoteUpdateInput = {
   content?: Prisma.StringFieldUpdateOperationsInput | string
+  isPinned?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  Customer?: Prisma.CustomerUpdateOneRequiredWithoutCustomerNoteNestedInput
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  Customer?: Prisma.CustomerUpdateOneRequiredWithoutCustomerNotesNestedInput
   User?: Prisma.UserUpdateOneRequiredWithoutCustomerNotesNestedInput
 }
 
@@ -317,8 +347,10 @@ export type CustomerNoteUncheckedUpdateInput = {
   customerId?: Prisma.IntFieldUpdateOperationsInput | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   content?: Prisma.StringFieldUpdateOperationsInput | string
+  isPinned?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type CustomerNoteCreateManyInput = {
@@ -326,14 +358,18 @@ export type CustomerNoteCreateManyInput = {
   customerId: number
   userId: number
   content: string
+  isPinned?: boolean
+  deletedAt?: Date | string | null
   createdAt?: Date | string
-  updatedAt?: Date | string
+  updatedAt?: Date | string | null
 }
 
 export type CustomerNoteUpdateManyMutationInput = {
   content?: Prisma.StringFieldUpdateOperationsInput | string
+  isPinned?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type CustomerNoteUncheckedUpdateManyInput = {
@@ -341,8 +377,10 @@ export type CustomerNoteUncheckedUpdateManyInput = {
   customerId?: Prisma.IntFieldUpdateOperationsInput | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   content?: Prisma.StringFieldUpdateOperationsInput | string
+  isPinned?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type CustomerNoteListRelationFilter = {
@@ -360,6 +398,8 @@ export type CustomerNoteCountOrderByAggregateInput = {
   customerId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   content?: Prisma.SortOrder
+  isPinned?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -375,6 +415,8 @@ export type CustomerNoteMaxOrderByAggregateInput = {
   customerId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   content?: Prisma.SortOrder
+  isPinned?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -384,6 +426,8 @@ export type CustomerNoteMinOrderByAggregateInput = {
   customerId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   content?: Prisma.SortOrder
+  isPinned?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -480,8 +524,10 @@ export type CustomerNoteUncheckedUpdateManyWithoutUserNestedInput = {
 
 export type CustomerNoteCreateWithoutCustomerInput = {
   content: string
+  isPinned?: boolean
+  deletedAt?: Date | string | null
   createdAt?: Date | string
-  updatedAt?: Date | string
+  updatedAt?: Date | string | null
   User: Prisma.UserCreateNestedOneWithoutCustomerNotesInput
 }
 
@@ -489,8 +535,10 @@ export type CustomerNoteUncheckedCreateWithoutCustomerInput = {
   id?: number
   userId: number
   content: string
+  isPinned?: boolean
+  deletedAt?: Date | string | null
   createdAt?: Date | string
-  updatedAt?: Date | string
+  updatedAt?: Date | string | null
 }
 
 export type CustomerNoteCreateOrConnectWithoutCustomerInput = {
@@ -527,23 +575,29 @@ export type CustomerNoteScalarWhereInput = {
   customerId?: Prisma.IntFilter<"CustomerNote"> | number
   userId?: Prisma.IntFilter<"CustomerNote"> | number
   content?: Prisma.StringFilter<"CustomerNote"> | string
+  isPinned?: Prisma.BoolFilter<"CustomerNote"> | boolean
+  deletedAt?: Prisma.DateTimeNullableFilter<"CustomerNote"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"CustomerNote"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"CustomerNote"> | Date | string
+  updatedAt?: Prisma.DateTimeNullableFilter<"CustomerNote"> | Date | string | null
 }
 
 export type CustomerNoteCreateWithoutUserInput = {
   content: string
+  isPinned?: boolean
+  deletedAt?: Date | string | null
   createdAt?: Date | string
-  updatedAt?: Date | string
-  Customer: Prisma.CustomerCreateNestedOneWithoutCustomerNoteInput
+  updatedAt?: Date | string | null
+  Customer: Prisma.CustomerCreateNestedOneWithoutCustomerNotesInput
 }
 
 export type CustomerNoteUncheckedCreateWithoutUserInput = {
   id?: number
   customerId: number
   content: string
+  isPinned?: boolean
+  deletedAt?: Date | string | null
   createdAt?: Date | string
-  updatedAt?: Date | string
+  updatedAt?: Date | string | null
 }
 
 export type CustomerNoteCreateOrConnectWithoutUserInput = {
@@ -576,14 +630,18 @@ export type CustomerNoteCreateManyCustomerInput = {
   id?: number
   userId: number
   content: string
+  isPinned?: boolean
+  deletedAt?: Date | string | null
   createdAt?: Date | string
-  updatedAt?: Date | string
+  updatedAt?: Date | string | null
 }
 
 export type CustomerNoteUpdateWithoutCustomerInput = {
   content?: Prisma.StringFieldUpdateOperationsInput | string
+  isPinned?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   User?: Prisma.UserUpdateOneRequiredWithoutCustomerNotesNestedInput
 }
 
@@ -591,47 +649,59 @@ export type CustomerNoteUncheckedUpdateWithoutCustomerInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   content?: Prisma.StringFieldUpdateOperationsInput | string
+  isPinned?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type CustomerNoteUncheckedUpdateManyWithoutCustomerInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   content?: Prisma.StringFieldUpdateOperationsInput | string
+  isPinned?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type CustomerNoteCreateManyUserInput = {
   id?: number
   customerId: number
   content: string
+  isPinned?: boolean
+  deletedAt?: Date | string | null
   createdAt?: Date | string
-  updatedAt?: Date | string
+  updatedAt?: Date | string | null
 }
 
 export type CustomerNoteUpdateWithoutUserInput = {
   content?: Prisma.StringFieldUpdateOperationsInput | string
+  isPinned?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  Customer?: Prisma.CustomerUpdateOneRequiredWithoutCustomerNoteNestedInput
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  Customer?: Prisma.CustomerUpdateOneRequiredWithoutCustomerNotesNestedInput
 }
 
 export type CustomerNoteUncheckedUpdateWithoutUserInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   customerId?: Prisma.IntFieldUpdateOperationsInput | number
   content?: Prisma.StringFieldUpdateOperationsInput | string
+  isPinned?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type CustomerNoteUncheckedUpdateManyWithoutUserInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   customerId?: Prisma.IntFieldUpdateOperationsInput | number
   content?: Prisma.StringFieldUpdateOperationsInput | string
+  isPinned?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 
@@ -641,6 +711,8 @@ export type CustomerNoteSelect<ExtArgs extends runtime.Types.Extensions.Internal
   customerId?: boolean
   userId?: boolean
   content?: boolean
+  isPinned?: boolean
+  deletedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   Customer?: boolean | Prisma.CustomerDefaultArgs<ExtArgs>
@@ -652,6 +724,8 @@ export type CustomerNoteSelectCreateManyAndReturn<ExtArgs extends runtime.Types.
   customerId?: boolean
   userId?: boolean
   content?: boolean
+  isPinned?: boolean
+  deletedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   Customer?: boolean | Prisma.CustomerDefaultArgs<ExtArgs>
@@ -663,6 +737,8 @@ export type CustomerNoteSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.
   customerId?: boolean
   userId?: boolean
   content?: boolean
+  isPinned?: boolean
+  deletedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   Customer?: boolean | Prisma.CustomerDefaultArgs<ExtArgs>
@@ -674,11 +750,13 @@ export type CustomerNoteSelectScalar = {
   customerId?: boolean
   userId?: boolean
   content?: boolean
+  isPinned?: boolean
+  deletedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type CustomerNoteOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "customerId" | "userId" | "content" | "createdAt" | "updatedAt", ExtArgs["result"]["customerNote"]>
+export type CustomerNoteOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "customerId" | "userId" | "content" | "isPinned" | "deletedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["customerNote"]>
 export type CustomerNoteInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   Customer?: boolean | Prisma.CustomerDefaultArgs<ExtArgs>
   User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -703,8 +781,10 @@ export type $CustomerNotePayload<ExtArgs extends runtime.Types.Extensions.Intern
     customerId: number
     userId: number
     content: string
+    isPinned: boolean
+    deletedAt: Date | null
     createdAt: Date
-    updatedAt: Date
+    updatedAt: Date | null
   }, ExtArgs["result"]["customerNote"]>
   composites: {}
 }
@@ -1134,6 +1214,8 @@ export interface CustomerNoteFieldRefs {
   readonly customerId: Prisma.FieldRef<"CustomerNote", 'Int'>
   readonly userId: Prisma.FieldRef<"CustomerNote", 'Int'>
   readonly content: Prisma.FieldRef<"CustomerNote", 'String'>
+  readonly isPinned: Prisma.FieldRef<"CustomerNote", 'Boolean'>
+  readonly deletedAt: Prisma.FieldRef<"CustomerNote", 'DateTime'>
   readonly createdAt: Prisma.FieldRef<"CustomerNote", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"CustomerNote", 'DateTime'>
 }

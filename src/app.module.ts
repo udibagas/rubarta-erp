@@ -18,7 +18,7 @@ import { FileModule } from './file/file.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { SuppliersModule } from './suppliers/suppliers.module';
 import { ReportModule } from './report/report.module';
-// import { InvoicesModule } from './invoices/invoices.module';
+import { InvoicesModule } from './invoices/invoices.module';
 // import { PaymentsModule } from './payments/payments.module';
 // import { ExpensesModule } from './expenses/expenses.module';
 import { CustomersModule } from './customers/customers.module';
@@ -27,6 +27,12 @@ import { join } from 'path';
 import { ContactsModule } from './contacts/contacts.module';
 import { LeadsModule } from './leads/leads.module';
 import { OpportunitiesModule } from './opportunities/opportunities.module';
+import { QuotationsModule } from './quotations/quotations.module';
+import { TasksModule } from './tasks/tasks.module';
+import { InteractionsModule } from './interactions/interactions.module';
+import { OrdersModule } from './orders/orders.module';
+import { MaterialsModule } from './materials/materials.module';
+import { CrmDashboardModule } from './crm-dashboard/crm-dashboard.module';
 
 @Module({
   imports: [
@@ -93,13 +99,19 @@ import { OpportunitiesModule } from './opportunities/opportunities.module';
     SuppliersModule,
     ReportModule,
     // AccountsModule,
-    // InvoicesModule,
+    InvoicesModule,
     // PaymentsModule,
     // ExpensesModule,
     CustomersModule,
     ContactsModule,
     LeadsModule,
     OpportunitiesModule,
+    QuotationsModule,
+    TasksModule,
+    InteractionsModule,
+    OrdersModule,
+    MaterialsModule,
+    CrmDashboardModule,
   ],
   controllers: [],
   providers: [],

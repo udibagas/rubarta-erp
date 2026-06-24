@@ -190,7 +190,16 @@ export const CustomerScalarFieldEnum = {
   name: 'name',
   address: 'address',
   phone: 'phone',
-  email: 'email'
+  email: 'email',
+  website: 'website',
+  industry: 'industry',
+  employeeCount: 'employeeCount',
+  revenue: 'revenue',
+  tags: 'tags',
+  isActive: 'isActive',
+  deletedAt: 'deletedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 } as const
 
 export type CustomerScalarFieldEnum = (typeof CustomerScalarFieldEnum)[keyof typeof CustomerScalarFieldEnum]
@@ -204,6 +213,9 @@ export const ContactScalarFieldEnum = {
   phone: 'phone',
   position: 'position',
   notes: 'notes',
+  isPrimary: 'isPrimary',
+  isActive: 'isActive',
+  deletedAt: 'deletedAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -218,7 +230,10 @@ export const LeadScalarFieldEnum = {
   userId: 'userId',
   source: 'source',
   status: 'status',
+  estimatedValue: 'estimatedValue',
   notes: 'notes',
+  convertedDate: 'convertedDate',
+  deletedAt: 'deletedAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -232,9 +247,14 @@ export const OpportunityScalarFieldEnum = {
   companyId: 'companyId',
   userId: 'userId',
   name: 'name',
+  description: 'description',
   amount: 'amount',
+  probability: 'probability',
   stage: 'stage',
   expectedCloseDate: 'expectedCloseDate',
+  actualCloseDate: 'actualCloseDate',
+  lostReason: 'lostReason',
+  deletedAt: 'deletedAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -246,13 +266,20 @@ export const QuotationScalarFieldEnum = {
   id: 'id',
   number: 'number',
   title: 'title',
+  description: 'description',
   totalAmount: 'totalAmount',
+  discount: 'discount',
   vatAmount: 'vatAmount',
   grandTotal: 'grandTotal',
   status: 'status',
   currency: 'currency',
   validity: 'validity',
   validUntil: 'validUntil',
+  sentDate: 'sentDate',
+  acceptedDate: 'acceptedDate',
+  deletedAt: 'deletedAt',
+  notes: 'notes',
+  terms: 'terms',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   customerId: 'customerId',
@@ -270,8 +297,10 @@ export const QuotationItemScalarFieldEnum = {
   description: 'description',
   quantity: 'quantity',
   unitPrice: 'unitPrice',
+  discount: 'discount',
   totalPrice: 'totalPrice',
-  vat: 'vat'
+  vat: 'vat',
+  sortOrder: 'sortOrder'
 } as const
 
 export type QuotationItemScalarFieldEnum = (typeof QuotationItemScalarFieldEnum)[keyof typeof QuotationItemScalarFieldEnum]
@@ -284,7 +313,10 @@ export const TaskScalarFieldEnum = {
   title: 'title',
   description: 'description',
   dueDate: 'dueDate',
+  completedAt: 'completedAt',
   status: 'status',
+  priority: 'priority',
+  deletedAt: 'deletedAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -298,7 +330,11 @@ export const InteractionScalarFieldEnum = {
   userId: 'userId',
   type: 'type',
   date: 'date',
+  duration: 'duration',
+  subject: 'subject',
   notes: 'notes',
+  outcome: 'outcome',
+  deletedAt: 'deletedAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -311,10 +347,18 @@ export const OrderScalarFieldEnum = {
   number: 'number',
   date: 'date',
   customerId: 'customerId',
+  description: 'description',
   totalAmount: 'totalAmount',
+  discount: 'discount',
   vatAmount: 'vatAmount',
   grandTotal: 'grandTotal',
   status: 'status',
+  shippingAddress: 'shippingAddress',
+  billingAddress: 'billingAddress',
+  paymentTerms: 'paymentTerms',
+  deliveryDate: 'deliveryDate',
+  notes: 'notes',
+  deletedAt: 'deletedAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -329,8 +373,10 @@ export const OrderItemScalarFieldEnum = {
   description: 'description',
   quantity: 'quantity',
   unitPrice: 'unitPrice',
+  discount: 'discount',
   totalPrice: 'totalPrice',
-  vat: 'vat'
+  vat: 'vat',
+  sortOrder: 'sortOrder'
 } as const
 
 export type OrderItemScalarFieldEnum = (typeof OrderItemScalarFieldEnum)[keyof typeof OrderItemScalarFieldEnum]
@@ -341,6 +387,8 @@ export const CustomerNoteScalarFieldEnum = {
   customerId: 'customerId',
   userId: 'userId',
   content: 'content',
+  isPinned: 'isPinned',
+  deletedAt: 'deletedAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -352,10 +400,12 @@ export const CustomerFileScalarFieldEnum = {
   id: 'id',
   customerId: 'customerId',
   description: 'description',
+  category: 'category',
   fileName: 'fileName',
   filePath: 'filePath',
   fileSize: 'fileSize',
   fileType: 'fileType',
+  deletedAt: 'deletedAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -368,10 +418,15 @@ export const MaterialScalarFieldEnum = {
   partNumber: 'partNumber',
   name: 'name',
   description: 'description',
+  category: 'category',
   unit: 'unit',
   purchasePrice: 'purchasePrice',
   sellingPrice: 'sellingPrice',
+  minStock: 'minStock',
+  currentStock: 'currentStock',
+  isActive: 'isActive',
   supplierId: 'supplierId',
+  deletedAt: 'deletedAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const

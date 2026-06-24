@@ -44,6 +44,9 @@ export const LeadSource = {
   Advertisement: 'Advertisement',
   SocialMedia: 'SocialMedia',
   Website: 'Website',
+  ColdCall: 'ColdCall',
+  EmailCampaign: 'EmailCampaign',
+  Event: 'Event',
   Other: 'Other'
 } as const
 
@@ -52,6 +55,8 @@ export type LeadSource = (typeof LeadSource)[keyof typeof LeadSource]
 
 export const OpportunityStages = {
   Prospecting: 'Prospecting',
+  Qualification: 'Qualification',
+  Proposal: 'Proposal',
   Negotiation: 'Negotiation',
   Proposal_Sent: 'Proposal_Sent',
   Closed_Won: 'Closed_Won',
@@ -70,6 +75,41 @@ export const QuotationStatus = {
 } as const
 
 export type QuotationStatus = (typeof QuotationStatus)[keyof typeof QuotationStatus]
+
+
+export const TaskStatus = {
+  Todo: 'Todo',
+  InProgress: 'InProgress',
+  Completed: 'Completed',
+  Cancelled: 'Cancelled',
+  OnHold: 'OnHold'
+} as const
+
+export type TaskStatus = (typeof TaskStatus)[keyof typeof TaskStatus]
+
+
+export const TaskPriority = {
+  Low: 'Low',
+  Medium: 'Medium',
+  High: 'High',
+  Urgent: 'Urgent'
+} as const
+
+export type TaskPriority = (typeof TaskPriority)[keyof typeof TaskPriority]
+
+
+export const InteractionType = {
+  Call: 'Call',
+  Email: 'Email',
+  Meeting: 'Meeting',
+  Demo: 'Demo',
+  SiteVisit: 'SiteVisit',
+  Presentation: 'Presentation',
+  FollowUp: 'FollowUp',
+  Other: 'Other'
+} as const
+
+export type InteractionType = (typeof InteractionType)[keyof typeof InteractionType]
 
 
 export const OrderStatus = {

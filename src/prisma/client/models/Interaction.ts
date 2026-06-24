@@ -30,21 +30,27 @@ export type InteractionAvgAggregateOutputType = {
   id: number | null
   customerId: number | null
   userId: number | null
+  duration: number | null
 }
 
 export type InteractionSumAggregateOutputType = {
   id: number | null
   customerId: number | null
   userId: number | null
+  duration: number | null
 }
 
 export type InteractionMinAggregateOutputType = {
   id: number | null
   customerId: number | null
   userId: number | null
-  type: string | null
+  type: $Enums.InteractionType | null
   date: Date | null
+  duration: number | null
+  subject: string | null
   notes: string | null
+  outcome: string | null
+  deletedAt: Date | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -53,9 +59,13 @@ export type InteractionMaxAggregateOutputType = {
   id: number | null
   customerId: number | null
   userId: number | null
-  type: string | null
+  type: $Enums.InteractionType | null
   date: Date | null
+  duration: number | null
+  subject: string | null
   notes: string | null
+  outcome: string | null
+  deletedAt: Date | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -66,7 +76,11 @@ export type InteractionCountAggregateOutputType = {
   userId: number
   type: number
   date: number
+  duration: number
+  subject: number
   notes: number
+  outcome: number
+  deletedAt: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -77,12 +91,14 @@ export type InteractionAvgAggregateInputType = {
   id?: true
   customerId?: true
   userId?: true
+  duration?: true
 }
 
 export type InteractionSumAggregateInputType = {
   id?: true
   customerId?: true
   userId?: true
+  duration?: true
 }
 
 export type InteractionMinAggregateInputType = {
@@ -91,7 +107,11 @@ export type InteractionMinAggregateInputType = {
   userId?: true
   type?: true
   date?: true
+  duration?: true
+  subject?: true
   notes?: true
+  outcome?: true
+  deletedAt?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -102,7 +122,11 @@ export type InteractionMaxAggregateInputType = {
   userId?: true
   type?: true
   date?: true
+  duration?: true
+  subject?: true
   notes?: true
+  outcome?: true
+  deletedAt?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -113,7 +137,11 @@ export type InteractionCountAggregateInputType = {
   userId?: true
   type?: true
   date?: true
+  duration?: true
+  subject?: true
   notes?: true
+  outcome?: true
+  deletedAt?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -209,11 +237,15 @@ export type InteractionGroupByOutputType = {
   id: number
   customerId: number
   userId: number
-  type: string
+  type: $Enums.InteractionType
   date: Date
+  duration: number | null
+  subject: string | null
   notes: string | null
+  outcome: string | null
+  deletedAt: Date | null
   createdAt: Date
-  updatedAt: Date
+  updatedAt: Date | null
   _count: InteractionCountAggregateOutputType | null
   _avg: InteractionAvgAggregateOutputType | null
   _sum: InteractionSumAggregateOutputType | null
@@ -243,11 +275,15 @@ export type InteractionWhereInput = {
   id?: Prisma.IntFilter<"Interaction"> | number
   customerId?: Prisma.IntFilter<"Interaction"> | number
   userId?: Prisma.IntFilter<"Interaction"> | number
-  type?: Prisma.StringFilter<"Interaction"> | string
+  type?: Prisma.EnumInteractionTypeFilter<"Interaction"> | $Enums.InteractionType
   date?: Prisma.DateTimeFilter<"Interaction"> | Date | string
+  duration?: Prisma.IntNullableFilter<"Interaction"> | number | null
+  subject?: Prisma.StringNullableFilter<"Interaction"> | string | null
   notes?: Prisma.StringNullableFilter<"Interaction"> | string | null
+  outcome?: Prisma.StringNullableFilter<"Interaction"> | string | null
+  deletedAt?: Prisma.DateTimeNullableFilter<"Interaction"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Interaction"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"Interaction"> | Date | string
+  updatedAt?: Prisma.DateTimeNullableFilter<"Interaction"> | Date | string | null
   Customer?: Prisma.XOR<Prisma.CustomerScalarRelationFilter, Prisma.CustomerWhereInput>
   User?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }
@@ -258,9 +294,13 @@ export type InteractionOrderByWithRelationInput = {
   userId?: Prisma.SortOrder
   type?: Prisma.SortOrder
   date?: Prisma.SortOrder
+  duration?: Prisma.SortOrderInput | Prisma.SortOrder
+  subject?: Prisma.SortOrderInput | Prisma.SortOrder
   notes?: Prisma.SortOrderInput | Prisma.SortOrder
+  outcome?: Prisma.SortOrderInput | Prisma.SortOrder
+  deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   Customer?: Prisma.CustomerOrderByWithRelationInput
   User?: Prisma.UserOrderByWithRelationInput
 }
@@ -272,11 +312,15 @@ export type InteractionWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.InteractionWhereInput | Prisma.InteractionWhereInput[]
   customerId?: Prisma.IntFilter<"Interaction"> | number
   userId?: Prisma.IntFilter<"Interaction"> | number
-  type?: Prisma.StringFilter<"Interaction"> | string
+  type?: Prisma.EnumInteractionTypeFilter<"Interaction"> | $Enums.InteractionType
   date?: Prisma.DateTimeFilter<"Interaction"> | Date | string
+  duration?: Prisma.IntNullableFilter<"Interaction"> | number | null
+  subject?: Prisma.StringNullableFilter<"Interaction"> | string | null
   notes?: Prisma.StringNullableFilter<"Interaction"> | string | null
+  outcome?: Prisma.StringNullableFilter<"Interaction"> | string | null
+  deletedAt?: Prisma.DateTimeNullableFilter<"Interaction"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Interaction"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"Interaction"> | Date | string
+  updatedAt?: Prisma.DateTimeNullableFilter<"Interaction"> | Date | string | null
   Customer?: Prisma.XOR<Prisma.CustomerScalarRelationFilter, Prisma.CustomerWhereInput>
   User?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }, "id">
@@ -287,9 +331,13 @@ export type InteractionOrderByWithAggregationInput = {
   userId?: Prisma.SortOrder
   type?: Prisma.SortOrder
   date?: Prisma.SortOrder
+  duration?: Prisma.SortOrderInput | Prisma.SortOrder
+  subject?: Prisma.SortOrderInput | Prisma.SortOrder
   notes?: Prisma.SortOrderInput | Prisma.SortOrder
+  outcome?: Prisma.SortOrderInput | Prisma.SortOrder
+  deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.InteractionCountOrderByAggregateInput
   _avg?: Prisma.InteractionAvgOrderByAggregateInput
   _max?: Prisma.InteractionMaxOrderByAggregateInput
@@ -304,19 +352,27 @@ export type InteractionScalarWhereWithAggregatesInput = {
   id?: Prisma.IntWithAggregatesFilter<"Interaction"> | number
   customerId?: Prisma.IntWithAggregatesFilter<"Interaction"> | number
   userId?: Prisma.IntWithAggregatesFilter<"Interaction"> | number
-  type?: Prisma.StringWithAggregatesFilter<"Interaction"> | string
+  type?: Prisma.EnumInteractionTypeWithAggregatesFilter<"Interaction"> | $Enums.InteractionType
   date?: Prisma.DateTimeWithAggregatesFilter<"Interaction"> | Date | string
+  duration?: Prisma.IntNullableWithAggregatesFilter<"Interaction"> | number | null
+  subject?: Prisma.StringNullableWithAggregatesFilter<"Interaction"> | string | null
   notes?: Prisma.StringNullableWithAggregatesFilter<"Interaction"> | string | null
+  outcome?: Prisma.StringNullableWithAggregatesFilter<"Interaction"> | string | null
+  deletedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Interaction"> | Date | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Interaction"> | Date | string
-  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Interaction"> | Date | string
+  updatedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Interaction"> | Date | string | null
 }
 
 export type InteractionCreateInput = {
-  type: string
+  type: $Enums.InteractionType
   date: Date | string
+  duration?: number | null
+  subject?: string | null
   notes?: string | null
+  outcome?: string | null
+  deletedAt?: Date | string | null
   createdAt?: Date | string
-  updatedAt?: Date | string
+  updatedAt?: Date | string | null
   Customer: Prisma.CustomerCreateNestedOneWithoutInteractionsInput
   User: Prisma.UserCreateNestedOneWithoutInteractionsInput
 }
@@ -325,19 +381,27 @@ export type InteractionUncheckedCreateInput = {
   id?: number
   customerId: number
   userId: number
-  type: string
+  type: $Enums.InteractionType
   date: Date | string
+  duration?: number | null
+  subject?: string | null
   notes?: string | null
+  outcome?: string | null
+  deletedAt?: Date | string | null
   createdAt?: Date | string
-  updatedAt?: Date | string
+  updatedAt?: Date | string | null
 }
 
 export type InteractionUpdateInput = {
-  type?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumInteractionTypeFieldUpdateOperationsInput | $Enums.InteractionType
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  duration?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  subject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  outcome?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Customer?: Prisma.CustomerUpdateOneRequiredWithoutInteractionsNestedInput
   User?: Prisma.UserUpdateOneRequiredWithoutInteractionsNestedInput
 }
@@ -346,41 +410,57 @@ export type InteractionUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   customerId?: Prisma.IntFieldUpdateOperationsInput | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
-  type?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumInteractionTypeFieldUpdateOperationsInput | $Enums.InteractionType
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  duration?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  subject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  outcome?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type InteractionCreateManyInput = {
   id?: number
   customerId: number
   userId: number
-  type: string
+  type: $Enums.InteractionType
   date: Date | string
+  duration?: number | null
+  subject?: string | null
   notes?: string | null
+  outcome?: string | null
+  deletedAt?: Date | string | null
   createdAt?: Date | string
-  updatedAt?: Date | string
+  updatedAt?: Date | string | null
 }
 
 export type InteractionUpdateManyMutationInput = {
-  type?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumInteractionTypeFieldUpdateOperationsInput | $Enums.InteractionType
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  duration?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  subject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  outcome?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type InteractionUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   customerId?: Prisma.IntFieldUpdateOperationsInput | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
-  type?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumInteractionTypeFieldUpdateOperationsInput | $Enums.InteractionType
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  duration?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  subject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  outcome?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type InteractionListRelationFilter = {
@@ -399,7 +479,11 @@ export type InteractionCountOrderByAggregateInput = {
   userId?: Prisma.SortOrder
   type?: Prisma.SortOrder
   date?: Prisma.SortOrder
+  duration?: Prisma.SortOrder
+  subject?: Prisma.SortOrder
   notes?: Prisma.SortOrder
+  outcome?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -408,6 +492,7 @@ export type InteractionAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
   customerId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  duration?: Prisma.SortOrder
 }
 
 export type InteractionMaxOrderByAggregateInput = {
@@ -416,7 +501,11 @@ export type InteractionMaxOrderByAggregateInput = {
   userId?: Prisma.SortOrder
   type?: Prisma.SortOrder
   date?: Prisma.SortOrder
+  duration?: Prisma.SortOrder
+  subject?: Prisma.SortOrder
   notes?: Prisma.SortOrder
+  outcome?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -427,7 +516,11 @@ export type InteractionMinOrderByAggregateInput = {
   userId?: Prisma.SortOrder
   type?: Prisma.SortOrder
   date?: Prisma.SortOrder
+  duration?: Prisma.SortOrder
+  subject?: Prisma.SortOrder
   notes?: Prisma.SortOrder
+  outcome?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -436,6 +529,7 @@ export type InteractionSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
   customerId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  duration?: Prisma.SortOrder
 }
 
 export type InteractionCreateNestedManyWithoutCustomerInput = {
@@ -478,6 +572,10 @@ export type InteractionUncheckedUpdateManyWithoutCustomerNestedInput = {
   update?: Prisma.InteractionUpdateWithWhereUniqueWithoutCustomerInput | Prisma.InteractionUpdateWithWhereUniqueWithoutCustomerInput[]
   updateMany?: Prisma.InteractionUpdateManyWithWhereWithoutCustomerInput | Prisma.InteractionUpdateManyWithWhereWithoutCustomerInput[]
   deleteMany?: Prisma.InteractionScalarWhereInput | Prisma.InteractionScalarWhereInput[]
+}
+
+export type EnumInteractionTypeFieldUpdateOperationsInput = {
+  set?: $Enums.InteractionType
 }
 
 export type InteractionCreateNestedManyWithoutUserInput = {
@@ -523,22 +621,30 @@ export type InteractionUncheckedUpdateManyWithoutUserNestedInput = {
 }
 
 export type InteractionCreateWithoutCustomerInput = {
-  type: string
+  type: $Enums.InteractionType
   date: Date | string
+  duration?: number | null
+  subject?: string | null
   notes?: string | null
+  outcome?: string | null
+  deletedAt?: Date | string | null
   createdAt?: Date | string
-  updatedAt?: Date | string
+  updatedAt?: Date | string | null
   User: Prisma.UserCreateNestedOneWithoutInteractionsInput
 }
 
 export type InteractionUncheckedCreateWithoutCustomerInput = {
   id?: number
   userId: number
-  type: string
+  type: $Enums.InteractionType
   date: Date | string
+  duration?: number | null
+  subject?: string | null
   notes?: string | null
+  outcome?: string | null
+  deletedAt?: Date | string | null
   createdAt?: Date | string
-  updatedAt?: Date | string
+  updatedAt?: Date | string | null
 }
 
 export type InteractionCreateOrConnectWithoutCustomerInput = {
@@ -574,30 +680,42 @@ export type InteractionScalarWhereInput = {
   id?: Prisma.IntFilter<"Interaction"> | number
   customerId?: Prisma.IntFilter<"Interaction"> | number
   userId?: Prisma.IntFilter<"Interaction"> | number
-  type?: Prisma.StringFilter<"Interaction"> | string
+  type?: Prisma.EnumInteractionTypeFilter<"Interaction"> | $Enums.InteractionType
   date?: Prisma.DateTimeFilter<"Interaction"> | Date | string
+  duration?: Prisma.IntNullableFilter<"Interaction"> | number | null
+  subject?: Prisma.StringNullableFilter<"Interaction"> | string | null
   notes?: Prisma.StringNullableFilter<"Interaction"> | string | null
+  outcome?: Prisma.StringNullableFilter<"Interaction"> | string | null
+  deletedAt?: Prisma.DateTimeNullableFilter<"Interaction"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Interaction"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"Interaction"> | Date | string
+  updatedAt?: Prisma.DateTimeNullableFilter<"Interaction"> | Date | string | null
 }
 
 export type InteractionCreateWithoutUserInput = {
-  type: string
+  type: $Enums.InteractionType
   date: Date | string
+  duration?: number | null
+  subject?: string | null
   notes?: string | null
+  outcome?: string | null
+  deletedAt?: Date | string | null
   createdAt?: Date | string
-  updatedAt?: Date | string
+  updatedAt?: Date | string | null
   Customer: Prisma.CustomerCreateNestedOneWithoutInteractionsInput
 }
 
 export type InteractionUncheckedCreateWithoutUserInput = {
   id?: number
   customerId: number
-  type: string
+  type: $Enums.InteractionType
   date: Date | string
+  duration?: number | null
+  subject?: string | null
   notes?: string | null
+  outcome?: string | null
+  deletedAt?: Date | string | null
   createdAt?: Date | string
-  updatedAt?: Date | string
+  updatedAt?: Date | string | null
 }
 
 export type InteractionCreateOrConnectWithoutUserInput = {
@@ -629,79 +747,111 @@ export type InteractionUpdateManyWithWhereWithoutUserInput = {
 export type InteractionCreateManyCustomerInput = {
   id?: number
   userId: number
-  type: string
+  type: $Enums.InteractionType
   date: Date | string
+  duration?: number | null
+  subject?: string | null
   notes?: string | null
+  outcome?: string | null
+  deletedAt?: Date | string | null
   createdAt?: Date | string
-  updatedAt?: Date | string
+  updatedAt?: Date | string | null
 }
 
 export type InteractionUpdateWithoutCustomerInput = {
-  type?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumInteractionTypeFieldUpdateOperationsInput | $Enums.InteractionType
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  duration?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  subject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  outcome?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   User?: Prisma.UserUpdateOneRequiredWithoutInteractionsNestedInput
 }
 
 export type InteractionUncheckedUpdateWithoutCustomerInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
-  type?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumInteractionTypeFieldUpdateOperationsInput | $Enums.InteractionType
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  duration?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  subject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  outcome?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type InteractionUncheckedUpdateManyWithoutCustomerInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
-  type?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumInteractionTypeFieldUpdateOperationsInput | $Enums.InteractionType
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  duration?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  subject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  outcome?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type InteractionCreateManyUserInput = {
   id?: number
   customerId: number
-  type: string
+  type: $Enums.InteractionType
   date: Date | string
+  duration?: number | null
+  subject?: string | null
   notes?: string | null
+  outcome?: string | null
+  deletedAt?: Date | string | null
   createdAt?: Date | string
-  updatedAt?: Date | string
+  updatedAt?: Date | string | null
 }
 
 export type InteractionUpdateWithoutUserInput = {
-  type?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumInteractionTypeFieldUpdateOperationsInput | $Enums.InteractionType
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  duration?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  subject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  outcome?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Customer?: Prisma.CustomerUpdateOneRequiredWithoutInteractionsNestedInput
 }
 
 export type InteractionUncheckedUpdateWithoutUserInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   customerId?: Prisma.IntFieldUpdateOperationsInput | number
-  type?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumInteractionTypeFieldUpdateOperationsInput | $Enums.InteractionType
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  duration?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  subject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  outcome?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type InteractionUncheckedUpdateManyWithoutUserInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   customerId?: Prisma.IntFieldUpdateOperationsInput | number
-  type?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumInteractionTypeFieldUpdateOperationsInput | $Enums.InteractionType
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  duration?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  subject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  outcome?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 
@@ -712,7 +862,11 @@ export type InteractionSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   userId?: boolean
   type?: boolean
   date?: boolean
+  duration?: boolean
+  subject?: boolean
   notes?: boolean
+  outcome?: boolean
+  deletedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   Customer?: boolean | Prisma.CustomerDefaultArgs<ExtArgs>
@@ -725,7 +879,11 @@ export type InteractionSelectCreateManyAndReturn<ExtArgs extends runtime.Types.E
   userId?: boolean
   type?: boolean
   date?: boolean
+  duration?: boolean
+  subject?: boolean
   notes?: boolean
+  outcome?: boolean
+  deletedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   Customer?: boolean | Prisma.CustomerDefaultArgs<ExtArgs>
@@ -738,7 +896,11 @@ export type InteractionSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.E
   userId?: boolean
   type?: boolean
   date?: boolean
+  duration?: boolean
+  subject?: boolean
   notes?: boolean
+  outcome?: boolean
+  deletedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   Customer?: boolean | Prisma.CustomerDefaultArgs<ExtArgs>
@@ -751,12 +913,16 @@ export type InteractionSelectScalar = {
   userId?: boolean
   type?: boolean
   date?: boolean
+  duration?: boolean
+  subject?: boolean
   notes?: boolean
+  outcome?: boolean
+  deletedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type InteractionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "customerId" | "userId" | "type" | "date" | "notes" | "createdAt" | "updatedAt", ExtArgs["result"]["interaction"]>
+export type InteractionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "customerId" | "userId" | "type" | "date" | "duration" | "subject" | "notes" | "outcome" | "deletedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["interaction"]>
 export type InteractionInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   Customer?: boolean | Prisma.CustomerDefaultArgs<ExtArgs>
   User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -780,11 +946,15 @@ export type $InteractionPayload<ExtArgs extends runtime.Types.Extensions.Interna
     id: number
     customerId: number
     userId: number
-    type: string
+    type: $Enums.InteractionType
     date: Date
+    duration: number | null
+    subject: string | null
     notes: string | null
+    outcome: string | null
+    deletedAt: Date | null
     createdAt: Date
-    updatedAt: Date
+    updatedAt: Date | null
   }, ExtArgs["result"]["interaction"]>
   composites: {}
 }
@@ -1213,9 +1383,13 @@ export interface InteractionFieldRefs {
   readonly id: Prisma.FieldRef<"Interaction", 'Int'>
   readonly customerId: Prisma.FieldRef<"Interaction", 'Int'>
   readonly userId: Prisma.FieldRef<"Interaction", 'Int'>
-  readonly type: Prisma.FieldRef<"Interaction", 'String'>
+  readonly type: Prisma.FieldRef<"Interaction", 'InteractionType'>
   readonly date: Prisma.FieldRef<"Interaction", 'DateTime'>
+  readonly duration: Prisma.FieldRef<"Interaction", 'Int'>
+  readonly subject: Prisma.FieldRef<"Interaction", 'String'>
   readonly notes: Prisma.FieldRef<"Interaction", 'String'>
+  readonly outcome: Prisma.FieldRef<"Interaction", 'String'>
+  readonly deletedAt: Prisma.FieldRef<"Interaction", 'DateTime'>
   readonly createdAt: Prisma.FieldRef<"Interaction", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Interaction", 'DateTime'>
 }

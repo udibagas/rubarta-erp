@@ -1074,10 +1074,6 @@ export type EnumNkpTypeFieldUpdateOperationsInput = {
   set?: $Enums.NkpType
 }
 
-export type NullableDateTimeFieldUpdateOperationsInput = {
-  set?: Date | string | null
-}
-
 export type NkpUpdateOneWithoutChildNestedInput = {
   create?: Prisma.XOR<Prisma.NkpCreateWithoutChildInput, Prisma.NkpUncheckedCreateWithoutChildInput>
   connectOrCreate?: Prisma.NkpCreateOrConnectWithoutChildInput

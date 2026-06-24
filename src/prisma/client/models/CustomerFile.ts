@@ -42,10 +42,12 @@ export type CustomerFileMinAggregateOutputType = {
   id: number | null
   customerId: number | null
   description: string | null
+  category: string | null
   fileName: string | null
   filePath: string | null
   fileSize: number | null
   fileType: string | null
+  deletedAt: Date | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -54,10 +56,12 @@ export type CustomerFileMaxAggregateOutputType = {
   id: number | null
   customerId: number | null
   description: string | null
+  category: string | null
   fileName: string | null
   filePath: string | null
   fileSize: number | null
   fileType: string | null
+  deletedAt: Date | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -66,10 +70,12 @@ export type CustomerFileCountAggregateOutputType = {
   id: number
   customerId: number
   description: number
+  category: number
   fileName: number
   filePath: number
   fileSize: number
   fileType: number
+  deletedAt: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -92,10 +98,12 @@ export type CustomerFileMinAggregateInputType = {
   id?: true
   customerId?: true
   description?: true
+  category?: true
   fileName?: true
   filePath?: true
   fileSize?: true
   fileType?: true
+  deletedAt?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -104,10 +112,12 @@ export type CustomerFileMaxAggregateInputType = {
   id?: true
   customerId?: true
   description?: true
+  category?: true
   fileName?: true
   filePath?: true
   fileSize?: true
   fileType?: true
+  deletedAt?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -116,10 +126,12 @@ export type CustomerFileCountAggregateInputType = {
   id?: true
   customerId?: true
   description?: true
+  category?: true
   fileName?: true
   filePath?: true
   fileSize?: true
   fileType?: true
+  deletedAt?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -215,12 +227,14 @@ export type CustomerFileGroupByOutputType = {
   id: number
   customerId: number
   description: string | null
+  category: string | null
   fileName: string
   filePath: string
   fileSize: number
   fileType: string
+  deletedAt: Date | null
   createdAt: Date
-  updatedAt: Date
+  updatedAt: Date | null
   _count: CustomerFileCountAggregateOutputType | null
   _avg: CustomerFileAvgAggregateOutputType | null
   _sum: CustomerFileSumAggregateOutputType | null
@@ -250,12 +264,14 @@ export type CustomerFileWhereInput = {
   id?: Prisma.IntFilter<"CustomerFile"> | number
   customerId?: Prisma.IntFilter<"CustomerFile"> | number
   description?: Prisma.StringNullableFilter<"CustomerFile"> | string | null
+  category?: Prisma.StringNullableFilter<"CustomerFile"> | string | null
   fileName?: Prisma.StringFilter<"CustomerFile"> | string
   filePath?: Prisma.StringFilter<"CustomerFile"> | string
   fileSize?: Prisma.IntFilter<"CustomerFile"> | number
   fileType?: Prisma.StringFilter<"CustomerFile"> | string
+  deletedAt?: Prisma.DateTimeNullableFilter<"CustomerFile"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"CustomerFile"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"CustomerFile"> | Date | string
+  updatedAt?: Prisma.DateTimeNullableFilter<"CustomerFile"> | Date | string | null
   Customer?: Prisma.XOR<Prisma.CustomerScalarRelationFilter, Prisma.CustomerWhereInput>
 }
 
@@ -263,12 +279,14 @@ export type CustomerFileOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   customerId?: Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
+  category?: Prisma.SortOrderInput | Prisma.SortOrder
   fileName?: Prisma.SortOrder
   filePath?: Prisma.SortOrder
   fileSize?: Prisma.SortOrder
   fileType?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   Customer?: Prisma.CustomerOrderByWithRelationInput
 }
 
@@ -279,12 +297,14 @@ export type CustomerFileWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.CustomerFileWhereInput | Prisma.CustomerFileWhereInput[]
   customerId?: Prisma.IntFilter<"CustomerFile"> | number
   description?: Prisma.StringNullableFilter<"CustomerFile"> | string | null
+  category?: Prisma.StringNullableFilter<"CustomerFile"> | string | null
   fileName?: Prisma.StringFilter<"CustomerFile"> | string
   filePath?: Prisma.StringFilter<"CustomerFile"> | string
   fileSize?: Prisma.IntFilter<"CustomerFile"> | number
   fileType?: Prisma.StringFilter<"CustomerFile"> | string
+  deletedAt?: Prisma.DateTimeNullableFilter<"CustomerFile"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"CustomerFile"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"CustomerFile"> | Date | string
+  updatedAt?: Prisma.DateTimeNullableFilter<"CustomerFile"> | Date | string | null
   Customer?: Prisma.XOR<Prisma.CustomerScalarRelationFilter, Prisma.CustomerWhereInput>
 }, "id">
 
@@ -292,12 +312,14 @@ export type CustomerFileOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   customerId?: Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
+  category?: Prisma.SortOrderInput | Prisma.SortOrder
   fileName?: Prisma.SortOrder
   filePath?: Prisma.SortOrder
   fileSize?: Prisma.SortOrder
   fileType?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.CustomerFileCountOrderByAggregateInput
   _avg?: Prisma.CustomerFileAvgOrderByAggregateInput
   _max?: Prisma.CustomerFileMaxOrderByAggregateInput
@@ -312,92 +334,108 @@ export type CustomerFileScalarWhereWithAggregatesInput = {
   id?: Prisma.IntWithAggregatesFilter<"CustomerFile"> | number
   customerId?: Prisma.IntWithAggregatesFilter<"CustomerFile"> | number
   description?: Prisma.StringNullableWithAggregatesFilter<"CustomerFile"> | string | null
+  category?: Prisma.StringNullableWithAggregatesFilter<"CustomerFile"> | string | null
   fileName?: Prisma.StringWithAggregatesFilter<"CustomerFile"> | string
   filePath?: Prisma.StringWithAggregatesFilter<"CustomerFile"> | string
   fileSize?: Prisma.IntWithAggregatesFilter<"CustomerFile"> | number
   fileType?: Prisma.StringWithAggregatesFilter<"CustomerFile"> | string
+  deletedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"CustomerFile"> | Date | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"CustomerFile"> | Date | string
-  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"CustomerFile"> | Date | string
+  updatedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"CustomerFile"> | Date | string | null
 }
 
 export type CustomerFileCreateInput = {
   description?: string | null
+  category?: string | null
   fileName: string
   filePath: string
   fileSize: number
   fileType: string
+  deletedAt?: Date | string | null
   createdAt?: Date | string
-  updatedAt?: Date | string
-  Customer: Prisma.CustomerCreateNestedOneWithoutCustomerFileInput
+  updatedAt?: Date | string | null
+  Customer: Prisma.CustomerCreateNestedOneWithoutCustomerFilesInput
 }
 
 export type CustomerFileUncheckedCreateInput = {
   id?: number
   customerId: number
   description?: string | null
+  category?: string | null
   fileName: string
   filePath: string
   fileSize: number
   fileType: string
+  deletedAt?: Date | string | null
   createdAt?: Date | string
-  updatedAt?: Date | string
+  updatedAt?: Date | string | null
 }
 
 export type CustomerFileUpdateInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fileName?: Prisma.StringFieldUpdateOperationsInput | string
   filePath?: Prisma.StringFieldUpdateOperationsInput | string
   fileSize?: Prisma.IntFieldUpdateOperationsInput | number
   fileType?: Prisma.StringFieldUpdateOperationsInput | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  Customer?: Prisma.CustomerUpdateOneRequiredWithoutCustomerFileNestedInput
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  Customer?: Prisma.CustomerUpdateOneRequiredWithoutCustomerFilesNestedInput
 }
 
 export type CustomerFileUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   customerId?: Prisma.IntFieldUpdateOperationsInput | number
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fileName?: Prisma.StringFieldUpdateOperationsInput | string
   filePath?: Prisma.StringFieldUpdateOperationsInput | string
   fileSize?: Prisma.IntFieldUpdateOperationsInput | number
   fileType?: Prisma.StringFieldUpdateOperationsInput | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type CustomerFileCreateManyInput = {
   id?: number
   customerId: number
   description?: string | null
+  category?: string | null
   fileName: string
   filePath: string
   fileSize: number
   fileType: string
+  deletedAt?: Date | string | null
   createdAt?: Date | string
-  updatedAt?: Date | string
+  updatedAt?: Date | string | null
 }
 
 export type CustomerFileUpdateManyMutationInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fileName?: Prisma.StringFieldUpdateOperationsInput | string
   filePath?: Prisma.StringFieldUpdateOperationsInput | string
   fileSize?: Prisma.IntFieldUpdateOperationsInput | number
   fileType?: Prisma.StringFieldUpdateOperationsInput | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type CustomerFileUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   customerId?: Prisma.IntFieldUpdateOperationsInput | number
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fileName?: Prisma.StringFieldUpdateOperationsInput | string
   filePath?: Prisma.StringFieldUpdateOperationsInput | string
   fileSize?: Prisma.IntFieldUpdateOperationsInput | number
   fileType?: Prisma.StringFieldUpdateOperationsInput | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type CustomerFileListRelationFilter = {
@@ -414,10 +452,12 @@ export type CustomerFileCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   customerId?: Prisma.SortOrder
   description?: Prisma.SortOrder
+  category?: Prisma.SortOrder
   fileName?: Prisma.SortOrder
   filePath?: Prisma.SortOrder
   fileSize?: Prisma.SortOrder
   fileType?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -432,10 +472,12 @@ export type CustomerFileMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   customerId?: Prisma.SortOrder
   description?: Prisma.SortOrder
+  category?: Prisma.SortOrder
   fileName?: Prisma.SortOrder
   filePath?: Prisma.SortOrder
   fileSize?: Prisma.SortOrder
   fileType?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -444,10 +486,12 @@ export type CustomerFileMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   customerId?: Prisma.SortOrder
   description?: Prisma.SortOrder
+  category?: Prisma.SortOrder
   fileName?: Prisma.SortOrder
   filePath?: Prisma.SortOrder
   fileSize?: Prisma.SortOrder
   fileType?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -502,23 +546,27 @@ export type CustomerFileUncheckedUpdateManyWithoutCustomerNestedInput = {
 
 export type CustomerFileCreateWithoutCustomerInput = {
   description?: string | null
+  category?: string | null
   fileName: string
   filePath: string
   fileSize: number
   fileType: string
+  deletedAt?: Date | string | null
   createdAt?: Date | string
-  updatedAt?: Date | string
+  updatedAt?: Date | string | null
 }
 
 export type CustomerFileUncheckedCreateWithoutCustomerInput = {
   id?: number
   description?: string | null
+  category?: string | null
   fileName: string
   filePath: string
   fileSize: number
   fileType: string
+  deletedAt?: Date | string | null
   createdAt?: Date | string
-  updatedAt?: Date | string
+  updatedAt?: Date | string | null
 }
 
 export type CustomerFileCreateOrConnectWithoutCustomerInput = {
@@ -554,55 +602,65 @@ export type CustomerFileScalarWhereInput = {
   id?: Prisma.IntFilter<"CustomerFile"> | number
   customerId?: Prisma.IntFilter<"CustomerFile"> | number
   description?: Prisma.StringNullableFilter<"CustomerFile"> | string | null
+  category?: Prisma.StringNullableFilter<"CustomerFile"> | string | null
   fileName?: Prisma.StringFilter<"CustomerFile"> | string
   filePath?: Prisma.StringFilter<"CustomerFile"> | string
   fileSize?: Prisma.IntFilter<"CustomerFile"> | number
   fileType?: Prisma.StringFilter<"CustomerFile"> | string
+  deletedAt?: Prisma.DateTimeNullableFilter<"CustomerFile"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"CustomerFile"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"CustomerFile"> | Date | string
+  updatedAt?: Prisma.DateTimeNullableFilter<"CustomerFile"> | Date | string | null
 }
 
 export type CustomerFileCreateManyCustomerInput = {
   id?: number
   description?: string | null
+  category?: string | null
   fileName: string
   filePath: string
   fileSize: number
   fileType: string
+  deletedAt?: Date | string | null
   createdAt?: Date | string
-  updatedAt?: Date | string
+  updatedAt?: Date | string | null
 }
 
 export type CustomerFileUpdateWithoutCustomerInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fileName?: Prisma.StringFieldUpdateOperationsInput | string
   filePath?: Prisma.StringFieldUpdateOperationsInput | string
   fileSize?: Prisma.IntFieldUpdateOperationsInput | number
   fileType?: Prisma.StringFieldUpdateOperationsInput | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type CustomerFileUncheckedUpdateWithoutCustomerInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fileName?: Prisma.StringFieldUpdateOperationsInput | string
   filePath?: Prisma.StringFieldUpdateOperationsInput | string
   fileSize?: Prisma.IntFieldUpdateOperationsInput | number
   fileType?: Prisma.StringFieldUpdateOperationsInput | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type CustomerFileUncheckedUpdateManyWithoutCustomerInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fileName?: Prisma.StringFieldUpdateOperationsInput | string
   filePath?: Prisma.StringFieldUpdateOperationsInput | string
   fileSize?: Prisma.IntFieldUpdateOperationsInput | number
   fileType?: Prisma.StringFieldUpdateOperationsInput | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 
@@ -611,10 +669,12 @@ export type CustomerFileSelect<ExtArgs extends runtime.Types.Extensions.Internal
   id?: boolean
   customerId?: boolean
   description?: boolean
+  category?: boolean
   fileName?: boolean
   filePath?: boolean
   fileSize?: boolean
   fileType?: boolean
+  deletedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   Customer?: boolean | Prisma.CustomerDefaultArgs<ExtArgs>
@@ -624,10 +684,12 @@ export type CustomerFileSelectCreateManyAndReturn<ExtArgs extends runtime.Types.
   id?: boolean
   customerId?: boolean
   description?: boolean
+  category?: boolean
   fileName?: boolean
   filePath?: boolean
   fileSize?: boolean
   fileType?: boolean
+  deletedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   Customer?: boolean | Prisma.CustomerDefaultArgs<ExtArgs>
@@ -637,10 +699,12 @@ export type CustomerFileSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.
   id?: boolean
   customerId?: boolean
   description?: boolean
+  category?: boolean
   fileName?: boolean
   filePath?: boolean
   fileSize?: boolean
   fileType?: boolean
+  deletedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   Customer?: boolean | Prisma.CustomerDefaultArgs<ExtArgs>
@@ -650,15 +714,17 @@ export type CustomerFileSelectScalar = {
   id?: boolean
   customerId?: boolean
   description?: boolean
+  category?: boolean
   fileName?: boolean
   filePath?: boolean
   fileSize?: boolean
   fileType?: boolean
+  deletedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type CustomerFileOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "customerId" | "description" | "fileName" | "filePath" | "fileSize" | "fileType" | "createdAt" | "updatedAt", ExtArgs["result"]["customerFile"]>
+export type CustomerFileOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "customerId" | "description" | "category" | "fileName" | "filePath" | "fileSize" | "fileType" | "deletedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["customerFile"]>
 export type CustomerFileInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   Customer?: boolean | Prisma.CustomerDefaultArgs<ExtArgs>
 }
@@ -678,12 +744,14 @@ export type $CustomerFilePayload<ExtArgs extends runtime.Types.Extensions.Intern
     id: number
     customerId: number
     description: string | null
+    category: string | null
     fileName: string
     filePath: string
     fileSize: number
     fileType: string
+    deletedAt: Date | null
     createdAt: Date
-    updatedAt: Date
+    updatedAt: Date | null
   }, ExtArgs["result"]["customerFile"]>
   composites: {}
 }
@@ -1111,10 +1179,12 @@ export interface CustomerFileFieldRefs {
   readonly id: Prisma.FieldRef<"CustomerFile", 'Int'>
   readonly customerId: Prisma.FieldRef<"CustomerFile", 'Int'>
   readonly description: Prisma.FieldRef<"CustomerFile", 'String'>
+  readonly category: Prisma.FieldRef<"CustomerFile", 'String'>
   readonly fileName: Prisma.FieldRef<"CustomerFile", 'String'>
   readonly filePath: Prisma.FieldRef<"CustomerFile", 'String'>
   readonly fileSize: Prisma.FieldRef<"CustomerFile", 'Int'>
   readonly fileType: Prisma.FieldRef<"CustomerFile", 'String'>
+  readonly deletedAt: Prisma.FieldRef<"CustomerFile", 'DateTime'>
   readonly createdAt: Prisma.FieldRef<"CustomerFile", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"CustomerFile", 'DateTime'>
 }

@@ -30,6 +30,8 @@ export type MaterialAvgAggregateOutputType = {
   id: number | null
   purchasePrice: number | null
   sellingPrice: number | null
+  minStock: number | null
+  currentStock: number | null
   supplierId: number | null
 }
 
@@ -37,6 +39,8 @@ export type MaterialSumAggregateOutputType = {
   id: number | null
   purchasePrice: number | null
   sellingPrice: number | null
+  minStock: number | null
+  currentStock: number | null
   supplierId: number | null
 }
 
@@ -45,10 +49,15 @@ export type MaterialMinAggregateOutputType = {
   partNumber: string | null
   name: string | null
   description: string | null
+  category: string | null
   unit: string | null
   purchasePrice: number | null
   sellingPrice: number | null
+  minStock: number | null
+  currentStock: number | null
+  isActive: boolean | null
   supplierId: number | null
+  deletedAt: Date | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -58,10 +67,15 @@ export type MaterialMaxAggregateOutputType = {
   partNumber: string | null
   name: string | null
   description: string | null
+  category: string | null
   unit: string | null
   purchasePrice: number | null
   sellingPrice: number | null
+  minStock: number | null
+  currentStock: number | null
+  isActive: boolean | null
   supplierId: number | null
+  deletedAt: Date | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -71,10 +85,15 @@ export type MaterialCountAggregateOutputType = {
   partNumber: number
   name: number
   description: number
+  category: number
   unit: number
   purchasePrice: number
   sellingPrice: number
+  minStock: number
+  currentStock: number
+  isActive: number
   supplierId: number
+  deletedAt: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -85,6 +104,8 @@ export type MaterialAvgAggregateInputType = {
   id?: true
   purchasePrice?: true
   sellingPrice?: true
+  minStock?: true
+  currentStock?: true
   supplierId?: true
 }
 
@@ -92,6 +113,8 @@ export type MaterialSumAggregateInputType = {
   id?: true
   purchasePrice?: true
   sellingPrice?: true
+  minStock?: true
+  currentStock?: true
   supplierId?: true
 }
 
@@ -100,10 +123,15 @@ export type MaterialMinAggregateInputType = {
   partNumber?: true
   name?: true
   description?: true
+  category?: true
   unit?: true
   purchasePrice?: true
   sellingPrice?: true
+  minStock?: true
+  currentStock?: true
+  isActive?: true
   supplierId?: true
+  deletedAt?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -113,10 +141,15 @@ export type MaterialMaxAggregateInputType = {
   partNumber?: true
   name?: true
   description?: true
+  category?: true
   unit?: true
   purchasePrice?: true
   sellingPrice?: true
+  minStock?: true
+  currentStock?: true
+  isActive?: true
   supplierId?: true
+  deletedAt?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -126,10 +159,15 @@ export type MaterialCountAggregateInputType = {
   partNumber?: true
   name?: true
   description?: true
+  category?: true
   unit?: true
   purchasePrice?: true
   sellingPrice?: true
+  minStock?: true
+  currentStock?: true
+  isActive?: true
   supplierId?: true
+  deletedAt?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -226,12 +264,17 @@ export type MaterialGroupByOutputType = {
   partNumber: string
   name: string
   description: string | null
+  category: string | null
   unit: string
   purchasePrice: number | null
   sellingPrice: number | null
+  minStock: number | null
+  currentStock: number | null
+  isActive: boolean
   supplierId: number | null
+  deletedAt: Date | null
   createdAt: Date
-  updatedAt: Date
+  updatedAt: Date | null
   _count: MaterialCountAggregateOutputType | null
   _avg: MaterialAvgAggregateOutputType | null
   _sum: MaterialSumAggregateOutputType | null
@@ -262,12 +305,17 @@ export type MaterialWhereInput = {
   partNumber?: Prisma.StringFilter<"Material"> | string
   name?: Prisma.StringFilter<"Material"> | string
   description?: Prisma.StringNullableFilter<"Material"> | string | null
+  category?: Prisma.StringNullableFilter<"Material"> | string | null
   unit?: Prisma.StringFilter<"Material"> | string
   purchasePrice?: Prisma.FloatNullableFilter<"Material"> | number | null
   sellingPrice?: Prisma.FloatNullableFilter<"Material"> | number | null
+  minStock?: Prisma.IntNullableFilter<"Material"> | number | null
+  currentStock?: Prisma.IntNullableFilter<"Material"> | number | null
+  isActive?: Prisma.BoolFilter<"Material"> | boolean
   supplierId?: Prisma.IntNullableFilter<"Material"> | number | null
+  deletedAt?: Prisma.DateTimeNullableFilter<"Material"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Material"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"Material"> | Date | string
+  updatedAt?: Prisma.DateTimeNullableFilter<"Material"> | Date | string | null
   Supplier?: Prisma.XOR<Prisma.SupplierNullableScalarRelationFilter, Prisma.SupplierWhereInput> | null
 }
 
@@ -276,12 +324,17 @@ export type MaterialOrderByWithRelationInput = {
   partNumber?: Prisma.SortOrder
   name?: Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
+  category?: Prisma.SortOrderInput | Prisma.SortOrder
   unit?: Prisma.SortOrder
   purchasePrice?: Prisma.SortOrderInput | Prisma.SortOrder
   sellingPrice?: Prisma.SortOrderInput | Prisma.SortOrder
+  minStock?: Prisma.SortOrderInput | Prisma.SortOrder
+  currentStock?: Prisma.SortOrderInput | Prisma.SortOrder
+  isActive?: Prisma.SortOrder
   supplierId?: Prisma.SortOrderInput | Prisma.SortOrder
+  deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   Supplier?: Prisma.SupplierOrderByWithRelationInput
 }
 
@@ -293,12 +346,17 @@ export type MaterialWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.MaterialWhereInput | Prisma.MaterialWhereInput[]
   name?: Prisma.StringFilter<"Material"> | string
   description?: Prisma.StringNullableFilter<"Material"> | string | null
+  category?: Prisma.StringNullableFilter<"Material"> | string | null
   unit?: Prisma.StringFilter<"Material"> | string
   purchasePrice?: Prisma.FloatNullableFilter<"Material"> | number | null
   sellingPrice?: Prisma.FloatNullableFilter<"Material"> | number | null
+  minStock?: Prisma.IntNullableFilter<"Material"> | number | null
+  currentStock?: Prisma.IntNullableFilter<"Material"> | number | null
+  isActive?: Prisma.BoolFilter<"Material"> | boolean
   supplierId?: Prisma.IntNullableFilter<"Material"> | number | null
+  deletedAt?: Prisma.DateTimeNullableFilter<"Material"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Material"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"Material"> | Date | string
+  updatedAt?: Prisma.DateTimeNullableFilter<"Material"> | Date | string | null
   Supplier?: Prisma.XOR<Prisma.SupplierNullableScalarRelationFilter, Prisma.SupplierWhereInput> | null
 }, "id" | "partNumber">
 
@@ -307,12 +365,17 @@ export type MaterialOrderByWithAggregationInput = {
   partNumber?: Prisma.SortOrder
   name?: Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
+  category?: Prisma.SortOrderInput | Prisma.SortOrder
   unit?: Prisma.SortOrder
   purchasePrice?: Prisma.SortOrderInput | Prisma.SortOrder
   sellingPrice?: Prisma.SortOrderInput | Prisma.SortOrder
+  minStock?: Prisma.SortOrderInput | Prisma.SortOrder
+  currentStock?: Prisma.SortOrderInput | Prisma.SortOrder
+  isActive?: Prisma.SortOrder
   supplierId?: Prisma.SortOrderInput | Prisma.SortOrder
+  deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.MaterialCountOrderByAggregateInput
   _avg?: Prisma.MaterialAvgOrderByAggregateInput
   _max?: Prisma.MaterialMaxOrderByAggregateInput
@@ -328,23 +391,33 @@ export type MaterialScalarWhereWithAggregatesInput = {
   partNumber?: Prisma.StringWithAggregatesFilter<"Material"> | string
   name?: Prisma.StringWithAggregatesFilter<"Material"> | string
   description?: Prisma.StringNullableWithAggregatesFilter<"Material"> | string | null
+  category?: Prisma.StringNullableWithAggregatesFilter<"Material"> | string | null
   unit?: Prisma.StringWithAggregatesFilter<"Material"> | string
   purchasePrice?: Prisma.FloatNullableWithAggregatesFilter<"Material"> | number | null
   sellingPrice?: Prisma.FloatNullableWithAggregatesFilter<"Material"> | number | null
+  minStock?: Prisma.IntNullableWithAggregatesFilter<"Material"> | number | null
+  currentStock?: Prisma.IntNullableWithAggregatesFilter<"Material"> | number | null
+  isActive?: Prisma.BoolWithAggregatesFilter<"Material"> | boolean
   supplierId?: Prisma.IntNullableWithAggregatesFilter<"Material"> | number | null
+  deletedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Material"> | Date | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Material"> | Date | string
-  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Material"> | Date | string
+  updatedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Material"> | Date | string | null
 }
 
 export type MaterialCreateInput = {
   partNumber: string
   name: string
   description?: string | null
+  category?: string | null
   unit: string
   purchasePrice?: number | null
   sellingPrice?: number | null
+  minStock?: number | null
+  currentStock?: number | null
+  isActive?: boolean
+  deletedAt?: Date | string | null
   createdAt?: Date | string
-  updatedAt?: Date | string
+  updatedAt?: Date | string | null
   Supplier?: Prisma.SupplierCreateNestedOneWithoutMaterialInput
 }
 
@@ -353,23 +426,33 @@ export type MaterialUncheckedCreateInput = {
   partNumber: string
   name: string
   description?: string | null
+  category?: string | null
   unit: string
   purchasePrice?: number | null
   sellingPrice?: number | null
+  minStock?: number | null
+  currentStock?: number | null
+  isActive?: boolean
   supplierId?: number | null
+  deletedAt?: Date | string | null
   createdAt?: Date | string
-  updatedAt?: Date | string
+  updatedAt?: Date | string | null
 }
 
 export type MaterialUpdateInput = {
   partNumber?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   unit?: Prisma.StringFieldUpdateOperationsInput | string
   purchasePrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   sellingPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  minStock?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  currentStock?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Supplier?: Prisma.SupplierUpdateOneWithoutMaterialNestedInput
 }
 
@@ -378,12 +461,17 @@ export type MaterialUncheckedUpdateInput = {
   partNumber?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   unit?: Prisma.StringFieldUpdateOperationsInput | string
   purchasePrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   sellingPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  minStock?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  currentStock?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   supplierId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type MaterialCreateManyInput = {
@@ -391,23 +479,33 @@ export type MaterialCreateManyInput = {
   partNumber: string
   name: string
   description?: string | null
+  category?: string | null
   unit: string
   purchasePrice?: number | null
   sellingPrice?: number | null
+  minStock?: number | null
+  currentStock?: number | null
+  isActive?: boolean
   supplierId?: number | null
+  deletedAt?: Date | string | null
   createdAt?: Date | string
-  updatedAt?: Date | string
+  updatedAt?: Date | string | null
 }
 
 export type MaterialUpdateManyMutationInput = {
   partNumber?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   unit?: Prisma.StringFieldUpdateOperationsInput | string
   purchasePrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   sellingPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  minStock?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  currentStock?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type MaterialUncheckedUpdateManyInput = {
@@ -415,12 +513,17 @@ export type MaterialUncheckedUpdateManyInput = {
   partNumber?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   unit?: Prisma.StringFieldUpdateOperationsInput | string
   purchasePrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   sellingPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  minStock?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  currentStock?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   supplierId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type MaterialListRelationFilter = {
@@ -438,10 +541,15 @@ export type MaterialCountOrderByAggregateInput = {
   partNumber?: Prisma.SortOrder
   name?: Prisma.SortOrder
   description?: Prisma.SortOrder
+  category?: Prisma.SortOrder
   unit?: Prisma.SortOrder
   purchasePrice?: Prisma.SortOrder
   sellingPrice?: Prisma.SortOrder
+  minStock?: Prisma.SortOrder
+  currentStock?: Prisma.SortOrder
+  isActive?: Prisma.SortOrder
   supplierId?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -450,6 +558,8 @@ export type MaterialAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
   purchasePrice?: Prisma.SortOrder
   sellingPrice?: Prisma.SortOrder
+  minStock?: Prisma.SortOrder
+  currentStock?: Prisma.SortOrder
   supplierId?: Prisma.SortOrder
 }
 
@@ -458,10 +568,15 @@ export type MaterialMaxOrderByAggregateInput = {
   partNumber?: Prisma.SortOrder
   name?: Prisma.SortOrder
   description?: Prisma.SortOrder
+  category?: Prisma.SortOrder
   unit?: Prisma.SortOrder
   purchasePrice?: Prisma.SortOrder
   sellingPrice?: Prisma.SortOrder
+  minStock?: Prisma.SortOrder
+  currentStock?: Prisma.SortOrder
+  isActive?: Prisma.SortOrder
   supplierId?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -471,10 +586,15 @@ export type MaterialMinOrderByAggregateInput = {
   partNumber?: Prisma.SortOrder
   name?: Prisma.SortOrder
   description?: Prisma.SortOrder
+  category?: Prisma.SortOrder
   unit?: Prisma.SortOrder
   purchasePrice?: Prisma.SortOrder
   sellingPrice?: Prisma.SortOrder
+  minStock?: Prisma.SortOrder
+  currentStock?: Prisma.SortOrder
+  isActive?: Prisma.SortOrder
   supplierId?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -483,6 +603,8 @@ export type MaterialSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
   purchasePrice?: Prisma.SortOrder
   sellingPrice?: Prisma.SortOrder
+  minStock?: Prisma.SortOrder
+  currentStock?: Prisma.SortOrder
   supplierId?: Prisma.SortOrder
 }
 
@@ -528,23 +650,20 @@ export type MaterialUncheckedUpdateManyWithoutSupplierNestedInput = {
   deleteMany?: Prisma.MaterialScalarWhereInput | Prisma.MaterialScalarWhereInput[]
 }
 
-export type NullableFloatFieldUpdateOperationsInput = {
-  set?: number | null
-  increment?: number
-  decrement?: number
-  multiply?: number
-  divide?: number
-}
-
 export type MaterialCreateWithoutSupplierInput = {
   partNumber: string
   name: string
   description?: string | null
+  category?: string | null
   unit: string
   purchasePrice?: number | null
   sellingPrice?: number | null
+  minStock?: number | null
+  currentStock?: number | null
+  isActive?: boolean
+  deletedAt?: Date | string | null
   createdAt?: Date | string
-  updatedAt?: Date | string
+  updatedAt?: Date | string | null
 }
 
 export type MaterialUncheckedCreateWithoutSupplierInput = {
@@ -552,11 +671,16 @@ export type MaterialUncheckedCreateWithoutSupplierInput = {
   partNumber: string
   name: string
   description?: string | null
+  category?: string | null
   unit: string
   purchasePrice?: number | null
   sellingPrice?: number | null
+  minStock?: number | null
+  currentStock?: number | null
+  isActive?: boolean
+  deletedAt?: Date | string | null
   createdAt?: Date | string
-  updatedAt?: Date | string
+  updatedAt?: Date | string | null
 }
 
 export type MaterialCreateOrConnectWithoutSupplierInput = {
@@ -593,12 +717,17 @@ export type MaterialScalarWhereInput = {
   partNumber?: Prisma.StringFilter<"Material"> | string
   name?: Prisma.StringFilter<"Material"> | string
   description?: Prisma.StringNullableFilter<"Material"> | string | null
+  category?: Prisma.StringNullableFilter<"Material"> | string | null
   unit?: Prisma.StringFilter<"Material"> | string
   purchasePrice?: Prisma.FloatNullableFilter<"Material"> | number | null
   sellingPrice?: Prisma.FloatNullableFilter<"Material"> | number | null
+  minStock?: Prisma.IntNullableFilter<"Material"> | number | null
+  currentStock?: Prisma.IntNullableFilter<"Material"> | number | null
+  isActive?: Prisma.BoolFilter<"Material"> | boolean
   supplierId?: Prisma.IntNullableFilter<"Material"> | number | null
+  deletedAt?: Prisma.DateTimeNullableFilter<"Material"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Material"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"Material"> | Date | string
+  updatedAt?: Prisma.DateTimeNullableFilter<"Material"> | Date | string | null
 }
 
 export type MaterialCreateManySupplierInput = {
@@ -606,22 +735,32 @@ export type MaterialCreateManySupplierInput = {
   partNumber: string
   name: string
   description?: string | null
+  category?: string | null
   unit: string
   purchasePrice?: number | null
   sellingPrice?: number | null
+  minStock?: number | null
+  currentStock?: number | null
+  isActive?: boolean
+  deletedAt?: Date | string | null
   createdAt?: Date | string
-  updatedAt?: Date | string
+  updatedAt?: Date | string | null
 }
 
 export type MaterialUpdateWithoutSupplierInput = {
   partNumber?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   unit?: Prisma.StringFieldUpdateOperationsInput | string
   purchasePrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   sellingPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  minStock?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  currentStock?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type MaterialUncheckedUpdateWithoutSupplierInput = {
@@ -629,11 +768,16 @@ export type MaterialUncheckedUpdateWithoutSupplierInput = {
   partNumber?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   unit?: Prisma.StringFieldUpdateOperationsInput | string
   purchasePrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   sellingPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  minStock?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  currentStock?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type MaterialUncheckedUpdateManyWithoutSupplierInput = {
@@ -641,11 +785,16 @@ export type MaterialUncheckedUpdateManyWithoutSupplierInput = {
   partNumber?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   unit?: Prisma.StringFieldUpdateOperationsInput | string
   purchasePrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   sellingPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  minStock?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  currentStock?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 
@@ -655,10 +804,15 @@ export type MaterialSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   partNumber?: boolean
   name?: boolean
   description?: boolean
+  category?: boolean
   unit?: boolean
   purchasePrice?: boolean
   sellingPrice?: boolean
+  minStock?: boolean
+  currentStock?: boolean
+  isActive?: boolean
   supplierId?: boolean
+  deletedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   Supplier?: boolean | Prisma.Material$SupplierArgs<ExtArgs>
@@ -669,10 +823,15 @@ export type MaterialSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
   partNumber?: boolean
   name?: boolean
   description?: boolean
+  category?: boolean
   unit?: boolean
   purchasePrice?: boolean
   sellingPrice?: boolean
+  minStock?: boolean
+  currentStock?: boolean
+  isActive?: boolean
   supplierId?: boolean
+  deletedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   Supplier?: boolean | Prisma.Material$SupplierArgs<ExtArgs>
@@ -683,10 +842,15 @@ export type MaterialSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
   partNumber?: boolean
   name?: boolean
   description?: boolean
+  category?: boolean
   unit?: boolean
   purchasePrice?: boolean
   sellingPrice?: boolean
+  minStock?: boolean
+  currentStock?: boolean
+  isActive?: boolean
   supplierId?: boolean
+  deletedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   Supplier?: boolean | Prisma.Material$SupplierArgs<ExtArgs>
@@ -697,15 +861,20 @@ export type MaterialSelectScalar = {
   partNumber?: boolean
   name?: boolean
   description?: boolean
+  category?: boolean
   unit?: boolean
   purchasePrice?: boolean
   sellingPrice?: boolean
+  minStock?: boolean
+  currentStock?: boolean
+  isActive?: boolean
   supplierId?: boolean
+  deletedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type MaterialOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "partNumber" | "name" | "description" | "unit" | "purchasePrice" | "sellingPrice" | "supplierId" | "createdAt" | "updatedAt", ExtArgs["result"]["material"]>
+export type MaterialOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "partNumber" | "name" | "description" | "category" | "unit" | "purchasePrice" | "sellingPrice" | "minStock" | "currentStock" | "isActive" | "supplierId" | "deletedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["material"]>
 export type MaterialInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   Supplier?: boolean | Prisma.Material$SupplierArgs<ExtArgs>
 }
@@ -726,12 +895,17 @@ export type $MaterialPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     partNumber: string
     name: string
     description: string | null
+    category: string | null
     unit: string
     purchasePrice: number | null
     sellingPrice: number | null
+    minStock: number | null
+    currentStock: number | null
+    isActive: boolean
     supplierId: number | null
+    deletedAt: Date | null
     createdAt: Date
-    updatedAt: Date
+    updatedAt: Date | null
   }, ExtArgs["result"]["material"]>
   composites: {}
 }
@@ -1160,10 +1334,15 @@ export interface MaterialFieldRefs {
   readonly partNumber: Prisma.FieldRef<"Material", 'String'>
   readonly name: Prisma.FieldRef<"Material", 'String'>
   readonly description: Prisma.FieldRef<"Material", 'String'>
+  readonly category: Prisma.FieldRef<"Material", 'String'>
   readonly unit: Prisma.FieldRef<"Material", 'String'>
   readonly purchasePrice: Prisma.FieldRef<"Material", 'Float'>
   readonly sellingPrice: Prisma.FieldRef<"Material", 'Float'>
+  readonly minStock: Prisma.FieldRef<"Material", 'Int'>
+  readonly currentStock: Prisma.FieldRef<"Material", 'Int'>
+  readonly isActive: Prisma.FieldRef<"Material", 'Boolean'>
   readonly supplierId: Prisma.FieldRef<"Material", 'Int'>
+  readonly deletedAt: Prisma.FieldRef<"Material", 'DateTime'>
   readonly createdAt: Prisma.FieldRef<"Material", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Material", 'DateTime'>
 }

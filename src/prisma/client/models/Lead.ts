@@ -31,6 +31,7 @@ export type LeadAvgAggregateOutputType = {
   customerId: number | null
   companyId: number | null
   userId: number | null
+  estimatedValue: number | null
 }
 
 export type LeadSumAggregateOutputType = {
@@ -38,6 +39,7 @@ export type LeadSumAggregateOutputType = {
   customerId: number | null
   companyId: number | null
   userId: number | null
+  estimatedValue: number | null
 }
 
 export type LeadMinAggregateOutputType = {
@@ -47,7 +49,10 @@ export type LeadMinAggregateOutputType = {
   userId: number | null
   source: $Enums.LeadSource | null
   status: $Enums.LeadStatus | null
+  estimatedValue: number | null
   notes: string | null
+  convertedDate: Date | null
+  deletedAt: Date | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -59,7 +64,10 @@ export type LeadMaxAggregateOutputType = {
   userId: number | null
   source: $Enums.LeadSource | null
   status: $Enums.LeadStatus | null
+  estimatedValue: number | null
   notes: string | null
+  convertedDate: Date | null
+  deletedAt: Date | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -71,7 +79,10 @@ export type LeadCountAggregateOutputType = {
   userId: number
   source: number
   status: number
+  estimatedValue: number
   notes: number
+  convertedDate: number
+  deletedAt: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -83,6 +94,7 @@ export type LeadAvgAggregateInputType = {
   customerId?: true
   companyId?: true
   userId?: true
+  estimatedValue?: true
 }
 
 export type LeadSumAggregateInputType = {
@@ -90,6 +102,7 @@ export type LeadSumAggregateInputType = {
   customerId?: true
   companyId?: true
   userId?: true
+  estimatedValue?: true
 }
 
 export type LeadMinAggregateInputType = {
@@ -99,7 +112,10 @@ export type LeadMinAggregateInputType = {
   userId?: true
   source?: true
   status?: true
+  estimatedValue?: true
   notes?: true
+  convertedDate?: true
+  deletedAt?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -111,7 +127,10 @@ export type LeadMaxAggregateInputType = {
   userId?: true
   source?: true
   status?: true
+  estimatedValue?: true
   notes?: true
+  convertedDate?: true
+  deletedAt?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -123,7 +142,10 @@ export type LeadCountAggregateInputType = {
   userId?: true
   source?: true
   status?: true
+  estimatedValue?: true
   notes?: true
+  convertedDate?: true
+  deletedAt?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -222,9 +244,12 @@ export type LeadGroupByOutputType = {
   userId: number
   source: $Enums.LeadSource
   status: $Enums.LeadStatus
+  estimatedValue: number | null
   notes: string | null
+  convertedDate: Date | null
+  deletedAt: Date | null
   createdAt: Date
-  updatedAt: Date
+  updatedAt: Date | null
   _count: LeadCountAggregateOutputType | null
   _avg: LeadAvgAggregateOutputType | null
   _sum: LeadSumAggregateOutputType | null
@@ -257,9 +282,12 @@ export type LeadWhereInput = {
   userId?: Prisma.IntFilter<"Lead"> | number
   source?: Prisma.EnumLeadSourceFilter<"Lead"> | $Enums.LeadSource
   status?: Prisma.EnumLeadStatusFilter<"Lead"> | $Enums.LeadStatus
+  estimatedValue?: Prisma.FloatNullableFilter<"Lead"> | number | null
   notes?: Prisma.StringNullableFilter<"Lead"> | string | null
+  convertedDate?: Prisma.DateTimeNullableFilter<"Lead"> | Date | string | null
+  deletedAt?: Prisma.DateTimeNullableFilter<"Lead"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Lead"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"Lead"> | Date | string
+  updatedAt?: Prisma.DateTimeNullableFilter<"Lead"> | Date | string | null
   Customer?: Prisma.XOR<Prisma.CustomerScalarRelationFilter, Prisma.CustomerWhereInput>
   Company?: Prisma.XOR<Prisma.CompanyScalarRelationFilter, Prisma.CompanyWhereInput>
   User?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
@@ -272,9 +300,12 @@ export type LeadOrderByWithRelationInput = {
   userId?: Prisma.SortOrder
   source?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  estimatedValue?: Prisma.SortOrderInput | Prisma.SortOrder
   notes?: Prisma.SortOrderInput | Prisma.SortOrder
+  convertedDate?: Prisma.SortOrderInput | Prisma.SortOrder
+  deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   Customer?: Prisma.CustomerOrderByWithRelationInput
   Company?: Prisma.CompanyOrderByWithRelationInput
   User?: Prisma.UserOrderByWithRelationInput
@@ -290,9 +321,12 @@ export type LeadWhereUniqueInput = Prisma.AtLeast<{
   userId?: Prisma.IntFilter<"Lead"> | number
   source?: Prisma.EnumLeadSourceFilter<"Lead"> | $Enums.LeadSource
   status?: Prisma.EnumLeadStatusFilter<"Lead"> | $Enums.LeadStatus
+  estimatedValue?: Prisma.FloatNullableFilter<"Lead"> | number | null
   notes?: Prisma.StringNullableFilter<"Lead"> | string | null
+  convertedDate?: Prisma.DateTimeNullableFilter<"Lead"> | Date | string | null
+  deletedAt?: Prisma.DateTimeNullableFilter<"Lead"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Lead"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"Lead"> | Date | string
+  updatedAt?: Prisma.DateTimeNullableFilter<"Lead"> | Date | string | null
   Customer?: Prisma.XOR<Prisma.CustomerScalarRelationFilter, Prisma.CustomerWhereInput>
   Company?: Prisma.XOR<Prisma.CompanyScalarRelationFilter, Prisma.CompanyWhereInput>
   User?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
@@ -305,9 +339,12 @@ export type LeadOrderByWithAggregationInput = {
   userId?: Prisma.SortOrder
   source?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  estimatedValue?: Prisma.SortOrderInput | Prisma.SortOrder
   notes?: Prisma.SortOrderInput | Prisma.SortOrder
+  convertedDate?: Prisma.SortOrderInput | Prisma.SortOrder
+  deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.LeadCountOrderByAggregateInput
   _avg?: Prisma.LeadAvgOrderByAggregateInput
   _max?: Prisma.LeadMaxOrderByAggregateInput
@@ -325,17 +362,23 @@ export type LeadScalarWhereWithAggregatesInput = {
   userId?: Prisma.IntWithAggregatesFilter<"Lead"> | number
   source?: Prisma.EnumLeadSourceWithAggregatesFilter<"Lead"> | $Enums.LeadSource
   status?: Prisma.EnumLeadStatusWithAggregatesFilter<"Lead"> | $Enums.LeadStatus
+  estimatedValue?: Prisma.FloatNullableWithAggregatesFilter<"Lead"> | number | null
   notes?: Prisma.StringNullableWithAggregatesFilter<"Lead"> | string | null
+  convertedDate?: Prisma.DateTimeNullableWithAggregatesFilter<"Lead"> | Date | string | null
+  deletedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Lead"> | Date | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Lead"> | Date | string
-  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Lead"> | Date | string
+  updatedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Lead"> | Date | string | null
 }
 
 export type LeadCreateInput = {
   source: $Enums.LeadSource
   status?: $Enums.LeadStatus
+  estimatedValue?: number | null
   notes?: string | null
+  convertedDate?: Date | string | null
+  deletedAt?: Date | string | null
   createdAt?: Date | string
-  updatedAt?: Date | string
+  updatedAt?: Date | string | null
   Customer: Prisma.CustomerCreateNestedOneWithoutLeadsInput
   Company: Prisma.CompanyCreateNestedOneWithoutLeadInput
   User: Prisma.UserCreateNestedOneWithoutLeadsInput
@@ -348,17 +391,23 @@ export type LeadUncheckedCreateInput = {
   userId: number
   source: $Enums.LeadSource
   status?: $Enums.LeadStatus
+  estimatedValue?: number | null
   notes?: string | null
+  convertedDate?: Date | string | null
+  deletedAt?: Date | string | null
   createdAt?: Date | string
-  updatedAt?: Date | string
+  updatedAt?: Date | string | null
 }
 
 export type LeadUpdateInput = {
   source?: Prisma.EnumLeadSourceFieldUpdateOperationsInput | $Enums.LeadSource
   status?: Prisma.EnumLeadStatusFieldUpdateOperationsInput | $Enums.LeadStatus
+  estimatedValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  convertedDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Customer?: Prisma.CustomerUpdateOneRequiredWithoutLeadsNestedInput
   Company?: Prisma.CompanyUpdateOneRequiredWithoutLeadNestedInput
   User?: Prisma.UserUpdateOneRequiredWithoutLeadsNestedInput
@@ -371,9 +420,12 @@ export type LeadUncheckedUpdateInput = {
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   source?: Prisma.EnumLeadSourceFieldUpdateOperationsInput | $Enums.LeadSource
   status?: Prisma.EnumLeadStatusFieldUpdateOperationsInput | $Enums.LeadStatus
+  estimatedValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  convertedDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type LeadCreateManyInput = {
@@ -383,17 +435,23 @@ export type LeadCreateManyInput = {
   userId: number
   source: $Enums.LeadSource
   status?: $Enums.LeadStatus
+  estimatedValue?: number | null
   notes?: string | null
+  convertedDate?: Date | string | null
+  deletedAt?: Date | string | null
   createdAt?: Date | string
-  updatedAt?: Date | string
+  updatedAt?: Date | string | null
 }
 
 export type LeadUpdateManyMutationInput = {
   source?: Prisma.EnumLeadSourceFieldUpdateOperationsInput | $Enums.LeadSource
   status?: Prisma.EnumLeadStatusFieldUpdateOperationsInput | $Enums.LeadStatus
+  estimatedValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  convertedDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type LeadUncheckedUpdateManyInput = {
@@ -403,9 +461,12 @@ export type LeadUncheckedUpdateManyInput = {
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   source?: Prisma.EnumLeadSourceFieldUpdateOperationsInput | $Enums.LeadSource
   status?: Prisma.EnumLeadStatusFieldUpdateOperationsInput | $Enums.LeadStatus
+  estimatedValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  convertedDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type LeadListRelationFilter = {
@@ -425,7 +486,10 @@ export type LeadCountOrderByAggregateInput = {
   userId?: Prisma.SortOrder
   source?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  estimatedValue?: Prisma.SortOrder
   notes?: Prisma.SortOrder
+  convertedDate?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -435,6 +499,7 @@ export type LeadAvgOrderByAggregateInput = {
   customerId?: Prisma.SortOrder
   companyId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  estimatedValue?: Prisma.SortOrder
 }
 
 export type LeadMaxOrderByAggregateInput = {
@@ -444,7 +509,10 @@ export type LeadMaxOrderByAggregateInput = {
   userId?: Prisma.SortOrder
   source?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  estimatedValue?: Prisma.SortOrder
   notes?: Prisma.SortOrder
+  convertedDate?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -456,7 +524,10 @@ export type LeadMinOrderByAggregateInput = {
   userId?: Prisma.SortOrder
   source?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  estimatedValue?: Prisma.SortOrder
   notes?: Prisma.SortOrder
+  convertedDate?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -466,6 +537,7 @@ export type LeadSumOrderByAggregateInput = {
   customerId?: Prisma.SortOrder
   companyId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  estimatedValue?: Prisma.SortOrder
 }
 
 export type LeadCreateNestedManyWithoutCustomerInput = {
@@ -605,9 +677,12 @@ export type LeadUncheckedUpdateManyWithoutUserNestedInput = {
 export type LeadCreateWithoutCustomerInput = {
   source: $Enums.LeadSource
   status?: $Enums.LeadStatus
+  estimatedValue?: number | null
   notes?: string | null
+  convertedDate?: Date | string | null
+  deletedAt?: Date | string | null
   createdAt?: Date | string
-  updatedAt?: Date | string
+  updatedAt?: Date | string | null
   Company: Prisma.CompanyCreateNestedOneWithoutLeadInput
   User: Prisma.UserCreateNestedOneWithoutLeadsInput
 }
@@ -618,9 +693,12 @@ export type LeadUncheckedCreateWithoutCustomerInput = {
   userId: number
   source: $Enums.LeadSource
   status?: $Enums.LeadStatus
+  estimatedValue?: number | null
   notes?: string | null
+  convertedDate?: Date | string | null
+  deletedAt?: Date | string | null
   createdAt?: Date | string
-  updatedAt?: Date | string
+  updatedAt?: Date | string | null
 }
 
 export type LeadCreateOrConnectWithoutCustomerInput = {
@@ -659,17 +737,23 @@ export type LeadScalarWhereInput = {
   userId?: Prisma.IntFilter<"Lead"> | number
   source?: Prisma.EnumLeadSourceFilter<"Lead"> | $Enums.LeadSource
   status?: Prisma.EnumLeadStatusFilter<"Lead"> | $Enums.LeadStatus
+  estimatedValue?: Prisma.FloatNullableFilter<"Lead"> | number | null
   notes?: Prisma.StringNullableFilter<"Lead"> | string | null
+  convertedDate?: Prisma.DateTimeNullableFilter<"Lead"> | Date | string | null
+  deletedAt?: Prisma.DateTimeNullableFilter<"Lead"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Lead"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"Lead"> | Date | string
+  updatedAt?: Prisma.DateTimeNullableFilter<"Lead"> | Date | string | null
 }
 
 export type LeadCreateWithoutCompanyInput = {
   source: $Enums.LeadSource
   status?: $Enums.LeadStatus
+  estimatedValue?: number | null
   notes?: string | null
+  convertedDate?: Date | string | null
+  deletedAt?: Date | string | null
   createdAt?: Date | string
-  updatedAt?: Date | string
+  updatedAt?: Date | string | null
   Customer: Prisma.CustomerCreateNestedOneWithoutLeadsInput
   User: Prisma.UserCreateNestedOneWithoutLeadsInput
 }
@@ -680,9 +764,12 @@ export type LeadUncheckedCreateWithoutCompanyInput = {
   userId: number
   source: $Enums.LeadSource
   status?: $Enums.LeadStatus
+  estimatedValue?: number | null
   notes?: string | null
+  convertedDate?: Date | string | null
+  deletedAt?: Date | string | null
   createdAt?: Date | string
-  updatedAt?: Date | string
+  updatedAt?: Date | string | null
 }
 
 export type LeadCreateOrConnectWithoutCompanyInput = {
@@ -714,9 +801,12 @@ export type LeadUpdateManyWithWhereWithoutCompanyInput = {
 export type LeadCreateWithoutUserInput = {
   source: $Enums.LeadSource
   status?: $Enums.LeadStatus
+  estimatedValue?: number | null
   notes?: string | null
+  convertedDate?: Date | string | null
+  deletedAt?: Date | string | null
   createdAt?: Date | string
-  updatedAt?: Date | string
+  updatedAt?: Date | string | null
   Customer: Prisma.CustomerCreateNestedOneWithoutLeadsInput
   Company: Prisma.CompanyCreateNestedOneWithoutLeadInput
 }
@@ -727,9 +817,12 @@ export type LeadUncheckedCreateWithoutUserInput = {
   companyId: number
   source: $Enums.LeadSource
   status?: $Enums.LeadStatus
+  estimatedValue?: number | null
   notes?: string | null
+  convertedDate?: Date | string | null
+  deletedAt?: Date | string | null
   createdAt?: Date | string
-  updatedAt?: Date | string
+  updatedAt?: Date | string | null
 }
 
 export type LeadCreateOrConnectWithoutUserInput = {
@@ -764,17 +857,23 @@ export type LeadCreateManyCustomerInput = {
   userId: number
   source: $Enums.LeadSource
   status?: $Enums.LeadStatus
+  estimatedValue?: number | null
   notes?: string | null
+  convertedDate?: Date | string | null
+  deletedAt?: Date | string | null
   createdAt?: Date | string
-  updatedAt?: Date | string
+  updatedAt?: Date | string | null
 }
 
 export type LeadUpdateWithoutCustomerInput = {
   source?: Prisma.EnumLeadSourceFieldUpdateOperationsInput | $Enums.LeadSource
   status?: Prisma.EnumLeadStatusFieldUpdateOperationsInput | $Enums.LeadStatus
+  estimatedValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  convertedDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Company?: Prisma.CompanyUpdateOneRequiredWithoutLeadNestedInput
   User?: Prisma.UserUpdateOneRequiredWithoutLeadsNestedInput
 }
@@ -785,9 +884,12 @@ export type LeadUncheckedUpdateWithoutCustomerInput = {
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   source?: Prisma.EnumLeadSourceFieldUpdateOperationsInput | $Enums.LeadSource
   status?: Prisma.EnumLeadStatusFieldUpdateOperationsInput | $Enums.LeadStatus
+  estimatedValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  convertedDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type LeadUncheckedUpdateManyWithoutCustomerInput = {
@@ -796,9 +898,12 @@ export type LeadUncheckedUpdateManyWithoutCustomerInput = {
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   source?: Prisma.EnumLeadSourceFieldUpdateOperationsInput | $Enums.LeadSource
   status?: Prisma.EnumLeadStatusFieldUpdateOperationsInput | $Enums.LeadStatus
+  estimatedValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  convertedDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type LeadCreateManyCompanyInput = {
@@ -807,17 +912,23 @@ export type LeadCreateManyCompanyInput = {
   userId: number
   source: $Enums.LeadSource
   status?: $Enums.LeadStatus
+  estimatedValue?: number | null
   notes?: string | null
+  convertedDate?: Date | string | null
+  deletedAt?: Date | string | null
   createdAt?: Date | string
-  updatedAt?: Date | string
+  updatedAt?: Date | string | null
 }
 
 export type LeadUpdateWithoutCompanyInput = {
   source?: Prisma.EnumLeadSourceFieldUpdateOperationsInput | $Enums.LeadSource
   status?: Prisma.EnumLeadStatusFieldUpdateOperationsInput | $Enums.LeadStatus
+  estimatedValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  convertedDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Customer?: Prisma.CustomerUpdateOneRequiredWithoutLeadsNestedInput
   User?: Prisma.UserUpdateOneRequiredWithoutLeadsNestedInput
 }
@@ -828,9 +939,12 @@ export type LeadUncheckedUpdateWithoutCompanyInput = {
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   source?: Prisma.EnumLeadSourceFieldUpdateOperationsInput | $Enums.LeadSource
   status?: Prisma.EnumLeadStatusFieldUpdateOperationsInput | $Enums.LeadStatus
+  estimatedValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  convertedDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type LeadUncheckedUpdateManyWithoutCompanyInput = {
@@ -839,9 +953,12 @@ export type LeadUncheckedUpdateManyWithoutCompanyInput = {
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   source?: Prisma.EnumLeadSourceFieldUpdateOperationsInput | $Enums.LeadSource
   status?: Prisma.EnumLeadStatusFieldUpdateOperationsInput | $Enums.LeadStatus
+  estimatedValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  convertedDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type LeadCreateManyUserInput = {
@@ -850,17 +967,23 @@ export type LeadCreateManyUserInput = {
   companyId: number
   source: $Enums.LeadSource
   status?: $Enums.LeadStatus
+  estimatedValue?: number | null
   notes?: string | null
+  convertedDate?: Date | string | null
+  deletedAt?: Date | string | null
   createdAt?: Date | string
-  updatedAt?: Date | string
+  updatedAt?: Date | string | null
 }
 
 export type LeadUpdateWithoutUserInput = {
   source?: Prisma.EnumLeadSourceFieldUpdateOperationsInput | $Enums.LeadSource
   status?: Prisma.EnumLeadStatusFieldUpdateOperationsInput | $Enums.LeadStatus
+  estimatedValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  convertedDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Customer?: Prisma.CustomerUpdateOneRequiredWithoutLeadsNestedInput
   Company?: Prisma.CompanyUpdateOneRequiredWithoutLeadNestedInput
 }
@@ -871,9 +994,12 @@ export type LeadUncheckedUpdateWithoutUserInput = {
   companyId?: Prisma.IntFieldUpdateOperationsInput | number
   source?: Prisma.EnumLeadSourceFieldUpdateOperationsInput | $Enums.LeadSource
   status?: Prisma.EnumLeadStatusFieldUpdateOperationsInput | $Enums.LeadStatus
+  estimatedValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  convertedDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type LeadUncheckedUpdateManyWithoutUserInput = {
@@ -882,9 +1008,12 @@ export type LeadUncheckedUpdateManyWithoutUserInput = {
   companyId?: Prisma.IntFieldUpdateOperationsInput | number
   source?: Prisma.EnumLeadSourceFieldUpdateOperationsInput | $Enums.LeadSource
   status?: Prisma.EnumLeadStatusFieldUpdateOperationsInput | $Enums.LeadStatus
+  estimatedValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  convertedDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 
@@ -896,7 +1025,10 @@ export type LeadSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   userId?: boolean
   source?: boolean
   status?: boolean
+  estimatedValue?: boolean
   notes?: boolean
+  convertedDate?: boolean
+  deletedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   Customer?: boolean | Prisma.CustomerDefaultArgs<ExtArgs>
@@ -911,7 +1043,10 @@ export type LeadSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   userId?: boolean
   source?: boolean
   status?: boolean
+  estimatedValue?: boolean
   notes?: boolean
+  convertedDate?: boolean
+  deletedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   Customer?: boolean | Prisma.CustomerDefaultArgs<ExtArgs>
@@ -926,7 +1061,10 @@ export type LeadSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   userId?: boolean
   source?: boolean
   status?: boolean
+  estimatedValue?: boolean
   notes?: boolean
+  convertedDate?: boolean
+  deletedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   Customer?: boolean | Prisma.CustomerDefaultArgs<ExtArgs>
@@ -941,12 +1079,15 @@ export type LeadSelectScalar = {
   userId?: boolean
   source?: boolean
   status?: boolean
+  estimatedValue?: boolean
   notes?: boolean
+  convertedDate?: boolean
+  deletedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type LeadOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "customerId" | "companyId" | "userId" | "source" | "status" | "notes" | "createdAt" | "updatedAt", ExtArgs["result"]["lead"]>
+export type LeadOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "customerId" | "companyId" | "userId" | "source" | "status" | "estimatedValue" | "notes" | "convertedDate" | "deletedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["lead"]>
 export type LeadInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   Customer?: boolean | Prisma.CustomerDefaultArgs<ExtArgs>
   Company?: boolean | Prisma.CompanyDefaultArgs<ExtArgs>
@@ -977,9 +1118,12 @@ export type $LeadPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     userId: number
     source: $Enums.LeadSource
     status: $Enums.LeadStatus
+    estimatedValue: number | null
     notes: string | null
+    convertedDate: Date | null
+    deletedAt: Date | null
     createdAt: Date
-    updatedAt: Date
+    updatedAt: Date | null
   }, ExtArgs["result"]["lead"]>
   composites: {}
 }
@@ -1412,7 +1556,10 @@ export interface LeadFieldRefs {
   readonly userId: Prisma.FieldRef<"Lead", 'Int'>
   readonly source: Prisma.FieldRef<"Lead", 'LeadSource'>
   readonly status: Prisma.FieldRef<"Lead", 'LeadStatus'>
+  readonly estimatedValue: Prisma.FieldRef<"Lead", 'Float'>
   readonly notes: Prisma.FieldRef<"Lead", 'String'>
+  readonly convertedDate: Prisma.FieldRef<"Lead", 'DateTime'>
+  readonly deletedAt: Prisma.FieldRef<"Lead", 'DateTime'>
   readonly createdAt: Prisma.FieldRef<"Lead", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Lead", 'DateTime'>
 }

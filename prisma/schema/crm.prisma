@@ -1,9 +1,22 @@
 model Customer {
-  id            Int            @id @default(autoincrement())
-  name          String
-  address       String
-  phone         String
-  email         String
+  id            Int       @id @default(autoincrement())
+  name          String    @db.VarChar(200)
+  address       String    @db.Text
+  phone         String    @db.VarChar(50)
+  email         String    @unique @db.VarChar(100)
+  website       String?   @db.VarChar(200)
+  industry      String?   @db.VarChar(100)
+  employeeCount Int?
+  revenue       Float?
+  tags          String[]  @default([])
+  isActive      Boolean   @default(true)
+  deletedAt     DateTime? @db.Timestamp()
+
+  // Timestamps
+  createdAt DateTime  @default(now())
+  updatedAt DateTime? @updatedAt
+
+  // Relations
   Invoices      Invoice[]
   Contacts      Contact[]
   Leads         Lead[]
@@ -11,27 +24,39 @@ model Customer {
   Tasks         Task[]
   Interactions  Interaction[]
   Orders        Order[]
-  CustomerNote  CustomerNote[]
-  CustomerFile  CustomerFile[]
-  Quotation     Quotation[]
+  CustomerNotes CustomerNote[]
+  CustomerFiles CustomerFile[]
+  Quotations    Quotation[]
 
+  @@index([email])
+  @@index([isActive])
+  @@index([deletedAt])
   @@map("Customers")
 }
 
 model Contact {
-  id         Int      @id @default(autoincrement())
+  id         Int       @id @default(autoincrement())
   customerId Int
-  name       String
-  email      String?  @unique
-  phone      String
-  position   String?
-  notes      String?
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+  name       String    @db.VarChar(200)
+  email      String?   @db.VarChar(100)
+  phone      String    @db.VarChar(50)
+  position   String?   @db.VarChar(100)
+  notes      String?   @db.Text
+  isPrimary  Boolean   @default(false)
+  isActive   Boolean   @default(true)
+  deletedAt  DateTime? @db.Timestamp()
+
+  // Timestamps
+  createdAt DateTime  @default(now())
+  updatedAt DateTime? @updatedAt
 
   // Relationships
-  Customer Customer @relation(fields: [customerId], references: [id])
+  Customer Customer @relation(fields: [customerId], references: [id], onDelete: Cascade)
 
+  @@unique([customerId, email])
+  @@index([customerId])
+  @@index([email])
+  @@index([deletedAt])
   @@map("Contacts")
 }
 
@@ -48,11 +73,16 @@ enum LeadSource {
   Advertisement
   SocialMedia
   Website
+  ColdCall
+  EmailCampaign
+  Event
   Other
 }
 
 enum OpportunityStages {
   Prospecting // Initial stage of identifying potential customers
+  Qualification // Qualifying the opportunity
+  Proposal // Proposal development
   Negotiation // Discussing terms and conditions
   Proposal_Sent // Proposal has been sent to the customer
   Closed_Won // Opportunity has been won
@@ -67,25 +97,59 @@ enum QuotationStatus {
   Expired // Quotation validity period has expired
 }
 
+enum TaskStatus {
+  Todo
+  InProgress
+  Completed
+  Cancelled
+  OnHold
+}
+
+enum TaskPriority {
+  Low
+  Medium
+  High
+  Urgent
+}
+
+enum InteractionType {
+  Call
+  Email
+  Meeting
+  Demo
+  SiteVisit
+  Presentation
+  FollowUp
+  Other
+}
+
 model Lead {
   id Int @id @default(autoincrement())
 
-  customerId Int
-  companyId  Int
-  userId     Int
-  source     LeadSource
-  status     LeadStatus @default(New)
-  notes      String?
+  customerId     Int
+  companyId      Int
+  userId         Int
+  source         LeadSource
+  status         LeadStatus @default(New)
+  estimatedValue Float?
+  notes          String?    @db.Text
+  convertedDate  DateTime?  @db.Timestamp()
+  deletedAt      DateTime?  @db.Timestamp()
 
   // Timestamps
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt DateTime  @default(now())
+  updatedAt DateTime? @updatedAt
 
   // Relationships
-  Customer Customer @relation(fields: [customerId], references: [id])
+  Customer Customer @relation(fields: [customerId], references: [id], onDelete: Cascade)
   Company  Company  @relation(fields: [companyId], references: [id])
   User     User     @relation(fields: [userId], references: [id])
 
+  @@index([customerId])
+  @@index([userId])
+  @@index([companyId])
+  @@index([status])
+  @@index([deletedAt])
   @@map("Leads")
 }
 
@@ -94,37 +158,57 @@ model Opportunity {
   customerId        Int
   companyId         Int
   userId            Int
-  name              String
+  name              String            @db.VarChar(200)
+  description       String?           @db.Text
   amount            Float
+  probability       Int?              @db.SmallInt // 0-100
   stage             OpportunityStages
   expectedCloseDate DateTime
-  createdAt         DateTime          @default(now())
-  updatedAt         DateTime          @updatedAt
+  actualCloseDate   DateTime?         @db.Timestamp()
+  lostReason        String?           @db.Text
+  deletedAt         DateTime?         @db.Timestamp()
+
+  // Timestamps
+  createdAt DateTime  @default(now())
+  updatedAt DateTime? @updatedAt
 
   // Relationships
-  Customer   Customer    @relation(fields: [customerId], references: [id])
+  Customer   Customer    @relation(fields: [customerId], references: [id], onDelete: Cascade)
   User       User        @relation(fields: [userId], references: [id])
   Company    Company     @relation(fields: [companyId], references: [id])
   Quotations Quotation[]
 
+  @@index([customerId])
+  @@index([userId])
+  @@index([companyId])
+  @@index([stage])
+  @@index([expectedCloseDate])
+  @@index([deletedAt])
   @@map("Opportunities")
 }
 
 model Quotation {
-  id          Int             @id @default(autoincrement())
-  number      String          @unique
-  title       String
-  totalAmount Float
-  vatAmount   Float           @default(0)
-  grandTotal  Float
-  status      QuotationStatus @default(Draft)
-  currency    Currency        @default(IDR) // Currency code, e.g., IDR, USD
-  validity    Int             @default(30) // Validity period in days
-  validUntil  DateTime
+  id           Int             @id @default(autoincrement())
+  number       String          @unique @db.VarChar(50)
+  title        String          @db.VarChar(200)
+  description  String?         @db.Text
+  totalAmount  Float
+  discount     Float           @default(0)
+  vatAmount    Float           @default(0)
+  grandTotal   Float
+  status       QuotationStatus @default(Draft)
+  currency     Currency        @default(IDR) // Currency code, e.g., IDR, USD
+  validity     Int             @default(30) // Validity period in days
+  validUntil   DateTime
+  sentDate     DateTime?       @db.Timestamp()
+  acceptedDate DateTime?       @db.Timestamp()
+  deletedAt    DateTime?       @db.Timestamp()
+  notes        String?         @db.Text
+  terms        String?         @db.Text
 
   // Timestamps
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt DateTime  @default(now())
+  updatedAt DateTime? @updatedAt
 
   // Foreign Keys
   customerId    Int
@@ -133,61 +217,92 @@ model Quotation {
 
   // Relationships
   Opportunity    Opportunity?    @relation(fields: [opportunityId], references: [id])
-  Customer       Customer        @relation(fields: [customerId], references: [id])
+  Customer       Customer        @relation(fields: [customerId], references: [id], onDelete: Cascade)
   User           User            @relation(fields: [userId], references: [id])
   QuotationItems QuotationItem[]
 
+  @@index([number])
+  @@index([customerId])
+  @@index([userId])
+  @@index([opportunityId])
+  @@index([status])
+  @@index([deletedAt])
   @@map("Quotations")
 }
 
 model QuotationItem {
   id          Int     @id @default(autoincrement())
   quotationId Int
-  partNumber  String
-  description String
+  partNumber  String  @db.VarChar(100)
+  description String  @db.Text
   quantity    Int
   unitPrice   Float
+  discount    Float   @default(0)
   totalPrice  Float
   vat         Boolean @default(false) // Indicates if VAT is applicable
+  sortOrder   Int     @default(0)
 
   // Relationships
-  Quotation Quotation @relation(fields: [quotationId], references: [id])
+  Quotation Quotation @relation(fields: [quotationId], references: [id], onDelete: Cascade)
 
+  @@index([quotationId])
   @@map("QuotationItems")
 }
 
 model Task {
-  id          Int      @id @default(autoincrement())
+  id          Int          @id @default(autoincrement())
   userId      Int
   customerId  Int
-  title       String
-  description String?
+  title       String       @db.VarChar(200)
+  description String?      @db.Text
   dueDate     DateTime
-  status      String
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  completedAt DateTime?    @db.Timestamp()
+  status      TaskStatus   @default(Todo)
+  priority    TaskPriority @default(Medium)
+  deletedAt   DateTime?    @db.Timestamp()
+
+  // Timestamps
+  createdAt DateTime  @default(now())
+  updatedAt DateTime? @updatedAt
 
   // Relationships
   User     User     @relation(fields: [userId], references: [id])
-  Customer Customer @relation(fields: [customerId], references: [id])
+  Customer Customer @relation(fields: [customerId], references: [id], onDelete: Cascade)
 
+  @@index([userId])
+  @@index([customerId])
+  @@index([status])
+  @@index([priority])
+  @@index([dueDate])
+  @@index([deletedAt])
   @@map("Tasks")
 }
 
 model Interaction {
-  id         Int      @id @default(autoincrement())
+  id         Int             @id @default(autoincrement())
   customerId Int
   userId     Int
-  type       String
+  type       InteractionType
   date       DateTime
-  notes      String?
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt @map("updatedAt")
+  duration   Int?            @db.Integer // Duration in minutes
+  subject    String?         @db.VarChar(200)
+  notes      String?         @db.Text
+  outcome    String?         @db.Text
+  deletedAt  DateTime?       @db.Timestamp()
+
+  // Timestamps
+  createdAt DateTime  @default(now())
+  updatedAt DateTime? @updatedAt
 
   // Relationships
-  Customer Customer @relation(fields: [customerId], references: [id])
+  Customer Customer @relation(fields: [customerId], references: [id], onDelete: Cascade)
   User     User     @relation(fields: [userId], references: [id])
 
+  @@index([customerId])
+  @@index([userId])
+  @@index([type])
+  @@index([date])
+  @@index([deletedAt])
   @@map("Interactions")
 }
 
@@ -199,93 +314,129 @@ enum OrderStatus {
 }
 
 model Order {
-  id          Int         @id @default(autoincrement())
-  number      String      @unique
-  date        DateTime
-  customerId  Int
-  totalAmount Float
-  vatAmount   Float       @default(0)
-  grandTotal  Float
-  status      OrderStatus
+  id              Int         @id @default(autoincrement())
+  number          String      @unique @db.VarChar(50)
+  date            DateTime
+  customerId      Int
+  description     String?     @db.Text
+  totalAmount     Float
+  discount        Float       @default(0)
+  vatAmount       Float       @default(0)
+  grandTotal      Float
+  status          OrderStatus
+  shippingAddress String?     @db.Text
+  billingAddress  String?     @db.Text
+  paymentTerms    String?     @db.VarChar(100)
+  deliveryDate    DateTime?
+  notes           String?     @db.Text
+  deletedAt       DateTime?   @db.Timestamp()
 
   // Timestamps
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt DateTime  @default(now())
+  updatedAt DateTime? @updatedAt
 
   // Relationships
-  Customer   Customer    @relation(fields: [customerId], references: [id])
+  Customer   Customer    @relation(fields: [customerId], references: [id], onDelete: Cascade)
   Invoice    Invoice?
   OrderItems OrderItem[]
 
+  @@index([number])
+  @@index([customerId])
+  @@index([status])
+  @@index([date])
+  @@index([deletedAt])
   @@map("Orders")
 }
 
 model OrderItem {
   id          Int     @id @default(autoincrement())
   orderId     Int
-  partNumber  String
-  description String
+  partNumber  String  @db.VarChar(100)
+  description String  @db.Text
   quantity    Int
   unitPrice   Float
+  discount    Float   @default(0)
   totalPrice  Float
   vat         Boolean @default(false) // Indicates if VAT is applicable
+  sortOrder   Int     @default(0)
 
   // Relationships
-  Order Order @relation(fields: [orderId], references: [id])
+  Order Order @relation(fields: [orderId], references: [id], onDelete: Cascade)
 
+  @@index([orderId])
   @@map("OrderItems")
 }
 
 model CustomerNote {
-  id         Int      @id @default(autoincrement())
+  id         Int       @id @default(autoincrement())
   customerId Int
   userId     Int
-  content    String
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+  content    String    @db.Text
+  isPinned   Boolean   @default(false)
+  deletedAt  DateTime? @db.Timestamp()
+
+  // Timestamps
+  createdAt DateTime  @default(now())
+  updatedAt DateTime? @updatedAt
 
   // Relationships
-  Customer Customer @relation(fields: [customerId], references: [id])
+  Customer Customer @relation(fields: [customerId], references: [id], onDelete: Cascade)
   User     User     @relation(fields: [userId], references: [id])
 
+  @@index([customerId])
+  @@index([userId])
+  @@index([deletedAt])
   @@map("CustomerNotes")
 }
 
 model CustomerFile {
-  id          Int     @id @default(autoincrement())
+  id          Int       @id @default(autoincrement())
   customerId  Int
-  description String?
+  description String?   @db.Text
+  category    String?   @db.VarChar(100) // e.g., contract, invoice, document
+  fileName    String    @db.VarChar(255)
+  filePath    String    @db.Text
+  fileSize    Int       @db.Integer
+  fileType    String    @db.VarChar(30)
+  deletedAt   DateTime? @db.Timestamp()
 
-  fileName String @db.VarChar(255)
-  filePath String @db.Text
-  fileSize Int    @db.Integer
-  fileType String @db.VarChar(30)
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  // Timestamps
+  createdAt DateTime  @default(now())
+  updatedAt DateTime? @updatedAt
 
   // Relationships
-  Customer Customer @relation(fields: [customerId], references: [id])
+  Customer Customer @relation(fields: [customerId], references: [id], onDelete: Cascade)
 
+  @@index([customerId])
+  @@index([deletedAt])
   @@map("CustomerFiles")
 }
 
 model Material {
-  id            Int     @id @default(autoincrement())
-  partNumber    String  @unique
-  name          String
-  description   String?
-  unit          String // e.g., pcs, kg, liter
+  id            Int       @id @default(autoincrement())
+  partNumber    String    @unique @db.VarChar(100)
+  name          String    @db.VarChar(200)
+  description   String?   @db.Text
+  category      String?   @db.VarChar(100)
+  unit          String    @db.VarChar(50) // e.g., pcs, kg, liter
   purchasePrice Float?
   sellingPrice  Float?
+  minStock      Int?      @default(0)
+  currentStock  Int?      @default(0)
+  isActive      Boolean   @default(true)
   supplierId    Int?
+  deletedAt     DateTime? @db.Timestamp()
 
   // Timestamps
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt DateTime  @default(now())
+  updatedAt DateTime? @updatedAt
 
   // Relationships
   Supplier Supplier? @relation(fields: [supplierId], references: [id])
 
+  @@index([partNumber])
+  @@index([supplierId])
+  @@index([isActive])
+  @@index([deletedAt])
   @@map("Materials")
 }

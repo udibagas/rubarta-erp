@@ -30,6 +30,7 @@ export type OrderAvgAggregateOutputType = {
   id: number | null
   customerId: number | null
   totalAmount: number | null
+  discount: number | null
   vatAmount: number | null
   grandTotal: number | null
 }
@@ -38,6 +39,7 @@ export type OrderSumAggregateOutputType = {
   id: number | null
   customerId: number | null
   totalAmount: number | null
+  discount: number | null
   vatAmount: number | null
   grandTotal: number | null
 }
@@ -47,10 +49,18 @@ export type OrderMinAggregateOutputType = {
   number: string | null
   date: Date | null
   customerId: number | null
+  description: string | null
   totalAmount: number | null
+  discount: number | null
   vatAmount: number | null
   grandTotal: number | null
   status: $Enums.OrderStatus | null
+  shippingAddress: string | null
+  billingAddress: string | null
+  paymentTerms: string | null
+  deliveryDate: Date | null
+  notes: string | null
+  deletedAt: Date | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -60,10 +70,18 @@ export type OrderMaxAggregateOutputType = {
   number: string | null
   date: Date | null
   customerId: number | null
+  description: string | null
   totalAmount: number | null
+  discount: number | null
   vatAmount: number | null
   grandTotal: number | null
   status: $Enums.OrderStatus | null
+  shippingAddress: string | null
+  billingAddress: string | null
+  paymentTerms: string | null
+  deliveryDate: Date | null
+  notes: string | null
+  deletedAt: Date | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -73,10 +91,18 @@ export type OrderCountAggregateOutputType = {
   number: number
   date: number
   customerId: number
+  description: number
   totalAmount: number
+  discount: number
   vatAmount: number
   grandTotal: number
   status: number
+  shippingAddress: number
+  billingAddress: number
+  paymentTerms: number
+  deliveryDate: number
+  notes: number
+  deletedAt: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -87,6 +113,7 @@ export type OrderAvgAggregateInputType = {
   id?: true
   customerId?: true
   totalAmount?: true
+  discount?: true
   vatAmount?: true
   grandTotal?: true
 }
@@ -95,6 +122,7 @@ export type OrderSumAggregateInputType = {
   id?: true
   customerId?: true
   totalAmount?: true
+  discount?: true
   vatAmount?: true
   grandTotal?: true
 }
@@ -104,10 +132,18 @@ export type OrderMinAggregateInputType = {
   number?: true
   date?: true
   customerId?: true
+  description?: true
   totalAmount?: true
+  discount?: true
   vatAmount?: true
   grandTotal?: true
   status?: true
+  shippingAddress?: true
+  billingAddress?: true
+  paymentTerms?: true
+  deliveryDate?: true
+  notes?: true
+  deletedAt?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -117,10 +153,18 @@ export type OrderMaxAggregateInputType = {
   number?: true
   date?: true
   customerId?: true
+  description?: true
   totalAmount?: true
+  discount?: true
   vatAmount?: true
   grandTotal?: true
   status?: true
+  shippingAddress?: true
+  billingAddress?: true
+  paymentTerms?: true
+  deliveryDate?: true
+  notes?: true
+  deletedAt?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -130,10 +174,18 @@ export type OrderCountAggregateInputType = {
   number?: true
   date?: true
   customerId?: true
+  description?: true
   totalAmount?: true
+  discount?: true
   vatAmount?: true
   grandTotal?: true
   status?: true
+  shippingAddress?: true
+  billingAddress?: true
+  paymentTerms?: true
+  deliveryDate?: true
+  notes?: true
+  deletedAt?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -230,12 +282,20 @@ export type OrderGroupByOutputType = {
   number: string
   date: Date
   customerId: number
+  description: string | null
   totalAmount: number
+  discount: number
   vatAmount: number
   grandTotal: number
   status: $Enums.OrderStatus
+  shippingAddress: string | null
+  billingAddress: string | null
+  paymentTerms: string | null
+  deliveryDate: Date | null
+  notes: string | null
+  deletedAt: Date | null
   createdAt: Date
-  updatedAt: Date
+  updatedAt: Date | null
   _count: OrderCountAggregateOutputType | null
   _avg: OrderAvgAggregateOutputType | null
   _sum: OrderSumAggregateOutputType | null
@@ -266,12 +326,20 @@ export type OrderWhereInput = {
   number?: Prisma.StringFilter<"Order"> | string
   date?: Prisma.DateTimeFilter<"Order"> | Date | string
   customerId?: Prisma.IntFilter<"Order"> | number
+  description?: Prisma.StringNullableFilter<"Order"> | string | null
   totalAmount?: Prisma.FloatFilter<"Order"> | number
+  discount?: Prisma.FloatFilter<"Order"> | number
   vatAmount?: Prisma.FloatFilter<"Order"> | number
   grandTotal?: Prisma.FloatFilter<"Order"> | number
   status?: Prisma.EnumOrderStatusFilter<"Order"> | $Enums.OrderStatus
+  shippingAddress?: Prisma.StringNullableFilter<"Order"> | string | null
+  billingAddress?: Prisma.StringNullableFilter<"Order"> | string | null
+  paymentTerms?: Prisma.StringNullableFilter<"Order"> | string | null
+  deliveryDate?: Prisma.DateTimeNullableFilter<"Order"> | Date | string | null
+  notes?: Prisma.StringNullableFilter<"Order"> | string | null
+  deletedAt?: Prisma.DateTimeNullableFilter<"Order"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Order"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"Order"> | Date | string
+  updatedAt?: Prisma.DateTimeNullableFilter<"Order"> | Date | string | null
   Customer?: Prisma.XOR<Prisma.CustomerScalarRelationFilter, Prisma.CustomerWhereInput>
   Invoice?: Prisma.XOR<Prisma.InvoiceNullableScalarRelationFilter, Prisma.InvoiceWhereInput> | null
   OrderItems?: Prisma.OrderItemListRelationFilter
@@ -282,12 +350,20 @@ export type OrderOrderByWithRelationInput = {
   number?: Prisma.SortOrder
   date?: Prisma.SortOrder
   customerId?: Prisma.SortOrder
+  description?: Prisma.SortOrderInput | Prisma.SortOrder
   totalAmount?: Prisma.SortOrder
+  discount?: Prisma.SortOrder
   vatAmount?: Prisma.SortOrder
   grandTotal?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  shippingAddress?: Prisma.SortOrderInput | Prisma.SortOrder
+  billingAddress?: Prisma.SortOrderInput | Prisma.SortOrder
+  paymentTerms?: Prisma.SortOrderInput | Prisma.SortOrder
+  deliveryDate?: Prisma.SortOrderInput | Prisma.SortOrder
+  notes?: Prisma.SortOrderInput | Prisma.SortOrder
+  deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   Customer?: Prisma.CustomerOrderByWithRelationInput
   Invoice?: Prisma.InvoiceOrderByWithRelationInput
   OrderItems?: Prisma.OrderItemOrderByRelationAggregateInput
@@ -301,12 +377,20 @@ export type OrderWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.OrderWhereInput | Prisma.OrderWhereInput[]
   date?: Prisma.DateTimeFilter<"Order"> | Date | string
   customerId?: Prisma.IntFilter<"Order"> | number
+  description?: Prisma.StringNullableFilter<"Order"> | string | null
   totalAmount?: Prisma.FloatFilter<"Order"> | number
+  discount?: Prisma.FloatFilter<"Order"> | number
   vatAmount?: Prisma.FloatFilter<"Order"> | number
   grandTotal?: Prisma.FloatFilter<"Order"> | number
   status?: Prisma.EnumOrderStatusFilter<"Order"> | $Enums.OrderStatus
+  shippingAddress?: Prisma.StringNullableFilter<"Order"> | string | null
+  billingAddress?: Prisma.StringNullableFilter<"Order"> | string | null
+  paymentTerms?: Prisma.StringNullableFilter<"Order"> | string | null
+  deliveryDate?: Prisma.DateTimeNullableFilter<"Order"> | Date | string | null
+  notes?: Prisma.StringNullableFilter<"Order"> | string | null
+  deletedAt?: Prisma.DateTimeNullableFilter<"Order"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Order"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"Order"> | Date | string
+  updatedAt?: Prisma.DateTimeNullableFilter<"Order"> | Date | string | null
   Customer?: Prisma.XOR<Prisma.CustomerScalarRelationFilter, Prisma.CustomerWhereInput>
   Invoice?: Prisma.XOR<Prisma.InvoiceNullableScalarRelationFilter, Prisma.InvoiceWhereInput> | null
   OrderItems?: Prisma.OrderItemListRelationFilter
@@ -317,12 +401,20 @@ export type OrderOrderByWithAggregationInput = {
   number?: Prisma.SortOrder
   date?: Prisma.SortOrder
   customerId?: Prisma.SortOrder
+  description?: Prisma.SortOrderInput | Prisma.SortOrder
   totalAmount?: Prisma.SortOrder
+  discount?: Prisma.SortOrder
   vatAmount?: Prisma.SortOrder
   grandTotal?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  shippingAddress?: Prisma.SortOrderInput | Prisma.SortOrder
+  billingAddress?: Prisma.SortOrderInput | Prisma.SortOrder
+  paymentTerms?: Prisma.SortOrderInput | Prisma.SortOrder
+  deliveryDate?: Prisma.SortOrderInput | Prisma.SortOrder
+  notes?: Prisma.SortOrderInput | Prisma.SortOrder
+  deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.OrderCountOrderByAggregateInput
   _avg?: Prisma.OrderAvgOrderByAggregateInput
   _max?: Prisma.OrderMaxOrderByAggregateInput
@@ -338,23 +430,39 @@ export type OrderScalarWhereWithAggregatesInput = {
   number?: Prisma.StringWithAggregatesFilter<"Order"> | string
   date?: Prisma.DateTimeWithAggregatesFilter<"Order"> | Date | string
   customerId?: Prisma.IntWithAggregatesFilter<"Order"> | number
+  description?: Prisma.StringNullableWithAggregatesFilter<"Order"> | string | null
   totalAmount?: Prisma.FloatWithAggregatesFilter<"Order"> | number
+  discount?: Prisma.FloatWithAggregatesFilter<"Order"> | number
   vatAmount?: Prisma.FloatWithAggregatesFilter<"Order"> | number
   grandTotal?: Prisma.FloatWithAggregatesFilter<"Order"> | number
   status?: Prisma.EnumOrderStatusWithAggregatesFilter<"Order"> | $Enums.OrderStatus
+  shippingAddress?: Prisma.StringNullableWithAggregatesFilter<"Order"> | string | null
+  billingAddress?: Prisma.StringNullableWithAggregatesFilter<"Order"> | string | null
+  paymentTerms?: Prisma.StringNullableWithAggregatesFilter<"Order"> | string | null
+  deliveryDate?: Prisma.DateTimeNullableWithAggregatesFilter<"Order"> | Date | string | null
+  notes?: Prisma.StringNullableWithAggregatesFilter<"Order"> | string | null
+  deletedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Order"> | Date | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Order"> | Date | string
-  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Order"> | Date | string
+  updatedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Order"> | Date | string | null
 }
 
 export type OrderCreateInput = {
   number: string
   date: Date | string
+  description?: string | null
   totalAmount: number
+  discount?: number
   vatAmount?: number
   grandTotal: number
   status: $Enums.OrderStatus
+  shippingAddress?: string | null
+  billingAddress?: string | null
+  paymentTerms?: string | null
+  deliveryDate?: Date | string | null
+  notes?: string | null
+  deletedAt?: Date | string | null
   createdAt?: Date | string
-  updatedAt?: Date | string
+  updatedAt?: Date | string | null
   Customer: Prisma.CustomerCreateNestedOneWithoutOrdersInput
   Invoice?: Prisma.InvoiceCreateNestedOneWithoutOrderInput
   OrderItems?: Prisma.OrderItemCreateNestedManyWithoutOrderInput
@@ -365,12 +473,20 @@ export type OrderUncheckedCreateInput = {
   number: string
   date: Date | string
   customerId: number
+  description?: string | null
   totalAmount: number
+  discount?: number
   vatAmount?: number
   grandTotal: number
   status: $Enums.OrderStatus
+  shippingAddress?: string | null
+  billingAddress?: string | null
+  paymentTerms?: string | null
+  deliveryDate?: Date | string | null
+  notes?: string | null
+  deletedAt?: Date | string | null
   createdAt?: Date | string
-  updatedAt?: Date | string
+  updatedAt?: Date | string | null
   Invoice?: Prisma.InvoiceUncheckedCreateNestedOneWithoutOrderInput
   OrderItems?: Prisma.OrderItemUncheckedCreateNestedManyWithoutOrderInput
 }
@@ -378,12 +494,20 @@ export type OrderUncheckedCreateInput = {
 export type OrderUpdateInput = {
   number?: Prisma.StringFieldUpdateOperationsInput | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
+  discount?: Prisma.FloatFieldUpdateOperationsInput | number
   vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
   status?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
+  shippingAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  paymentTerms?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Customer?: Prisma.CustomerUpdateOneRequiredWithoutOrdersNestedInput
   Invoice?: Prisma.InvoiceUpdateOneWithoutOrderNestedInput
   OrderItems?: Prisma.OrderItemUpdateManyWithoutOrderNestedInput
@@ -394,12 +518,20 @@ export type OrderUncheckedUpdateInput = {
   number?: Prisma.StringFieldUpdateOperationsInput | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   customerId?: Prisma.IntFieldUpdateOperationsInput | number
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
+  discount?: Prisma.FloatFieldUpdateOperationsInput | number
   vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
   status?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
+  shippingAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  paymentTerms?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Invoice?: Prisma.InvoiceUncheckedUpdateOneWithoutOrderNestedInput
   OrderItems?: Prisma.OrderItemUncheckedUpdateManyWithoutOrderNestedInput
 }
@@ -409,23 +541,39 @@ export type OrderCreateManyInput = {
   number: string
   date: Date | string
   customerId: number
+  description?: string | null
   totalAmount: number
+  discount?: number
   vatAmount?: number
   grandTotal: number
   status: $Enums.OrderStatus
+  shippingAddress?: string | null
+  billingAddress?: string | null
+  paymentTerms?: string | null
+  deliveryDate?: Date | string | null
+  notes?: string | null
+  deletedAt?: Date | string | null
   createdAt?: Date | string
-  updatedAt?: Date | string
+  updatedAt?: Date | string | null
 }
 
 export type OrderUpdateManyMutationInput = {
   number?: Prisma.StringFieldUpdateOperationsInput | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
+  discount?: Prisma.FloatFieldUpdateOperationsInput | number
   vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
   status?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
+  shippingAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  paymentTerms?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type OrderUncheckedUpdateManyInput = {
@@ -433,12 +581,20 @@ export type OrderUncheckedUpdateManyInput = {
   number?: Prisma.StringFieldUpdateOperationsInput | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   customerId?: Prisma.IntFieldUpdateOperationsInput | number
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
+  discount?: Prisma.FloatFieldUpdateOperationsInput | number
   vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
   status?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
+  shippingAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  paymentTerms?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type OrderScalarRelationFilter = {
@@ -461,10 +617,18 @@ export type OrderCountOrderByAggregateInput = {
   number?: Prisma.SortOrder
   date?: Prisma.SortOrder
   customerId?: Prisma.SortOrder
+  description?: Prisma.SortOrder
   totalAmount?: Prisma.SortOrder
+  discount?: Prisma.SortOrder
   vatAmount?: Prisma.SortOrder
   grandTotal?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  shippingAddress?: Prisma.SortOrder
+  billingAddress?: Prisma.SortOrder
+  paymentTerms?: Prisma.SortOrder
+  deliveryDate?: Prisma.SortOrder
+  notes?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -473,6 +637,7 @@ export type OrderAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
   customerId?: Prisma.SortOrder
   totalAmount?: Prisma.SortOrder
+  discount?: Prisma.SortOrder
   vatAmount?: Prisma.SortOrder
   grandTotal?: Prisma.SortOrder
 }
@@ -482,10 +647,18 @@ export type OrderMaxOrderByAggregateInput = {
   number?: Prisma.SortOrder
   date?: Prisma.SortOrder
   customerId?: Prisma.SortOrder
+  description?: Prisma.SortOrder
   totalAmount?: Prisma.SortOrder
+  discount?: Prisma.SortOrder
   vatAmount?: Prisma.SortOrder
   grandTotal?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  shippingAddress?: Prisma.SortOrder
+  billingAddress?: Prisma.SortOrder
+  paymentTerms?: Prisma.SortOrder
+  deliveryDate?: Prisma.SortOrder
+  notes?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -495,10 +668,18 @@ export type OrderMinOrderByAggregateInput = {
   number?: Prisma.SortOrder
   date?: Prisma.SortOrder
   customerId?: Prisma.SortOrder
+  description?: Prisma.SortOrder
   totalAmount?: Prisma.SortOrder
+  discount?: Prisma.SortOrder
   vatAmount?: Prisma.SortOrder
   grandTotal?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  shippingAddress?: Prisma.SortOrder
+  billingAddress?: Prisma.SortOrder
+  paymentTerms?: Prisma.SortOrder
+  deliveryDate?: Prisma.SortOrder
+  notes?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -507,6 +688,7 @@ export type OrderSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
   customerId?: Prisma.SortOrder
   totalAmount?: Prisma.SortOrder
+  discount?: Prisma.SortOrder
   vatAmount?: Prisma.SortOrder
   grandTotal?: Prisma.SortOrder
 }
@@ -588,12 +770,20 @@ export type OrderUpdateOneRequiredWithoutOrderItemsNestedInput = {
 export type OrderCreateWithoutInvoiceInput = {
   number: string
   date: Date | string
+  description?: string | null
   totalAmount: number
+  discount?: number
   vatAmount?: number
   grandTotal: number
   status: $Enums.OrderStatus
+  shippingAddress?: string | null
+  billingAddress?: string | null
+  paymentTerms?: string | null
+  deliveryDate?: Date | string | null
+  notes?: string | null
+  deletedAt?: Date | string | null
   createdAt?: Date | string
-  updatedAt?: Date | string
+  updatedAt?: Date | string | null
   Customer: Prisma.CustomerCreateNestedOneWithoutOrdersInput
   OrderItems?: Prisma.OrderItemCreateNestedManyWithoutOrderInput
 }
@@ -603,12 +793,20 @@ export type OrderUncheckedCreateWithoutInvoiceInput = {
   number: string
   date: Date | string
   customerId: number
+  description?: string | null
   totalAmount: number
+  discount?: number
   vatAmount?: number
   grandTotal: number
   status: $Enums.OrderStatus
+  shippingAddress?: string | null
+  billingAddress?: string | null
+  paymentTerms?: string | null
+  deliveryDate?: Date | string | null
+  notes?: string | null
+  deletedAt?: Date | string | null
   createdAt?: Date | string
-  updatedAt?: Date | string
+  updatedAt?: Date | string | null
   OrderItems?: Prisma.OrderItemUncheckedCreateNestedManyWithoutOrderInput
 }
 
@@ -631,12 +829,20 @@ export type OrderUpdateToOneWithWhereWithoutInvoiceInput = {
 export type OrderUpdateWithoutInvoiceInput = {
   number?: Prisma.StringFieldUpdateOperationsInput | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
+  discount?: Prisma.FloatFieldUpdateOperationsInput | number
   vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
   status?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
+  shippingAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  paymentTerms?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Customer?: Prisma.CustomerUpdateOneRequiredWithoutOrdersNestedInput
   OrderItems?: Prisma.OrderItemUpdateManyWithoutOrderNestedInput
 }
@@ -646,24 +852,40 @@ export type OrderUncheckedUpdateWithoutInvoiceInput = {
   number?: Prisma.StringFieldUpdateOperationsInput | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   customerId?: Prisma.IntFieldUpdateOperationsInput | number
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
+  discount?: Prisma.FloatFieldUpdateOperationsInput | number
   vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
   status?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
+  shippingAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  paymentTerms?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   OrderItems?: Prisma.OrderItemUncheckedUpdateManyWithoutOrderNestedInput
 }
 
 export type OrderCreateWithoutCustomerInput = {
   number: string
   date: Date | string
+  description?: string | null
   totalAmount: number
+  discount?: number
   vatAmount?: number
   grandTotal: number
   status: $Enums.OrderStatus
+  shippingAddress?: string | null
+  billingAddress?: string | null
+  paymentTerms?: string | null
+  deliveryDate?: Date | string | null
+  notes?: string | null
+  deletedAt?: Date | string | null
   createdAt?: Date | string
-  updatedAt?: Date | string
+  updatedAt?: Date | string | null
   Invoice?: Prisma.InvoiceCreateNestedOneWithoutOrderInput
   OrderItems?: Prisma.OrderItemCreateNestedManyWithoutOrderInput
 }
@@ -672,12 +894,20 @@ export type OrderUncheckedCreateWithoutCustomerInput = {
   id?: number
   number: string
   date: Date | string
+  description?: string | null
   totalAmount: number
+  discount?: number
   vatAmount?: number
   grandTotal: number
   status: $Enums.OrderStatus
+  shippingAddress?: string | null
+  billingAddress?: string | null
+  paymentTerms?: string | null
+  deliveryDate?: Date | string | null
+  notes?: string | null
+  deletedAt?: Date | string | null
   createdAt?: Date | string
-  updatedAt?: Date | string
+  updatedAt?: Date | string | null
   Invoice?: Prisma.InvoiceUncheckedCreateNestedOneWithoutOrderInput
   OrderItems?: Prisma.OrderItemUncheckedCreateNestedManyWithoutOrderInput
 }
@@ -716,23 +946,39 @@ export type OrderScalarWhereInput = {
   number?: Prisma.StringFilter<"Order"> | string
   date?: Prisma.DateTimeFilter<"Order"> | Date | string
   customerId?: Prisma.IntFilter<"Order"> | number
+  description?: Prisma.StringNullableFilter<"Order"> | string | null
   totalAmount?: Prisma.FloatFilter<"Order"> | number
+  discount?: Prisma.FloatFilter<"Order"> | number
   vatAmount?: Prisma.FloatFilter<"Order"> | number
   grandTotal?: Prisma.FloatFilter<"Order"> | number
   status?: Prisma.EnumOrderStatusFilter<"Order"> | $Enums.OrderStatus
+  shippingAddress?: Prisma.StringNullableFilter<"Order"> | string | null
+  billingAddress?: Prisma.StringNullableFilter<"Order"> | string | null
+  paymentTerms?: Prisma.StringNullableFilter<"Order"> | string | null
+  deliveryDate?: Prisma.DateTimeNullableFilter<"Order"> | Date | string | null
+  notes?: Prisma.StringNullableFilter<"Order"> | string | null
+  deletedAt?: Prisma.DateTimeNullableFilter<"Order"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Order"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"Order"> | Date | string
+  updatedAt?: Prisma.DateTimeNullableFilter<"Order"> | Date | string | null
 }
 
 export type OrderCreateWithoutOrderItemsInput = {
   number: string
   date: Date | string
+  description?: string | null
   totalAmount: number
+  discount?: number
   vatAmount?: number
   grandTotal: number
   status: $Enums.OrderStatus
+  shippingAddress?: string | null
+  billingAddress?: string | null
+  paymentTerms?: string | null
+  deliveryDate?: Date | string | null
+  notes?: string | null
+  deletedAt?: Date | string | null
   createdAt?: Date | string
-  updatedAt?: Date | string
+  updatedAt?: Date | string | null
   Customer: Prisma.CustomerCreateNestedOneWithoutOrdersInput
   Invoice?: Prisma.InvoiceCreateNestedOneWithoutOrderInput
 }
@@ -742,12 +988,20 @@ export type OrderUncheckedCreateWithoutOrderItemsInput = {
   number: string
   date: Date | string
   customerId: number
+  description?: string | null
   totalAmount: number
+  discount?: number
   vatAmount?: number
   grandTotal: number
   status: $Enums.OrderStatus
+  shippingAddress?: string | null
+  billingAddress?: string | null
+  paymentTerms?: string | null
+  deliveryDate?: Date | string | null
+  notes?: string | null
+  deletedAt?: Date | string | null
   createdAt?: Date | string
-  updatedAt?: Date | string
+  updatedAt?: Date | string | null
   Invoice?: Prisma.InvoiceUncheckedCreateNestedOneWithoutOrderInput
 }
 
@@ -770,12 +1024,20 @@ export type OrderUpdateToOneWithWhereWithoutOrderItemsInput = {
 export type OrderUpdateWithoutOrderItemsInput = {
   number?: Prisma.StringFieldUpdateOperationsInput | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
+  discount?: Prisma.FloatFieldUpdateOperationsInput | number
   vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
   status?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
+  shippingAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  paymentTerms?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Customer?: Prisma.CustomerUpdateOneRequiredWithoutOrdersNestedInput
   Invoice?: Prisma.InvoiceUpdateOneWithoutOrderNestedInput
 }
@@ -785,12 +1047,20 @@ export type OrderUncheckedUpdateWithoutOrderItemsInput = {
   number?: Prisma.StringFieldUpdateOperationsInput | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   customerId?: Prisma.IntFieldUpdateOperationsInput | number
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
+  discount?: Prisma.FloatFieldUpdateOperationsInput | number
   vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
   status?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
+  shippingAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  paymentTerms?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Invoice?: Prisma.InvoiceUncheckedUpdateOneWithoutOrderNestedInput
 }
 
@@ -798,23 +1068,39 @@ export type OrderCreateManyCustomerInput = {
   id?: number
   number: string
   date: Date | string
+  description?: string | null
   totalAmount: number
+  discount?: number
   vatAmount?: number
   grandTotal: number
   status: $Enums.OrderStatus
+  shippingAddress?: string | null
+  billingAddress?: string | null
+  paymentTerms?: string | null
+  deliveryDate?: Date | string | null
+  notes?: string | null
+  deletedAt?: Date | string | null
   createdAt?: Date | string
-  updatedAt?: Date | string
+  updatedAt?: Date | string | null
 }
 
 export type OrderUpdateWithoutCustomerInput = {
   number?: Prisma.StringFieldUpdateOperationsInput | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
+  discount?: Prisma.FloatFieldUpdateOperationsInput | number
   vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
   status?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
+  shippingAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  paymentTerms?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Invoice?: Prisma.InvoiceUpdateOneWithoutOrderNestedInput
   OrderItems?: Prisma.OrderItemUpdateManyWithoutOrderNestedInput
 }
@@ -823,12 +1109,20 @@ export type OrderUncheckedUpdateWithoutCustomerInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   number?: Prisma.StringFieldUpdateOperationsInput | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
+  discount?: Prisma.FloatFieldUpdateOperationsInput | number
   vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
   status?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
+  shippingAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  paymentTerms?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Invoice?: Prisma.InvoiceUncheckedUpdateOneWithoutOrderNestedInput
   OrderItems?: Prisma.OrderItemUncheckedUpdateManyWithoutOrderNestedInput
 }
@@ -837,12 +1131,20 @@ export type OrderUncheckedUpdateManyWithoutCustomerInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   number?: Prisma.StringFieldUpdateOperationsInput | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
+  discount?: Prisma.FloatFieldUpdateOperationsInput | number
   vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
   status?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
+  shippingAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  paymentTerms?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 
@@ -881,10 +1183,18 @@ export type OrderSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   number?: boolean
   date?: boolean
   customerId?: boolean
+  description?: boolean
   totalAmount?: boolean
+  discount?: boolean
   vatAmount?: boolean
   grandTotal?: boolean
   status?: boolean
+  shippingAddress?: boolean
+  billingAddress?: boolean
+  paymentTerms?: boolean
+  deliveryDate?: boolean
+  notes?: boolean
+  deletedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   Customer?: boolean | Prisma.CustomerDefaultArgs<ExtArgs>
@@ -898,10 +1208,18 @@ export type OrderSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   number?: boolean
   date?: boolean
   customerId?: boolean
+  description?: boolean
   totalAmount?: boolean
+  discount?: boolean
   vatAmount?: boolean
   grandTotal?: boolean
   status?: boolean
+  shippingAddress?: boolean
+  billingAddress?: boolean
+  paymentTerms?: boolean
+  deliveryDate?: boolean
+  notes?: boolean
+  deletedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   Customer?: boolean | Prisma.CustomerDefaultArgs<ExtArgs>
@@ -912,10 +1230,18 @@ export type OrderSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   number?: boolean
   date?: boolean
   customerId?: boolean
+  description?: boolean
   totalAmount?: boolean
+  discount?: boolean
   vatAmount?: boolean
   grandTotal?: boolean
   status?: boolean
+  shippingAddress?: boolean
+  billingAddress?: boolean
+  paymentTerms?: boolean
+  deliveryDate?: boolean
+  notes?: boolean
+  deletedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   Customer?: boolean | Prisma.CustomerDefaultArgs<ExtArgs>
@@ -926,15 +1252,23 @@ export type OrderSelectScalar = {
   number?: boolean
   date?: boolean
   customerId?: boolean
+  description?: boolean
   totalAmount?: boolean
+  discount?: boolean
   vatAmount?: boolean
   grandTotal?: boolean
   status?: boolean
+  shippingAddress?: boolean
+  billingAddress?: boolean
+  paymentTerms?: boolean
+  deliveryDate?: boolean
+  notes?: boolean
+  deletedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type OrderOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "number" | "date" | "customerId" | "totalAmount" | "vatAmount" | "grandTotal" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["order"]>
+export type OrderOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "number" | "date" | "customerId" | "description" | "totalAmount" | "discount" | "vatAmount" | "grandTotal" | "status" | "shippingAddress" | "billingAddress" | "paymentTerms" | "deliveryDate" | "notes" | "deletedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["order"]>
 export type OrderInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   Customer?: boolean | Prisma.CustomerDefaultArgs<ExtArgs>
   Invoice?: boolean | Prisma.Order$InvoiceArgs<ExtArgs>
@@ -960,12 +1294,20 @@ export type $OrderPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     number: string
     date: Date
     customerId: number
+    description: string | null
     totalAmount: number
+    discount: number
     vatAmount: number
     grandTotal: number
     status: $Enums.OrderStatus
+    shippingAddress: string | null
+    billingAddress: string | null
+    paymentTerms: string | null
+    deliveryDate: Date | null
+    notes: string | null
+    deletedAt: Date | null
     createdAt: Date
-    updatedAt: Date
+    updatedAt: Date | null
   }, ExtArgs["result"]["order"]>
   composites: {}
 }
@@ -1396,10 +1738,18 @@ export interface OrderFieldRefs {
   readonly number: Prisma.FieldRef<"Order", 'String'>
   readonly date: Prisma.FieldRef<"Order", 'DateTime'>
   readonly customerId: Prisma.FieldRef<"Order", 'Int'>
+  readonly description: Prisma.FieldRef<"Order", 'String'>
   readonly totalAmount: Prisma.FieldRef<"Order", 'Float'>
+  readonly discount: Prisma.FieldRef<"Order", 'Float'>
   readonly vatAmount: Prisma.FieldRef<"Order", 'Float'>
   readonly grandTotal: Prisma.FieldRef<"Order", 'Float'>
   readonly status: Prisma.FieldRef<"Order", 'OrderStatus'>
+  readonly shippingAddress: Prisma.FieldRef<"Order", 'String'>
+  readonly billingAddress: Prisma.FieldRef<"Order", 'String'>
+  readonly paymentTerms: Prisma.FieldRef<"Order", 'String'>
+  readonly deliveryDate: Prisma.FieldRef<"Order", 'DateTime'>
+  readonly notes: Prisma.FieldRef<"Order", 'String'>
+  readonly deletedAt: Prisma.FieldRef<"Order", 'DateTime'>
   readonly createdAt: Prisma.FieldRef<"Order", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Order", 'DateTime'>
 }
