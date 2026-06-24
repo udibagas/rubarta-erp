@@ -50,7 +50,6 @@ export class TasksController {
     return this.tasksService.findAll({
       keyword,
       userId,
-      customerId,
       status,
       priority,
     });

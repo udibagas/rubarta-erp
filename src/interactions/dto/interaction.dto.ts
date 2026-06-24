@@ -11,9 +11,15 @@ import {
 import { InteractionType } from '../../prisma/client/client';
 
 export class CreateInteractionDto {
-  @ApiProperty({ example: 1 })
+  @ApiProperty({ required: false, example: 1 })
+  @IsOptional()
   @IsInt()
-  customerId: number;
+  leadId?: number;
+
+  @ApiProperty({ required: false, example: 1 })
+  @IsOptional()
+  @IsInt()
+  opportunityId?: number;
 
   @ApiProperty({ example: 1 })
   @IsInt()
@@ -56,7 +62,12 @@ export class QueryInteractionDto {
   @ApiProperty({ required: false })
   @IsOptional()
   @IsInt()
-  customerId?: number;
+  leadId?: number;
+
+  @ApiProperty({ required: false })
+  @IsOptional()
+  @IsInt()
+  opportunityId?: number;
 
   @ApiProperty({ required: false })
   @IsOptional()

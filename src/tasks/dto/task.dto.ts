@@ -14,11 +14,17 @@ export class CreateTaskDto {
   @IsInt()
   userId: number;
 
-  @ApiProperty({ example: 1 })
+  @ApiProperty({ required: false, example: 1 })
+  @IsOptional()
   @IsInt()
-  customerId: number;
+  leadId?: number;
 
-  @ApiProperty({ example: 'Follow up with customer' })
+  @ApiProperty({ required: false, example: 1 })
+  @IsOptional()
+  @IsInt()
+  opportunityId?: number;
+
+  @ApiProperty({ example: 'Follow up with lead' })
   @IsString()
   @MaxLength(200)
   title: string;
@@ -65,7 +71,12 @@ export class QueryTaskDto {
   @ApiProperty({ required: false })
   @IsOptional()
   @IsInt()
-  customerId?: number;
+  leadId?: number;
+
+  @ApiProperty({ required: false })
+  @IsOptional()
+  @IsInt()
+  opportunityId?: number;
 
   @ApiProperty({ required: false, enum: TaskStatus })
   @IsOptional()

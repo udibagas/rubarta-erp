@@ -225,6 +225,7 @@ export type ContactScalarFieldEnum = (typeof ContactScalarFieldEnum)[keyof typeo
 
 export const LeadScalarFieldEnum = {
   id: 'id',
+  title: 'title',
   customerId: 'customerId',
   companyId: 'companyId',
   userId: 'userId',
@@ -309,7 +310,8 @@ export type QuotationItemScalarFieldEnum = (typeof QuotationItemScalarFieldEnum)
 export const TaskScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
-  customerId: 'customerId',
+  leadId: 'leadId',
+  opportunityId: 'opportunityId',
   title: 'title',
   description: 'description',
   dueDate: 'dueDate',
@@ -326,7 +328,8 @@ export type TaskScalarFieldEnum = (typeof TaskScalarFieldEnum)[keyof typeof Task
 
 export const InteractionScalarFieldEnum = {
   id: 'id',
-  customerId: 'customerId',
+  leadId: 'leadId',
+  opportunityId: 'opportunityId',
   userId: 'userId',
   type: 'type',
   date: 'date',

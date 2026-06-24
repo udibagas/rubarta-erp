@@ -26,10 +26,6 @@ export class TasksService {
       where.userId = query.userId;
     }
 
-    if (query.customerId) {
-      where.customerId = query.customerId;
-    }
-
     if (query.status) {
       where.status = query.status;
     }

@@ -26,10 +26,6 @@ export class InteractionsService {
       deletedAt: null,
     };
 
-    if (query.customerId) {
-      where.customerId = query.customerId;
-    }
-
     if (query.userId) {
       where.userId = query.userId;
     }

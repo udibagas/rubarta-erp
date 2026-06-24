@@ -9,6 +9,11 @@ import {
 } from 'class-validator';
 
 export class CreateLeadDto {
+  @ApiProperty({ example: 'Pneumatic Systems Upgrade Project' })
+  @IsNotEmpty({ message: 'Title is required' })
+  @IsString({ message: 'Invalid title' })
+  title: string;
+
   @ApiProperty({ example: 1 })
   @IsNotEmpty({ message: 'Company is required' })
   @IsNumber({}, { message: 'Invalid company' })

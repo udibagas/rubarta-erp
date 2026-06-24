@@ -50,7 +50,6 @@ export class InteractionsController {
   ) {
     return this.interactionsService.findAll({
       keyword,
-      customerId,
       userId,
       type,
     });

@@ -28,21 +28,24 @@ export type AggregateInteraction = {
 
 export type InteractionAvgAggregateOutputType = {
   id: number | null
-  customerId: number | null
+  leadId: number | null
+  opportunityId: number | null
   userId: number | null
   duration: number | null
 }
 
 export type InteractionSumAggregateOutputType = {
   id: number | null
-  customerId: number | null
+  leadId: number | null
+  opportunityId: number | null
   userId: number | null
   duration: number | null
 }
 
 export type InteractionMinAggregateOutputType = {
   id: number | null
-  customerId: number | null
+  leadId: number | null
+  opportunityId: number | null
   userId: number | null
   type: $Enums.InteractionType | null
   date: Date | null
@@ -57,7 +60,8 @@ export type InteractionMinAggregateOutputType = {
 
 export type InteractionMaxAggregateOutputType = {
   id: number | null
-  customerId: number | null
+  leadId: number | null
+  opportunityId: number | null
   userId: number | null
   type: $Enums.InteractionType | null
   date: Date | null
@@ -72,7 +76,8 @@ export type InteractionMaxAggregateOutputType = {
 
 export type InteractionCountAggregateOutputType = {
   id: number
-  customerId: number
+  leadId: number
+  opportunityId: number
   userId: number
   type: number
   date: number
@@ -89,21 +94,24 @@ export type InteractionCountAggregateOutputType = {
 
 export type InteractionAvgAggregateInputType = {
   id?: true
-  customerId?: true
+  leadId?: true
+  opportunityId?: true
   userId?: true
   duration?: true
 }
 
 export type InteractionSumAggregateInputType = {
   id?: true
-  customerId?: true
+  leadId?: true
+  opportunityId?: true
   userId?: true
   duration?: true
 }
 
 export type InteractionMinAggregateInputType = {
   id?: true
-  customerId?: true
+  leadId?: true
+  opportunityId?: true
   userId?: true
   type?: true
   date?: true
@@ -118,7 +126,8 @@ export type InteractionMinAggregateInputType = {
 
 export type InteractionMaxAggregateInputType = {
   id?: true
-  customerId?: true
+  leadId?: true
+  opportunityId?: true
   userId?: true
   type?: true
   date?: true
@@ -133,7 +142,8 @@ export type InteractionMaxAggregateInputType = {
 
 export type InteractionCountAggregateInputType = {
   id?: true
-  customerId?: true
+  leadId?: true
+  opportunityId?: true
   userId?: true
   type?: true
   date?: true
@@ -235,7 +245,8 @@ export type InteractionGroupByArgs<ExtArgs extends runtime.Types.Extensions.Inte
 
 export type InteractionGroupByOutputType = {
   id: number
-  customerId: number
+  leadId: number | null
+  opportunityId: number | null
   userId: number
   type: $Enums.InteractionType
   date: Date
@@ -273,7 +284,8 @@ export type InteractionWhereInput = {
   OR?: Prisma.InteractionWhereInput[]
   NOT?: Prisma.InteractionWhereInput | Prisma.InteractionWhereInput[]
   id?: Prisma.IntFilter<"Interaction"> | number
-  customerId?: Prisma.IntFilter<"Interaction"> | number
+  leadId?: Prisma.IntNullableFilter<"Interaction"> | number | null
+  opportunityId?: Prisma.IntNullableFilter<"Interaction"> | number | null
   userId?: Prisma.IntFilter<"Interaction"> | number
   type?: Prisma.EnumInteractionTypeFilter<"Interaction"> | $Enums.InteractionType
   date?: Prisma.DateTimeFilter<"Interaction"> | Date | string
@@ -284,13 +296,15 @@ export type InteractionWhereInput = {
   deletedAt?: Prisma.DateTimeNullableFilter<"Interaction"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Interaction"> | Date | string
   updatedAt?: Prisma.DateTimeNullableFilter<"Interaction"> | Date | string | null
-  Customer?: Prisma.XOR<Prisma.CustomerScalarRelationFilter, Prisma.CustomerWhereInput>
+  Lead?: Prisma.XOR<Prisma.LeadNullableScalarRelationFilter, Prisma.LeadWhereInput> | null
+  Opportunity?: Prisma.XOR<Prisma.OpportunityNullableScalarRelationFilter, Prisma.OpportunityWhereInput> | null
   User?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }
 
 export type InteractionOrderByWithRelationInput = {
   id?: Prisma.SortOrder
-  customerId?: Prisma.SortOrder
+  leadId?: Prisma.SortOrderInput | Prisma.SortOrder
+  opportunityId?: Prisma.SortOrderInput | Prisma.SortOrder
   userId?: Prisma.SortOrder
   type?: Prisma.SortOrder
   date?: Prisma.SortOrder
@@ -301,7 +315,8 @@ export type InteractionOrderByWithRelationInput = {
   deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrderInput | Prisma.SortOrder
-  Customer?: Prisma.CustomerOrderByWithRelationInput
+  Lead?: Prisma.LeadOrderByWithRelationInput
+  Opportunity?: Prisma.OpportunityOrderByWithRelationInput
   User?: Prisma.UserOrderByWithRelationInput
 }
 
@@ -310,7 +325,8 @@ export type InteractionWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.InteractionWhereInput | Prisma.InteractionWhereInput[]
   OR?: Prisma.InteractionWhereInput[]
   NOT?: Prisma.InteractionWhereInput | Prisma.InteractionWhereInput[]
-  customerId?: Prisma.IntFilter<"Interaction"> | number
+  leadId?: Prisma.IntNullableFilter<"Interaction"> | number | null
+  opportunityId?: Prisma.IntNullableFilter<"Interaction"> | number | null
   userId?: Prisma.IntFilter<"Interaction"> | number
   type?: Prisma.EnumInteractionTypeFilter<"Interaction"> | $Enums.InteractionType
   date?: Prisma.DateTimeFilter<"Interaction"> | Date | string
@@ -321,13 +337,15 @@ export type InteractionWhereUniqueInput = Prisma.AtLeast<{
   deletedAt?: Prisma.DateTimeNullableFilter<"Interaction"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Interaction"> | Date | string
   updatedAt?: Prisma.DateTimeNullableFilter<"Interaction"> | Date | string | null
-  Customer?: Prisma.XOR<Prisma.CustomerScalarRelationFilter, Prisma.CustomerWhereInput>
+  Lead?: Prisma.XOR<Prisma.LeadNullableScalarRelationFilter, Prisma.LeadWhereInput> | null
+  Opportunity?: Prisma.XOR<Prisma.OpportunityNullableScalarRelationFilter, Prisma.OpportunityWhereInput> | null
   User?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }, "id">
 
 export type InteractionOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
-  customerId?: Prisma.SortOrder
+  leadId?: Prisma.SortOrderInput | Prisma.SortOrder
+  opportunityId?: Prisma.SortOrderInput | Prisma.SortOrder
   userId?: Prisma.SortOrder
   type?: Prisma.SortOrder
   date?: Prisma.SortOrder
@@ -350,7 +368,8 @@ export type InteractionScalarWhereWithAggregatesInput = {
   OR?: Prisma.InteractionScalarWhereWithAggregatesInput[]
   NOT?: Prisma.InteractionScalarWhereWithAggregatesInput | Prisma.InteractionScalarWhereWithAggregatesInput[]
   id?: Prisma.IntWithAggregatesFilter<"Interaction"> | number
-  customerId?: Prisma.IntWithAggregatesFilter<"Interaction"> | number
+  leadId?: Prisma.IntNullableWithAggregatesFilter<"Interaction"> | number | null
+  opportunityId?: Prisma.IntNullableWithAggregatesFilter<"Interaction"> | number | null
   userId?: Prisma.IntWithAggregatesFilter<"Interaction"> | number
   type?: Prisma.EnumInteractionTypeWithAggregatesFilter<"Interaction"> | $Enums.InteractionType
   date?: Prisma.DateTimeWithAggregatesFilter<"Interaction"> | Date | string
@@ -373,13 +392,15 @@ export type InteractionCreateInput = {
   deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
-  Customer: Prisma.CustomerCreateNestedOneWithoutInteractionsInput
+  Lead?: Prisma.LeadCreateNestedOneWithoutInteractionsInput
+  Opportunity?: Prisma.OpportunityCreateNestedOneWithoutInteractionsInput
   User: Prisma.UserCreateNestedOneWithoutInteractionsInput
 }
 
 export type InteractionUncheckedCreateInput = {
   id?: number
-  customerId: number
+  leadId?: number | null
+  opportunityId?: number | null
   userId: number
   type: $Enums.InteractionType
   date: Date | string
@@ -402,13 +423,15 @@ export type InteractionUpdateInput = {
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  Customer?: Prisma.CustomerUpdateOneRequiredWithoutInteractionsNestedInput
+  Lead?: Prisma.LeadUpdateOneWithoutInteractionsNestedInput
+  Opportunity?: Prisma.OpportunityUpdateOneWithoutInteractionsNestedInput
   User?: Prisma.UserUpdateOneRequiredWithoutInteractionsNestedInput
 }
 
 export type InteractionUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  customerId?: Prisma.IntFieldUpdateOperationsInput | number
+  leadId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  opportunityId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   type?: Prisma.EnumInteractionTypeFieldUpdateOperationsInput | $Enums.InteractionType
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -423,7 +446,8 @@ export type InteractionUncheckedUpdateInput = {
 
 export type InteractionCreateManyInput = {
   id?: number
-  customerId: number
+  leadId?: number | null
+  opportunityId?: number | null
   userId: number
   type: $Enums.InteractionType
   date: Date | string
@@ -450,7 +474,8 @@ export type InteractionUpdateManyMutationInput = {
 
 export type InteractionUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  customerId?: Prisma.IntFieldUpdateOperationsInput | number
+  leadId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  opportunityId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   type?: Prisma.EnumInteractionTypeFieldUpdateOperationsInput | $Enums.InteractionType
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -475,7 +500,8 @@ export type InteractionOrderByRelationAggregateInput = {
 
 export type InteractionCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  customerId?: Prisma.SortOrder
+  leadId?: Prisma.SortOrder
+  opportunityId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   type?: Prisma.SortOrder
   date?: Prisma.SortOrder
@@ -490,14 +516,16 @@ export type InteractionCountOrderByAggregateInput = {
 
 export type InteractionAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  customerId?: Prisma.SortOrder
+  leadId?: Prisma.SortOrder
+  opportunityId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   duration?: Prisma.SortOrder
 }
 
 export type InteractionMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  customerId?: Prisma.SortOrder
+  leadId?: Prisma.SortOrder
+  opportunityId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   type?: Prisma.SortOrder
   date?: Prisma.SortOrder
@@ -512,7 +540,8 @@ export type InteractionMaxOrderByAggregateInput = {
 
 export type InteractionMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  customerId?: Prisma.SortOrder
+  leadId?: Prisma.SortOrder
+  opportunityId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   type?: Prisma.SortOrder
   date?: Prisma.SortOrder
@@ -527,50 +556,93 @@ export type InteractionMinOrderByAggregateInput = {
 
 export type InteractionSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  customerId?: Prisma.SortOrder
+  leadId?: Prisma.SortOrder
+  opportunityId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   duration?: Prisma.SortOrder
 }
 
-export type InteractionCreateNestedManyWithoutCustomerInput = {
-  create?: Prisma.XOR<Prisma.InteractionCreateWithoutCustomerInput, Prisma.InteractionUncheckedCreateWithoutCustomerInput> | Prisma.InteractionCreateWithoutCustomerInput[] | Prisma.InteractionUncheckedCreateWithoutCustomerInput[]
-  connectOrCreate?: Prisma.InteractionCreateOrConnectWithoutCustomerInput | Prisma.InteractionCreateOrConnectWithoutCustomerInput[]
-  createMany?: Prisma.InteractionCreateManyCustomerInputEnvelope
+export type InteractionCreateNestedManyWithoutLeadInput = {
+  create?: Prisma.XOR<Prisma.InteractionCreateWithoutLeadInput, Prisma.InteractionUncheckedCreateWithoutLeadInput> | Prisma.InteractionCreateWithoutLeadInput[] | Prisma.InteractionUncheckedCreateWithoutLeadInput[]
+  connectOrCreate?: Prisma.InteractionCreateOrConnectWithoutLeadInput | Prisma.InteractionCreateOrConnectWithoutLeadInput[]
+  createMany?: Prisma.InteractionCreateManyLeadInputEnvelope
   connect?: Prisma.InteractionWhereUniqueInput | Prisma.InteractionWhereUniqueInput[]
 }
 
-export type InteractionUncheckedCreateNestedManyWithoutCustomerInput = {
-  create?: Prisma.XOR<Prisma.InteractionCreateWithoutCustomerInput, Prisma.InteractionUncheckedCreateWithoutCustomerInput> | Prisma.InteractionCreateWithoutCustomerInput[] | Prisma.InteractionUncheckedCreateWithoutCustomerInput[]
-  connectOrCreate?: Prisma.InteractionCreateOrConnectWithoutCustomerInput | Prisma.InteractionCreateOrConnectWithoutCustomerInput[]
-  createMany?: Prisma.InteractionCreateManyCustomerInputEnvelope
+export type InteractionUncheckedCreateNestedManyWithoutLeadInput = {
+  create?: Prisma.XOR<Prisma.InteractionCreateWithoutLeadInput, Prisma.InteractionUncheckedCreateWithoutLeadInput> | Prisma.InteractionCreateWithoutLeadInput[] | Prisma.InteractionUncheckedCreateWithoutLeadInput[]
+  connectOrCreate?: Prisma.InteractionCreateOrConnectWithoutLeadInput | Prisma.InteractionCreateOrConnectWithoutLeadInput[]
+  createMany?: Prisma.InteractionCreateManyLeadInputEnvelope
   connect?: Prisma.InteractionWhereUniqueInput | Prisma.InteractionWhereUniqueInput[]
 }
 
-export type InteractionUpdateManyWithoutCustomerNestedInput = {
-  create?: Prisma.XOR<Prisma.InteractionCreateWithoutCustomerInput, Prisma.InteractionUncheckedCreateWithoutCustomerInput> | Prisma.InteractionCreateWithoutCustomerInput[] | Prisma.InteractionUncheckedCreateWithoutCustomerInput[]
-  connectOrCreate?: Prisma.InteractionCreateOrConnectWithoutCustomerInput | Prisma.InteractionCreateOrConnectWithoutCustomerInput[]
-  upsert?: Prisma.InteractionUpsertWithWhereUniqueWithoutCustomerInput | Prisma.InteractionUpsertWithWhereUniqueWithoutCustomerInput[]
-  createMany?: Prisma.InteractionCreateManyCustomerInputEnvelope
+export type InteractionUpdateManyWithoutLeadNestedInput = {
+  create?: Prisma.XOR<Prisma.InteractionCreateWithoutLeadInput, Prisma.InteractionUncheckedCreateWithoutLeadInput> | Prisma.InteractionCreateWithoutLeadInput[] | Prisma.InteractionUncheckedCreateWithoutLeadInput[]
+  connectOrCreate?: Prisma.InteractionCreateOrConnectWithoutLeadInput | Prisma.InteractionCreateOrConnectWithoutLeadInput[]
+  upsert?: Prisma.InteractionUpsertWithWhereUniqueWithoutLeadInput | Prisma.InteractionUpsertWithWhereUniqueWithoutLeadInput[]
+  createMany?: Prisma.InteractionCreateManyLeadInputEnvelope
   set?: Prisma.InteractionWhereUniqueInput | Prisma.InteractionWhereUniqueInput[]
   disconnect?: Prisma.InteractionWhereUniqueInput | Prisma.InteractionWhereUniqueInput[]
   delete?: Prisma.InteractionWhereUniqueInput | Prisma.InteractionWhereUniqueInput[]
   connect?: Prisma.InteractionWhereUniqueInput | Prisma.InteractionWhereUniqueInput[]
-  update?: Prisma.InteractionUpdateWithWhereUniqueWithoutCustomerInput | Prisma.InteractionUpdateWithWhereUniqueWithoutCustomerInput[]
-  updateMany?: Prisma.InteractionUpdateManyWithWhereWithoutCustomerInput | Prisma.InteractionUpdateManyWithWhereWithoutCustomerInput[]
+  update?: Prisma.InteractionUpdateWithWhereUniqueWithoutLeadInput | Prisma.InteractionUpdateWithWhereUniqueWithoutLeadInput[]
+  updateMany?: Prisma.InteractionUpdateManyWithWhereWithoutLeadInput | Prisma.InteractionUpdateManyWithWhereWithoutLeadInput[]
   deleteMany?: Prisma.InteractionScalarWhereInput | Prisma.InteractionScalarWhereInput[]
 }
 
-export type InteractionUncheckedUpdateManyWithoutCustomerNestedInput = {
-  create?: Prisma.XOR<Prisma.InteractionCreateWithoutCustomerInput, Prisma.InteractionUncheckedCreateWithoutCustomerInput> | Prisma.InteractionCreateWithoutCustomerInput[] | Prisma.InteractionUncheckedCreateWithoutCustomerInput[]
-  connectOrCreate?: Prisma.InteractionCreateOrConnectWithoutCustomerInput | Prisma.InteractionCreateOrConnectWithoutCustomerInput[]
-  upsert?: Prisma.InteractionUpsertWithWhereUniqueWithoutCustomerInput | Prisma.InteractionUpsertWithWhereUniqueWithoutCustomerInput[]
-  createMany?: Prisma.InteractionCreateManyCustomerInputEnvelope
+export type InteractionUncheckedUpdateManyWithoutLeadNestedInput = {
+  create?: Prisma.XOR<Prisma.InteractionCreateWithoutLeadInput, Prisma.InteractionUncheckedCreateWithoutLeadInput> | Prisma.InteractionCreateWithoutLeadInput[] | Prisma.InteractionUncheckedCreateWithoutLeadInput[]
+  connectOrCreate?: Prisma.InteractionCreateOrConnectWithoutLeadInput | Prisma.InteractionCreateOrConnectWithoutLeadInput[]
+  upsert?: Prisma.InteractionUpsertWithWhereUniqueWithoutLeadInput | Prisma.InteractionUpsertWithWhereUniqueWithoutLeadInput[]
+  createMany?: Prisma.InteractionCreateManyLeadInputEnvelope
   set?: Prisma.InteractionWhereUniqueInput | Prisma.InteractionWhereUniqueInput[]
   disconnect?: Prisma.InteractionWhereUniqueInput | Prisma.InteractionWhereUniqueInput[]
   delete?: Prisma.InteractionWhereUniqueInput | Prisma.InteractionWhereUniqueInput[]
   connect?: Prisma.InteractionWhereUniqueInput | Prisma.InteractionWhereUniqueInput[]
-  update?: Prisma.InteractionUpdateWithWhereUniqueWithoutCustomerInput | Prisma.InteractionUpdateWithWhereUniqueWithoutCustomerInput[]
-  updateMany?: Prisma.InteractionUpdateManyWithWhereWithoutCustomerInput | Prisma.InteractionUpdateManyWithWhereWithoutCustomerInput[]
+  update?: Prisma.InteractionUpdateWithWhereUniqueWithoutLeadInput | Prisma.InteractionUpdateWithWhereUniqueWithoutLeadInput[]
+  updateMany?: Prisma.InteractionUpdateManyWithWhereWithoutLeadInput | Prisma.InteractionUpdateManyWithWhereWithoutLeadInput[]
+  deleteMany?: Prisma.InteractionScalarWhereInput | Prisma.InteractionScalarWhereInput[]
+}
+
+export type InteractionCreateNestedManyWithoutOpportunityInput = {
+  create?: Prisma.XOR<Prisma.InteractionCreateWithoutOpportunityInput, Prisma.InteractionUncheckedCreateWithoutOpportunityInput> | Prisma.InteractionCreateWithoutOpportunityInput[] | Prisma.InteractionUncheckedCreateWithoutOpportunityInput[]
+  connectOrCreate?: Prisma.InteractionCreateOrConnectWithoutOpportunityInput | Prisma.InteractionCreateOrConnectWithoutOpportunityInput[]
+  createMany?: Prisma.InteractionCreateManyOpportunityInputEnvelope
+  connect?: Prisma.InteractionWhereUniqueInput | Prisma.InteractionWhereUniqueInput[]
+}
+
+export type InteractionUncheckedCreateNestedManyWithoutOpportunityInput = {
+  create?: Prisma.XOR<Prisma.InteractionCreateWithoutOpportunityInput, Prisma.InteractionUncheckedCreateWithoutOpportunityInput> | Prisma.InteractionCreateWithoutOpportunityInput[] | Prisma.InteractionUncheckedCreateWithoutOpportunityInput[]
+  connectOrCreate?: Prisma.InteractionCreateOrConnectWithoutOpportunityInput | Prisma.InteractionCreateOrConnectWithoutOpportunityInput[]
+  createMany?: Prisma.InteractionCreateManyOpportunityInputEnvelope
+  connect?: Prisma.InteractionWhereUniqueInput | Prisma.InteractionWhereUniqueInput[]
+}
+
+export type InteractionUpdateManyWithoutOpportunityNestedInput = {
+  create?: Prisma.XOR<Prisma.InteractionCreateWithoutOpportunityInput, Prisma.InteractionUncheckedCreateWithoutOpportunityInput> | Prisma.InteractionCreateWithoutOpportunityInput[] | Prisma.InteractionUncheckedCreateWithoutOpportunityInput[]
+  connectOrCreate?: Prisma.InteractionCreateOrConnectWithoutOpportunityInput | Prisma.InteractionCreateOrConnectWithoutOpportunityInput[]
+  upsert?: Prisma.InteractionUpsertWithWhereUniqueWithoutOpportunityInput | Prisma.InteractionUpsertWithWhereUniqueWithoutOpportunityInput[]
+  createMany?: Prisma.InteractionCreateManyOpportunityInputEnvelope
+  set?: Prisma.InteractionWhereUniqueInput | Prisma.InteractionWhereUniqueInput[]
+  disconnect?: Prisma.InteractionWhereUniqueInput | Prisma.InteractionWhereUniqueInput[]
+  delete?: Prisma.InteractionWhereUniqueInput | Prisma.InteractionWhereUniqueInput[]
+  connect?: Prisma.InteractionWhereUniqueInput | Prisma.InteractionWhereUniqueInput[]
+  update?: Prisma.InteractionUpdateWithWhereUniqueWithoutOpportunityInput | Prisma.InteractionUpdateWithWhereUniqueWithoutOpportunityInput[]
+  updateMany?: Prisma.InteractionUpdateManyWithWhereWithoutOpportunityInput | Prisma.InteractionUpdateManyWithWhereWithoutOpportunityInput[]
+  deleteMany?: Prisma.InteractionScalarWhereInput | Prisma.InteractionScalarWhereInput[]
+}
+
+export type InteractionUncheckedUpdateManyWithoutOpportunityNestedInput = {
+  create?: Prisma.XOR<Prisma.InteractionCreateWithoutOpportunityInput, Prisma.InteractionUncheckedCreateWithoutOpportunityInput> | Prisma.InteractionCreateWithoutOpportunityInput[] | Prisma.InteractionUncheckedCreateWithoutOpportunityInput[]
+  connectOrCreate?: Prisma.InteractionCreateOrConnectWithoutOpportunityInput | Prisma.InteractionCreateOrConnectWithoutOpportunityInput[]
+  upsert?: Prisma.InteractionUpsertWithWhereUniqueWithoutOpportunityInput | Prisma.InteractionUpsertWithWhereUniqueWithoutOpportunityInput[]
+  createMany?: Prisma.InteractionCreateManyOpportunityInputEnvelope
+  set?: Prisma.InteractionWhereUniqueInput | Prisma.InteractionWhereUniqueInput[]
+  disconnect?: Prisma.InteractionWhereUniqueInput | Prisma.InteractionWhereUniqueInput[]
+  delete?: Prisma.InteractionWhereUniqueInput | Prisma.InteractionWhereUniqueInput[]
+  connect?: Prisma.InteractionWhereUniqueInput | Prisma.InteractionWhereUniqueInput[]
+  update?: Prisma.InteractionUpdateWithWhereUniqueWithoutOpportunityInput | Prisma.InteractionUpdateWithWhereUniqueWithoutOpportunityInput[]
+  updateMany?: Prisma.InteractionUpdateManyWithWhereWithoutOpportunityInput | Prisma.InteractionUpdateManyWithWhereWithoutOpportunityInput[]
   deleteMany?: Prisma.InteractionScalarWhereInput | Prisma.InteractionScalarWhereInput[]
 }
 
@@ -620,7 +692,7 @@ export type InteractionUncheckedUpdateManyWithoutUserNestedInput = {
   deleteMany?: Prisma.InteractionScalarWhereInput | Prisma.InteractionScalarWhereInput[]
 }
 
-export type InteractionCreateWithoutCustomerInput = {
+export type InteractionCreateWithoutLeadInput = {
   type: $Enums.InteractionType
   date: Date | string
   duration?: number | null
@@ -630,11 +702,13 @@ export type InteractionCreateWithoutCustomerInput = {
   deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
+  Opportunity?: Prisma.OpportunityCreateNestedOneWithoutInteractionsInput
   User: Prisma.UserCreateNestedOneWithoutInteractionsInput
 }
 
-export type InteractionUncheckedCreateWithoutCustomerInput = {
+export type InteractionUncheckedCreateWithoutLeadInput = {
   id?: number
+  opportunityId?: number | null
   userId: number
   type: $Enums.InteractionType
   date: Date | string
@@ -647,30 +721,30 @@ export type InteractionUncheckedCreateWithoutCustomerInput = {
   updatedAt?: Date | string | null
 }
 
-export type InteractionCreateOrConnectWithoutCustomerInput = {
+export type InteractionCreateOrConnectWithoutLeadInput = {
   where: Prisma.InteractionWhereUniqueInput
-  create: Prisma.XOR<Prisma.InteractionCreateWithoutCustomerInput, Prisma.InteractionUncheckedCreateWithoutCustomerInput>
+  create: Prisma.XOR<Prisma.InteractionCreateWithoutLeadInput, Prisma.InteractionUncheckedCreateWithoutLeadInput>
 }
 
-export type InteractionCreateManyCustomerInputEnvelope = {
-  data: Prisma.InteractionCreateManyCustomerInput | Prisma.InteractionCreateManyCustomerInput[]
+export type InteractionCreateManyLeadInputEnvelope = {
+  data: Prisma.InteractionCreateManyLeadInput | Prisma.InteractionCreateManyLeadInput[]
   skipDuplicates?: boolean
 }
 
-export type InteractionUpsertWithWhereUniqueWithoutCustomerInput = {
+export type InteractionUpsertWithWhereUniqueWithoutLeadInput = {
   where: Prisma.InteractionWhereUniqueInput
-  update: Prisma.XOR<Prisma.InteractionUpdateWithoutCustomerInput, Prisma.InteractionUncheckedUpdateWithoutCustomerInput>
-  create: Prisma.XOR<Prisma.InteractionCreateWithoutCustomerInput, Prisma.InteractionUncheckedCreateWithoutCustomerInput>
+  update: Prisma.XOR<Prisma.InteractionUpdateWithoutLeadInput, Prisma.InteractionUncheckedUpdateWithoutLeadInput>
+  create: Prisma.XOR<Prisma.InteractionCreateWithoutLeadInput, Prisma.InteractionUncheckedCreateWithoutLeadInput>
 }
 
-export type InteractionUpdateWithWhereUniqueWithoutCustomerInput = {
+export type InteractionUpdateWithWhereUniqueWithoutLeadInput = {
   where: Prisma.InteractionWhereUniqueInput
-  data: Prisma.XOR<Prisma.InteractionUpdateWithoutCustomerInput, Prisma.InteractionUncheckedUpdateWithoutCustomerInput>
+  data: Prisma.XOR<Prisma.InteractionUpdateWithoutLeadInput, Prisma.InteractionUncheckedUpdateWithoutLeadInput>
 }
 
-export type InteractionUpdateManyWithWhereWithoutCustomerInput = {
+export type InteractionUpdateManyWithWhereWithoutLeadInput = {
   where: Prisma.InteractionScalarWhereInput
-  data: Prisma.XOR<Prisma.InteractionUpdateManyMutationInput, Prisma.InteractionUncheckedUpdateManyWithoutCustomerInput>
+  data: Prisma.XOR<Prisma.InteractionUpdateManyMutationInput, Prisma.InteractionUncheckedUpdateManyWithoutLeadInput>
 }
 
 export type InteractionScalarWhereInput = {
@@ -678,7 +752,8 @@ export type InteractionScalarWhereInput = {
   OR?: Prisma.InteractionScalarWhereInput[]
   NOT?: Prisma.InteractionScalarWhereInput | Prisma.InteractionScalarWhereInput[]
   id?: Prisma.IntFilter<"Interaction"> | number
-  customerId?: Prisma.IntFilter<"Interaction"> | number
+  leadId?: Prisma.IntNullableFilter<"Interaction"> | number | null
+  opportunityId?: Prisma.IntNullableFilter<"Interaction"> | number | null
   userId?: Prisma.IntFilter<"Interaction"> | number
   type?: Prisma.EnumInteractionTypeFilter<"Interaction"> | $Enums.InteractionType
   date?: Prisma.DateTimeFilter<"Interaction"> | Date | string
@@ -691,6 +766,61 @@ export type InteractionScalarWhereInput = {
   updatedAt?: Prisma.DateTimeNullableFilter<"Interaction"> | Date | string | null
 }
 
+export type InteractionCreateWithoutOpportunityInput = {
+  type: $Enums.InteractionType
+  date: Date | string
+  duration?: number | null
+  subject?: string | null
+  notes?: string | null
+  outcome?: string | null
+  deletedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string | null
+  Lead?: Prisma.LeadCreateNestedOneWithoutInteractionsInput
+  User: Prisma.UserCreateNestedOneWithoutInteractionsInput
+}
+
+export type InteractionUncheckedCreateWithoutOpportunityInput = {
+  id?: number
+  leadId?: number | null
+  userId: number
+  type: $Enums.InteractionType
+  date: Date | string
+  duration?: number | null
+  subject?: string | null
+  notes?: string | null
+  outcome?: string | null
+  deletedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string | null
+}
+
+export type InteractionCreateOrConnectWithoutOpportunityInput = {
+  where: Prisma.InteractionWhereUniqueInput
+  create: Prisma.XOR<Prisma.InteractionCreateWithoutOpportunityInput, Prisma.InteractionUncheckedCreateWithoutOpportunityInput>
+}
+
+export type InteractionCreateManyOpportunityInputEnvelope = {
+  data: Prisma.InteractionCreateManyOpportunityInput | Prisma.InteractionCreateManyOpportunityInput[]
+  skipDuplicates?: boolean
+}
+
+export type InteractionUpsertWithWhereUniqueWithoutOpportunityInput = {
+  where: Prisma.InteractionWhereUniqueInput
+  update: Prisma.XOR<Prisma.InteractionUpdateWithoutOpportunityInput, Prisma.InteractionUncheckedUpdateWithoutOpportunityInput>
+  create: Prisma.XOR<Prisma.InteractionCreateWithoutOpportunityInput, Prisma.InteractionUncheckedCreateWithoutOpportunityInput>
+}
+
+export type InteractionUpdateWithWhereUniqueWithoutOpportunityInput = {
+  where: Prisma.InteractionWhereUniqueInput
+  data: Prisma.XOR<Prisma.InteractionUpdateWithoutOpportunityInput, Prisma.InteractionUncheckedUpdateWithoutOpportunityInput>
+}
+
+export type InteractionUpdateManyWithWhereWithoutOpportunityInput = {
+  where: Prisma.InteractionScalarWhereInput
+  data: Prisma.XOR<Prisma.InteractionUpdateManyMutationInput, Prisma.InteractionUncheckedUpdateManyWithoutOpportunityInput>
+}
+
 export type InteractionCreateWithoutUserInput = {
   type: $Enums.InteractionType
   date: Date | string
@@ -701,12 +831,14 @@ export type InteractionCreateWithoutUserInput = {
   deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
-  Customer: Prisma.CustomerCreateNestedOneWithoutInteractionsInput
+  Lead?: Prisma.LeadCreateNestedOneWithoutInteractionsInput
+  Opportunity?: Prisma.OpportunityCreateNestedOneWithoutInteractionsInput
 }
 
 export type InteractionUncheckedCreateWithoutUserInput = {
   id?: number
-  customerId: number
+  leadId?: number | null
+  opportunityId?: number | null
   type: $Enums.InteractionType
   date: Date | string
   duration?: number | null
@@ -744,8 +876,9 @@ export type InteractionUpdateManyWithWhereWithoutUserInput = {
   data: Prisma.XOR<Prisma.InteractionUpdateManyMutationInput, Prisma.InteractionUncheckedUpdateManyWithoutUserInput>
 }
 
-export type InteractionCreateManyCustomerInput = {
+export type InteractionCreateManyLeadInput = {
   id?: number
+  opportunityId?: number | null
   userId: number
   type: $Enums.InteractionType
   date: Date | string
@@ -758,7 +891,7 @@ export type InteractionCreateManyCustomerInput = {
   updatedAt?: Date | string | null
 }
 
-export type InteractionUpdateWithoutCustomerInput = {
+export type InteractionUpdateWithoutLeadInput = {
   type?: Prisma.EnumInteractionTypeFieldUpdateOperationsInput | $Enums.InteractionType
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   duration?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -768,11 +901,13 @@ export type InteractionUpdateWithoutCustomerInput = {
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  Opportunity?: Prisma.OpportunityUpdateOneWithoutInteractionsNestedInput
   User?: Prisma.UserUpdateOneRequiredWithoutInteractionsNestedInput
 }
 
-export type InteractionUncheckedUpdateWithoutCustomerInput = {
+export type InteractionUncheckedUpdateWithoutLeadInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
+  opportunityId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   type?: Prisma.EnumInteractionTypeFieldUpdateOperationsInput | $Enums.InteractionType
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -785,8 +920,68 @@ export type InteractionUncheckedUpdateWithoutCustomerInput = {
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
-export type InteractionUncheckedUpdateManyWithoutCustomerInput = {
+export type InteractionUncheckedUpdateManyWithoutLeadInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
+  opportunityId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  userId?: Prisma.IntFieldUpdateOperationsInput | number
+  type?: Prisma.EnumInteractionTypeFieldUpdateOperationsInput | $Enums.InteractionType
+  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  duration?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  subject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  outcome?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+}
+
+export type InteractionCreateManyOpportunityInput = {
+  id?: number
+  leadId?: number | null
+  userId: number
+  type: $Enums.InteractionType
+  date: Date | string
+  duration?: number | null
+  subject?: string | null
+  notes?: string | null
+  outcome?: string | null
+  deletedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string | null
+}
+
+export type InteractionUpdateWithoutOpportunityInput = {
+  type?: Prisma.EnumInteractionTypeFieldUpdateOperationsInput | $Enums.InteractionType
+  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  duration?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  subject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  outcome?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  Lead?: Prisma.LeadUpdateOneWithoutInteractionsNestedInput
+  User?: Prisma.UserUpdateOneRequiredWithoutInteractionsNestedInput
+}
+
+export type InteractionUncheckedUpdateWithoutOpportunityInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  leadId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  userId?: Prisma.IntFieldUpdateOperationsInput | number
+  type?: Prisma.EnumInteractionTypeFieldUpdateOperationsInput | $Enums.InteractionType
+  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  duration?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  subject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  outcome?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+}
+
+export type InteractionUncheckedUpdateManyWithoutOpportunityInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  leadId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   type?: Prisma.EnumInteractionTypeFieldUpdateOperationsInput | $Enums.InteractionType
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -801,7 +996,8 @@ export type InteractionUncheckedUpdateManyWithoutCustomerInput = {
 
 export type InteractionCreateManyUserInput = {
   id?: number
-  customerId: number
+  leadId?: number | null
+  opportunityId?: number | null
   type: $Enums.InteractionType
   date: Date | string
   duration?: number | null
@@ -823,12 +1019,14 @@ export type InteractionUpdateWithoutUserInput = {
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  Customer?: Prisma.CustomerUpdateOneRequiredWithoutInteractionsNestedInput
+  Lead?: Prisma.LeadUpdateOneWithoutInteractionsNestedInput
+  Opportunity?: Prisma.OpportunityUpdateOneWithoutInteractionsNestedInput
 }
 
 export type InteractionUncheckedUpdateWithoutUserInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  customerId?: Prisma.IntFieldUpdateOperationsInput | number
+  leadId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  opportunityId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   type?: Prisma.EnumInteractionTypeFieldUpdateOperationsInput | $Enums.InteractionType
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   duration?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -842,7 +1040,8 @@ export type InteractionUncheckedUpdateWithoutUserInput = {
 
 export type InteractionUncheckedUpdateManyWithoutUserInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  customerId?: Prisma.IntFieldUpdateOperationsInput | number
+  leadId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  opportunityId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   type?: Prisma.EnumInteractionTypeFieldUpdateOperationsInput | $Enums.InteractionType
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   duration?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -858,7 +1057,8 @@ export type InteractionUncheckedUpdateManyWithoutUserInput = {
 
 export type InteractionSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  customerId?: boolean
+  leadId?: boolean
+  opportunityId?: boolean
   userId?: boolean
   type?: boolean
   date?: boolean
@@ -869,13 +1069,15 @@ export type InteractionSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   deletedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  Customer?: boolean | Prisma.CustomerDefaultArgs<ExtArgs>
+  Lead?: boolean | Prisma.Interaction$LeadArgs<ExtArgs>
+  Opportunity?: boolean | Prisma.Interaction$OpportunityArgs<ExtArgs>
   User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["interaction"]>
 
 export type InteractionSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  customerId?: boolean
+  leadId?: boolean
+  opportunityId?: boolean
   userId?: boolean
   type?: boolean
   date?: boolean
@@ -886,13 +1088,15 @@ export type InteractionSelectCreateManyAndReturn<ExtArgs extends runtime.Types.E
   deletedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  Customer?: boolean | Prisma.CustomerDefaultArgs<ExtArgs>
+  Lead?: boolean | Prisma.Interaction$LeadArgs<ExtArgs>
+  Opportunity?: boolean | Prisma.Interaction$OpportunityArgs<ExtArgs>
   User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["interaction"]>
 
 export type InteractionSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  customerId?: boolean
+  leadId?: boolean
+  opportunityId?: boolean
   userId?: boolean
   type?: boolean
   date?: boolean
@@ -903,13 +1107,15 @@ export type InteractionSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.E
   deletedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  Customer?: boolean | Prisma.CustomerDefaultArgs<ExtArgs>
+  Lead?: boolean | Prisma.Interaction$LeadArgs<ExtArgs>
+  Opportunity?: boolean | Prisma.Interaction$OpportunityArgs<ExtArgs>
   User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["interaction"]>
 
 export type InteractionSelectScalar = {
   id?: boolean
-  customerId?: boolean
+  leadId?: boolean
+  opportunityId?: boolean
   userId?: boolean
   type?: boolean
   date?: boolean
@@ -922,29 +1128,34 @@ export type InteractionSelectScalar = {
   updatedAt?: boolean
 }
 
-export type InteractionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "customerId" | "userId" | "type" | "date" | "duration" | "subject" | "notes" | "outcome" | "deletedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["interaction"]>
+export type InteractionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "leadId" | "opportunityId" | "userId" | "type" | "date" | "duration" | "subject" | "notes" | "outcome" | "deletedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["interaction"]>
 export type InteractionInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  Customer?: boolean | Prisma.CustomerDefaultArgs<ExtArgs>
+  Lead?: boolean | Prisma.Interaction$LeadArgs<ExtArgs>
+  Opportunity?: boolean | Prisma.Interaction$OpportunityArgs<ExtArgs>
   User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
 export type InteractionIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  Customer?: boolean | Prisma.CustomerDefaultArgs<ExtArgs>
+  Lead?: boolean | Prisma.Interaction$LeadArgs<ExtArgs>
+  Opportunity?: boolean | Prisma.Interaction$OpportunityArgs<ExtArgs>
   User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
 export type InteractionIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  Customer?: boolean | Prisma.CustomerDefaultArgs<ExtArgs>
+  Lead?: boolean | Prisma.Interaction$LeadArgs<ExtArgs>
+  Opportunity?: boolean | Prisma.Interaction$OpportunityArgs<ExtArgs>
   User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
 
 export type $InteractionPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Interaction"
   objects: {
-    Customer: Prisma.$CustomerPayload<ExtArgs>
+    Lead: Prisma.$LeadPayload<ExtArgs> | null
+    Opportunity: Prisma.$OpportunityPayload<ExtArgs> | null
     User: Prisma.$UserPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
-    customerId: number
+    leadId: number | null
+    opportunityId: number | null
     userId: number
     type: $Enums.InteractionType
     date: Date
@@ -1349,7 +1560,8 @@ readonly fields: InteractionFieldRefs;
  */
 export interface Prisma__InteractionClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  Customer<T extends Prisma.CustomerDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CustomerDefaultArgs<ExtArgs>>): Prisma.Prisma__CustomerClient<runtime.Types.Result.GetResult<Prisma.$CustomerPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  Lead<T extends Prisma.Interaction$LeadArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Interaction$LeadArgs<ExtArgs>>): Prisma.Prisma__LeadClient<runtime.Types.Result.GetResult<Prisma.$LeadPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  Opportunity<T extends Prisma.Interaction$OpportunityArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Interaction$OpportunityArgs<ExtArgs>>): Prisma.Prisma__OpportunityClient<runtime.Types.Result.GetResult<Prisma.$OpportunityPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   User<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1381,7 +1593,8 @@ export interface Prisma__InteractionClient<T, Null = never, ExtArgs extends runt
  */
 export interface InteractionFieldRefs {
   readonly id: Prisma.FieldRef<"Interaction", 'Int'>
-  readonly customerId: Prisma.FieldRef<"Interaction", 'Int'>
+  readonly leadId: Prisma.FieldRef<"Interaction", 'Int'>
+  readonly opportunityId: Prisma.FieldRef<"Interaction", 'Int'>
   readonly userId: Prisma.FieldRef<"Interaction", 'Int'>
   readonly type: Prisma.FieldRef<"Interaction", 'InteractionType'>
   readonly date: Prisma.FieldRef<"Interaction", 'DateTime'>
@@ -1790,6 +2003,44 @@ export type InteractionDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.I
    * Limit how many Interactions to delete.
    */
   limit?: number
+}
+
+/**
+ * Interaction.Lead
+ */
+export type Interaction$LeadArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Lead
+   */
+  select?: Prisma.LeadSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Lead
+   */
+  omit?: Prisma.LeadOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.LeadInclude<ExtArgs> | null
+  where?: Prisma.LeadWhereInput
+}
+
+/**
+ * Interaction.Opportunity
+ */
+export type Interaction$OpportunityArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Opportunity
+   */
+  select?: Prisma.OpportunitySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Opportunity
+   */
+  omit?: Prisma.OpportunityOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.OpportunityInclude<ExtArgs> | null
+  where?: Prisma.OpportunityWhereInput
 }
 
 /**

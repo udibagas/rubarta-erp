@@ -21,8 +21,6 @@ model Customer {
   Contacts      Contact[]
   Leads         Lead[]
   Opportunities Opportunity[]
-  Tasks         Task[]
-  Interactions  Interaction[]
   Orders        Order[]
   CustomerNotes CustomerNote[]
   CustomerFiles CustomerFile[]
@@ -126,6 +124,7 @@ enum InteractionType {
 model Lead {
   id Int @id @default(autoincrement())
 
+  title          String     @db.VarChar(200)
   customerId     Int
   companyId      Int
   userId         Int
@@ -141,9 +140,11 @@ model Lead {
   updatedAt DateTime? @updatedAt
 
   // Relationships
-  Customer Customer @relation(fields: [customerId], references: [id], onDelete: Cascade)
-  Company  Company  @relation(fields: [companyId], references: [id])
-  User     User     @relation(fields: [userId], references: [id])
+  Customer     Customer      @relation(fields: [customerId], references: [id], onDelete: Cascade)
+  Company      Company       @relation(fields: [companyId], references: [id])
+  User         User          @relation(fields: [userId], references: [id])
+  Tasks        Task[]
+  Interactions Interaction[]
 
   @@index([customerId])
   @@index([userId])
@@ -173,10 +174,12 @@ model Opportunity {
   updatedAt DateTime? @updatedAt
 
   // Relationships
-  Customer   Customer    @relation(fields: [customerId], references: [id], onDelete: Cascade)
-  User       User        @relation(fields: [userId], references: [id])
-  Company    Company     @relation(fields: [companyId], references: [id])
-  Quotations Quotation[]
+  Customer     Customer      @relation(fields: [customerId], references: [id], onDelete: Cascade)
+  User         User          @relation(fields: [userId], references: [id])
+  Company      Company       @relation(fields: [companyId], references: [id])
+  Quotations   Quotation[]
+  Tasks        Task[]
+  Interactions Interaction[]
 
   @@index([customerId])
   @@index([userId])
@@ -250,27 +253,30 @@ model QuotationItem {
 }
 
 model Task {
-  id          Int          @id @default(autoincrement())
-  userId      Int
-  customerId  Int
-  title       String       @db.VarChar(200)
-  description String?      @db.Text
-  dueDate     DateTime
-  completedAt DateTime?    @db.Timestamp()
-  status      TaskStatus   @default(Todo)
-  priority    TaskPriority @default(Medium)
-  deletedAt   DateTime?    @db.Timestamp()
+  id            Int          @id @default(autoincrement())
+  userId        Int
+  leadId        Int?
+  opportunityId Int?
+  title         String       @db.VarChar(200)
+  description   String?      @db.Text
+  dueDate       DateTime
+  completedAt   DateTime?    @db.Timestamp()
+  status        TaskStatus   @default(Todo)
+  priority      TaskPriority @default(Medium)
+  deletedAt     DateTime?    @db.Timestamp()
 
   // Timestamps
   createdAt DateTime  @default(now())
   updatedAt DateTime? @updatedAt
 
   // Relationships
-  User     User     @relation(fields: [userId], references: [id])
-  Customer Customer @relation(fields: [customerId], references: [id], onDelete: Cascade)
+  User        User         @relation(fields: [userId], references: [id])
+  Lead        Lead?        @relation(fields: [leadId], references: [id], onDelete: Cascade)
+  Opportunity Opportunity? @relation(fields: [opportunityId], references: [id], onDelete: Cascade)
 
   @@index([userId])
-  @@index([customerId])
+  @@index([leadId])
+  @@index([opportunityId])
   @@index([status])
   @@index([priority])
   @@index([dueDate])
@@ -279,26 +285,29 @@ model Task {
 }
 
 model Interaction {
-  id         Int             @id @default(autoincrement())
-  customerId Int
-  userId     Int
-  type       InteractionType
-  date       DateTime
-  duration   Int?            @db.Integer // Duration in minutes
-  subject    String?         @db.VarChar(200)
-  notes      String?         @db.Text
-  outcome    String?         @db.Text
-  deletedAt  DateTime?       @db.Timestamp()
+  id            Int             @id @default(autoincrement())
+  leadId        Int?
+  opportunityId Int?
+  userId        Int
+  type          InteractionType
+  date          DateTime
+  duration      Int?            @db.Integer // Duration in minutes
+  subject       String?         @db.VarChar(200)
+  notes         String?         @db.Text
+  outcome       String?         @db.Text
+  deletedAt     DateTime?       @db.Timestamp()
 
   // Timestamps
   createdAt DateTime  @default(now())
   updatedAt DateTime? @updatedAt
 
   // Relationships
-  Customer Customer @relation(fields: [customerId], references: [id], onDelete: Cascade)
-  User     User     @relation(fields: [userId], references: [id])
+  Lead        Lead?        @relation(fields: [leadId], references: [id], onDelete: Cascade)
+  Opportunity Opportunity? @relation(fields: [opportunityId], references: [id], onDelete: Cascade)
+  User        User         @relation(fields: [userId], references: [id])
 
-  @@index([customerId])
+  @@index([leadId])
+  @@index([opportunityId])
   @@index([userId])
   @@index([type])
   @@index([date])

@@ -55,16 +55,36 @@ export class CustomersService {
         Leads: {
           where: { deletedAt: null },
           orderBy: { createdAt: 'desc' },
-          take: 5,
+          include: {
+            User: { select: { name: true } },
+          },
         },
         Opportunities: {
           where: { deletedAt: null },
           orderBy: { createdAt: 'desc' },
-          take: 5,
+          include: {
+            User: { select: { name: true } },
+          },
         },
         Orders: {
           orderBy: { date: 'desc' },
-          take: 5,
+        },
+        Interactions: {
+          where: { deletedAt: null },
+          orderBy: { createdAt: 'desc' },
+          include: {
+            User: { select: { name: true } },
+          },
+        },
+        Quotations: {
+          where: { deletedAt: null },
+          orderBy: { createdAt: 'desc' },
+          include: {
+            User: { select: { name: true } },
+          },
+        },
+        Invoices: {
+          orderBy: { createdAt: 'desc' },
         },
         _count: {
           select: {
