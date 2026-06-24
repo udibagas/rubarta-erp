@@ -367,7 +367,12 @@ export class CrmDashboardService {
           select: {
             title: true,
             createdAt: true,
-            Customer: { select: { id: true, name: true } },
+            Lead: {
+              select: { Customer: { select: { id: true, name: true } } },
+            },
+            Opportunity: {
+              select: { Customer: { select: { id: true, name: true } } },
+            },
             User: { select: { id: true, name: true } },
           },
         }),
@@ -379,7 +384,12 @@ export class CrmDashboardService {
             type: true,
             subject: true,
             date: true,
-            Customer: { select: { id: true, name: true } },
+            Lead: {
+              select: { Customer: { select: { id: true, name: true } } },
+            },
+            Opportunity: {
+              select: { Customer: { select: { id: true, name: true } } },
+            },
             User: { select: { id: true, name: true } },
           },
         }),
@@ -439,8 +449,10 @@ export class CrmDashboardService {
       activities.push({
         type: 'Task',
         description: `Task created: ${task.title}`,
-        customerId: task.Customer.id,
-        customerName: task.Customer.name,
+        customerId:
+          task.Lead?.Customer?.id || task.Opportunity?.Customer?.id || null,
+        customerName:
+          task.Lead?.Customer?.name || task.Opportunity?.Customer?.name || null,
         userId: task.User.id,
         userName: task.User.name,
         date: task.createdAt,
@@ -451,8 +463,14 @@ export class CrmDashboardService {
       activities.push({
         type: 'Interaction',
         description: `${interaction.type}: ${interaction.subject || 'No subject'}`,
-        customerId: interaction.Customer.id,
-        customerName: interaction.Customer.name,
+        customerId:
+          interaction.Lead?.Customer?.id ||
+          interaction.Opportunity?.Customer?.id ||
+          null,
+        customerName:
+          interaction.Lead?.Customer?.name ||
+          interaction.Opportunity?.Customer?.name ||
+          null,
         userId: interaction.User.id,
         userName: interaction.User.name,
         date: interaction.date,
@@ -621,7 +639,12 @@ export class CrmDashboardService {
         dueDate: true,
         priority: true,
         status: true,
-        Customer: { select: { id: true, name: true } },
+        Lead: {
+          select: { Customer: { select: { id: true, name: true } } },
+        },
+        Opportunity: {
+          select: { Customer: { select: { id: true, name: true } } },
+        },
       },
     });
 
@@ -632,8 +655,10 @@ export class CrmDashboardService {
       title: task.title,
       dueDate: task.dueDate,
       priority: task.priority,
-      customerId: task.Customer.id,
-      customerName: task.Customer.name,
+      customerId:
+        task.Lead?.Customer?.id || task.Opportunity?.Customer?.id || null,
+      customerName:
+        task.Lead?.Customer?.name || task.Opportunity?.Customer?.name || null,
       status: task.status,
       isOverdue: task.dueDate < now,
     }));

@@ -69,13 +69,6 @@ export class CustomersService {
         Orders: {
           orderBy: { date: 'desc' },
         },
-        Interactions: {
-          where: { deletedAt: null },
-          orderBy: { createdAt: 'desc' },
-          include: {
-            User: { select: { name: true } },
-          },
-        },
         Quotations: {
           where: { deletedAt: null },
           orderBy: { createdAt: 'desc' },
@@ -92,8 +85,6 @@ export class CustomersService {
             Leads: true,
             Opportunities: true,
             Orders: true,
-            Tasks: true,
-            Interactions: true,
           },
         },
       },

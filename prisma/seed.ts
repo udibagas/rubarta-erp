@@ -522,6 +522,7 @@ async function main() {
   const leads = await Promise.all([
     prisma.lead.create({
       data: {
+        title: 'Pneumatic Systems Upgrade Project',
         customerId: customers[0].id,
         companyId: companies[0].id,
         userId: salesUser.id,
@@ -535,6 +536,7 @@ async function main() {
     }),
     prisma.lead.create({
       data: {
+        title: 'Industrial Electronics Supply',
         customerId: customers[1].id,
         companyId: companies[0].id,
         userId: salesUser.id,
@@ -547,6 +549,7 @@ async function main() {
     }),
     prisma.lead.create({
       data: {
+        title: 'Mechanical Parts Inquiry',
         customerId: customers[2].id,
         companyId: companies[0].id,
         userId: admin.id,
@@ -558,6 +561,7 @@ async function main() {
     }),
     prisma.lead.create({
       data: {
+        title: 'Manufacturing Expo 2026 - Annual Supply Contract',
         customerId: customers[3].id,
         companyId: companies[0].id,
         userId: salesUser.id,
@@ -570,6 +574,7 @@ async function main() {
     }),
     prisma.lead.create({
       data: {
+        title: 'Construction Parts Referral',
         customerId: customers[5].id,
         companyId: companies[0].id,
         userId: admin.id,
@@ -841,7 +846,7 @@ async function main() {
     prisma.task.create({
       data: {
         userId: salesUser.id,
-        customerId: customers[0].id,
+        opportunityId: opportunities[0].id,
         title: 'Follow up on Astra quotation',
         description: 'Call Budi Santoso to discuss quotation feedback',
         dueDate: new Date('2026-05-28'),
@@ -852,7 +857,7 @@ async function main() {
     prisma.task.create({
       data: {
         userId: salesUser.id,
-        customerId: customers[1].id,
+        opportunityId: opportunities[1].id,
         title: 'Prepare technical presentation for Telkom',
         description:
           'Create slides about electronics components specifications',
@@ -864,7 +869,7 @@ async function main() {
     prisma.task.create({
       data: {
         userId: admin.id,
-        customerId: customers[3].id,
+        opportunityId: opportunities[2].id,
         title: 'Process Indofood PO',
         description: 'Convert accepted quotation to purchase order',
         dueDate: new Date('2026-05-25'),
@@ -876,7 +881,7 @@ async function main() {
     prisma.task.create({
       data: {
         userId: salesUser.id,
-        customerId: customers[2].id,
+        leadId: leads[2].id,
         title: 'Schedule site visit to Sejahtera Bersama',
         description: 'Arrange meeting to understand their requirements',
         dueDate: new Date('2026-06-05'),
@@ -887,7 +892,7 @@ async function main() {
     prisma.task.create({
       data: {
         userId: admin.id,
-        customerId: customers[4].id,
+        opportunityId: opportunities[3].id,
         title: 'Prepare proposal for BCA maintenance contract',
         description: 'Draft comprehensive proposal for quarterly supply',
         dueDate: new Date('2026-06-10'),
@@ -898,7 +903,7 @@ async function main() {
     prisma.task.create({
       data: {
         userId: salesUser.id,
-        customerId: customers[0].id,
+        leadId: leads[0].id,
         title: 'Update Astra in CRM system',
         description: 'Add new contact person and update company information',
         dueDate: new Date('2026-05-20'),
@@ -919,7 +924,7 @@ async function main() {
   const interactions = await Promise.all([
     prisma.interaction.create({
       data: {
-        customerId: customers[0].id,
+        opportunityId: opportunities[0].id,
         userId: salesUser.id,
         type: InteractionType.Meeting,
         date: new Date('2026-05-15'),
@@ -932,7 +937,7 @@ async function main() {
     }),
     prisma.interaction.create({
       data: {
-        customerId: customers[0].id,
+        opportunityId: opportunities[0].id,
         userId: salesUser.id,
         type: InteractionType.Call,
         date: new Date('2026-05-22'),
@@ -945,7 +950,7 @@ async function main() {
     }),
     prisma.interaction.create({
       data: {
-        customerId: customers[1].id,
+        leadId: leads[1].id,
         userId: salesUser.id,
         type: InteractionType.Email,
         date: new Date('2026-05-18'),
@@ -958,7 +963,7 @@ async function main() {
     }),
     prisma.interaction.create({
       data: {
-        customerId: customers[3].id,
+        opportunityId: opportunities[2].id,
         userId: salesUser.id,
         type: InteractionType.Demo,
         date: new Date('2026-04-25'),
@@ -972,7 +977,7 @@ async function main() {
     }),
     prisma.interaction.create({
       data: {
-        customerId: customers[3].id,
+        opportunityId: opportunities[2].id,
         userId: admin.id,
         type: InteractionType.Call,
         date: new Date('2026-05-20'),
@@ -984,7 +989,7 @@ async function main() {
     }),
     prisma.interaction.create({
       data: {
-        customerId: customers[2].id,
+        leadId: leads[2].id,
         userId: admin.id,
         type: InteractionType.Call,
         date: new Date('2026-05-12'),
@@ -997,7 +1002,7 @@ async function main() {
     }),
     prisma.interaction.create({
       data: {
-        customerId: customers[4].id,
+        opportunityId: opportunities[3].id,
         userId: admin.id,
         type: InteractionType.Meeting,
         date: new Date('2026-05-08'),
@@ -1010,7 +1015,7 @@ async function main() {
     }),
     prisma.interaction.create({
       data: {
-        customerId: customers[5].id,
+        leadId: leads[4].id,
         userId: admin.id,
         type: InteractionType.SiteVisit,
         date: new Date('2026-05-10'),

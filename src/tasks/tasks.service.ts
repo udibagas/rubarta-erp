@@ -12,7 +12,6 @@ export class TasksService {
       data,
       include: {
         User: { select: { id: true, name: true } },
-        Customer: { select: { id: true, name: true } },
       },
     });
   }
@@ -46,7 +45,6 @@ export class TasksService {
       orderBy: [{ priority: 'desc' }, { dueDate: 'asc' }],
       include: {
         User: { select: { id: true, name: true } },
-        Customer: { select: { id: true, name: true } },
       },
     });
   }
@@ -56,7 +54,6 @@ export class TasksService {
       where: { id, deletedAt: null },
       include: {
         User: true,
-        Customer: true,
       },
     });
 
@@ -80,7 +77,6 @@ export class TasksService {
       data,
       include: {
         User: { select: { id: true, name: true } },
-        Customer: { select: { id: true, name: true } },
       },
     });
   }

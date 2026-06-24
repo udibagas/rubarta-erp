@@ -15,7 +15,6 @@ export class InteractionsService {
     return this.prisma.interaction.create({
       data,
       include: {
-        Customer: { select: { id: true, name: true } },
         User: { select: { id: true, name: true } },
       },
     });
@@ -46,7 +45,6 @@ export class InteractionsService {
       where,
       orderBy: { date: 'desc' },
       include: {
-        Customer: { select: { id: true, name: true } },
         User: { select: { id: true, name: true } },
       },
     });
@@ -56,7 +54,6 @@ export class InteractionsService {
     const interaction = await this.prisma.interaction.findFirst({
       where: { id, deletedAt: null },
       include: {
-        Customer: true,
         User: true,
       },
     });
@@ -75,7 +72,6 @@ export class InteractionsService {
       where: { id },
       data,
       include: {
-        Customer: { select: { id: true, name: true } },
         User: { select: { id: true, name: true } },
       },
     });
