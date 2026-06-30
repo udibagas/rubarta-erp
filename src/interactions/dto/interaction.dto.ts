@@ -22,7 +22,7 @@ export class CreateInteractionDto {
   opportunityId?: number;
 
   @ApiProperty({ example: 1 })
-  @IsInt()
+  @IsInt({ message: 'Invalid User' })
   userId: number;
 
   @ApiProperty({ enum: InteractionType, example: InteractionType.Meeting })
