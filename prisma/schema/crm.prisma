@@ -125,7 +125,7 @@ model Lead {
   id Int @id @default(autoincrement())
 
   title          String     @db.VarChar(200)
-  customerId     Int
+  customerId     Int?
   companyId      Int
   userId         Int
   source         LeadSource
@@ -140,7 +140,7 @@ model Lead {
   updatedAt DateTime? @updatedAt
 
   // Relationships
-  Customer     Customer      @relation(fields: [customerId], references: [id], onDelete: Cascade)
+  Customer     Customer?     @relation(fields: [customerId], references: [id], onDelete: Cascade)
   Company      Company       @relation(fields: [companyId], references: [id])
   User         User          @relation(fields: [userId], references: [id])
   Tasks        Task[]

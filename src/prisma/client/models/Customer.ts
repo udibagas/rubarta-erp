@@ -619,6 +619,11 @@ export type CustomerSumOrderByAggregateInput = {
   revenue?: Prisma.SortOrder
 }
 
+export type CustomerNullableScalarRelationFilter = {
+  is?: Prisma.CustomerWhereInput | null
+  isNot?: Prisma.CustomerWhereInput | null
+}
+
 export type CustomerCreateNestedOneWithoutInvoicesInput = {
   create?: Prisma.XOR<Prisma.CustomerCreateWithoutInvoicesInput, Prisma.CustomerUncheckedCreateWithoutInvoicesInput>
   connectOrCreate?: Prisma.CustomerCreateOrConnectWithoutInvoicesInput
@@ -682,10 +687,12 @@ export type CustomerCreateNestedOneWithoutLeadsInput = {
   connect?: Prisma.CustomerWhereUniqueInput
 }
 
-export type CustomerUpdateOneRequiredWithoutLeadsNestedInput = {
+export type CustomerUpdateOneWithoutLeadsNestedInput = {
   create?: Prisma.XOR<Prisma.CustomerCreateWithoutLeadsInput, Prisma.CustomerUncheckedCreateWithoutLeadsInput>
   connectOrCreate?: Prisma.CustomerCreateOrConnectWithoutLeadsInput
   upsert?: Prisma.CustomerUpsertWithoutLeadsInput
+  disconnect?: Prisma.CustomerWhereInput | boolean
+  delete?: Prisma.CustomerWhereInput | boolean
   connect?: Prisma.CustomerWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.CustomerUpdateToOneWithWhereWithoutLeadsInput, Prisma.CustomerUpdateWithoutLeadsInput>, Prisma.CustomerUncheckedUpdateWithoutLeadsInput>
 }
