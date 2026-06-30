@@ -33,6 +33,13 @@ export class InteractionsService {
       where.type = query.type;
     }
 
+    if (query.customerId) {
+      where.OR = [
+        { Lead: { customerId: query.customerId } },
+        { Opportunity: { customerId: query.customerId } },
+      ];
+    }
+
     if (query.keyword) {
       where.OR = [
         { subject: { contains: query.keyword, mode: 'insensitive' } },

@@ -26,7 +26,7 @@ export class CreateInteractionDto {
   userId: number;
 
   @ApiProperty({ enum: InteractionType, example: InteractionType.Meeting })
-  @IsEnum(InteractionType)
+  @IsEnum(InteractionType, { message: 'Invalid Interaction Type' })
   type: InteractionType;
 
   @ApiProperty({ example: '2025-05-25T10:00:00Z' })
@@ -83,4 +83,9 @@ export class QueryInteractionDto {
   @IsOptional()
   @IsString()
   keyword?: string;
+
+  @ApiProperty({ required: false })
+  @IsOptional()
+  @IsInt()
+  customerId?: number;
 }
