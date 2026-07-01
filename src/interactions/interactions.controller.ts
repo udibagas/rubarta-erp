@@ -45,14 +45,28 @@ export class InteractionsController {
     @Query('customerId', new ParseIntPipe({ optional: true }))
     customerId?: number,
     @Query('userId', new ParseIntPipe({ optional: true })) userId?: number,
+    @Query('leadId', new ParseIntPipe({ optional: true })) leadId?: number,
+    @Query('opportunityId', new ParseIntPipe({ optional: true }))
+    opportunityId?: number,
+    @Query('contactId', new ParseIntPipe({ optional: true }))
+    contactId?: number,
     @Query('type', new ParseEnumPipe(InteractionType, { optional: true }))
     type?: InteractionType,
+    @Query('isPaginated') isPaginated?: boolean,
+    @Query('page', new ParseIntPipe({ optional: true })) page?: number,
+    @Query('limit', new ParseIntPipe({ optional: true })) limit?: number,
   ) {
     return this.interactionsService.findAll({
       keyword,
       customerId,
       userId,
+      leadId,
+      opportunityId,
+      contactId,
       type,
+      isPaginated: isPaginated === true || isPaginated === 'true',
+      page,
+      limit,
     });
   }
 

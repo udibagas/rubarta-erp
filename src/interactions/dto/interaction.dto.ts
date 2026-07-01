@@ -7,6 +7,7 @@ import {
   IsDateString,
   MaxLength,
   Min,
+  IsBoolean,
 } from 'class-validator';
 import { InteractionType } from '../../prisma/client/client';
 
@@ -20,6 +21,11 @@ export class CreateInteractionDto {
   @IsOptional()
   @IsInt()
   opportunityId?: number;
+
+  @ApiProperty({ required: false, example: 1 })
+  @IsOptional()
+  @IsInt()
+  contactId?: number;
 
   @ApiProperty({ example: 1 })
   @IsInt({ message: 'Invalid User' })
@@ -72,6 +78,11 @@ export class QueryInteractionDto {
   @ApiProperty({ required: false })
   @IsOptional()
   @IsInt()
+  contactId?: number;
+
+  @ApiProperty({ required: false })
+  @IsOptional()
+  @IsInt()
   userId?: number;
 
   @ApiProperty({ required: false, enum: InteractionType })
@@ -88,4 +99,19 @@ export class QueryInteractionDto {
   @IsOptional()
   @IsInt()
   customerId?: number;
+
+  @ApiProperty({ required: false })
+  @IsOptional()
+  @IsBoolean()
+  isPaginated?: boolean;
+
+  @ApiProperty({ required: false, default: 1 })
+  @IsOptional()
+  @IsInt()
+  page?: number;
+
+  @ApiProperty({ required: false, default: 10 })
+  @IsOptional()
+  @IsInt()
+  limit?: number;
 }

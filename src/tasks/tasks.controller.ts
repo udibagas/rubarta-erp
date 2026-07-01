@@ -40,18 +40,27 @@ export class TasksController {
   findAll(
     @Query('keyword') keyword?: string,
     @Query('userId', new ParseIntPipe({ optional: true })) userId?: number,
-    @Query('customerId', new ParseIntPipe({ optional: true }))
-    customerId?: number,
+    @Query('leadId', new ParseIntPipe({ optional: true })) leadId?: number,
+    @Query('opportunityId', new ParseIntPipe({ optional: true }))
+    opportunityId?: number,
     @Query('status', new ParseEnumPipe(TaskStatus, { optional: true }))
     status?: TaskStatus,
     @Query('priority', new ParseEnumPipe(TaskPriority, { optional: true }))
     priority?: TaskPriority,
+    @Query('isPaginated') isPaginated?: boolean,
+    @Query('page', new ParseIntPipe({ optional: true })) page?: number,
+    @Query('limit', new ParseIntPipe({ optional: true })) limit?: number,
   ) {
     return this.tasksService.findAll({
       keyword,
       userId,
+      leadId,
+      opportunityId,
       status,
       priority,
+      isPaginated: isPaginated === true,
+      page,
+      limit,
     });
   }
 

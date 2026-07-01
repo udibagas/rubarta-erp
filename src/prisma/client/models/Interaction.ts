@@ -30,6 +30,7 @@ export type InteractionAvgAggregateOutputType = {
   id: number | null
   leadId: number | null
   opportunityId: number | null
+  contactId: number | null
   userId: number | null
   duration: number | null
 }
@@ -38,6 +39,7 @@ export type InteractionSumAggregateOutputType = {
   id: number | null
   leadId: number | null
   opportunityId: number | null
+  contactId: number | null
   userId: number | null
   duration: number | null
 }
@@ -46,6 +48,7 @@ export type InteractionMinAggregateOutputType = {
   id: number | null
   leadId: number | null
   opportunityId: number | null
+  contactId: number | null
   userId: number | null
   type: $Enums.InteractionType | null
   date: Date | null
@@ -62,6 +65,7 @@ export type InteractionMaxAggregateOutputType = {
   id: number | null
   leadId: number | null
   opportunityId: number | null
+  contactId: number | null
   userId: number | null
   type: $Enums.InteractionType | null
   date: Date | null
@@ -78,6 +82,7 @@ export type InteractionCountAggregateOutputType = {
   id: number
   leadId: number
   opportunityId: number
+  contactId: number
   userId: number
   type: number
   date: number
@@ -96,6 +101,7 @@ export type InteractionAvgAggregateInputType = {
   id?: true
   leadId?: true
   opportunityId?: true
+  contactId?: true
   userId?: true
   duration?: true
 }
@@ -104,6 +110,7 @@ export type InteractionSumAggregateInputType = {
   id?: true
   leadId?: true
   opportunityId?: true
+  contactId?: true
   userId?: true
   duration?: true
 }
@@ -112,6 +119,7 @@ export type InteractionMinAggregateInputType = {
   id?: true
   leadId?: true
   opportunityId?: true
+  contactId?: true
   userId?: true
   type?: true
   date?: true
@@ -128,6 +136,7 @@ export type InteractionMaxAggregateInputType = {
   id?: true
   leadId?: true
   opportunityId?: true
+  contactId?: true
   userId?: true
   type?: true
   date?: true
@@ -144,6 +153,7 @@ export type InteractionCountAggregateInputType = {
   id?: true
   leadId?: true
   opportunityId?: true
+  contactId?: true
   userId?: true
   type?: true
   date?: true
@@ -247,6 +257,7 @@ export type InteractionGroupByOutputType = {
   id: number
   leadId: number | null
   opportunityId: number | null
+  contactId: number | null
   userId: number
   type: $Enums.InteractionType
   date: Date
@@ -286,6 +297,7 @@ export type InteractionWhereInput = {
   id?: Prisma.IntFilter<"Interaction"> | number
   leadId?: Prisma.IntNullableFilter<"Interaction"> | number | null
   opportunityId?: Prisma.IntNullableFilter<"Interaction"> | number | null
+  contactId?: Prisma.IntNullableFilter<"Interaction"> | number | null
   userId?: Prisma.IntFilter<"Interaction"> | number
   type?: Prisma.EnumInteractionTypeFilter<"Interaction"> | $Enums.InteractionType
   date?: Prisma.DateTimeFilter<"Interaction"> | Date | string
@@ -298,6 +310,7 @@ export type InteractionWhereInput = {
   updatedAt?: Prisma.DateTimeNullableFilter<"Interaction"> | Date | string | null
   Lead?: Prisma.XOR<Prisma.LeadNullableScalarRelationFilter, Prisma.LeadWhereInput> | null
   Opportunity?: Prisma.XOR<Prisma.OpportunityNullableScalarRelationFilter, Prisma.OpportunityWhereInput> | null
+  Contact?: Prisma.XOR<Prisma.ContactNullableScalarRelationFilter, Prisma.ContactWhereInput> | null
   User?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }
 
@@ -305,6 +318,7 @@ export type InteractionOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   leadId?: Prisma.SortOrderInput | Prisma.SortOrder
   opportunityId?: Prisma.SortOrderInput | Prisma.SortOrder
+  contactId?: Prisma.SortOrderInput | Prisma.SortOrder
   userId?: Prisma.SortOrder
   type?: Prisma.SortOrder
   date?: Prisma.SortOrder
@@ -317,6 +331,7 @@ export type InteractionOrderByWithRelationInput = {
   updatedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   Lead?: Prisma.LeadOrderByWithRelationInput
   Opportunity?: Prisma.OpportunityOrderByWithRelationInput
+  Contact?: Prisma.ContactOrderByWithRelationInput
   User?: Prisma.UserOrderByWithRelationInput
 }
 
@@ -327,6 +342,7 @@ export type InteractionWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.InteractionWhereInput | Prisma.InteractionWhereInput[]
   leadId?: Prisma.IntNullableFilter<"Interaction"> | number | null
   opportunityId?: Prisma.IntNullableFilter<"Interaction"> | number | null
+  contactId?: Prisma.IntNullableFilter<"Interaction"> | number | null
   userId?: Prisma.IntFilter<"Interaction"> | number
   type?: Prisma.EnumInteractionTypeFilter<"Interaction"> | $Enums.InteractionType
   date?: Prisma.DateTimeFilter<"Interaction"> | Date | string
@@ -339,6 +355,7 @@ export type InteractionWhereUniqueInput = Prisma.AtLeast<{
   updatedAt?: Prisma.DateTimeNullableFilter<"Interaction"> | Date | string | null
   Lead?: Prisma.XOR<Prisma.LeadNullableScalarRelationFilter, Prisma.LeadWhereInput> | null
   Opportunity?: Prisma.XOR<Prisma.OpportunityNullableScalarRelationFilter, Prisma.OpportunityWhereInput> | null
+  Contact?: Prisma.XOR<Prisma.ContactNullableScalarRelationFilter, Prisma.ContactWhereInput> | null
   User?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }, "id">
 
@@ -346,6 +363,7 @@ export type InteractionOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   leadId?: Prisma.SortOrderInput | Prisma.SortOrder
   opportunityId?: Prisma.SortOrderInput | Prisma.SortOrder
+  contactId?: Prisma.SortOrderInput | Prisma.SortOrder
   userId?: Prisma.SortOrder
   type?: Prisma.SortOrder
   date?: Prisma.SortOrder
@@ -370,6 +388,7 @@ export type InteractionScalarWhereWithAggregatesInput = {
   id?: Prisma.IntWithAggregatesFilter<"Interaction"> | number
   leadId?: Prisma.IntNullableWithAggregatesFilter<"Interaction"> | number | null
   opportunityId?: Prisma.IntNullableWithAggregatesFilter<"Interaction"> | number | null
+  contactId?: Prisma.IntNullableWithAggregatesFilter<"Interaction"> | number | null
   userId?: Prisma.IntWithAggregatesFilter<"Interaction"> | number
   type?: Prisma.EnumInteractionTypeWithAggregatesFilter<"Interaction"> | $Enums.InteractionType
   date?: Prisma.DateTimeWithAggregatesFilter<"Interaction"> | Date | string
@@ -394,6 +413,7 @@ export type InteractionCreateInput = {
   updatedAt?: Date | string | null
   Lead?: Prisma.LeadCreateNestedOneWithoutInteractionsInput
   Opportunity?: Prisma.OpportunityCreateNestedOneWithoutInteractionsInput
+  Contact?: Prisma.ContactCreateNestedOneWithoutInteractionsInput
   User: Prisma.UserCreateNestedOneWithoutInteractionsInput
 }
 
@@ -401,6 +421,7 @@ export type InteractionUncheckedCreateInput = {
   id?: number
   leadId?: number | null
   opportunityId?: number | null
+  contactId?: number | null
   userId: number
   type: $Enums.InteractionType
   date: Date | string
@@ -425,6 +446,7 @@ export type InteractionUpdateInput = {
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Lead?: Prisma.LeadUpdateOneWithoutInteractionsNestedInput
   Opportunity?: Prisma.OpportunityUpdateOneWithoutInteractionsNestedInput
+  Contact?: Prisma.ContactUpdateOneWithoutInteractionsNestedInput
   User?: Prisma.UserUpdateOneRequiredWithoutInteractionsNestedInput
 }
 
@@ -432,6 +454,7 @@ export type InteractionUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   leadId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   opportunityId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  contactId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   type?: Prisma.EnumInteractionTypeFieldUpdateOperationsInput | $Enums.InteractionType
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -448,6 +471,7 @@ export type InteractionCreateManyInput = {
   id?: number
   leadId?: number | null
   opportunityId?: number | null
+  contactId?: number | null
   userId: number
   type: $Enums.InteractionType
   date: Date | string
@@ -476,6 +500,7 @@ export type InteractionUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   leadId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   opportunityId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  contactId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   type?: Prisma.EnumInteractionTypeFieldUpdateOperationsInput | $Enums.InteractionType
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -502,6 +527,7 @@ export type InteractionCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   leadId?: Prisma.SortOrder
   opportunityId?: Prisma.SortOrder
+  contactId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   type?: Prisma.SortOrder
   date?: Prisma.SortOrder
@@ -518,6 +544,7 @@ export type InteractionAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
   leadId?: Prisma.SortOrder
   opportunityId?: Prisma.SortOrder
+  contactId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   duration?: Prisma.SortOrder
 }
@@ -526,6 +553,7 @@ export type InteractionMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   leadId?: Prisma.SortOrder
   opportunityId?: Prisma.SortOrder
+  contactId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   type?: Prisma.SortOrder
   date?: Prisma.SortOrder
@@ -542,6 +570,7 @@ export type InteractionMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   leadId?: Prisma.SortOrder
   opportunityId?: Prisma.SortOrder
+  contactId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   type?: Prisma.SortOrder
   date?: Prisma.SortOrder
@@ -558,8 +587,51 @@ export type InteractionSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
   leadId?: Prisma.SortOrder
   opportunityId?: Prisma.SortOrder
+  contactId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   duration?: Prisma.SortOrder
+}
+
+export type InteractionCreateNestedManyWithoutContactInput = {
+  create?: Prisma.XOR<Prisma.InteractionCreateWithoutContactInput, Prisma.InteractionUncheckedCreateWithoutContactInput> | Prisma.InteractionCreateWithoutContactInput[] | Prisma.InteractionUncheckedCreateWithoutContactInput[]
+  connectOrCreate?: Prisma.InteractionCreateOrConnectWithoutContactInput | Prisma.InteractionCreateOrConnectWithoutContactInput[]
+  createMany?: Prisma.InteractionCreateManyContactInputEnvelope
+  connect?: Prisma.InteractionWhereUniqueInput | Prisma.InteractionWhereUniqueInput[]
+}
+
+export type InteractionUncheckedCreateNestedManyWithoutContactInput = {
+  create?: Prisma.XOR<Prisma.InteractionCreateWithoutContactInput, Prisma.InteractionUncheckedCreateWithoutContactInput> | Prisma.InteractionCreateWithoutContactInput[] | Prisma.InteractionUncheckedCreateWithoutContactInput[]
+  connectOrCreate?: Prisma.InteractionCreateOrConnectWithoutContactInput | Prisma.InteractionCreateOrConnectWithoutContactInput[]
+  createMany?: Prisma.InteractionCreateManyContactInputEnvelope
+  connect?: Prisma.InteractionWhereUniqueInput | Prisma.InteractionWhereUniqueInput[]
+}
+
+export type InteractionUpdateManyWithoutContactNestedInput = {
+  create?: Prisma.XOR<Prisma.InteractionCreateWithoutContactInput, Prisma.InteractionUncheckedCreateWithoutContactInput> | Prisma.InteractionCreateWithoutContactInput[] | Prisma.InteractionUncheckedCreateWithoutContactInput[]
+  connectOrCreate?: Prisma.InteractionCreateOrConnectWithoutContactInput | Prisma.InteractionCreateOrConnectWithoutContactInput[]
+  upsert?: Prisma.InteractionUpsertWithWhereUniqueWithoutContactInput | Prisma.InteractionUpsertWithWhereUniqueWithoutContactInput[]
+  createMany?: Prisma.InteractionCreateManyContactInputEnvelope
+  set?: Prisma.InteractionWhereUniqueInput | Prisma.InteractionWhereUniqueInput[]
+  disconnect?: Prisma.InteractionWhereUniqueInput | Prisma.InteractionWhereUniqueInput[]
+  delete?: Prisma.InteractionWhereUniqueInput | Prisma.InteractionWhereUniqueInput[]
+  connect?: Prisma.InteractionWhereUniqueInput | Prisma.InteractionWhereUniqueInput[]
+  update?: Prisma.InteractionUpdateWithWhereUniqueWithoutContactInput | Prisma.InteractionUpdateWithWhereUniqueWithoutContactInput[]
+  updateMany?: Prisma.InteractionUpdateManyWithWhereWithoutContactInput | Prisma.InteractionUpdateManyWithWhereWithoutContactInput[]
+  deleteMany?: Prisma.InteractionScalarWhereInput | Prisma.InteractionScalarWhereInput[]
+}
+
+export type InteractionUncheckedUpdateManyWithoutContactNestedInput = {
+  create?: Prisma.XOR<Prisma.InteractionCreateWithoutContactInput, Prisma.InteractionUncheckedCreateWithoutContactInput> | Prisma.InteractionCreateWithoutContactInput[] | Prisma.InteractionUncheckedCreateWithoutContactInput[]
+  connectOrCreate?: Prisma.InteractionCreateOrConnectWithoutContactInput | Prisma.InteractionCreateOrConnectWithoutContactInput[]
+  upsert?: Prisma.InteractionUpsertWithWhereUniqueWithoutContactInput | Prisma.InteractionUpsertWithWhereUniqueWithoutContactInput[]
+  createMany?: Prisma.InteractionCreateManyContactInputEnvelope
+  set?: Prisma.InteractionWhereUniqueInput | Prisma.InteractionWhereUniqueInput[]
+  disconnect?: Prisma.InteractionWhereUniqueInput | Prisma.InteractionWhereUniqueInput[]
+  delete?: Prisma.InteractionWhereUniqueInput | Prisma.InteractionWhereUniqueInput[]
+  connect?: Prisma.InteractionWhereUniqueInput | Prisma.InteractionWhereUniqueInput[]
+  update?: Prisma.InteractionUpdateWithWhereUniqueWithoutContactInput | Prisma.InteractionUpdateWithWhereUniqueWithoutContactInput[]
+  updateMany?: Prisma.InteractionUpdateManyWithWhereWithoutContactInput | Prisma.InteractionUpdateManyWithWhereWithoutContactInput[]
+  deleteMany?: Prisma.InteractionScalarWhereInput | Prisma.InteractionScalarWhereInput[]
 }
 
 export type InteractionCreateNestedManyWithoutLeadInput = {
@@ -692,6 +764,83 @@ export type InteractionUncheckedUpdateManyWithoutUserNestedInput = {
   deleteMany?: Prisma.InteractionScalarWhereInput | Prisma.InteractionScalarWhereInput[]
 }
 
+export type InteractionCreateWithoutContactInput = {
+  type: $Enums.InteractionType
+  date: Date | string
+  duration?: number | null
+  subject?: string | null
+  notes?: string | null
+  outcome?: string | null
+  deletedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string | null
+  Lead?: Prisma.LeadCreateNestedOneWithoutInteractionsInput
+  Opportunity?: Prisma.OpportunityCreateNestedOneWithoutInteractionsInput
+  User: Prisma.UserCreateNestedOneWithoutInteractionsInput
+}
+
+export type InteractionUncheckedCreateWithoutContactInput = {
+  id?: number
+  leadId?: number | null
+  opportunityId?: number | null
+  userId: number
+  type: $Enums.InteractionType
+  date: Date | string
+  duration?: number | null
+  subject?: string | null
+  notes?: string | null
+  outcome?: string | null
+  deletedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string | null
+}
+
+export type InteractionCreateOrConnectWithoutContactInput = {
+  where: Prisma.InteractionWhereUniqueInput
+  create: Prisma.XOR<Prisma.InteractionCreateWithoutContactInput, Prisma.InteractionUncheckedCreateWithoutContactInput>
+}
+
+export type InteractionCreateManyContactInputEnvelope = {
+  data: Prisma.InteractionCreateManyContactInput | Prisma.InteractionCreateManyContactInput[]
+  skipDuplicates?: boolean
+}
+
+export type InteractionUpsertWithWhereUniqueWithoutContactInput = {
+  where: Prisma.InteractionWhereUniqueInput
+  update: Prisma.XOR<Prisma.InteractionUpdateWithoutContactInput, Prisma.InteractionUncheckedUpdateWithoutContactInput>
+  create: Prisma.XOR<Prisma.InteractionCreateWithoutContactInput, Prisma.InteractionUncheckedCreateWithoutContactInput>
+}
+
+export type InteractionUpdateWithWhereUniqueWithoutContactInput = {
+  where: Prisma.InteractionWhereUniqueInput
+  data: Prisma.XOR<Prisma.InteractionUpdateWithoutContactInput, Prisma.InteractionUncheckedUpdateWithoutContactInput>
+}
+
+export type InteractionUpdateManyWithWhereWithoutContactInput = {
+  where: Prisma.InteractionScalarWhereInput
+  data: Prisma.XOR<Prisma.InteractionUpdateManyMutationInput, Prisma.InteractionUncheckedUpdateManyWithoutContactInput>
+}
+
+export type InteractionScalarWhereInput = {
+  AND?: Prisma.InteractionScalarWhereInput | Prisma.InteractionScalarWhereInput[]
+  OR?: Prisma.InteractionScalarWhereInput[]
+  NOT?: Prisma.InteractionScalarWhereInput | Prisma.InteractionScalarWhereInput[]
+  id?: Prisma.IntFilter<"Interaction"> | number
+  leadId?: Prisma.IntNullableFilter<"Interaction"> | number | null
+  opportunityId?: Prisma.IntNullableFilter<"Interaction"> | number | null
+  contactId?: Prisma.IntNullableFilter<"Interaction"> | number | null
+  userId?: Prisma.IntFilter<"Interaction"> | number
+  type?: Prisma.EnumInteractionTypeFilter<"Interaction"> | $Enums.InteractionType
+  date?: Prisma.DateTimeFilter<"Interaction"> | Date | string
+  duration?: Prisma.IntNullableFilter<"Interaction"> | number | null
+  subject?: Prisma.StringNullableFilter<"Interaction"> | string | null
+  notes?: Prisma.StringNullableFilter<"Interaction"> | string | null
+  outcome?: Prisma.StringNullableFilter<"Interaction"> | string | null
+  deletedAt?: Prisma.DateTimeNullableFilter<"Interaction"> | Date | string | null
+  createdAt?: Prisma.DateTimeFilter<"Interaction"> | Date | string
+  updatedAt?: Prisma.DateTimeNullableFilter<"Interaction"> | Date | string | null
+}
+
 export type InteractionCreateWithoutLeadInput = {
   type: $Enums.InteractionType
   date: Date | string
@@ -703,12 +852,14 @@ export type InteractionCreateWithoutLeadInput = {
   createdAt?: Date | string
   updatedAt?: Date | string | null
   Opportunity?: Prisma.OpportunityCreateNestedOneWithoutInteractionsInput
+  Contact?: Prisma.ContactCreateNestedOneWithoutInteractionsInput
   User: Prisma.UserCreateNestedOneWithoutInteractionsInput
 }
 
 export type InteractionUncheckedCreateWithoutLeadInput = {
   id?: number
   opportunityId?: number | null
+  contactId?: number | null
   userId: number
   type: $Enums.InteractionType
   date: Date | string
@@ -747,25 +898,6 @@ export type InteractionUpdateManyWithWhereWithoutLeadInput = {
   data: Prisma.XOR<Prisma.InteractionUpdateManyMutationInput, Prisma.InteractionUncheckedUpdateManyWithoutLeadInput>
 }
 
-export type InteractionScalarWhereInput = {
-  AND?: Prisma.InteractionScalarWhereInput | Prisma.InteractionScalarWhereInput[]
-  OR?: Prisma.InteractionScalarWhereInput[]
-  NOT?: Prisma.InteractionScalarWhereInput | Prisma.InteractionScalarWhereInput[]
-  id?: Prisma.IntFilter<"Interaction"> | number
-  leadId?: Prisma.IntNullableFilter<"Interaction"> | number | null
-  opportunityId?: Prisma.IntNullableFilter<"Interaction"> | number | null
-  userId?: Prisma.IntFilter<"Interaction"> | number
-  type?: Prisma.EnumInteractionTypeFilter<"Interaction"> | $Enums.InteractionType
-  date?: Prisma.DateTimeFilter<"Interaction"> | Date | string
-  duration?: Prisma.IntNullableFilter<"Interaction"> | number | null
-  subject?: Prisma.StringNullableFilter<"Interaction"> | string | null
-  notes?: Prisma.StringNullableFilter<"Interaction"> | string | null
-  outcome?: Prisma.StringNullableFilter<"Interaction"> | string | null
-  deletedAt?: Prisma.DateTimeNullableFilter<"Interaction"> | Date | string | null
-  createdAt?: Prisma.DateTimeFilter<"Interaction"> | Date | string
-  updatedAt?: Prisma.DateTimeNullableFilter<"Interaction"> | Date | string | null
-}
-
 export type InteractionCreateWithoutOpportunityInput = {
   type: $Enums.InteractionType
   date: Date | string
@@ -777,12 +909,14 @@ export type InteractionCreateWithoutOpportunityInput = {
   createdAt?: Date | string
   updatedAt?: Date | string | null
   Lead?: Prisma.LeadCreateNestedOneWithoutInteractionsInput
+  Contact?: Prisma.ContactCreateNestedOneWithoutInteractionsInput
   User: Prisma.UserCreateNestedOneWithoutInteractionsInput
 }
 
 export type InteractionUncheckedCreateWithoutOpportunityInput = {
   id?: number
   leadId?: number | null
+  contactId?: number | null
   userId: number
   type: $Enums.InteractionType
   date: Date | string
@@ -833,12 +967,14 @@ export type InteractionCreateWithoutUserInput = {
   updatedAt?: Date | string | null
   Lead?: Prisma.LeadCreateNestedOneWithoutInteractionsInput
   Opportunity?: Prisma.OpportunityCreateNestedOneWithoutInteractionsInput
+  Contact?: Prisma.ContactCreateNestedOneWithoutInteractionsInput
 }
 
 export type InteractionUncheckedCreateWithoutUserInput = {
   id?: number
   leadId?: number | null
   opportunityId?: number | null
+  contactId?: number | null
   type: $Enums.InteractionType
   date: Date | string
   duration?: number | null
@@ -876,9 +1012,73 @@ export type InteractionUpdateManyWithWhereWithoutUserInput = {
   data: Prisma.XOR<Prisma.InteractionUpdateManyMutationInput, Prisma.InteractionUncheckedUpdateManyWithoutUserInput>
 }
 
+export type InteractionCreateManyContactInput = {
+  id?: number
+  leadId?: number | null
+  opportunityId?: number | null
+  userId: number
+  type: $Enums.InteractionType
+  date: Date | string
+  duration?: number | null
+  subject?: string | null
+  notes?: string | null
+  outcome?: string | null
+  deletedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string | null
+}
+
+export type InteractionUpdateWithoutContactInput = {
+  type?: Prisma.EnumInteractionTypeFieldUpdateOperationsInput | $Enums.InteractionType
+  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  duration?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  subject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  outcome?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  Lead?: Prisma.LeadUpdateOneWithoutInteractionsNestedInput
+  Opportunity?: Prisma.OpportunityUpdateOneWithoutInteractionsNestedInput
+  User?: Prisma.UserUpdateOneRequiredWithoutInteractionsNestedInput
+}
+
+export type InteractionUncheckedUpdateWithoutContactInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  leadId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  opportunityId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  userId?: Prisma.IntFieldUpdateOperationsInput | number
+  type?: Prisma.EnumInteractionTypeFieldUpdateOperationsInput | $Enums.InteractionType
+  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  duration?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  subject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  outcome?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+}
+
+export type InteractionUncheckedUpdateManyWithoutContactInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  leadId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  opportunityId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  userId?: Prisma.IntFieldUpdateOperationsInput | number
+  type?: Prisma.EnumInteractionTypeFieldUpdateOperationsInput | $Enums.InteractionType
+  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  duration?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  subject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  outcome?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+}
+
 export type InteractionCreateManyLeadInput = {
   id?: number
   opportunityId?: number | null
+  contactId?: number | null
   userId: number
   type: $Enums.InteractionType
   date: Date | string
@@ -902,12 +1102,14 @@ export type InteractionUpdateWithoutLeadInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Opportunity?: Prisma.OpportunityUpdateOneWithoutInteractionsNestedInput
+  Contact?: Prisma.ContactUpdateOneWithoutInteractionsNestedInput
   User?: Prisma.UserUpdateOneRequiredWithoutInteractionsNestedInput
 }
 
 export type InteractionUncheckedUpdateWithoutLeadInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   opportunityId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  contactId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   type?: Prisma.EnumInteractionTypeFieldUpdateOperationsInput | $Enums.InteractionType
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -923,6 +1125,7 @@ export type InteractionUncheckedUpdateWithoutLeadInput = {
 export type InteractionUncheckedUpdateManyWithoutLeadInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   opportunityId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  contactId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   type?: Prisma.EnumInteractionTypeFieldUpdateOperationsInput | $Enums.InteractionType
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -938,6 +1141,7 @@ export type InteractionUncheckedUpdateManyWithoutLeadInput = {
 export type InteractionCreateManyOpportunityInput = {
   id?: number
   leadId?: number | null
+  contactId?: number | null
   userId: number
   type: $Enums.InteractionType
   date: Date | string
@@ -961,12 +1165,14 @@ export type InteractionUpdateWithoutOpportunityInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Lead?: Prisma.LeadUpdateOneWithoutInteractionsNestedInput
+  Contact?: Prisma.ContactUpdateOneWithoutInteractionsNestedInput
   User?: Prisma.UserUpdateOneRequiredWithoutInteractionsNestedInput
 }
 
 export type InteractionUncheckedUpdateWithoutOpportunityInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   leadId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  contactId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   type?: Prisma.EnumInteractionTypeFieldUpdateOperationsInput | $Enums.InteractionType
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -982,6 +1188,7 @@ export type InteractionUncheckedUpdateWithoutOpportunityInput = {
 export type InteractionUncheckedUpdateManyWithoutOpportunityInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   leadId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  contactId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   type?: Prisma.EnumInteractionTypeFieldUpdateOperationsInput | $Enums.InteractionType
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -998,6 +1205,7 @@ export type InteractionCreateManyUserInput = {
   id?: number
   leadId?: number | null
   opportunityId?: number | null
+  contactId?: number | null
   type: $Enums.InteractionType
   date: Date | string
   duration?: number | null
@@ -1021,12 +1229,14 @@ export type InteractionUpdateWithoutUserInput = {
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Lead?: Prisma.LeadUpdateOneWithoutInteractionsNestedInput
   Opportunity?: Prisma.OpportunityUpdateOneWithoutInteractionsNestedInput
+  Contact?: Prisma.ContactUpdateOneWithoutInteractionsNestedInput
 }
 
 export type InteractionUncheckedUpdateWithoutUserInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   leadId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   opportunityId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  contactId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   type?: Prisma.EnumInteractionTypeFieldUpdateOperationsInput | $Enums.InteractionType
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   duration?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1042,6 +1252,7 @@ export type InteractionUncheckedUpdateManyWithoutUserInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   leadId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   opportunityId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  contactId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   type?: Prisma.EnumInteractionTypeFieldUpdateOperationsInput | $Enums.InteractionType
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   duration?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1059,6 +1270,7 @@ export type InteractionSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   id?: boolean
   leadId?: boolean
   opportunityId?: boolean
+  contactId?: boolean
   userId?: boolean
   type?: boolean
   date?: boolean
@@ -1071,6 +1283,7 @@ export type InteractionSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   updatedAt?: boolean
   Lead?: boolean | Prisma.Interaction$LeadArgs<ExtArgs>
   Opportunity?: boolean | Prisma.Interaction$OpportunityArgs<ExtArgs>
+  Contact?: boolean | Prisma.Interaction$ContactArgs<ExtArgs>
   User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["interaction"]>
 
@@ -1078,6 +1291,7 @@ export type InteractionSelectCreateManyAndReturn<ExtArgs extends runtime.Types.E
   id?: boolean
   leadId?: boolean
   opportunityId?: boolean
+  contactId?: boolean
   userId?: boolean
   type?: boolean
   date?: boolean
@@ -1090,6 +1304,7 @@ export type InteractionSelectCreateManyAndReturn<ExtArgs extends runtime.Types.E
   updatedAt?: boolean
   Lead?: boolean | Prisma.Interaction$LeadArgs<ExtArgs>
   Opportunity?: boolean | Prisma.Interaction$OpportunityArgs<ExtArgs>
+  Contact?: boolean | Prisma.Interaction$ContactArgs<ExtArgs>
   User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["interaction"]>
 
@@ -1097,6 +1312,7 @@ export type InteractionSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.E
   id?: boolean
   leadId?: boolean
   opportunityId?: boolean
+  contactId?: boolean
   userId?: boolean
   type?: boolean
   date?: boolean
@@ -1109,6 +1325,7 @@ export type InteractionSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.E
   updatedAt?: boolean
   Lead?: boolean | Prisma.Interaction$LeadArgs<ExtArgs>
   Opportunity?: boolean | Prisma.Interaction$OpportunityArgs<ExtArgs>
+  Contact?: boolean | Prisma.Interaction$ContactArgs<ExtArgs>
   User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["interaction"]>
 
@@ -1116,6 +1333,7 @@ export type InteractionSelectScalar = {
   id?: boolean
   leadId?: boolean
   opportunityId?: boolean
+  contactId?: boolean
   userId?: boolean
   type?: boolean
   date?: boolean
@@ -1128,20 +1346,23 @@ export type InteractionSelectScalar = {
   updatedAt?: boolean
 }
 
-export type InteractionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "leadId" | "opportunityId" | "userId" | "type" | "date" | "duration" | "subject" | "notes" | "outcome" | "deletedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["interaction"]>
+export type InteractionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "leadId" | "opportunityId" | "contactId" | "userId" | "type" | "date" | "duration" | "subject" | "notes" | "outcome" | "deletedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["interaction"]>
 export type InteractionInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   Lead?: boolean | Prisma.Interaction$LeadArgs<ExtArgs>
   Opportunity?: boolean | Prisma.Interaction$OpportunityArgs<ExtArgs>
+  Contact?: boolean | Prisma.Interaction$ContactArgs<ExtArgs>
   User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
 export type InteractionIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   Lead?: boolean | Prisma.Interaction$LeadArgs<ExtArgs>
   Opportunity?: boolean | Prisma.Interaction$OpportunityArgs<ExtArgs>
+  Contact?: boolean | Prisma.Interaction$ContactArgs<ExtArgs>
   User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
 export type InteractionIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   Lead?: boolean | Prisma.Interaction$LeadArgs<ExtArgs>
   Opportunity?: boolean | Prisma.Interaction$OpportunityArgs<ExtArgs>
+  Contact?: boolean | Prisma.Interaction$ContactArgs<ExtArgs>
   User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
 
@@ -1150,12 +1371,14 @@ export type $InteractionPayload<ExtArgs extends runtime.Types.Extensions.Interna
   objects: {
     Lead: Prisma.$LeadPayload<ExtArgs> | null
     Opportunity: Prisma.$OpportunityPayload<ExtArgs> | null
+    Contact: Prisma.$ContactPayload<ExtArgs> | null
     User: Prisma.$UserPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
     leadId: number | null
     opportunityId: number | null
+    contactId: number | null
     userId: number
     type: $Enums.InteractionType
     date: Date
@@ -1562,6 +1785,7 @@ export interface Prisma__InteractionClient<T, Null = never, ExtArgs extends runt
   readonly [Symbol.toStringTag]: "PrismaPromise"
   Lead<T extends Prisma.Interaction$LeadArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Interaction$LeadArgs<ExtArgs>>): Prisma.Prisma__LeadClient<runtime.Types.Result.GetResult<Prisma.$LeadPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   Opportunity<T extends Prisma.Interaction$OpportunityArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Interaction$OpportunityArgs<ExtArgs>>): Prisma.Prisma__OpportunityClient<runtime.Types.Result.GetResult<Prisma.$OpportunityPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  Contact<T extends Prisma.Interaction$ContactArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Interaction$ContactArgs<ExtArgs>>): Prisma.Prisma__ContactClient<runtime.Types.Result.GetResult<Prisma.$ContactPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   User<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1595,6 +1819,7 @@ export interface InteractionFieldRefs {
   readonly id: Prisma.FieldRef<"Interaction", 'Int'>
   readonly leadId: Prisma.FieldRef<"Interaction", 'Int'>
   readonly opportunityId: Prisma.FieldRef<"Interaction", 'Int'>
+  readonly contactId: Prisma.FieldRef<"Interaction", 'Int'>
   readonly userId: Prisma.FieldRef<"Interaction", 'Int'>
   readonly type: Prisma.FieldRef<"Interaction", 'InteractionType'>
   readonly date: Prisma.FieldRef<"Interaction", 'DateTime'>
@@ -2041,6 +2266,25 @@ export type Interaction$OpportunityArgs<ExtArgs extends runtime.Types.Extensions
    */
   include?: Prisma.OpportunityInclude<ExtArgs> | null
   where?: Prisma.OpportunityWhereInput
+}
+
+/**
+ * Interaction.Contact
+ */
+export type Interaction$ContactArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Contact
+   */
+  select?: Prisma.ContactSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Contact
+   */
+  omit?: Prisma.ContactOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ContactInclude<ExtArgs> | null
+  where?: Prisma.ContactWhereInput
 }
 
 /**

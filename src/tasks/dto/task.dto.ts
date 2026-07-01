@@ -6,6 +6,7 @@ import {
   IsEnum,
   IsDateString,
   MaxLength,
+  IsBoolean,
 } from 'class-validator';
 import { TaskStatus, TaskPriority } from '../../prisma/client/client';
 
@@ -92,4 +93,19 @@ export class QueryTaskDto {
   @IsOptional()
   @IsString()
   keyword?: string;
+
+  @ApiProperty({ required: false })
+  @IsOptional()
+  @IsBoolean()
+  isPaginated?: boolean;
+
+  @ApiProperty({ required: false, default: 1 })
+  @IsOptional()
+  @IsInt()
+  page?: number;
+
+  @ApiProperty({ required: false, default: 10 })
+  @IsOptional()
+  @IsInt()
+  limit?: number;
 }

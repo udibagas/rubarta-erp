@@ -16,6 +16,7 @@ export class InteractionsService {
       data,
       include: {
         User: { select: { id: true, name: true } },
+        Contact: { select: { id: true, name: true, email: true, phone: true } },
       },
     });
   }
@@ -27,6 +28,18 @@ export class InteractionsService {
 
     if (query.userId) {
       where.userId = query.userId;
+    }
+
+    if (query.leadId) {
+      where.leadId = query.leadId;
+    }
+
+    if (query.opportunityId) {
+      where.opportunityId = query.opportunityId;
+    }
+
+    if (query.contactId) {
+      where.contactId = query.contactId;
     }
 
     if (query.type) {
@@ -48,12 +61,47 @@ export class InteractionsService {
       ];
     }
 
+    const orderBy = {
+      date: 'desc',
+    } as Prisma.InteractionOrderByWithRelationInput;
+    const include = {
+      User: { select: { id: true, name: true } },
+      Contact: { select: { id: true, name: true, email: true, phone: true } },
+    };
+
+    // If pagination is requested
+    if (query.isPaginated) {
+      const page = query.page || 1;
+      const limit = query.limit || 10;
+      const skip = (page - 1) * limit;
+
+      const [data, total] = await Promise.all([
+        this.prisma.interaction.findMany({
+          where,
+          orderBy,
+          include,
+          skip,
+          take: limit,
+        }),
+        this.prisma.interaction.count({ where }),
+      ]);
+
+      return {
+        data,
+        meta: {
+          total,
+          page,
+          limit,
+          totalPages: Math.ceil(total / limit),
+        },
+      };
+    }
+
+    // Return all results without pagination
     return this.prisma.interaction.findMany({
       where,
-      orderBy: { date: 'desc' },
-      include: {
-        User: { select: { id: true, name: true } },
-      },
+      orderBy,
+      include,
     });
   }
 
@@ -62,6 +110,7 @@ export class InteractionsService {
       where: { id, deletedAt: null },
       include: {
         User: true,
+        Contact: true,
       },
     });
 
@@ -80,6 +129,7 @@ export class InteractionsService {
       data,
       include: {
         User: { select: { id: true, name: true } },
+        Contact: { select: { id: true, name: true, email: true, phone: true } },
       },
     });
   }

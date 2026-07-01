@@ -25,6 +25,14 @@ export class TasksService {
       where.userId = query.userId;
     }
 
+    if (query.leadId) {
+      where.leadId = query.leadId;
+    }
+
+    if (query.opportunityId) {
+      where.opportunityId = query.opportunityId;
+    }
+
     if (query.status) {
       where.status = query.status;
     }
@@ -40,12 +48,47 @@ export class TasksService {
       ];
     }
 
+    const orderBy = [
+      { priority: 'desc' },
+      { dueDate: 'asc' },
+    ] as Prisma.TaskOrderByWithRelationInput[];
+    const include = {
+      User: { select: { id: true, name: true } },
+    };
+
+    // If pagination is requested
+    if (query.isPaginated) {
+      const page = query.page || 1;
+      const limit = query.limit || 10;
+      const skip = (page - 1) * limit;
+
+      const [data, total] = await Promise.all([
+        this.prisma.task.findMany({
+          where,
+          orderBy,
+          include,
+          skip,
+          take: limit,
+        }),
+        this.prisma.task.count({ where }),
+      ]);
+
+      return {
+        data,
+        meta: {
+          total,
+          page,
+          limit,
+          totalPages: Math.ceil(total / limit),
+        },
+      };
+    }
+
+    // Return all results without pagination
     return this.prisma.task.findMany({
       where,
-      orderBy: [{ priority: 'desc' }, { dueDate: 'asc' }],
-      include: {
-        User: { select: { id: true, name: true } },
-      },
+      orderBy,
+      include,
     });
   }
 
