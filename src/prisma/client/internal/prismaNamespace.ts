@@ -2997,6 +2997,7 @@ export const InteractionScalarFieldEnum = {
   id: 'id',
   leadId: 'leadId',
   opportunityId: 'opportunityId',
+  contactId: 'contactId',
   userId: 'userId',
   type: 'type',
   date: 'date',
