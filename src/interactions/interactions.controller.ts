@@ -64,7 +64,7 @@ export class InteractionsController {
       opportunityId,
       contactId,
       type,
-      isPaginated: isPaginated === true || isPaginated === 'true',
+      isPaginated: isPaginated === true,
       page,
       limit,
     });
