@@ -25,6 +25,7 @@ model Customer {
   CustomerNotes CustomerNote[]
   CustomerFiles CustomerFile[]
   Quotations    Quotation[]
+  VisitPlans    VisitPlan[]
 
   @@index([email])
   @@index([isActive])
@@ -51,6 +52,7 @@ model Contact {
   // Relationships
   Customer     Customer      @relation(fields: [customerId], references: [id], onDelete: Cascade)
   Interactions Interaction[]
+  VisitPlans   VisitPlan[]
 
   @@unique([customerId, email])
   @@index([customerId])
@@ -120,6 +122,14 @@ enum InteractionType {
   Presentation
   FollowUp
   Other
+}
+
+enum VisitPlanStatus {
+  Planned
+  InProgress
+  Completed
+  Cancelled
+  Rescheduled
 }
 
 model Lead {
@@ -455,4 +465,44 @@ model Material {
   @@index([isActive])
   @@index([deletedAt])
   @@map("Materials")
+}
+
+model VisitPlan {
+  id                Int             @id @default(autoincrement())
+  customerId        Int
+  userId            Int
+  companyId         Int
+  contactId         Int? // Optional reference to Contact
+  title             String          @db.VarChar(200)
+  purpose           String?         @db.Text
+  scheduledDate     DateTime
+  scheduledTime     String?         @db.VarChar(10) // e.g., "09:00"
+  estimatedDuration Int?            @db.Integer // Duration in minutes
+  status            VisitPlanStatus @default(Planned)
+  actualVisitDate   DateTime?       @db.Timestamp()
+  outcome           String?         @db.Text
+  notes             String?         @db.Text
+  address           String?         @db.Text
+  contactPerson     String?         @db.VarChar(200) // Fallback if no contactId
+  contactPhone      String?         @db.VarChar(50) // Fallback if no contactId
+  deletedAt         DateTime?       @db.Timestamp()
+
+  // Timestamps
+  createdAt DateTime  @default(now())
+  updatedAt DateTime? @updatedAt
+
+  // Relationships
+  Customer Customer @relation(fields: [customerId], references: [id], onDelete: Cascade)
+  User     User     @relation(fields: [userId], references: [id])
+  Company  Company  @relation(fields: [companyId], references: [id])
+  Contact  Contact? @relation(fields: [contactId], references: [id])
+
+  @@index([customerId])
+  @@index([userId])
+  @@index([companyId])
+  @@index([contactId])
+  @@index([status])
+  @@index([scheduledDate])
+  @@index([deletedAt])
+  @@map("VisitPlans")
 }

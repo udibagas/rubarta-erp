@@ -135,6 +135,11 @@ export type CustomerFile = Prisma.CustomerFileModel
  */
 export type Material = Prisma.MaterialModel
 /**
+ * Model VisitPlan
+ * 
+ */
+export type VisitPlan = Prisma.VisitPlanModel
+/**
  * Model Nkp
  * 
  */

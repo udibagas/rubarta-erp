@@ -41,6 +41,7 @@ export class OpportunitiesService {
       where,
       take: pageSize,
       skip: (page - 1) * pageSize,
+      orderBy: { createdAt: 'desc' },
       include: {
         Company: { select: { name: true } },
         User: { select: { name: true } },

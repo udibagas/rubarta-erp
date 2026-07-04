@@ -112,6 +112,17 @@ export const InteractionType = {
 export type InteractionType = (typeof InteractionType)[keyof typeof InteractionType]
 
 
+export const VisitPlanStatus = {
+  Planned: 'Planned',
+  InProgress: 'InProgress',
+  Completed: 'Completed',
+  Cancelled: 'Cancelled',
+  Rescheduled: 'Rescheduled'
+} as const
+
+export type VisitPlanStatus = (typeof VisitPlanStatus)[keyof typeof VisitPlanStatus]
+
+
 export const OrderStatus = {
   Pending: 'Pending',
   Processing: 'Processing',

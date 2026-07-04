@@ -70,6 +70,7 @@ export const ModelName = {
   CustomerNote: 'CustomerNote',
   CustomerFile: 'CustomerFile',
   Material: 'Material',
+  VisitPlan: 'VisitPlan',
   Nkp: 'Nkp',
   NkpItem: 'NkpItem',
   NkpApproval: 'NkpApproval',
@@ -437,6 +438,32 @@ export const MaterialScalarFieldEnum = {
 } as const
 
 export type MaterialScalarFieldEnum = (typeof MaterialScalarFieldEnum)[keyof typeof MaterialScalarFieldEnum]
+
+
+export const VisitPlanScalarFieldEnum = {
+  id: 'id',
+  customerId: 'customerId',
+  userId: 'userId',
+  companyId: 'companyId',
+  contactId: 'contactId',
+  title: 'title',
+  purpose: 'purpose',
+  scheduledDate: 'scheduledDate',
+  scheduledTime: 'scheduledTime',
+  estimatedDuration: 'estimatedDuration',
+  status: 'status',
+  actualVisitDate: 'actualVisitDate',
+  outcome: 'outcome',
+  notes: 'notes',
+  address: 'address',
+  contactPerson: 'contactPerson',
+  contactPhone: 'contactPhone',
+  deletedAt: 'deletedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type VisitPlanScalarFieldEnum = (typeof VisitPlanScalarFieldEnum)[keyof typeof VisitPlanScalarFieldEnum]
 
 
 export const NkpScalarFieldEnum = {

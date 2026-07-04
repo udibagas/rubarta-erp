@@ -278,6 +278,7 @@ export type ContactWhereInput = {
   updatedAt?: Prisma.DateTimeNullableFilter<"Contact"> | Date | string | null
   Customer?: Prisma.XOR<Prisma.CustomerScalarRelationFilter, Prisma.CustomerWhereInput>
   Interactions?: Prisma.InteractionListRelationFilter
+  VisitPlans?: Prisma.VisitPlanListRelationFilter
 }
 
 export type ContactOrderByWithRelationInput = {
@@ -295,6 +296,7 @@ export type ContactOrderByWithRelationInput = {
   updatedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   Customer?: Prisma.CustomerOrderByWithRelationInput
   Interactions?: Prisma.InteractionOrderByRelationAggregateInput
+  VisitPlans?: Prisma.VisitPlanOrderByRelationAggregateInput
 }
 
 export type ContactWhereUniqueInput = Prisma.AtLeast<{
@@ -316,6 +318,7 @@ export type ContactWhereUniqueInput = Prisma.AtLeast<{
   updatedAt?: Prisma.DateTimeNullableFilter<"Contact"> | Date | string | null
   Customer?: Prisma.XOR<Prisma.CustomerScalarRelationFilter, Prisma.CustomerWhereInput>
   Interactions?: Prisma.InteractionListRelationFilter
+  VisitPlans?: Prisma.VisitPlanListRelationFilter
 }, "id" | "customerId_email">
 
 export type ContactOrderByWithAggregationInput = {
@@ -369,6 +372,7 @@ export type ContactCreateInput = {
   updatedAt?: Date | string | null
   Customer: Prisma.CustomerCreateNestedOneWithoutContactsInput
   Interactions?: Prisma.InteractionCreateNestedManyWithoutContactInput
+  VisitPlans?: Prisma.VisitPlanCreateNestedManyWithoutContactInput
 }
 
 export type ContactUncheckedCreateInput = {
@@ -385,6 +389,7 @@ export type ContactUncheckedCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string | null
   Interactions?: Prisma.InteractionUncheckedCreateNestedManyWithoutContactInput
+  VisitPlans?: Prisma.VisitPlanUncheckedCreateNestedManyWithoutContactInput
 }
 
 export type ContactUpdateInput = {
@@ -400,6 +405,7 @@ export type ContactUpdateInput = {
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Customer?: Prisma.CustomerUpdateOneRequiredWithoutContactsNestedInput
   Interactions?: Prisma.InteractionUpdateManyWithoutContactNestedInput
+  VisitPlans?: Prisma.VisitPlanUpdateManyWithoutContactNestedInput
 }
 
 export type ContactUncheckedUpdateInput = {
@@ -416,6 +422,7 @@ export type ContactUncheckedUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Interactions?: Prisma.InteractionUncheckedUpdateManyWithoutContactNestedInput
+  VisitPlans?: Prisma.VisitPlanUncheckedUpdateManyWithoutContactNestedInput
 }
 
 export type ContactCreateManyInput = {
@@ -594,6 +601,22 @@ export type ContactUpdateOneWithoutInteractionsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ContactUpdateToOneWithWhereWithoutInteractionsInput, Prisma.ContactUpdateWithoutInteractionsInput>, Prisma.ContactUncheckedUpdateWithoutInteractionsInput>
 }
 
+export type ContactCreateNestedOneWithoutVisitPlansInput = {
+  create?: Prisma.XOR<Prisma.ContactCreateWithoutVisitPlansInput, Prisma.ContactUncheckedCreateWithoutVisitPlansInput>
+  connectOrCreate?: Prisma.ContactCreateOrConnectWithoutVisitPlansInput
+  connect?: Prisma.ContactWhereUniqueInput
+}
+
+export type ContactUpdateOneWithoutVisitPlansNestedInput = {
+  create?: Prisma.XOR<Prisma.ContactCreateWithoutVisitPlansInput, Prisma.ContactUncheckedCreateWithoutVisitPlansInput>
+  connectOrCreate?: Prisma.ContactCreateOrConnectWithoutVisitPlansInput
+  upsert?: Prisma.ContactUpsertWithoutVisitPlansInput
+  disconnect?: Prisma.ContactWhereInput | boolean
+  delete?: Prisma.ContactWhereInput | boolean
+  connect?: Prisma.ContactWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ContactUpdateToOneWithWhereWithoutVisitPlansInput, Prisma.ContactUpdateWithoutVisitPlansInput>, Prisma.ContactUncheckedUpdateWithoutVisitPlansInput>
+}
+
 export type ContactCreateWithoutCustomerInput = {
   name: string
   email?: string | null
@@ -606,6 +629,7 @@ export type ContactCreateWithoutCustomerInput = {
   createdAt?: Date | string
   updatedAt?: Date | string | null
   Interactions?: Prisma.InteractionCreateNestedManyWithoutContactInput
+  VisitPlans?: Prisma.VisitPlanCreateNestedManyWithoutContactInput
 }
 
 export type ContactUncheckedCreateWithoutCustomerInput = {
@@ -621,6 +645,7 @@ export type ContactUncheckedCreateWithoutCustomerInput = {
   createdAt?: Date | string
   updatedAt?: Date | string | null
   Interactions?: Prisma.InteractionUncheckedCreateNestedManyWithoutContactInput
+  VisitPlans?: Prisma.VisitPlanUncheckedCreateNestedManyWithoutContactInput
 }
 
 export type ContactCreateOrConnectWithoutCustomerInput = {
@@ -679,6 +704,7 @@ export type ContactCreateWithoutInteractionsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string | null
   Customer: Prisma.CustomerCreateNestedOneWithoutContactsInput
+  VisitPlans?: Prisma.VisitPlanCreateNestedManyWithoutContactInput
 }
 
 export type ContactUncheckedCreateWithoutInteractionsInput = {
@@ -694,6 +720,7 @@ export type ContactUncheckedCreateWithoutInteractionsInput = {
   deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
+  VisitPlans?: Prisma.VisitPlanUncheckedCreateNestedManyWithoutContactInput
 }
 
 export type ContactCreateOrConnectWithoutInteractionsInput = {
@@ -724,6 +751,7 @@ export type ContactUpdateWithoutInteractionsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Customer?: Prisma.CustomerUpdateOneRequiredWithoutContactsNestedInput
+  VisitPlans?: Prisma.VisitPlanUpdateManyWithoutContactNestedInput
 }
 
 export type ContactUncheckedUpdateWithoutInteractionsInput = {
@@ -739,6 +767,85 @@ export type ContactUncheckedUpdateWithoutInteractionsInput = {
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  VisitPlans?: Prisma.VisitPlanUncheckedUpdateManyWithoutContactNestedInput
+}
+
+export type ContactCreateWithoutVisitPlansInput = {
+  name: string
+  email?: string | null
+  phone: string
+  position?: string | null
+  notes?: string | null
+  isPrimary?: boolean
+  isActive?: boolean
+  deletedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string | null
+  Customer: Prisma.CustomerCreateNestedOneWithoutContactsInput
+  Interactions?: Prisma.InteractionCreateNestedManyWithoutContactInput
+}
+
+export type ContactUncheckedCreateWithoutVisitPlansInput = {
+  id?: number
+  customerId: number
+  name: string
+  email?: string | null
+  phone: string
+  position?: string | null
+  notes?: string | null
+  isPrimary?: boolean
+  isActive?: boolean
+  deletedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string | null
+  Interactions?: Prisma.InteractionUncheckedCreateNestedManyWithoutContactInput
+}
+
+export type ContactCreateOrConnectWithoutVisitPlansInput = {
+  where: Prisma.ContactWhereUniqueInput
+  create: Prisma.XOR<Prisma.ContactCreateWithoutVisitPlansInput, Prisma.ContactUncheckedCreateWithoutVisitPlansInput>
+}
+
+export type ContactUpsertWithoutVisitPlansInput = {
+  update: Prisma.XOR<Prisma.ContactUpdateWithoutVisitPlansInput, Prisma.ContactUncheckedUpdateWithoutVisitPlansInput>
+  create: Prisma.XOR<Prisma.ContactCreateWithoutVisitPlansInput, Prisma.ContactUncheckedCreateWithoutVisitPlansInput>
+  where?: Prisma.ContactWhereInput
+}
+
+export type ContactUpdateToOneWithWhereWithoutVisitPlansInput = {
+  where?: Prisma.ContactWhereInput
+  data: Prisma.XOR<Prisma.ContactUpdateWithoutVisitPlansInput, Prisma.ContactUncheckedUpdateWithoutVisitPlansInput>
+}
+
+export type ContactUpdateWithoutVisitPlansInput = {
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  position?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isPrimary?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  Customer?: Prisma.CustomerUpdateOneRequiredWithoutContactsNestedInput
+  Interactions?: Prisma.InteractionUpdateManyWithoutContactNestedInput
+}
+
+export type ContactUncheckedUpdateWithoutVisitPlansInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  customerId?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  position?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isPrimary?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  Interactions?: Prisma.InteractionUncheckedUpdateManyWithoutContactNestedInput
 }
 
 export type ContactCreateManyCustomerInput = {
@@ -767,6 +874,7 @@ export type ContactUpdateWithoutCustomerInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Interactions?: Prisma.InteractionUpdateManyWithoutContactNestedInput
+  VisitPlans?: Prisma.VisitPlanUpdateManyWithoutContactNestedInput
 }
 
 export type ContactUncheckedUpdateWithoutCustomerInput = {
@@ -782,6 +890,7 @@ export type ContactUncheckedUpdateWithoutCustomerInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Interactions?: Prisma.InteractionUncheckedUpdateManyWithoutContactNestedInput
+  VisitPlans?: Prisma.VisitPlanUncheckedUpdateManyWithoutContactNestedInput
 }
 
 export type ContactUncheckedUpdateManyWithoutCustomerInput = {
@@ -805,10 +914,12 @@ export type ContactUncheckedUpdateManyWithoutCustomerInput = {
 
 export type ContactCountOutputType = {
   Interactions: number
+  VisitPlans: number
 }
 
 export type ContactCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   Interactions?: boolean | ContactCountOutputTypeCountInteractionsArgs
+  VisitPlans?: boolean | ContactCountOutputTypeCountVisitPlansArgs
 }
 
 /**
@@ -828,6 +939,13 @@ export type ContactCountOutputTypeCountInteractionsArgs<ExtArgs extends runtime.
   where?: Prisma.InteractionWhereInput
 }
 
+/**
+ * ContactCountOutputType without action
+ */
+export type ContactCountOutputTypeCountVisitPlansArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.VisitPlanWhereInput
+}
+
 
 export type ContactSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -844,6 +962,7 @@ export type ContactSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   updatedAt?: boolean
   Customer?: boolean | Prisma.CustomerDefaultArgs<ExtArgs>
   Interactions?: boolean | Prisma.Contact$InteractionsArgs<ExtArgs>
+  VisitPlans?: boolean | Prisma.Contact$VisitPlansArgs<ExtArgs>
   _count?: boolean | Prisma.ContactCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["contact"]>
 
@@ -898,6 +1017,7 @@ export type ContactOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
 export type ContactInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   Customer?: boolean | Prisma.CustomerDefaultArgs<ExtArgs>
   Interactions?: boolean | Prisma.Contact$InteractionsArgs<ExtArgs>
+  VisitPlans?: boolean | Prisma.Contact$VisitPlansArgs<ExtArgs>
   _count?: boolean | Prisma.ContactCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ContactIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -912,6 +1032,7 @@ export type $ContactPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
   objects: {
     Customer: Prisma.$CustomerPayload<ExtArgs>
     Interactions: Prisma.$InteractionPayload<ExtArgs>[]
+    VisitPlans: Prisma.$VisitPlanPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1322,6 +1443,7 @@ export interface Prisma__ContactClient<T, Null = never, ExtArgs extends runtime.
   readonly [Symbol.toStringTag]: "PrismaPromise"
   Customer<T extends Prisma.CustomerDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CustomerDefaultArgs<ExtArgs>>): Prisma.Prisma__CustomerClient<runtime.Types.Result.GetResult<Prisma.$CustomerPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   Interactions<T extends Prisma.Contact$InteractionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Contact$InteractionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InteractionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  VisitPlans<T extends Prisma.Contact$VisitPlansArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Contact$VisitPlansArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$VisitPlanPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1785,6 +1907,30 @@ export type Contact$InteractionsArgs<ExtArgs extends runtime.Types.Extensions.In
   take?: number
   skip?: number
   distinct?: Prisma.InteractionScalarFieldEnum | Prisma.InteractionScalarFieldEnum[]
+}
+
+/**
+ * Contact.VisitPlans
+ */
+export type Contact$VisitPlansArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the VisitPlan
+   */
+  select?: Prisma.VisitPlanSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the VisitPlan
+   */
+  omit?: Prisma.VisitPlanOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.VisitPlanInclude<ExtArgs> | null
+  where?: Prisma.VisitPlanWhereInput
+  orderBy?: Prisma.VisitPlanOrderByWithRelationInput | Prisma.VisitPlanOrderByWithRelationInput[]
+  cursor?: Prisma.VisitPlanWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.VisitPlanScalarFieldEnum | Prisma.VisitPlanScalarFieldEnum[]
 }
 
 /**

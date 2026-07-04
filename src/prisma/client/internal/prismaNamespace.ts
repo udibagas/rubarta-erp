@@ -403,6 +403,7 @@ export const ModelName = {
   CustomerNote: 'CustomerNote',
   CustomerFile: 'CustomerFile',
   Material: 'Material',
+  VisitPlan: 'VisitPlan',
   Nkp: 'Nkp',
   NkpItem: 'NkpItem',
   NkpApproval: 'NkpApproval',
@@ -430,7 +431,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "supplier" | "account" | "invoice" | "invoiceItem" | "payment" | "expense" | "customer" | "contact" | "lead" | "opportunity" | "quotation" | "quotationItem" | "task" | "interaction" | "order" | "orderItem" | "customerNote" | "customerFile" | "material" | "nkp" | "nkpItem" | "nkpApproval" | "nkpAttachment" | "company" | "department" | "bank" | "user" | "userBalance" | "approvalSetting" | "approvalSettingItem" | "notification"
+    modelProps: "supplier" | "account" | "invoice" | "invoiceItem" | "payment" | "expense" | "customer" | "contact" | "lead" | "opportunity" | "quotation" | "quotationItem" | "task" | "interaction" | "order" | "orderItem" | "customerNote" | "customerFile" | "material" | "visitPlan" | "nkp" | "nkpItem" | "nkpApproval" | "nkpAttachment" | "company" | "department" | "bank" | "user" | "userBalance" | "approvalSetting" | "approvalSettingItem" | "notification"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1840,6 +1841,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    VisitPlan: {
+      payload: Prisma.$VisitPlanPayload<ExtArgs>
+      fields: Prisma.VisitPlanFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.VisitPlanFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VisitPlanPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.VisitPlanFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VisitPlanPayload>
+        }
+        findFirst: {
+          args: Prisma.VisitPlanFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VisitPlanPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.VisitPlanFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VisitPlanPayload>
+        }
+        findMany: {
+          args: Prisma.VisitPlanFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VisitPlanPayload>[]
+        }
+        create: {
+          args: Prisma.VisitPlanCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VisitPlanPayload>
+        }
+        createMany: {
+          args: Prisma.VisitPlanCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.VisitPlanCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VisitPlanPayload>[]
+        }
+        delete: {
+          args: Prisma.VisitPlanDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VisitPlanPayload>
+        }
+        update: {
+          args: Prisma.VisitPlanUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VisitPlanPayload>
+        }
+        deleteMany: {
+          args: Prisma.VisitPlanDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.VisitPlanUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.VisitPlanUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VisitPlanPayload>[]
+        }
+        upsert: {
+          args: Prisma.VisitPlanUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VisitPlanPayload>
+        }
+        aggregate: {
+          args: Prisma.VisitPlanAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateVisitPlan>
+        }
+        groupBy: {
+          args: Prisma.VisitPlanGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.VisitPlanGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.VisitPlanCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.VisitPlanCountAggregateOutputType> | number
+        }
+      }
+    }
     Nkp: {
       payload: Prisma.$NkpPayload<ExtArgs>
       fields: Prisma.NkpFieldRefs
@@ -3106,6 +3181,32 @@ export const MaterialScalarFieldEnum = {
 export type MaterialScalarFieldEnum = (typeof MaterialScalarFieldEnum)[keyof typeof MaterialScalarFieldEnum]
 
 
+export const VisitPlanScalarFieldEnum = {
+  id: 'id',
+  customerId: 'customerId',
+  userId: 'userId',
+  companyId: 'companyId',
+  contactId: 'contactId',
+  title: 'title',
+  purpose: 'purpose',
+  scheduledDate: 'scheduledDate',
+  scheduledTime: 'scheduledTime',
+  estimatedDuration: 'estimatedDuration',
+  status: 'status',
+  actualVisitDate: 'actualVisitDate',
+  outcome: 'outcome',
+  notes: 'notes',
+  address: 'address',
+  contactPerson: 'contactPerson',
+  contactPhone: 'contactPhone',
+  deletedAt: 'deletedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type VisitPlanScalarFieldEnum = (typeof VisitPlanScalarFieldEnum)[keyof typeof VisitPlanScalarFieldEnum]
+
+
 export const NkpScalarFieldEnum = {
   id: 'id',
   date: 'date',
@@ -3551,6 +3652,20 @@ export type ListEnumOrderStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$
 
 
 /**
+ * Reference to a field of type 'VisitPlanStatus'
+ */
+export type EnumVisitPlanStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'VisitPlanStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'VisitPlanStatus[]'
+ */
+export type ListEnumVisitPlanStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'VisitPlanStatus[]'>
+    
+
+
+/**
  * Reference to a field of type 'PaymentStatus'
  */
 export type EnumPaymentStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PaymentStatus'>
@@ -3776,6 +3891,7 @@ export type GlobalOmitConfig = {
   customerNote?: Prisma.CustomerNoteOmit
   customerFile?: Prisma.CustomerFileOmit
   material?: Prisma.MaterialOmit
+  visitPlan?: Prisma.VisitPlanOmit
   nkp?: Prisma.NkpOmit
   nkpItem?: Prisma.NkpItemOmit
   nkpApproval?: Prisma.NkpApprovalOmit

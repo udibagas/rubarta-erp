@@ -23,6 +23,7 @@ model Company {
   ApprovalSetting ApprovalSetting[]
   Opportunity     Opportunity[]
   Lead            Lead[]
+  VisitPlans      VisitPlan[]
 
   @@map("Companies")
 }
@@ -77,6 +78,7 @@ model User {
   Quotations          Quotation[]
   Invoices            Invoice[]
   Payments            Payment[]
+  VisitPlans          VisitPlan[]
 
   @@index([bankId, departmentId])
   @@map("Users")

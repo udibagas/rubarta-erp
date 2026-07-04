@@ -33,6 +33,7 @@ import { InteractionsModule } from './interactions/interactions.module';
 import { OrdersModule } from './orders/orders.module';
 import { MaterialsModule } from './materials/materials.module';
 import { CrmDashboardModule } from './crm-dashboard/crm-dashboard.module';
+import { VisitPlansModule } from './visit-plans/visit-plans.module';
 
 @Module({
   imports: [
@@ -112,6 +113,7 @@ import { CrmDashboardModule } from './crm-dashboard/crm-dashboard.module';
     OrdersModule,
     MaterialsModule,
     CrmDashboardModule,
+    VisitPlansModule,
   ],
   controllers: [],
   providers: [],
