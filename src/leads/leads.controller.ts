@@ -12,6 +12,7 @@ import {
 import { LeadsService } from './leads.service';
 import { CreateLeadDto } from './dto/create-lead.dto';
 import { UpdateLeadDto } from './dto/update-lead.dto';
+import { ConvertLeadDto } from './dto/convert-lead.dto';
 import { Auth } from '../auth/auth.decorator';
 import { User } from '../prisma/client/client';
 
@@ -42,6 +43,15 @@ export class LeadsController {
   @Patch(':id')
   update(@Param('id', ParseIntPipe) id: number, @Body() data: UpdateLeadDto) {
     return this.leadsService.update(id, data);
+  }
+
+  @Post(':id/convert')
+  convertToOpportunity(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() data: ConvertLeadDto,
+    @Auth() user: User,
+  ) {
+    return this.leadsService.convertToOpportunity(id, data, user.id);
   }
 
   @Delete(':id')

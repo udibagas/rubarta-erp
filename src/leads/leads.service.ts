@@ -1,12 +1,17 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateLeadDto } from './dto/create-lead.dto';
 import { UpdateLeadDto } from './dto/update-lead.dto';
+import { ConvertLeadDto } from './dto/convert-lead.dto';
 import { PrismaService } from '../prisma/prisma.service';
 import { LeadStatus, Prisma } from '../prisma/client/client';
+import { OpportunitiesService } from '../opportunities/opportunities.service';
 
 @Injectable()
 export class LeadsService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(
+    private readonly prisma: PrismaService,
+    private readonly opportunitiesService: OpportunitiesService,
+  ) {}
 
   create(data: CreateLeadDto) {
     return this.prisma.lead.create({
@@ -127,5 +132,35 @@ export class LeadsService {
       where: { id },
       data: { deletedAt: new Date() },
     });
+  }
+
+  async convertToOpportunity(id: number, data: ConvertLeadDto, userId: number) {
+    const lead = await this.findOne(id); // Verify lead exists
+
+    if (!lead.customerId) {
+      throw new NotFoundException(
+        'Lead must have a customer to be converted to opportunity',
+      );
+    }
+
+    // Create opportunity
+    const opportunity = await this.opportunitiesService.create({
+      userId,
+      customerId: lead.customerId,
+      companyId: lead.companyId,
+      name: data.name,
+      description: data.description,
+      amount: data.amount,
+      probability: data.probability,
+      stage: data.stage,
+      expectedCloseDate: data.expectedCloseDate,
+    });
+
+    // Update lead status to Converted
+    await this.update(id, {
+      status: LeadStatus.Converted,
+    });
+
+    return opportunity;
   }
 }
