@@ -37,6 +37,7 @@ export class OpportunitiesService {
       take: pageSize,
       skip: (page - 1) * pageSize,
       include: {
+        Company: { select: { name: true } },
         User: { select: { name: true } },
         Customer: { select: { name: true } },
       },
