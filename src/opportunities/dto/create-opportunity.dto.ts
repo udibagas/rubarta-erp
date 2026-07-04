@@ -20,6 +20,9 @@ export class CreateOpportunityDto {
   @IsNotEmpty({ message: 'Name is required' })
   name: string;
 
+  @IsOptional()
+  description?: string;
+
   @IsNotEmpty({ message: 'Stage is required' })
   @IsNumber({}, { message: 'Amount must be number' })
   amount: number;
