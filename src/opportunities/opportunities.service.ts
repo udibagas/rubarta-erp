@@ -53,6 +53,7 @@ export class OpportunitiesService {
       include: {
         User: { select: { name: true } },
         Customer: { select: { name: true } },
+        Company: { select: { name: true } },
       },
     });
   }
