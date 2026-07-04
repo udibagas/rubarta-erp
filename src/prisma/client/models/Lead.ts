@@ -301,6 +301,7 @@ export type LeadWhereInput = {
   User?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   Tasks?: Prisma.TaskListRelationFilter
   Interactions?: Prisma.InteractionListRelationFilter
+  opportunities?: Prisma.OpportunityListRelationFilter
 }
 
 export type LeadOrderByWithRelationInput = {
@@ -322,6 +323,7 @@ export type LeadOrderByWithRelationInput = {
   User?: Prisma.UserOrderByWithRelationInput
   Tasks?: Prisma.TaskOrderByRelationAggregateInput
   Interactions?: Prisma.InteractionOrderByRelationAggregateInput
+  opportunities?: Prisma.OpportunityOrderByRelationAggregateInput
 }
 
 export type LeadWhereUniqueInput = Prisma.AtLeast<{
@@ -346,6 +348,7 @@ export type LeadWhereUniqueInput = Prisma.AtLeast<{
   User?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   Tasks?: Prisma.TaskListRelationFilter
   Interactions?: Prisma.InteractionListRelationFilter
+  opportunities?: Prisma.OpportunityListRelationFilter
 }, "id">
 
 export type LeadOrderByWithAggregationInput = {
@@ -403,6 +406,7 @@ export type LeadCreateInput = {
   User: Prisma.UserCreateNestedOneWithoutLeadsInput
   Tasks?: Prisma.TaskCreateNestedManyWithoutLeadInput
   Interactions?: Prisma.InteractionCreateNestedManyWithoutLeadInput
+  opportunities?: Prisma.OpportunityCreateNestedManyWithoutLeadInput
 }
 
 export type LeadUncheckedCreateInput = {
@@ -421,6 +425,7 @@ export type LeadUncheckedCreateInput = {
   updatedAt?: Date | string | null
   Tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutLeadInput
   Interactions?: Prisma.InteractionUncheckedCreateNestedManyWithoutLeadInput
+  opportunities?: Prisma.OpportunityUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadUpdateInput = {
@@ -438,6 +443,7 @@ export type LeadUpdateInput = {
   User?: Prisma.UserUpdateOneRequiredWithoutLeadsNestedInput
   Tasks?: Prisma.TaskUpdateManyWithoutLeadNestedInput
   Interactions?: Prisma.InteractionUpdateManyWithoutLeadNestedInput
+  opportunities?: Prisma.OpportunityUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadUncheckedUpdateInput = {
@@ -456,6 +462,7 @@ export type LeadUncheckedUpdateInput = {
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Tasks?: Prisma.TaskUncheckedUpdateManyWithoutLeadNestedInput
   Interactions?: Prisma.InteractionUncheckedUpdateManyWithoutLeadNestedInput
+  opportunities?: Prisma.OpportunityUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadCreateManyInput = {
@@ -631,6 +638,22 @@ export type EnumLeadStatusFieldUpdateOperationsInput = {
   set?: $Enums.LeadStatus
 }
 
+export type LeadCreateNestedOneWithoutOpportunitiesInput = {
+  create?: Prisma.XOR<Prisma.LeadCreateWithoutOpportunitiesInput, Prisma.LeadUncheckedCreateWithoutOpportunitiesInput>
+  connectOrCreate?: Prisma.LeadCreateOrConnectWithoutOpportunitiesInput
+  connect?: Prisma.LeadWhereUniqueInput
+}
+
+export type LeadUpdateOneWithoutOpportunitiesNestedInput = {
+  create?: Prisma.XOR<Prisma.LeadCreateWithoutOpportunitiesInput, Prisma.LeadUncheckedCreateWithoutOpportunitiesInput>
+  connectOrCreate?: Prisma.LeadCreateOrConnectWithoutOpportunitiesInput
+  upsert?: Prisma.LeadUpsertWithoutOpportunitiesInput
+  disconnect?: Prisma.LeadWhereInput | boolean
+  delete?: Prisma.LeadWhereInput | boolean
+  connect?: Prisma.LeadWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.LeadUpdateToOneWithWhereWithoutOpportunitiesInput, Prisma.LeadUpdateWithoutOpportunitiesInput>, Prisma.LeadUncheckedUpdateWithoutOpportunitiesInput>
+}
+
 export type LeadCreateNestedOneWithoutTasksInput = {
   create?: Prisma.XOR<Prisma.LeadCreateWithoutTasksInput, Prisma.LeadUncheckedCreateWithoutTasksInput>
   connectOrCreate?: Prisma.LeadCreateOrConnectWithoutTasksInput
@@ -761,6 +784,7 @@ export type LeadCreateWithoutCustomerInput = {
   User: Prisma.UserCreateNestedOneWithoutLeadsInput
   Tasks?: Prisma.TaskCreateNestedManyWithoutLeadInput
   Interactions?: Prisma.InteractionCreateNestedManyWithoutLeadInput
+  opportunities?: Prisma.OpportunityCreateNestedManyWithoutLeadInput
 }
 
 export type LeadUncheckedCreateWithoutCustomerInput = {
@@ -778,6 +802,7 @@ export type LeadUncheckedCreateWithoutCustomerInput = {
   updatedAt?: Date | string | null
   Tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutLeadInput
   Interactions?: Prisma.InteractionUncheckedCreateNestedManyWithoutLeadInput
+  opportunities?: Prisma.OpportunityUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadCreateOrConnectWithoutCustomerInput = {
@@ -825,6 +850,92 @@ export type LeadScalarWhereInput = {
   updatedAt?: Prisma.DateTimeNullableFilter<"Lead"> | Date | string | null
 }
 
+export type LeadCreateWithoutOpportunitiesInput = {
+  title: string
+  source: $Enums.LeadSource
+  status?: $Enums.LeadStatus
+  estimatedValue?: number | null
+  notes?: string | null
+  convertedDate?: Date | string | null
+  deletedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string | null
+  Customer?: Prisma.CustomerCreateNestedOneWithoutLeadsInput
+  Company: Prisma.CompanyCreateNestedOneWithoutLeadInput
+  User: Prisma.UserCreateNestedOneWithoutLeadsInput
+  Tasks?: Prisma.TaskCreateNestedManyWithoutLeadInput
+  Interactions?: Prisma.InteractionCreateNestedManyWithoutLeadInput
+}
+
+export type LeadUncheckedCreateWithoutOpportunitiesInput = {
+  id?: number
+  title: string
+  customerId?: number | null
+  companyId: number
+  userId: number
+  source: $Enums.LeadSource
+  status?: $Enums.LeadStatus
+  estimatedValue?: number | null
+  notes?: string | null
+  convertedDate?: Date | string | null
+  deletedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string | null
+  Tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutLeadInput
+  Interactions?: Prisma.InteractionUncheckedCreateNestedManyWithoutLeadInput
+}
+
+export type LeadCreateOrConnectWithoutOpportunitiesInput = {
+  where: Prisma.LeadWhereUniqueInput
+  create: Prisma.XOR<Prisma.LeadCreateWithoutOpportunitiesInput, Prisma.LeadUncheckedCreateWithoutOpportunitiesInput>
+}
+
+export type LeadUpsertWithoutOpportunitiesInput = {
+  update: Prisma.XOR<Prisma.LeadUpdateWithoutOpportunitiesInput, Prisma.LeadUncheckedUpdateWithoutOpportunitiesInput>
+  create: Prisma.XOR<Prisma.LeadCreateWithoutOpportunitiesInput, Prisma.LeadUncheckedCreateWithoutOpportunitiesInput>
+  where?: Prisma.LeadWhereInput
+}
+
+export type LeadUpdateToOneWithWhereWithoutOpportunitiesInput = {
+  where?: Prisma.LeadWhereInput
+  data: Prisma.XOR<Prisma.LeadUpdateWithoutOpportunitiesInput, Prisma.LeadUncheckedUpdateWithoutOpportunitiesInput>
+}
+
+export type LeadUpdateWithoutOpportunitiesInput = {
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  source?: Prisma.EnumLeadSourceFieldUpdateOperationsInput | $Enums.LeadSource
+  status?: Prisma.EnumLeadStatusFieldUpdateOperationsInput | $Enums.LeadStatus
+  estimatedValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  convertedDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  Customer?: Prisma.CustomerUpdateOneWithoutLeadsNestedInput
+  Company?: Prisma.CompanyUpdateOneRequiredWithoutLeadNestedInput
+  User?: Prisma.UserUpdateOneRequiredWithoutLeadsNestedInput
+  Tasks?: Prisma.TaskUpdateManyWithoutLeadNestedInput
+  Interactions?: Prisma.InteractionUpdateManyWithoutLeadNestedInput
+}
+
+export type LeadUncheckedUpdateWithoutOpportunitiesInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  customerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  companyId?: Prisma.IntFieldUpdateOperationsInput | number
+  userId?: Prisma.IntFieldUpdateOperationsInput | number
+  source?: Prisma.EnumLeadSourceFieldUpdateOperationsInput | $Enums.LeadSource
+  status?: Prisma.EnumLeadStatusFieldUpdateOperationsInput | $Enums.LeadStatus
+  estimatedValue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  convertedDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  Tasks?: Prisma.TaskUncheckedUpdateManyWithoutLeadNestedInput
+  Interactions?: Prisma.InteractionUncheckedUpdateManyWithoutLeadNestedInput
+}
+
 export type LeadCreateWithoutTasksInput = {
   title: string
   source: $Enums.LeadSource
@@ -839,6 +950,7 @@ export type LeadCreateWithoutTasksInput = {
   Company: Prisma.CompanyCreateNestedOneWithoutLeadInput
   User: Prisma.UserCreateNestedOneWithoutLeadsInput
   Interactions?: Prisma.InteractionCreateNestedManyWithoutLeadInput
+  opportunities?: Prisma.OpportunityCreateNestedManyWithoutLeadInput
 }
 
 export type LeadUncheckedCreateWithoutTasksInput = {
@@ -856,6 +968,7 @@ export type LeadUncheckedCreateWithoutTasksInput = {
   createdAt?: Date | string
   updatedAt?: Date | string | null
   Interactions?: Prisma.InteractionUncheckedCreateNestedManyWithoutLeadInput
+  opportunities?: Prisma.OpportunityUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadCreateOrConnectWithoutTasksInput = {
@@ -888,6 +1001,7 @@ export type LeadUpdateWithoutTasksInput = {
   Company?: Prisma.CompanyUpdateOneRequiredWithoutLeadNestedInput
   User?: Prisma.UserUpdateOneRequiredWithoutLeadsNestedInput
   Interactions?: Prisma.InteractionUpdateManyWithoutLeadNestedInput
+  opportunities?: Prisma.OpportunityUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadUncheckedUpdateWithoutTasksInput = {
@@ -905,6 +1019,7 @@ export type LeadUncheckedUpdateWithoutTasksInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Interactions?: Prisma.InteractionUncheckedUpdateManyWithoutLeadNestedInput
+  opportunities?: Prisma.OpportunityUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadCreateWithoutInteractionsInput = {
@@ -921,6 +1036,7 @@ export type LeadCreateWithoutInteractionsInput = {
   Company: Prisma.CompanyCreateNestedOneWithoutLeadInput
   User: Prisma.UserCreateNestedOneWithoutLeadsInput
   Tasks?: Prisma.TaskCreateNestedManyWithoutLeadInput
+  opportunities?: Prisma.OpportunityCreateNestedManyWithoutLeadInput
 }
 
 export type LeadUncheckedCreateWithoutInteractionsInput = {
@@ -938,6 +1054,7 @@ export type LeadUncheckedCreateWithoutInteractionsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string | null
   Tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutLeadInput
+  opportunities?: Prisma.OpportunityUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadCreateOrConnectWithoutInteractionsInput = {
@@ -970,6 +1087,7 @@ export type LeadUpdateWithoutInteractionsInput = {
   Company?: Prisma.CompanyUpdateOneRequiredWithoutLeadNestedInput
   User?: Prisma.UserUpdateOneRequiredWithoutLeadsNestedInput
   Tasks?: Prisma.TaskUpdateManyWithoutLeadNestedInput
+  opportunities?: Prisma.OpportunityUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadUncheckedUpdateWithoutInteractionsInput = {
@@ -987,6 +1105,7 @@ export type LeadUncheckedUpdateWithoutInteractionsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Tasks?: Prisma.TaskUncheckedUpdateManyWithoutLeadNestedInput
+  opportunities?: Prisma.OpportunityUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadCreateWithoutCompanyInput = {
@@ -1003,6 +1122,7 @@ export type LeadCreateWithoutCompanyInput = {
   User: Prisma.UserCreateNestedOneWithoutLeadsInput
   Tasks?: Prisma.TaskCreateNestedManyWithoutLeadInput
   Interactions?: Prisma.InteractionCreateNestedManyWithoutLeadInput
+  opportunities?: Prisma.OpportunityCreateNestedManyWithoutLeadInput
 }
 
 export type LeadUncheckedCreateWithoutCompanyInput = {
@@ -1020,6 +1140,7 @@ export type LeadUncheckedCreateWithoutCompanyInput = {
   updatedAt?: Date | string | null
   Tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutLeadInput
   Interactions?: Prisma.InteractionUncheckedCreateNestedManyWithoutLeadInput
+  opportunities?: Prisma.OpportunityUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadCreateOrConnectWithoutCompanyInput = {
@@ -1062,6 +1183,7 @@ export type LeadCreateWithoutUserInput = {
   Company: Prisma.CompanyCreateNestedOneWithoutLeadInput
   Tasks?: Prisma.TaskCreateNestedManyWithoutLeadInput
   Interactions?: Prisma.InteractionCreateNestedManyWithoutLeadInput
+  opportunities?: Prisma.OpportunityCreateNestedManyWithoutLeadInput
 }
 
 export type LeadUncheckedCreateWithoutUserInput = {
@@ -1079,6 +1201,7 @@ export type LeadUncheckedCreateWithoutUserInput = {
   updatedAt?: Date | string | null
   Tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutLeadInput
   Interactions?: Prisma.InteractionUncheckedCreateNestedManyWithoutLeadInput
+  opportunities?: Prisma.OpportunityUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadCreateOrConnectWithoutUserInput = {
@@ -1136,6 +1259,7 @@ export type LeadUpdateWithoutCustomerInput = {
   User?: Prisma.UserUpdateOneRequiredWithoutLeadsNestedInput
   Tasks?: Prisma.TaskUpdateManyWithoutLeadNestedInput
   Interactions?: Prisma.InteractionUpdateManyWithoutLeadNestedInput
+  opportunities?: Prisma.OpportunityUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadUncheckedUpdateWithoutCustomerInput = {
@@ -1153,6 +1277,7 @@ export type LeadUncheckedUpdateWithoutCustomerInput = {
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Tasks?: Prisma.TaskUncheckedUpdateManyWithoutLeadNestedInput
   Interactions?: Prisma.InteractionUncheckedUpdateManyWithoutLeadNestedInput
+  opportunities?: Prisma.OpportunityUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadUncheckedUpdateManyWithoutCustomerInput = {
@@ -1199,6 +1324,7 @@ export type LeadUpdateWithoutCompanyInput = {
   User?: Prisma.UserUpdateOneRequiredWithoutLeadsNestedInput
   Tasks?: Prisma.TaskUpdateManyWithoutLeadNestedInput
   Interactions?: Prisma.InteractionUpdateManyWithoutLeadNestedInput
+  opportunities?: Prisma.OpportunityUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadUncheckedUpdateWithoutCompanyInput = {
@@ -1216,6 +1342,7 @@ export type LeadUncheckedUpdateWithoutCompanyInput = {
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Tasks?: Prisma.TaskUncheckedUpdateManyWithoutLeadNestedInput
   Interactions?: Prisma.InteractionUncheckedUpdateManyWithoutLeadNestedInput
+  opportunities?: Prisma.OpportunityUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadUncheckedUpdateManyWithoutCompanyInput = {
@@ -1262,6 +1389,7 @@ export type LeadUpdateWithoutUserInput = {
   Company?: Prisma.CompanyUpdateOneRequiredWithoutLeadNestedInput
   Tasks?: Prisma.TaskUpdateManyWithoutLeadNestedInput
   Interactions?: Prisma.InteractionUpdateManyWithoutLeadNestedInput
+  opportunities?: Prisma.OpportunityUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadUncheckedUpdateWithoutUserInput = {
@@ -1279,6 +1407,7 @@ export type LeadUncheckedUpdateWithoutUserInput = {
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Tasks?: Prisma.TaskUncheckedUpdateManyWithoutLeadNestedInput
   Interactions?: Prisma.InteractionUncheckedUpdateManyWithoutLeadNestedInput
+  opportunities?: Prisma.OpportunityUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadUncheckedUpdateManyWithoutUserInput = {
@@ -1304,11 +1433,13 @@ export type LeadUncheckedUpdateManyWithoutUserInput = {
 export type LeadCountOutputType = {
   Tasks: number
   Interactions: number
+  opportunities: number
 }
 
 export type LeadCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   Tasks?: boolean | LeadCountOutputTypeCountTasksArgs
   Interactions?: boolean | LeadCountOutputTypeCountInteractionsArgs
+  opportunities?: boolean | LeadCountOutputTypeCountOpportunitiesArgs
 }
 
 /**
@@ -1335,6 +1466,13 @@ export type LeadCountOutputTypeCountInteractionsArgs<ExtArgs extends runtime.Typ
   where?: Prisma.InteractionWhereInput
 }
 
+/**
+ * LeadCountOutputType without action
+ */
+export type LeadCountOutputTypeCountOpportunitiesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.OpportunityWhereInput
+}
+
 
 export type LeadSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1355,6 +1493,7 @@ export type LeadSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   Tasks?: boolean | Prisma.Lead$TasksArgs<ExtArgs>
   Interactions?: boolean | Prisma.Lead$InteractionsArgs<ExtArgs>
+  opportunities?: boolean | Prisma.Lead$opportunitiesArgs<ExtArgs>
   _count?: boolean | Prisma.LeadCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["lead"]>
 
@@ -1419,6 +1558,7 @@ export type LeadInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   Tasks?: boolean | Prisma.Lead$TasksArgs<ExtArgs>
   Interactions?: boolean | Prisma.Lead$InteractionsArgs<ExtArgs>
+  opportunities?: boolean | Prisma.Lead$opportunitiesArgs<ExtArgs>
   _count?: boolean | Prisma.LeadCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type LeadIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1440,6 +1580,7 @@ export type $LeadPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     User: Prisma.$UserPayload<ExtArgs>
     Tasks: Prisma.$TaskPayload<ExtArgs>[]
     Interactions: Prisma.$InteractionPayload<ExtArgs>[]
+    opportunities: Prisma.$OpportunityPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1854,6 +1995,7 @@ export interface Prisma__LeadClient<T, Null = never, ExtArgs extends runtime.Typ
   User<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   Tasks<T extends Prisma.Lead$TasksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Lead$TasksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TaskPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   Interactions<T extends Prisma.Lead$InteractionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Lead$InteractionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InteractionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  opportunities<T extends Prisma.Lead$opportunitiesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Lead$opportunitiesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OpportunityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2361,6 +2503,30 @@ export type Lead$InteractionsArgs<ExtArgs extends runtime.Types.Extensions.Inter
   take?: number
   skip?: number
   distinct?: Prisma.InteractionScalarFieldEnum | Prisma.InteractionScalarFieldEnum[]
+}
+
+/**
+ * Lead.opportunities
+ */
+export type Lead$opportunitiesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Opportunity
+   */
+  select?: Prisma.OpportunitySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Opportunity
+   */
+  omit?: Prisma.OpportunityOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.OpportunityInclude<ExtArgs> | null
+  where?: Prisma.OpportunityWhereInput
+  orderBy?: Prisma.OpportunityOrderByWithRelationInput | Prisma.OpportunityOrderByWithRelationInput[]
+  cursor?: Prisma.OpportunityWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.OpportunityScalarFieldEnum | Prisma.OpportunityScalarFieldEnum[]
 }
 
 /**

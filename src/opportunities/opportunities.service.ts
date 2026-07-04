@@ -13,16 +13,21 @@ export class OpportunitiesService {
   }
 
   async findAll(params: {
-    page: number;
-    pageSize: number;
-    companyId: number;
-    keyword: string;
+    page?: number;
+    pageSize?: number;
+    companyId?: number;
+    leadId?: number;
+    keyword?: string;
   }) {
     const where: Prisma.OpportunityWhereInput = {};
-    const { page, pageSize, companyId, keyword } = params;
+    const { page = 1, pageSize = 10, companyId, leadId, keyword } = params;
 
     if (companyId) {
       where.companyId = companyId;
+    }
+
+    if (leadId) {
+      where.leadId = leadId;
     }
 
     if (keyword) {

@@ -2913,6 +2913,7 @@ export const OpportunityScalarFieldEnum = {
   id: 'id',
   customerId: 'customerId',
   companyId: 'companyId',
+  leadId: 'leadId',
   userId: 'userId',
   name: 'name',
   description: 'description',

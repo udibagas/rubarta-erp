@@ -141,11 +141,12 @@ model Lead {
   updatedAt DateTime? @updatedAt
 
   // Relationships
-  Customer     Customer?     @relation(fields: [customerId], references: [id], onDelete: Cascade)
-  Company      Company       @relation(fields: [companyId], references: [id])
-  User         User          @relation(fields: [userId], references: [id])
-  Tasks        Task[]
-  Interactions Interaction[]
+  Customer      Customer?     @relation(fields: [customerId], references: [id], onDelete: Cascade)
+  Company       Company       @relation(fields: [companyId], references: [id])
+  User          User          @relation(fields: [userId], references: [id])
+  Tasks         Task[]
+  Interactions  Interaction[]
+  opportunities Opportunity[]
 
   @@index([customerId])
   @@index([userId])
@@ -159,6 +160,7 @@ model Opportunity {
   id                Int               @id @default(autoincrement())
   customerId        Int
   companyId         Int
+  leadId            Int?
   userId            Int
   name              String            @db.VarChar(200)
   description       String?           @db.Text
@@ -181,6 +183,7 @@ model Opportunity {
   Quotations   Quotation[]
   Tasks        Task[]
   Interactions Interaction[]
+  Lead         Lead?         @relation(fields: [leadId], references: [id], onDelete: Cascade)
 
   @@index([customerId])
   @@index([userId])
