@@ -1,5 +1,12 @@
 import { OpportunityStages } from '../../prisma/client/client';
-import { IsEnum, IsNotEmpty, IsNumber } from 'class-validator';
+import {
+  IsEnum,
+  IsNotEmpty,
+  IsNumber,
+  IsOptional,
+  Max,
+  Min,
+} from 'class-validator';
 
 export class CreateOpportunityDto {
   userId: number;
@@ -16,6 +23,12 @@ export class CreateOpportunityDto {
   @IsNotEmpty({ message: 'Stage is required' })
   @IsNumber({}, { message: 'Amount must be number' })
   amount: number;
+
+  @IsOptional()
+  @IsNumber({}, { message: 'Probability must be a number' })
+  @Min(0, { message: 'Probability must be at least 0' })
+  @Max(100, { message: 'Probability must be at most 100' })
+  probability?: number;
 
   @IsNotEmpty({ message: 'Stage is required' })
   @IsEnum(OpportunityStages, { message: 'Invalid stage' })
