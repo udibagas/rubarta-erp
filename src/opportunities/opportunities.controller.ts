@@ -26,9 +26,11 @@ export class OpportunitiesController {
 
   @Get()
   findAll(
-    @Query('page', ParseIntPipe) page: number = 1,
-    @Query('pageSize', ParseIntPipe) pageSize: number = 10,
-    @Query('companyId', ParseIntPipe) companyId?: number,
+    @Query('page', new ParseIntPipe({ optional: true })) page: number = 1,
+    @Query('pageSize', new ParseIntPipe({ optional: true }))
+    pageSize: number = 10,
+    @Query('companyId', new ParseIntPipe({ optional: true }))
+    companyId?: number,
     @Query('keyword') keyword?: string,
   ) {
     return this.opportunitiesService.findAll({
