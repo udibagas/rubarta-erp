@@ -52,6 +52,8 @@ export type VisitPlanMinAggregateOutputType = {
   contactId: number | null
   title: string | null
   purpose: string | null
+  visitType: $Enums.VisitType | null
+  meetingUrl: string | null
   scheduledDate: Date | null
   scheduledTime: string | null
   estimatedDuration: number | null
@@ -75,6 +77,8 @@ export type VisitPlanMaxAggregateOutputType = {
   contactId: number | null
   title: string | null
   purpose: string | null
+  visitType: $Enums.VisitType | null
+  meetingUrl: string | null
   scheduledDate: Date | null
   scheduledTime: string | null
   estimatedDuration: number | null
@@ -98,6 +102,8 @@ export type VisitPlanCountAggregateOutputType = {
   contactId: number
   title: number
   purpose: number
+  visitType: number
+  meetingUrl: number
   scheduledDate: number
   scheduledTime: number
   estimatedDuration: number
@@ -141,6 +147,8 @@ export type VisitPlanMinAggregateInputType = {
   contactId?: true
   title?: true
   purpose?: true
+  visitType?: true
+  meetingUrl?: true
   scheduledDate?: true
   scheduledTime?: true
   estimatedDuration?: true
@@ -164,6 +172,8 @@ export type VisitPlanMaxAggregateInputType = {
   contactId?: true
   title?: true
   purpose?: true
+  visitType?: true
+  meetingUrl?: true
   scheduledDate?: true
   scheduledTime?: true
   estimatedDuration?: true
@@ -187,6 +197,8 @@ export type VisitPlanCountAggregateInputType = {
   contactId?: true
   title?: true
   purpose?: true
+  visitType?: true
+  meetingUrl?: true
   scheduledDate?: true
   scheduledTime?: true
   estimatedDuration?: true
@@ -297,6 +309,8 @@ export type VisitPlanGroupByOutputType = {
   contactId: number | null
   title: string
   purpose: string | null
+  visitType: $Enums.VisitType
+  meetingUrl: string | null
   scheduledDate: Date
   scheduledTime: string | null
   estimatedDuration: number | null
@@ -343,6 +357,8 @@ export type VisitPlanWhereInput = {
   contactId?: Prisma.IntNullableFilter<"VisitPlan"> | number | null
   title?: Prisma.StringFilter<"VisitPlan"> | string
   purpose?: Prisma.StringNullableFilter<"VisitPlan"> | string | null
+  visitType?: Prisma.EnumVisitTypeFilter<"VisitPlan"> | $Enums.VisitType
+  meetingUrl?: Prisma.StringNullableFilter<"VisitPlan"> | string | null
   scheduledDate?: Prisma.DateTimeFilter<"VisitPlan"> | Date | string
   scheduledTime?: Prisma.StringNullableFilter<"VisitPlan"> | string | null
   estimatedDuration?: Prisma.IntNullableFilter<"VisitPlan"> | number | null
@@ -370,6 +386,8 @@ export type VisitPlanOrderByWithRelationInput = {
   contactId?: Prisma.SortOrderInput | Prisma.SortOrder
   title?: Prisma.SortOrder
   purpose?: Prisma.SortOrderInput | Prisma.SortOrder
+  visitType?: Prisma.SortOrder
+  meetingUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   scheduledDate?: Prisma.SortOrder
   scheduledTime?: Prisma.SortOrderInput | Prisma.SortOrder
   estimatedDuration?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -400,6 +418,8 @@ export type VisitPlanWhereUniqueInput = Prisma.AtLeast<{
   contactId?: Prisma.IntNullableFilter<"VisitPlan"> | number | null
   title?: Prisma.StringFilter<"VisitPlan"> | string
   purpose?: Prisma.StringNullableFilter<"VisitPlan"> | string | null
+  visitType?: Prisma.EnumVisitTypeFilter<"VisitPlan"> | $Enums.VisitType
+  meetingUrl?: Prisma.StringNullableFilter<"VisitPlan"> | string | null
   scheduledDate?: Prisma.DateTimeFilter<"VisitPlan"> | Date | string
   scheduledTime?: Prisma.StringNullableFilter<"VisitPlan"> | string | null
   estimatedDuration?: Prisma.IntNullableFilter<"VisitPlan"> | number | null
@@ -427,6 +447,8 @@ export type VisitPlanOrderByWithAggregationInput = {
   contactId?: Prisma.SortOrderInput | Prisma.SortOrder
   title?: Prisma.SortOrder
   purpose?: Prisma.SortOrderInput | Prisma.SortOrder
+  visitType?: Prisma.SortOrder
+  meetingUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   scheduledDate?: Prisma.SortOrder
   scheduledTime?: Prisma.SortOrderInput | Prisma.SortOrder
   estimatedDuration?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -458,6 +480,8 @@ export type VisitPlanScalarWhereWithAggregatesInput = {
   contactId?: Prisma.IntNullableWithAggregatesFilter<"VisitPlan"> | number | null
   title?: Prisma.StringWithAggregatesFilter<"VisitPlan"> | string
   purpose?: Prisma.StringNullableWithAggregatesFilter<"VisitPlan"> | string | null
+  visitType?: Prisma.EnumVisitTypeWithAggregatesFilter<"VisitPlan"> | $Enums.VisitType
+  meetingUrl?: Prisma.StringNullableWithAggregatesFilter<"VisitPlan"> | string | null
   scheduledDate?: Prisma.DateTimeWithAggregatesFilter<"VisitPlan"> | Date | string
   scheduledTime?: Prisma.StringNullableWithAggregatesFilter<"VisitPlan"> | string | null
   estimatedDuration?: Prisma.IntNullableWithAggregatesFilter<"VisitPlan"> | number | null
@@ -476,6 +500,8 @@ export type VisitPlanScalarWhereWithAggregatesInput = {
 export type VisitPlanCreateInput = {
   title: string
   purpose?: string | null
+  visitType?: $Enums.VisitType
+  meetingUrl?: string | null
   scheduledDate: Date | string
   scheduledTime?: string | null
   estimatedDuration?: number | null
@@ -503,6 +529,8 @@ export type VisitPlanUncheckedCreateInput = {
   contactId?: number | null
   title: string
   purpose?: string | null
+  visitType?: $Enums.VisitType
+  meetingUrl?: string | null
   scheduledDate: Date | string
   scheduledTime?: string | null
   estimatedDuration?: number | null
@@ -521,6 +549,8 @@ export type VisitPlanUncheckedCreateInput = {
 export type VisitPlanUpdateInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   purpose?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  visitType?: Prisma.EnumVisitTypeFieldUpdateOperationsInput | $Enums.VisitType
+  meetingUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   scheduledDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   scheduledTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   estimatedDuration?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -548,6 +578,8 @@ export type VisitPlanUncheckedUpdateInput = {
   contactId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   purpose?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  visitType?: Prisma.EnumVisitTypeFieldUpdateOperationsInput | $Enums.VisitType
+  meetingUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   scheduledDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   scheduledTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   estimatedDuration?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -571,6 +603,8 @@ export type VisitPlanCreateManyInput = {
   contactId?: number | null
   title: string
   purpose?: string | null
+  visitType?: $Enums.VisitType
+  meetingUrl?: string | null
   scheduledDate: Date | string
   scheduledTime?: string | null
   estimatedDuration?: number | null
@@ -589,6 +623,8 @@ export type VisitPlanCreateManyInput = {
 export type VisitPlanUpdateManyMutationInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   purpose?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  visitType?: Prisma.EnumVisitTypeFieldUpdateOperationsInput | $Enums.VisitType
+  meetingUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   scheduledDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   scheduledTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   estimatedDuration?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -612,6 +648,8 @@ export type VisitPlanUncheckedUpdateManyInput = {
   contactId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   purpose?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  visitType?: Prisma.EnumVisitTypeFieldUpdateOperationsInput | $Enums.VisitType
+  meetingUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   scheduledDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   scheduledTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   estimatedDuration?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -645,6 +683,8 @@ export type VisitPlanCountOrderByAggregateInput = {
   contactId?: Prisma.SortOrder
   title?: Prisma.SortOrder
   purpose?: Prisma.SortOrder
+  visitType?: Prisma.SortOrder
+  meetingUrl?: Prisma.SortOrder
   scheduledDate?: Prisma.SortOrder
   scheduledTime?: Prisma.SortOrder
   estimatedDuration?: Prisma.SortOrder
@@ -677,6 +717,8 @@ export type VisitPlanMaxOrderByAggregateInput = {
   contactId?: Prisma.SortOrder
   title?: Prisma.SortOrder
   purpose?: Prisma.SortOrder
+  visitType?: Prisma.SortOrder
+  meetingUrl?: Prisma.SortOrder
   scheduledDate?: Prisma.SortOrder
   scheduledTime?: Prisma.SortOrder
   estimatedDuration?: Prisma.SortOrder
@@ -700,6 +742,8 @@ export type VisitPlanMinOrderByAggregateInput = {
   contactId?: Prisma.SortOrder
   title?: Prisma.SortOrder
   purpose?: Prisma.SortOrder
+  visitType?: Prisma.SortOrder
+  meetingUrl?: Prisma.SortOrder
   scheduledDate?: Prisma.SortOrder
   scheduledTime?: Prisma.SortOrder
   estimatedDuration?: Prisma.SortOrder
@@ -808,6 +852,10 @@ export type VisitPlanUncheckedUpdateManyWithoutContactNestedInput = {
   deleteMany?: Prisma.VisitPlanScalarWhereInput | Prisma.VisitPlanScalarWhereInput[]
 }
 
+export type EnumVisitTypeFieldUpdateOperationsInput = {
+  set?: $Enums.VisitType
+}
+
 export type EnumVisitPlanStatusFieldUpdateOperationsInput = {
   set?: $Enums.VisitPlanStatus
 }
@@ -899,6 +947,8 @@ export type VisitPlanUncheckedUpdateManyWithoutUserNestedInput = {
 export type VisitPlanCreateWithoutCustomerInput = {
   title: string
   purpose?: string | null
+  visitType?: $Enums.VisitType
+  meetingUrl?: string | null
   scheduledDate: Date | string
   scheduledTime?: string | null
   estimatedDuration?: number | null
@@ -924,6 +974,8 @@ export type VisitPlanUncheckedCreateWithoutCustomerInput = {
   contactId?: number | null
   title: string
   purpose?: string | null
+  visitType?: $Enums.VisitType
+  meetingUrl?: string | null
   scheduledDate: Date | string
   scheduledTime?: string | null
   estimatedDuration?: number | null
@@ -976,6 +1028,8 @@ export type VisitPlanScalarWhereInput = {
   contactId?: Prisma.IntNullableFilter<"VisitPlan"> | number | null
   title?: Prisma.StringFilter<"VisitPlan"> | string
   purpose?: Prisma.StringNullableFilter<"VisitPlan"> | string | null
+  visitType?: Prisma.EnumVisitTypeFilter<"VisitPlan"> | $Enums.VisitType
+  meetingUrl?: Prisma.StringNullableFilter<"VisitPlan"> | string | null
   scheduledDate?: Prisma.DateTimeFilter<"VisitPlan"> | Date | string
   scheduledTime?: Prisma.StringNullableFilter<"VisitPlan"> | string | null
   estimatedDuration?: Prisma.IntNullableFilter<"VisitPlan"> | number | null
@@ -994,6 +1048,8 @@ export type VisitPlanScalarWhereInput = {
 export type VisitPlanCreateWithoutContactInput = {
   title: string
   purpose?: string | null
+  visitType?: $Enums.VisitType
+  meetingUrl?: string | null
   scheduledDate: Date | string
   scheduledTime?: string | null
   estimatedDuration?: number | null
@@ -1019,6 +1075,8 @@ export type VisitPlanUncheckedCreateWithoutContactInput = {
   companyId: number
   title: string
   purpose?: string | null
+  visitType?: $Enums.VisitType
+  meetingUrl?: string | null
   scheduledDate: Date | string
   scheduledTime?: string | null
   estimatedDuration?: number | null
@@ -1063,6 +1121,8 @@ export type VisitPlanUpdateManyWithWhereWithoutContactInput = {
 export type VisitPlanCreateWithoutCompanyInput = {
   title: string
   purpose?: string | null
+  visitType?: $Enums.VisitType
+  meetingUrl?: string | null
   scheduledDate: Date | string
   scheduledTime?: string | null
   estimatedDuration?: number | null
@@ -1088,6 +1148,8 @@ export type VisitPlanUncheckedCreateWithoutCompanyInput = {
   contactId?: number | null
   title: string
   purpose?: string | null
+  visitType?: $Enums.VisitType
+  meetingUrl?: string | null
   scheduledDate: Date | string
   scheduledTime?: string | null
   estimatedDuration?: number | null
@@ -1132,6 +1194,8 @@ export type VisitPlanUpdateManyWithWhereWithoutCompanyInput = {
 export type VisitPlanCreateWithoutUserInput = {
   title: string
   purpose?: string | null
+  visitType?: $Enums.VisitType
+  meetingUrl?: string | null
   scheduledDate: Date | string
   scheduledTime?: string | null
   estimatedDuration?: number | null
@@ -1157,6 +1221,8 @@ export type VisitPlanUncheckedCreateWithoutUserInput = {
   contactId?: number | null
   title: string
   purpose?: string | null
+  visitType?: $Enums.VisitType
+  meetingUrl?: string | null
   scheduledDate: Date | string
   scheduledTime?: string | null
   estimatedDuration?: number | null
@@ -1205,6 +1271,8 @@ export type VisitPlanCreateManyCustomerInput = {
   contactId?: number | null
   title: string
   purpose?: string | null
+  visitType?: $Enums.VisitType
+  meetingUrl?: string | null
   scheduledDate: Date | string
   scheduledTime?: string | null
   estimatedDuration?: number | null
@@ -1223,6 +1291,8 @@ export type VisitPlanCreateManyCustomerInput = {
 export type VisitPlanUpdateWithoutCustomerInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   purpose?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  visitType?: Prisma.EnumVisitTypeFieldUpdateOperationsInput | $Enums.VisitType
+  meetingUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   scheduledDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   scheduledTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   estimatedDuration?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1248,6 +1318,8 @@ export type VisitPlanUncheckedUpdateWithoutCustomerInput = {
   contactId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   purpose?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  visitType?: Prisma.EnumVisitTypeFieldUpdateOperationsInput | $Enums.VisitType
+  meetingUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   scheduledDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   scheduledTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   estimatedDuration?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1270,6 +1342,8 @@ export type VisitPlanUncheckedUpdateManyWithoutCustomerInput = {
   contactId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   purpose?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  visitType?: Prisma.EnumVisitTypeFieldUpdateOperationsInput | $Enums.VisitType
+  meetingUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   scheduledDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   scheduledTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   estimatedDuration?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1292,6 +1366,8 @@ export type VisitPlanCreateManyContactInput = {
   companyId: number
   title: string
   purpose?: string | null
+  visitType?: $Enums.VisitType
+  meetingUrl?: string | null
   scheduledDate: Date | string
   scheduledTime?: string | null
   estimatedDuration?: number | null
@@ -1310,6 +1386,8 @@ export type VisitPlanCreateManyContactInput = {
 export type VisitPlanUpdateWithoutContactInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   purpose?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  visitType?: Prisma.EnumVisitTypeFieldUpdateOperationsInput | $Enums.VisitType
+  meetingUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   scheduledDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   scheduledTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   estimatedDuration?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1335,6 +1413,8 @@ export type VisitPlanUncheckedUpdateWithoutContactInput = {
   companyId?: Prisma.IntFieldUpdateOperationsInput | number
   title?: Prisma.StringFieldUpdateOperationsInput | string
   purpose?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  visitType?: Prisma.EnumVisitTypeFieldUpdateOperationsInput | $Enums.VisitType
+  meetingUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   scheduledDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   scheduledTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   estimatedDuration?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1357,6 +1437,8 @@ export type VisitPlanUncheckedUpdateManyWithoutContactInput = {
   companyId?: Prisma.IntFieldUpdateOperationsInput | number
   title?: Prisma.StringFieldUpdateOperationsInput | string
   purpose?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  visitType?: Prisma.EnumVisitTypeFieldUpdateOperationsInput | $Enums.VisitType
+  meetingUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   scheduledDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   scheduledTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   estimatedDuration?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1379,6 +1461,8 @@ export type VisitPlanCreateManyCompanyInput = {
   contactId?: number | null
   title: string
   purpose?: string | null
+  visitType?: $Enums.VisitType
+  meetingUrl?: string | null
   scheduledDate: Date | string
   scheduledTime?: string | null
   estimatedDuration?: number | null
@@ -1397,6 +1481,8 @@ export type VisitPlanCreateManyCompanyInput = {
 export type VisitPlanUpdateWithoutCompanyInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   purpose?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  visitType?: Prisma.EnumVisitTypeFieldUpdateOperationsInput | $Enums.VisitType
+  meetingUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   scheduledDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   scheduledTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   estimatedDuration?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1422,6 +1508,8 @@ export type VisitPlanUncheckedUpdateWithoutCompanyInput = {
   contactId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   purpose?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  visitType?: Prisma.EnumVisitTypeFieldUpdateOperationsInput | $Enums.VisitType
+  meetingUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   scheduledDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   scheduledTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   estimatedDuration?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1444,6 +1532,8 @@ export type VisitPlanUncheckedUpdateManyWithoutCompanyInput = {
   contactId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   purpose?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  visitType?: Prisma.EnumVisitTypeFieldUpdateOperationsInput | $Enums.VisitType
+  meetingUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   scheduledDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   scheduledTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   estimatedDuration?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1466,6 +1556,8 @@ export type VisitPlanCreateManyUserInput = {
   contactId?: number | null
   title: string
   purpose?: string | null
+  visitType?: $Enums.VisitType
+  meetingUrl?: string | null
   scheduledDate: Date | string
   scheduledTime?: string | null
   estimatedDuration?: number | null
@@ -1484,6 +1576,8 @@ export type VisitPlanCreateManyUserInput = {
 export type VisitPlanUpdateWithoutUserInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   purpose?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  visitType?: Prisma.EnumVisitTypeFieldUpdateOperationsInput | $Enums.VisitType
+  meetingUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   scheduledDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   scheduledTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   estimatedDuration?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1509,6 +1603,8 @@ export type VisitPlanUncheckedUpdateWithoutUserInput = {
   contactId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   purpose?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  visitType?: Prisma.EnumVisitTypeFieldUpdateOperationsInput | $Enums.VisitType
+  meetingUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   scheduledDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   scheduledTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   estimatedDuration?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1531,6 +1627,8 @@ export type VisitPlanUncheckedUpdateManyWithoutUserInput = {
   contactId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   purpose?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  visitType?: Prisma.EnumVisitTypeFieldUpdateOperationsInput | $Enums.VisitType
+  meetingUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   scheduledDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   scheduledTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   estimatedDuration?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1556,6 +1654,8 @@ export type VisitPlanSelect<ExtArgs extends runtime.Types.Extensions.InternalArg
   contactId?: boolean
   title?: boolean
   purpose?: boolean
+  visitType?: boolean
+  meetingUrl?: boolean
   scheduledDate?: boolean
   scheduledTime?: boolean
   estimatedDuration?: boolean
@@ -1583,6 +1683,8 @@ export type VisitPlanSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ext
   contactId?: boolean
   title?: boolean
   purpose?: boolean
+  visitType?: boolean
+  meetingUrl?: boolean
   scheduledDate?: boolean
   scheduledTime?: boolean
   estimatedDuration?: boolean
@@ -1610,6 +1712,8 @@ export type VisitPlanSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ext
   contactId?: boolean
   title?: boolean
   purpose?: boolean
+  visitType?: boolean
+  meetingUrl?: boolean
   scheduledDate?: boolean
   scheduledTime?: boolean
   estimatedDuration?: boolean
@@ -1637,6 +1741,8 @@ export type VisitPlanSelectScalar = {
   contactId?: boolean
   title?: boolean
   purpose?: boolean
+  visitType?: boolean
+  meetingUrl?: boolean
   scheduledDate?: boolean
   scheduledTime?: boolean
   estimatedDuration?: boolean
@@ -1652,7 +1758,7 @@ export type VisitPlanSelectScalar = {
   updatedAt?: boolean
 }
 
-export type VisitPlanOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "customerId" | "userId" | "companyId" | "contactId" | "title" | "purpose" | "scheduledDate" | "scheduledTime" | "estimatedDuration" | "status" | "actualVisitDate" | "outcome" | "notes" | "address" | "contactPerson" | "contactPhone" | "deletedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["visitPlan"]>
+export type VisitPlanOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "customerId" | "userId" | "companyId" | "contactId" | "title" | "purpose" | "visitType" | "meetingUrl" | "scheduledDate" | "scheduledTime" | "estimatedDuration" | "status" | "actualVisitDate" | "outcome" | "notes" | "address" | "contactPerson" | "contactPhone" | "deletedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["visitPlan"]>
 export type VisitPlanInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   Customer?: boolean | Prisma.CustomerDefaultArgs<ExtArgs>
   User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -1688,6 +1794,8 @@ export type $VisitPlanPayload<ExtArgs extends runtime.Types.Extensions.InternalA
     contactId: number | null
     title: string
     purpose: string | null
+    visitType: $Enums.VisitType
+    meetingUrl: string | null
     scheduledDate: Date
     scheduledTime: string | null
     estimatedDuration: number | null
@@ -2135,6 +2243,8 @@ export interface VisitPlanFieldRefs {
   readonly contactId: Prisma.FieldRef<"VisitPlan", 'Int'>
   readonly title: Prisma.FieldRef<"VisitPlan", 'String'>
   readonly purpose: Prisma.FieldRef<"VisitPlan", 'String'>
+  readonly visitType: Prisma.FieldRef<"VisitPlan", 'VisitType'>
+  readonly meetingUrl: Prisma.FieldRef<"VisitPlan", 'String'>
   readonly scheduledDate: Prisma.FieldRef<"VisitPlan", 'DateTime'>
   readonly scheduledTime: Prisma.FieldRef<"VisitPlan", 'String'>
   readonly estimatedDuration: Prisma.FieldRef<"VisitPlan", 'Int'>

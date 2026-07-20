@@ -504,11 +504,28 @@ export type EnumOrderStatusWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedEnumOrderStatusFilter<$PrismaModel>
 }
 
+export type EnumVisitTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.VisitType | Prisma.EnumVisitTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.VisitType[] | Prisma.ListEnumVisitTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.VisitType[] | Prisma.ListEnumVisitTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumVisitTypeFilter<$PrismaModel> | $Enums.VisitType
+}
+
 export type EnumVisitPlanStatusFilter<$PrismaModel = never> = {
   equals?: $Enums.VisitPlanStatus | Prisma.EnumVisitPlanStatusFieldRefInput<$PrismaModel>
   in?: $Enums.VisitPlanStatus[] | Prisma.ListEnumVisitPlanStatusFieldRefInput<$PrismaModel>
   notIn?: $Enums.VisitPlanStatus[] | Prisma.ListEnumVisitPlanStatusFieldRefInput<$PrismaModel>
   not?: Prisma.NestedEnumVisitPlanStatusFilter<$PrismaModel> | $Enums.VisitPlanStatus
+}
+
+export type EnumVisitTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.VisitType | Prisma.EnumVisitTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.VisitType[] | Prisma.ListEnumVisitTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.VisitType[] | Prisma.ListEnumVisitTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumVisitTypeWithAggregatesFilter<$PrismaModel> | $Enums.VisitType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumVisitTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumVisitTypeFilter<$PrismaModel>
 }
 
 export type EnumVisitPlanStatusWithAggregatesFilter<$PrismaModel = never> = {
@@ -1111,11 +1128,28 @@ export type NestedEnumOrderStatusWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedEnumOrderStatusFilter<$PrismaModel>
 }
 
+export type NestedEnumVisitTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.VisitType | Prisma.EnumVisitTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.VisitType[] | Prisma.ListEnumVisitTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.VisitType[] | Prisma.ListEnumVisitTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumVisitTypeFilter<$PrismaModel> | $Enums.VisitType
+}
+
 export type NestedEnumVisitPlanStatusFilter<$PrismaModel = never> = {
   equals?: $Enums.VisitPlanStatus | Prisma.EnumVisitPlanStatusFieldRefInput<$PrismaModel>
   in?: $Enums.VisitPlanStatus[] | Prisma.ListEnumVisitPlanStatusFieldRefInput<$PrismaModel>
   notIn?: $Enums.VisitPlanStatus[] | Prisma.ListEnumVisitPlanStatusFieldRefInput<$PrismaModel>
   not?: Prisma.NestedEnumVisitPlanStatusFilter<$PrismaModel> | $Enums.VisitPlanStatus
+}
+
+export type NestedEnumVisitTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.VisitType | Prisma.EnumVisitTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.VisitType[] | Prisma.ListEnumVisitTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.VisitType[] | Prisma.ListEnumVisitTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumVisitTypeWithAggregatesFilter<$PrismaModel> | $Enums.VisitType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumVisitTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumVisitTypeFilter<$PrismaModel>
 }
 
 export type NestedEnumVisitPlanStatusWithAggregatesFilter<$PrismaModel = never> = {

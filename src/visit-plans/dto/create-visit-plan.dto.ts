@@ -1,10 +1,12 @@
-import { VisitPlanStatus } from '../../prisma/client/client';
+import { VisitPlanStatus, VisitType } from '../../prisma/client/client';
 import {
   IsEnum,
   IsInt,
   IsNotEmpty,
   IsOptional,
   IsString,
+  IsUrl,
+  ValidateIf,
 } from 'class-validator';
 
 export class CreateVisitPlanDto {
@@ -29,6 +31,15 @@ export class CreateVisitPlanDto {
   @IsOptional()
   @IsString()
   purpose?: string;
+
+  @IsOptional()
+  @IsEnum(VisitType, { message: 'Invalid visit type' })
+  visitType?: VisitType;
+
+  @ValidateIf((o) => o.visitType === 'Online')
+  @IsUrl({}, { message: 'Invalid meeting URL' })
+  @IsOptional()
+  meetingUrl?: string;
 
   @IsNotEmpty({ message: 'Scheduled date is required' })
   scheduledDate: Date;

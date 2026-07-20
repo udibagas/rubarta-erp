@@ -132,6 +132,11 @@ enum VisitPlanStatus {
   Rescheduled
 }
 
+enum VisitType {
+  Online
+  Offline
+}
+
 model Lead {
   id Int @id @default(autoincrement())
 
@@ -475,6 +480,8 @@ model VisitPlan {
   contactId         Int? // Optional reference to Contact
   title             String          @db.VarChar(200)
   purpose           String?         @db.Text
+  visitType         VisitType       @default(Offline)
+  meetingUrl        String?         @db.VarChar(500) // URL for online meetings
   scheduledDate     DateTime
   scheduledTime     String?         @db.VarChar(10) // e.g., "09:00"
   estimatedDuration Int?            @db.Integer // Duration in minutes

@@ -448,6 +448,8 @@ export const VisitPlanScalarFieldEnum = {
   contactId: 'contactId',
   title: 'title',
   purpose: 'purpose',
+  visitType: 'visitType',
+  meetingUrl: 'meetingUrl',
   scheduledDate: 'scheduledDate',
   scheduledTime: 'scheduledTime',
   estimatedDuration: 'estimatedDuration',

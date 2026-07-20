@@ -2,7 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateVisitPlanDto } from './dto/create-visit-plan.dto';
 import { UpdateVisitPlanDto } from './dto/update-visit-plan.dto';
 import { PrismaService } from '../prisma/prisma.service';
-import { Prisma, VisitPlanStatus } from '../prisma/client/client';
+import { Prisma, VisitPlanStatus, VisitType } from '../prisma/client/client';
 
 @Injectable()
 export class VisitPlansService {
@@ -39,8 +39,11 @@ export class VisitPlansService {
     customerId?: number;
     contactId?: number;
     status?: VisitPlanStatus;
+    visitType?: VisitType;
     startDate?: Date;
     endDate?: Date;
+    year?: number;
+    month?: number;
   }) {
     const where: Prisma.VisitPlanWhereInput = {
       deletedAt: null,
@@ -54,6 +57,7 @@ export class VisitPlansService {
       customerId,
       contactId,
       status,
+      visitType,
       startDate,
       endDate,
     } = params;
@@ -76,6 +80,10 @@ export class VisitPlansService {
 
     if (status) {
       where.status = status;
+    }
+
+    if (visitType) {
+      where.visitType = visitType;
     }
 
     if (startDate || endDate) {

@@ -123,6 +123,14 @@ export const VisitPlanStatus = {
 export type VisitPlanStatus = (typeof VisitPlanStatus)[keyof typeof VisitPlanStatus]
 
 
+export const VisitType = {
+  Online: 'Online',
+  Offline: 'Offline'
+} as const
+
+export type VisitType = (typeof VisitType)[keyof typeof VisitType]
+
+
 export const OrderStatus = {
   Pending: 'Pending',
   Processing: 'Processing',

@@ -13,7 +13,7 @@ import { VisitPlansService } from './visit-plans.service';
 import { CreateVisitPlanDto } from './dto/create-visit-plan.dto';
 import { UpdateVisitPlanDto } from './dto/update-visit-plan.dto';
 import { Auth } from '../auth/auth.decorator';
-import { User, VisitPlanStatus } from '../prisma/client/client';
+import { User, VisitPlanStatus, VisitType } from '../prisma/client/client';
 
 @Controller('api/visit-plans')
 export class VisitPlansController {
@@ -33,19 +33,25 @@ export class VisitPlansController {
     @Query('contactId', ParseIntPipe) contactId?: number,
     @Query('userId', ParseIntPipe) userId?: number,
     @Query('status') status?: VisitPlanStatus,
+    @Query('visitType') visitType?: VisitType,
     @Query('startDate') startDate?: string,
     @Query('endDate') endDate?: string,
     @Query('keyword') keyword?: string,
+    @Query('year', ParseIntPipe) year?: number,
+    @Query('month', ParseIntPipe) month?: number,
   ) {
     return this.visitPlansService.findAll({
       page,
       pageSize,
       keyword,
+      year,
+      month,
       companyId,
       customerId,
       contactId,
       userId,
       status,
+      visitType,
       startDate: startDate ? new Date(startDate) : undefined,
       endDate: endDate ? new Date(endDate) : undefined,
     });

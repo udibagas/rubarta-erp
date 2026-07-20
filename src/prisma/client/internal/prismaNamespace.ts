@@ -3189,6 +3189,8 @@ export const VisitPlanScalarFieldEnum = {
   contactId: 'contactId',
   title: 'title',
   purpose: 'purpose',
+  visitType: 'visitType',
+  meetingUrl: 'meetingUrl',
   scheduledDate: 'scheduledDate',
   scheduledTime: 'scheduledTime',
   estimatedDuration: 'estimatedDuration',
@@ -3648,6 +3650,20 @@ export type EnumOrderStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$Pris
  * Reference to a field of type 'OrderStatus[]'
  */
 export type ListEnumOrderStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'OrderStatus[]'>
+    
+
+
+/**
+ * Reference to a field of type 'VisitType'
+ */
+export type EnumVisitTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'VisitType'>
+    
+
+
+/**
+ * Reference to a field of type 'VisitType[]'
+ */
+export type ListEnumVisitTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'VisitType[]'>
     
 
 
