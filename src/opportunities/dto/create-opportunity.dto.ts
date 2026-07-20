@@ -17,6 +17,9 @@ export class CreateOpportunityDto {
   @IsNotEmpty({ message: 'Company is required' })
   companyId: number;
 
+  @IsOptional()
+  leadId: number;
+
   @IsNotEmpty({ message: 'Name is required' })
   name: string;
 
