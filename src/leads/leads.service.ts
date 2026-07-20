@@ -145,6 +145,7 @@ export class LeadsService {
 
     // Create opportunity
     const opportunity = await this.opportunitiesService.create({
+      leadId: id,
       userId,
       customerId: lead.customerId,
       companyId: lead.companyId,
