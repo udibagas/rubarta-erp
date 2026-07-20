@@ -26,19 +26,19 @@ export class VisitPlansController {
 
   @Get()
   findAll(
-    @Query('page', ParseIntPipe) page?: number,
-    @Query('pageSize', ParseIntPipe) pageSize?: number,
-    @Query('companyId', ParseIntPipe) companyId?: number,
-    @Query('customerId', ParseIntPipe) customerId?: number,
-    @Query('contactId', ParseIntPipe) contactId?: number,
-    @Query('userId', ParseIntPipe) userId?: number,
+    @Query('page', new ParseIntPipe({ optional: true })) page?: number,
+    @Query('pageSize', new ParseIntPipe({ optional: true })) pageSize?: number,
+    @Query('companyId', new ParseIntPipe({ optional: true })) companyId?: number,
+    @Query('customerId', new ParseIntPipe({ optional: true })) customerId?: number,
+    @Query('contactId', new ParseIntPipe({ optional: true })) contactId?: number,
+    @Query('userId', new ParseIntPipe({ optional: true })) userId?: number,
     @Query('status') status?: VisitPlanStatus,
     @Query('visitType') visitType?: VisitType,
     @Query('startDate') startDate?: string,
     @Query('endDate') endDate?: string,
     @Query('keyword') keyword?: string,
-    @Query('year', ParseIntPipe) year?: number,
-    @Query('month', ParseIntPipe) month?: number,
+    @Query('year', new ParseIntPipe({ optional: true })) year?: number,
+    @Query('month', new ParseIntPipe({ optional: true })) month?: number,
   ) {
     return this.visitPlansService.findAll({
       page,

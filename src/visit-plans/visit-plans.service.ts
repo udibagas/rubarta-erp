@@ -60,6 +60,8 @@ export class VisitPlansService {
       visitType,
       startDate,
       endDate,
+      year,
+      month,
     } = params;
 
     if (companyId) {
@@ -86,7 +88,26 @@ export class VisitPlansService {
       where.visitType = visitType;
     }
 
-    if (startDate || endDate) {
+    // Handle year/month filtering
+    if (year || month) {
+      const filterYear = year || new Date().getFullYear();
+      const filterMonth = month !== undefined ? month : 1;
+
+      const start = new Date(
+        filterYear,
+        month !== undefined ? filterMonth - 1 : 0,
+        1,
+      );
+      const end =
+        month !== undefined
+          ? new Date(filterYear, filterMonth, 0, 23, 59, 59, 999)
+          : new Date(filterYear, 11, 31, 23, 59, 59, 999);
+
+      where.scheduledDate = {
+        gte: start,
+        lte: end,
+      };
+    } else if (startDate || endDate) {
       where.scheduledDate = {};
       if (startDate) {
         where.scheduledDate.gte = startDate;
