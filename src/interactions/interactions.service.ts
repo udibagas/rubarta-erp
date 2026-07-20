@@ -86,15 +86,7 @@ export class InteractionsService {
         this.prisma.interaction.count({ where }),
       ]);
 
-      return {
-        data,
-        meta: {
-          total,
-          page,
-          limit,
-          totalPages: Math.ceil(total / limit),
-        },
-      };
+      return { data, page, total };
     }
 
     // Return all results without pagination
