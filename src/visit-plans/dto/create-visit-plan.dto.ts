@@ -13,15 +13,15 @@ export class CreateVisitPlanDto {
   userId: number;
 
   @IsNotEmpty({ message: 'Customer is required' })
-  @IsInt()
+  @IsInt({ message: 'Invalid customer' })
   customerId: number;
 
   @IsNotEmpty({ message: 'Company is required' })
-  @IsInt()
+  @IsInt({ message: 'Invalid company' })
   companyId: number;
 
   @IsOptional()
-  @IsInt()
+  @IsInt({ message: 'Invalid contact' })
   contactId?: number;
 
   @IsNotEmpty({ message: 'Title is required' })
