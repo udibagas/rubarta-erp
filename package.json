@@ -18,7 +18,9 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "db:generate": "prisma generate --schema=./prisma/schema",
-    "db:push": "npm run db:generate && prisma db push --schema=./prisma/schema"
+    "db:push": "npm run db:generate && prisma db push --schema=./prisma/schema",
+    "seed": "ts-node prisma/seed.ts",
+    "seed:one": "ts-node prisma/seeders/run-seeder.ts"
   },
   "dependencies": {
     "@nestjs-modules/mailer": "^2.0.1",
