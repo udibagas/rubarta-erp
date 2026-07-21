@@ -228,6 +228,7 @@ model Quotation {
   deletedAt    DateTime?       @db.Timestamp()
   notes        String?         @db.Text
   terms        String?         @db.Text
+  attachments  Json?           @db.Json // For storing file metadata like name, path, size, type
 
   // Timestamps
   createdAt DateTime  @default(now())

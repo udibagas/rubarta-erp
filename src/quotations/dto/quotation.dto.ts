@@ -117,6 +117,10 @@ export class CreateQuotationDto {
   @ValidateNested({ each: true })
   @Type(() => QuotationItemDto)
   items: QuotationItemDto[];
+
+  @IsOptional()
+  @IsArray({ message: 'Attachments must be an array' })
+  attachments?: Record<string, any>[];
 }
 
 export class UpdateQuotationDto extends PartialType(CreateQuotationDto) {

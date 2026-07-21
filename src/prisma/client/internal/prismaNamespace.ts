@@ -3025,6 +3025,7 @@ export const QuotationScalarFieldEnum = {
   deletedAt: 'deletedAt',
   notes: 'notes',
   terms: 'terms',
+  attachments: 'attachments',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   customerId: 'customerId',

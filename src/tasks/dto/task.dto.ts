@@ -63,12 +63,14 @@ export class CreateTaskDto {
 
   @ApiProperty({
     required: false,
-    example: {
-      fileName: 'document.pdf',
-      filePath: '/uploads/2025/01/document.pdf',
-      fileSize: 102400,
-      fileType: 'application/pdf',
-    },
+    example: [
+      {
+        fileName: 'document.pdf',
+        filePath: '/uploads/2025/01/document.pdf',
+        fileSize: 102400,
+        fileType: 'application/pdf',
+      },
+    ],
     description: 'File metadata (name, path, size, type)',
   })
   @IsOptional()

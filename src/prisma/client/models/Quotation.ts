@@ -118,6 +118,7 @@ export type QuotationCountAggregateOutputType = {
   deletedAt: number
   notes: number
   terms: number
+  attachments: number
   createdAt: number
   updatedAt: number
   customerId: number
@@ -219,6 +220,7 @@ export type QuotationCountAggregateInputType = {
   deletedAt?: true
   notes?: true
   terms?: true
+  attachments?: true
   createdAt?: true
   updatedAt?: true
   customerId?: true
@@ -331,6 +333,7 @@ export type QuotationGroupByOutputType = {
   deletedAt: Date | null
   notes: string | null
   terms: string | null
+  attachments: runtime.JsonValue | null
   createdAt: Date
   updatedAt: Date | null
   customerId: number
@@ -379,6 +382,7 @@ export type QuotationWhereInput = {
   deletedAt?: Prisma.DateTimeNullableFilter<"Quotation"> | Date | string | null
   notes?: Prisma.StringNullableFilter<"Quotation"> | string | null
   terms?: Prisma.StringNullableFilter<"Quotation"> | string | null
+  attachments?: Prisma.JsonNullableFilter<"Quotation">
   createdAt?: Prisma.DateTimeFilter<"Quotation"> | Date | string
   updatedAt?: Prisma.DateTimeNullableFilter<"Quotation"> | Date | string | null
   customerId?: Prisma.IntFilter<"Quotation"> | number
@@ -408,6 +412,7 @@ export type QuotationOrderByWithRelationInput = {
   deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   notes?: Prisma.SortOrderInput | Prisma.SortOrder
   terms?: Prisma.SortOrderInput | Prisma.SortOrder
+  attachments?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   customerId?: Prisma.SortOrder
@@ -440,6 +445,7 @@ export type QuotationWhereUniqueInput = Prisma.AtLeast<{
   deletedAt?: Prisma.DateTimeNullableFilter<"Quotation"> | Date | string | null
   notes?: Prisma.StringNullableFilter<"Quotation"> | string | null
   terms?: Prisma.StringNullableFilter<"Quotation"> | string | null
+  attachments?: Prisma.JsonNullableFilter<"Quotation">
   createdAt?: Prisma.DateTimeFilter<"Quotation"> | Date | string
   updatedAt?: Prisma.DateTimeNullableFilter<"Quotation"> | Date | string | null
   customerId?: Prisma.IntFilter<"Quotation"> | number
@@ -469,6 +475,7 @@ export type QuotationOrderByWithAggregationInput = {
   deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   notes?: Prisma.SortOrderInput | Prisma.SortOrder
   terms?: Prisma.SortOrderInput | Prisma.SortOrder
+  attachments?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   customerId?: Prisma.SortOrder
@@ -502,6 +509,7 @@ export type QuotationScalarWhereWithAggregatesInput = {
   deletedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Quotation"> | Date | string | null
   notes?: Prisma.StringNullableWithAggregatesFilter<"Quotation"> | string | null
   terms?: Prisma.StringNullableWithAggregatesFilter<"Quotation"> | string | null
+  attachments?: Prisma.JsonNullableWithAggregatesFilter<"Quotation">
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Quotation"> | Date | string
   updatedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Quotation"> | Date | string | null
   customerId?: Prisma.IntWithAggregatesFilter<"Quotation"> | number
@@ -526,6 +534,7 @@ export type QuotationCreateInput = {
   deletedAt?: Date | string | null
   notes?: string | null
   terms?: string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string | null
   Opportunity?: Prisma.OpportunityCreateNestedOneWithoutQuotationsInput
@@ -552,6 +561,7 @@ export type QuotationUncheckedCreateInput = {
   deletedAt?: Date | string | null
   notes?: string | null
   terms?: string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string | null
   customerId: number
@@ -577,6 +587,7 @@ export type QuotationUpdateInput = {
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   terms?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Opportunity?: Prisma.OpportunityUpdateOneWithoutQuotationsNestedInput
@@ -603,6 +614,7 @@ export type QuotationUncheckedUpdateInput = {
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   terms?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   customerId?: Prisma.IntFieldUpdateOperationsInput | number
@@ -629,6 +641,7 @@ export type QuotationCreateManyInput = {
   deletedAt?: Date | string | null
   notes?: string | null
   terms?: string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string | null
   customerId: number
@@ -653,6 +666,7 @@ export type QuotationUpdateManyMutationInput = {
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   terms?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
@@ -675,6 +689,7 @@ export type QuotationUncheckedUpdateManyInput = {
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   terms?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   customerId?: Prisma.IntFieldUpdateOperationsInput | number
@@ -710,6 +725,7 @@ export type QuotationCountOrderByAggregateInput = {
   deletedAt?: Prisma.SortOrder
   notes?: Prisma.SortOrder
   terms?: Prisma.SortOrder
+  attachments?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   customerId?: Prisma.SortOrder
@@ -957,6 +973,7 @@ export type QuotationCreateWithoutCustomerInput = {
   deletedAt?: Date | string | null
   notes?: string | null
   terms?: string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string | null
   Opportunity?: Prisma.OpportunityCreateNestedOneWithoutQuotationsInput
@@ -982,6 +999,7 @@ export type QuotationUncheckedCreateWithoutCustomerInput = {
   deletedAt?: Date | string | null
   notes?: string | null
   terms?: string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string | null
   userId: number
@@ -1036,6 +1054,7 @@ export type QuotationScalarWhereInput = {
   deletedAt?: Prisma.DateTimeNullableFilter<"Quotation"> | Date | string | null
   notes?: Prisma.StringNullableFilter<"Quotation"> | string | null
   terms?: Prisma.StringNullableFilter<"Quotation"> | string | null
+  attachments?: Prisma.JsonNullableFilter<"Quotation">
   createdAt?: Prisma.DateTimeFilter<"Quotation"> | Date | string
   updatedAt?: Prisma.DateTimeNullableFilter<"Quotation"> | Date | string | null
   customerId?: Prisma.IntFilter<"Quotation"> | number
@@ -1060,6 +1079,7 @@ export type QuotationCreateWithoutOpportunityInput = {
   deletedAt?: Date | string | null
   notes?: string | null
   terms?: string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string | null
   Customer: Prisma.CustomerCreateNestedOneWithoutQuotationsInput
@@ -1085,6 +1105,7 @@ export type QuotationUncheckedCreateWithoutOpportunityInput = {
   deletedAt?: Date | string | null
   notes?: string | null
   terms?: string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string | null
   customerId: number
@@ -1135,6 +1156,7 @@ export type QuotationCreateWithoutQuotationItemsInput = {
   deletedAt?: Date | string | null
   notes?: string | null
   terms?: string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string | null
   Opportunity?: Prisma.OpportunityCreateNestedOneWithoutQuotationsInput
@@ -1160,6 +1182,7 @@ export type QuotationUncheckedCreateWithoutQuotationItemsInput = {
   deletedAt?: Date | string | null
   notes?: string | null
   terms?: string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string | null
   customerId: number
@@ -1200,6 +1223,7 @@ export type QuotationUpdateWithoutQuotationItemsInput = {
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   terms?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Opportunity?: Prisma.OpportunityUpdateOneWithoutQuotationsNestedInput
@@ -1225,6 +1249,7 @@ export type QuotationUncheckedUpdateWithoutQuotationItemsInput = {
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   terms?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   customerId?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1249,6 +1274,7 @@ export type QuotationCreateWithoutUserInput = {
   deletedAt?: Date | string | null
   notes?: string | null
   terms?: string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string | null
   Opportunity?: Prisma.OpportunityCreateNestedOneWithoutQuotationsInput
@@ -1274,6 +1300,7 @@ export type QuotationUncheckedCreateWithoutUserInput = {
   deletedAt?: Date | string | null
   notes?: string | null
   terms?: string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string | null
   customerId: number
@@ -1325,6 +1352,7 @@ export type QuotationCreateManyCustomerInput = {
   deletedAt?: Date | string | null
   notes?: string | null
   terms?: string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string | null
   userId: number
@@ -1348,6 +1376,7 @@ export type QuotationUpdateWithoutCustomerInput = {
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   terms?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Opportunity?: Prisma.OpportunityUpdateOneWithoutQuotationsNestedInput
@@ -1373,6 +1402,7 @@ export type QuotationUncheckedUpdateWithoutCustomerInput = {
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   terms?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   userId?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1398,6 +1428,7 @@ export type QuotationUncheckedUpdateManyWithoutCustomerInput = {
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   terms?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   userId?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1422,6 +1453,7 @@ export type QuotationCreateManyOpportunityInput = {
   deletedAt?: Date | string | null
   notes?: string | null
   terms?: string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string | null
   customerId: number
@@ -1445,6 +1477,7 @@ export type QuotationUpdateWithoutOpportunityInput = {
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   terms?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Customer?: Prisma.CustomerUpdateOneRequiredWithoutQuotationsNestedInput
@@ -1470,6 +1503,7 @@ export type QuotationUncheckedUpdateWithoutOpportunityInput = {
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   terms?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   customerId?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1495,6 +1529,7 @@ export type QuotationUncheckedUpdateManyWithoutOpportunityInput = {
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   terms?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   customerId?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1519,6 +1554,7 @@ export type QuotationCreateManyUserInput = {
   deletedAt?: Date | string | null
   notes?: string | null
   terms?: string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string | null
   customerId: number
@@ -1542,6 +1578,7 @@ export type QuotationUpdateWithoutUserInput = {
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   terms?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Opportunity?: Prisma.OpportunityUpdateOneWithoutQuotationsNestedInput
@@ -1567,6 +1604,7 @@ export type QuotationUncheckedUpdateWithoutUserInput = {
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   terms?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   customerId?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1592,6 +1630,7 @@ export type QuotationUncheckedUpdateManyWithoutUserInput = {
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   terms?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   customerId?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1647,6 +1686,7 @@ export type QuotationSelect<ExtArgs extends runtime.Types.Extensions.InternalArg
   deletedAt?: boolean
   notes?: boolean
   terms?: boolean
+  attachments?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   customerId?: boolean
@@ -1677,6 +1717,7 @@ export type QuotationSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ext
   deletedAt?: boolean
   notes?: boolean
   terms?: boolean
+  attachments?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   customerId?: boolean
@@ -1705,6 +1746,7 @@ export type QuotationSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ext
   deletedAt?: boolean
   notes?: boolean
   terms?: boolean
+  attachments?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   customerId?: boolean
@@ -1733,6 +1775,7 @@ export type QuotationSelectScalar = {
   deletedAt?: boolean
   notes?: boolean
   terms?: boolean
+  attachments?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   customerId?: boolean
@@ -1740,7 +1783,7 @@ export type QuotationSelectScalar = {
   opportunityId?: boolean
 }
 
-export type QuotationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "number" | "title" | "description" | "totalAmount" | "discount" | "vatAmount" | "grandTotal" | "status" | "currency" | "validity" | "validUntil" | "sentDate" | "acceptedDate" | "deletedAt" | "notes" | "terms" | "createdAt" | "updatedAt" | "customerId" | "userId" | "opportunityId", ExtArgs["result"]["quotation"]>
+export type QuotationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "number" | "title" | "description" | "totalAmount" | "discount" | "vatAmount" | "grandTotal" | "status" | "currency" | "validity" | "validUntil" | "sentDate" | "acceptedDate" | "deletedAt" | "notes" | "terms" | "attachments" | "createdAt" | "updatedAt" | "customerId" | "userId" | "opportunityId", ExtArgs["result"]["quotation"]>
 export type QuotationInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   Opportunity?: boolean | Prisma.Quotation$OpportunityArgs<ExtArgs>
   Customer?: boolean | Prisma.CustomerDefaultArgs<ExtArgs>
@@ -1785,6 +1828,7 @@ export type $QuotationPayload<ExtArgs extends runtime.Types.Extensions.InternalA
     deletedAt: Date | null
     notes: string | null
     terms: string | null
+    attachments: runtime.JsonValue | null
     createdAt: Date
     updatedAt: Date | null
     customerId: number
@@ -2234,6 +2278,7 @@ export interface QuotationFieldRefs {
   readonly deletedAt: Prisma.FieldRef<"Quotation", 'DateTime'>
   readonly notes: Prisma.FieldRef<"Quotation", 'String'>
   readonly terms: Prisma.FieldRef<"Quotation", 'String'>
+  readonly attachments: Prisma.FieldRef<"Quotation", 'Json'>
   readonly createdAt: Prisma.FieldRef<"Quotation", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Quotation", 'DateTime'>
   readonly customerId: Prisma.FieldRef<"Quotation", 'Int'>
