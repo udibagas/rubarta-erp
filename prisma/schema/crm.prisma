@@ -185,6 +185,7 @@ model Opportunity {
   expectedCloseDate DateTime
   actualCloseDate   DateTime?         @db.Timestamp()
   lostReason        String?           @db.Text
+  attachments       Json?             @db.Json // For storing file metadata like name, path, size, type
   deletedAt         DateTime?         @db.Timestamp()
 
   // Timestamps
@@ -283,6 +284,7 @@ model Task {
   status        TaskStatus   @default(Todo)
   priority      TaskPriority @default(Medium)
   deletedAt     DateTime?    @db.Timestamp()
+  attachments   Json?        @db.Json // For storing file metadata like name, path, size, type
 
   // Timestamps
   createdAt DateTime  @default(now())

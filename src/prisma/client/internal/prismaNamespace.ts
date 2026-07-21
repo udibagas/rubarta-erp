@@ -2998,6 +2998,7 @@ export const OpportunityScalarFieldEnum = {
   expectedCloseDate: 'expectedCloseDate',
   actualCloseDate: 'actualCloseDate',
   lostReason: 'lostReason',
+  attachments: 'attachments',
   deletedAt: 'deletedAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -3062,6 +3063,7 @@ export const TaskScalarFieldEnum = {
   status: 'status',
   priority: 'priority',
   deletedAt: 'deletedAt',
+  attachments: 'attachments',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const

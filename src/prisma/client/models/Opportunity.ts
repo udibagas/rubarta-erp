@@ -98,6 +98,7 @@ export type OpportunityCountAggregateOutputType = {
   expectedCloseDate: number
   actualCloseDate: number
   lostReason: number
+  attachments: number
   deletedAt: number
   createdAt: number
   updatedAt: number
@@ -177,6 +178,7 @@ export type OpportunityCountAggregateInputType = {
   expectedCloseDate?: true
   actualCloseDate?: true
   lostReason?: true
+  attachments?: true
   deletedAt?: true
   createdAt?: true
   updatedAt?: true
@@ -283,6 +285,7 @@ export type OpportunityGroupByOutputType = {
   expectedCloseDate: Date
   actualCloseDate: Date | null
   lostReason: string | null
+  attachments: runtime.JsonValue | null
   deletedAt: Date | null
   createdAt: Date
   updatedAt: Date | null
@@ -325,6 +328,7 @@ export type OpportunityWhereInput = {
   expectedCloseDate?: Prisma.DateTimeFilter<"Opportunity"> | Date | string
   actualCloseDate?: Prisma.DateTimeNullableFilter<"Opportunity"> | Date | string | null
   lostReason?: Prisma.StringNullableFilter<"Opportunity"> | string | null
+  attachments?: Prisma.JsonNullableFilter<"Opportunity">
   deletedAt?: Prisma.DateTimeNullableFilter<"Opportunity"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Opportunity"> | Date | string
   updatedAt?: Prisma.DateTimeNullableFilter<"Opportunity"> | Date | string | null
@@ -351,6 +355,7 @@ export type OpportunityOrderByWithRelationInput = {
   expectedCloseDate?: Prisma.SortOrder
   actualCloseDate?: Prisma.SortOrderInput | Prisma.SortOrder
   lostReason?: Prisma.SortOrderInput | Prisma.SortOrder
+  attachments?: Prisma.SortOrderInput | Prisma.SortOrder
   deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -380,6 +385,7 @@ export type OpportunityWhereUniqueInput = Prisma.AtLeast<{
   expectedCloseDate?: Prisma.DateTimeFilter<"Opportunity"> | Date | string
   actualCloseDate?: Prisma.DateTimeNullableFilter<"Opportunity"> | Date | string | null
   lostReason?: Prisma.StringNullableFilter<"Opportunity"> | string | null
+  attachments?: Prisma.JsonNullableFilter<"Opportunity">
   deletedAt?: Prisma.DateTimeNullableFilter<"Opportunity"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Opportunity"> | Date | string
   updatedAt?: Prisma.DateTimeNullableFilter<"Opportunity"> | Date | string | null
@@ -406,6 +412,7 @@ export type OpportunityOrderByWithAggregationInput = {
   expectedCloseDate?: Prisma.SortOrder
   actualCloseDate?: Prisma.SortOrderInput | Prisma.SortOrder
   lostReason?: Prisma.SortOrderInput | Prisma.SortOrder
+  attachments?: Prisma.SortOrderInput | Prisma.SortOrder
   deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -433,6 +440,7 @@ export type OpportunityScalarWhereWithAggregatesInput = {
   expectedCloseDate?: Prisma.DateTimeWithAggregatesFilter<"Opportunity"> | Date | string
   actualCloseDate?: Prisma.DateTimeNullableWithAggregatesFilter<"Opportunity"> | Date | string | null
   lostReason?: Prisma.StringNullableWithAggregatesFilter<"Opportunity"> | string | null
+  attachments?: Prisma.JsonNullableWithAggregatesFilter<"Opportunity">
   deletedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Opportunity"> | Date | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Opportunity"> | Date | string
   updatedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Opportunity"> | Date | string | null
@@ -447,6 +455,7 @@ export type OpportunityCreateInput = {
   expectedCloseDate: Date | string
   actualCloseDate?: Date | string | null
   lostReason?: string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
@@ -473,6 +482,7 @@ export type OpportunityUncheckedCreateInput = {
   expectedCloseDate: Date | string
   actualCloseDate?: Date | string | null
   lostReason?: string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
@@ -490,6 +500,7 @@ export type OpportunityUpdateInput = {
   expectedCloseDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   actualCloseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   lostReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -516,6 +527,7 @@ export type OpportunityUncheckedUpdateInput = {
   expectedCloseDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   actualCloseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   lostReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -538,6 +550,7 @@ export type OpportunityCreateManyInput = {
   expectedCloseDate: Date | string
   actualCloseDate?: Date | string | null
   lostReason?: string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
@@ -552,6 +565,7 @@ export type OpportunityUpdateManyMutationInput = {
   expectedCloseDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   actualCloseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   lostReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -571,6 +585,7 @@ export type OpportunityUncheckedUpdateManyInput = {
   expectedCloseDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   actualCloseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   lostReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -600,6 +615,7 @@ export type OpportunityCountOrderByAggregateInput = {
   expectedCloseDate?: Prisma.SortOrder
   actualCloseDate?: Prisma.SortOrder
   lostReason?: Prisma.SortOrder
+  attachments?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -897,6 +913,7 @@ export type OpportunityCreateWithoutCustomerInput = {
   expectedCloseDate: Date | string
   actualCloseDate?: Date | string | null
   lostReason?: string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
@@ -921,6 +938,7 @@ export type OpportunityUncheckedCreateWithoutCustomerInput = {
   expectedCloseDate: Date | string
   actualCloseDate?: Date | string | null
   lostReason?: string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
@@ -972,6 +990,7 @@ export type OpportunityScalarWhereInput = {
   expectedCloseDate?: Prisma.DateTimeFilter<"Opportunity"> | Date | string
   actualCloseDate?: Prisma.DateTimeNullableFilter<"Opportunity"> | Date | string | null
   lostReason?: Prisma.StringNullableFilter<"Opportunity"> | string | null
+  attachments?: Prisma.JsonNullableFilter<"Opportunity">
   deletedAt?: Prisma.DateTimeNullableFilter<"Opportunity"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Opportunity"> | Date | string
   updatedAt?: Prisma.DateTimeNullableFilter<"Opportunity"> | Date | string | null
@@ -986,6 +1005,7 @@ export type OpportunityCreateWithoutLeadInput = {
   expectedCloseDate: Date | string
   actualCloseDate?: Date | string | null
   lostReason?: string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
@@ -1010,6 +1030,7 @@ export type OpportunityUncheckedCreateWithoutLeadInput = {
   expectedCloseDate: Date | string
   actualCloseDate?: Date | string | null
   lostReason?: string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
@@ -1053,6 +1074,7 @@ export type OpportunityCreateWithoutQuotationsInput = {
   expectedCloseDate: Date | string
   actualCloseDate?: Date | string | null
   lostReason?: string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
@@ -1078,6 +1100,7 @@ export type OpportunityUncheckedCreateWithoutQuotationsInput = {
   expectedCloseDate: Date | string
   actualCloseDate?: Date | string | null
   lostReason?: string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
@@ -1110,6 +1133,7 @@ export type OpportunityUpdateWithoutQuotationsInput = {
   expectedCloseDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   actualCloseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   lostReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1135,6 +1159,7 @@ export type OpportunityUncheckedUpdateWithoutQuotationsInput = {
   expectedCloseDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   actualCloseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   lostReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1151,6 +1176,7 @@ export type OpportunityCreateWithoutTasksInput = {
   expectedCloseDate: Date | string
   actualCloseDate?: Date | string | null
   lostReason?: string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
@@ -1176,6 +1202,7 @@ export type OpportunityUncheckedCreateWithoutTasksInput = {
   expectedCloseDate: Date | string
   actualCloseDate?: Date | string | null
   lostReason?: string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
@@ -1208,6 +1235,7 @@ export type OpportunityUpdateWithoutTasksInput = {
   expectedCloseDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   actualCloseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   lostReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1233,6 +1261,7 @@ export type OpportunityUncheckedUpdateWithoutTasksInput = {
   expectedCloseDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   actualCloseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   lostReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1249,6 +1278,7 @@ export type OpportunityCreateWithoutInteractionsInput = {
   expectedCloseDate: Date | string
   actualCloseDate?: Date | string | null
   lostReason?: string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
@@ -1274,6 +1304,7 @@ export type OpportunityUncheckedCreateWithoutInteractionsInput = {
   expectedCloseDate: Date | string
   actualCloseDate?: Date | string | null
   lostReason?: string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
@@ -1306,6 +1337,7 @@ export type OpportunityUpdateWithoutInteractionsInput = {
   expectedCloseDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   actualCloseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   lostReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1331,6 +1363,7 @@ export type OpportunityUncheckedUpdateWithoutInteractionsInput = {
   expectedCloseDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   actualCloseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   lostReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1347,6 +1380,7 @@ export type OpportunityCreateWithoutCompanyInput = {
   expectedCloseDate: Date | string
   actualCloseDate?: Date | string | null
   lostReason?: string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
@@ -1371,6 +1405,7 @@ export type OpportunityUncheckedCreateWithoutCompanyInput = {
   expectedCloseDate: Date | string
   actualCloseDate?: Date | string | null
   lostReason?: string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
@@ -1414,6 +1449,7 @@ export type OpportunityCreateWithoutUserInput = {
   expectedCloseDate: Date | string
   actualCloseDate?: Date | string | null
   lostReason?: string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
@@ -1438,6 +1474,7 @@ export type OpportunityUncheckedCreateWithoutUserInput = {
   expectedCloseDate: Date | string
   actualCloseDate?: Date | string | null
   lostReason?: string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
@@ -1485,6 +1522,7 @@ export type OpportunityCreateManyCustomerInput = {
   expectedCloseDate: Date | string
   actualCloseDate?: Date | string | null
   lostReason?: string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
@@ -1499,6 +1537,7 @@ export type OpportunityUpdateWithoutCustomerInput = {
   expectedCloseDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   actualCloseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   lostReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1523,6 +1562,7 @@ export type OpportunityUncheckedUpdateWithoutCustomerInput = {
   expectedCloseDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   actualCloseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   lostReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1544,6 +1584,7 @@ export type OpportunityUncheckedUpdateManyWithoutCustomerInput = {
   expectedCloseDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   actualCloseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   lostReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1562,6 +1603,7 @@ export type OpportunityCreateManyLeadInput = {
   expectedCloseDate: Date | string
   actualCloseDate?: Date | string | null
   lostReason?: string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
@@ -1576,6 +1618,7 @@ export type OpportunityUpdateWithoutLeadInput = {
   expectedCloseDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   actualCloseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   lostReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1600,6 +1643,7 @@ export type OpportunityUncheckedUpdateWithoutLeadInput = {
   expectedCloseDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   actualCloseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   lostReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1621,6 +1665,7 @@ export type OpportunityUncheckedUpdateManyWithoutLeadInput = {
   expectedCloseDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   actualCloseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   lostReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1639,6 +1684,7 @@ export type OpportunityCreateManyCompanyInput = {
   expectedCloseDate: Date | string
   actualCloseDate?: Date | string | null
   lostReason?: string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
@@ -1653,6 +1699,7 @@ export type OpportunityUpdateWithoutCompanyInput = {
   expectedCloseDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   actualCloseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   lostReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1677,6 +1724,7 @@ export type OpportunityUncheckedUpdateWithoutCompanyInput = {
   expectedCloseDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   actualCloseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   lostReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1698,6 +1746,7 @@ export type OpportunityUncheckedUpdateManyWithoutCompanyInput = {
   expectedCloseDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   actualCloseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   lostReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1716,6 +1765,7 @@ export type OpportunityCreateManyUserInput = {
   expectedCloseDate: Date | string
   actualCloseDate?: Date | string | null
   lostReason?: string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
@@ -1730,6 +1780,7 @@ export type OpportunityUpdateWithoutUserInput = {
   expectedCloseDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   actualCloseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   lostReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1754,6 +1805,7 @@ export type OpportunityUncheckedUpdateWithoutUserInput = {
   expectedCloseDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   actualCloseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   lostReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1775,6 +1827,7 @@ export type OpportunityUncheckedUpdateManyWithoutUserInput = {
   expectedCloseDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   actualCloseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   lostReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1843,6 +1896,7 @@ export type OpportunitySelect<ExtArgs extends runtime.Types.Extensions.InternalA
   expectedCloseDate?: boolean
   actualCloseDate?: boolean
   lostReason?: boolean
+  attachments?: boolean
   deletedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -1870,6 +1924,7 @@ export type OpportunitySelectCreateManyAndReturn<ExtArgs extends runtime.Types.E
   expectedCloseDate?: boolean
   actualCloseDate?: boolean
   lostReason?: boolean
+  attachments?: boolean
   deletedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -1893,6 +1948,7 @@ export type OpportunitySelectUpdateManyAndReturn<ExtArgs extends runtime.Types.E
   expectedCloseDate?: boolean
   actualCloseDate?: boolean
   lostReason?: boolean
+  attachments?: boolean
   deletedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -1916,12 +1972,13 @@ export type OpportunitySelectScalar = {
   expectedCloseDate?: boolean
   actualCloseDate?: boolean
   lostReason?: boolean
+  attachments?: boolean
   deletedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type OpportunityOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "customerId" | "companyId" | "leadId" | "userId" | "name" | "description" | "amount" | "probability" | "stage" | "expectedCloseDate" | "actualCloseDate" | "lostReason" | "deletedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["opportunity"]>
+export type OpportunityOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "customerId" | "companyId" | "leadId" | "userId" | "name" | "description" | "amount" | "probability" | "stage" | "expectedCloseDate" | "actualCloseDate" | "lostReason" | "attachments" | "deletedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["opportunity"]>
 export type OpportunityInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   Customer?: boolean | Prisma.CustomerDefaultArgs<ExtArgs>
   User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -1970,6 +2027,7 @@ export type $OpportunityPayload<ExtArgs extends runtime.Types.Extensions.Interna
     expectedCloseDate: Date
     actualCloseDate: Date | null
     lostReason: string | null
+    attachments: runtime.JsonValue | null
     deletedAt: Date | null
     createdAt: Date
     updatedAt: Date | null
@@ -2416,6 +2474,7 @@ export interface OpportunityFieldRefs {
   readonly expectedCloseDate: Prisma.FieldRef<"Opportunity", 'DateTime'>
   readonly actualCloseDate: Prisma.FieldRef<"Opportunity", 'DateTime'>
   readonly lostReason: Prisma.FieldRef<"Opportunity", 'String'>
+  readonly attachments: Prisma.FieldRef<"Opportunity", 'Json'>
   readonly deletedAt: Prisma.FieldRef<"Opportunity", 'DateTime'>
   readonly createdAt: Prisma.FieldRef<"Opportunity", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Opportunity", 'DateTime'>

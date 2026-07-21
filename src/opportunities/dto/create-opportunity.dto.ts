@@ -6,6 +6,7 @@ import {
   IsOptional,
   Max,
   Min,
+  IsArray,
 } from 'class-validator';
 
 export class CreateOpportunityDto {
@@ -42,4 +43,8 @@ export class CreateOpportunityDto {
 
   @IsNotEmpty({ message: 'Expected close date is required' })
   expectedCloseDate: Date;
+
+  @IsOptional()
+  @IsArray({ message: 'Attachments must be an array' })
+  attachments?: Record<string, any>[];
 }
