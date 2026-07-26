@@ -31,6 +31,8 @@ export class OpportunitiesController {
     pageSize: number = 10,
     @Query('companyId', new ParseIntPipe({ optional: true }))
     companyId?: number,
+    @Query('customerId', new ParseIntPipe({ optional: true }))
+    customerId?: number,
     @Query('leadId', new ParseIntPipe({ optional: true }))
     leadId?: number,
     @Query('keyword') keyword?: string,
@@ -39,6 +41,7 @@ export class OpportunitiesController {
       page,
       pageSize,
       companyId,
+      customerId,
       leadId,
       keyword,
     });

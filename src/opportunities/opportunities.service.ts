@@ -16,11 +16,19 @@ export class OpportunitiesService {
     page?: number;
     pageSize?: number;
     companyId?: number;
+    customerId?: number;
     leadId?: number;
     keyword?: string;
   }) {
     const where: Prisma.OpportunityWhereInput = {};
-    const { page = 1, pageSize = 10, companyId, leadId, keyword } = params;
+    const {
+      page = 1,
+      pageSize = 10,
+      companyId,
+      customerId,
+      leadId,
+      keyword,
+    } = params;
 
     if (companyId) {
       where.companyId = companyId;
@@ -28,6 +36,10 @@ export class OpportunitiesService {
 
     if (leadId) {
       where.leadId = leadId;
+    }
+
+    if (customerId) {
+      where.customerId = customerId;
     }
 
     if (keyword) {
