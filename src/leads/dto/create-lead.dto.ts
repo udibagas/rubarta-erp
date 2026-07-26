@@ -45,7 +45,7 @@ export class CreateLeadDto {
 
   @ApiProperty({ required: false, example: 50000000 })
   @IsOptional()
-  @IsNumber()
+  @IsNumber({}, { message: 'Invalid estimated value' })
   estimatedValue?: number;
 
   @ApiProperty({ required: false, example: 'Interested in our product line' })
