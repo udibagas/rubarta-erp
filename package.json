@@ -8,6 +8,7 @@
   "scripts": {
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
+    "dev": "nest start --watch && npx tailwindcss -i ./css/tailwind.css -o ./css/main.css --watch",
     "start": "nest start",
     "start:dev": "nest start --watch && npx tailwindcss -i ./css/tailwind.css -o ./css/main.css --watch",
     "start:debug": "nest start --debug --watch",
@@ -42,16 +43,17 @@
     "class-validator": "^0.14.2",
     "cookie-parser": "^1.4.7",
     "ejs": "^3.1.10",
-    "exceljs": "^4.4.0",
+    "exceljs": "^3.4.0",
     "form-data": "^4.0.5",
     "helmet": "^8.1.0",
     "ncsrf": "^1.1.0",
     "nodemailer": "^7.0.10",
+    "preview-email": "^3.2.0",
     "reflect-metadata": "^0.2.2",
     "rxjs": "^7.8.2"
   },
   "devDependencies": {
-    "@compodoc/compodoc": "^1.1.32",
+    "@compodoc/compodoc": "^2.0.0",
     "@nestjs/cli": "^11.0.0",
     "@nestjs/schematics": "^11.0.0",
     "@nestjs/testing": "^11.0.0",
