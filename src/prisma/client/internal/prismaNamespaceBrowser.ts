@@ -459,6 +459,7 @@ export const VisitPlanScalarFieldEnum = {
   status: 'status',
   actualVisitDate: 'actualVisitDate',
   outcome: 'outcome',
+  cancelReason: 'cancelReason',
   notes: 'notes',
   address: 'address',
   contactPerson: 'contactPerson',

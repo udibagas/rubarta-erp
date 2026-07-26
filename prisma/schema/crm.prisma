@@ -491,6 +491,7 @@ model VisitPlan {
   status            VisitPlanStatus @default(Planned)
   actualVisitDate   DateTime?       @db.Timestamp()
   outcome           String?         @db.Text
+  cancelReason      String?         @db.Text
   notes             String?         @db.Text
   address           String?         @db.Text
   contactPerson     String?         @db.VarChar(200) // Fallback if no contactId

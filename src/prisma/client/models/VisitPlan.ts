@@ -60,6 +60,7 @@ export type VisitPlanMinAggregateOutputType = {
   status: $Enums.VisitPlanStatus | null
   actualVisitDate: Date | null
   outcome: string | null
+  cancelReason: string | null
   notes: string | null
   address: string | null
   contactPerson: string | null
@@ -85,6 +86,7 @@ export type VisitPlanMaxAggregateOutputType = {
   status: $Enums.VisitPlanStatus | null
   actualVisitDate: Date | null
   outcome: string | null
+  cancelReason: string | null
   notes: string | null
   address: string | null
   contactPerson: string | null
@@ -110,6 +112,7 @@ export type VisitPlanCountAggregateOutputType = {
   status: number
   actualVisitDate: number
   outcome: number
+  cancelReason: number
   notes: number
   address: number
   contactPerson: number
@@ -155,6 +158,7 @@ export type VisitPlanMinAggregateInputType = {
   status?: true
   actualVisitDate?: true
   outcome?: true
+  cancelReason?: true
   notes?: true
   address?: true
   contactPerson?: true
@@ -180,6 +184,7 @@ export type VisitPlanMaxAggregateInputType = {
   status?: true
   actualVisitDate?: true
   outcome?: true
+  cancelReason?: true
   notes?: true
   address?: true
   contactPerson?: true
@@ -205,6 +210,7 @@ export type VisitPlanCountAggregateInputType = {
   status?: true
   actualVisitDate?: true
   outcome?: true
+  cancelReason?: true
   notes?: true
   address?: true
   contactPerson?: true
@@ -317,6 +323,7 @@ export type VisitPlanGroupByOutputType = {
   status: $Enums.VisitPlanStatus
   actualVisitDate: Date | null
   outcome: string | null
+  cancelReason: string | null
   notes: string | null
   address: string | null
   contactPerson: string | null
@@ -365,6 +372,7 @@ export type VisitPlanWhereInput = {
   status?: Prisma.EnumVisitPlanStatusFilter<"VisitPlan"> | $Enums.VisitPlanStatus
   actualVisitDate?: Prisma.DateTimeNullableFilter<"VisitPlan"> | Date | string | null
   outcome?: Prisma.StringNullableFilter<"VisitPlan"> | string | null
+  cancelReason?: Prisma.StringNullableFilter<"VisitPlan"> | string | null
   notes?: Prisma.StringNullableFilter<"VisitPlan"> | string | null
   address?: Prisma.StringNullableFilter<"VisitPlan"> | string | null
   contactPerson?: Prisma.StringNullableFilter<"VisitPlan"> | string | null
@@ -394,6 +402,7 @@ export type VisitPlanOrderByWithRelationInput = {
   status?: Prisma.SortOrder
   actualVisitDate?: Prisma.SortOrderInput | Prisma.SortOrder
   outcome?: Prisma.SortOrderInput | Prisma.SortOrder
+  cancelReason?: Prisma.SortOrderInput | Prisma.SortOrder
   notes?: Prisma.SortOrderInput | Prisma.SortOrder
   address?: Prisma.SortOrderInput | Prisma.SortOrder
   contactPerson?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -426,6 +435,7 @@ export type VisitPlanWhereUniqueInput = Prisma.AtLeast<{
   status?: Prisma.EnumVisitPlanStatusFilter<"VisitPlan"> | $Enums.VisitPlanStatus
   actualVisitDate?: Prisma.DateTimeNullableFilter<"VisitPlan"> | Date | string | null
   outcome?: Prisma.StringNullableFilter<"VisitPlan"> | string | null
+  cancelReason?: Prisma.StringNullableFilter<"VisitPlan"> | string | null
   notes?: Prisma.StringNullableFilter<"VisitPlan"> | string | null
   address?: Prisma.StringNullableFilter<"VisitPlan"> | string | null
   contactPerson?: Prisma.StringNullableFilter<"VisitPlan"> | string | null
@@ -455,6 +465,7 @@ export type VisitPlanOrderByWithAggregationInput = {
   status?: Prisma.SortOrder
   actualVisitDate?: Prisma.SortOrderInput | Prisma.SortOrder
   outcome?: Prisma.SortOrderInput | Prisma.SortOrder
+  cancelReason?: Prisma.SortOrderInput | Prisma.SortOrder
   notes?: Prisma.SortOrderInput | Prisma.SortOrder
   address?: Prisma.SortOrderInput | Prisma.SortOrder
   contactPerson?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -488,6 +499,7 @@ export type VisitPlanScalarWhereWithAggregatesInput = {
   status?: Prisma.EnumVisitPlanStatusWithAggregatesFilter<"VisitPlan"> | $Enums.VisitPlanStatus
   actualVisitDate?: Prisma.DateTimeNullableWithAggregatesFilter<"VisitPlan"> | Date | string | null
   outcome?: Prisma.StringNullableWithAggregatesFilter<"VisitPlan"> | string | null
+  cancelReason?: Prisma.StringNullableWithAggregatesFilter<"VisitPlan"> | string | null
   notes?: Prisma.StringNullableWithAggregatesFilter<"VisitPlan"> | string | null
   address?: Prisma.StringNullableWithAggregatesFilter<"VisitPlan"> | string | null
   contactPerson?: Prisma.StringNullableWithAggregatesFilter<"VisitPlan"> | string | null
@@ -508,6 +520,7 @@ export type VisitPlanCreateInput = {
   status?: $Enums.VisitPlanStatus
   actualVisitDate?: Date | string | null
   outcome?: string | null
+  cancelReason?: string | null
   notes?: string | null
   address?: string | null
   contactPerson?: string | null
@@ -537,6 +550,7 @@ export type VisitPlanUncheckedCreateInput = {
   status?: $Enums.VisitPlanStatus
   actualVisitDate?: Date | string | null
   outcome?: string | null
+  cancelReason?: string | null
   notes?: string | null
   address?: string | null
   contactPerson?: string | null
@@ -557,6 +571,7 @@ export type VisitPlanUpdateInput = {
   status?: Prisma.EnumVisitPlanStatusFieldUpdateOperationsInput | $Enums.VisitPlanStatus
   actualVisitDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   outcome?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cancelReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPerson?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -586,6 +601,7 @@ export type VisitPlanUncheckedUpdateInput = {
   status?: Prisma.EnumVisitPlanStatusFieldUpdateOperationsInput | $Enums.VisitPlanStatus
   actualVisitDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   outcome?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cancelReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPerson?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -611,6 +627,7 @@ export type VisitPlanCreateManyInput = {
   status?: $Enums.VisitPlanStatus
   actualVisitDate?: Date | string | null
   outcome?: string | null
+  cancelReason?: string | null
   notes?: string | null
   address?: string | null
   contactPerson?: string | null
@@ -631,6 +648,7 @@ export type VisitPlanUpdateManyMutationInput = {
   status?: Prisma.EnumVisitPlanStatusFieldUpdateOperationsInput | $Enums.VisitPlanStatus
   actualVisitDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   outcome?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cancelReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPerson?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -656,6 +674,7 @@ export type VisitPlanUncheckedUpdateManyInput = {
   status?: Prisma.EnumVisitPlanStatusFieldUpdateOperationsInput | $Enums.VisitPlanStatus
   actualVisitDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   outcome?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cancelReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPerson?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -691,6 +710,7 @@ export type VisitPlanCountOrderByAggregateInput = {
   status?: Prisma.SortOrder
   actualVisitDate?: Prisma.SortOrder
   outcome?: Prisma.SortOrder
+  cancelReason?: Prisma.SortOrder
   notes?: Prisma.SortOrder
   address?: Prisma.SortOrder
   contactPerson?: Prisma.SortOrder
@@ -725,6 +745,7 @@ export type VisitPlanMaxOrderByAggregateInput = {
   status?: Prisma.SortOrder
   actualVisitDate?: Prisma.SortOrder
   outcome?: Prisma.SortOrder
+  cancelReason?: Prisma.SortOrder
   notes?: Prisma.SortOrder
   address?: Prisma.SortOrder
   contactPerson?: Prisma.SortOrder
@@ -750,6 +771,7 @@ export type VisitPlanMinOrderByAggregateInput = {
   status?: Prisma.SortOrder
   actualVisitDate?: Prisma.SortOrder
   outcome?: Prisma.SortOrder
+  cancelReason?: Prisma.SortOrder
   notes?: Prisma.SortOrder
   address?: Prisma.SortOrder
   contactPerson?: Prisma.SortOrder
@@ -955,6 +977,7 @@ export type VisitPlanCreateWithoutCustomerInput = {
   status?: $Enums.VisitPlanStatus
   actualVisitDate?: Date | string | null
   outcome?: string | null
+  cancelReason?: string | null
   notes?: string | null
   address?: string | null
   contactPerson?: string | null
@@ -982,6 +1005,7 @@ export type VisitPlanUncheckedCreateWithoutCustomerInput = {
   status?: $Enums.VisitPlanStatus
   actualVisitDate?: Date | string | null
   outcome?: string | null
+  cancelReason?: string | null
   notes?: string | null
   address?: string | null
   contactPerson?: string | null
@@ -1036,6 +1060,7 @@ export type VisitPlanScalarWhereInput = {
   status?: Prisma.EnumVisitPlanStatusFilter<"VisitPlan"> | $Enums.VisitPlanStatus
   actualVisitDate?: Prisma.DateTimeNullableFilter<"VisitPlan"> | Date | string | null
   outcome?: Prisma.StringNullableFilter<"VisitPlan"> | string | null
+  cancelReason?: Prisma.StringNullableFilter<"VisitPlan"> | string | null
   notes?: Prisma.StringNullableFilter<"VisitPlan"> | string | null
   address?: Prisma.StringNullableFilter<"VisitPlan"> | string | null
   contactPerson?: Prisma.StringNullableFilter<"VisitPlan"> | string | null
@@ -1056,6 +1081,7 @@ export type VisitPlanCreateWithoutContactInput = {
   status?: $Enums.VisitPlanStatus
   actualVisitDate?: Date | string | null
   outcome?: string | null
+  cancelReason?: string | null
   notes?: string | null
   address?: string | null
   contactPerson?: string | null
@@ -1083,6 +1109,7 @@ export type VisitPlanUncheckedCreateWithoutContactInput = {
   status?: $Enums.VisitPlanStatus
   actualVisitDate?: Date | string | null
   outcome?: string | null
+  cancelReason?: string | null
   notes?: string | null
   address?: string | null
   contactPerson?: string | null
@@ -1129,6 +1156,7 @@ export type VisitPlanCreateWithoutCompanyInput = {
   status?: $Enums.VisitPlanStatus
   actualVisitDate?: Date | string | null
   outcome?: string | null
+  cancelReason?: string | null
   notes?: string | null
   address?: string | null
   contactPerson?: string | null
@@ -1156,6 +1184,7 @@ export type VisitPlanUncheckedCreateWithoutCompanyInput = {
   status?: $Enums.VisitPlanStatus
   actualVisitDate?: Date | string | null
   outcome?: string | null
+  cancelReason?: string | null
   notes?: string | null
   address?: string | null
   contactPerson?: string | null
@@ -1202,6 +1231,7 @@ export type VisitPlanCreateWithoutUserInput = {
   status?: $Enums.VisitPlanStatus
   actualVisitDate?: Date | string | null
   outcome?: string | null
+  cancelReason?: string | null
   notes?: string | null
   address?: string | null
   contactPerson?: string | null
@@ -1229,6 +1259,7 @@ export type VisitPlanUncheckedCreateWithoutUserInput = {
   status?: $Enums.VisitPlanStatus
   actualVisitDate?: Date | string | null
   outcome?: string | null
+  cancelReason?: string | null
   notes?: string | null
   address?: string | null
   contactPerson?: string | null
@@ -1279,6 +1310,7 @@ export type VisitPlanCreateManyCustomerInput = {
   status?: $Enums.VisitPlanStatus
   actualVisitDate?: Date | string | null
   outcome?: string | null
+  cancelReason?: string | null
   notes?: string | null
   address?: string | null
   contactPerson?: string | null
@@ -1299,6 +1331,7 @@ export type VisitPlanUpdateWithoutCustomerInput = {
   status?: Prisma.EnumVisitPlanStatusFieldUpdateOperationsInput | $Enums.VisitPlanStatus
   actualVisitDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   outcome?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cancelReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPerson?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1326,6 +1359,7 @@ export type VisitPlanUncheckedUpdateWithoutCustomerInput = {
   status?: Prisma.EnumVisitPlanStatusFieldUpdateOperationsInput | $Enums.VisitPlanStatus
   actualVisitDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   outcome?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cancelReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPerson?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1350,6 +1384,7 @@ export type VisitPlanUncheckedUpdateManyWithoutCustomerInput = {
   status?: Prisma.EnumVisitPlanStatusFieldUpdateOperationsInput | $Enums.VisitPlanStatus
   actualVisitDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   outcome?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cancelReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPerson?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1374,6 +1409,7 @@ export type VisitPlanCreateManyContactInput = {
   status?: $Enums.VisitPlanStatus
   actualVisitDate?: Date | string | null
   outcome?: string | null
+  cancelReason?: string | null
   notes?: string | null
   address?: string | null
   contactPerson?: string | null
@@ -1394,6 +1430,7 @@ export type VisitPlanUpdateWithoutContactInput = {
   status?: Prisma.EnumVisitPlanStatusFieldUpdateOperationsInput | $Enums.VisitPlanStatus
   actualVisitDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   outcome?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cancelReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPerson?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1421,6 +1458,7 @@ export type VisitPlanUncheckedUpdateWithoutContactInput = {
   status?: Prisma.EnumVisitPlanStatusFieldUpdateOperationsInput | $Enums.VisitPlanStatus
   actualVisitDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   outcome?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cancelReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPerson?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1445,6 +1483,7 @@ export type VisitPlanUncheckedUpdateManyWithoutContactInput = {
   status?: Prisma.EnumVisitPlanStatusFieldUpdateOperationsInput | $Enums.VisitPlanStatus
   actualVisitDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   outcome?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cancelReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPerson?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1469,6 +1508,7 @@ export type VisitPlanCreateManyCompanyInput = {
   status?: $Enums.VisitPlanStatus
   actualVisitDate?: Date | string | null
   outcome?: string | null
+  cancelReason?: string | null
   notes?: string | null
   address?: string | null
   contactPerson?: string | null
@@ -1489,6 +1529,7 @@ export type VisitPlanUpdateWithoutCompanyInput = {
   status?: Prisma.EnumVisitPlanStatusFieldUpdateOperationsInput | $Enums.VisitPlanStatus
   actualVisitDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   outcome?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cancelReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPerson?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1516,6 +1557,7 @@ export type VisitPlanUncheckedUpdateWithoutCompanyInput = {
   status?: Prisma.EnumVisitPlanStatusFieldUpdateOperationsInput | $Enums.VisitPlanStatus
   actualVisitDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   outcome?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cancelReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPerson?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1540,6 +1582,7 @@ export type VisitPlanUncheckedUpdateManyWithoutCompanyInput = {
   status?: Prisma.EnumVisitPlanStatusFieldUpdateOperationsInput | $Enums.VisitPlanStatus
   actualVisitDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   outcome?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cancelReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPerson?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1564,6 +1607,7 @@ export type VisitPlanCreateManyUserInput = {
   status?: $Enums.VisitPlanStatus
   actualVisitDate?: Date | string | null
   outcome?: string | null
+  cancelReason?: string | null
   notes?: string | null
   address?: string | null
   contactPerson?: string | null
@@ -1584,6 +1628,7 @@ export type VisitPlanUpdateWithoutUserInput = {
   status?: Prisma.EnumVisitPlanStatusFieldUpdateOperationsInput | $Enums.VisitPlanStatus
   actualVisitDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   outcome?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cancelReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPerson?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1611,6 +1656,7 @@ export type VisitPlanUncheckedUpdateWithoutUserInput = {
   status?: Prisma.EnumVisitPlanStatusFieldUpdateOperationsInput | $Enums.VisitPlanStatus
   actualVisitDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   outcome?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cancelReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPerson?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1635,6 +1681,7 @@ export type VisitPlanUncheckedUpdateManyWithoutUserInput = {
   status?: Prisma.EnumVisitPlanStatusFieldUpdateOperationsInput | $Enums.VisitPlanStatus
   actualVisitDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   outcome?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cancelReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPerson?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1662,6 +1709,7 @@ export type VisitPlanSelect<ExtArgs extends runtime.Types.Extensions.InternalArg
   status?: boolean
   actualVisitDate?: boolean
   outcome?: boolean
+  cancelReason?: boolean
   notes?: boolean
   address?: boolean
   contactPerson?: boolean
@@ -1691,6 +1739,7 @@ export type VisitPlanSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ext
   status?: boolean
   actualVisitDate?: boolean
   outcome?: boolean
+  cancelReason?: boolean
   notes?: boolean
   address?: boolean
   contactPerson?: boolean
@@ -1720,6 +1769,7 @@ export type VisitPlanSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ext
   status?: boolean
   actualVisitDate?: boolean
   outcome?: boolean
+  cancelReason?: boolean
   notes?: boolean
   address?: boolean
   contactPerson?: boolean
@@ -1749,6 +1799,7 @@ export type VisitPlanSelectScalar = {
   status?: boolean
   actualVisitDate?: boolean
   outcome?: boolean
+  cancelReason?: boolean
   notes?: boolean
   address?: boolean
   contactPerson?: boolean
@@ -1758,7 +1809,7 @@ export type VisitPlanSelectScalar = {
   updatedAt?: boolean
 }
 
-export type VisitPlanOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "customerId" | "userId" | "companyId" | "contactId" | "title" | "purpose" | "visitType" | "meetingUrl" | "scheduledDate" | "scheduledTime" | "estimatedDuration" | "status" | "actualVisitDate" | "outcome" | "notes" | "address" | "contactPerson" | "contactPhone" | "deletedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["visitPlan"]>
+export type VisitPlanOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "customerId" | "userId" | "companyId" | "contactId" | "title" | "purpose" | "visitType" | "meetingUrl" | "scheduledDate" | "scheduledTime" | "estimatedDuration" | "status" | "actualVisitDate" | "outcome" | "cancelReason" | "notes" | "address" | "contactPerson" | "contactPhone" | "deletedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["visitPlan"]>
 export type VisitPlanInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   Customer?: boolean | Prisma.CustomerDefaultArgs<ExtArgs>
   User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -1802,6 +1853,7 @@ export type $VisitPlanPayload<ExtArgs extends runtime.Types.Extensions.InternalA
     status: $Enums.VisitPlanStatus
     actualVisitDate: Date | null
     outcome: string | null
+    cancelReason: string | null
     notes: string | null
     address: string | null
     contactPerson: string | null
@@ -2251,6 +2303,7 @@ export interface VisitPlanFieldRefs {
   readonly status: Prisma.FieldRef<"VisitPlan", 'VisitPlanStatus'>
   readonly actualVisitDate: Prisma.FieldRef<"VisitPlan", 'DateTime'>
   readonly outcome: Prisma.FieldRef<"VisitPlan", 'String'>
+  readonly cancelReason: Prisma.FieldRef<"VisitPlan", 'String'>
   readonly notes: Prisma.FieldRef<"VisitPlan", 'String'>
   readonly address: Prisma.FieldRef<"VisitPlan", 'String'>
   readonly contactPerson: Prisma.FieldRef<"VisitPlan", 'String'>

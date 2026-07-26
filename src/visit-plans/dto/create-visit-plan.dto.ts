@@ -65,6 +65,10 @@ export class CreateVisitPlanDto {
 
   @IsOptional()
   @IsString()
+  cancelReason?: string;
+
+  @IsOptional()
+  @IsString()
   notes?: string;
 
   @IsOptional()
