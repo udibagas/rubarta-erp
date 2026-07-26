@@ -12,7 +12,6 @@ import { EventEmitterModule } from '@nestjs/event-emitter';
 import { ThrottlerModule } from '@nestjs/throttler';
 // import { APP_GUARD } from '@nestjs/core';
 import { MailerModule } from '@nestjs-modules/mailer';
-import { EjsAdapter } from '@nestjs-modules/mailer/dist/adapters/ejs.adapter'; //?
 import { NotificationsModule } from './notifications/notifications.module';
 import { FileModule } from './file/file.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
@@ -34,6 +33,7 @@ import { OrdersModule } from './orders/orders.module';
 import { MaterialsModule } from './materials/materials.module';
 import { CrmDashboardModule } from './crm-dashboard/crm-dashboard.module';
 import { VisitPlansModule } from './visit-plans/visit-plans.module';
+import { EjsAdapter } from '@nestjs-modules/mailer/adapters/ejs.adapter';
 
 @Module({
   imports: [
