@@ -34,16 +34,17 @@ export class VisitPlansService {
     page?: number;
     pageSize?: number;
     keyword?: string;
-    companyId?: number;
-    userId?: number;
-    customerId?: number;
-    contactId?: number;
-    status?: VisitPlanStatus;
-    visitType?: VisitType;
+    companyId?: number | string | number[] | string[];
+    userId?: number | number[] | string | string[];
+    customerId?: number | string | number[] | string[];
+    status?: VisitPlanStatus | VisitPlanStatus[];
+    visitType?: VisitType | VisitType[];
     startDate?: Date;
     endDate?: Date;
     year?: number;
     month?: number;
+    sortBy?: string;
+    sortOrder?: 'asc' | 'desc';
   }) {
     const where: Prisma.VisitPlanWhereInput = {
       deletedAt: null,
@@ -55,7 +56,6 @@ export class VisitPlansService {
       companyId,
       userId,
       customerId,
-      contactId,
       status,
       visitType,
       startDate,
@@ -65,27 +65,43 @@ export class VisitPlansService {
     } = params;
 
     if (companyId) {
-      where.companyId = companyId;
+      if (Array.isArray(companyId)) {
+        where.companyId = { in: companyId.map((id) => +id) };
+      } else {
+        where.companyId = +companyId;
+      }
     }
 
     if (userId) {
-      where.userId = userId;
+      if (Array.isArray(userId)) {
+        where.userId = { in: userId.map((id) => +id) };
+      } else {
+        where.userId = +userId;
+      }
     }
 
     if (customerId) {
-      where.customerId = customerId;
-    }
-
-    if (contactId) {
-      where.contactId = contactId;
+      if (Array.isArray(customerId)) {
+        where.customerId = { in: customerId.map((id) => +id) };
+      } else {
+        where.customerId = +customerId;
+      }
     }
 
     if (status) {
-      where.status = status;
+      if (!Array.isArray(status)) {
+        where.status = { in: [status] };
+      } else {
+        where.status = { in: status };
+      }
     }
 
     if (visitType) {
-      where.visitType = visitType;
+      if (!Array.isArray(visitType)) {
+        where.visitType = { in: [visitType] };
+      } else {
+        where.visitType = { in: visitType };
+      }
     }
 
     // Handle year/month filtering
@@ -126,6 +142,12 @@ export class VisitPlansService {
           },
         },
         {
+          purpose: {
+            contains: keyword,
+            mode: 'insensitive',
+          },
+        },
+        {
           Customer: {
             name: {
               contains: keyword,
@@ -146,7 +168,9 @@ export class VisitPlansService {
       where,
       take: pageSize,
       skip: (page - 1) * pageSize,
-      orderBy: { scheduledDate: 'asc' },
+      orderBy: params.sortBy
+        ? { [params.sortBy]: params.sortOrder || 'asc' }
+        : { scheduledDate: 'desc' },
       include: {
         Company: { select: { id: true, name: true } },
         Customer: {

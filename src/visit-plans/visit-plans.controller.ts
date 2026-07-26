@@ -28,17 +28,18 @@ export class VisitPlansController {
   findAll(
     @Query('page', new ParseIntPipe({ optional: true })) page?: number,
     @Query('pageSize', new ParseIntPipe({ optional: true })) pageSize?: number,
-    @Query('companyId', new ParseIntPipe({ optional: true })) companyId?: number,
-    @Query('customerId', new ParseIntPipe({ optional: true })) customerId?: number,
-    @Query('contactId', new ParseIntPipe({ optional: true })) contactId?: number,
-    @Query('userId', new ParseIntPipe({ optional: true })) userId?: number,
-    @Query('status') status?: VisitPlanStatus,
-    @Query('visitType') visitType?: VisitType,
+    @Query('companyId') companyId?: number | string | number[] | string[],
+    @Query('customerId') customerId?: number | string | number[] | string[],
+    @Query('userId') userId?: number | number[] | string | string[],
+    @Query('status') status?: VisitPlanStatus | VisitPlanStatus[],
+    @Query('visitType') visitType?: VisitType | VisitType[],
     @Query('startDate') startDate?: string,
     @Query('endDate') endDate?: string,
     @Query('keyword') keyword?: string,
     @Query('year', new ParseIntPipe({ optional: true })) year?: number,
     @Query('month', new ParseIntPipe({ optional: true })) month?: number,
+    @Query('sortBy') sortBy?: string,
+    @Query('sortOrder') sortOrder?: 'asc' | 'desc',
   ) {
     return this.visitPlansService.findAll({
       page,
@@ -48,12 +49,13 @@ export class VisitPlansController {
       month,
       companyId,
       customerId,
-      contactId,
       userId,
       status,
       visitType,
       startDate: startDate ? new Date(startDate) : undefined,
       endDate: endDate ? new Date(endDate) : undefined,
+      sortBy,
+      sortOrder,
     });
   }
 
