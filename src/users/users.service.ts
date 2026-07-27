@@ -4,7 +4,7 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { PrismaService } from '../prisma/prisma.service';
 import * as bcrypt from 'bcrypt';
 import * as fs from 'node:fs/promises';
-import { Prisma } from '../prisma/client/client';
+import { Prisma, User } from '../prisma/client/client';
 
 @Injectable()
 export class UsersService {
@@ -99,7 +99,7 @@ export class UsersService {
     return code;
   }
 
-  getBalance() {
+  getBalance(user: User) {
     return this.prisma.userBalance.findMany({
       orderBy: { userId: 'asc' },
       include: {
@@ -108,6 +108,9 @@ export class UsersService {
             name: true,
           },
         },
+      },
+      where: {
+        userId: user.roles.includes('ADMIN') ? undefined : user.id,
       },
     });
   }

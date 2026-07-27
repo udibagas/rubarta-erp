@@ -20,8 +20,9 @@ import {
   ApiOperation,
   ApiTags,
 } from '@nestjs/swagger';
-import { User } from './user.entity';
-import { Role } from '../prisma/client/client';
+import { User as UserEntity } from './user.entity';
+import { Role, User } from '../prisma/client/client';
+import { Auth } from '../auth/auth.decorator';
 
 @ApiTags('Users')
 @ApiBearerAuth()
@@ -32,7 +33,7 @@ export class UsersController {
   @Post()
   @Roles(Role.ADMIN)
   @ApiCreatedResponse({
-    type: User,
+    type: UserEntity,
     description: 'Created user',
   })
   @ApiOperation({ summary: 'Create new user' })
@@ -42,26 +43,26 @@ export class UsersController {
 
   @Get()
   @ApiOperation({ summary: 'Get all users' })
-  @ApiOkResponse({ type: User, isArray: true })
+  @ApiOkResponse({ type: UserEntity, isArray: true })
   findAll(@Query('keyword') keyword?: string) {
     return this.usersService.findAll(keyword);
   }
 
   @Get('balance')
-  balance() {
-    return this.usersService.getBalance();
+  balance(@Auth() user: User) {
+    return this.usersService.getBalance(user);
   }
 
   @Get(':id')
   @ApiOperation({ summary: 'Get single user by id' })
-  @ApiOkResponse({ type: User })
+  @ApiOkResponse({ type: UserEntity })
   findOne(@Param('id', ParseIntPipe) id: number) {
     return this.usersService.findOne(id);
   }
 
   @Patch(':id')
   @ApiOperation({ summary: 'Update user by id' })
-  @ApiOkResponse({ type: User })
+  @ApiOkResponse({ type: UserEntity })
   update(
     @Param('id', ParseIntPipe) id: number,
     @Body() updateUserDto: UpdateUserDto,
@@ -72,7 +73,7 @@ export class UsersController {
   @Delete(':id')
   @Roles(Role.ADMIN)
   @ApiOperation({ summary: 'Delete user by id' })
-  @ApiOkResponse({ type: User })
+  @ApiOkResponse({ type: UserEntity })
   remove(@Param('id', ParseIntPipe) id: number) {
     return this.usersService.remove(id);
   }
