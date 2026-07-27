@@ -60,7 +60,7 @@ export class CreateUserDto {
   @IsObject({ message: 'Invalid object' })
   signatureSpeciment?: JsonObject;
 
-  @ApiProperty({ example: ['APPROVER', 'VERIFIER'], enum: Role })
+  @ApiProperty({ example: ['ADMIN', 'USER', 'SALES_REP'], enum: Role })
   @IsArray()
   @ArrayNotEmpty()
   @IsEnum(Role, { each: true, message: 'Invalid Role' })
