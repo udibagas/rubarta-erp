@@ -7,6 +7,7 @@ import {
   Param,
   Delete,
   ParseIntPipe,
+  Query,
 } from '@nestjs/common';
 import { SuppliersService } from './suppliers.service';
 import { SupplierDto } from './supplier.dto';
@@ -24,8 +25,8 @@ export class SuppliersController {
   }
 
   @Get()
-  findAll() {
-    return this.suppliersService.findAll();
+  findAll(@Query('keyword') keyword?: string) {
+    return this.suppliersService.findAll({ keyword });
   }
 
   @Get(':id')

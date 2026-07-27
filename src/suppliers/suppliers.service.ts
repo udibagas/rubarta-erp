@@ -7,8 +7,17 @@ import { PrismaService } from '../prisma/prisma.service';
 export class SuppliersService {
   constructor(private readonly prisma: PrismaService) {}
 
-  findAll(): Promise<Supplier[]> {
+  findAll({ keyword }: { keyword?: string }): Promise<Supplier[]> {
     return this.prisma.supplier.findMany({
+      where: keyword
+        ? {
+            OR: [
+              { name: { contains: keyword, mode: 'insensitive' } },
+              { code: { contains: keyword, mode: 'insensitive' } },
+              { address: { contains: keyword, mode: 'insensitive' } },
+            ],
+          }
+        : {},
       include: { Bank: true },
     });
   }
