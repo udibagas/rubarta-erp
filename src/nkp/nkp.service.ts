@@ -71,6 +71,7 @@ export class NkpService {
     format?: string;
     orderBy?: string;
     orderDirection?: 'asc' | 'desc';
+    user: User;
   }) {
     const {
       page,
@@ -89,6 +90,14 @@ export class NkpService {
 
     if (companyId) {
       where.companyId = companyId;
+    }
+
+    // jika bukan admin, maka hanya bisa melihat data yang dia buat atau data yang dia sebagai employee
+    if (params.user && !params.user.roles.some((role) => role === Role.ADMIN)) {
+      where.OR = [
+        { requesterId: params.user.id },
+        { employeeId: params.user.id },
+      ];
     }
 
     if (
