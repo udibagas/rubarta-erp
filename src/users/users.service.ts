@@ -101,7 +101,7 @@ export class UsersService {
 
   getBalance(user: User) {
     return this.prisma.userBalance.findMany({
-      orderBy: { userId: 'asc' },
+      orderBy: { user: { name: 'asc' } },
       include: {
         user: {
           select: {
