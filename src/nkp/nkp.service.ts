@@ -83,7 +83,7 @@ export class NkpService {
       action,
       format,
       orderBy = 'updatedAt',
-      orderDirection = 'asc',
+      orderDirection = 'desc',
     } = params;
 
     const where: Prisma.NkpWhereInput = {};
@@ -140,7 +140,7 @@ export class NkpService {
 
     const options: Prisma.NkpFindManyArgs = {
       where,
-      orderBy: { updatedAt: 'desc' },
+      orderBy: { [orderBy]: orderDirection },
       include: {
         Employee: { select: { name: true } },
         Supplier: { select: { name: true } },
@@ -159,12 +159,6 @@ export class NkpService {
         },
       },
     };
-
-    if (orderBy) {
-      options.orderBy = {
-        [orderBy]: orderDirection,
-      };
-    }
 
     if (!action || action == 'report') {
       options.take = pageSize;
