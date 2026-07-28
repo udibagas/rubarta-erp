@@ -67,6 +67,11 @@ export class CreateCustomerDto {
   @IsOptional()
   @IsBoolean()
   readonly isActive?: boolean;
+
+  @ApiProperty({ required: false })
+  @IsOptional()
+  @IsInt()
+  readonly accountManagerId?: number;
 }
 
 export class UpdateCustomerDto extends PartialType(CreateCustomerDto) {}
@@ -86,4 +91,9 @@ export class QueryCustomerDto {
   @IsOptional()
   @IsBoolean()
   readonly isActive?: boolean;
+
+  @ApiProperty({ required: false })
+  @IsOptional()
+  @IsInt()
+  readonly accountManagerId?: number;
 }

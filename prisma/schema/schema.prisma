@@ -79,6 +79,7 @@ model User {
   Invoices            Invoice[]
   Payments            Payment[]
   VisitPlans          VisitPlan[]
+  Customers           Customer[]
 
   @@index([bankId, departmentId])
   @@map("Users")

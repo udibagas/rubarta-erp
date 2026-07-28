@@ -2938,6 +2938,7 @@ export const CustomerScalarFieldEnum = {
   employeeCount: 'employeeCount',
   revenue: 'revenue',
   tags: 'tags',
+  accountManagerId: 'accountManagerId',
   isActive: 'isActive',
   deletedAt: 'deletedAt',
   createdAt: 'createdAt',

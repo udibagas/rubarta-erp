@@ -31,6 +31,10 @@ export class CustomersService {
       where.isActive = query.isActive;
     }
 
+    if (query.accountManagerId) {
+      where.accountManagerId = query.accountManagerId;
+    }
+
     return this.prisma.customer.findMany({
       where,
       orderBy: { name: 'asc' },
