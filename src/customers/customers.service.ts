@@ -39,6 +39,9 @@ export class CustomersService {
       where,
       orderBy: { name: 'asc' },
       include: {
+        accountManager: {
+          select: { name: true },
+        },
         _count: {
           select: {
             Contacts: true,
