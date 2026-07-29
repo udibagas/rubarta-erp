@@ -20,6 +20,19 @@ export class CustomersService {
       where.OR = [
         { name: { contains: query.keyword, mode: 'insensitive' } },
         { email: { contains: query.keyword, mode: 'insensitive' } },
+        { address: { contains: query.keyword, mode: 'insensitive' } },
+        { website: { contains: query.keyword, mode: 'insensitive' } },
+        {
+          tags: {
+            has: query.keyword,
+          },
+        },
+        { industry: { contains: query.keyword, mode: 'insensitive' } },
+        {
+          accountManager: {
+            name: { contains: query.keyword, mode: 'insensitive' },
+          },
+        },
       ];
     }
 
