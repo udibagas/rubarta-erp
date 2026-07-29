@@ -51,6 +51,8 @@ export class ContactsService {
       where.OR = [
         { name: { contains: keyword, mode: 'insensitive' } },
         { email: { contains: keyword, mode: 'insensitive' } },
+        { phone: { contains: keyword, mode: 'insensitive' } },
+        { position: { contains: keyword, mode: 'insensitive' } },
         { Customer: { name: { contains: keyword, mode: 'insensitive' } } },
       ];
     }
