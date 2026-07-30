@@ -9,7 +9,7 @@ import { CrmDashboardService } from './crm-dashboard.service';
 
 @ApiTags('CRM Dashboard')
 @ApiBearerAuth()
-@Controller('crm-dashboard')
+@Controller('api/crm-dashboard')
 export class CrmDashboardController {
   constructor(private readonly dashboardService: CrmDashboardService) {}
 
