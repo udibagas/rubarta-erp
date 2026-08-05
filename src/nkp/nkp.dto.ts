@@ -12,6 +12,7 @@ import {
   IsEnum,
   IsNotEmpty,
   IsNumber,
+  IsNumberString,
   IsOptional,
   MaxLength,
   ValidateNested,
@@ -178,4 +179,44 @@ export class CloseNkpDto {
   @Type(() => NkpAttachmentDto)
   @ArrayNotEmpty({ message: 'Please attach proof of transfer' })
   attachments: NkpAttachmentDto[];
+}
+
+export class QueryNkpDto {
+  @IsOptional()
+  @IsNumberString()
+  page?: string;
+
+  @IsOptional()
+  @IsNumberString()
+  pageSize?: string;
+
+  @IsOptional()
+  keyword?: string;
+
+  @IsOptional()
+  status?: PaymentStatus | PaymentStatus[];
+
+  @IsOptional()
+  @IsNumberString()
+  companyId?: string;
+
+  @IsOptional()
+  @IsEnum(PaymentType)
+  paymentType?: PaymentType;
+
+  @IsOptional()
+  action?: string;
+
+  @IsOptional()
+  format?: string;
+
+  @IsOptional()
+  dateRange?: any;
+
+  @IsOptional()
+  orderBy?: string;
+
+  @IsOptional()
+  @IsEnum(['asc', 'desc'])
+  orderDirection?: 'asc' | 'desc';
 }

@@ -19,7 +19,7 @@ import {
   ApiOperation,
   ApiTags,
 } from '@nestjs/swagger';
-import { CloseNkpDto, NkpDto } from './nkp.dto';
+import { CloseNkpDto, NkpDto, QueryNkpDto } from './nkp.dto';
 import { Auth } from '../auth/auth.decorator';
 import { PaymentType, Role, User } from '../prisma/client/client';
 // import * as htmlToPdf from 'html-pdf-node';
@@ -73,42 +73,21 @@ export class NkpController {
   async findAll(
     @Res() res: Response,
     @Auth() user: User & { Role: Role },
-    @Query('page') page?: string,
-    @Query('pageSize') pageSize?: string,
-    @Query('keyword') keyword?: string,
-    @Query('companyId', ParseIntPipe) companyId?: number,
-    @Query('paymentType') paymentType?: PaymentType,
-    @Query('action') action?: string,
-    @Query('format') format?: string,
-    @Query('dateRange') dateRange?: any,
-    @Query('orderBy') orderBy?: string,
-    @Query('orderDirection') orderDirection?: 'asc' | 'desc',
+    @Query() query: QueryNkpDto,
   ) {
-    const data = await this.nkpService.findAll({
-      page: Number(page),
-      pageSize: Number(pageSize),
-      companyId,
-      paymentType,
-      keyword,
-      action,
-      format,
-      dateRange,
-      orderBy,
-      orderDirection,
-      user,
-    });
+    const data = await this.nkpService.findAll({ ...query, user });
 
-    if (action == 'download' && format == 'pdf') {
+    if (query.action == 'download' && query.format == 'pdf') {
       return res.render('nkp/report', {
         data,
-        paymentType,
-        dateRange,
+        paymentType: query.paymentType,
+        dateRange: query.dateRange,
         formatDateNumeric,
         toDecimal,
       });
     }
 
-    if (action == 'download' && format == 'excel') {
+    if (query.action == 'download' && query.format == 'excel') {
       const workbook = new ExcelJS.Workbook();
       const worksheet = workbook.addWorksheet('NKP Report');
 

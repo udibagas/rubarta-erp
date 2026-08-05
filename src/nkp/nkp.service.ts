@@ -1,5 +1,5 @@
 import { ForbiddenException, Injectable } from '@nestjs/common';
-import { CloseNkpDto, NkpDto } from './nkp.dto';
+import { CloseNkpDto, NkpDto, QueryNkpDto } from './nkp.dto';
 import { PrismaService } from '../prisma/prisma.service';
 import {
   ApprovalStatus,
@@ -60,23 +60,12 @@ export class NkpService {
     return savedData;
   }
 
-  async findAll(params: {
-    page: number;
-    pageSize: number;
-    companyId?: number;
-    paymentType?: PaymentType;
-    keyword?: string;
-    dateRange?: any;
-    action?: string;
-    format?: string;
-    orderBy?: string;
-    orderDirection?: 'asc' | 'desc';
-    user: User;
-  }) {
+  async findAll(params: QueryNkpDto & { user?: User }) {
     const {
       page,
       pageSize,
       companyId,
+      status,
       keyword,
       paymentType,
       dateRange,
@@ -86,10 +75,20 @@ export class NkpService {
       orderDirection = 'desc',
     } = params;
 
+    console.log('params', params);
+
     const where: Prisma.NkpWhereInput = {};
 
     if (companyId) {
-      where.companyId = companyId;
+      where.companyId = +companyId;
+    }
+
+    if (Array.isArray(status) && status.length > 0) {
+      where.status = { in: status };
+    }
+
+    if (status && typeof status == 'string') {
+      where.status = status;
     }
 
     // jika bukan admin, maka hanya bisa melihat data yang dia buat atau data yang dia sebagai employee
@@ -161,8 +160,8 @@ export class NkpService {
     };
 
     if (!action || action == 'report') {
-      options.take = pageSize;
-      options.skip = (page - 1) * pageSize;
+      options.take = Number(pageSize);
+      options.skip = (Number(page) - 1) * Number(pageSize);
     }
 
     const data = await this.prisma.nkp.findMany(options);
@@ -170,7 +169,7 @@ export class NkpService {
     if (action == 'download') {
       if (format == 'pdf') {
         const company = await this.prisma.company.findUniqueOrThrow({
-          where: { id: companyId },
+          where: { id: Number(companyId) },
         });
 
         return { data, company };
