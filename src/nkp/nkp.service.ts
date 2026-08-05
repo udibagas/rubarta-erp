@@ -75,8 +75,6 @@ export class NkpService {
       orderDirection = 'desc',
     } = params;
 
-    console.log('params', params);
-
     const where: Prisma.NkpWhereInput = {};
 
     if (companyId) {
@@ -455,7 +453,6 @@ export class NkpService {
     const nkp = await this.prisma.nkp.findFirst({ where: { id } });
 
     if (nkp) {
-      console.log(nkp.number);
       return (
         await this.prisma.nkp.aggregate({
           _sum: { finalPayment: true },
