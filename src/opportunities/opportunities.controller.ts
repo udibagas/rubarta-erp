@@ -10,8 +10,11 @@ import {
   Query,
 } from '@nestjs/common';
 import { OpportunitiesService } from './opportunities.service';
-import { CreateOpportunityDto } from './dto/create-opportunity.dto';
-import { UpdateOpportunityDto } from './dto/update-opportunity.dto';
+import {
+  CreateOpportunityDto,
+  OpportunityQueryDto,
+  UpdateOpportunityDto,
+} from './dto/opportunity.dto';
 import { Auth } from '../auth/auth.decorator';
 import { User } from '../prisma/client/client';
 
@@ -25,26 +28,8 @@ export class OpportunitiesController {
   }
 
   @Get()
-  findAll(
-    @Query('page', new ParseIntPipe({ optional: true })) page: number = 1,
-    @Query('pageSize', new ParseIntPipe({ optional: true }))
-    pageSize: number = 10,
-    @Query('companyId', new ParseIntPipe({ optional: true }))
-    companyId?: number,
-    @Query('customerId', new ParseIntPipe({ optional: true }))
-    customerId?: number,
-    @Query('leadId', new ParseIntPipe({ optional: true }))
-    leadId?: number,
-    @Query('keyword') keyword?: string,
-  ) {
-    return this.opportunitiesService.findAll({
-      page,
-      pageSize,
-      companyId,
-      customerId,
-      leadId,
-      keyword,
-    });
+  findAll(@Query() params: OpportunityQueryDto) {
+    return this.opportunitiesService.findAll(params);
   }
 
   @Get(':id')

@@ -1,6 +1,9 @@
 import { Injectable } from '@nestjs/common';
-import { CreateOpportunityDto } from './dto/create-opportunity.dto';
-import { UpdateOpportunityDto } from './dto/update-opportunity.dto';
+import {
+  CreateOpportunityDto,
+  UpdateOpportunityDto,
+  OpportunityQueryDto,
+} from './dto/opportunity.dto';
 import { PrismaService } from '../prisma/prisma.service';
 import { Prisma } from '../prisma/client/client';
 
@@ -12,14 +15,7 @@ export class OpportunitiesService {
     return this.prisma.opportunity.create({ data });
   }
 
-  async findAll(params: {
-    page?: number;
-    pageSize?: number;
-    companyId?: number;
-    customerId?: number;
-    leadId?: number;
-    keyword?: string;
-  }) {
+  async findAll(params: OpportunityQueryDto) {
     const where: Prisma.OpportunityWhereInput = {};
     const {
       page = 1,
@@ -28,18 +24,20 @@ export class OpportunitiesService {
       customerId,
       leadId,
       keyword,
+      sortBy,
+      sortOrder,
     } = params;
 
     if (companyId) {
-      where.companyId = companyId;
+      where.companyId = Number(companyId);
     }
 
     if (leadId) {
-      where.leadId = leadId;
+      where.leadId = Number(leadId);
     }
 
     if (customerId) {
-      where.customerId = customerId;
+      where.customerId = Number(customerId);
     }
 
     if (keyword) {
@@ -51,9 +49,11 @@ export class OpportunitiesService {
 
     const data = await this.prisma.opportunity.findMany({
       where,
-      take: pageSize,
-      skip: (page - 1) * pageSize,
-      orderBy: { createdAt: 'desc' },
+      take: Number(pageSize),
+      skip: (Number(page) - 1) * Number(pageSize),
+      orderBy: sortBy
+        ? { [sortBy]: sortOrder || 'asc' }
+        : { createdAt: 'desc' },
       include: {
         Company: { select: { name: true } },
         User: { select: { name: true } },

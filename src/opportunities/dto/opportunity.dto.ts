@@ -7,6 +7,7 @@ import {
   Max,
   Min,
   IsArray,
+  IsNumberString,
 } from 'class-validator';
 
 export class CreateOpportunityDto {
@@ -47,4 +48,39 @@ export class CreateOpportunityDto {
   @IsOptional()
   @IsArray({ message: 'Attachments must be an array' })
   attachments?: Record<string, any>[];
+}
+
+import { PartialType } from '@nestjs/swagger';
+
+export class UpdateOpportunityDto extends PartialType(CreateOpportunityDto) {}
+
+export class OpportunityQueryDto {
+  @IsOptional()
+  @IsNumberString({}, { message: 'Page must be a number' })
+  page?: string;
+
+  @IsOptional()
+  @IsNumberString({}, { message: 'Page size must be a number' })
+  pageSize?: string;
+
+  @IsOptional()
+  @IsNumberString({}, { message: 'Company ID must be a number' })
+  companyId?: string;
+
+  @IsOptional()
+  @IsNumberString({}, { message: 'Customer ID must be a number' })
+  customerId?: string;
+
+  @IsOptional()
+  @IsNumberString({}, { message: 'Lead ID must be a number' })
+  leadId?: string;
+
+  @IsOptional()
+  keyword?: string;
+
+  @IsOptional()
+  sortBy?: string;
+
+  @IsOptional()
+  sortOrder?: 'asc' | 'desc';
 }
