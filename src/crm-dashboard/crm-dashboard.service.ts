@@ -367,12 +367,8 @@ export class CrmDashboardService {
           select: {
             title: true,
             createdAt: true,
-            Lead: {
-              select: { Customer: { select: { id: true, name: true } } },
-            },
-            Opportunity: {
-              select: { Customer: { select: { id: true, name: true } } },
-            },
+            customerId: true,
+            Customer: { select: { id: true, name: true } },
             User: { select: { id: true, name: true } },
           },
         }),
@@ -449,10 +445,8 @@ export class CrmDashboardService {
       activities.push({
         type: 'Task',
         description: `Task created: ${task.title}`,
-        customerId:
-          task.Lead?.Customer?.id || task.Opportunity?.Customer?.id || null,
-        customerName:
-          task.Lead?.Customer?.name || task.Opportunity?.Customer?.name || null,
+        customerId: task.customerId,
+        customerName: task.Customer?.name || null,
         userId: task.User.id,
         userName: task.User.name,
         date: task.createdAt,

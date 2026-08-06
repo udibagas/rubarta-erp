@@ -26,6 +26,11 @@ export class CreateTaskDto {
   @IsInt()
   opportunityId?: number;
 
+  @ApiProperty({ required: false, example: 1 })
+  @IsOptional()
+  @IsInt()
+  customerId?: number;
+
   @ApiProperty({ example: 'Follow up with lead' })
   @IsString()
   @MaxLength(200)

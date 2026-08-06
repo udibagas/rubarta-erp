@@ -28,6 +28,7 @@ model Customer {
   CustomerFiles  CustomerFile[]
   Quotations     Quotation[]
   VisitPlans     VisitPlan[]
+  Tasks          Task[]
 
   @@index([email])
   @@index([isActive])
@@ -279,6 +280,7 @@ model Task {
   id            Int          @id @default(autoincrement())
   userId        Int
   leadId        Int?
+  customerId    Int?
   opportunityId Int?
   title         String       @db.VarChar(200)
   description   String?      @db.Text
@@ -297,10 +299,12 @@ model Task {
   User        User         @relation(fields: [userId], references: [id])
   Lead        Lead?        @relation(fields: [leadId], references: [id], onDelete: Cascade)
   Opportunity Opportunity? @relation(fields: [opportunityId], references: [id], onDelete: Cascade)
+  Customer    Customer?    @relation(fields: [customerId], references: [id], onDelete: Cascade)
 
   @@index([userId])
   @@index([leadId])
   @@index([opportunityId])
+  @@index([customerId])
   @@index([status])
   @@index([priority])
   @@index([dueDate])
