@@ -20,6 +20,12 @@ export class CreateMaterialDto {
   @MaxLength(200)
   name: string;
 
+  @ApiProperty({ required: false, example: 'SP-100' })
+  @IsOptional()
+  @IsString()
+  @MaxLength(100)
+  model?: string;
+
   @ApiProperty({ required: false, example: 'High-quality steel plate' })
   @IsOptional()
   @IsString()
@@ -35,6 +41,24 @@ export class CreateMaterialDto {
   @IsString()
   @MaxLength(50)
   unit: string;
+
+  @ApiProperty({ required: false, example: 5.5 })
+  @IsOptional()
+  @IsNumber()
+  @Min(0)
+  weight?: number;
+
+  @ApiProperty({ required: false, example: 'USD' })
+  @IsOptional()
+  @IsString()
+  @MaxLength(3)
+  purchaseCurrency?: string;
+
+  @ApiProperty({ required: false, example: 'USD' })
+  @IsOptional()
+  @IsString()
+  @MaxLength(3)
+  sellingCurrency?: string;
 
   @ApiProperty({ required: false, example: 100000 })
   @IsOptional()

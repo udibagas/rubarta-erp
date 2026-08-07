@@ -453,19 +453,23 @@ model CustomerFile {
 }
 
 model Material {
-  id            Int       @id @default(autoincrement())
-  partNumber    String    @unique @db.VarChar(100)
-  name          String    @db.VarChar(200)
-  description   String?   @db.Text
-  category      String?   @db.VarChar(100)
-  unit          String    @db.VarChar(50) // e.g., pcs, kg, liter
-  purchasePrice Float?
-  sellingPrice  Float?
-  minStock      Int?      @default(0)
-  currentStock  Int?      @default(0)
-  isActive      Boolean   @default(true)
-  supplierId    Int?
-  deletedAt     DateTime? @db.Timestamp()
+  id               Int       @id @default(autoincrement())
+  partNumber       String    @unique @db.VarChar(100)
+  name             String    @db.VarChar(200)
+  model            String?   @db.VarChar(100)
+  description      String?   @db.Text
+  category         String?   @db.VarChar(100)
+  unit             String    @db.VarChar(50) // e.g., pcs, kg, liter
+  weight           Float?
+  purchaseCurrency String?   @db.Char(3) // ISO 4217 currency code
+  sellingCurrency  String?   @db.Char(3) // ISO 4217 currency code
+  purchasePrice    Float?
+  sellingPrice     Float?
+  minStock         Int?      @default(0)
+  currentStock     Int?      @default(0)
+  isActive         Boolean   @default(true)
+  supplierId       Int?
+  deletedAt        DateTime? @db.Timestamp()
 
   // Timestamps
   createdAt DateTime  @default(now())
