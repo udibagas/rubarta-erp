@@ -9,6 +9,13 @@ import {
   Query,
   ParseIntPipe,
   ParseBoolPipe,
+  UseInterceptors,
+  UploadedFile,
+  ParseFilePipe,
+  MaxFileSizeValidator,
+  FileTypeValidator,
+  Res,
+  StreamableFile,
 } from '@nestjs/common';
 import {
   ApiTags,
@@ -16,7 +23,11 @@ import {
   ApiOperation,
   ApiOkResponse,
   ApiCreatedResponse,
+  ApiConsumes,
 } from '@nestjs/swagger';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { Response } from 'express';
+import * as multer from 'multer';
 import { MaterialsService } from './materials.service';
 import { CreateMaterialDto, UpdateMaterialDto } from './dto/material.dto';
 
@@ -94,5 +105,78 @@ export class MaterialsController {
   @ApiOkResponse({ description: 'Material deleted' })
   remove(@Param('id', ParseIntPipe) id: number) {
     return this.materialsService.remove(id);
+  }
+
+  @Get('export/excel')
+  @ApiOperation({ summary: 'Export materials to Excel' })
+  @ApiOkResponse({ description: 'Excel file download' })
+  async exportToExcel(
+    @Res({ passthrough: true }) res: Response,
+    @Query('keyword') keyword?: string,
+    @Query('category') category?: string,
+    @Query('supplierId', new ParseIntPipe({ optional: true }))
+    supplierId?: number,
+    @Query('isActive', new ParseBoolPipe({ optional: true }))
+    isActive?: boolean,
+    @Query('lowStock', new ParseBoolPipe({ optional: true }))
+    lowStock?: boolean,
+  ) {
+    const buffer = await this.materialsService.exportToExcel({
+      keyword,
+      category,
+      supplierId,
+      isActive,
+      lowStock,
+    });
+
+    const fileName = `materials_${new Date().toISOString().split('T')[0]}.xlsx`;
+    res.set({
+      'Content-Type':
+        'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+      'Content-Disposition': `attachment; filename="${fileName}"`,
+    });
+
+    return new StreamableFile(buffer);
+  }
+
+  @Post('import/excel')
+  @ApiOperation({ summary: 'Import materials from Excel' })
+  @ApiConsumes('multipart/form-data')
+  @ApiCreatedResponse({ description: 'Materials imported successfully' })
+  @UseInterceptors(
+    FileInterceptor('file', {
+      storage: multer.memoryStorage(),
+    }),
+  )
+  async importFromExcel(
+    @UploadedFile(
+      new ParseFilePipe({
+        validators: [
+          new MaxFileSizeValidator({ maxSize: 10000000 }), // 10MB
+          new FileTypeValidator({
+            fileType:
+              'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+          }),
+        ],
+      }),
+    )
+    file: Express.Multer.File,
+  ) {
+    return this.materialsService.importFromExcel(file.buffer);
+  }
+
+  @Get('export/template')
+  @ApiOperation({ summary: 'Download Excel template for import' })
+  @ApiOkResponse({ description: 'Excel template file' })
+  async downloadTemplate(@Res({ passthrough: true }) res: Response) {
+    const buffer = await this.materialsService.generateTemplate();
+
+    res.set({
+      'Content-Type':
+        'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+      'Content-Disposition': 'attachment; filename="materials_template.xlsx"',
+    });
+
+    return new StreamableFile(buffer);
   }
 }
