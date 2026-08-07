@@ -5,6 +5,7 @@ import {
   OpportunityStages,
   OrderStatus,
   QuotationStatus,
+  Role,
   TaskStatus,
 } from '../prisma/client/client';
 import {
@@ -185,6 +186,9 @@ export class CrmDashboardService {
   async getSalesPerformance(): Promise<SalesPerformanceDto[]> {
     const users = await this.prisma.user.findMany({
       select: { id: true, name: true },
+      where: {
+        roles: { hasSome: [Role.SALES_REP] },
+      },
     });
 
     const performance = await Promise.all(
