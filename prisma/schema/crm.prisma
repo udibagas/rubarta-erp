@@ -469,6 +469,7 @@ model Material {
   currentStock     Int?      @default(0)
   isActive         Boolean   @default(true)
   supplierId       Int?
+  leadTime         Int?      @db.Integer // Lead time in days
   deletedAt        DateTime? @db.Timestamp()
 
   // Timestamps

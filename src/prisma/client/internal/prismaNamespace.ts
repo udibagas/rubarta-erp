@@ -3182,6 +3182,7 @@ export const MaterialScalarFieldEnum = {
   currentStock: 'currentStock',
   isActive: 'isActive',
   supplierId: 'supplierId',
+  leadTime: 'leadTime',
   deletedAt: 'deletedAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'

@@ -93,6 +93,12 @@ export class CreateMaterialDto {
   @IsOptional()
   @IsInt()
   supplierId?: number;
+
+  @ApiProperty({ required: false, example: 7 })
+  @IsOptional()
+  @IsInt()
+  @Min(0)
+  leadTime?: number;
 }
 
 export class UpdateMaterialDto extends PartialType(CreateMaterialDto) {}
