@@ -35,11 +35,14 @@ export async function seedQuotations(
       validity: 30,
       validUntil: new Date('2026-06-25'),
       sentDate: new Date('2026-05-26'),
-      terms: 'Payment: 30 days after delivery\nDelivery: 14 days after PO',
+      termsAndConditions:
+        'Payment: 30 days after delivery\nDelivery: 14 days after PO',
       QuotationItems: {
         create: [
           {
             partNumber: materials[6].partNumber,
+            name: materials[6].name,
+            model: materials[6].model,
             description: materials[6].description || materials[6].name,
             quantity: 10,
             unitPrice: 750000,
@@ -50,6 +53,8 @@ export async function seedQuotations(
           },
           {
             partNumber: materials[7].partNumber,
+            name: materials[7].name,
+            model: materials[7].model,
             description: materials[7].description || materials[7].name,
             quantity: 15,
             unitPrice: 600000,
@@ -60,6 +65,8 @@ export async function seedQuotations(
           },
           {
             partNumber: materials[8].partNumber,
+            name: materials[8].name,
+            model: materials[8].model,
             description: materials[8].description || materials[8].name,
             quantity: 20,
             unitPrice: 450000,
@@ -70,6 +77,8 @@ export async function seedQuotations(
           },
           {
             partNumber: materials[4].partNumber,
+            name: materials[4].name,
+            model: materials[4].model,
             description: materials[4].description || materials[4].name,
             quantity: 100,
             unitPrice: 120000,
@@ -99,11 +108,14 @@ export async function seedQuotations(
       currency: Currency.IDR,
       validity: 30,
       validUntil: new Date('2026-07-25'),
-      terms: 'Payment: 45 days after delivery\nDelivery: 21 days after PO',
+      termsAndConditions:
+        'Payment: 45 days after delivery\nDelivery: 21 days after PO',
       QuotationItems: {
         create: [
           {
             partNumber: materials[0].partNumber,
+            name: materials[0].name,
+            model: materials[0].model,
             description: materials[0].description || materials[0].name,
             quantity: 1000,
             unitPrice: 5000,
@@ -114,6 +126,8 @@ export async function seedQuotations(
           },
           {
             partNumber: materials[1].partNumber,
+            name: materials[1].name,
+            model: materials[1].model,
             description: materials[1].description || materials[1].name,
             quantity: 2000,
             unitPrice: 1000,
@@ -124,6 +138,8 @@ export async function seedQuotations(
           },
           {
             partNumber: materials[2].partNumber,
+            name: materials[2].name,
+            model: materials[2].model,
             description: materials[2].description || materials[2].name,
             quantity: 1500,
             unitPrice: 2500,
@@ -155,11 +171,14 @@ export async function seedQuotations(
       validUntil: new Date('2026-07-15'),
       sentDate: new Date('2026-05-10'),
       acceptedDate: new Date('2026-05-20'),
-      terms: 'Payment: 30 days after monthly delivery\nDelivery: Monthly basis',
+      termsAndConditions:
+        'Payment: 30 days after monthly delivery\nDelivery: Monthly basis',
       QuotationItems: {
         create: [
           {
             partNumber: materials[3].partNumber,
+            name: materials[3].name,
+            model: materials[3].model,
             description: materials[3].description || materials[3].name,
             quantity: 200,
             unitPrice: 45000,
@@ -170,6 +189,8 @@ export async function seedQuotations(
           },
           {
             partNumber: materials[4].partNumber,
+            name: materials[4].name,
+            model: materials[4].model,
             description: materials[4].description || materials[4].name,
             quantity: 150,
             unitPrice: 120000,
@@ -180,6 +201,8 @@ export async function seedQuotations(
           },
           {
             partNumber: materials[9].partNumber,
+            name: materials[9].name,
+            model: materials[9].model,
             description: materials[9].description || materials[9].name,
             quantity: 50,
             unitPrice: 1200000,

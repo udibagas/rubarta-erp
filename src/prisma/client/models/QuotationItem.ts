@@ -50,6 +50,8 @@ export type QuotationItemMinAggregateOutputType = {
   id: number | null
   quotationId: number | null
   partNumber: string | null
+  name: string | null
+  model: string | null
   description: string | null
   quantity: number | null
   unitPrice: number | null
@@ -63,6 +65,8 @@ export type QuotationItemMaxAggregateOutputType = {
   id: number | null
   quotationId: number | null
   partNumber: string | null
+  name: string | null
+  model: string | null
   description: string | null
   quantity: number | null
   unitPrice: number | null
@@ -76,6 +80,8 @@ export type QuotationItemCountAggregateOutputType = {
   id: number
   quotationId: number
   partNumber: number
+  name: number
+  model: number
   description: number
   quantity: number
   unitPrice: number
@@ -111,6 +117,8 @@ export type QuotationItemMinAggregateInputType = {
   id?: true
   quotationId?: true
   partNumber?: true
+  name?: true
+  model?: true
   description?: true
   quantity?: true
   unitPrice?: true
@@ -124,6 +132,8 @@ export type QuotationItemMaxAggregateInputType = {
   id?: true
   quotationId?: true
   partNumber?: true
+  name?: true
+  model?: true
   description?: true
   quantity?: true
   unitPrice?: true
@@ -137,6 +147,8 @@ export type QuotationItemCountAggregateInputType = {
   id?: true
   quotationId?: true
   partNumber?: true
+  name?: true
+  model?: true
   description?: true
   quantity?: true
   unitPrice?: true
@@ -237,7 +249,9 @@ export type QuotationItemGroupByOutputType = {
   id: number
   quotationId: number
   partNumber: string
-  description: string
+  name: string
+  model: string | null
+  description: string | null
   quantity: number
   unitPrice: number
   discount: number
@@ -273,7 +287,9 @@ export type QuotationItemWhereInput = {
   id?: Prisma.IntFilter<"QuotationItem"> | number
   quotationId?: Prisma.IntFilter<"QuotationItem"> | number
   partNumber?: Prisma.StringFilter<"QuotationItem"> | string
-  description?: Prisma.StringFilter<"QuotationItem"> | string
+  name?: Prisma.StringFilter<"QuotationItem"> | string
+  model?: Prisma.StringNullableFilter<"QuotationItem"> | string | null
+  description?: Prisma.StringNullableFilter<"QuotationItem"> | string | null
   quantity?: Prisma.IntFilter<"QuotationItem"> | number
   unitPrice?: Prisma.FloatFilter<"QuotationItem"> | number
   discount?: Prisma.FloatFilter<"QuotationItem"> | number
@@ -287,7 +303,9 @@ export type QuotationItemOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   quotationId?: Prisma.SortOrder
   partNumber?: Prisma.SortOrder
-  description?: Prisma.SortOrder
+  name?: Prisma.SortOrder
+  model?: Prisma.SortOrderInput | Prisma.SortOrder
+  description?: Prisma.SortOrderInput | Prisma.SortOrder
   quantity?: Prisma.SortOrder
   unitPrice?: Prisma.SortOrder
   discount?: Prisma.SortOrder
@@ -304,7 +322,9 @@ export type QuotationItemWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.QuotationItemWhereInput | Prisma.QuotationItemWhereInput[]
   quotationId?: Prisma.IntFilter<"QuotationItem"> | number
   partNumber?: Prisma.StringFilter<"QuotationItem"> | string
-  description?: Prisma.StringFilter<"QuotationItem"> | string
+  name?: Prisma.StringFilter<"QuotationItem"> | string
+  model?: Prisma.StringNullableFilter<"QuotationItem"> | string | null
+  description?: Prisma.StringNullableFilter<"QuotationItem"> | string | null
   quantity?: Prisma.IntFilter<"QuotationItem"> | number
   unitPrice?: Prisma.FloatFilter<"QuotationItem"> | number
   discount?: Prisma.FloatFilter<"QuotationItem"> | number
@@ -318,7 +338,9 @@ export type QuotationItemOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   quotationId?: Prisma.SortOrder
   partNumber?: Prisma.SortOrder
-  description?: Prisma.SortOrder
+  name?: Prisma.SortOrder
+  model?: Prisma.SortOrderInput | Prisma.SortOrder
+  description?: Prisma.SortOrderInput | Prisma.SortOrder
   quantity?: Prisma.SortOrder
   unitPrice?: Prisma.SortOrder
   discount?: Prisma.SortOrder
@@ -339,7 +361,9 @@ export type QuotationItemScalarWhereWithAggregatesInput = {
   id?: Prisma.IntWithAggregatesFilter<"QuotationItem"> | number
   quotationId?: Prisma.IntWithAggregatesFilter<"QuotationItem"> | number
   partNumber?: Prisma.StringWithAggregatesFilter<"QuotationItem"> | string
-  description?: Prisma.StringWithAggregatesFilter<"QuotationItem"> | string
+  name?: Prisma.StringWithAggregatesFilter<"QuotationItem"> | string
+  model?: Prisma.StringNullableWithAggregatesFilter<"QuotationItem"> | string | null
+  description?: Prisma.StringNullableWithAggregatesFilter<"QuotationItem"> | string | null
   quantity?: Prisma.IntWithAggregatesFilter<"QuotationItem"> | number
   unitPrice?: Prisma.FloatWithAggregatesFilter<"QuotationItem"> | number
   discount?: Prisma.FloatWithAggregatesFilter<"QuotationItem"> | number
@@ -350,7 +374,9 @@ export type QuotationItemScalarWhereWithAggregatesInput = {
 
 export type QuotationItemCreateInput = {
   partNumber: string
-  description: string
+  name: string
+  model?: string | null
+  description?: string | null
   quantity: number
   unitPrice: number
   discount?: number
@@ -364,7 +390,9 @@ export type QuotationItemUncheckedCreateInput = {
   id?: number
   quotationId: number
   partNumber: string
-  description: string
+  name: string
+  model?: string | null
+  description?: string | null
   quantity: number
   unitPrice: number
   discount?: number
@@ -375,7 +403,9 @@ export type QuotationItemUncheckedCreateInput = {
 
 export type QuotationItemUpdateInput = {
   partNumber?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  model?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   unitPrice?: Prisma.FloatFieldUpdateOperationsInput | number
   discount?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -389,7 +419,9 @@ export type QuotationItemUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   quotationId?: Prisma.IntFieldUpdateOperationsInput | number
   partNumber?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  model?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   unitPrice?: Prisma.FloatFieldUpdateOperationsInput | number
   discount?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -402,7 +434,9 @@ export type QuotationItemCreateManyInput = {
   id?: number
   quotationId: number
   partNumber: string
-  description: string
+  name: string
+  model?: string | null
+  description?: string | null
   quantity: number
   unitPrice: number
   discount?: number
@@ -413,7 +447,9 @@ export type QuotationItemCreateManyInput = {
 
 export type QuotationItemUpdateManyMutationInput = {
   partNumber?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  model?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   unitPrice?: Prisma.FloatFieldUpdateOperationsInput | number
   discount?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -426,7 +462,9 @@ export type QuotationItemUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   quotationId?: Prisma.IntFieldUpdateOperationsInput | number
   partNumber?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  model?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   unitPrice?: Prisma.FloatFieldUpdateOperationsInput | number
   discount?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -449,6 +487,8 @@ export type QuotationItemCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   quotationId?: Prisma.SortOrder
   partNumber?: Prisma.SortOrder
+  name?: Prisma.SortOrder
+  model?: Prisma.SortOrder
   description?: Prisma.SortOrder
   quantity?: Prisma.SortOrder
   unitPrice?: Prisma.SortOrder
@@ -472,6 +512,8 @@ export type QuotationItemMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   quotationId?: Prisma.SortOrder
   partNumber?: Prisma.SortOrder
+  name?: Prisma.SortOrder
+  model?: Prisma.SortOrder
   description?: Prisma.SortOrder
   quantity?: Prisma.SortOrder
   unitPrice?: Prisma.SortOrder
@@ -485,6 +527,8 @@ export type QuotationItemMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   quotationId?: Prisma.SortOrder
   partNumber?: Prisma.SortOrder
+  name?: Prisma.SortOrder
+  model?: Prisma.SortOrder
   description?: Prisma.SortOrder
   quantity?: Prisma.SortOrder
   unitPrice?: Prisma.SortOrder
@@ -548,7 +592,9 @@ export type QuotationItemUncheckedUpdateManyWithoutQuotationNestedInput = {
 
 export type QuotationItemCreateWithoutQuotationInput = {
   partNumber: string
-  description: string
+  name: string
+  model?: string | null
+  description?: string | null
   quantity: number
   unitPrice: number
   discount?: number
@@ -560,7 +606,9 @@ export type QuotationItemCreateWithoutQuotationInput = {
 export type QuotationItemUncheckedCreateWithoutQuotationInput = {
   id?: number
   partNumber: string
-  description: string
+  name: string
+  model?: string | null
+  description?: string | null
   quantity: number
   unitPrice: number
   discount?: number
@@ -602,7 +650,9 @@ export type QuotationItemScalarWhereInput = {
   id?: Prisma.IntFilter<"QuotationItem"> | number
   quotationId?: Prisma.IntFilter<"QuotationItem"> | number
   partNumber?: Prisma.StringFilter<"QuotationItem"> | string
-  description?: Prisma.StringFilter<"QuotationItem"> | string
+  name?: Prisma.StringFilter<"QuotationItem"> | string
+  model?: Prisma.StringNullableFilter<"QuotationItem"> | string | null
+  description?: Prisma.StringNullableFilter<"QuotationItem"> | string | null
   quantity?: Prisma.IntFilter<"QuotationItem"> | number
   unitPrice?: Prisma.FloatFilter<"QuotationItem"> | number
   discount?: Prisma.FloatFilter<"QuotationItem"> | number
@@ -614,7 +664,9 @@ export type QuotationItemScalarWhereInput = {
 export type QuotationItemCreateManyQuotationInput = {
   id?: number
   partNumber: string
-  description: string
+  name: string
+  model?: string | null
+  description?: string | null
   quantity: number
   unitPrice: number
   discount?: number
@@ -625,7 +677,9 @@ export type QuotationItemCreateManyQuotationInput = {
 
 export type QuotationItemUpdateWithoutQuotationInput = {
   partNumber?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  model?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   unitPrice?: Prisma.FloatFieldUpdateOperationsInput | number
   discount?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -637,7 +691,9 @@ export type QuotationItemUpdateWithoutQuotationInput = {
 export type QuotationItemUncheckedUpdateWithoutQuotationInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   partNumber?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  model?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   unitPrice?: Prisma.FloatFieldUpdateOperationsInput | number
   discount?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -649,7 +705,9 @@ export type QuotationItemUncheckedUpdateWithoutQuotationInput = {
 export type QuotationItemUncheckedUpdateManyWithoutQuotationInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   partNumber?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  model?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   unitPrice?: Prisma.FloatFieldUpdateOperationsInput | number
   discount?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -664,6 +722,8 @@ export type QuotationItemSelect<ExtArgs extends runtime.Types.Extensions.Interna
   id?: boolean
   quotationId?: boolean
   partNumber?: boolean
+  name?: boolean
+  model?: boolean
   description?: boolean
   quantity?: boolean
   unitPrice?: boolean
@@ -678,6 +738,8 @@ export type QuotationItemSelectCreateManyAndReturn<ExtArgs extends runtime.Types
   id?: boolean
   quotationId?: boolean
   partNumber?: boolean
+  name?: boolean
+  model?: boolean
   description?: boolean
   quantity?: boolean
   unitPrice?: boolean
@@ -692,6 +754,8 @@ export type QuotationItemSelectUpdateManyAndReturn<ExtArgs extends runtime.Types
   id?: boolean
   quotationId?: boolean
   partNumber?: boolean
+  name?: boolean
+  model?: boolean
   description?: boolean
   quantity?: boolean
   unitPrice?: boolean
@@ -706,6 +770,8 @@ export type QuotationItemSelectScalar = {
   id?: boolean
   quotationId?: boolean
   partNumber?: boolean
+  name?: boolean
+  model?: boolean
   description?: boolean
   quantity?: boolean
   unitPrice?: boolean
@@ -715,7 +781,7 @@ export type QuotationItemSelectScalar = {
   sortOrder?: boolean
 }
 
-export type QuotationItemOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "quotationId" | "partNumber" | "description" | "quantity" | "unitPrice" | "discount" | "totalPrice" | "vat" | "sortOrder", ExtArgs["result"]["quotationItem"]>
+export type QuotationItemOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "quotationId" | "partNumber" | "name" | "model" | "description" | "quantity" | "unitPrice" | "discount" | "totalPrice" | "vat" | "sortOrder", ExtArgs["result"]["quotationItem"]>
 export type QuotationItemInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   Quotation?: boolean | Prisma.QuotationDefaultArgs<ExtArgs>
 }
@@ -735,7 +801,9 @@ export type $QuotationItemPayload<ExtArgs extends runtime.Types.Extensions.Inter
     id: number
     quotationId: number
     partNumber: string
-    description: string
+    name: string
+    model: string | null
+    description: string | null
     quantity: number
     unitPrice: number
     discount: number
@@ -1169,6 +1237,8 @@ export interface QuotationItemFieldRefs {
   readonly id: Prisma.FieldRef<"QuotationItem", 'Int'>
   readonly quotationId: Prisma.FieldRef<"QuotationItem", 'Int'>
   readonly partNumber: Prisma.FieldRef<"QuotationItem", 'String'>
+  readonly name: Prisma.FieldRef<"QuotationItem", 'String'>
+  readonly model: Prisma.FieldRef<"QuotationItem", 'String'>
   readonly description: Prisma.FieldRef<"QuotationItem", 'String'>
   readonly quantity: Prisma.FieldRef<"QuotationItem", 'Int'>
   readonly unitPrice: Prisma.FieldRef<"QuotationItem", 'Float'>

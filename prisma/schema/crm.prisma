@@ -214,24 +214,35 @@ model Opportunity {
 }
 
 model Quotation {
-  id           Int             @id @default(autoincrement())
-  number       String          @unique @db.VarChar(50)
-  title        String          @db.VarChar(200)
-  description  String?         @db.Text
-  totalAmount  Float
-  discount     Float           @default(0)
-  vatAmount    Float           @default(0)
-  grandTotal   Float
-  status       QuotationStatus @default(Draft)
-  currency     Currency        @default(IDR) // Currency code, e.g., IDR, USD
-  validity     Int             @default(30) // Validity period in days
-  validUntil   DateTime
-  sentDate     DateTime?       @db.Timestamp()
-  acceptedDate DateTime?       @db.Timestamp()
-  deletedAt    DateTime?       @db.Timestamp()
-  notes        String?         @db.Text
-  terms        String?         @db.Text
-  attachments  Json?           @db.Json // For storing file metadata like name, path, size, type
+  id                 Int             @id @default(autoincrement())
+  number             String          @unique @db.VarChar(50)
+  date               DateTime?       @db.Timestamp()
+  title              String          @db.VarChar(200)
+  description        String?         @db.Text
+  totalAmount        Float
+  discount           Float           @default(0)
+  vatAmount          Float           @default(0)
+  grandTotal         Float
+  status             QuotationStatus @default(Draft)
+  currency           Currency        @default(IDR) // Currency code, e.g., IDR, USD
+  validity           Int             @default(30) // Validity period in days
+  validUntil         DateTime
+  sentDate           DateTime?       @db.Timestamp()
+  acceptedDate       DateTime?       @db.Timestamp()
+  deletedAt          DateTime?       @db.Timestamp()
+  notes              String?         @db.Text
+  attachments        Json?           @db.Json // For storing file metadata like name, path, size, type
+  termOfPayment      String?         @db.VarChar(30) // e.g., "Net 30", "Due on Receipt"
+  termsAndConditions String?         @db.Text
+  termOfDelivery     String?         @db.VarChar(20) // e.g., "FOB", "CIF", "Ex Works"
+  paymentMethod      String?         @db.VarChar(30) // e.g., "Bank Transfer", "Credit Card", "Cash"
+  requestType        String?         @db.VarChar(30) // e.g., "Sales", "Customer Free Program", "Lending Of Goods", "Fee Service", "Warranty", "Others"
+
+  // customer address
+  customerAddress String? @db.Text
+  contactPerson   String? @db.VarChar(200)
+  contactPhone    String? @db.VarChar(50)
+  contactEmail    String? @db.VarChar(100)
 
   // Timestamps
   createdAt DateTime  @default(now())
@@ -261,7 +272,9 @@ model QuotationItem {
   id          Int     @id @default(autoincrement())
   quotationId Int
   partNumber  String  @db.VarChar(100)
-  description String  @db.Text
+  name        String  @db.VarChar(200)
+  model       String? @db.VarChar(100)
+  description String? @db.Text
   quantity    Int
   unitPrice   Float
   discount    Float   @default(0)

@@ -53,6 +53,7 @@ export type QuotationSumAggregateOutputType = {
 export type QuotationMinAggregateOutputType = {
   id: number | null
   number: string | null
+  date: Date | null
   title: string | null
   description: string | null
   totalAmount: number | null
@@ -67,7 +68,15 @@ export type QuotationMinAggregateOutputType = {
   acceptedDate: Date | null
   deletedAt: Date | null
   notes: string | null
-  terms: string | null
+  termOfPayment: string | null
+  termsAndConditions: string | null
+  termOfDelivery: string | null
+  paymentMethod: string | null
+  requestType: string | null
+  customerAddress: string | null
+  contactPerson: string | null
+  contactPhone: string | null
+  contactEmail: string | null
   createdAt: Date | null
   updatedAt: Date | null
   customerId: number | null
@@ -78,6 +87,7 @@ export type QuotationMinAggregateOutputType = {
 export type QuotationMaxAggregateOutputType = {
   id: number | null
   number: string | null
+  date: Date | null
   title: string | null
   description: string | null
   totalAmount: number | null
@@ -92,7 +102,15 @@ export type QuotationMaxAggregateOutputType = {
   acceptedDate: Date | null
   deletedAt: Date | null
   notes: string | null
-  terms: string | null
+  termOfPayment: string | null
+  termsAndConditions: string | null
+  termOfDelivery: string | null
+  paymentMethod: string | null
+  requestType: string | null
+  customerAddress: string | null
+  contactPerson: string | null
+  contactPhone: string | null
+  contactEmail: string | null
   createdAt: Date | null
   updatedAt: Date | null
   customerId: number | null
@@ -103,6 +121,7 @@ export type QuotationMaxAggregateOutputType = {
 export type QuotationCountAggregateOutputType = {
   id: number
   number: number
+  date: number
   title: number
   description: number
   totalAmount: number
@@ -117,8 +136,16 @@ export type QuotationCountAggregateOutputType = {
   acceptedDate: number
   deletedAt: number
   notes: number
-  terms: number
   attachments: number
+  termOfPayment: number
+  termsAndConditions: number
+  termOfDelivery: number
+  paymentMethod: number
+  requestType: number
+  customerAddress: number
+  contactPerson: number
+  contactPhone: number
+  contactEmail: number
   createdAt: number
   updatedAt: number
   customerId: number
@@ -155,6 +182,7 @@ export type QuotationSumAggregateInputType = {
 export type QuotationMinAggregateInputType = {
   id?: true
   number?: true
+  date?: true
   title?: true
   description?: true
   totalAmount?: true
@@ -169,7 +197,15 @@ export type QuotationMinAggregateInputType = {
   acceptedDate?: true
   deletedAt?: true
   notes?: true
-  terms?: true
+  termOfPayment?: true
+  termsAndConditions?: true
+  termOfDelivery?: true
+  paymentMethod?: true
+  requestType?: true
+  customerAddress?: true
+  contactPerson?: true
+  contactPhone?: true
+  contactEmail?: true
   createdAt?: true
   updatedAt?: true
   customerId?: true
@@ -180,6 +216,7 @@ export type QuotationMinAggregateInputType = {
 export type QuotationMaxAggregateInputType = {
   id?: true
   number?: true
+  date?: true
   title?: true
   description?: true
   totalAmount?: true
@@ -194,7 +231,15 @@ export type QuotationMaxAggregateInputType = {
   acceptedDate?: true
   deletedAt?: true
   notes?: true
-  terms?: true
+  termOfPayment?: true
+  termsAndConditions?: true
+  termOfDelivery?: true
+  paymentMethod?: true
+  requestType?: true
+  customerAddress?: true
+  contactPerson?: true
+  contactPhone?: true
+  contactEmail?: true
   createdAt?: true
   updatedAt?: true
   customerId?: true
@@ -205,6 +250,7 @@ export type QuotationMaxAggregateInputType = {
 export type QuotationCountAggregateInputType = {
   id?: true
   number?: true
+  date?: true
   title?: true
   description?: true
   totalAmount?: true
@@ -219,8 +265,16 @@ export type QuotationCountAggregateInputType = {
   acceptedDate?: true
   deletedAt?: true
   notes?: true
-  terms?: true
   attachments?: true
+  termOfPayment?: true
+  termsAndConditions?: true
+  termOfDelivery?: true
+  paymentMethod?: true
+  requestType?: true
+  customerAddress?: true
+  contactPerson?: true
+  contactPhone?: true
+  contactEmail?: true
   createdAt?: true
   updatedAt?: true
   customerId?: true
@@ -318,6 +372,7 @@ export type QuotationGroupByArgs<ExtArgs extends runtime.Types.Extensions.Intern
 export type QuotationGroupByOutputType = {
   id: number
   number: string
+  date: Date | null
   title: string
   description: string | null
   totalAmount: number
@@ -332,8 +387,16 @@ export type QuotationGroupByOutputType = {
   acceptedDate: Date | null
   deletedAt: Date | null
   notes: string | null
-  terms: string | null
   attachments: runtime.JsonValue | null
+  termOfPayment: string | null
+  termsAndConditions: string | null
+  termOfDelivery: string | null
+  paymentMethod: string | null
+  requestType: string | null
+  customerAddress: string | null
+  contactPerson: string | null
+  contactPhone: string | null
+  contactEmail: string | null
   createdAt: Date
   updatedAt: Date | null
   customerId: number
@@ -367,6 +430,7 @@ export type QuotationWhereInput = {
   NOT?: Prisma.QuotationWhereInput | Prisma.QuotationWhereInput[]
   id?: Prisma.IntFilter<"Quotation"> | number
   number?: Prisma.StringFilter<"Quotation"> | string
+  date?: Prisma.DateTimeNullableFilter<"Quotation"> | Date | string | null
   title?: Prisma.StringFilter<"Quotation"> | string
   description?: Prisma.StringNullableFilter<"Quotation"> | string | null
   totalAmount?: Prisma.FloatFilter<"Quotation"> | number
@@ -381,8 +445,16 @@ export type QuotationWhereInput = {
   acceptedDate?: Prisma.DateTimeNullableFilter<"Quotation"> | Date | string | null
   deletedAt?: Prisma.DateTimeNullableFilter<"Quotation"> | Date | string | null
   notes?: Prisma.StringNullableFilter<"Quotation"> | string | null
-  terms?: Prisma.StringNullableFilter<"Quotation"> | string | null
   attachments?: Prisma.JsonNullableFilter<"Quotation">
+  termOfPayment?: Prisma.StringNullableFilter<"Quotation"> | string | null
+  termsAndConditions?: Prisma.StringNullableFilter<"Quotation"> | string | null
+  termOfDelivery?: Prisma.StringNullableFilter<"Quotation"> | string | null
+  paymentMethod?: Prisma.StringNullableFilter<"Quotation"> | string | null
+  requestType?: Prisma.StringNullableFilter<"Quotation"> | string | null
+  customerAddress?: Prisma.StringNullableFilter<"Quotation"> | string | null
+  contactPerson?: Prisma.StringNullableFilter<"Quotation"> | string | null
+  contactPhone?: Prisma.StringNullableFilter<"Quotation"> | string | null
+  contactEmail?: Prisma.StringNullableFilter<"Quotation"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Quotation"> | Date | string
   updatedAt?: Prisma.DateTimeNullableFilter<"Quotation"> | Date | string | null
   customerId?: Prisma.IntFilter<"Quotation"> | number
@@ -397,6 +469,7 @@ export type QuotationWhereInput = {
 export type QuotationOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   number?: Prisma.SortOrder
+  date?: Prisma.SortOrderInput | Prisma.SortOrder
   title?: Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   totalAmount?: Prisma.SortOrder
@@ -411,8 +484,16 @@ export type QuotationOrderByWithRelationInput = {
   acceptedDate?: Prisma.SortOrderInput | Prisma.SortOrder
   deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   notes?: Prisma.SortOrderInput | Prisma.SortOrder
-  terms?: Prisma.SortOrderInput | Prisma.SortOrder
   attachments?: Prisma.SortOrderInput | Prisma.SortOrder
+  termOfPayment?: Prisma.SortOrderInput | Prisma.SortOrder
+  termsAndConditions?: Prisma.SortOrderInput | Prisma.SortOrder
+  termOfDelivery?: Prisma.SortOrderInput | Prisma.SortOrder
+  paymentMethod?: Prisma.SortOrderInput | Prisma.SortOrder
+  requestType?: Prisma.SortOrderInput | Prisma.SortOrder
+  customerAddress?: Prisma.SortOrderInput | Prisma.SortOrder
+  contactPerson?: Prisma.SortOrderInput | Prisma.SortOrder
+  contactPhone?: Prisma.SortOrderInput | Prisma.SortOrder
+  contactEmail?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   customerId?: Prisma.SortOrder
@@ -430,6 +511,7 @@ export type QuotationWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.QuotationWhereInput | Prisma.QuotationWhereInput[]
   OR?: Prisma.QuotationWhereInput[]
   NOT?: Prisma.QuotationWhereInput | Prisma.QuotationWhereInput[]
+  date?: Prisma.DateTimeNullableFilter<"Quotation"> | Date | string | null
   title?: Prisma.StringFilter<"Quotation"> | string
   description?: Prisma.StringNullableFilter<"Quotation"> | string | null
   totalAmount?: Prisma.FloatFilter<"Quotation"> | number
@@ -444,8 +526,16 @@ export type QuotationWhereUniqueInput = Prisma.AtLeast<{
   acceptedDate?: Prisma.DateTimeNullableFilter<"Quotation"> | Date | string | null
   deletedAt?: Prisma.DateTimeNullableFilter<"Quotation"> | Date | string | null
   notes?: Prisma.StringNullableFilter<"Quotation"> | string | null
-  terms?: Prisma.StringNullableFilter<"Quotation"> | string | null
   attachments?: Prisma.JsonNullableFilter<"Quotation">
+  termOfPayment?: Prisma.StringNullableFilter<"Quotation"> | string | null
+  termsAndConditions?: Prisma.StringNullableFilter<"Quotation"> | string | null
+  termOfDelivery?: Prisma.StringNullableFilter<"Quotation"> | string | null
+  paymentMethod?: Prisma.StringNullableFilter<"Quotation"> | string | null
+  requestType?: Prisma.StringNullableFilter<"Quotation"> | string | null
+  customerAddress?: Prisma.StringNullableFilter<"Quotation"> | string | null
+  contactPerson?: Prisma.StringNullableFilter<"Quotation"> | string | null
+  contactPhone?: Prisma.StringNullableFilter<"Quotation"> | string | null
+  contactEmail?: Prisma.StringNullableFilter<"Quotation"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Quotation"> | Date | string
   updatedAt?: Prisma.DateTimeNullableFilter<"Quotation"> | Date | string | null
   customerId?: Prisma.IntFilter<"Quotation"> | number
@@ -460,6 +550,7 @@ export type QuotationWhereUniqueInput = Prisma.AtLeast<{
 export type QuotationOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   number?: Prisma.SortOrder
+  date?: Prisma.SortOrderInput | Prisma.SortOrder
   title?: Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   totalAmount?: Prisma.SortOrder
@@ -474,8 +565,16 @@ export type QuotationOrderByWithAggregationInput = {
   acceptedDate?: Prisma.SortOrderInput | Prisma.SortOrder
   deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   notes?: Prisma.SortOrderInput | Prisma.SortOrder
-  terms?: Prisma.SortOrderInput | Prisma.SortOrder
   attachments?: Prisma.SortOrderInput | Prisma.SortOrder
+  termOfPayment?: Prisma.SortOrderInput | Prisma.SortOrder
+  termsAndConditions?: Prisma.SortOrderInput | Prisma.SortOrder
+  termOfDelivery?: Prisma.SortOrderInput | Prisma.SortOrder
+  paymentMethod?: Prisma.SortOrderInput | Prisma.SortOrder
+  requestType?: Prisma.SortOrderInput | Prisma.SortOrder
+  customerAddress?: Prisma.SortOrderInput | Prisma.SortOrder
+  contactPerson?: Prisma.SortOrderInput | Prisma.SortOrder
+  contactPhone?: Prisma.SortOrderInput | Prisma.SortOrder
+  contactEmail?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   customerId?: Prisma.SortOrder
@@ -494,6 +593,7 @@ export type QuotationScalarWhereWithAggregatesInput = {
   NOT?: Prisma.QuotationScalarWhereWithAggregatesInput | Prisma.QuotationScalarWhereWithAggregatesInput[]
   id?: Prisma.IntWithAggregatesFilter<"Quotation"> | number
   number?: Prisma.StringWithAggregatesFilter<"Quotation"> | string
+  date?: Prisma.DateTimeNullableWithAggregatesFilter<"Quotation"> | Date | string | null
   title?: Prisma.StringWithAggregatesFilter<"Quotation"> | string
   description?: Prisma.StringNullableWithAggregatesFilter<"Quotation"> | string | null
   totalAmount?: Prisma.FloatWithAggregatesFilter<"Quotation"> | number
@@ -508,8 +608,16 @@ export type QuotationScalarWhereWithAggregatesInput = {
   acceptedDate?: Prisma.DateTimeNullableWithAggregatesFilter<"Quotation"> | Date | string | null
   deletedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Quotation"> | Date | string | null
   notes?: Prisma.StringNullableWithAggregatesFilter<"Quotation"> | string | null
-  terms?: Prisma.StringNullableWithAggregatesFilter<"Quotation"> | string | null
   attachments?: Prisma.JsonNullableWithAggregatesFilter<"Quotation">
+  termOfPayment?: Prisma.StringNullableWithAggregatesFilter<"Quotation"> | string | null
+  termsAndConditions?: Prisma.StringNullableWithAggregatesFilter<"Quotation"> | string | null
+  termOfDelivery?: Prisma.StringNullableWithAggregatesFilter<"Quotation"> | string | null
+  paymentMethod?: Prisma.StringNullableWithAggregatesFilter<"Quotation"> | string | null
+  requestType?: Prisma.StringNullableWithAggregatesFilter<"Quotation"> | string | null
+  customerAddress?: Prisma.StringNullableWithAggregatesFilter<"Quotation"> | string | null
+  contactPerson?: Prisma.StringNullableWithAggregatesFilter<"Quotation"> | string | null
+  contactPhone?: Prisma.StringNullableWithAggregatesFilter<"Quotation"> | string | null
+  contactEmail?: Prisma.StringNullableWithAggregatesFilter<"Quotation"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Quotation"> | Date | string
   updatedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Quotation"> | Date | string | null
   customerId?: Prisma.IntWithAggregatesFilter<"Quotation"> | number
@@ -519,6 +627,7 @@ export type QuotationScalarWhereWithAggregatesInput = {
 
 export type QuotationCreateInput = {
   number: string
+  date?: Date | string | null
   title: string
   description?: string | null
   totalAmount: number
@@ -533,8 +642,16 @@ export type QuotationCreateInput = {
   acceptedDate?: Date | string | null
   deletedAt?: Date | string | null
   notes?: string | null
-  terms?: string | null
   attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  termOfPayment?: string | null
+  termsAndConditions?: string | null
+  termOfDelivery?: string | null
+  paymentMethod?: string | null
+  requestType?: string | null
+  customerAddress?: string | null
+  contactPerson?: string | null
+  contactPhone?: string | null
+  contactEmail?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
   Opportunity?: Prisma.OpportunityCreateNestedOneWithoutQuotationsInput
@@ -546,6 +663,7 @@ export type QuotationCreateInput = {
 export type QuotationUncheckedCreateInput = {
   id?: number
   number: string
+  date?: Date | string | null
   title: string
   description?: string | null
   totalAmount: number
@@ -560,8 +678,16 @@ export type QuotationUncheckedCreateInput = {
   acceptedDate?: Date | string | null
   deletedAt?: Date | string | null
   notes?: string | null
-  terms?: string | null
   attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  termOfPayment?: string | null
+  termsAndConditions?: string | null
+  termOfDelivery?: string | null
+  paymentMethod?: string | null
+  requestType?: string | null
+  customerAddress?: string | null
+  contactPerson?: string | null
+  contactPhone?: string | null
+  contactEmail?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
   customerId: number
@@ -572,6 +698,7 @@ export type QuotationUncheckedCreateInput = {
 
 export type QuotationUpdateInput = {
   number?: Prisma.StringFieldUpdateOperationsInput | string
+  date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -586,8 +713,16 @@ export type QuotationUpdateInput = {
   acceptedDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  terms?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  termOfPayment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  termsAndConditions?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  termOfDelivery?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  requestType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  customerAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactPerson?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Opportunity?: Prisma.OpportunityUpdateOneWithoutQuotationsNestedInput
@@ -599,6 +734,7 @@ export type QuotationUpdateInput = {
 export type QuotationUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   number?: Prisma.StringFieldUpdateOperationsInput | string
+  date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -613,8 +749,16 @@ export type QuotationUncheckedUpdateInput = {
   acceptedDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  terms?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  termOfPayment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  termsAndConditions?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  termOfDelivery?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  requestType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  customerAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactPerson?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   customerId?: Prisma.IntFieldUpdateOperationsInput | number
@@ -626,6 +770,7 @@ export type QuotationUncheckedUpdateInput = {
 export type QuotationCreateManyInput = {
   id?: number
   number: string
+  date?: Date | string | null
   title: string
   description?: string | null
   totalAmount: number
@@ -640,8 +785,16 @@ export type QuotationCreateManyInput = {
   acceptedDate?: Date | string | null
   deletedAt?: Date | string | null
   notes?: string | null
-  terms?: string | null
   attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  termOfPayment?: string | null
+  termsAndConditions?: string | null
+  termOfDelivery?: string | null
+  paymentMethod?: string | null
+  requestType?: string | null
+  customerAddress?: string | null
+  contactPerson?: string | null
+  contactPhone?: string | null
+  contactEmail?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
   customerId: number
@@ -651,6 +804,7 @@ export type QuotationCreateManyInput = {
 
 export type QuotationUpdateManyMutationInput = {
   number?: Prisma.StringFieldUpdateOperationsInput | string
+  date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -665,8 +819,16 @@ export type QuotationUpdateManyMutationInput = {
   acceptedDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  terms?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  termOfPayment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  termsAndConditions?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  termOfDelivery?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  requestType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  customerAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactPerson?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
@@ -674,6 +836,7 @@ export type QuotationUpdateManyMutationInput = {
 export type QuotationUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   number?: Prisma.StringFieldUpdateOperationsInput | string
+  date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -688,8 +851,16 @@ export type QuotationUncheckedUpdateManyInput = {
   acceptedDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  terms?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  termOfPayment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  termsAndConditions?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  termOfDelivery?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  requestType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  customerAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactPerson?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   customerId?: Prisma.IntFieldUpdateOperationsInput | number
@@ -710,6 +881,7 @@ export type QuotationOrderByRelationAggregateInput = {
 export type QuotationCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   number?: Prisma.SortOrder
+  date?: Prisma.SortOrder
   title?: Prisma.SortOrder
   description?: Prisma.SortOrder
   totalAmount?: Prisma.SortOrder
@@ -724,8 +896,16 @@ export type QuotationCountOrderByAggregateInput = {
   acceptedDate?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
   notes?: Prisma.SortOrder
-  terms?: Prisma.SortOrder
   attachments?: Prisma.SortOrder
+  termOfPayment?: Prisma.SortOrder
+  termsAndConditions?: Prisma.SortOrder
+  termOfDelivery?: Prisma.SortOrder
+  paymentMethod?: Prisma.SortOrder
+  requestType?: Prisma.SortOrder
+  customerAddress?: Prisma.SortOrder
+  contactPerson?: Prisma.SortOrder
+  contactPhone?: Prisma.SortOrder
+  contactEmail?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   customerId?: Prisma.SortOrder
@@ -748,6 +928,7 @@ export type QuotationAvgOrderByAggregateInput = {
 export type QuotationMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   number?: Prisma.SortOrder
+  date?: Prisma.SortOrder
   title?: Prisma.SortOrder
   description?: Prisma.SortOrder
   totalAmount?: Prisma.SortOrder
@@ -762,7 +943,15 @@ export type QuotationMaxOrderByAggregateInput = {
   acceptedDate?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
   notes?: Prisma.SortOrder
-  terms?: Prisma.SortOrder
+  termOfPayment?: Prisma.SortOrder
+  termsAndConditions?: Prisma.SortOrder
+  termOfDelivery?: Prisma.SortOrder
+  paymentMethod?: Prisma.SortOrder
+  requestType?: Prisma.SortOrder
+  customerAddress?: Prisma.SortOrder
+  contactPerson?: Prisma.SortOrder
+  contactPhone?: Prisma.SortOrder
+  contactEmail?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   customerId?: Prisma.SortOrder
@@ -773,6 +962,7 @@ export type QuotationMaxOrderByAggregateInput = {
 export type QuotationMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   number?: Prisma.SortOrder
+  date?: Prisma.SortOrder
   title?: Prisma.SortOrder
   description?: Prisma.SortOrder
   totalAmount?: Prisma.SortOrder
@@ -787,7 +977,15 @@ export type QuotationMinOrderByAggregateInput = {
   acceptedDate?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
   notes?: Prisma.SortOrder
-  terms?: Prisma.SortOrder
+  termOfPayment?: Prisma.SortOrder
+  termsAndConditions?: Prisma.SortOrder
+  termOfDelivery?: Prisma.SortOrder
+  paymentMethod?: Prisma.SortOrder
+  requestType?: Prisma.SortOrder
+  customerAddress?: Prisma.SortOrder
+  contactPerson?: Prisma.SortOrder
+  contactPhone?: Prisma.SortOrder
+  contactEmail?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   customerId?: Prisma.SortOrder
@@ -958,6 +1156,7 @@ export type QuotationUncheckedUpdateManyWithoutUserNestedInput = {
 
 export type QuotationCreateWithoutCustomerInput = {
   number: string
+  date?: Date | string | null
   title: string
   description?: string | null
   totalAmount: number
@@ -972,8 +1171,16 @@ export type QuotationCreateWithoutCustomerInput = {
   acceptedDate?: Date | string | null
   deletedAt?: Date | string | null
   notes?: string | null
-  terms?: string | null
   attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  termOfPayment?: string | null
+  termsAndConditions?: string | null
+  termOfDelivery?: string | null
+  paymentMethod?: string | null
+  requestType?: string | null
+  customerAddress?: string | null
+  contactPerson?: string | null
+  contactPhone?: string | null
+  contactEmail?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
   Opportunity?: Prisma.OpportunityCreateNestedOneWithoutQuotationsInput
@@ -984,6 +1191,7 @@ export type QuotationCreateWithoutCustomerInput = {
 export type QuotationUncheckedCreateWithoutCustomerInput = {
   id?: number
   number: string
+  date?: Date | string | null
   title: string
   description?: string | null
   totalAmount: number
@@ -998,8 +1206,16 @@ export type QuotationUncheckedCreateWithoutCustomerInput = {
   acceptedDate?: Date | string | null
   deletedAt?: Date | string | null
   notes?: string | null
-  terms?: string | null
   attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  termOfPayment?: string | null
+  termsAndConditions?: string | null
+  termOfDelivery?: string | null
+  paymentMethod?: string | null
+  requestType?: string | null
+  customerAddress?: string | null
+  contactPerson?: string | null
+  contactPhone?: string | null
+  contactEmail?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
   userId: number
@@ -1039,6 +1255,7 @@ export type QuotationScalarWhereInput = {
   NOT?: Prisma.QuotationScalarWhereInput | Prisma.QuotationScalarWhereInput[]
   id?: Prisma.IntFilter<"Quotation"> | number
   number?: Prisma.StringFilter<"Quotation"> | string
+  date?: Prisma.DateTimeNullableFilter<"Quotation"> | Date | string | null
   title?: Prisma.StringFilter<"Quotation"> | string
   description?: Prisma.StringNullableFilter<"Quotation"> | string | null
   totalAmount?: Prisma.FloatFilter<"Quotation"> | number
@@ -1053,8 +1270,16 @@ export type QuotationScalarWhereInput = {
   acceptedDate?: Prisma.DateTimeNullableFilter<"Quotation"> | Date | string | null
   deletedAt?: Prisma.DateTimeNullableFilter<"Quotation"> | Date | string | null
   notes?: Prisma.StringNullableFilter<"Quotation"> | string | null
-  terms?: Prisma.StringNullableFilter<"Quotation"> | string | null
   attachments?: Prisma.JsonNullableFilter<"Quotation">
+  termOfPayment?: Prisma.StringNullableFilter<"Quotation"> | string | null
+  termsAndConditions?: Prisma.StringNullableFilter<"Quotation"> | string | null
+  termOfDelivery?: Prisma.StringNullableFilter<"Quotation"> | string | null
+  paymentMethod?: Prisma.StringNullableFilter<"Quotation"> | string | null
+  requestType?: Prisma.StringNullableFilter<"Quotation"> | string | null
+  customerAddress?: Prisma.StringNullableFilter<"Quotation"> | string | null
+  contactPerson?: Prisma.StringNullableFilter<"Quotation"> | string | null
+  contactPhone?: Prisma.StringNullableFilter<"Quotation"> | string | null
+  contactEmail?: Prisma.StringNullableFilter<"Quotation"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Quotation"> | Date | string
   updatedAt?: Prisma.DateTimeNullableFilter<"Quotation"> | Date | string | null
   customerId?: Prisma.IntFilter<"Quotation"> | number
@@ -1064,6 +1289,7 @@ export type QuotationScalarWhereInput = {
 
 export type QuotationCreateWithoutOpportunityInput = {
   number: string
+  date?: Date | string | null
   title: string
   description?: string | null
   totalAmount: number
@@ -1078,8 +1304,16 @@ export type QuotationCreateWithoutOpportunityInput = {
   acceptedDate?: Date | string | null
   deletedAt?: Date | string | null
   notes?: string | null
-  terms?: string | null
   attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  termOfPayment?: string | null
+  termsAndConditions?: string | null
+  termOfDelivery?: string | null
+  paymentMethod?: string | null
+  requestType?: string | null
+  customerAddress?: string | null
+  contactPerson?: string | null
+  contactPhone?: string | null
+  contactEmail?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
   Customer: Prisma.CustomerCreateNestedOneWithoutQuotationsInput
@@ -1090,6 +1324,7 @@ export type QuotationCreateWithoutOpportunityInput = {
 export type QuotationUncheckedCreateWithoutOpportunityInput = {
   id?: number
   number: string
+  date?: Date | string | null
   title: string
   description?: string | null
   totalAmount: number
@@ -1104,8 +1339,16 @@ export type QuotationUncheckedCreateWithoutOpportunityInput = {
   acceptedDate?: Date | string | null
   deletedAt?: Date | string | null
   notes?: string | null
-  terms?: string | null
   attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  termOfPayment?: string | null
+  termsAndConditions?: string | null
+  termOfDelivery?: string | null
+  paymentMethod?: string | null
+  requestType?: string | null
+  customerAddress?: string | null
+  contactPerson?: string | null
+  contactPhone?: string | null
+  contactEmail?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
   customerId: number
@@ -1141,6 +1384,7 @@ export type QuotationUpdateManyWithWhereWithoutOpportunityInput = {
 
 export type QuotationCreateWithoutQuotationItemsInput = {
   number: string
+  date?: Date | string | null
   title: string
   description?: string | null
   totalAmount: number
@@ -1155,8 +1399,16 @@ export type QuotationCreateWithoutQuotationItemsInput = {
   acceptedDate?: Date | string | null
   deletedAt?: Date | string | null
   notes?: string | null
-  terms?: string | null
   attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  termOfPayment?: string | null
+  termsAndConditions?: string | null
+  termOfDelivery?: string | null
+  paymentMethod?: string | null
+  requestType?: string | null
+  customerAddress?: string | null
+  contactPerson?: string | null
+  contactPhone?: string | null
+  contactEmail?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
   Opportunity?: Prisma.OpportunityCreateNestedOneWithoutQuotationsInput
@@ -1167,6 +1419,7 @@ export type QuotationCreateWithoutQuotationItemsInput = {
 export type QuotationUncheckedCreateWithoutQuotationItemsInput = {
   id?: number
   number: string
+  date?: Date | string | null
   title: string
   description?: string | null
   totalAmount: number
@@ -1181,8 +1434,16 @@ export type QuotationUncheckedCreateWithoutQuotationItemsInput = {
   acceptedDate?: Date | string | null
   deletedAt?: Date | string | null
   notes?: string | null
-  terms?: string | null
   attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  termOfPayment?: string | null
+  termsAndConditions?: string | null
+  termOfDelivery?: string | null
+  paymentMethod?: string | null
+  requestType?: string | null
+  customerAddress?: string | null
+  contactPerson?: string | null
+  contactPhone?: string | null
+  contactEmail?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
   customerId: number
@@ -1208,6 +1469,7 @@ export type QuotationUpdateToOneWithWhereWithoutQuotationItemsInput = {
 
 export type QuotationUpdateWithoutQuotationItemsInput = {
   number?: Prisma.StringFieldUpdateOperationsInput | string
+  date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -1222,8 +1484,16 @@ export type QuotationUpdateWithoutQuotationItemsInput = {
   acceptedDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  terms?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  termOfPayment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  termsAndConditions?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  termOfDelivery?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  requestType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  customerAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactPerson?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Opportunity?: Prisma.OpportunityUpdateOneWithoutQuotationsNestedInput
@@ -1234,6 +1504,7 @@ export type QuotationUpdateWithoutQuotationItemsInput = {
 export type QuotationUncheckedUpdateWithoutQuotationItemsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   number?: Prisma.StringFieldUpdateOperationsInput | string
+  date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -1248,8 +1519,16 @@ export type QuotationUncheckedUpdateWithoutQuotationItemsInput = {
   acceptedDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  terms?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  termOfPayment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  termsAndConditions?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  termOfDelivery?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  requestType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  customerAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactPerson?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   customerId?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1259,6 +1538,7 @@ export type QuotationUncheckedUpdateWithoutQuotationItemsInput = {
 
 export type QuotationCreateWithoutUserInput = {
   number: string
+  date?: Date | string | null
   title: string
   description?: string | null
   totalAmount: number
@@ -1273,8 +1553,16 @@ export type QuotationCreateWithoutUserInput = {
   acceptedDate?: Date | string | null
   deletedAt?: Date | string | null
   notes?: string | null
-  terms?: string | null
   attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  termOfPayment?: string | null
+  termsAndConditions?: string | null
+  termOfDelivery?: string | null
+  paymentMethod?: string | null
+  requestType?: string | null
+  customerAddress?: string | null
+  contactPerson?: string | null
+  contactPhone?: string | null
+  contactEmail?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
   Opportunity?: Prisma.OpportunityCreateNestedOneWithoutQuotationsInput
@@ -1285,6 +1573,7 @@ export type QuotationCreateWithoutUserInput = {
 export type QuotationUncheckedCreateWithoutUserInput = {
   id?: number
   number: string
+  date?: Date | string | null
   title: string
   description?: string | null
   totalAmount: number
@@ -1299,8 +1588,16 @@ export type QuotationUncheckedCreateWithoutUserInput = {
   acceptedDate?: Date | string | null
   deletedAt?: Date | string | null
   notes?: string | null
-  terms?: string | null
   attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  termOfPayment?: string | null
+  termsAndConditions?: string | null
+  termOfDelivery?: string | null
+  paymentMethod?: string | null
+  requestType?: string | null
+  customerAddress?: string | null
+  contactPerson?: string | null
+  contactPhone?: string | null
+  contactEmail?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
   customerId: number
@@ -1337,6 +1634,7 @@ export type QuotationUpdateManyWithWhereWithoutUserInput = {
 export type QuotationCreateManyCustomerInput = {
   id?: number
   number: string
+  date?: Date | string | null
   title: string
   description?: string | null
   totalAmount: number
@@ -1351,8 +1649,16 @@ export type QuotationCreateManyCustomerInput = {
   acceptedDate?: Date | string | null
   deletedAt?: Date | string | null
   notes?: string | null
-  terms?: string | null
   attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  termOfPayment?: string | null
+  termsAndConditions?: string | null
+  termOfDelivery?: string | null
+  paymentMethod?: string | null
+  requestType?: string | null
+  customerAddress?: string | null
+  contactPerson?: string | null
+  contactPhone?: string | null
+  contactEmail?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
   userId: number
@@ -1361,6 +1667,7 @@ export type QuotationCreateManyCustomerInput = {
 
 export type QuotationUpdateWithoutCustomerInput = {
   number?: Prisma.StringFieldUpdateOperationsInput | string
+  date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -1375,8 +1682,16 @@ export type QuotationUpdateWithoutCustomerInput = {
   acceptedDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  terms?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  termOfPayment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  termsAndConditions?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  termOfDelivery?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  requestType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  customerAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactPerson?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Opportunity?: Prisma.OpportunityUpdateOneWithoutQuotationsNestedInput
@@ -1387,6 +1702,7 @@ export type QuotationUpdateWithoutCustomerInput = {
 export type QuotationUncheckedUpdateWithoutCustomerInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   number?: Prisma.StringFieldUpdateOperationsInput | string
+  date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -1401,8 +1717,16 @@ export type QuotationUncheckedUpdateWithoutCustomerInput = {
   acceptedDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  terms?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  termOfPayment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  termsAndConditions?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  termOfDelivery?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  requestType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  customerAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactPerson?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   userId?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1413,6 +1737,7 @@ export type QuotationUncheckedUpdateWithoutCustomerInput = {
 export type QuotationUncheckedUpdateManyWithoutCustomerInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   number?: Prisma.StringFieldUpdateOperationsInput | string
+  date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -1427,8 +1752,16 @@ export type QuotationUncheckedUpdateManyWithoutCustomerInput = {
   acceptedDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  terms?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  termOfPayment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  termsAndConditions?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  termOfDelivery?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  requestType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  customerAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactPerson?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   userId?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1438,6 +1771,7 @@ export type QuotationUncheckedUpdateManyWithoutCustomerInput = {
 export type QuotationCreateManyOpportunityInput = {
   id?: number
   number: string
+  date?: Date | string | null
   title: string
   description?: string | null
   totalAmount: number
@@ -1452,8 +1786,16 @@ export type QuotationCreateManyOpportunityInput = {
   acceptedDate?: Date | string | null
   deletedAt?: Date | string | null
   notes?: string | null
-  terms?: string | null
   attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  termOfPayment?: string | null
+  termsAndConditions?: string | null
+  termOfDelivery?: string | null
+  paymentMethod?: string | null
+  requestType?: string | null
+  customerAddress?: string | null
+  contactPerson?: string | null
+  contactPhone?: string | null
+  contactEmail?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
   customerId: number
@@ -1462,6 +1804,7 @@ export type QuotationCreateManyOpportunityInput = {
 
 export type QuotationUpdateWithoutOpportunityInput = {
   number?: Prisma.StringFieldUpdateOperationsInput | string
+  date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -1476,8 +1819,16 @@ export type QuotationUpdateWithoutOpportunityInput = {
   acceptedDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  terms?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  termOfPayment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  termsAndConditions?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  termOfDelivery?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  requestType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  customerAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactPerson?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Customer?: Prisma.CustomerUpdateOneRequiredWithoutQuotationsNestedInput
@@ -1488,6 +1839,7 @@ export type QuotationUpdateWithoutOpportunityInput = {
 export type QuotationUncheckedUpdateWithoutOpportunityInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   number?: Prisma.StringFieldUpdateOperationsInput | string
+  date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -1502,8 +1854,16 @@ export type QuotationUncheckedUpdateWithoutOpportunityInput = {
   acceptedDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  terms?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  termOfPayment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  termsAndConditions?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  termOfDelivery?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  requestType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  customerAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactPerson?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   customerId?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1514,6 +1874,7 @@ export type QuotationUncheckedUpdateWithoutOpportunityInput = {
 export type QuotationUncheckedUpdateManyWithoutOpportunityInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   number?: Prisma.StringFieldUpdateOperationsInput | string
+  date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -1528,8 +1889,16 @@ export type QuotationUncheckedUpdateManyWithoutOpportunityInput = {
   acceptedDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  terms?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  termOfPayment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  termsAndConditions?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  termOfDelivery?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  requestType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  customerAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactPerson?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   customerId?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1539,6 +1908,7 @@ export type QuotationUncheckedUpdateManyWithoutOpportunityInput = {
 export type QuotationCreateManyUserInput = {
   id?: number
   number: string
+  date?: Date | string | null
   title: string
   description?: string | null
   totalAmount: number
@@ -1553,8 +1923,16 @@ export type QuotationCreateManyUserInput = {
   acceptedDate?: Date | string | null
   deletedAt?: Date | string | null
   notes?: string | null
-  terms?: string | null
   attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  termOfPayment?: string | null
+  termsAndConditions?: string | null
+  termOfDelivery?: string | null
+  paymentMethod?: string | null
+  requestType?: string | null
+  customerAddress?: string | null
+  contactPerson?: string | null
+  contactPhone?: string | null
+  contactEmail?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
   customerId: number
@@ -1563,6 +1941,7 @@ export type QuotationCreateManyUserInput = {
 
 export type QuotationUpdateWithoutUserInput = {
   number?: Prisma.StringFieldUpdateOperationsInput | string
+  date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -1577,8 +1956,16 @@ export type QuotationUpdateWithoutUserInput = {
   acceptedDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  terms?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  termOfPayment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  termsAndConditions?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  termOfDelivery?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  requestType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  customerAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactPerson?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Opportunity?: Prisma.OpportunityUpdateOneWithoutQuotationsNestedInput
@@ -1589,6 +1976,7 @@ export type QuotationUpdateWithoutUserInput = {
 export type QuotationUncheckedUpdateWithoutUserInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   number?: Prisma.StringFieldUpdateOperationsInput | string
+  date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -1603,8 +1991,16 @@ export type QuotationUncheckedUpdateWithoutUserInput = {
   acceptedDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  terms?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  termOfPayment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  termsAndConditions?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  termOfDelivery?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  requestType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  customerAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactPerson?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   customerId?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1615,6 +2011,7 @@ export type QuotationUncheckedUpdateWithoutUserInput = {
 export type QuotationUncheckedUpdateManyWithoutUserInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   number?: Prisma.StringFieldUpdateOperationsInput | string
+  date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -1629,8 +2026,16 @@ export type QuotationUncheckedUpdateManyWithoutUserInput = {
   acceptedDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  terms?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  termOfPayment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  termsAndConditions?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  termOfDelivery?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  requestType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  customerAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactPerson?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   customerId?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1671,6 +2076,7 @@ export type QuotationCountOutputTypeCountQuotationItemsArgs<ExtArgs extends runt
 export type QuotationSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   number?: boolean
+  date?: boolean
   title?: boolean
   description?: boolean
   totalAmount?: boolean
@@ -1685,8 +2091,16 @@ export type QuotationSelect<ExtArgs extends runtime.Types.Extensions.InternalArg
   acceptedDate?: boolean
   deletedAt?: boolean
   notes?: boolean
-  terms?: boolean
   attachments?: boolean
+  termOfPayment?: boolean
+  termsAndConditions?: boolean
+  termOfDelivery?: boolean
+  paymentMethod?: boolean
+  requestType?: boolean
+  customerAddress?: boolean
+  contactPerson?: boolean
+  contactPhone?: boolean
+  contactEmail?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   customerId?: boolean
@@ -1702,6 +2116,7 @@ export type QuotationSelect<ExtArgs extends runtime.Types.Extensions.InternalArg
 export type QuotationSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   number?: boolean
+  date?: boolean
   title?: boolean
   description?: boolean
   totalAmount?: boolean
@@ -1716,8 +2131,16 @@ export type QuotationSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ext
   acceptedDate?: boolean
   deletedAt?: boolean
   notes?: boolean
-  terms?: boolean
   attachments?: boolean
+  termOfPayment?: boolean
+  termsAndConditions?: boolean
+  termOfDelivery?: boolean
+  paymentMethod?: boolean
+  requestType?: boolean
+  customerAddress?: boolean
+  contactPerson?: boolean
+  contactPhone?: boolean
+  contactEmail?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   customerId?: boolean
@@ -1731,6 +2154,7 @@ export type QuotationSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ext
 export type QuotationSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   number?: boolean
+  date?: boolean
   title?: boolean
   description?: boolean
   totalAmount?: boolean
@@ -1745,8 +2169,16 @@ export type QuotationSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ext
   acceptedDate?: boolean
   deletedAt?: boolean
   notes?: boolean
-  terms?: boolean
   attachments?: boolean
+  termOfPayment?: boolean
+  termsAndConditions?: boolean
+  termOfDelivery?: boolean
+  paymentMethod?: boolean
+  requestType?: boolean
+  customerAddress?: boolean
+  contactPerson?: boolean
+  contactPhone?: boolean
+  contactEmail?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   customerId?: boolean
@@ -1760,6 +2192,7 @@ export type QuotationSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ext
 export type QuotationSelectScalar = {
   id?: boolean
   number?: boolean
+  date?: boolean
   title?: boolean
   description?: boolean
   totalAmount?: boolean
@@ -1774,8 +2207,16 @@ export type QuotationSelectScalar = {
   acceptedDate?: boolean
   deletedAt?: boolean
   notes?: boolean
-  terms?: boolean
   attachments?: boolean
+  termOfPayment?: boolean
+  termsAndConditions?: boolean
+  termOfDelivery?: boolean
+  paymentMethod?: boolean
+  requestType?: boolean
+  customerAddress?: boolean
+  contactPerson?: boolean
+  contactPhone?: boolean
+  contactEmail?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   customerId?: boolean
@@ -1783,7 +2224,7 @@ export type QuotationSelectScalar = {
   opportunityId?: boolean
 }
 
-export type QuotationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "number" | "title" | "description" | "totalAmount" | "discount" | "vatAmount" | "grandTotal" | "status" | "currency" | "validity" | "validUntil" | "sentDate" | "acceptedDate" | "deletedAt" | "notes" | "terms" | "attachments" | "createdAt" | "updatedAt" | "customerId" | "userId" | "opportunityId", ExtArgs["result"]["quotation"]>
+export type QuotationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "number" | "date" | "title" | "description" | "totalAmount" | "discount" | "vatAmount" | "grandTotal" | "status" | "currency" | "validity" | "validUntil" | "sentDate" | "acceptedDate" | "deletedAt" | "notes" | "attachments" | "termOfPayment" | "termsAndConditions" | "termOfDelivery" | "paymentMethod" | "requestType" | "customerAddress" | "contactPerson" | "contactPhone" | "contactEmail" | "createdAt" | "updatedAt" | "customerId" | "userId" | "opportunityId", ExtArgs["result"]["quotation"]>
 export type QuotationInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   Opportunity?: boolean | Prisma.Quotation$OpportunityArgs<ExtArgs>
   Customer?: boolean | Prisma.CustomerDefaultArgs<ExtArgs>
@@ -1813,6 +2254,7 @@ export type $QuotationPayload<ExtArgs extends runtime.Types.Extensions.InternalA
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
     number: string
+    date: Date | null
     title: string
     description: string | null
     totalAmount: number
@@ -1827,8 +2269,16 @@ export type $QuotationPayload<ExtArgs extends runtime.Types.Extensions.InternalA
     acceptedDate: Date | null
     deletedAt: Date | null
     notes: string | null
-    terms: string | null
     attachments: runtime.JsonValue | null
+    termOfPayment: string | null
+    termsAndConditions: string | null
+    termOfDelivery: string | null
+    paymentMethod: string | null
+    requestType: string | null
+    customerAddress: string | null
+    contactPerson: string | null
+    contactPhone: string | null
+    contactEmail: string | null
     createdAt: Date
     updatedAt: Date | null
     customerId: number
@@ -2263,6 +2713,7 @@ export interface Prisma__QuotationClient<T, Null = never, ExtArgs extends runtim
 export interface QuotationFieldRefs {
   readonly id: Prisma.FieldRef<"Quotation", 'Int'>
   readonly number: Prisma.FieldRef<"Quotation", 'String'>
+  readonly date: Prisma.FieldRef<"Quotation", 'DateTime'>
   readonly title: Prisma.FieldRef<"Quotation", 'String'>
   readonly description: Prisma.FieldRef<"Quotation", 'String'>
   readonly totalAmount: Prisma.FieldRef<"Quotation", 'Float'>
@@ -2277,8 +2728,16 @@ export interface QuotationFieldRefs {
   readonly acceptedDate: Prisma.FieldRef<"Quotation", 'DateTime'>
   readonly deletedAt: Prisma.FieldRef<"Quotation", 'DateTime'>
   readonly notes: Prisma.FieldRef<"Quotation", 'String'>
-  readonly terms: Prisma.FieldRef<"Quotation", 'String'>
   readonly attachments: Prisma.FieldRef<"Quotation", 'Json'>
+  readonly termOfPayment: Prisma.FieldRef<"Quotation", 'String'>
+  readonly termsAndConditions: Prisma.FieldRef<"Quotation", 'String'>
+  readonly termOfDelivery: Prisma.FieldRef<"Quotation", 'String'>
+  readonly paymentMethod: Prisma.FieldRef<"Quotation", 'String'>
+  readonly requestType: Prisma.FieldRef<"Quotation", 'String'>
+  readonly customerAddress: Prisma.FieldRef<"Quotation", 'String'>
+  readonly contactPerson: Prisma.FieldRef<"Quotation", 'String'>
+  readonly contactPhone: Prisma.FieldRef<"Quotation", 'String'>
+  readonly contactEmail: Prisma.FieldRef<"Quotation", 'String'>
   readonly createdAt: Prisma.FieldRef<"Quotation", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Quotation", 'DateTime'>
   readonly customerId: Prisma.FieldRef<"Quotation", 'Int'>
