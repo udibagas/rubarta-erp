@@ -105,9 +105,9 @@ export class NkpService {
         PaymentType.TRANSFER_BALANCE,
         PaymentType.TAX,
         PaymentType.BILL,
-      ].includes(paymentType)
+      ].includes(paymentType as PaymentType)
     ) {
-      where.paymentType = paymentType;
+      where.paymentType = paymentType as PaymentType;
     }
 
     if (dateRange && dateRange !== 'null') {

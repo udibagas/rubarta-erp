@@ -201,8 +201,8 @@ export class QueryNkpDto {
   companyId?: string;
 
   @IsOptional()
-  @IsEnum(PaymentType)
-  paymentType?: PaymentType;
+  @IsEnum([...Object.values(PaymentType), 'ALL'])
+  paymentType?: PaymentType | 'ALL';
 
   @IsOptional()
   action?: string;
