@@ -24,6 +24,9 @@ export class UserType {
   @Field({ nullable: true })
   bankAccount?: string;
 
+  @Field({ nullable: true })
+  currency?: string;
+
   @Field()
   active: boolean;
 
