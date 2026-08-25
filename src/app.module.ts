@@ -34,6 +34,8 @@ import { MaterialsModule } from './materials/materials.module';
 import { CrmDashboardModule } from './crm-dashboard/crm-dashboard.module';
 import { VisitPlansModule } from './visit-plans/visit-plans.module';
 import { EjsAdapter } from '@nestjs-modules/mailer/adapters/ejs.adapter';
+import { GraphQLModule } from '@nestjs/graphql';
+import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 
 @Module({
   imports: [
@@ -87,6 +89,12 @@ import { EjsAdapter } from '@nestjs-modules/mailer/adapters/ejs.adapter';
     //   rootPath: join(__dirname, '../..', 'public'),
     // }),
     EventEmitterModule.forRoot(),
+    GraphQLModule.forRoot<ApolloDriverConfig>({
+      driver: ApolloDriver,
+      graphiql: true,
+      playground: false,
+      autoSchemaFile: true,
+    }),
     UsersModule,
     PrismaModule,
     AuthModule,

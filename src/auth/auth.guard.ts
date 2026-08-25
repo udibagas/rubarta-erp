@@ -8,6 +8,7 @@ import { Reflector } from '@nestjs/core';
 import { JwtService } from '@nestjs/jwt';
 import { UsersService } from '../users/users.service';
 import { IS_PUBLIC_KEY } from './public.decorator';
+import { type ContextType } from '@nestjs/common';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
@@ -25,9 +26,20 @@ export class AuthGuard implements CanActivate {
 
     if (isPublic) return true;
 
-    const request = context.switchToHttp().getRequest();
-    let [, token] = request.headers.authorization?.split(' ') ?? [];
-    if (!token) token = request.cookies['token']; // check di cookie juga barangkali ada
+    const contextType: ContextType | 'graphql' = context.getType();
+    let token: string;
+    let request: any;
+
+    if (contextType == 'graphql') {
+      const ctx = context.getArgByIndex(2);
+      request = ctx.req;
+      token = ctx.req.cookies.token; // check di cookies aja
+    } else {
+      request = context.switchToHttp().getRequest();
+      token = request.headers.authorization?.split(' ')[1];
+      if (!token) token = request.cookies['token']; // check di cookie juga barangkali ada
+    }
+
     if (!token) throw new UnauthorizedException();
 
     try {
