@@ -68,6 +68,9 @@ export type OpportunityStages = (typeof OpportunityStages)[keyof typeof Opportun
 
 export const QuotationStatus = {
   Draft: 'Draft',
+  Submitted: 'Submitted',
+  Approved: 'Approved',
+  Declined: 'Declined',
   Sent: 'Sent',
   Accepted: 'Accepted',
   Rejected: 'Rejected',

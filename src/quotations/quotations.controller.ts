@@ -8,7 +8,6 @@ import {
   Delete,
   Query,
   ParseIntPipe,
-  ParseEnumPipe,
 } from '@nestjs/common';
 import {
   ApiTags,
@@ -23,7 +22,6 @@ import {
   UpdateQuotationDto,
   QueryQuotationDto,
 } from './dto/quotation.dto';
-import { QuotationStatus } from '../prisma/client/client';
 
 @ApiTags('Quotations')
 @ApiBearerAuth()
@@ -41,21 +39,8 @@ export class QuotationsController {
   @Get()
   @ApiOperation({ summary: 'Get all quotations' })
   @ApiOkResponse({ description: 'List of quotations' })
-  findAll(
-    @Query('keyword') keyword?: string,
-    @Query('customerId', new ParseIntPipe({ optional: true }))
-    customerId?: number,
-    @Query('opportunityId', new ParseIntPipe({ optional: true }))
-    opportunityId?: number,
-    @Query('status', new ParseEnumPipe(QuotationStatus, { optional: true }))
-    status?: QuotationStatus,
-  ) {
-    return this.quotationsService.findAll({
-      keyword,
-      customerId,
-      opportunityId,
-      status,
-    });
+  findAll(@Query() query: QueryQuotationDto) {
+    return this.quotationsService.findAll(query);
   }
 
   @Get(':id')
@@ -73,6 +58,13 @@ export class QuotationsController {
     @Body() updateQuotationDto: UpdateQuotationDto,
   ) {
     return this.quotationsService.update(id, updateQuotationDto);
+  }
+
+  @Post(':id/submit')
+  @ApiOperation({ summary: 'Submit quotation' })
+  @ApiOkResponse({ description: 'Quotation submitted' })
+  submit(@Param('id', ParseIntPipe) id: number) {
+    return this.quotationsService.submit(id);
   }
 
   @Delete(':id')

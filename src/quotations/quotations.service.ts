@@ -200,4 +200,34 @@ export class QuotationsService {
       data: { deletedAt: new Date() },
     });
   }
+
+  async submit(id: number) {
+    await this.findOne(id);
+
+    const updatedQuotation = await this.prisma.quotation.update({
+      where: { id },
+      data: {
+        status: QuotationStatus.Submitted,
+      },
+    });
+
+    // Todo: trigger approval workflow
+
+    return updatedQuotation;
+  }
+
+  async send(id: number) {
+    await this.findOne(id);
+
+    const updatedQuotation = await this.prisma.quotation.update({
+      where: { id },
+      data: {
+        status: QuotationStatus.Sent,
+      },
+    });
+
+    // Todo: send email to customer, cc to creator, sales rep, approvers
+
+    return updatedQuotation;
+  }
 }
