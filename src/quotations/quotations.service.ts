@@ -17,6 +17,7 @@ import {
   QuotationStatus,
 } from '../prisma/client/client';
 import { EventEmitter2, OnEvent } from '@nestjs/event-emitter';
+import dayjs from 'dayjs';
 
 @Injectable()
 export class QuotationsService {
@@ -27,6 +28,7 @@ export class QuotationsService {
 
   async create(data: CreateQuotationDto) {
     const { items, ...quotationData } = data;
+    const number = await this.generateNumber();
 
     // Calculate totals
     let totalAmount = 0;
@@ -54,6 +56,7 @@ export class QuotationsService {
     return this.prisma.quotation.create({
       data: {
         ...quotationData,
+        number,
         totalAmount,
         vatAmount,
         grandTotal,
@@ -319,5 +322,20 @@ export class QuotationsService {
     // Todo: send email to customer, cc to creator, sales rep, approvers
 
     return updatedQuotation;
+  }
+
+  async generateNumber(): Promise<string> {
+    const lastQuotation = await this.prisma.quotation.findFirst({
+      orderBy: { id: 'desc' },
+    });
+
+    const monthYear = dayjs().format('MMYYYY');
+
+    const lastNumber = lastQuotation
+      ? parseInt(lastQuotation.number.split('-').pop())
+      : 0;
+
+    const newNumber = lastNumber + 1;
+    return `QUO${monthYear}-${newNumber}`;
   }
 }

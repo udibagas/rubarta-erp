@@ -64,11 +64,6 @@ export class QuotationItemDto {
 }
 
 export class CreateQuotationDto {
-  @ApiProperty({ example: 'QUO-2025-001' })
-  @IsString()
-  @MaxLength(50)
-  number: string;
-
   @ApiProperty({ example: '2025-06-25' })
   @IsDateString()
   date: string;
