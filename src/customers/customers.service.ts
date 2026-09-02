@@ -55,6 +55,9 @@ export class CustomersService {
         accountManager: {
           select: { name: true },
         },
+        Contacts: {
+          select: { name: true, phone: true, email: true },
+        },
         _count: {
           select: {
             Contacts: true,

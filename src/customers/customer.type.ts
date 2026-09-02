@@ -1,4 +1,5 @@
 import { ObjectType, Field, Int, Float } from '@nestjs/graphql';
+import { ContactType } from '../contacts/contact.type';
 
 @ObjectType('Customer')
 export class CustomerType {
@@ -43,4 +44,7 @@ export class CustomerType {
 
   @Field({ nullable: true })
   updatedAt?: Date;
+
+  @Field(() => [ContactType])
+  Contacts?: ContactType[];
 }
