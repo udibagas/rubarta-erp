@@ -9,8 +9,6 @@ import { DepartmentsModule } from './departments/departments.module';
 import { ApprovalSettingsModule } from './approval-settings/approval-settings.module';
 import { NkpModule } from './nkp/nkp.module';
 import { EventEmitterModule } from '@nestjs/event-emitter';
-import { ThrottlerModule } from '@nestjs/throttler';
-// import { APP_GUARD } from '@nestjs/core';
 import { MailerModule } from '@nestjs-modules/mailer';
 import { NotificationsModule } from './notifications/notifications.module';
 import { FileModule } from './file/file.module';
@@ -18,10 +16,7 @@ import { ServeStaticModule } from '@nestjs/serve-static';
 import { SuppliersModule } from './suppliers/suppliers.module';
 import { ReportModule } from './report/report.module';
 import { InvoicesModule } from './invoices/invoices.module';
-// import { PaymentsModule } from './payments/payments.module';
-// import { ExpensesModule } from './expenses/expenses.module';
 import { CustomersModule } from './customers/customers.module';
-// import { AccountsModule } from './accounts/accounts.module';
 import { join } from 'path';
 import { ContactsModule } from './contacts/contacts.module';
 import { LeadsModule } from './leads/leads.module';
@@ -40,12 +35,6 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
-    ThrottlerModule.forRoot([
-      {
-        ttl: 60000, // 1 minute
-        limit: 10, // max request per minute
-      },
-    ]),
     MailerModule.forRoot({
       transport: {
         host: process.env.MAILER_HOST,
@@ -84,10 +73,6 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
       rootPath: join(__dirname, '../..', 'css'),
       serveRoot: '/css',
     }),
-    // FOR SPA
-    // ServeStaticModule.forRoot({
-    //   rootPath: join(__dirname, '../..', 'public'),
-    // }),
     EventEmitterModule.forRoot(),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
@@ -107,10 +92,7 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
     FileModule,
     SuppliersModule,
     ReportModule,
-    // AccountsModule,
     InvoicesModule,
-    // PaymentsModule,
-    // ExpensesModule,
     CustomersModule,
     ContactsModule,
     LeadsModule,
@@ -125,12 +107,5 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
   ],
   controllers: [],
   providers: [],
-  //! ini bikin test jadi hang up, enable kalau udah production
-  // providers: [
-  //   {
-  //     provide: APP_GUARD,
-  //     useClass: ThrottlerGuard,
-  //   },
-  // ],
 })
 export class AppModule {}
