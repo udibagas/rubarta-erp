@@ -185,7 +185,7 @@ export type ApprovalSettingGroupByArgs<ExtArgs extends runtime.Types.Extensions.
 
 export type ApprovalSettingGroupByOutputType = {
   id: number
-  companyId: number
+  companyId: number | null
   approvalType: $Enums.ApprovalType
   paymentType: $Enums.PaymentType | null
   nkpType: $Enums.NkpType | null
@@ -216,17 +216,17 @@ export type ApprovalSettingWhereInput = {
   OR?: Prisma.ApprovalSettingWhereInput[]
   NOT?: Prisma.ApprovalSettingWhereInput | Prisma.ApprovalSettingWhereInput[]
   id?: Prisma.IntFilter<"ApprovalSetting"> | number
-  companyId?: Prisma.IntFilter<"ApprovalSetting"> | number
+  companyId?: Prisma.IntNullableFilter<"ApprovalSetting"> | number | null
   approvalType?: Prisma.EnumApprovalTypeFilter<"ApprovalSetting"> | $Enums.ApprovalType
   paymentType?: Prisma.EnumPaymentTypeNullableFilter<"ApprovalSetting"> | $Enums.PaymentType | null
   nkpType?: Prisma.EnumNkpTypeNullableFilter<"ApprovalSetting"> | $Enums.NkpType | null
-  Company?: Prisma.XOR<Prisma.CompanyScalarRelationFilter, Prisma.CompanyWhereInput>
+  Company?: Prisma.XOR<Prisma.CompanyNullableScalarRelationFilter, Prisma.CompanyWhereInput> | null
   ApprovalSettingItem?: Prisma.ApprovalSettingItemListRelationFilter
 }
 
 export type ApprovalSettingOrderByWithRelationInput = {
   id?: Prisma.SortOrder
-  companyId?: Prisma.SortOrder
+  companyId?: Prisma.SortOrderInput | Prisma.SortOrder
   approvalType?: Prisma.SortOrder
   paymentType?: Prisma.SortOrderInput | Prisma.SortOrder
   nkpType?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -240,17 +240,17 @@ export type ApprovalSettingWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.ApprovalSettingWhereInput | Prisma.ApprovalSettingWhereInput[]
   OR?: Prisma.ApprovalSettingWhereInput[]
   NOT?: Prisma.ApprovalSettingWhereInput | Prisma.ApprovalSettingWhereInput[]
-  companyId?: Prisma.IntFilter<"ApprovalSetting"> | number
+  companyId?: Prisma.IntNullableFilter<"ApprovalSetting"> | number | null
   approvalType?: Prisma.EnumApprovalTypeFilter<"ApprovalSetting"> | $Enums.ApprovalType
   paymentType?: Prisma.EnumPaymentTypeNullableFilter<"ApprovalSetting"> | $Enums.PaymentType | null
   nkpType?: Prisma.EnumNkpTypeNullableFilter<"ApprovalSetting"> | $Enums.NkpType | null
-  Company?: Prisma.XOR<Prisma.CompanyScalarRelationFilter, Prisma.CompanyWhereInput>
+  Company?: Prisma.XOR<Prisma.CompanyNullableScalarRelationFilter, Prisma.CompanyWhereInput> | null
   ApprovalSettingItem?: Prisma.ApprovalSettingItemListRelationFilter
 }, "id" | "companyId_approvalType_paymentType_nkpType">
 
 export type ApprovalSettingOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
-  companyId?: Prisma.SortOrder
+  companyId?: Prisma.SortOrderInput | Prisma.SortOrder
   approvalType?: Prisma.SortOrder
   paymentType?: Prisma.SortOrderInput | Prisma.SortOrder
   nkpType?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -266,7 +266,7 @@ export type ApprovalSettingScalarWhereWithAggregatesInput = {
   OR?: Prisma.ApprovalSettingScalarWhereWithAggregatesInput[]
   NOT?: Prisma.ApprovalSettingScalarWhereWithAggregatesInput | Prisma.ApprovalSettingScalarWhereWithAggregatesInput[]
   id?: Prisma.IntWithAggregatesFilter<"ApprovalSetting"> | number
-  companyId?: Prisma.IntWithAggregatesFilter<"ApprovalSetting"> | number
+  companyId?: Prisma.IntNullableWithAggregatesFilter<"ApprovalSetting"> | number | null
   approvalType?: Prisma.EnumApprovalTypeWithAggregatesFilter<"ApprovalSetting"> | $Enums.ApprovalType
   paymentType?: Prisma.EnumPaymentTypeNullableWithAggregatesFilter<"ApprovalSetting"> | $Enums.PaymentType | null
   nkpType?: Prisma.EnumNkpTypeNullableWithAggregatesFilter<"ApprovalSetting"> | $Enums.NkpType | null
@@ -276,13 +276,13 @@ export type ApprovalSettingCreateInput = {
   approvalType: $Enums.ApprovalType
   paymentType?: $Enums.PaymentType | null
   nkpType?: $Enums.NkpType | null
-  Company: Prisma.CompanyCreateNestedOneWithoutApprovalSettingInput
+  Company?: Prisma.CompanyCreateNestedOneWithoutApprovalSettingInput
   ApprovalSettingItem?: Prisma.ApprovalSettingItemCreateNestedManyWithoutApprovalSettingInput
 }
 
 export type ApprovalSettingUncheckedCreateInput = {
   id?: number
-  companyId: number
+  companyId?: number | null
   approvalType: $Enums.ApprovalType
   paymentType?: $Enums.PaymentType | null
   nkpType?: $Enums.NkpType | null
@@ -293,13 +293,13 @@ export type ApprovalSettingUpdateInput = {
   approvalType?: Prisma.EnumApprovalTypeFieldUpdateOperationsInput | $Enums.ApprovalType
   paymentType?: Prisma.NullableEnumPaymentTypeFieldUpdateOperationsInput | $Enums.PaymentType | null
   nkpType?: Prisma.NullableEnumNkpTypeFieldUpdateOperationsInput | $Enums.NkpType | null
-  Company?: Prisma.CompanyUpdateOneRequiredWithoutApprovalSettingNestedInput
+  Company?: Prisma.CompanyUpdateOneWithoutApprovalSettingNestedInput
   ApprovalSettingItem?: Prisma.ApprovalSettingItemUpdateManyWithoutApprovalSettingNestedInput
 }
 
 export type ApprovalSettingUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  companyId?: Prisma.IntFieldUpdateOperationsInput | number
+  companyId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   approvalType?: Prisma.EnumApprovalTypeFieldUpdateOperationsInput | $Enums.ApprovalType
   paymentType?: Prisma.NullableEnumPaymentTypeFieldUpdateOperationsInput | $Enums.PaymentType | null
   nkpType?: Prisma.NullableEnumNkpTypeFieldUpdateOperationsInput | $Enums.NkpType | null
@@ -308,7 +308,7 @@ export type ApprovalSettingUncheckedUpdateInput = {
 
 export type ApprovalSettingCreateManyInput = {
   id?: number
-  companyId: number
+  companyId?: number | null
   approvalType: $Enums.ApprovalType
   paymentType?: $Enums.PaymentType | null
   nkpType?: $Enums.NkpType | null
@@ -322,7 +322,7 @@ export type ApprovalSettingUpdateManyMutationInput = {
 
 export type ApprovalSettingUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  companyId?: Prisma.IntFieldUpdateOperationsInput | number
+  companyId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   approvalType?: Prisma.EnumApprovalTypeFieldUpdateOperationsInput | $Enums.ApprovalType
   paymentType?: Prisma.NullableEnumPaymentTypeFieldUpdateOperationsInput | $Enums.PaymentType | null
   nkpType?: Prisma.NullableEnumNkpTypeFieldUpdateOperationsInput | $Enums.NkpType | null
@@ -426,10 +426,6 @@ export type ApprovalSettingUncheckedUpdateManyWithoutCompanyNestedInput = {
   deleteMany?: Prisma.ApprovalSettingScalarWhereInput | Prisma.ApprovalSettingScalarWhereInput[]
 }
 
-export type EnumApprovalTypeFieldUpdateOperationsInput = {
-  set?: $Enums.ApprovalType
-}
-
 export type NullableEnumPaymentTypeFieldUpdateOperationsInput = {
   set?: $Enums.PaymentType | null
 }
@@ -498,7 +494,7 @@ export type ApprovalSettingScalarWhereInput = {
   OR?: Prisma.ApprovalSettingScalarWhereInput[]
   NOT?: Prisma.ApprovalSettingScalarWhereInput | Prisma.ApprovalSettingScalarWhereInput[]
   id?: Prisma.IntFilter<"ApprovalSetting"> | number
-  companyId?: Prisma.IntFilter<"ApprovalSetting"> | number
+  companyId?: Prisma.IntNullableFilter<"ApprovalSetting"> | number | null
   approvalType?: Prisma.EnumApprovalTypeFilter<"ApprovalSetting"> | $Enums.ApprovalType
   paymentType?: Prisma.EnumPaymentTypeNullableFilter<"ApprovalSetting"> | $Enums.PaymentType | null
   nkpType?: Prisma.EnumNkpTypeNullableFilter<"ApprovalSetting"> | $Enums.NkpType | null
@@ -508,12 +504,12 @@ export type ApprovalSettingCreateWithoutApprovalSettingItemInput = {
   approvalType: $Enums.ApprovalType
   paymentType?: $Enums.PaymentType | null
   nkpType?: $Enums.NkpType | null
-  Company: Prisma.CompanyCreateNestedOneWithoutApprovalSettingInput
+  Company?: Prisma.CompanyCreateNestedOneWithoutApprovalSettingInput
 }
 
 export type ApprovalSettingUncheckedCreateWithoutApprovalSettingItemInput = {
   id?: number
-  companyId: number
+  companyId?: number | null
   approvalType: $Enums.ApprovalType
   paymentType?: $Enums.PaymentType | null
   nkpType?: $Enums.NkpType | null
@@ -539,12 +535,12 @@ export type ApprovalSettingUpdateWithoutApprovalSettingItemInput = {
   approvalType?: Prisma.EnumApprovalTypeFieldUpdateOperationsInput | $Enums.ApprovalType
   paymentType?: Prisma.NullableEnumPaymentTypeFieldUpdateOperationsInput | $Enums.PaymentType | null
   nkpType?: Prisma.NullableEnumNkpTypeFieldUpdateOperationsInput | $Enums.NkpType | null
-  Company?: Prisma.CompanyUpdateOneRequiredWithoutApprovalSettingNestedInput
+  Company?: Prisma.CompanyUpdateOneWithoutApprovalSettingNestedInput
 }
 
 export type ApprovalSettingUncheckedUpdateWithoutApprovalSettingItemInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  companyId?: Prisma.IntFieldUpdateOperationsInput | number
+  companyId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   approvalType?: Prisma.EnumApprovalTypeFieldUpdateOperationsInput | $Enums.ApprovalType
   paymentType?: Prisma.NullableEnumPaymentTypeFieldUpdateOperationsInput | $Enums.PaymentType | null
   nkpType?: Prisma.NullableEnumNkpTypeFieldUpdateOperationsInput | $Enums.NkpType | null
@@ -616,7 +612,7 @@ export type ApprovalSettingSelect<ExtArgs extends runtime.Types.Extensions.Inter
   approvalType?: boolean
   paymentType?: boolean
   nkpType?: boolean
-  Company?: boolean | Prisma.CompanyDefaultArgs<ExtArgs>
+  Company?: boolean | Prisma.ApprovalSetting$CompanyArgs<ExtArgs>
   ApprovalSettingItem?: boolean | Prisma.ApprovalSetting$ApprovalSettingItemArgs<ExtArgs>
   _count?: boolean | Prisma.ApprovalSettingCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["approvalSetting"]>
@@ -627,7 +623,7 @@ export type ApprovalSettingSelectCreateManyAndReturn<ExtArgs extends runtime.Typ
   approvalType?: boolean
   paymentType?: boolean
   nkpType?: boolean
-  Company?: boolean | Prisma.CompanyDefaultArgs<ExtArgs>
+  Company?: boolean | Prisma.ApprovalSetting$CompanyArgs<ExtArgs>
 }, ExtArgs["result"]["approvalSetting"]>
 
 export type ApprovalSettingSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -636,7 +632,7 @@ export type ApprovalSettingSelectUpdateManyAndReturn<ExtArgs extends runtime.Typ
   approvalType?: boolean
   paymentType?: boolean
   nkpType?: boolean
-  Company?: boolean | Prisma.CompanyDefaultArgs<ExtArgs>
+  Company?: boolean | Prisma.ApprovalSetting$CompanyArgs<ExtArgs>
 }, ExtArgs["result"]["approvalSetting"]>
 
 export type ApprovalSettingSelectScalar = {
@@ -649,26 +645,26 @@ export type ApprovalSettingSelectScalar = {
 
 export type ApprovalSettingOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "companyId" | "approvalType" | "paymentType" | "nkpType", ExtArgs["result"]["approvalSetting"]>
 export type ApprovalSettingInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  Company?: boolean | Prisma.CompanyDefaultArgs<ExtArgs>
+  Company?: boolean | Prisma.ApprovalSetting$CompanyArgs<ExtArgs>
   ApprovalSettingItem?: boolean | Prisma.ApprovalSetting$ApprovalSettingItemArgs<ExtArgs>
   _count?: boolean | Prisma.ApprovalSettingCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ApprovalSettingIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  Company?: boolean | Prisma.CompanyDefaultArgs<ExtArgs>
+  Company?: boolean | Prisma.ApprovalSetting$CompanyArgs<ExtArgs>
 }
 export type ApprovalSettingIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  Company?: boolean | Prisma.CompanyDefaultArgs<ExtArgs>
+  Company?: boolean | Prisma.ApprovalSetting$CompanyArgs<ExtArgs>
 }
 
 export type $ApprovalSettingPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "ApprovalSetting"
   objects: {
-    Company: Prisma.$CompanyPayload<ExtArgs>
+    Company: Prisma.$CompanyPayload<ExtArgs> | null
     ApprovalSettingItem: Prisma.$ApprovalSettingItemPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
-    companyId: number
+    companyId: number | null
     approvalType: $Enums.ApprovalType
     paymentType: $Enums.PaymentType | null
     nkpType: $Enums.NkpType | null
@@ -1066,7 +1062,7 @@ readonly fields: ApprovalSettingFieldRefs;
  */
 export interface Prisma__ApprovalSettingClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  Company<T extends Prisma.CompanyDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CompanyDefaultArgs<ExtArgs>>): Prisma.Prisma__CompanyClient<runtime.Types.Result.GetResult<Prisma.$CompanyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  Company<T extends Prisma.ApprovalSetting$CompanyArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ApprovalSetting$CompanyArgs<ExtArgs>>): Prisma.Prisma__CompanyClient<runtime.Types.Result.GetResult<Prisma.$CompanyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   ApprovalSettingItem<T extends Prisma.ApprovalSetting$ApprovalSettingItemArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ApprovalSetting$ApprovalSettingItemArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ApprovalSettingItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1500,6 +1496,25 @@ export type ApprovalSettingDeleteManyArgs<ExtArgs extends runtime.Types.Extensio
    * Limit how many ApprovalSettings to delete.
    */
   limit?: number
+}
+
+/**
+ * ApprovalSetting.Company
+ */
+export type ApprovalSetting$CompanyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Company
+   */
+  select?: Prisma.CompanySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Company
+   */
+  omit?: Prisma.CompanyOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CompanyInclude<ExtArgs> | null
+  where?: Prisma.CompanyWhereInput
 }
 
 /**

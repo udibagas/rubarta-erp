@@ -180,7 +180,11 @@ export type ApprovalStatus = (typeof ApprovalStatus)[keyof typeof ApprovalStatus
 
 
 export const ApprovalType = {
-  NKP: 'NKP'
+  NKP: 'NKP',
+  QUOTATION: 'QUOTATION',
+  SALES_ORDER: 'SALES_ORDER',
+  PURCHASE_ORDER: 'PURCHASE_ORDER',
+  INVOICE: 'INVOICE'
 } as const
 
 export type ApprovalType = (typeof ApprovalType)[keyof typeof ApprovalType]

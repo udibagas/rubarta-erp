@@ -56,6 +56,8 @@ export class MaterialsController {
     isActive?: boolean,
     @Query('lowStock', new ParseBoolPipe({ optional: true }))
     lowStock?: boolean,
+    @Query('page', new ParseIntPipe({ optional: true })) page?: number,
+    @Query('pageSize', new ParseIntPipe({ optional: true })) pageSize?: number,
   ) {
     return this.materialsService.findAll({
       keyword,
@@ -63,6 +65,8 @@ export class MaterialsController {
       supplierId,
       isActive,
       lowStock,
+      page,
+      pageSize,
     });
   }
 

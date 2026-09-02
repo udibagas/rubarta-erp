@@ -2,6 +2,25 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateOrderDto, UpdateOrderDto, QueryOrderDto } from './dto/order.dto';
 import { Prisma } from '../prisma/client/client';
+import fs from 'fs';
+import { PDFParse } from 'pdf-parse';
+
+interface PurchaseOrderItem {
+  lineNo: number;
+  manufacturer: string;
+  vendorPartNo: string;
+  description: string;
+  tariffCode: string | null;
+
+  quantity: number;
+  unit: string;
+
+  unitPrice: number;
+  discountPercent: number;
+  netUnitPrice: number;
+  netAmount: number;
+  weight: number;
+}
 
 @Injectable()
 export class OrdersService {
@@ -174,5 +193,32 @@ export class OrdersService {
       where: { id },
       data: { deletedAt: new Date() },
     });
+  }
+
+  async parsePo() {
+    const buffer = fs.readFileSync('./po.pdf');
+    const uint8Array = new Uint8Array(buffer);
+    const parser = new PDFParse(uint8Array);
+    const result = await parser.getText();
+
+    const regex = /Page \d+\/\d+/;
+
+    const pages = result.text.split(/-- \d+ of \d+ --/);
+
+    const lines = [];
+
+    let i = 0;
+    for (const page of pages) {
+      const pageLines = page
+        .split('\n')
+        .filter((item) => !regex.test(item))
+        .slice(i > 0 ? 38 : 36)
+        .map((line) => line.trim().replace(/\t/g, '==='))
+        .filter((line) => line.length > 0);
+      lines.push(...pageLines);
+      i++;
+    }
+
+    return lines;
   }
 }

@@ -1,15 +1,29 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  ForbiddenException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import {
   CreateQuotationDto,
   UpdateQuotationDto,
   QueryQuotationDto,
 } from './dto/quotation.dto';
-import { Prisma, QuotationStatus } from '../prisma/client/client';
+import {
+  ApprovalStatus,
+  ApprovalType,
+  Prisma,
+  Quotation,
+  QuotationStatus,
+} from '../prisma/client/client';
+import { EventEmitter2, OnEvent } from '@nestjs/event-emitter';
 
 @Injectable()
 export class QuotationsService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(
+    private readonly prisma: PrismaService,
+    private eventEmitter: EventEmitter2,
+  ) {}
 
   async create(data: CreateQuotationDto) {
     const { items, ...quotationData } = data;
@@ -211,9 +225,85 @@ export class QuotationsService {
       },
     });
 
-    // Todo: trigger approval workflow
+    this.eventEmitter.emit('quotation.submitted', updatedQuotation);
 
     return updatedQuotation;
+  }
+
+  @OnEvent('quotation.submitted', { async: true })
+  async requestForApproval(quotation: Quotation) {
+    const approval = await this.prisma.approvalSetting.findFirst({
+      where: {
+        approvalType: ApprovalType.QUOTATION,
+      },
+      include: { ApprovalSettingItem: true },
+    });
+
+    const quotationApproval = await this.prisma.approval.create({
+      data: {
+        approvalType: ApprovalType.QUOTATION,
+        moduleId: quotation.id,
+        items: {
+          create: approval.ApprovalSettingItem.map((i) => ({
+            userId: i.userId,
+            order: i.level,
+          })),
+        },
+      },
+      include: {
+        items: true,
+      },
+    });
+
+    // TODO: harusnya berjenjang
+    quotationApproval.items.forEach((i) => {
+      this.eventEmitter.emit('quotation.notifyApprover', quotation, i.userId);
+    });
+  }
+
+  @OnEvent('quotation.notifyApprover')
+  async notifyApprover(quotation: Quotation, userId: number) {
+    const approvalItem = await this.prisma.approvalItem.findFirst({
+      where: {
+        userId,
+        approval: {
+          approvalType: ApprovalType.QUOTATION,
+          moduleId: quotation.id,
+        },
+      },
+    });
+
+    if (approvalItem) {
+      // TODO: send notification to approvers
+    }
+  }
+
+  async approve(id: number, userId: number, remarks?: string) {
+    const quotation = await this.findOne(id);
+
+    const where = {
+      userId,
+      approval: {
+        approvalType: ApprovalType.QUOTATION,
+        moduleId: id,
+      },
+    };
+
+    const approvalItem = await this.prisma.approvalItem.findFirst({ where });
+
+    if (!approvalItem) {
+      throw new ForbiddenException(
+        'You are not allowed to perform this action',
+      );
+    }
+
+    // await this.prisma.approvalItem.update({
+    //   where,
+    //   data: {
+    //     status: ApprovalStatus.APPROVED,
+    //     remarks: remarks,
+    //   },
+    // });
   }
 
   async send(id: number) {

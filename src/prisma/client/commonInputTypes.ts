@@ -289,26 +289,18 @@ export type BoolWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedBoolFilter<$PrismaModel>
 }
 
-export type IntNullableFilter<$PrismaModel = never> = {
-  equals?: number | Prisma.IntFieldRefInput<$PrismaModel> | null
-  in?: number[] | Prisma.ListIntFieldRefInput<$PrismaModel> | null
-  notIn?: number[] | Prisma.ListIntFieldRefInput<$PrismaModel> | null
-  lt?: number | Prisma.IntFieldRefInput<$PrismaModel>
-  lte?: number | Prisma.IntFieldRefInput<$PrismaModel>
-  gt?: number | Prisma.IntFieldRefInput<$PrismaModel>
-  gte?: number | Prisma.IntFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedIntNullableFilter<$PrismaModel> | number | null
+export type EnumApprovalTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.ApprovalType | Prisma.EnumApprovalTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.ApprovalType[] | Prisma.ListEnumApprovalTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ApprovalType[] | Prisma.ListEnumApprovalTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumApprovalTypeFilter<$PrismaModel> | $Enums.ApprovalType
 }
 
-export type FloatNullableFilter<$PrismaModel = never> = {
-  equals?: number | Prisma.FloatFieldRefInput<$PrismaModel> | null
-  in?: number[] | Prisma.ListFloatFieldRefInput<$PrismaModel> | null
-  notIn?: number[] | Prisma.ListFloatFieldRefInput<$PrismaModel> | null
-  lt?: number | Prisma.FloatFieldRefInput<$PrismaModel>
-  lte?: number | Prisma.FloatFieldRefInput<$PrismaModel>
-  gt?: number | Prisma.FloatFieldRefInput<$PrismaModel>
-  gte?: number | Prisma.FloatFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedFloatNullableFilter<$PrismaModel> | number | null
+export type EnumApprovalStatusNullableFilter<$PrismaModel = never> = {
+  equals?: $Enums.ApprovalStatus | Prisma.EnumApprovalStatusFieldRefInput<$PrismaModel> | null
+  in?: $Enums.ApprovalStatus[] | Prisma.ListEnumApprovalStatusFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.ApprovalStatus[] | Prisma.ListEnumApprovalStatusFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumApprovalStatusNullableFilter<$PrismaModel> | $Enums.ApprovalStatus | null
 }
 
 export type DateTimeNullableFilter<$PrismaModel = never> = {
@@ -320,6 +312,51 @@ export type DateTimeNullableFilter<$PrismaModel = never> = {
   gt?: Date | string | Prisma.DateTimeFieldRefInput<$PrismaModel>
   gte?: Date | string | Prisma.DateTimeFieldRefInput<$PrismaModel>
   not?: Prisma.NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+}
+
+export type EnumApprovalTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.ApprovalType | Prisma.EnumApprovalTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.ApprovalType[] | Prisma.ListEnumApprovalTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ApprovalType[] | Prisma.ListEnumApprovalTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumApprovalTypeWithAggregatesFilter<$PrismaModel> | $Enums.ApprovalType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumApprovalTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumApprovalTypeFilter<$PrismaModel>
+}
+
+export type EnumApprovalStatusNullableWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.ApprovalStatus | Prisma.EnumApprovalStatusFieldRefInput<$PrismaModel> | null
+  in?: $Enums.ApprovalStatus[] | Prisma.ListEnumApprovalStatusFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.ApprovalStatus[] | Prisma.ListEnumApprovalStatusFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumApprovalStatusNullableWithAggregatesFilter<$PrismaModel> | $Enums.ApprovalStatus | null
+  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumApprovalStatusNullableFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumApprovalStatusNullableFilter<$PrismaModel>
+}
+
+export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: Date | string | Prisma.DateTimeFieldRefInput<$PrismaModel> | null
+  in?: Date[] | string[] | Prisma.ListDateTimeFieldRefInput<$PrismaModel> | null
+  notIn?: Date[] | string[] | Prisma.ListDateTimeFieldRefInput<$PrismaModel> | null
+  lt?: Date | string | Prisma.DateTimeFieldRefInput<$PrismaModel>
+  lte?: Date | string | Prisma.DateTimeFieldRefInput<$PrismaModel>
+  gt?: Date | string | Prisma.DateTimeFieldRefInput<$PrismaModel>
+  gte?: Date | string | Prisma.DateTimeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
+  _min?: Prisma.NestedDateTimeNullableFilter<$PrismaModel>
+  _max?: Prisma.NestedDateTimeNullableFilter<$PrismaModel>
+}
+
+export type IntNullableFilter<$PrismaModel = never> = {
+  equals?: number | Prisma.IntFieldRefInput<$PrismaModel> | null
+  in?: number[] | Prisma.ListIntFieldRefInput<$PrismaModel> | null
+  notIn?: number[] | Prisma.ListIntFieldRefInput<$PrismaModel> | null
+  lt?: number | Prisma.IntFieldRefInput<$PrismaModel>
+  lte?: number | Prisma.IntFieldRefInput<$PrismaModel>
+  gt?: number | Prisma.IntFieldRefInput<$PrismaModel>
+  gte?: number | Prisma.IntFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedIntNullableFilter<$PrismaModel> | number | null
 }
 
 export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -338,6 +375,17 @@ export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedIntNullableFilter<$PrismaModel>
 }
 
+export type FloatNullableFilter<$PrismaModel = never> = {
+  equals?: number | Prisma.FloatFieldRefInput<$PrismaModel> | null
+  in?: number[] | Prisma.ListFloatFieldRefInput<$PrismaModel> | null
+  notIn?: number[] | Prisma.ListFloatFieldRefInput<$PrismaModel> | null
+  lt?: number | Prisma.FloatFieldRefInput<$PrismaModel>
+  lte?: number | Prisma.FloatFieldRefInput<$PrismaModel>
+  gt?: number | Prisma.FloatFieldRefInput<$PrismaModel>
+  gte?: number | Prisma.FloatFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedFloatNullableFilter<$PrismaModel> | number | null
+}
+
 export type FloatNullableWithAggregatesFilter<$PrismaModel = never> = {
   equals?: number | Prisma.FloatFieldRefInput<$PrismaModel> | null
   in?: number[] | Prisma.ListFloatFieldRefInput<$PrismaModel> | null
@@ -352,20 +400,6 @@ export type FloatNullableWithAggregatesFilter<$PrismaModel = never> = {
   _sum?: Prisma.NestedFloatNullableFilter<$PrismaModel>
   _min?: Prisma.NestedFloatNullableFilter<$PrismaModel>
   _max?: Prisma.NestedFloatNullableFilter<$PrismaModel>
-}
-
-export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
-  equals?: Date | string | Prisma.DateTimeFieldRefInput<$PrismaModel> | null
-  in?: Date[] | string[] | Prisma.ListDateTimeFieldRefInput<$PrismaModel> | null
-  notIn?: Date[] | string[] | Prisma.ListDateTimeFieldRefInput<$PrismaModel> | null
-  lt?: Date | string | Prisma.DateTimeFieldRefInput<$PrismaModel>
-  lte?: Date | string | Prisma.DateTimeFieldRefInput<$PrismaModel>
-  gt?: Date | string | Prisma.DateTimeFieldRefInput<$PrismaModel>
-  gte?: Date | string | Prisma.DateTimeFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
-  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
-  _min?: Prisma.NestedDateTimeNullableFilter<$PrismaModel>
-  _max?: Prisma.NestedDateTimeNullableFilter<$PrismaModel>
 }
 
 export type EnumLeadSourceFilter<$PrismaModel = never> = {
@@ -596,13 +630,6 @@ export type EnumApprovalActionTypeFilter<$PrismaModel = never> = {
   not?: Prisma.NestedEnumApprovalActionTypeFilter<$PrismaModel> | $Enums.ApprovalActionType
 }
 
-export type EnumApprovalStatusNullableFilter<$PrismaModel = never> = {
-  equals?: $Enums.ApprovalStatus | Prisma.EnumApprovalStatusFieldRefInput<$PrismaModel> | null
-  in?: $Enums.ApprovalStatus[] | Prisma.ListEnumApprovalStatusFieldRefInput<$PrismaModel> | null
-  notIn?: $Enums.ApprovalStatus[] | Prisma.ListEnumApprovalStatusFieldRefInput<$PrismaModel> | null
-  not?: Prisma.NestedEnumApprovalStatusNullableFilter<$PrismaModel> | $Enums.ApprovalStatus | null
-}
-
 export type EnumApprovalActionTypeWithAggregatesFilter<$PrismaModel = never> = {
   equals?: $Enums.ApprovalActionType | Prisma.EnumApprovalActionTypeFieldRefInput<$PrismaModel>
   in?: $Enums.ApprovalActionType[] | Prisma.ListEnumApprovalActionTypeFieldRefInput<$PrismaModel>
@@ -611,23 +638,6 @@ export type EnumApprovalActionTypeWithAggregatesFilter<$PrismaModel = never> = {
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumApprovalActionTypeFilter<$PrismaModel>
   _max?: Prisma.NestedEnumApprovalActionTypeFilter<$PrismaModel>
-}
-
-export type EnumApprovalStatusNullableWithAggregatesFilter<$PrismaModel = never> = {
-  equals?: $Enums.ApprovalStatus | Prisma.EnumApprovalStatusFieldRefInput<$PrismaModel> | null
-  in?: $Enums.ApprovalStatus[] | Prisma.ListEnumApprovalStatusFieldRefInput<$PrismaModel> | null
-  notIn?: $Enums.ApprovalStatus[] | Prisma.ListEnumApprovalStatusFieldRefInput<$PrismaModel> | null
-  not?: Prisma.NestedEnumApprovalStatusNullableWithAggregatesFilter<$PrismaModel> | $Enums.ApprovalStatus | null
-  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
-  _min?: Prisma.NestedEnumApprovalStatusNullableFilter<$PrismaModel>
-  _max?: Prisma.NestedEnumApprovalStatusNullableFilter<$PrismaModel>
-}
-
-export type EnumApprovalTypeFilter<$PrismaModel = never> = {
-  equals?: $Enums.ApprovalType | Prisma.EnumApprovalTypeFieldRefInput<$PrismaModel>
-  in?: $Enums.ApprovalType[] | Prisma.ListEnumApprovalTypeFieldRefInput<$PrismaModel>
-  notIn?: $Enums.ApprovalType[] | Prisma.ListEnumApprovalTypeFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedEnumApprovalTypeFilter<$PrismaModel> | $Enums.ApprovalType
 }
 
 export type EnumPaymentTypeNullableFilter<$PrismaModel = never> = {
@@ -642,16 +652,6 @@ export type EnumNkpTypeNullableFilter<$PrismaModel = never> = {
   in?: $Enums.NkpType[] | Prisma.ListEnumNkpTypeFieldRefInput<$PrismaModel> | null
   notIn?: $Enums.NkpType[] | Prisma.ListEnumNkpTypeFieldRefInput<$PrismaModel> | null
   not?: Prisma.NestedEnumNkpTypeNullableFilter<$PrismaModel> | $Enums.NkpType | null
-}
-
-export type EnumApprovalTypeWithAggregatesFilter<$PrismaModel = never> = {
-  equals?: $Enums.ApprovalType | Prisma.EnumApprovalTypeFieldRefInput<$PrismaModel>
-  in?: $Enums.ApprovalType[] | Prisma.ListEnumApprovalTypeFieldRefInput<$PrismaModel>
-  notIn?: $Enums.ApprovalType[] | Prisma.ListEnumApprovalTypeFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedEnumApprovalTypeWithAggregatesFilter<$PrismaModel> | $Enums.ApprovalType
-  _count?: Prisma.NestedIntFilter<$PrismaModel>
-  _min?: Prisma.NestedEnumApprovalTypeFilter<$PrismaModel>
-  _max?: Prisma.NestedEnumApprovalTypeFilter<$PrismaModel>
 }
 
 export type EnumPaymentTypeNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -924,15 +924,18 @@ export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedBoolFilter<$PrismaModel>
 }
 
-export type NestedFloatNullableFilter<$PrismaModel = never> = {
-  equals?: number | Prisma.FloatFieldRefInput<$PrismaModel> | null
-  in?: number[] | Prisma.ListFloatFieldRefInput<$PrismaModel> | null
-  notIn?: number[] | Prisma.ListFloatFieldRefInput<$PrismaModel> | null
-  lt?: number | Prisma.FloatFieldRefInput<$PrismaModel>
-  lte?: number | Prisma.FloatFieldRefInput<$PrismaModel>
-  gt?: number | Prisma.FloatFieldRefInput<$PrismaModel>
-  gte?: number | Prisma.FloatFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedFloatNullableFilter<$PrismaModel> | number | null
+export type NestedEnumApprovalTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.ApprovalType | Prisma.EnumApprovalTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.ApprovalType[] | Prisma.ListEnumApprovalTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ApprovalType[] | Prisma.ListEnumApprovalTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumApprovalTypeFilter<$PrismaModel> | $Enums.ApprovalType
+}
+
+export type NestedEnumApprovalStatusNullableFilter<$PrismaModel = never> = {
+  equals?: $Enums.ApprovalStatus | Prisma.EnumApprovalStatusFieldRefInput<$PrismaModel> | null
+  in?: $Enums.ApprovalStatus[] | Prisma.ListEnumApprovalStatusFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.ApprovalStatus[] | Prisma.ListEnumApprovalStatusFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumApprovalStatusNullableFilter<$PrismaModel> | $Enums.ApprovalStatus | null
 }
 
 export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
@@ -944,6 +947,40 @@ export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
   gt?: Date | string | Prisma.DateTimeFieldRefInput<$PrismaModel>
   gte?: Date | string | Prisma.DateTimeFieldRefInput<$PrismaModel>
   not?: Prisma.NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+}
+
+export type NestedEnumApprovalTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.ApprovalType | Prisma.EnumApprovalTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.ApprovalType[] | Prisma.ListEnumApprovalTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ApprovalType[] | Prisma.ListEnumApprovalTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumApprovalTypeWithAggregatesFilter<$PrismaModel> | $Enums.ApprovalType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumApprovalTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumApprovalTypeFilter<$PrismaModel>
+}
+
+export type NestedEnumApprovalStatusNullableWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.ApprovalStatus | Prisma.EnumApprovalStatusFieldRefInput<$PrismaModel> | null
+  in?: $Enums.ApprovalStatus[] | Prisma.ListEnumApprovalStatusFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.ApprovalStatus[] | Prisma.ListEnumApprovalStatusFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumApprovalStatusNullableWithAggregatesFilter<$PrismaModel> | $Enums.ApprovalStatus | null
+  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumApprovalStatusNullableFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumApprovalStatusNullableFilter<$PrismaModel>
+}
+
+export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: Date | string | Prisma.DateTimeFieldRefInput<$PrismaModel> | null
+  in?: Date[] | string[] | Prisma.ListDateTimeFieldRefInput<$PrismaModel> | null
+  notIn?: Date[] | string[] | Prisma.ListDateTimeFieldRefInput<$PrismaModel> | null
+  lt?: Date | string | Prisma.DateTimeFieldRefInput<$PrismaModel>
+  lte?: Date | string | Prisma.DateTimeFieldRefInput<$PrismaModel>
+  gt?: Date | string | Prisma.DateTimeFieldRefInput<$PrismaModel>
+  gte?: Date | string | Prisma.DateTimeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
+  _min?: Prisma.NestedDateTimeNullableFilter<$PrismaModel>
+  _max?: Prisma.NestedDateTimeNullableFilter<$PrismaModel>
 }
 
 export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -962,6 +999,17 @@ export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedIntNullableFilter<$PrismaModel>
 }
 
+export type NestedFloatNullableFilter<$PrismaModel = never> = {
+  equals?: number | Prisma.FloatFieldRefInput<$PrismaModel> | null
+  in?: number[] | Prisma.ListFloatFieldRefInput<$PrismaModel> | null
+  notIn?: number[] | Prisma.ListFloatFieldRefInput<$PrismaModel> | null
+  lt?: number | Prisma.FloatFieldRefInput<$PrismaModel>
+  lte?: number | Prisma.FloatFieldRefInput<$PrismaModel>
+  gt?: number | Prisma.FloatFieldRefInput<$PrismaModel>
+  gte?: number | Prisma.FloatFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedFloatNullableFilter<$PrismaModel> | number | null
+}
+
 export type NestedFloatNullableWithAggregatesFilter<$PrismaModel = never> = {
   equals?: number | Prisma.FloatFieldRefInput<$PrismaModel> | null
   in?: number[] | Prisma.ListFloatFieldRefInput<$PrismaModel> | null
@@ -976,20 +1024,6 @@ export type NestedFloatNullableWithAggregatesFilter<$PrismaModel = never> = {
   _sum?: Prisma.NestedFloatNullableFilter<$PrismaModel>
   _min?: Prisma.NestedFloatNullableFilter<$PrismaModel>
   _max?: Prisma.NestedFloatNullableFilter<$PrismaModel>
-}
-
-export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
-  equals?: Date | string | Prisma.DateTimeFieldRefInput<$PrismaModel> | null
-  in?: Date[] | string[] | Prisma.ListDateTimeFieldRefInput<$PrismaModel> | null
-  notIn?: Date[] | string[] | Prisma.ListDateTimeFieldRefInput<$PrismaModel> | null
-  lt?: Date | string | Prisma.DateTimeFieldRefInput<$PrismaModel>
-  lte?: Date | string | Prisma.DateTimeFieldRefInput<$PrismaModel>
-  gt?: Date | string | Prisma.DateTimeFieldRefInput<$PrismaModel>
-  gte?: Date | string | Prisma.DateTimeFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
-  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
-  _min?: Prisma.NestedDateTimeNullableFilter<$PrismaModel>
-  _max?: Prisma.NestedDateTimeNullableFilter<$PrismaModel>
 }
 
 export type NestedEnumLeadSourceFilter<$PrismaModel = never> = {
@@ -1220,13 +1254,6 @@ export type NestedEnumApprovalActionTypeFilter<$PrismaModel = never> = {
   not?: Prisma.NestedEnumApprovalActionTypeFilter<$PrismaModel> | $Enums.ApprovalActionType
 }
 
-export type NestedEnumApprovalStatusNullableFilter<$PrismaModel = never> = {
-  equals?: $Enums.ApprovalStatus | Prisma.EnumApprovalStatusFieldRefInput<$PrismaModel> | null
-  in?: $Enums.ApprovalStatus[] | Prisma.ListEnumApprovalStatusFieldRefInput<$PrismaModel> | null
-  notIn?: $Enums.ApprovalStatus[] | Prisma.ListEnumApprovalStatusFieldRefInput<$PrismaModel> | null
-  not?: Prisma.NestedEnumApprovalStatusNullableFilter<$PrismaModel> | $Enums.ApprovalStatus | null
-}
-
 export type NestedEnumApprovalActionTypeWithAggregatesFilter<$PrismaModel = never> = {
   equals?: $Enums.ApprovalActionType | Prisma.EnumApprovalActionTypeFieldRefInput<$PrismaModel>
   in?: $Enums.ApprovalActionType[] | Prisma.ListEnumApprovalActionTypeFieldRefInput<$PrismaModel>
@@ -1235,23 +1262,6 @@ export type NestedEnumApprovalActionTypeWithAggregatesFilter<$PrismaModel = neve
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumApprovalActionTypeFilter<$PrismaModel>
   _max?: Prisma.NestedEnumApprovalActionTypeFilter<$PrismaModel>
-}
-
-export type NestedEnumApprovalStatusNullableWithAggregatesFilter<$PrismaModel = never> = {
-  equals?: $Enums.ApprovalStatus | Prisma.EnumApprovalStatusFieldRefInput<$PrismaModel> | null
-  in?: $Enums.ApprovalStatus[] | Prisma.ListEnumApprovalStatusFieldRefInput<$PrismaModel> | null
-  notIn?: $Enums.ApprovalStatus[] | Prisma.ListEnumApprovalStatusFieldRefInput<$PrismaModel> | null
-  not?: Prisma.NestedEnumApprovalStatusNullableWithAggregatesFilter<$PrismaModel> | $Enums.ApprovalStatus | null
-  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
-  _min?: Prisma.NestedEnumApprovalStatusNullableFilter<$PrismaModel>
-  _max?: Prisma.NestedEnumApprovalStatusNullableFilter<$PrismaModel>
-}
-
-export type NestedEnumApprovalTypeFilter<$PrismaModel = never> = {
-  equals?: $Enums.ApprovalType | Prisma.EnumApprovalTypeFieldRefInput<$PrismaModel>
-  in?: $Enums.ApprovalType[] | Prisma.ListEnumApprovalTypeFieldRefInput<$PrismaModel>
-  notIn?: $Enums.ApprovalType[] | Prisma.ListEnumApprovalTypeFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedEnumApprovalTypeFilter<$PrismaModel> | $Enums.ApprovalType
 }
 
 export type NestedEnumPaymentTypeNullableFilter<$PrismaModel = never> = {
@@ -1266,16 +1276,6 @@ export type NestedEnumNkpTypeNullableFilter<$PrismaModel = never> = {
   in?: $Enums.NkpType[] | Prisma.ListEnumNkpTypeFieldRefInput<$PrismaModel> | null
   notIn?: $Enums.NkpType[] | Prisma.ListEnumNkpTypeFieldRefInput<$PrismaModel> | null
   not?: Prisma.NestedEnumNkpTypeNullableFilter<$PrismaModel> | $Enums.NkpType | null
-}
-
-export type NestedEnumApprovalTypeWithAggregatesFilter<$PrismaModel = never> = {
-  equals?: $Enums.ApprovalType | Prisma.EnumApprovalTypeFieldRefInput<$PrismaModel>
-  in?: $Enums.ApprovalType[] | Prisma.ListEnumApprovalTypeFieldRefInput<$PrismaModel>
-  notIn?: $Enums.ApprovalType[] | Prisma.ListEnumApprovalTypeFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedEnumApprovalTypeWithAggregatesFilter<$PrismaModel> | $Enums.ApprovalType
-  _count?: Prisma.NestedIntFilter<$PrismaModel>
-  _min?: Prisma.NestedEnumApprovalTypeFilter<$PrismaModel>
-  _max?: Prisma.NestedEnumApprovalTypeFilter<$PrismaModel>
 }
 
 export type NestedEnumPaymentTypeNullableWithAggregatesFilter<$PrismaModel = never> = {

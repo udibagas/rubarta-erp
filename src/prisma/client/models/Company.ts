@@ -364,6 +364,11 @@ export type CompanySumOrderByAggregateInput = {
   id?: Prisma.SortOrder
 }
 
+export type CompanyNullableScalarRelationFilter = {
+  is?: Prisma.CompanyWhereInput | null
+  isNot?: Prisma.CompanyWhereInput | null
+}
+
 export type CompanyCreateNestedOneWithoutLeadInput = {
   create?: Prisma.XOR<Prisma.CompanyCreateWithoutLeadInput, Prisma.CompanyUncheckedCreateWithoutLeadInput>
   connectOrCreate?: Prisma.CompanyCreateOrConnectWithoutLeadInput
@@ -426,10 +431,12 @@ export type CompanyCreateNestedOneWithoutApprovalSettingInput = {
   connect?: Prisma.CompanyWhereUniqueInput
 }
 
-export type CompanyUpdateOneRequiredWithoutApprovalSettingNestedInput = {
+export type CompanyUpdateOneWithoutApprovalSettingNestedInput = {
   create?: Prisma.XOR<Prisma.CompanyCreateWithoutApprovalSettingInput, Prisma.CompanyUncheckedCreateWithoutApprovalSettingInput>
   connectOrCreate?: Prisma.CompanyCreateOrConnectWithoutApprovalSettingInput
   upsert?: Prisma.CompanyUpsertWithoutApprovalSettingInput
+  disconnect?: Prisma.CompanyWhereInput | boolean
+  delete?: Prisma.CompanyWhereInput | boolean
   connect?: Prisma.CompanyWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.CompanyUpdateToOneWithWhereWithoutApprovalSettingInput, Prisma.CompanyUpdateWithoutApprovalSettingInput>, Prisma.CompanyUncheckedUpdateWithoutApprovalSettingInput>
 }

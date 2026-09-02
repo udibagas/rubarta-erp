@@ -696,14 +696,6 @@ export type CustomerCreatetagsInput = {
   set: string[]
 }
 
-export type NullableIntFieldUpdateOperationsInput = {
-  set?: number | null
-  increment?: number
-  decrement?: number
-  multiply?: number
-  divide?: number
-}
-
 export type NullableFloatFieldUpdateOperationsInput = {
   set?: number | null
   increment?: number
@@ -715,10 +707,6 @@ export type NullableFloatFieldUpdateOperationsInput = {
 export type CustomerUpdatetagsInput = {
   set?: string[]
   push?: string | string[]
-}
-
-export type NullableDateTimeFieldUpdateOperationsInput = {
-  set?: Date | string | null
 }
 
 export type CustomerCreateNestedOneWithoutContactsInput = {

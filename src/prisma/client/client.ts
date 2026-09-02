@@ -70,6 +70,16 @@ export type Payment = Prisma.PaymentModel
  */
 export type Expense = Prisma.ExpenseModel
 /**
+ * Model Approval
+ * 
+ */
+export type Approval = Prisma.ApprovalModel
+/**
+ * Model ApprovalItem
+ * 
+ */
+export type ApprovalItem = Prisma.ApprovalItemModel
+/**
  * Model Customer
  * 
  */

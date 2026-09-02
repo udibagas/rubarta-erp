@@ -1,0 +1,28 @@
+model Approval {
+  id           Int             @id @default(autoincrement())
+  approvalType ApprovalType
+  moduleId     Int
+  items        ApprovalItem[]
+  status       ApprovalStatus?
+  createdAt    DateTime        @default(now())
+  updatedAt    DateTime?       @updatedAt
+
+  @@index([moduleId])
+}
+
+model ApprovalItem {
+  id         Int             @id @default(autoincrement())
+  approvalId Int?
+  order      Int
+  userId     Int
+  status     ApprovalStatus?
+  remarks    String?
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime? @updatedAt
+
+  approval Approval? @relation(fields: [approvalId], references: [id])
+  user     User      @relation(fields: [userId], references: [id])
+
+  @@index([approvalId, userId])
+}

@@ -128,4 +128,16 @@ export class QueryMaterialDto {
   @IsOptional()
   @IsBoolean()
   lowStock?: boolean;
+
+  @ApiProperty({ required: false, minimum: 1, default: 1 })
+  @IsOptional()
+  @IsInt()
+  @Min(1)
+  page?: number;
+
+  @ApiProperty({ required: false, minimum: 1, default: 10 })
+  @IsOptional()
+  @IsInt()
+  @Min(1)
+  pageSize?: number;
 }

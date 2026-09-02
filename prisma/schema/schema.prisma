@@ -80,6 +80,7 @@ model User {
   Payments            Payment[]
   VisitPlans          VisitPlan[]
   Customers           Customer[]
+  approvalItems       ApprovalItem[]
 
   @@index([bankId, departmentId])
   @@map("Users")
@@ -99,8 +100,8 @@ model UserBalance {
 
 model ApprovalSetting {
   id                  Int                   @id @default(autoincrement())
-  Company             Company               @relation(fields: [companyId], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  companyId           Int
+  Company             Company?              @relation(fields: [companyId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  companyId           Int?
   approvalType        ApprovalType
   paymentType         PaymentType?
   nkpType             NkpType?
@@ -168,6 +169,10 @@ enum ApprovalStatus {
 
 enum ApprovalType {
   NKP
+  QUOTATION
+  SALES_ORDER
+  PURCHASE_ORDER
+  INVOICE
 }
 
 enum ApprovalActionType {

@@ -57,6 +57,8 @@ export const ModelName = {
   InvoiceItem: 'InvoiceItem',
   Payment: 'Payment',
   Expense: 'Expense',
+  Approval: 'Approval',
+  ApprovalItem: 'ApprovalItem',
   Customer: 'Customer',
   Contact: 'Contact',
   Lead: 'Lead',
@@ -184,6 +186,32 @@ export const ExpenseScalarFieldEnum = {
 } as const
 
 export type ExpenseScalarFieldEnum = (typeof ExpenseScalarFieldEnum)[keyof typeof ExpenseScalarFieldEnum]
+
+
+export const ApprovalScalarFieldEnum = {
+  id: 'id',
+  approvalType: 'approvalType',
+  moduleId: 'moduleId',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ApprovalScalarFieldEnum = (typeof ApprovalScalarFieldEnum)[keyof typeof ApprovalScalarFieldEnum]
+
+
+export const ApprovalItemScalarFieldEnum = {
+  id: 'id',
+  approvalId: 'approvalId',
+  order: 'order',
+  userId: 'userId',
+  status: 'status',
+  remarks: 'remarks',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ApprovalItemScalarFieldEnum = (typeof ApprovalItemScalarFieldEnum)[keyof typeof ApprovalItemScalarFieldEnum]
 
 
 export const CustomerScalarFieldEnum = {

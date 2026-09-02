@@ -62,6 +62,26 @@ export class MaterialsService {
       where.isActive = query.isActive;
     }
 
+    // apply pagination
+    if (query.page !== undefined || query.pageSize !== undefined) {
+      const page = query.page ?? 1;
+      const limit = query.pageSize ?? 10;
+      const total = await this.prisma.material.count({ where });
+      const skip = (page - 1) * limit;
+
+      let materials = await this.prisma.material.findMany({
+        where,
+        orderBy: { name: 'asc' },
+        skip: skip,
+        take: limit,
+        include: {
+          Supplier: { select: { id: true, name: true } },
+        },
+      });
+
+      return { data: materials, page, total };
+    }
+
     // Note: lowStock filter is applied after fetching
     // because Prisma doesn't support field-to-field comparison in where clause
     let materials = await this.prisma.material.findMany({
@@ -73,6 +93,7 @@ export class MaterialsService {
     });
 
     // Filter low stock materials in memory
+    // TODO: Consider moving low stock filtering to the database query if Prisma adds support for field-to-field comparison.
     if (query.lowStock) {
       materials = materials.filter(
         (m) =>
@@ -167,9 +188,10 @@ export class MaterialsService {
     });
   }
 
-  async exportToExcel(query: QueryMaterialDto): Promise<Buffer> {
-    const materials = await this.findAll(query);
-
+  async exportToExcel(
+    query: Omit<QueryMaterialDto, 'page' | 'pageSize'>,
+  ): Promise<Buffer> {
+    const materials = (await this.findAll(query)) as any[]; // TODO: give proper type
     const workbook = new ExcelJS.Workbook();
     const worksheet = workbook.addWorksheet('Materials');
 

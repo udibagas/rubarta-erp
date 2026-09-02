@@ -95,6 +95,9 @@ enum OpportunityStages {
 
 enum QuotationStatus {
   Draft // Quotation is being prepared
+  Submitted // Quotation is submitted for internal approval
+  Approved // Quotation is internally approved
+  Declined // Quotation is internally declined
   Sent // Quotation has been sent to the customer
   Accepted // Customer has accepted the quotation
   Rejected // Customer has rejected the quotation

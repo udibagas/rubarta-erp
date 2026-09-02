@@ -47,6 +47,14 @@ export class OrdersController {
     return this.ordersService.findAll({ keyword, customerId, status });
   }
 
+  @Get('parse-po')
+  @ApiOperation({ summary: 'Parse PO PDF' })
+  @ApiOkResponse({ description: 'Parsed PO text' })
+  async parsePo() {
+    const result = await this.ordersService.parsePo();
+    return result;
+  }
+
   @Get(':id')
   @ApiOperation({ summary: 'Get order by ID' })
   @ApiOkResponse({ description: 'Order details' })
