@@ -62,6 +62,10 @@ export class MaterialsService {
       where.isActive = query.isActive;
     }
 
+    if (query.lowStock) {
+      where.currentStock = { lte: this.prisma.material.fields.minStock };
+    }
+
     // apply pagination
     if (query.page !== undefined || query.pageSize !== undefined) {
       const page = query.page ?? 1;
@@ -82,8 +86,6 @@ export class MaterialsService {
       return { data: materials, page, total };
     }
 
-    // Note: lowStock filter is applied after fetching
-    // because Prisma doesn't support field-to-field comparison in where clause
     let materials = await this.prisma.material.findMany({
       where,
       orderBy: { name: 'asc' },
@@ -91,17 +93,6 @@ export class MaterialsService {
         Supplier: { select: { id: true, name: true } },
       },
     });
-
-    // Filter low stock materials in memory
-    // TODO: Consider moving low stock filtering to the database query if Prisma adds support for field-to-field comparison.
-    if (query.lowStock) {
-      materials = materials.filter(
-        (m) =>
-          m.currentStock !== null &&
-          m.minStock !== null &&
-          m.currentStock <= m.minStock,
-      );
-    }
 
     return materials;
   }
