@@ -7,8 +7,10 @@ import {
   Param,
   Delete,
   Query,
+  Res,
   ParseIntPipe,
 } from '@nestjs/common';
+import { Response } from 'express';
 import {
   ApiTags,
   ApiBearerAuth,
@@ -49,6 +51,19 @@ export class QuotationsController {
   @ApiOkResponse({ description: 'Quotation details' })
   findOne(@Param('id', ParseIntPipe) id: number) {
     return this.quotationsService.findOne(id);
+  }
+
+  @Get(':id/preview')
+  @ApiOperation({ summary: 'Preview quotation PDF' })
+  @ApiOkResponse({ description: 'Quotation PDF' })
+  async preview(@Param('id', ParseIntPipe) id: number, @Res() res: Response) {
+    const pdfBuffer = await this.quotationsService.preview(id);
+    res.set({
+      'Content-Type': 'application/pdf',
+      'Content-Disposition': `inline; filename="quotation-${id}.pdf"`,
+      'Content-Length': pdfBuffer.length,
+    });
+    res.end(pdfBuffer);
   }
 
   @Patch(':id')

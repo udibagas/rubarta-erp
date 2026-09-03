@@ -265,6 +265,11 @@ export class QuotationsService {
     });
   }
 
+  async preview(id: number): Promise<Buffer> {
+    const quotation = await this.findOne(id);
+    return generateQuotationPdf(quotation);
+  }
+
   private async generateNumber(): Promise<string> {
     const lastQuotation = await this.prisma.quotation.findFirst({
       orderBy: { id: 'desc' },
