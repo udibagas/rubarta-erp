@@ -4,10 +4,14 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
-import { EventEmitter2 } from '@nestjs/event-emitter';
+import { EventEmitter2, OnEvent } from '@nestjs/event-emitter';
 import { PrismaService } from '../prisma/prisma.service';
 import { NotificationsService } from '../notifications/notifications.service';
-import { ApprovalStatus, ApprovalType } from '../prisma/client/client';
+import {
+  ApprovalStatus,
+  ApprovalType,
+  QuotationStatus,
+} from '../prisma/client/client';
 
 @Injectable()
 export class ApprovalService {
@@ -52,16 +56,27 @@ export class ApprovalService {
       },
     });
 
+    let module: { number: string } | null = null;
+
+    if (approvalType === ApprovalType.QUOTATION) {
+      module = await this.prisma.quotation.findUnique({
+        where: { id: moduleId },
+        select: { number: true },
+      });
+    }
+
     const firstApprover = approval.items[0];
+
     if (firstApprover) {
       this.notification.notify({
         userId: firstApprover.userId,
         title: `Permintaan Persetujuan ${approvalType}`,
-        message: `Anda memiliki permintaan persetujuan baru untuk ${approvalType} #${moduleId}`,
+        message: `Anda memiliki permintaan persetujuan baru untuk ${approvalType} #${module?.number ?? moduleId}`,
         redirectUrl: '',
       });
     }
 
+    // no listener yet: subscribe with @OnEvent('approval.requested') in the owning module
     this.eventEmitter.emit('approval.requested', {
       approvalType,
       moduleId,
@@ -127,22 +142,38 @@ export class ApprovalService {
 
     const updatedApproval = await this.prisma.approval.update({
       where: { id: approval.id },
-      data: isFullyApproved ? { status: ApprovalStatus.APPROVED } : {},
+      data: {
+        status: isFullyApproved
+          ? ApprovalStatus.APPROVED
+          : ApprovalStatus.PARTIALLY_APPROVED,
+      },
       include: {
         items: { include: { user: true }, orderBy: { order: 'asc' } },
       },
     });
 
     if (isFullyApproved) {
+      // no listener yet: subscribe with @OnEvent('approval.completed') in the owning module
       this.eventEmitter.emit('approval.completed', { approvalType, moduleId });
     } else {
       const nextApprover = remainingItems[0];
+
+      let module: { number: string } | null = null;
+
+      if (approvalType === ApprovalType.QUOTATION) {
+        module = await this.prisma.quotation.findUnique({
+          where: { id: moduleId },
+          select: { number: true },
+        });
+      }
+
       this.notification.notify({
         userId: nextApprover.userId,
         title: `Permintaan Persetujuan ${approvalType}`,
-        message: `Anda memiliki permintaan persetujuan baru untuk ${approvalType} #${moduleId}`,
+        message: `Anda memiliki permintaan persetujuan baru untuk ${approvalType} #${module?.number ?? moduleId}`,
         redirectUrl: '',
       });
+      // no listener yet: subscribe with @OnEvent('approval.nextApprover') in the owning module
       this.eventEmitter.emit('approval.nextApprover', {
         approvalType,
         moduleId,
@@ -150,6 +181,7 @@ export class ApprovalService {
       });
     }
 
+    // no listener yet: subscribe with @OnEvent('approval.itemApproved') in the owning module
     this.eventEmitter.emit('approval.itemApproved', {
       approvalType,
       moduleId,
@@ -184,6 +216,7 @@ export class ApprovalService {
       },
     });
 
+    // no listener yet: subscribe with @OnEvent('approval.rejected') in the owning module
     this.eventEmitter.emit('approval.rejected', {
       approvalType,
       moduleId,
@@ -221,5 +254,36 @@ export class ApprovalService {
     }
 
     return { approval, currentItem };
+  }
+
+  @OnEvent('approval.completed')
+  private async handleApprovalCompleted(payload: {
+    approvalType: ApprovalType;
+    moduleId: number;
+  }) {
+    const { approvalType, moduleId } = payload;
+
+    if (approvalType === ApprovalType.QUOTATION) {
+      await this.prisma.quotation.update({
+        where: { id: moduleId },
+        data: { status: QuotationStatus.Approved },
+      });
+    }
+  }
+
+  @OnEvent('approval.nextApprover')
+  private async handleNextApprover(payload: {
+    approvalType: ApprovalType;
+    moduleId: number;
+    userId: number;
+  }) {
+    const { approvalType, moduleId } = payload;
+
+    if (approvalType === ApprovalType.QUOTATION) {
+      await this.prisma.quotation.update({
+        where: { id: moduleId },
+        data: { status: QuotationStatus.PartiallyApproved },
+      });
+    }
   }
 }

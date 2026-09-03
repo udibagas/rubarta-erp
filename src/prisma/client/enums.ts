@@ -175,6 +175,7 @@ export type PaymentStatus = (typeof PaymentStatus)[keyof typeof PaymentStatus]
 
 export const ApprovalStatus = {
   APPROVED: 'APPROVED',
+  PARTIALLY_APPROVED: 'PARTIALLY_APPROVED',
   REJECTED: 'REJECTED'
 } as const
 

@@ -226,7 +226,7 @@ export class QuotationsService {
       },
     });
 
-    this.approvalService.requestApproval(ApprovalType.QUOTATION, id);
+    await this.approvalService.requestApproval(ApprovalType.QUOTATION, id);
     return updatedQuotation;
   }
 
@@ -265,7 +265,7 @@ export class QuotationsService {
     });
   }
 
-  async generateNumber(): Promise<string> {
+  private async generateNumber(): Promise<string> {
     const lastQuotation = await this.prisma.quotation.findFirst({
       orderBy: { id: 'desc' },
     });
