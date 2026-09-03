@@ -12,6 +12,7 @@ import {
   IsEnum,
   IsNotEmpty,
   IsNumber,
+  IsOptional,
   ValidateNested,
 } from 'class-validator';
 
@@ -60,17 +61,17 @@ export class ApprovalSettingDto {
     description: 'Payment target',
     example: PaymentType.EMPLOYEE,
   })
-  @IsNotEmpty({ message: 'Payment target is required' })
+  @IsOptional()
   @IsEnum(PaymentType, { message: 'Invalid payment target' })
-  paymentType: PaymentType;
+  paymentType?: PaymentType;
 
   @ApiProperty({
     description: 'NKP type',
     example: NkpType.CASH_ADVANCE,
   })
-  @IsNotEmpty({ message: 'NKP type is required' })
+  @IsOptional()
   @IsEnum(NkpType, { message: 'Invalid NKP type' })
-  nkpType: NkpType;
+  nkpType?: NkpType;
 
   @ApiProperty({
     description: 'Approval setting item',
