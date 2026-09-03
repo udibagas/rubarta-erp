@@ -183,6 +183,33 @@ export class CreateQuotationDto {
 
 export class UpdateQuotationDto extends PartialType(CreateQuotationDto) {}
 
+export class SendQuotationEmailDto {
+  @ApiProperty({ example: 'Quotation QUO092026-1 for your review' })
+  @IsString()
+  @MaxLength(200)
+  subject: string;
+
+  @ApiProperty({
+    example: '<p>Dear customer, please find attached our quotation.</p>',
+  })
+  @IsString()
+  body: string;
+
+  @ApiProperty({ example: 'john.doe@example.com' })
+  @IsEmail()
+  to: string;
+
+  @ApiProperty({
+    required: false,
+    type: [String],
+    example: ['manager@example.com'],
+  })
+  @IsOptional()
+  @IsArray()
+  @IsEmail({}, { each: true })
+  cc?: string[];
+}
+
 export class QueryQuotationDto {
   @ApiProperty({ required: false })
   @IsOptional()

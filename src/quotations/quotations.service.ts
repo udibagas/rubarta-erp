@@ -1,4 +1,5 @@
 import {
+  BadRequestException,
   ForbiddenException,
   Injectable,
   NotFoundException,
@@ -8,6 +9,7 @@ import {
   CreateQuotationDto,
   UpdateQuotationDto,
   QueryQuotationDto,
+  SendQuotationEmailDto,
 } from './dto/quotation.dto';
 import {
   ApprovalStatus,
@@ -18,12 +20,17 @@ import {
 } from '../prisma/client/client';
 import { EventEmitter2, OnEvent } from '@nestjs/event-emitter';
 import dayjs from 'dayjs';
+import { MailerService } from '@nestjs-modules/mailer';
+import { generateQuotationPdf } from './quotation-pdf';
+import { NotificationsService } from '../notifications/notifications.service';
 
 @Injectable()
 export class QuotationsService {
   constructor(
     private readonly prisma: PrismaService,
     private eventEmitter: EventEmitter2,
+    private readonly mailerService: MailerService,
+    private readonly notification: NotificationsService,
   ) {}
 
   async create(data: CreateQuotationDto) {
@@ -122,7 +129,7 @@ export class QuotationsService {
           orderBy: { sortOrder: 'asc' },
         },
         Customer: true,
-        User: { select: { id: true, name: true } },
+        User: { select: { id: true, name: true, email: true } },
         Opportunity: true,
       },
     });
@@ -242,6 +249,10 @@ export class QuotationsService {
       include: { ApprovalSettingItem: true },
     });
 
+    if (!approval) {
+      return;
+    }
+
     const quotationApproval = await this.prisma.approval.create({
       data: {
         approvalType: ApprovalType.QUOTATION,
@@ -277,7 +288,12 @@ export class QuotationsService {
     });
 
     if (approvalItem) {
-      // TODO: send notification to approvers
+      this.notification.notify({
+        userId,
+        title: `Quotation ${quotation.number} Menunggu Persetujuan`,
+        message: `Quotation ${quotation.number} telah diajukan dan menunggu persetujuan Anda`,
+        redirectUrl: `https://erp.rubarta.co.id/quotations?number=${quotation.number}`,
+      });
     }
   }
 
@@ -309,19 +325,39 @@ export class QuotationsService {
     // });
   }
 
-  async send(id: number) {
-    await this.findOne(id);
+  async send(id: number, dto: SendQuotationEmailDto) {
+    const quotation = await this.findOne(id);
 
-    const updatedQuotation = await this.prisma.quotation.update({
+    if (!quotation.contactEmail) {
+      throw new BadRequestException(
+        'Quotation does not have a contact email to send to',
+      );
+    }
+
+    const pdfBuffer = await generateQuotationPdf(quotation);
+    const cc = [quotation.User.email, ...(dto.cc || [])];
+
+    await this.mailerService.sendMail({
+      to: dto.to || quotation.contactEmail,
+      cc,
+      subject: dto.subject,
+      html: dto.body,
+      attachments: [
+        {
+          filename: `${quotation.number}.pdf`,
+          content: pdfBuffer,
+          contentType: 'application/pdf',
+        },
+      ],
+    });
+
+    return this.prisma.quotation.update({
       where: { id },
       data: {
         status: QuotationStatus.Sent,
+        sentDate: new Date(),
       },
     });
-
-    // Todo: send email to customer, cc to creator, sales rep, approvers
-
-    return updatedQuotation;
   }
 
   async generateNumber(): Promise<string> {

@@ -21,6 +21,7 @@ import {
   CreateQuotationDto,
   UpdateQuotationDto,
   QueryQuotationDto,
+  SendQuotationEmailDto,
 } from './dto/quotation.dto';
 
 @ApiTags('Quotations')
@@ -65,6 +66,18 @@ export class QuotationsController {
   @ApiOkResponse({ description: 'Quotation submitted' })
   submit(@Param('id', ParseIntPipe) id: number) {
     return this.quotationsService.submit(id);
+  }
+
+  @Post(':id/send')
+  @ApiOperation({
+    summary: 'Send quotation to customer via email with PDF attached',
+  })
+  @ApiOkResponse({ description: 'Quotation sent' })
+  send(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() sendQuotationEmailDto: SendQuotationEmailDto,
+  ) {
+    return this.quotationsService.send(id, sendQuotationEmailDto);
   }
 
   @Delete(':id')
