@@ -341,8 +341,9 @@ export class MaterialsService {
       suppliers.map((s) => [s.name.toLowerCase(), s.id]),
     );
 
-    // Resolve supplier IDs and create materials
+    // Resolve supplier IDs and create/update materials
     const created = [];
+    const updated = [];
     const skipped = [];
 
     for (const material of materials) {
@@ -351,14 +352,6 @@ export class MaterialsService {
         const existing = await this.prisma.material.findFirst({
           where: { partNumber: material.partNumber, deletedAt: null },
         });
-
-        if (existing) {
-          skipped.push({
-            partNumber: material.partNumber,
-            reason: 'Already exists',
-          });
-          continue;
-        }
 
         // Resolve supplier ID
         if (material.supplierName) {
@@ -371,6 +364,16 @@ export class MaterialsService {
           delete material.supplierName;
         }
 
+        if (existing) {
+          const updatedMaterial = await this.prisma.material.update({
+            where: { id: existing.id },
+            data: material,
+          });
+
+          updated.push(updatedMaterial);
+          continue;
+        }
+
         const newMaterial = await this.prisma.material.create({
           data: material,
         });
@@ -378,7 +381,7 @@ export class MaterialsService {
         created.push(newMaterial);
       } catch (error) {
         const errorMessage =
-          error instanceof Error ? error.message : 'Failed to create';
+          error instanceof Error ? error.message : 'Failed to import';
         skipped.push({
           partNumber: material.partNumber,
           reason: errorMessage,
@@ -389,9 +392,14 @@ export class MaterialsService {
     return {
       message: 'Import completed',
       created: created.length,
+      updated: updated.length,
       skipped: skipped.length,
       details: {
         created: created.map((m) => ({
+          partNumber: m.partNumber,
+          name: m.name,
+        })),
+        updated: updated.map((m) => ({
           partNumber: m.partNumber,
           name: m.name,
         })),

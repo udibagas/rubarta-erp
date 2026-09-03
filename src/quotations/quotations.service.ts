@@ -1,9 +1,9 @@
 import {
   BadRequestException,
-  ForbiddenException,
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
+import { ApprovalService } from '../approval/approval.service';
 import { PrismaService } from '../prisma/prisma.service';
 import {
   CreateQuotationDto,
@@ -11,26 +11,17 @@ import {
   QueryQuotationDto,
   SendQuotationEmailDto,
 } from './dto/quotation.dto';
-import {
-  ApprovalStatus,
-  ApprovalType,
-  Prisma,
-  Quotation,
-  QuotationStatus,
-} from '../prisma/client/client';
-import { EventEmitter2, OnEvent } from '@nestjs/event-emitter';
+import { ApprovalType, Prisma, QuotationStatus } from '../prisma/client/client';
 import dayjs from 'dayjs';
 import { MailerService } from '@nestjs-modules/mailer';
 import { generateQuotationPdf } from './quotation-pdf';
-import { NotificationsService } from '../notifications/notifications.service';
 
 @Injectable()
 export class QuotationsService {
   constructor(
     private readonly prisma: PrismaService,
-    private eventEmitter: EventEmitter2,
     private readonly mailerService: MailerService,
-    private readonly notification: NotificationsService,
+    private readonly approvalService: ApprovalService,
   ) {}
 
   async create(data: CreateQuotationDto) {
@@ -235,94 +226,8 @@ export class QuotationsService {
       },
     });
 
-    this.eventEmitter.emit('quotation.submitted', updatedQuotation);
-
+    this.approvalService.requestApproval(ApprovalType.QUOTATION, id);
     return updatedQuotation;
-  }
-
-  @OnEvent('quotation.submitted', { async: true })
-  async requestForApproval(quotation: Quotation) {
-    const approval = await this.prisma.approvalSetting.findFirst({
-      where: {
-        approvalType: ApprovalType.QUOTATION,
-      },
-      include: { ApprovalSettingItem: true },
-    });
-
-    if (!approval) {
-      return;
-    }
-
-    const quotationApproval = await this.prisma.approval.create({
-      data: {
-        approvalType: ApprovalType.QUOTATION,
-        moduleId: quotation.id,
-        items: {
-          create: approval.ApprovalSettingItem.map((i) => ({
-            userId: i.userId,
-            order: i.level,
-          })),
-        },
-      },
-      include: {
-        items: true,
-      },
-    });
-
-    // TODO: harusnya berjenjang
-    quotationApproval.items.forEach((i) => {
-      this.eventEmitter.emit('quotation.notifyApprover', quotation, i.userId);
-    });
-  }
-
-  @OnEvent('quotation.notifyApprover')
-  async notifyApprover(quotation: Quotation, userId: number) {
-    const approvalItem = await this.prisma.approvalItem.findFirst({
-      where: {
-        userId,
-        approval: {
-          approvalType: ApprovalType.QUOTATION,
-          moduleId: quotation.id,
-        },
-      },
-    });
-
-    if (approvalItem) {
-      this.notification.notify({
-        userId,
-        title: `Quotation ${quotation.number} Menunggu Persetujuan`,
-        message: `Quotation ${quotation.number} telah diajukan dan menunggu persetujuan Anda`,
-        redirectUrl: `https://erp.rubarta.co.id/quotations?number=${quotation.number}`,
-      });
-    }
-  }
-
-  async approve(id: number, userId: number, remarks?: string) {
-    const quotation = await this.findOne(id);
-
-    const where = {
-      userId,
-      approval: {
-        approvalType: ApprovalType.QUOTATION,
-        moduleId: id,
-      },
-    };
-
-    const approvalItem = await this.prisma.approvalItem.findFirst({ where });
-
-    if (!approvalItem) {
-      throw new ForbiddenException(
-        'You are not allowed to perform this action',
-      );
-    }
-
-    // await this.prisma.approvalItem.update({
-    //   where,
-    //   data: {
-    //     status: ApprovalStatus.APPROVED,
-    //     remarks: remarks,
-    //   },
-    // });
   }
 
   async send(id: number, dto: SendQuotationEmailDto) {

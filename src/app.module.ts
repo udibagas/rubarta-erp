@@ -7,6 +7,7 @@ import { BanksModule } from './banks/banks.module';
 import { CompaniesModule } from './companies/companies.module';
 import { DepartmentsModule } from './departments/departments.module';
 import { ApprovalSettingsModule } from './approval-settings/approval-settings.module';
+import { ApprovalModule } from './approval/approval.module';
 import { NkpModule } from './nkp/nkp.module';
 import { EventEmitterModule } from '@nestjs/event-emitter';
 import { MailerModule } from '@nestjs-modules/mailer';
@@ -87,6 +88,7 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
     CompaniesModule,
     DepartmentsModule,
     ApprovalSettingsModule,
+    ApprovalModule,
     NkpModule,
     NotificationsModule,
     FileModule,
