@@ -159,7 +159,6 @@ export class NkpController {
   @Get('get-by-number')
   @ApiOperation({ summary: 'Get NKP by number' })
   findOneByNumber(@Query('number') number: string) {
-    console.log(number);
     return this.nkpService.findOne(number);
   }
 

@@ -16,6 +16,7 @@ import dayjs from 'dayjs';
 import { MailerService } from '@nestjs-modules/mailer';
 import { generateQuotationPdf } from './quotation-pdf';
 import { Cron, CronExpression } from '@nestjs/schedule';
+import { OnEvent } from '@nestjs/event-emitter';
 
 @Injectable()
 export class QuotationsService {
@@ -263,6 +264,41 @@ export class QuotationsService {
 
     const newNumber = lastNumber + 1;
     return `QUO${monthYear}-${newNumber}`;
+  }
+
+  @OnEvent('approval.completed')
+  private async handleApprovalCompleted(payload: {
+    approvalType: ApprovalType;
+    moduleId: number;
+  }) {
+    const { approvalType, moduleId } = payload;
+
+    if (approvalType !== ApprovalType.QUOTATION) {
+      return;
+    }
+
+    await this.prisma.quotation.update({
+      where: { id: moduleId },
+      data: { status: QuotationStatus.Approved },
+    });
+  }
+
+  @OnEvent('approval.nextApprover')
+  private async handleNextApprover(payload: {
+    approvalType: ApprovalType;
+    moduleId: number;
+    userId: number;
+  }) {
+    const { approvalType, moduleId } = payload;
+
+    if (approvalType !== ApprovalType.QUOTATION) {
+      return;
+    }
+
+    await this.prisma.quotation.update({
+      where: { id: moduleId },
+      data: { status: QuotationStatus.PartiallyApproved },
+    });
   }
 
   @Cron(CronExpression.EVERY_DAY_AT_8AM)

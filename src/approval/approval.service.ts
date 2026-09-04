@@ -153,7 +153,6 @@ export class ApprovalService {
     });
 
     if (isFullyApproved) {
-      // no listener yet: subscribe with @OnEvent('approval.completed') in the owning module
       this.eventEmitter.emit('approval.completed', { approvalType, moduleId });
     } else {
       const nextApprover = remainingItems[0];
@@ -173,7 +172,7 @@ export class ApprovalService {
         message: `Anda memiliki permintaan persetujuan baru untuk ${approvalType} #${module?.number ?? moduleId}`,
         redirectUrl: '',
       });
-      // no listener yet: subscribe with @OnEvent('approval.nextApprover') in the owning module
+
       this.eventEmitter.emit('approval.nextApprover', {
         approvalType,
         moduleId,
@@ -181,7 +180,6 @@ export class ApprovalService {
       });
     }
 
-    // no listener yet: subscribe with @OnEvent('approval.itemApproved') in the owning module
     this.eventEmitter.emit('approval.itemApproved', {
       approvalType,
       moduleId,
@@ -216,7 +214,6 @@ export class ApprovalService {
       },
     });
 
-    // no listener yet: subscribe with @OnEvent('approval.rejected') in the owning module
     this.eventEmitter.emit('approval.rejected', {
       approvalType,
       moduleId,
@@ -254,36 +251,5 @@ export class ApprovalService {
     }
 
     return { approval, currentItem };
-  }
-
-  @OnEvent('approval.completed')
-  private async handleApprovalCompleted(payload: {
-    approvalType: ApprovalType;
-    moduleId: number;
-  }) {
-    const { approvalType, moduleId } = payload;
-
-    if (approvalType === ApprovalType.QUOTATION) {
-      await this.prisma.quotation.update({
-        where: { id: moduleId },
-        data: { status: QuotationStatus.Approved },
-      });
-    }
-  }
-
-  @OnEvent('approval.nextApprover')
-  private async handleNextApprover(payload: {
-    approvalType: ApprovalType;
-    moduleId: number;
-    userId: number;
-  }) {
-    const { approvalType, moduleId } = payload;
-
-    if (approvalType === ApprovalType.QUOTATION) {
-      await this.prisma.quotation.update({
-        where: { id: moduleId },
-        data: { status: QuotationStatus.PartiallyApproved },
-      });
-    }
   }
 }
