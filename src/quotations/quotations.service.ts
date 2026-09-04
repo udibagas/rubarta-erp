@@ -10,7 +10,7 @@ import {
   UpdateQuotationDto,
   QueryQuotationDto,
   SendQuotationEmailDto,
-} from './dto/quotation.dto';
+} from './quotation.dto';
 import { ApprovalType, Prisma, QuotationStatus } from '../prisma/client/client';
 import dayjs from 'dayjs';
 import { MailerService } from '@nestjs-modules/mailer';
@@ -29,28 +29,14 @@ export class QuotationsService {
     const { items, ...quotationData } = data;
     const number = await this.generateNumber();
 
-    // Calculate totals
-    let totalAmount = 0;
-    let vatAmount = 0;
+    const totalAmount = items.reduce(
+      (sum, item) => sum + item.quantity * item.unitPrice,
+      0,
+    );
 
-    const processedItems = items.map((item) => {
-      const itemTotal = item.quantity * item.unitPrice - (item.discount || 0);
-      totalAmount += itemTotal;
-
-      if (item.vat) {
-        const itemVat = itemTotal * 0.11; // 11% VAT
-        vatAmount += itemVat;
-      }
-
-      return {
-        ...item,
-        totalPrice: itemTotal,
-      };
-    });
-
+    const vatAmount = totalAmount * 0.11;
     const discount = quotationData.discount || 0;
-    totalAmount -= discount;
-    const grandTotal = totalAmount + vatAmount;
+    const grandTotal = totalAmount + vatAmount - discount;
 
     return this.prisma.quotation.create({
       data: {
@@ -60,7 +46,10 @@ export class QuotationsService {
         vatAmount,
         grandTotal,
         QuotationItems: {
-          create: processedItems,
+          create: items.map((i) => ({
+            ...i,
+            totalPrice: i.quantity * i.unitPrice,
+          })),
         },
       },
       include: {
@@ -148,27 +137,14 @@ export class QuotationsService {
 
     // If items are provided, recalculate totals
     if (items) {
-      let totalAmount = 0;
-      let vatAmount = 0;
+      const totalAmount = items.reduce(
+        (sum, item) => sum + item.quantity * item.unitPrice,
+        0,
+      );
 
-      const processedItems = items.map((item) => {
-        const itemTotal = item.quantity * item.unitPrice - (item.discount || 0);
-        totalAmount += itemTotal;
-
-        if (item.vat) {
-          const itemVat = itemTotal * 0.11;
-          vatAmount += itemVat;
-        }
-
-        return {
-          ...item,
-          totalPrice: itemTotal,
-        };
-      });
-
+      const vatAmount = totalAmount * 0.11;
       const discount = quotationData.discount || 0;
-      totalAmount -= discount;
-      const grandTotal = totalAmount + vatAmount;
+      const grandTotal = totalAmount + vatAmount - discount;
 
       // Delete existing items and create new ones
       await this.prisma.quotationItem.deleteMany({
@@ -183,7 +159,10 @@ export class QuotationsService {
           vatAmount,
           grandTotal,
           QuotationItems: {
-            create: processedItems,
+            create: items.map((item) => ({
+              ...item,
+              totalPrice: item.quantity * item.unitPrice,
+            })),
           },
         },
         include: {

@@ -3244,9 +3244,7 @@ export const QuotationItemScalarFieldEnum = {
   description: 'description',
   quantity: 'quantity',
   unitPrice: 'unitPrice',
-  discount: 'discount',
   totalPrice: 'totalPrice',
-  vat: 'vat',
   sortOrder: 'sortOrder'
 } as const
 

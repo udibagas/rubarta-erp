@@ -282,9 +282,7 @@ model QuotationItem {
   description String? @db.Text
   quantity    Int
   unitPrice   Float
-  discount    Float   @default(0)
   totalPrice  Float
-  vat         Boolean @default(false) // Indicates if VAT is applicable
   sortOrder   Int     @default(0)
 
   // Relationships

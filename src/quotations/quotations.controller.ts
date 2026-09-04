@@ -24,7 +24,7 @@ import {
   UpdateQuotationDto,
   QueryQuotationDto,
   SendQuotationEmailDto,
-} from './dto/quotation.dto';
+} from './quotation.dto';
 
 @ApiTags('Quotations')
 @ApiBearerAuth()

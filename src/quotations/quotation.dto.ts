@@ -8,13 +8,12 @@ import {
   IsArray,
   ValidateNested,
   IsDateString,
-  IsBoolean,
   MaxLength,
   Min,
   IsEmail,
 } from 'class-validator';
 import { Type } from 'class-transformer';
-import { QuotationStatus, Currency } from '../../prisma/client/client';
+import { QuotationStatus, Currency } from '../prisma/client/client';
 
 export class QuotationItemDto {
   @ApiProperty({ example: 'PART-001' })
@@ -45,17 +44,6 @@ export class QuotationItemDto {
   @IsNumber()
   @Min(0)
   unitPrice: number;
-
-  @ApiProperty({ required: false, example: 0, default: 0 })
-  @IsOptional()
-  @IsNumber()
-  @Min(0)
-  discount?: number;
-
-  @ApiProperty({ required: false, example: false, default: false })
-  @IsOptional()
-  @IsBoolean()
-  vat?: boolean;
 
   @ApiProperty({ required: false, example: 0, default: 0 })
   @IsOptional()
