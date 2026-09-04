@@ -32,6 +32,7 @@ import { VisitPlansModule } from './visit-plans/visit-plans.module';
 import { EjsAdapter } from '@nestjs-modules/mailer/adapters/ejs.adapter';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
+import { ScheduleModule } from '@nestjs/schedule';
 
 @Module({
   imports: [
@@ -75,6 +76,7 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
       serveRoot: '/css',
     }),
     EventEmitterModule.forRoot(),
+    ScheduleModule.forRoot(),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       graphiql: true,

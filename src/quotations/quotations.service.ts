@@ -15,6 +15,7 @@ import { ApprovalType, Prisma, QuotationStatus } from '../prisma/client/client';
 import dayjs from 'dayjs';
 import { MailerService } from '@nestjs-modules/mailer';
 import { generateQuotationPdf } from './quotation-pdf';
+import { Cron, CronExpression } from '@nestjs/schedule';
 
 @Injectable()
 export class QuotationsService {
@@ -283,5 +284,26 @@ export class QuotationsService {
 
     const newNumber = lastNumber + 1;
     return `QUO${monthYear}-${newNumber}`;
+  }
+
+  @Cron(CronExpression.EVERY_DAY_AT_8AM)
+  async markAsExpired() {
+    await this.prisma.quotation.updateMany({
+      where: {
+        expirationDate: { lt: new Date() },
+        status: {
+          notIn: [
+            QuotationStatus.Expired,
+            QuotationStatus.Approved,
+            QuotationStatus.Rejected,
+          ],
+        },
+      },
+      data: {
+        status: QuotationStatus.Expired,
+      },
+    });
+
+    // TODO: apakah perlu kirim notifikasi ke user & customer bahwa quotation telah expired?
   }
 }
