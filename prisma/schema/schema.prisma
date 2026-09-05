@@ -26,6 +26,7 @@ model Company {
   Opportunity     Opportunity[]
   Lead            Lead[]
   VisitPlans      VisitPlan[]
+  quotations      Quotation[]
 
   @@map("Companies")
 }

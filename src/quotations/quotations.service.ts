@@ -207,7 +207,12 @@ export class QuotationsService {
       },
     });
 
-    await this.approvalService.requestApproval(ApprovalType.QUOTATION, id);
+    await this.approvalService.requestApproval(
+      ApprovalType.QUOTATION,
+      id,
+      updatedQuotation.companyId,
+    );
+
     return updatedQuotation;
   }
 

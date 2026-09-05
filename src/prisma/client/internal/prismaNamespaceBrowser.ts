@@ -327,7 +327,8 @@ export const QuotationScalarFieldEnum = {
   updatedAt: 'updatedAt',
   customerId: 'customerId',
   userId: 'userId',
-  opportunityId: 'opportunityId'
+  opportunityId: 'opportunityId',
+  companyId: 'companyId'
 } as const
 
 export type QuotationScalarFieldEnum = (typeof QuotationScalarFieldEnum)[keyof typeof QuotationScalarFieldEnum]

@@ -257,11 +257,13 @@ model Quotation {
   customerId    Int
   userId        Int
   opportunityId Int?
+  companyId     Int?
 
   // Relationships
   Opportunity    Opportunity?    @relation(fields: [opportunityId], references: [id])
   Customer       Customer        @relation(fields: [customerId], references: [id], onDelete: Cascade)
   User           User            @relation(fields: [userId], references: [id])
+  Company        Company?        @relation(fields: [companyId], references: [id])
   QuotationItems QuotationItem[]
 
   @@index([number])

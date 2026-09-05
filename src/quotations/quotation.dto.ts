@@ -52,6 +52,11 @@ export class QuotationItemDto {
 }
 
 export class CreateQuotationDto {
+  @ApiProperty({ required: false, example: 1 })
+  @IsOptional()
+  @IsInt()
+  companyId?: number;
+
   @ApiProperty({ example: '2025-06-25' })
   @IsDateString()
   date: string;
