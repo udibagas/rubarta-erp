@@ -226,7 +226,10 @@ export class ApprovalService {
       throw new NotFoundException('Approval not found');
     }
 
-    if (approval.status) {
+    if (
+      approval.status == ApprovalStatus.APPROVED ||
+      approval.status == ApprovalStatus.REJECTED
+    ) {
       throw new BadRequestException('This approval has already been finalized');
     }
 
