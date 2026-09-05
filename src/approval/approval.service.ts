@@ -4,14 +4,10 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
-import { EventEmitter2, OnEvent } from '@nestjs/event-emitter';
+import { EventEmitter2 } from '@nestjs/event-emitter';
 import { PrismaService } from '../prisma/prisma.service';
 import { NotificationsService } from '../notifications/notifications.service';
-import {
-  ApprovalStatus,
-  ApprovalType,
-  QuotationStatus,
-} from '../prisma/client/client';
+import { ApprovalStatus, ApprovalType } from '../prisma/client/client';
 
 @Injectable()
 export class ApprovalService {
@@ -56,27 +52,19 @@ export class ApprovalService {
       },
     });
 
-    let module: { number: string } | null = null;
-
-    if (approvalType === ApprovalType.QUOTATION) {
-      module = await this.prisma.quotation.findUnique({
-        where: { id: moduleId },
-        select: { number: true },
-      });
-    }
-
+    const module = await this.getModule(approvalType, moduleId);
+    const redirectUrl = this.getRedirectUrl(approvalType, moduleId);
     const firstApprover = approval.items[0];
 
     if (firstApprover) {
       this.notification.notify({
         userId: firstApprover.userId,
         title: `Permintaan Persetujuan ${approvalType}`,
-        message: `Anda memiliki permintaan persetujuan baru untuk ${approvalType} #${module?.number ?? moduleId}`,
-        redirectUrl: '',
+        message: `Anda memiliki permintaan persetujuan baru untuk ${approvalType} #${module.number ?? moduleId}`,
+        redirectUrl,
       });
     }
 
-    // no listener yet: subscribe with @OnEvent('approval.requested') in the owning module
     this.eventEmitter.emit('approval.requested', {
       approvalType,
       moduleId,
@@ -90,7 +78,14 @@ export class ApprovalService {
     return this.prisma.approval.findFirst({
       where: { approvalType, moduleId },
       include: {
-        items: { include: { user: true }, orderBy: { order: 'asc' } },
+        items: {
+          include: {
+            user: {
+              select: { id: true, name: true },
+            },
+          },
+          orderBy: { order: 'asc' },
+        },
       },
     });
   }
@@ -156,21 +151,14 @@ export class ApprovalService {
       this.eventEmitter.emit('approval.completed', { approvalType, moduleId });
     } else {
       const nextApprover = remainingItems[0];
-
-      let module: { number: string } | null = null;
-
-      if (approvalType === ApprovalType.QUOTATION) {
-        module = await this.prisma.quotation.findUnique({
-          where: { id: moduleId },
-          select: { number: true },
-        });
-      }
+      const module = await this.getModule(approvalType, moduleId);
+      const redirectUrl = this.getRedirectUrl(approvalType, moduleId);
 
       this.notification.notify({
         userId: nextApprover.userId,
         title: `Permintaan Persetujuan ${approvalType}`,
-        message: `Anda memiliki permintaan persetujuan baru untuk ${approvalType} #${module?.number ?? moduleId}`,
-        redirectUrl: '',
+        message: `Anda memiliki permintaan persetujuan baru untuk ${approvalType} #${module.number ?? moduleId}`,
+        redirectUrl,
       });
 
       this.eventEmitter.emit('approval.nextApprover', {
@@ -251,5 +239,29 @@ export class ApprovalService {
     }
 
     return { approval, currentItem };
+  }
+
+  private async getModule(approvalType: ApprovalType, moduleId: number) {
+    switch (approvalType) {
+      case ApprovalType.QUOTATION:
+        return this.prisma.quotation.findUnique({ where: { id: moduleId } });
+      default:
+        throw new NotFoundException(
+          'Module not found for the given approval type',
+        );
+    }
+  }
+
+  private getRedirectUrl(approvalType: ApprovalType, moduleId: number) {
+    const baseUrl = 'https://erp.rubarta.co.id/';
+
+    switch (approvalType) {
+      case ApprovalType.QUOTATION:
+        return `${baseUrl}quotations/${moduleId}`;
+      default:
+        throw new NotFoundException(
+          'Redirect URL not found for the given approval type',
+        );
+    }
   }
 }

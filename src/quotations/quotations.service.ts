@@ -212,22 +212,15 @@ export class QuotationsService {
   }
 
   async send(id: number, dto: SendQuotationEmailDto) {
+    const { to, cc, subject, body } = dto;
     const quotation = await this.findOne(id);
-
-    if (!quotation.contactEmail) {
-      throw new BadRequestException(
-        'Quotation does not have a contact email to send to',
-      );
-    }
-
     const pdfBuffer = await generateQuotationPdf(quotation);
-    const cc = [quotation.User.email, ...(dto.cc || [])];
 
     await this.mailerService.sendMail({
-      to: dto.to || quotation.contactEmail,
-      cc,
-      subject: dto.subject,
-      html: dto.body,
+      subject,
+      cc: [quotation.User.email, ...(cc || [])],
+      to,
+      html: body,
       attachments: [
         {
           filename: `${quotation.number}.pdf`,
