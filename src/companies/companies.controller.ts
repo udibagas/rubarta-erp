@@ -12,7 +12,7 @@ import {
   HttpStatus,
 } from '@nestjs/common';
 import { CompaniesService } from './companies.service';
-import { CompanyDto } from './company.dto';
+import { CreateCompanyDto, UpdateCompanyDto } from './company.dto';
 import {
   ApiBearerAuth,
   ApiCreatedResponse,
@@ -35,7 +35,7 @@ export class CompaniesController {
   @Roles(Role.ADMIN)
   @ApiOperation({ summary: 'Create new company' })
   @ApiCreatedResponse({ type: Company })
-  create(@Body() companyDto: CompanyDto): Promise<Company> {
+  create(@Body() companyDto: CreateCompanyDto): Promise<Company> {
     return this.companiesService.create(companyDto);
   }
 
@@ -59,7 +59,7 @@ export class CompaniesController {
   @ApiOkResponse({ type: Company })
   update(
     @Param('id', ParseIntPipe) id: number,
-    @Body() companyDto: CompanyDto,
+    @Body() companyDto: UpdateCompanyDto,
   ): Promise<Company> {
     return this.companiesService.update(id, companyDto);
   }
