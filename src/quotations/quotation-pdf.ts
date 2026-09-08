@@ -1,6 +1,11 @@
 import * as fs from 'fs';
 import * as path from 'path';
-import PDFDocument from 'pdfkit';
+import pdfkit from 'pdfkit';
+import {
+  PDFDocumentWithTables,
+  createPdfDocumentWithTables,
+} from 'pdfkit-table';
+// import PDFDocument, { type Table, type TableOptions } from 'pdfkit-table';
 
 const LOGO_PATH = path.join(process.cwd(), 'logo.png');
 
@@ -36,6 +41,8 @@ function formatAmount(value: number): string {
 
 export function generateQuotationPdf(quotation: any): Promise<Buffer> {
   return new Promise((resolve, reject) => {
+    const PDFDocument = createPdfDocumentWithTables(pdfkit);
+
     const doc = new PDFDocument({ size: 'A4', margin: 40 });
     const chunks: Buffer[] = [];
 
@@ -67,7 +74,7 @@ export function generateQuotationPdf(quotation: any): Promise<Buffer> {
       .font('Helvetica')
       .text(COMPANY.address.join('\n'), left + 55, doc.y + 2, { width: 260 });
 
-    const infoBoxWidth = 160;
+    const infoBoxWidth = 200;
     const infoBoxX = right - infoBoxWidth;
 
     doc
@@ -84,47 +91,42 @@ export function generateQuotationPdf(quotation: any): Promise<Buffer> {
       ['Date', formatDate(quotation.date)],
       ['Valid Until', formatDate(quotation.validUntil)],
       ['Attention', quotation.contactPerson || '-'],
+      ['Payment Method', quotation.paymentMethod || ''],
+      ['T.O.P.', quotation.termOfPayment || ''],
+      ['Currency', currency],
+      ['Phone', quotation.contactPhone || ''],
     ];
+
+    doc.table({
+      headers: [
+        {
+          label: 'Property',
+          width: 80,
+          property: 'property',
+        },
+        {
+          label: 'Value',
+          width: 120,
+          property: 'value',
+        },
+      ],
+      data: infoRows.map(([label, value]) => ({
+        property: `bold:${label}`,
+        value: value,
+      })),
+      options: {
+        x: infoBoxX,
+        y: headerTop + 40,
+        width: infoBoxWidth,
+        hideHeader: true,
+      },
+    });
 
     const infoY = doc.y + 6;
-    const infoLabelWidth = 65;
     const infoRowHeight = 16;
-
-    doc.lineWidth(0.5).strokeColor(COLORS.border);
-    infoRows.forEach(([label, value], index) => {
-      const rowY = infoY + index * infoRowHeight;
-      doc.rect(infoBoxX, rowY, infoBoxWidth, infoRowHeight).stroke();
-      doc
-        .fillColor('#000000')
-        .fontSize(8)
-        .font('Helvetica-Bold')
-        .text(label, infoBoxX + 4, rowY + 4, { width: infoLabelWidth });
-      doc.font('Helvetica').text(value, infoBoxX + infoLabelWidth, rowY + 4, {
-        width: infoBoxWidth - infoLabelWidth - 4,
-      });
-    });
-
     const detailY = infoY + infoRows.length * infoRowHeight + 6;
 
-    const detailRows: [string, string][] = [
-      ['Payment Method:', quotation.paymentMethod || ''],
-      ['T.O.P.:', quotation.termOfPayment || ''],
-      ['Currency:', currency],
-      ['Phone:', quotation.contactPhone || ''],
-    ];
-
-    detailRows.forEach(([label, value], index) => {
-      const rowY = detailY + index * 12;
-      doc
-        .fillColor('#000000')
-        .fontSize(8)
-        .font('Helvetica')
-        .text(label, infoBoxX, rowY, { width: 70 })
-        .text(value, infoBoxX + 70, rowY, { width: infoBoxWidth - 70 });
-    });
-
-    // ---------- Customer ----------
-    let y = Math.max(doc.y, detailY + detailRows.length * 12) + 20;
+    let y = 120; // Fixed starting Y position for the customer section
 
     doc
       .fillColor(COLORS.navy)
@@ -146,84 +148,60 @@ export function generateQuotationPdf(quotation: any): Promise<Buffer> {
       .text(quotation.customerAddress || '', left, y, {
         width: contentWidth / 2,
       });
-    y = doc.y + 15;
+
+    y = Math.max(doc.y, detailY) + 10;
 
     // ---------- Items table ----------
     const columns = [
-      { key: 'no', label: 'NO.', width: 30, align: 'center' as const },
+      { property: 'no', label: 'NO.', width: 30, align: 'center' as const },
       {
-        key: 'partNumber',
+        property: 'partNumber',
         label: 'PART NO.',
         width: 80,
         align: 'left' as const,
       },
       {
-        key: 'name',
+        property: 'name',
         label: 'DESCRIPTION',
         width: contentWidth - 30 - 80 - 45 - 90 - 90,
         align: 'left' as const,
       },
-      { key: 'quantity', label: 'QTY', width: 45, align: 'center' as const },
       {
-        key: 'unitPrice',
+        property: 'quantity',
+        label: 'QTY',
+        width: 45,
+        align: 'center' as const,
+      },
+      {
+        property: 'unitPrice',
         label: 'UNIT PRICE',
         width: 90,
         align: 'right' as const,
       },
       {
-        key: 'totalPrice',
+        property: 'totalPrice',
         label: 'AMOUNT',
         width: 90,
         align: 'right' as const,
       },
     ];
 
-    const tableRowHeight = 20;
-
-    const drawTableRow = (
-      rowY: number,
-      values: string[],
-      options: { bold?: boolean; fill?: string; textColor?: string } = {},
-    ) => {
-      let x = left;
-      doc.font(options.bold ? 'Helvetica-Bold' : 'Helvetica').fontSize(8);
-
-      if (options.fill) {
-        doc.rect(left, rowY, contentWidth, tableRowHeight).fill(options.fill);
-      }
-
-      doc.fillColor(options.textColor || '#000000');
-      columns.forEach((col, index) => {
-        doc.text(values[index], x + 4, rowY + 6, {
-          width: col.width - 8,
-          align: col.align,
-        });
-        x += col.width;
-      });
-    };
-
-    // Header row
-    drawTableRow(
-      y,
-      columns.map((c) => c.label),
-      { bold: true, fill: COLORS.navy, textColor: '#FFFFFF' },
+    doc.table(
+      {
+        headers: columns,
+        data: quotation.QuotationItems.map((item, index) => ({
+          no: String(index + 1),
+          partNumber: item.partNumber || '-',
+          name: item.name,
+          quantity: String(item.quantity),
+          unitPrice: formatAmount(item.unitPrice),
+          totalPrice: formatAmount(item.totalPrice),
+        })),
+      },
+      { y: 220, absolutePosition: true },
     );
-    y += tableRowHeight;
 
-    doc.strokeColor(COLORS.border).lineWidth(0.5);
-
-    (quotation.QuotationItems || []).forEach((item: any, index: number) => {
-      doc.rect(left, y, contentWidth, tableRowHeight).stroke();
-      drawTableRow(y, [
-        String(index + 1),
-        item.partNumber || '-',
-        item.name,
-        String(item.quantity),
-        formatAmount(item.unitPrice),
-        formatAmount(item.totalPrice),
-      ]);
-      y += tableRowHeight;
-    });
+    const tableRowHeight = 20;
 
     y += 10;
 
