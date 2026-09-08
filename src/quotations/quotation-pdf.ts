@@ -1,6 +1,7 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import pdfkit from 'pdfkit';
+import { PDFDocument, StandardFonts, rgb } from 'pdf-lib';
 import { createPdfDocumentWithTables } from 'pdfkit-table';
 
 const LOGO_PATH = path.join(process.cwd(), 'logo.png');
@@ -35,6 +36,29 @@ function formatAmount(value: number): string {
   });
 }
 
+async function addPageNumbers(pdfBuffer: Buffer): Promise<Buffer> {
+  const document = await PDFDocument.load(pdfBuffer);
+  const pages = document.getPages();
+  const font = await document.embedFont(StandardFonts.Helvetica);
+  const fontSize = 8;
+
+  pages.forEach((page, index) => {
+    const label = `Page ${index + 1} of ${pages.length}`;
+    const { width } = page.getSize();
+    const labelWidth = font.widthOfTextAtSize(label, fontSize);
+
+    page.drawText(label, {
+      x: (width - labelWidth) / 2,
+      y: 50,
+      size: fontSize,
+      font,
+      color: rgb(0.33, 0.33, 0.33),
+    });
+  });
+
+  return Buffer.from(await document.save());
+}
+
 export function generateQuotationPdf(quotation: any): Promise<Buffer> {
   return new Promise((resolve, reject) => {
     const PDFDocument = createPdfDocumentWithTables(pdfkit);
@@ -43,7 +67,9 @@ export function generateQuotationPdf(quotation: any): Promise<Buffer> {
     const chunks: Buffer[] = [];
 
     doc.on('data', (chunk) => chunks.push(chunk));
-    doc.on('end', () => resolve(Buffer.concat(chunks)));
+    doc.on('end', () => {
+      addPageNumbers(Buffer.concat(chunks)).then(resolve).catch(reject);
+    });
     doc.on('error', reject);
 
     const left = doc.page.margins.left;
@@ -143,7 +169,6 @@ export function generateQuotationPdf(quotation: any): Promise<Buffer> {
     };
 
     drawPageHeader();
-
     doc.on('pageAdded', drawPageHeader);
 
     let y = contentTop;
@@ -296,30 +321,6 @@ export function generateQuotationPdf(quotation: any): Promise<Buffer> {
         signatureY,
         { width: signatureWidth, align: 'center' },
       );
-
-    // const range = doc.bufferedPageRange();
-
-    // for (let index = 0; index < range.count; index++) {
-    //   doc.switchToPage(range.start + index);
-    //   const previousX = doc.x;
-    //   const previousY = doc.y;
-    //   doc
-    //     .fillColor(COLORS.gray)
-    //     .font('Helvetica')
-    //     .fontSize(8)
-    //     .text(
-    //       `Page ${index + 1} of ${range.count}`,
-    //       left,
-    //       doc.page.height - 28,
-    //       {
-    //         width: contentWidth,
-    //         align: 'center',
-    //         lineBreak: false,
-    //       },
-    //     );
-    //   doc.x = previousX;
-    //   doc.y = previousY;
-    // }
 
     doc.end();
   });
