@@ -1,11 +1,7 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import pdfkit from 'pdfkit';
-import {
-  PDFDocumentWithTables,
-  createPdfDocumentWithTables,
-} from 'pdfkit-table';
-// import PDFDocument, { type Table, type TableOptions } from 'pdfkit-table';
+import { createPdfDocumentWithTables } from 'pdfkit-table';
 
 const LOGO_PATH = path.join(process.cwd(), 'logo.png');
 
@@ -23,7 +19,7 @@ const COLORS = {
   green: '#1CA84B',
   navy: '#12355B',
   gray: '#555555',
-  border: '#B7B7B7',
+  border: '#808181',
 };
 
 function formatDate(date?: Date | string | null): string {
@@ -43,7 +39,7 @@ export function generateQuotationPdf(quotation: any): Promise<Buffer> {
   return new Promise((resolve, reject) => {
     const PDFDocument = createPdfDocumentWithTables(pdfkit);
 
-    const doc = new PDFDocument({ size: 'A4', margin: 40 });
+    const doc = new PDFDocument({ size: 'A4', margin: 40, bufferPages: true });
     const chunks: Buffer[] = [];
 
     doc.on('data', (chunk) => chunks.push(chunk));
@@ -55,37 +51,8 @@ export function generateQuotationPdf(quotation: any): Promise<Buffer> {
     const contentWidth = right - left;
     const currency = quotation.currency || 'IDR';
 
-    // ---------- Header: logo + company info (left), title + info box (right) ----------
-    const headerTop = doc.y;
-
-    if (fs.existsSync(LOGO_PATH)) {
-      doc.image(LOGO_PATH, left, headerTop, { width: 45 });
-    }
-
-    doc
-      .fillColor(COLORS.green)
-      .fontSize(13)
-      .font('Helvetica-Bold')
-      .text(COMPANY.name, left + 55, headerTop, { width: 260 });
-
-    doc
-      .fillColor(COLORS.gray)
-      .fontSize(8)
-      .font('Helvetica')
-      .text(COMPANY.address.join('\n'), left + 55, doc.y + 2, { width: 260 });
-
     const infoBoxWidth = 200;
     const infoBoxX = right - infoBoxWidth;
-
-    doc
-      .fillColor(COLORS.navy)
-      .fontSize(20)
-      .font('Helvetica-Bold')
-      .text('QUOTATION', infoBoxX, headerTop, {
-        width: infoBoxWidth,
-        align: 'right',
-      });
-
     const infoRows: [string, string][] = [
       ['No', quotation.number],
       ['Date', formatDate(quotation.date)],
@@ -97,59 +64,89 @@ export function generateQuotationPdf(quotation: any): Promise<Buffer> {
       ['Phone', quotation.contactPhone || ''],
     ];
 
-    doc.table({
-      headers: [
-        {
-          label: 'Property',
-          width: 80,
-          property: 'property',
+    const contentTop = 220;
+
+    const drawPageHeader = () => {
+      const headerTop = doc.page.margins.top;
+
+      if (fs.existsSync(LOGO_PATH)) {
+        doc.image(LOGO_PATH, left, headerTop, { width: 45 });
+      }
+
+      doc
+        .fillColor(COLORS.green)
+        .fontSize(13)
+        .font('Helvetica-Bold')
+        .text(COMPANY.name, left + 55, headerTop, { width: 260 });
+
+      doc
+        .fillColor(COLORS.gray)
+        .fontSize(8)
+        .font('Helvetica')
+        .text(COMPANY.address.join('\n'), left + 55, headerTop + 18, {
+          width: 260,
+        });
+
+      doc
+        .fillColor(COLORS.navy)
+        .fontSize(20)
+        .font('Helvetica-Bold')
+        .text('QUOTATION', infoBoxX, headerTop, {
+          width: infoBoxWidth,
+          align: 'right',
+        });
+
+      doc
+        .lineWidth(0.5)
+        .strokeColor(COLORS.border)
+        .moveTo(infoBoxX, headerTop + 28)
+        .lineTo(infoBoxX + infoBoxWidth, headerTop + 28)
+        .stroke();
+
+      doc.table({
+        headers: [
+          { label: 'Property', width: 80, property: 'property' },
+          { label: 'Value', width: 120, property: 'value' },
+        ],
+        data: infoRows.map(([label, value]) => ({
+          property: `bold:${label}`,
+          value,
+        })),
+        options: {
+          x: infoBoxX,
+          y: headerTop + 30,
+          width: infoBoxWidth,
+          hideHeader: true,
         },
-        {
-          label: 'Value',
-          width: 120,
-          property: 'value',
-        },
-      ],
-      data: infoRows.map(([label, value]) => ({
-        property: `bold:${label}`,
-        value: value,
-      })),
-      options: {
-        x: infoBoxX,
-        y: headerTop + 40,
-        width: infoBoxWidth,
-        hideHeader: true,
-      },
-    });
-
-    const infoY = doc.y + 6;
-    const infoRowHeight = 16;
-    const detailY = infoY + infoRows.length * infoRowHeight + 6;
-
-    let y = 120; // Fixed starting Y position for the customer section
-
-    doc
-      .fillColor(COLORS.navy)
-      .fontSize(9)
-      .font('Helvetica-Bold')
-      .text('CUSTOMER', left, y);
-    y += 12;
-
-    doc
-      .fillColor('#000000')
-      .fontSize(9)
-      .font('Helvetica-Bold')
-      .text(quotation.Customer?.name || '-', left, y);
-    y = doc.y;
-
-    doc
-      .font('Helvetica')
-      .fontSize(8)
-      .text(quotation.customerAddress || '', left, y, {
-        width: contentWidth / 2,
       });
 
-    y = Math.max(doc.y, detailY) + 10;
+      doc
+        .fillColor(COLORS.navy)
+        .fontSize(9)
+        .font('Helvetica-Bold')
+        .text('CUSTOMER', left, 120);
+
+      doc
+        .fillColor('#000000')
+        .fontSize(9)
+        .font('Helvetica-Bold')
+        .text(quotation.Customer?.name || '-', left, 132);
+
+      doc
+        .font('Helvetica')
+        .fontSize(8)
+        .text(quotation.customerAddress || '', left, 143, {
+          width: contentWidth / 2,
+        });
+
+      doc.y = contentTop;
+    };
+
+    drawPageHeader();
+
+    doc.on('pageAdded', drawPageHeader);
+
+    let y = contentTop;
 
     // ---------- Items table ----------
     const columns = [
@@ -198,7 +195,7 @@ export function generateQuotationPdf(quotation: any): Promise<Buffer> {
           totalPrice: formatAmount(item.totalPrice),
         })),
       },
-      { y: 220, absolutePosition: true },
+      { y, absolutePosition: true },
     );
 
     const tableRowHeight = 20;
@@ -225,33 +222,59 @@ export function generateQuotationPdf(quotation: any): Promise<Buffer> {
 
     totalsRows.push(['GRAND TOTAL', formatAmount(quotation.grandTotal)]);
 
-    const totalsWidth = 220;
-    const totalsX = right - totalsWidth;
-    const totalsLabelWidth = 120;
+    doc
+      .lineWidth(0.5)
+      .strokeColor(COLORS.border)
+      .moveTo(right - 200, doc.y - 2)
+      .lineTo(right, doc.y - 2)
+      .stroke();
 
-    totalsRows.forEach(([label, value], index) => {
-      const isLast = index === totalsRows.length - 1;
-      const rowY = y + index * tableRowHeight;
-      doc.rect(totalsX, rowY, totalsWidth, tableRowHeight).stroke();
-      doc
-        .font(isLast ? 'Helvetica-Bold' : 'Helvetica')
-        .fontSize(isLast ? 9 : 8)
-        .fillColor('#000000')
-        .text(label, totalsX + 6, rowY + 6, { width: totalsLabelWidth });
-      doc.text(value, totalsX + totalsLabelWidth, rowY + 6, {
-        width: totalsWidth - totalsLabelWidth - 6,
-        align: 'right',
-      });
-    });
+    doc.table(
+      {
+        headers: [
+          { label: 'Label', property: 'label' },
+          {
+            label: 'Value',
+            property: 'value',
+            align: 'right',
+          },
+        ],
+        data: [
+          {
+            label: 'bold:SUBTOTAL',
+            value: `bold:${formatAmount(quotation.totalAmount)}`,
+          },
+          {
+            label: `bold:DISCOUNT (${discountPct}%)`,
+            value: `bold:${formatAmount(quotation.discount || 0)}`,
+          },
+          ...(quotation.vatAmount
+            ? [
+                {
+                  label: 'bold:VAT',
+                  value: `bold:${formatAmount(quotation.vatAmount)}`,
+                },
+              ]
+            : []),
+          {
+            label: 'bold:GRAND TOTAL',
+            value: `bold:${formatAmount(quotation.grandTotal)}`,
+          },
+        ],
+      },
+      { hideHeader: true, x: right - 200, width: 200 },
+    );
 
     y += totalsRows.length * tableRowHeight + 30;
 
     if (quotation.termOfDelivery || quotation.termsAndConditions) {
       doc.fontSize(8).fillColor('#000000').font('Helvetica');
       if (quotation.termOfDelivery) {
-        doc.text(`Term of Delivery: ${quotation.termOfDelivery}`, left, y, {
-          width: contentWidth / 2,
-        });
+        doc
+          .font('Helvetica-Bold')
+          .text(`Term of Delivery: ${quotation.termOfDelivery}`, left, y, {
+            width: contentWidth / 2,
+          });
         y = doc.y + 4;
       }
       if (quotation.termsAndConditions) {
@@ -291,6 +314,30 @@ export function generateQuotationPdf(quotation: any): Promise<Buffer> {
         signatureY,
         { width: signatureWidth, align: 'center' },
       );
+
+    // const range = doc.bufferedPageRange();
+
+    // for (let index = 0; index < range.count; index++) {
+    //   doc.switchToPage(range.start + index);
+    //   const previousX = doc.x;
+    //   const previousY = doc.y;
+    //   doc
+    //     .fillColor(COLORS.gray)
+    //     .font('Helvetica')
+    //     .fontSize(8)
+    //     .text(
+    //       `Page ${index + 1} of ${range.count}`,
+    //       left,
+    //       doc.page.height - 28,
+    //       {
+    //         width: contentWidth,
+    //         align: 'center',
+    //         lineBreak: false,
+    //       },
+    //     );
+    //   doc.x = previousX;
+    //   doc.y = previousY;
+    // }
 
     doc.end();
   });
