@@ -262,37 +262,19 @@ export function generateQuotationPdf(quotation: any): Promise<Buffer> {
           },
         ],
       },
-      { hideHeader: true, x: right - 200, width: 200 },
+      {
+        hideHeader: true,
+        x: right - 200,
+        width: 200,
+      },
     );
 
     y += totalsRows.length * tableRowHeight + 30;
 
-    if (quotation.termOfDelivery || quotation.termsAndConditions) {
-      doc.fontSize(8).fillColor('#000000').font('Helvetica');
-      if (quotation.termOfDelivery) {
-        doc
-          .font('Helvetica-Bold')
-          .text(`Term of Delivery: ${quotation.termOfDelivery}`, left, y, {
-            width: contentWidth / 2,
-          });
-        y = doc.y + 4;
-      }
-      if (quotation.termsAndConditions) {
-        doc
-          .font('Helvetica-Bold')
-          .text('Terms and Conditions', left, y)
-          .font('Helvetica')
-          .text(quotation.termsAndConditions, left, doc.y + 2, {
-            width: contentWidth / 2,
-          });
-        y = doc.y;
-      }
-    }
-
     // ---------- Signature ----------
     const signatureWidth = 220;
     const signatureX = right - signatureWidth;
-    let signatureY = y + 20;
+    let signatureY = doc.y + 20;
 
     doc
       .font('Helvetica-Bold')
