@@ -9,6 +9,11 @@ import {
   Query,
   ParseIntPipe,
   ParseEnumPipe,
+  FileTypeValidator,
+  MaxFileSizeValidator,
+  ParseFilePipe,
+  UploadedFile,
+  UseInterceptors,
 } from '@nestjs/common';
 import {
   ApiTags,
@@ -16,10 +21,15 @@ import {
   ApiOperation,
   ApiOkResponse,
   ApiCreatedResponse,
+  ApiConsumes,
+  ApiBody,
 } from '@nestjs/swagger';
+import { FileInterceptor } from '@nestjs/platform-express';
+import * as multer from 'multer';
 import { OrdersService } from './orders.service';
-import { CreateOrderDto, UpdateOrderDto } from './dto/order.dto';
+import { CreateOrderDto, UpdateOrderDto } from './order.dto';
 import { OrderStatus } from '../prisma/client/client';
+import { Public } from '../auth/public.decorator';
 
 @ApiTags('Orders')
 @ApiBearerAuth()
@@ -47,12 +57,40 @@ export class OrdersController {
     return this.ordersService.findAll({ keyword, customerId, status });
   }
 
-  @Get('parse-po')
+  @Public()
+  @Post('parse-po')
   @ApiOperation({ summary: 'Parse PO PDF' })
+  @ApiConsumes('multipart/form-data')
+  @ApiBody({
+    schema: {
+      type: 'object',
+      properties: {
+        file: {
+          type: 'string',
+          format: 'binary',
+        },
+      },
+      required: ['file'],
+    },
+  })
   @ApiOkResponse({ description: 'Parsed PO text' })
-  async parsePo() {
-    const result = await this.ordersService.parsePo();
-    return result;
+  @UseInterceptors(
+    FileInterceptor('file', {
+      storage: multer.memoryStorage(),
+    }),
+  )
+  parsePo(
+    @UploadedFile(
+      new ParseFilePipe({
+        validators: [
+          new MaxFileSizeValidator({ maxSize: 10000000 }),
+          new FileTypeValidator({ fileType: 'application/pdf' }),
+        ],
+      }),
+    )
+    file: Express.Multer.File,
+  ) {
+    return this.ordersService.parsePo(file.buffer);
   }
 
   @Get(':id')

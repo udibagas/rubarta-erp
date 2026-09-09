@@ -1,9 +1,10 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
-import { CreateOrderDto, UpdateOrderDto, QueryOrderDto } from './dto/order.dto';
+import { CreateOrderDto, UpdateOrderDto, QueryOrderDto } from './order.dto';
 import { Prisma } from '../prisma/client/client';
 import fs from 'fs';
 import { PDFParse } from 'pdf-parse';
+import { parsePurchaseOrderItems } from './parser';
 
 interface PurchaseOrderItem {
   lineNo: number;
@@ -195,30 +196,7 @@ export class OrdersService {
     });
   }
 
-  async parsePo() {
-    const buffer = fs.readFileSync('./po.pdf');
-    const uint8Array = new Uint8Array(buffer);
-    const parser = new PDFParse(uint8Array);
-    const result = await parser.getText();
-
-    const regex = /Page \d+\/\d+/;
-
-    const pages = result.text.split(/-- \d+ of \d+ --/);
-
-    const lines = [];
-
-    let i = 0;
-    for (const page of pages) {
-      const pageLines = page
-        .split('\n')
-        .filter((item) => !regex.test(item))
-        .slice(i > 0 ? 38 : 36)
-        .map((line) => line.trim().replace(/\t/g, '==='))
-        .filter((line) => line.length > 0);
-      lines.push(...pageLines);
-      i++;
-    }
-
-    return lines;
+  async parsePo(pdfBuffer: Buffer) {
+    return parsePurchaseOrderItems(pdfBuffer);
   }
 }

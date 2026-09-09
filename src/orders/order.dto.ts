@@ -13,7 +13,7 @@ import {
   Min,
 } from 'class-validator';
 import { Type } from 'class-transformer';
-import { OrderStatus } from '../../prisma/client/client';
+import { OrderStatus } from '../prisma/client/client';
 
 export class OrderItemDto {
   @ApiProperty({ example: 'PART-001' })
