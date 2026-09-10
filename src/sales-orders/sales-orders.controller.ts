@@ -27,23 +27,29 @@ import {
 } from '@nestjs/swagger';
 import { FileInterceptor } from '@nestjs/platform-express';
 import * as multer from 'multer';
-import { OrdersService } from './orders.service';
-import { CreateOrderDto, UpdateOrderDto } from './order.dto';
-import { OrderStatus } from '../prisma/client/client';
+import { SalesOrdersService } from './sales-orders.service';
+import { CreateSalesOrderDto, UpdateSalesOrderDto } from './sales-order.dto';
+import { SalesOrderStatus } from '../prisma/client/client';
 import { Public } from '../auth/public.decorator';
 import { Response } from 'express';
 
 @ApiTags('Orders')
 @ApiBearerAuth()
-@Controller('api/orders')
-export class OrdersController {
-  constructor(private readonly ordersService: OrdersService) {}
+@Controller('api/sales-orders')
+export class SalesOrdersController {
+  constructor(private readonly salesOrdersService: SalesOrdersService) {}
 
   @Post()
   @ApiOperation({ summary: 'Create new order' })
   @ApiCreatedResponse({ description: 'Order created' })
-  create(@Body() createOrderDto: CreateOrderDto) {
-    return this.ordersService.create(createOrderDto);
+  create(
+    @Body() createOrderDto: CreateSalesOrderDto,
+    @Query('userId', new ParseIntPipe()) userId: number,
+  ) {
+    return this.salesOrdersService.create({
+      ...createOrderDto,
+      userId: userId,
+    });
   }
 
   @Get()
@@ -53,10 +59,10 @@ export class OrdersController {
     @Query('keyword') keyword?: string,
     @Query('customerId', new ParseIntPipe({ optional: true }))
     customerId?: number,
-    @Query('status', new ParseEnumPipe(OrderStatus, { optional: true }))
-    status?: OrderStatus,
+    @Query('status', new ParseEnumPipe(SalesOrderStatus, { optional: true }))
+    status?: SalesOrderStatus,
   ) {
-    return this.ordersService.findAll({ keyword, customerId, status });
+    return this.salesOrdersService.findAll({ keyword, customerId, status });
   }
 
   @Public()
@@ -92,21 +98,21 @@ export class OrdersController {
     )
     file: Express.Multer.File,
   ) {
-    return this.ordersService.parsePo(file.buffer);
+    return this.salesOrdersService.parsePo(file.buffer);
   }
 
   @Get(':id')
   @ApiOperation({ summary: 'Get order by ID' })
   @ApiOkResponse({ description: 'Order details' })
   findOne(@Param('id', ParseIntPipe) id: number) {
-    return this.ordersService.findOne(id);
+    return this.salesOrdersService.findOne(id);
   }
 
   @Get(':id/preview')
   @ApiOperation({ summary: 'Preview order PDF' })
   @ApiOkResponse({ description: 'Order PDF' })
   async preview(@Param('id', ParseIntPipe) id: number, @Res() res: Response) {
-    const pdfBuffer = await this.ordersService.preview(id);
+    const pdfBuffer = await this.salesOrdersService.preview(id);
 
     res.set({
       'Content-Type': 'application/pdf',
@@ -122,15 +128,15 @@ export class OrdersController {
   @ApiOkResponse({ description: 'Order updated' })
   update(
     @Param('id', ParseIntPipe) id: number,
-    @Body() updateOrderDto: UpdateOrderDto,
+    @Body() updateOrderDto: UpdateSalesOrderDto,
   ) {
-    return this.ordersService.update(id, updateOrderDto);
+    return this.salesOrdersService.update(id, updateOrderDto);
   }
 
   @Delete(':id')
   @ApiOperation({ summary: 'Delete order (soft delete)' })
   @ApiOkResponse({ description: 'Order deleted' })
   remove(@Param('id', ParseIntPipe) id: number) {
-    return this.ordersService.remove(id);
+    return this.salesOrdersService.remove(id);
   }
 }

@@ -1,8 +1,4 @@
-import {
-  BadRequestException,
-  Injectable,
-  NotFoundException,
-} from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { ApprovalService } from '../approval/approval.service';
 import { PrismaService } from '../prisma/prisma.service';
 import {
@@ -125,16 +121,7 @@ export class QuotationsService {
 
   async update(id: number, data: UpdateQuotationDto) {
     await this.findOne(id); // Verify exists
-
     const { items, ...quotationData } = data;
-
-    // Update status date fields
-    if (data.status === QuotationStatus.Sent && !quotationData['sentDate']) {
-      quotationData['sentDate'] = new Date();
-    }
-    if (data.status === QuotationStatus.Accepted) {
-      quotationData['acceptedDate'] = new Date();
-    }
 
     // If items are provided, recalculate totals
     if (items) {

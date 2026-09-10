@@ -10,8 +10,7 @@ import {
   ParseIntPipe,
 } from '@nestjs/common';
 import { InvoicesService } from './invoices.service';
-import { CreateInvoiceDto } from './dto/create-invoice.dto';
-import { UpdateInvoiceDto } from './dto/update-invoice.dto';
+import { CreateInvoiceDto, UpdateInvoiceDto } from './invoice.dto';
 import { Auth } from '../auth/auth.decorator';
 import { User, InvoiceStatus } from '../prisma/client/client';
 

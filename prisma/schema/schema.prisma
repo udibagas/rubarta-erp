@@ -84,6 +84,7 @@ model User {
   VisitPlans          VisitPlan[]
   Customers           Customer[]
   approvalItems       ApprovalItem[]
+  salesOrders         SalesOrder[]
 
   @@index([bankId, departmentId])
   @@map("Users")

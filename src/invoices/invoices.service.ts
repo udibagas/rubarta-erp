@@ -1,24 +1,29 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { CreateInvoiceDto } from './dto/create-invoice.dto';
-import { UpdateInvoiceDto } from './dto/update-invoice.dto';
+import { CreateInvoiceDto, UpdateInvoiceDto } from './invoice.dto';
 import { PrismaService } from '../prisma/prisma.service';
 import { Prisma, InvoiceStatus } from '../prisma/client/client';
+import dayjs from 'dayjs';
 
 @Injectable()
 export class InvoicesService {
   constructor(private readonly prisma: PrismaService) {}
 
-  async create(data: CreateInvoiceDto) {
+  async create(data: CreateInvoiceDto & { userId: number }) {
     const { items, ...invoiceData } = data;
+    const number = await this.generateNumber();
 
     return this.prisma.invoice.create({
       data: {
         ...invoiceData,
+        number,
         date: new Date(invoiceData.date),
         dueDate: new Date(invoiceData.dueDate),
         status: invoiceData.status || InvoiceStatus.Draft,
         InvoiceItems: {
-          create: items,
+          create: items.map((i) => ({
+            ...i,
+            totalPrice: i.quantity * i.unitPrice,
+          })),
         },
       },
       include: {
@@ -38,7 +43,7 @@ export class InvoicesService {
             email: true,
           },
         },
-        Order: {
+        SalesOrder: {
           select: {
             id: true,
             number: true,
@@ -128,7 +133,7 @@ export class InvoicesService {
             name: true,
           },
         },
-        Order: {
+        SalesOrder: {
           select: {
             id: true,
             number: true,
@@ -168,9 +173,9 @@ export class InvoicesService {
             email: true,
           },
         },
-        Order: {
+        SalesOrder: {
           include: {
-            OrderItems: true,
+            SalesOrderItems: true,
           },
         },
         InvoiceItems: true,
@@ -235,7 +240,7 @@ export class InvoicesService {
             name: true,
           },
         },
-        Order: {
+        SalesOrder: {
           select: {
             id: true,
             number: true,
@@ -300,5 +305,20 @@ export class InvoicesService {
       totalAmount: result._sum.grandTotal || 0,
       count: result._count,
     };
+  }
+
+  private async generateNumber(): Promise<string> {
+    const lastQuotation = await this.prisma.invoice.findFirst({
+      orderBy: { id: 'desc' },
+    });
+
+    const monthYear = dayjs().format('MMYYYY');
+
+    const lastNumber = lastQuotation
+      ? parseInt(lastQuotation.number.split('-').pop())
+      : 0;
+
+    const newNumber = lastNumber + 1;
+    return `INV${monthYear}-${newNumber}`;
   }
 }

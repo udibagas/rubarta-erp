@@ -53,8 +53,6 @@ export const AnyNull = runtime.AnyNull
 export const ModelName = {
   Supplier: 'Supplier',
   Account: 'Account',
-  Invoice: 'Invoice',
-  InvoiceItem: 'InvoiceItem',
   Payment: 'Payment',
   Expense: 'Expense',
   Approval: 'Approval',
@@ -63,20 +61,22 @@ export const ModelName = {
   Contact: 'Contact',
   Lead: 'Lead',
   Opportunity: 'Opportunity',
-  Quotation: 'Quotation',
-  QuotationItem: 'QuotationItem',
   Task: 'Task',
   Interaction: 'Interaction',
-  Order: 'Order',
-  OrderItem: 'OrderItem',
   CustomerNote: 'CustomerNote',
   CustomerFile: 'CustomerFile',
   Material: 'Material',
   VisitPlan: 'VisitPlan',
+  Invoice: 'Invoice',
+  InvoiceItem: 'InvoiceItem',
   Nkp: 'Nkp',
   NkpItem: 'NkpItem',
   NkpApproval: 'NkpApproval',
   NkpAttachment: 'NkpAttachment',
+  Quotation: 'Quotation',
+  QuotationItem: 'QuotationItem',
+  SalesOrder: 'SalesOrder',
+  SalesOrderItem: 'SalesOrderItem',
   Company: 'Company',
   Department: 'Department',
   Bank: 'Bank',
@@ -127,39 +127,6 @@ export const AccountScalarFieldEnum = {
 } as const
 
 export type AccountScalarFieldEnum = (typeof AccountScalarFieldEnum)[keyof typeof AccountScalarFieldEnum]
-
-
-export const InvoiceScalarFieldEnum = {
-  id: 'id',
-  number: 'number',
-  date: 'date',
-  dueDate: 'dueDate',
-  status: 'status',
-  attachments: 'attachments',
-  totalAmount: 'totalAmount',
-  vatAmount: 'vatAmount',
-  grandTotal: 'grandTotal',
-  userId: 'userId',
-  orderId: 'orderId',
-  customerId: 'customerId',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-} as const
-
-export type InvoiceScalarFieldEnum = (typeof InvoiceScalarFieldEnum)[keyof typeof InvoiceScalarFieldEnum]
-
-
-export const InvoiceItemScalarFieldEnum = {
-  id: 'id',
-  invoiceId: 'invoiceId',
-  description: 'description',
-  quantity: 'quantity',
-  unitPrice: 'unitPrice',
-  totalPrice: 'totalPrice',
-  vat: 'vat'
-} as const
-
-export type InvoiceItemScalarFieldEnum = (typeof InvoiceItemScalarFieldEnum)[keyof typeof InvoiceItemScalarFieldEnum]
 
 
 export const PaymentScalarFieldEnum = {
@@ -295,61 +262,6 @@ export const OpportunityScalarFieldEnum = {
 export type OpportunityScalarFieldEnum = (typeof OpportunityScalarFieldEnum)[keyof typeof OpportunityScalarFieldEnum]
 
 
-export const QuotationScalarFieldEnum = {
-  id: 'id',
-  number: 'number',
-  date: 'date',
-  title: 'title',
-  description: 'description',
-  totalAmount: 'totalAmount',
-  discount: 'discount',
-  vatAmount: 'vatAmount',
-  grandTotal: 'grandTotal',
-  status: 'status',
-  currency: 'currency',
-  validity: 'validity',
-  validUntil: 'validUntil',
-  sentDate: 'sentDate',
-  acceptedDate: 'acceptedDate',
-  deletedAt: 'deletedAt',
-  notes: 'notes',
-  attachments: 'attachments',
-  termOfPayment: 'termOfPayment',
-  termsAndConditions: 'termsAndConditions',
-  termOfDelivery: 'termOfDelivery',
-  paymentMethod: 'paymentMethod',
-  requestType: 'requestType',
-  customerAddress: 'customerAddress',
-  contactPerson: 'contactPerson',
-  contactPhone: 'contactPhone',
-  contactEmail: 'contactEmail',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
-  customerId: 'customerId',
-  userId: 'userId',
-  opportunityId: 'opportunityId',
-  companyId: 'companyId'
-} as const
-
-export type QuotationScalarFieldEnum = (typeof QuotationScalarFieldEnum)[keyof typeof QuotationScalarFieldEnum]
-
-
-export const QuotationItemScalarFieldEnum = {
-  id: 'id',
-  quotationId: 'quotationId',
-  partNumber: 'partNumber',
-  name: 'name',
-  model: 'model',
-  description: 'description',
-  quantity: 'quantity',
-  unitPrice: 'unitPrice',
-  totalPrice: 'totalPrice',
-  sortOrder: 'sortOrder'
-} as const
-
-export type QuotationItemScalarFieldEnum = (typeof QuotationItemScalarFieldEnum)[keyof typeof QuotationItemScalarFieldEnum]
-
-
 export const TaskScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
@@ -389,46 +301,6 @@ export const InteractionScalarFieldEnum = {
 } as const
 
 export type InteractionScalarFieldEnum = (typeof InteractionScalarFieldEnum)[keyof typeof InteractionScalarFieldEnum]
-
-
-export const OrderScalarFieldEnum = {
-  id: 'id',
-  number: 'number',
-  date: 'date',
-  customerId: 'customerId',
-  description: 'description',
-  totalAmount: 'totalAmount',
-  discount: 'discount',
-  vatAmount: 'vatAmount',
-  grandTotal: 'grandTotal',
-  status: 'status',
-  shippingAddress: 'shippingAddress',
-  billingAddress: 'billingAddress',
-  paymentTerms: 'paymentTerms',
-  deliveryDate: 'deliveryDate',
-  notes: 'notes',
-  deletedAt: 'deletedAt',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-} as const
-
-export type OrderScalarFieldEnum = (typeof OrderScalarFieldEnum)[keyof typeof OrderScalarFieldEnum]
-
-
-export const OrderItemScalarFieldEnum = {
-  id: 'id',
-  orderId: 'orderId',
-  partNumber: 'partNumber',
-  description: 'description',
-  quantity: 'quantity',
-  unitPrice: 'unitPrice',
-  discount: 'discount',
-  totalPrice: 'totalPrice',
-  vat: 'vat',
-  sortOrder: 'sortOrder'
-} as const
-
-export type OrderItemScalarFieldEnum = (typeof OrderItemScalarFieldEnum)[keyof typeof OrderItemScalarFieldEnum]
 
 
 export const CustomerNoteScalarFieldEnum = {
@@ -517,6 +389,39 @@ export const VisitPlanScalarFieldEnum = {
 export type VisitPlanScalarFieldEnum = (typeof VisitPlanScalarFieldEnum)[keyof typeof VisitPlanScalarFieldEnum]
 
 
+export const InvoiceScalarFieldEnum = {
+  id: 'id',
+  number: 'number',
+  date: 'date',
+  dueDate: 'dueDate',
+  status: 'status',
+  attachments: 'attachments',
+  totalAmount: 'totalAmount',
+  vatAmount: 'vatAmount',
+  grandTotal: 'grandTotal',
+  userId: 'userId',
+  salesOrderId: 'salesOrderId',
+  customerId: 'customerId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type InvoiceScalarFieldEnum = (typeof InvoiceScalarFieldEnum)[keyof typeof InvoiceScalarFieldEnum]
+
+
+export const InvoiceItemScalarFieldEnum = {
+  id: 'id',
+  invoiceId: 'invoiceId',
+  description: 'description',
+  quantity: 'quantity',
+  unitPrice: 'unitPrice',
+  totalPrice: 'totalPrice',
+  vat: 'vat'
+} as const
+
+export type InvoiceItemScalarFieldEnum = (typeof InvoiceItemScalarFieldEnum)[keyof typeof InvoiceItemScalarFieldEnum]
+
+
 export const NkpScalarFieldEnum = {
   id: 'id',
   date: 'date',
@@ -589,6 +494,100 @@ export const NkpAttachmentScalarFieldEnum = {
 } as const
 
 export type NkpAttachmentScalarFieldEnum = (typeof NkpAttachmentScalarFieldEnum)[keyof typeof NkpAttachmentScalarFieldEnum]
+
+
+export const QuotationScalarFieldEnum = {
+  id: 'id',
+  number: 'number',
+  date: 'date',
+  title: 'title',
+  description: 'description',
+  totalAmount: 'totalAmount',
+  discount: 'discount',
+  vatAmount: 'vatAmount',
+  grandTotal: 'grandTotal',
+  status: 'status',
+  currency: 'currency',
+  validity: 'validity',
+  validUntil: 'validUntil',
+  sentDate: 'sentDate',
+  acceptedDate: 'acceptedDate',
+  deletedAt: 'deletedAt',
+  notes: 'notes',
+  attachments: 'attachments',
+  termOfPayment: 'termOfPayment',
+  termsAndConditions: 'termsAndConditions',
+  termOfDelivery: 'termOfDelivery',
+  paymentMethod: 'paymentMethod',
+  requestType: 'requestType',
+  customerAddress: 'customerAddress',
+  contactPerson: 'contactPerson',
+  contactPhone: 'contactPhone',
+  contactEmail: 'contactEmail',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  customerId: 'customerId',
+  userId: 'userId',
+  opportunityId: 'opportunityId',
+  companyId: 'companyId'
+} as const
+
+export type QuotationScalarFieldEnum = (typeof QuotationScalarFieldEnum)[keyof typeof QuotationScalarFieldEnum]
+
+
+export const QuotationItemScalarFieldEnum = {
+  id: 'id',
+  quotationId: 'quotationId',
+  partNumber: 'partNumber',
+  name: 'name',
+  model: 'model',
+  description: 'description',
+  quantity: 'quantity',
+  unitPrice: 'unitPrice',
+  totalPrice: 'totalPrice',
+  sortOrder: 'sortOrder'
+} as const
+
+export type QuotationItemScalarFieldEnum = (typeof QuotationItemScalarFieldEnum)[keyof typeof QuotationItemScalarFieldEnum]
+
+
+export const SalesOrderScalarFieldEnum = {
+  id: 'id',
+  number: 'number',
+  date: 'date',
+  description: 'description',
+  totalAmount: 'totalAmount',
+  discount: 'discount',
+  vatAmount: 'vatAmount',
+  grandTotal: 'grandTotal',
+  status: 'status',
+  shippingAddress: 'shippingAddress',
+  billingAddress: 'billingAddress',
+  paymentTerms: 'paymentTerms',
+  deliveryDate: 'deliveryDate',
+  notes: 'notes',
+  deletedAt: 'deletedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  customerId: 'customerId',
+  userId: 'userId'
+} as const
+
+export type SalesOrderScalarFieldEnum = (typeof SalesOrderScalarFieldEnum)[keyof typeof SalesOrderScalarFieldEnum]
+
+
+export const SalesOrderItemScalarFieldEnum = {
+  id: 'id',
+  salesOrderId: 'salesOrderId',
+  partNumber: 'partNumber',
+  description: 'description',
+  quantity: 'quantity',
+  unitPrice: 'unitPrice',
+  totalPrice: 'totalPrice',
+  sortOrder: 'sortOrder'
+} as const
+
+export type SalesOrderItemScalarFieldEnum = (typeof SalesOrderItemScalarFieldEnum)[keyof typeof SalesOrderItemScalarFieldEnum]
 
 
 export const CompanyScalarFieldEnum = {

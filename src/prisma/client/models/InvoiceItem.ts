@@ -468,10 +468,6 @@ export type InvoiceItemUncheckedUpdateManyWithoutInvoiceNestedInput = {
   deleteMany?: Prisma.InvoiceItemScalarWhereInput | Prisma.InvoiceItemScalarWhereInput[]
 }
 
-export type BoolFieldUpdateOperationsInput = {
-  set?: boolean
-}
-
 export type InvoiceItemCreateWithoutInvoiceInput = {
   description: string
   quantity: number

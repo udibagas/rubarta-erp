@@ -13,9 +13,9 @@ import {
   Min,
 } from 'class-validator';
 import { Type } from 'class-transformer';
-import { OrderStatus } from '../prisma/client/client';
+import { SalesOrderStatus } from '../prisma/client/client';
 
-export class OrderItemDto {
+export class SalesOrderItemDto {
   @ApiProperty({ example: 'PART-001' })
   @IsString()
   @MaxLength(100)
@@ -37,27 +37,11 @@ export class OrderItemDto {
 
   @ApiProperty({ required: false, example: 0, default: 0 })
   @IsOptional()
-  @IsNumber()
-  @Min(0)
-  discount?: number;
-
-  @ApiProperty({ required: false, example: false, default: false })
-  @IsOptional()
-  @IsBoolean()
-  vat?: boolean;
-
-  @ApiProperty({ required: false, example: 0, default: 0 })
-  @IsOptional()
   @IsInt()
   sortOrder?: number;
 }
 
-export class CreateOrderDto {
-  @ApiProperty({ example: 'ORD-2025-001' })
-  @IsString()
-  @MaxLength(50)
-  number: string;
-
+export class CreateSalesOrderDto {
   @ApiProperty({ example: '2025-05-25T10:00:00Z' })
   @IsDateString()
   date: string;
@@ -77,9 +61,9 @@ export class CreateOrderDto {
   @Min(0)
   discount?: number;
 
-  @ApiProperty({ enum: OrderStatus, example: OrderStatus.Pending })
-  @IsEnum(OrderStatus)
-  status: OrderStatus;
+  @ApiProperty({ enum: SalesOrderStatus, example: SalesOrderStatus.Pending })
+  @IsEnum(SalesOrderStatus)
+  status: SalesOrderStatus;
 
   @ApiProperty({ required: false, example: 'Jl. Sudirman No. 123' })
   @IsOptional()
@@ -107,16 +91,16 @@ export class CreateOrderDto {
   @IsString()
   notes?: string;
 
-  @ApiProperty({ type: [OrderItemDto] })
+  @ApiProperty({ type: [SalesOrderItemDto] })
   @IsArray()
   @ValidateNested({ each: true })
-  @Type(() => OrderItemDto)
-  items: OrderItemDto[];
+  @Type(() => SalesOrderItemDto)
+  items: SalesOrderItemDto[];
 }
 
-export class UpdateOrderDto extends PartialType(CreateOrderDto) {}
+export class UpdateSalesOrderDto extends PartialType(CreateSalesOrderDto) {}
 
-export class QueryOrderDto {
+export class QuerySalesOrderDto {
   @ApiProperty({ required: false })
   @IsOptional()
   @IsString()
@@ -127,8 +111,8 @@ export class QueryOrderDto {
   @IsInt()
   customerId?: number;
 
-  @ApiProperty({ required: false, enum: OrderStatus })
+  @ApiProperty({ required: false, enum: SalesOrderStatus })
   @IsOptional()
-  @IsEnum(OrderStatus)
-  status?: OrderStatus;
+  @IsEnum(SalesOrderStatus)
+  status?: SalesOrderStatus;
 }

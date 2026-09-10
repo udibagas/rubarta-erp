@@ -448,22 +448,6 @@ export type CompanyUpdateOneRequiredWithoutOpportunityNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.CompanyUpdateToOneWithWhereWithoutOpportunityInput, Prisma.CompanyUpdateWithoutOpportunityInput>, Prisma.CompanyUncheckedUpdateWithoutOpportunityInput>
 }
 
-export type CompanyCreateNestedOneWithoutQuotationsInput = {
-  create?: Prisma.XOR<Prisma.CompanyCreateWithoutQuotationsInput, Prisma.CompanyUncheckedCreateWithoutQuotationsInput>
-  connectOrCreate?: Prisma.CompanyCreateOrConnectWithoutQuotationsInput
-  connect?: Prisma.CompanyWhereUniqueInput
-}
-
-export type CompanyUpdateOneWithoutQuotationsNestedInput = {
-  create?: Prisma.XOR<Prisma.CompanyCreateWithoutQuotationsInput, Prisma.CompanyUncheckedCreateWithoutQuotationsInput>
-  connectOrCreate?: Prisma.CompanyCreateOrConnectWithoutQuotationsInput
-  upsert?: Prisma.CompanyUpsertWithoutQuotationsInput
-  disconnect?: Prisma.CompanyWhereInput | boolean
-  delete?: Prisma.CompanyWhereInput | boolean
-  connect?: Prisma.CompanyWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.CompanyUpdateToOneWithWhereWithoutQuotationsInput, Prisma.CompanyUpdateWithoutQuotationsInput>, Prisma.CompanyUncheckedUpdateWithoutQuotationsInput>
-}
-
 export type CompanyCreateNestedOneWithoutVisitPlansInput = {
   create?: Prisma.XOR<Prisma.CompanyCreateWithoutVisitPlansInput, Prisma.CompanyUncheckedCreateWithoutVisitPlansInput>
   connectOrCreate?: Prisma.CompanyCreateOrConnectWithoutVisitPlansInput
@@ -490,6 +474,22 @@ export type CompanyUpdateOneRequiredWithoutNkpNestedInput = {
   upsert?: Prisma.CompanyUpsertWithoutNkpInput
   connect?: Prisma.CompanyWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.CompanyUpdateToOneWithWhereWithoutNkpInput, Prisma.CompanyUpdateWithoutNkpInput>, Prisma.CompanyUncheckedUpdateWithoutNkpInput>
+}
+
+export type CompanyCreateNestedOneWithoutQuotationsInput = {
+  create?: Prisma.XOR<Prisma.CompanyCreateWithoutQuotationsInput, Prisma.CompanyUncheckedCreateWithoutQuotationsInput>
+  connectOrCreate?: Prisma.CompanyCreateOrConnectWithoutQuotationsInput
+  connect?: Prisma.CompanyWhereUniqueInput
+}
+
+export type CompanyUpdateOneWithoutQuotationsNestedInput = {
+  create?: Prisma.XOR<Prisma.CompanyCreateWithoutQuotationsInput, Prisma.CompanyUncheckedCreateWithoutQuotationsInput>
+  connectOrCreate?: Prisma.CompanyCreateOrConnectWithoutQuotationsInput
+  upsert?: Prisma.CompanyUpsertWithoutQuotationsInput
+  disconnect?: Prisma.CompanyWhereInput | boolean
+  delete?: Prisma.CompanyWhereInput | boolean
+  connect?: Prisma.CompanyWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CompanyUpdateToOneWithWhereWithoutQuotationsInput, Prisma.CompanyUpdateWithoutQuotationsInput>, Prisma.CompanyUncheckedUpdateWithoutQuotationsInput>
 }
 
 export type CompanyCreateNestedOneWithoutApprovalSettingInput = {
@@ -648,76 +648,6 @@ export type CompanyUncheckedUpdateWithoutOpportunityInput = {
   quotations?: Prisma.QuotationUncheckedUpdateManyWithoutCompanyNestedInput
 }
 
-export type CompanyCreateWithoutQuotationsInput = {
-  code: string
-  name: string
-  address?: string | null
-  phone?: string | null
-  isDefault?: boolean
-  Nkp?: Prisma.NkpCreateNestedManyWithoutCompanyInput
-  ApprovalSetting?: Prisma.ApprovalSettingCreateNestedManyWithoutCompanyInput
-  Opportunity?: Prisma.OpportunityCreateNestedManyWithoutCompanyInput
-  Lead?: Prisma.LeadCreateNestedManyWithoutCompanyInput
-  VisitPlans?: Prisma.VisitPlanCreateNestedManyWithoutCompanyInput
-}
-
-export type CompanyUncheckedCreateWithoutQuotationsInput = {
-  id?: number
-  code: string
-  name: string
-  address?: string | null
-  phone?: string | null
-  isDefault?: boolean
-  Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutCompanyInput
-  ApprovalSetting?: Prisma.ApprovalSettingUncheckedCreateNestedManyWithoutCompanyInput
-  Opportunity?: Prisma.OpportunityUncheckedCreateNestedManyWithoutCompanyInput
-  Lead?: Prisma.LeadUncheckedCreateNestedManyWithoutCompanyInput
-  VisitPlans?: Prisma.VisitPlanUncheckedCreateNestedManyWithoutCompanyInput
-}
-
-export type CompanyCreateOrConnectWithoutQuotationsInput = {
-  where: Prisma.CompanyWhereUniqueInput
-  create: Prisma.XOR<Prisma.CompanyCreateWithoutQuotationsInput, Prisma.CompanyUncheckedCreateWithoutQuotationsInput>
-}
-
-export type CompanyUpsertWithoutQuotationsInput = {
-  update: Prisma.XOR<Prisma.CompanyUpdateWithoutQuotationsInput, Prisma.CompanyUncheckedUpdateWithoutQuotationsInput>
-  create: Prisma.XOR<Prisma.CompanyCreateWithoutQuotationsInput, Prisma.CompanyUncheckedCreateWithoutQuotationsInput>
-  where?: Prisma.CompanyWhereInput
-}
-
-export type CompanyUpdateToOneWithWhereWithoutQuotationsInput = {
-  where?: Prisma.CompanyWhereInput
-  data: Prisma.XOR<Prisma.CompanyUpdateWithoutQuotationsInput, Prisma.CompanyUncheckedUpdateWithoutQuotationsInput>
-}
-
-export type CompanyUpdateWithoutQuotationsInput = {
-  code?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isDefault?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  Nkp?: Prisma.NkpUpdateManyWithoutCompanyNestedInput
-  ApprovalSetting?: Prisma.ApprovalSettingUpdateManyWithoutCompanyNestedInput
-  Opportunity?: Prisma.OpportunityUpdateManyWithoutCompanyNestedInput
-  Lead?: Prisma.LeadUpdateManyWithoutCompanyNestedInput
-  VisitPlans?: Prisma.VisitPlanUpdateManyWithoutCompanyNestedInput
-}
-
-export type CompanyUncheckedUpdateWithoutQuotationsInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  code?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isDefault?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  Nkp?: Prisma.NkpUncheckedUpdateManyWithoutCompanyNestedInput
-  ApprovalSetting?: Prisma.ApprovalSettingUncheckedUpdateManyWithoutCompanyNestedInput
-  Opportunity?: Prisma.OpportunityUncheckedUpdateManyWithoutCompanyNestedInput
-  Lead?: Prisma.LeadUncheckedUpdateManyWithoutCompanyNestedInput
-  VisitPlans?: Prisma.VisitPlanUncheckedUpdateManyWithoutCompanyNestedInput
-}
-
 export type CompanyCreateWithoutVisitPlansInput = {
   code: string
   name: string
@@ -856,6 +786,76 @@ export type CompanyUncheckedUpdateWithoutNkpInput = {
   Lead?: Prisma.LeadUncheckedUpdateManyWithoutCompanyNestedInput
   VisitPlans?: Prisma.VisitPlanUncheckedUpdateManyWithoutCompanyNestedInput
   quotations?: Prisma.QuotationUncheckedUpdateManyWithoutCompanyNestedInput
+}
+
+export type CompanyCreateWithoutQuotationsInput = {
+  code: string
+  name: string
+  address?: string | null
+  phone?: string | null
+  isDefault?: boolean
+  Nkp?: Prisma.NkpCreateNestedManyWithoutCompanyInput
+  ApprovalSetting?: Prisma.ApprovalSettingCreateNestedManyWithoutCompanyInput
+  Opportunity?: Prisma.OpportunityCreateNestedManyWithoutCompanyInput
+  Lead?: Prisma.LeadCreateNestedManyWithoutCompanyInput
+  VisitPlans?: Prisma.VisitPlanCreateNestedManyWithoutCompanyInput
+}
+
+export type CompanyUncheckedCreateWithoutQuotationsInput = {
+  id?: number
+  code: string
+  name: string
+  address?: string | null
+  phone?: string | null
+  isDefault?: boolean
+  Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutCompanyInput
+  ApprovalSetting?: Prisma.ApprovalSettingUncheckedCreateNestedManyWithoutCompanyInput
+  Opportunity?: Prisma.OpportunityUncheckedCreateNestedManyWithoutCompanyInput
+  Lead?: Prisma.LeadUncheckedCreateNestedManyWithoutCompanyInput
+  VisitPlans?: Prisma.VisitPlanUncheckedCreateNestedManyWithoutCompanyInput
+}
+
+export type CompanyCreateOrConnectWithoutQuotationsInput = {
+  where: Prisma.CompanyWhereUniqueInput
+  create: Prisma.XOR<Prisma.CompanyCreateWithoutQuotationsInput, Prisma.CompanyUncheckedCreateWithoutQuotationsInput>
+}
+
+export type CompanyUpsertWithoutQuotationsInput = {
+  update: Prisma.XOR<Prisma.CompanyUpdateWithoutQuotationsInput, Prisma.CompanyUncheckedUpdateWithoutQuotationsInput>
+  create: Prisma.XOR<Prisma.CompanyCreateWithoutQuotationsInput, Prisma.CompanyUncheckedCreateWithoutQuotationsInput>
+  where?: Prisma.CompanyWhereInput
+}
+
+export type CompanyUpdateToOneWithWhereWithoutQuotationsInput = {
+  where?: Prisma.CompanyWhereInput
+  data: Prisma.XOR<Prisma.CompanyUpdateWithoutQuotationsInput, Prisma.CompanyUncheckedUpdateWithoutQuotationsInput>
+}
+
+export type CompanyUpdateWithoutQuotationsInput = {
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isDefault?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  Nkp?: Prisma.NkpUpdateManyWithoutCompanyNestedInput
+  ApprovalSetting?: Prisma.ApprovalSettingUpdateManyWithoutCompanyNestedInput
+  Opportunity?: Prisma.OpportunityUpdateManyWithoutCompanyNestedInput
+  Lead?: Prisma.LeadUpdateManyWithoutCompanyNestedInput
+  VisitPlans?: Prisma.VisitPlanUpdateManyWithoutCompanyNestedInput
+}
+
+export type CompanyUncheckedUpdateWithoutQuotationsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isDefault?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  Nkp?: Prisma.NkpUncheckedUpdateManyWithoutCompanyNestedInput
+  ApprovalSetting?: Prisma.ApprovalSettingUncheckedUpdateManyWithoutCompanyNestedInput
+  Opportunity?: Prisma.OpportunityUncheckedUpdateManyWithoutCompanyNestedInput
+  Lead?: Prisma.LeadUncheckedUpdateManyWithoutCompanyNestedInput
+  VisitPlans?: Prisma.VisitPlanUncheckedUpdateManyWithoutCompanyNestedInput
 }
 
 export type CompanyCreateWithoutApprovalSettingInput = {

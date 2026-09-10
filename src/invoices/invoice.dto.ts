@@ -1,4 +1,4 @@
-import { InvoiceStatus } from '../../prisma/client/client';
+import { InvoiceStatus } from '../prisma/client/client';
 import {
   IsNotEmpty,
   IsInt,
@@ -13,6 +13,7 @@ import {
   IsObject,
 } from 'class-validator';
 import { Type } from 'class-transformer';
+import { PartialType } from '@nestjs/swagger';
 
 export class InvoiceItemDto {
   @IsNotEmpty({ message: 'Description is required' })
@@ -30,19 +31,9 @@ export class InvoiceItemDto {
   @IsNotEmpty({ message: 'Total price is required' })
   @IsNumber()
   totalPrice: number;
-
-  @IsOptional()
-  @IsBoolean()
-  vat?: boolean;
 }
 
 export class CreateInvoiceDto {
-  userId: number;
-
-  @IsNotEmpty({ message: 'Invoice number is required' })
-  @IsString()
-  number: string;
-
   @IsNotEmpty({ message: 'Date is required' })
   @IsDateString()
   date: string;
@@ -53,7 +44,7 @@ export class CreateInvoiceDto {
 
   @IsNotEmpty({ message: 'Order ID is required' })
   @IsInt()
-  orderId: number;
+  salesOrderId: number;
 
   @IsNotEmpty({ message: 'Customer ID is required' })
   @IsInt()
@@ -85,3 +76,5 @@ export class CreateInvoiceDto {
   @Type(() => InvoiceItemDto)
   items: InvoiceItemDto[];
 }
+
+export class UpdateInvoiceDto extends PartialType(CreateInvoiceDto) {}

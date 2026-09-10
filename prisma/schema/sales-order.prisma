@@ -1,0 +1,64 @@
+model SalesOrder {
+  id              Int              @id @default(autoincrement())
+  number          String           @unique @db.VarChar(50)
+  date            DateTime
+  description     String?          @db.Text
+  totalAmount     Float
+  discount        Float            @default(0)
+  vatAmount       Float            @default(0)
+  grandTotal      Float
+  status          SalesOrderStatus @default(Draft)
+  shippingAddress String?          @db.Text
+  billingAddress  String?          @db.Text
+  paymentTerms    String?          @db.VarChar(100)
+  deliveryDate    DateTime?
+  notes           String?          @db.Text
+  deletedAt       DateTime?        @db.Timestamp()
+
+  // Timestamps
+  createdAt DateTime  @default(now())
+  updatedAt DateTime? @updatedAt
+
+  customerId Int
+  userId     Int
+
+  // Relationships
+  Customer        Customer         @relation(fields: [customerId], references: [id], onDelete: Cascade)
+  User            User             @relation(fields: [userId], references: [id])
+  Invoice         Invoice?
+  SalesOrderItems SalesOrderItem[]
+
+  @@index([number])
+  @@index([customerId])
+  @@index([status])
+  @@index([date])
+  @@index([deletedAt])
+  @@map("SalesOrders")
+}
+
+model SalesOrderItem {
+  id           Int    @id @default(autoincrement())
+  salesOrderId Int
+  partNumber   String @db.VarChar(100)
+  description  String @db.Text
+  quantity     Int
+  unitPrice    Float
+  totalPrice   Float
+  sortOrder    Int    @default(0)
+
+  // Relationships
+  SalesOrder SalesOrder @relation(fields: [salesOrderId], references: [id], onDelete: Cascade)
+
+  @@index([salesOrderId])
+  @@map("SalesOrderItems")
+}
+
+enum SalesOrderStatus {
+  Draft
+  Confirmed
+  Sent
+  Pending
+  Processing
+  Completed
+  Cancelled
+}

@@ -1,0 +1,55 @@
+model Invoice {
+  id          Int           @id @default(autoincrement())
+  number      String        @unique
+  date        DateTime
+  dueDate     DateTime
+  status      InvoiceStatus
+  attachments Json?         @db.JsonB // Attachments related to the invoice
+
+  // financials
+  totalAmount Float
+  vatAmount   Float
+  grandTotal  Float
+
+  // Relationships
+  userId       Int
+  salesOrderId Int @unique
+  customerId   Int
+
+  Customer     Customer      @relation(fields: [customerId], references: [id])
+  Payments     Payment[]
+  SalesOrder   SalesOrder    @relation(fields: [salesOrderId], references: [id])
+  User         User          @relation(fields: [userId], references: [id])
+  InvoiceItems InvoiceItem[]
+
+  // Timestamps
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("Invoices")
+}
+
+model InvoiceItem {
+  id          Int     @id @default(autoincrement())
+  invoiceId   Int
+  description String
+  quantity    Int
+  unitPrice   Float
+  totalPrice  Float
+  vat         Boolean @default(false) // Indicates if VAT is applicable
+
+  // Relationships
+  Invoice Invoice @relation(fields: [invoiceId], references: [id])
+
+  @@map("InvoiceItems")
+}
+
+enum InvoiceStatus {
+  Draft
+  Submitted
+  Approved
+  Sent
+  Pending
+  Paid
+  Overdue
+}

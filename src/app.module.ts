@@ -25,7 +25,7 @@ import { OpportunitiesModule } from './opportunities/opportunities.module';
 import { QuotationsModule } from './quotations/quotations.module';
 import { TasksModule } from './tasks/tasks.module';
 import { InteractionsModule } from './interactions/interactions.module';
-import { OrdersModule } from './orders/orders.module';
+import { SalesOrdersModule } from './sales-orders/sales-orders.module';
 import { MaterialsModule } from './materials/materials.module';
 import { CrmDashboardModule } from './crm-dashboard/crm-dashboard.module';
 import { VisitPlansModule } from './visit-plans/visit-plans.module';
@@ -98,13 +98,13 @@ import { ScheduleModule } from '@nestjs/schedule';
     ReportModule,
     InvoicesModule,
     CustomersModule,
+    SalesOrdersModule,
     ContactsModule,
     LeadsModule,
     OpportunitiesModule,
     QuotationsModule,
     TasksModule,
     InteractionsModule,
-    OrdersModule,
     MaterialsModule,
     CrmDashboardModule,
     VisitPlansModule,

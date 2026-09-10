@@ -50,16 +50,6 @@ export type Supplier = Prisma.SupplierModel
  */
 export type Account = Prisma.AccountModel
 /**
- * Model Invoice
- * 
- */
-export type Invoice = Prisma.InvoiceModel
-/**
- * Model InvoiceItem
- * 
- */
-export type InvoiceItem = Prisma.InvoiceItemModel
-/**
  * Model Payment
  * 
  */
@@ -100,16 +90,6 @@ export type Lead = Prisma.LeadModel
  */
 export type Opportunity = Prisma.OpportunityModel
 /**
- * Model Quotation
- * 
- */
-export type Quotation = Prisma.QuotationModel
-/**
- * Model QuotationItem
- * 
- */
-export type QuotationItem = Prisma.QuotationItemModel
-/**
  * Model Task
  * 
  */
@@ -119,16 +99,6 @@ export type Task = Prisma.TaskModel
  * 
  */
 export type Interaction = Prisma.InteractionModel
-/**
- * Model Order
- * 
- */
-export type Order = Prisma.OrderModel
-/**
- * Model OrderItem
- * 
- */
-export type OrderItem = Prisma.OrderItemModel
 /**
  * Model CustomerNote
  * 
@@ -150,6 +120,16 @@ export type Material = Prisma.MaterialModel
  */
 export type VisitPlan = Prisma.VisitPlanModel
 /**
+ * Model Invoice
+ * 
+ */
+export type Invoice = Prisma.InvoiceModel
+/**
+ * Model InvoiceItem
+ * 
+ */
+export type InvoiceItem = Prisma.InvoiceItemModel
+/**
  * Model Nkp
  * 
  */
@@ -169,6 +149,26 @@ export type NkpApproval = Prisma.NkpApprovalModel
  * 
  */
 export type NkpAttachment = Prisma.NkpAttachmentModel
+/**
+ * Model Quotation
+ * 
+ */
+export type Quotation = Prisma.QuotationModel
+/**
+ * Model QuotationItem
+ * 
+ */
+export type QuotationItem = Prisma.QuotationItemModel
+/**
+ * Model SalesOrder
+ * 
+ */
+export type SalesOrder = Prisma.SalesOrderModel
+/**
+ * Model SalesOrderItem
+ * 
+ */
+export type SalesOrderItem = Prisma.SalesOrderItemModel
 /**
  * Model Company
  * 

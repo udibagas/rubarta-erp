@@ -23,7 +23,7 @@ model Customer {
   Contacts       Contact[]
   Leads          Lead[]
   Opportunities  Opportunity[]
-  Orders         Order[]
+  SalesOrders    SalesOrder[]
   CustomerNotes  CustomerNote[]
   CustomerFiles  CustomerFile[]
   Quotations     Quotation[]
@@ -218,82 +218,6 @@ model Opportunity {
   @@map("Opportunities")
 }
 
-model Quotation {
-  id                 Int             @id @default(autoincrement())
-  number             String          @unique @db.VarChar(50)
-  date               DateTime?       @db.Timestamp()
-  title              String          @db.VarChar(200)
-  description        String?         @db.Text
-  totalAmount        Float
-  discount           Float           @default(0)
-  vatAmount          Float           @default(0)
-  grandTotal         Float
-  status             QuotationStatus @default(Draft)
-  currency           Currency        @default(IDR) // Currency code, e.g., IDR, USD
-  validity           Int             @default(30) // Validity period in days
-  validUntil         DateTime
-  sentDate           DateTime?       @db.Timestamp()
-  acceptedDate       DateTime?       @db.Timestamp()
-  deletedAt          DateTime?       @db.Timestamp()
-  notes              String?         @db.Text
-  attachments        Json?           @db.Json // For storing file metadata like name, path, size, type
-  termOfPayment      String?         @db.VarChar(30) // e.g., "Net 30", "Due on Receipt"
-  termsAndConditions String?         @db.Text
-  termOfDelivery     String?         @db.VarChar(20) // e.g., "FOB", "CIF", "Ex Works"
-  paymentMethod      String?         @db.VarChar(30) // e.g., "Bank Transfer", "Credit Card", "Cash"
-  requestType        String?         @db.VarChar(30) // e.g., "Sales", "Customer Free Program", "Lending Of Goods", "Fee Service", "Warranty", "Others"
-
-  // customer address
-  customerAddress String? @db.Text
-  contactPerson   String? @db.VarChar(200)
-  contactPhone    String? @db.VarChar(50)
-  contactEmail    String? @db.VarChar(100)
-
-  // Timestamps
-  createdAt DateTime  @default(now())
-  updatedAt DateTime? @updatedAt
-
-  // Foreign Keys
-  customerId    Int
-  userId        Int
-  opportunityId Int?
-  companyId     Int?
-
-  // Relationships
-  Opportunity    Opportunity?    @relation(fields: [opportunityId], references: [id])
-  Customer       Customer        @relation(fields: [customerId], references: [id], onDelete: Cascade)
-  User           User            @relation(fields: [userId], references: [id])
-  Company        Company?        @relation(fields: [companyId], references: [id])
-  QuotationItems QuotationItem[]
-
-  @@index([number])
-  @@index([customerId])
-  @@index([userId])
-  @@index([opportunityId])
-  @@index([status])
-  @@index([deletedAt])
-  @@map("Quotations")
-}
-
-model QuotationItem {
-  id          Int     @id @default(autoincrement())
-  quotationId Int
-  partNumber  String  @db.VarChar(100)
-  name        String  @db.VarChar(200)
-  model       String? @db.VarChar(100)
-  description String? @db.Text
-  quantity    Int
-  unitPrice   Float
-  totalPrice  Float
-  sortOrder   Int     @default(0)
-
-  // Relationships
-  Quotation Quotation @relation(fields: [quotationId], references: [id], onDelete: Cascade)
-
-  @@index([quotationId])
-  @@map("QuotationItems")
-}
-
 model Task {
   id            Int          @id @default(autoincrement())
   userId        Int
@@ -362,67 +286,6 @@ model Interaction {
   @@index([date])
   @@index([deletedAt])
   @@map("Interactions")
-}
-
-enum OrderStatus {
-  Pending
-  Processing
-  Completed
-  Cancelled
-}
-
-model Order {
-  id              Int         @id @default(autoincrement())
-  number          String      @unique @db.VarChar(50)
-  date            DateTime
-  customerId      Int
-  description     String?     @db.Text
-  totalAmount     Float
-  discount        Float       @default(0)
-  vatAmount       Float       @default(0)
-  grandTotal      Float
-  status          OrderStatus
-  shippingAddress String?     @db.Text
-  billingAddress  String?     @db.Text
-  paymentTerms    String?     @db.VarChar(100)
-  deliveryDate    DateTime?
-  notes           String?     @db.Text
-  deletedAt       DateTime?   @db.Timestamp()
-
-  // Timestamps
-  createdAt DateTime  @default(now())
-  updatedAt DateTime? @updatedAt
-
-  // Relationships
-  Customer   Customer    @relation(fields: [customerId], references: [id], onDelete: Cascade)
-  Invoice    Invoice?
-  OrderItems OrderItem[]
-
-  @@index([number])
-  @@index([customerId])
-  @@index([status])
-  @@index([date])
-  @@index([deletedAt])
-  @@map("Orders")
-}
-
-model OrderItem {
-  id          Int     @id @default(autoincrement())
-  orderId     Int
-  partNumber  String  @db.VarChar(100)
-  description String  @db.Text
-  quantity    Int
-  unitPrice   Float
-  discount    Float   @default(0)
-  totalPrice  Float
-  vat         Boolean @default(false) // Indicates if VAT is applicable
-  sortOrder   Int     @default(0)
-
-  // Relationships
-  Order Order @relation(fields: [orderId], references: [id], onDelete: Cascade)
-
-  @@index([orderId])
-  @@map("OrderItems")
 }
 
 model CustomerNote {

@@ -3,7 +3,7 @@ import { PrismaService } from '../prisma/prisma.service';
 import {
   LeadStatus,
   OpportunityStages,
-  OrderStatus,
+  SalesOrderStatus,
   QuotationStatus,
   Role,
   TaskStatus,
@@ -61,15 +61,18 @@ export class CrmDashboardService {
         },
         select: { amount: true },
       }),
+
       // Total quotations
       this.prisma.quotation.count({
         where: { deletedAt: null },
       }),
+
       // Orders data
-      this.prisma.order.findMany({
+      this.prisma.salesOrder.findMany({
         where: { deletedAt: null },
         select: { status: true, grandTotal: true },
       }),
+
       // Tasks data
       this.prisma.task.findMany({
         where: { deletedAt: null, status: { not: TaskStatus.Completed } },
@@ -85,7 +88,7 @@ export class CrmDashboardService {
 
     const totalOrders = orders.length;
     const totalRevenue = orders
-      .filter((order) => order.status === OrderStatus.Completed)
+      .filter((order) => order.status === SalesOrderStatus.Completed)
       .reduce((sum, order) => sum + order.grandTotal, 0);
 
     const now = new Date();
@@ -232,10 +235,10 @@ export class CrmDashboardService {
               status: QuotationStatus.Accepted,
             },
           }),
-          this.prisma.order.findMany({
+          this.prisma.salesOrder.findMany({
             where: {
               deletedAt: null,
-              status: OrderStatus.Completed,
+              status: SalesOrderStatus.Completed,
               Customer: {
                 Opportunities: {
                   some: { userId: user.id },
@@ -277,10 +280,10 @@ export class CrmDashboardService {
       select: {
         id: true,
         name: true,
-        Orders: {
+        SalesOrders: {
           where: {
             deletedAt: null,
-            status: OrderStatus.Completed,
+            status: SalesOrderStatus.Completed,
           },
           select: {
             grandTotal: true,
@@ -292,12 +295,12 @@ export class CrmDashboardService {
 
     const customerStats = customers
       .map((customer) => {
-        const totalOrders = customer.Orders.length;
-        const totalRevenue = customer.Orders.reduce(
+        const totalOrders = customer.SalesOrders.length;
+        const totalRevenue = customer.SalesOrders.reduce(
           (sum, order) => sum + order.grandTotal,
           0,
         );
-        const lastOrder = customer.Orders.sort(
+        const lastOrder = customer.SalesOrders.sort(
           (a, b) => b.date.getTime() - a.date.getTime(),
         )[0];
 
@@ -354,7 +357,7 @@ export class CrmDashboardService {
             User: { select: { id: true, name: true } },
           },
         }),
-        this.prisma.order.findMany({
+        this.prisma.salesOrder.findMany({
           where: { deletedAt: null },
           take: 10,
           orderBy: { createdAt: 'desc' },
@@ -487,10 +490,10 @@ export class CrmDashboardService {
     const startDate = new Date();
     startDate.setMonth(startDate.getMonth() - months);
 
-    const orders = await this.prisma.order.findMany({
+    const orders = await this.prisma.salesOrder.findMany({
       where: {
         deletedAt: null,
-        status: OrderStatus.Completed,
+        status: SalesOrderStatus.Completed,
         date: {
           gte: startDate,
         },
@@ -568,9 +571,9 @@ export class CrmDashboardService {
       this.prisma.opportunity.count({
         where: { deletedAt: null, stage: OpportunityStages.Closed_Won },
       }),
-      this.prisma.order.count({ where: { deletedAt: null } }),
-      this.prisma.order.count({
-        where: { deletedAt: null, status: OrderStatus.Completed },
+      this.prisma.salesOrder.count({ where: { deletedAt: null } }),
+      this.prisma.salesOrder.count({
+        where: { deletedAt: null, status: SalesOrderStatus.Completed },
       }),
     ]);
 

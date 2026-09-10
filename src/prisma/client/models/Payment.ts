@@ -402,16 +402,6 @@ export type PaymentUncheckedUpdateManyInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type PaymentListRelationFilter = {
-  every?: Prisma.PaymentWhereInput
-  some?: Prisma.PaymentWhereInput
-  none?: Prisma.PaymentWhereInput
-}
-
-export type PaymentOrderByRelationAggregateInput = {
-  _count?: Prisma.SortOrder
-}
-
 export type PaymentCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   date?: Prisma.SortOrder
@@ -458,6 +448,20 @@ export type PaymentSumOrderByAggregateInput = {
   amountPaid?: Prisma.SortOrder
   invoiceId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+}
+
+export type PaymentListRelationFilter = {
+  every?: Prisma.PaymentWhereInput
+  some?: Prisma.PaymentWhereInput
+  none?: Prisma.PaymentWhereInput
+}
+
+export type PaymentOrderByRelationAggregateInput = {
+  _count?: Prisma.SortOrder
+}
+
+export type DateTimeFieldUpdateOperationsInput = {
+  set?: Date | string
 }
 
 export type PaymentCreateNestedManyWithoutInvoiceInput = {

@@ -18,16 +18,6 @@ export const Currency = {
 export type Currency = (typeof Currency)[keyof typeof Currency]
 
 
-export const InvoiceStatus = {
-  Draft: 'Draft',
-  Pending: 'Pending',
-  Paid: 'Paid',
-  Overdue: 'Overdue'
-} as const
-
-export type InvoiceStatus = (typeof InvoiceStatus)[keyof typeof InvoiceStatus]
-
-
 export const LeadStatus = {
   New: 'New',
   Contacted: 'Contacted',
@@ -136,14 +126,30 @@ export const VisitType = {
 export type VisitType = (typeof VisitType)[keyof typeof VisitType]
 
 
-export const OrderStatus = {
+export const InvoiceStatus = {
+  Draft: 'Draft',
+  Submitted: 'Submitted',
+  Approved: 'Approved',
+  Sent: 'Sent',
+  Pending: 'Pending',
+  Paid: 'Paid',
+  Overdue: 'Overdue'
+} as const
+
+export type InvoiceStatus = (typeof InvoiceStatus)[keyof typeof InvoiceStatus]
+
+
+export const SalesOrderStatus = {
+  Draft: 'Draft',
+  Confirmed: 'Confirmed',
+  Sent: 'Sent',
   Pending: 'Pending',
   Processing: 'Processing',
   Completed: 'Completed',
   Cancelled: 'Cancelled'
 } as const
 
-export type OrderStatus = (typeof OrderStatus)[keyof typeof OrderStatus]
+export type SalesOrderStatus = (typeof SalesOrderStatus)[keyof typeof SalesOrderStatus]
 
 
 export const Role = {
