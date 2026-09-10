@@ -5,6 +5,7 @@ import { Prisma } from '../prisma/client/client';
 import fs from 'fs';
 import { PDFParse } from 'pdf-parse';
 import { parsePurchaseOrderItems } from './parser';
+import { generateOrderPdf } from './order-pdf';
 
 interface PurchaseOrderItem {
   lineNo: number;
@@ -198,5 +199,10 @@ export class OrdersService {
 
   async parsePo(pdfBuffer: Buffer) {
     return parsePurchaseOrderItems(pdfBuffer);
+  }
+
+  async preview(id: number): Promise<Buffer> {
+    const quotation = await this.findOne(id);
+    return generateOrderPdf(quotation);
   }
 }

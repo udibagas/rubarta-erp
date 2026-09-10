@@ -14,6 +14,7 @@ import {
   ParseFilePipe,
   UploadedFile,
   UseInterceptors,
+  Res,
 } from '@nestjs/common';
 import {
   ApiTags,
@@ -30,6 +31,7 @@ import { OrdersService } from './orders.service';
 import { CreateOrderDto, UpdateOrderDto } from './order.dto';
 import { OrderStatus } from '../prisma/client/client';
 import { Public } from '../auth/public.decorator';
+import { Response } from 'express';
 
 @ApiTags('Orders')
 @ApiBearerAuth()
@@ -98,6 +100,21 @@ export class OrdersController {
   @ApiOkResponse({ description: 'Order details' })
   findOne(@Param('id', ParseIntPipe) id: number) {
     return this.ordersService.findOne(id);
+  }
+
+  @Get(':id/preview')
+  @ApiOperation({ summary: 'Preview order PDF' })
+  @ApiOkResponse({ description: 'Order PDF' })
+  async preview(@Param('id', ParseIntPipe) id: number, @Res() res: Response) {
+    const pdfBuffer = await this.ordersService.preview(id);
+
+    res.set({
+      'Content-Type': 'application/pdf',
+      'Content-Disposition': `inline; filename="sales-order-${id}.pdf"`,
+      'Content-Length': pdfBuffer.length,
+    });
+
+    res.end(pdfBuffer);
   }
 
   @Patch(':id')
