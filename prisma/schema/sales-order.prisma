@@ -1,19 +1,33 @@
 model SalesOrder {
-  id              Int              @id @default(autoincrement())
-  number          String           @unique @db.VarChar(50)
-  date            DateTime
-  description     String?          @db.Text
-  totalAmount     Float
-  discount        Float            @default(0)
-  vatAmount       Float            @default(0)
-  grandTotal      Float
-  status          SalesOrderStatus @default(Draft)
-  shippingAddress String?          @db.Text
-  billingAddress  String?          @db.Text
-  paymentTerms    String?          @db.VarChar(100)
-  deliveryDate    DateTime?
-  notes           String?          @db.Text
-  deletedAt       DateTime?        @db.Timestamp()
+  id                 Int              @id @default(autoincrement())
+  number             String           @unique @db.VarChar(50)
+  referenceNumber    String
+  date               DateTime
+  title              String           @db.VarChar(200)
+  description        String?          @db.Text
+  totalAmount        Float
+  discount           Float            @default(0)
+  vatAmount          Float            @default(0)
+  grandTotal         Float
+  status             SalesOrderStatus @default(Draft)
+  currency           Currency         @default(IDR) // Currency code, e.g., IDR, USD
+  shippingAddress    String?          @db.Text
+  billingAddress     String?          @db.Text
+  termOfPayment      String?          @db.VarChar(30) // e.g., "Net 30", "Due on Receipt"
+  deliveryDate       DateTime?
+  deliveryMethod     String?
+  termsAndConditions String?          @db.Text
+  termOfDelivery     String?          @db.VarChar(20) // e.g., "FOB", "CIF", "Ex Works"
+  paymentMethod      String?          @db.VarChar(30) // e.g., "Bank Transfer", "Credit Card", "Cash"
+  requestType        String?          @db.VarChar(30) // e.g., "Sales", "Customer Free Program", "Lending Of Goods", "Fee Service", "Warranty", "Others"
+  notes              String?          @db.Text
+  deletedAt          DateTime?        @db.Timestamp()
+
+  // customer address
+  customerAddress String? @db.Text
+  contactPerson   String? @db.VarChar(200)
+  contactPhone    String? @db.VarChar(50)
+  contactEmail    String? @db.VarChar(100)
 
   // Timestamps
   createdAt DateTime  @default(now())

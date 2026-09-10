@@ -3,6 +3,13 @@ import * as path from 'path';
 import pdfkit from 'pdfkit';
 import { PDFDocument, StandardFonts, rgb } from 'pdf-lib';
 import { createPdfDocumentWithTables } from 'pdfkit-table';
+import {
+  Customer,
+  SalesOrder,
+  SalesOrderItem,
+  User,
+} from '../prisma/client/client';
+import { SalesOrderInclude } from '../prisma/client/models';
 
 const LOGO_PATH = path.join(process.cwd(), 'logo.png');
 
@@ -59,7 +66,7 @@ async function addPageNumbers(pdfBuffer: Buffer): Promise<Buffer> {
   return Buffer.from(await document.save());
 }
 
-export function generateOrderPdf(quotation: any): Promise<Buffer> {
+export function generateOrderPdf(salesOrder: any): Promise<Buffer> {
   return new Promise((resolve, reject) => {
     const PDFDocument = createPdfDocumentWithTables(pdfkit);
 
@@ -75,20 +82,20 @@ export function generateOrderPdf(quotation: any): Promise<Buffer> {
     const left = doc.page.margins.left;
     const right = doc.page.width - doc.page.margins.right;
     const contentWidth = right - left;
-    const currency = quotation.currency || 'IDR';
+    const currency = salesOrder.currency || 'IDR';
 
     const infoBoxWidth = 200;
     const infoBoxX = right - infoBoxWidth;
     const infoRows: [string, string][] = [
-      ['No', quotation.number],
-      ['Date', formatDate(quotation.date)],
-      ['Request Type', quotation.requestType || '-'],
-      ['Delivery Method', quotation.deliveryMethod || ''],
-      ['Payment Method', quotation.paymentMethod || ''],
-      ['T.O.P.', quotation.termOfPayment || ''],
+      ['No', salesOrder.number],
+      ['Date', formatDate(salesOrder.date)],
+      ['Request Type', salesOrder.requestType || '-'],
+      ['Delivery Method', salesOrder.deliveryMethod || ''],
+      ['Payment Method', salesOrder.paymentMethod || ''],
+      ['T.O.P.', salesOrder.termOfPayment || ''],
       ['Currency', currency],
-      ['Attention', quotation.contactPerson || '-'],
-      ['Phone', quotation.contactPhone || ''],
+      ['Attention', salesOrder.contactPerson || '-'],
+      ['Phone', salesOrder.contactPhone || ''],
     ];
 
     const contentTop = 220;
@@ -157,12 +164,12 @@ export function generateOrderPdf(quotation: any): Promise<Buffer> {
         .fillColor('#000000')
         .fontSize(9)
         .font('Helvetica-Bold')
-        .text(quotation.Customer?.name || '-', left, 132);
+        .text(salesOrder.Customer?.name || '-', left, 132);
 
       doc
         .font('Helvetica')
         .fontSize(8)
-        .text(quotation.customerAddress || '', left, 143, {
+        .text(salesOrder.customerAddress || '', left, 143, {
           width: contentWidth / 2,
         });
 
@@ -212,7 +219,7 @@ export function generateOrderPdf(quotation: any): Promise<Buffer> {
     doc.table(
       {
         headers: columns,
-        data: quotation.OrderItems.map((item, index) => ({
+        data: salesOrder.SalesOrderItems.map((item, index) => ({
           no: String(index + 1),
           partNumber: item.partNumber || '-',
           description: item.description || '-',
@@ -230,23 +237,23 @@ export function generateOrderPdf(quotation: any): Promise<Buffer> {
 
     // ---------- Totals ----------
     const totalsRows: [string, string][] = [
-      ['SUBTOTAL', formatAmount(quotation.totalAmount)],
+      ['SUBTOTAL', formatAmount(salesOrder.totalAmount)],
     ];
 
     const discountPct =
-      quotation.discount && quotation.totalAmount
-        ? Math.round((quotation.discount / quotation.totalAmount) * 100)
+      salesOrder.discount && salesOrder.totalAmount
+        ? Math.round((salesOrder.discount / salesOrder.totalAmount) * 100)
         : 0;
     totalsRows.push([
       `DISCOUNT (${discountPct}%)`,
-      formatAmount(quotation.discount || 0),
+      formatAmount(salesOrder.discount || 0),
     ]);
 
-    if (quotation.vatAmount) {
-      totalsRows.push(['VAT', formatAmount(quotation.vatAmount)]);
+    if (salesOrder.vatAmount) {
+      totalsRows.push(['VAT', formatAmount(salesOrder.vatAmount)]);
     }
 
-    totalsRows.push(['GRAND TOTAL', formatAmount(quotation.grandTotal)]);
+    totalsRows.push(['GRAND TOTAL', formatAmount(salesOrder.grandTotal)]);
 
     doc
       .lineWidth(0.5)
@@ -268,23 +275,23 @@ export function generateOrderPdf(quotation: any): Promise<Buffer> {
         data: [
           {
             label: 'bold:SUBTOTAL',
-            value: `bold:${formatAmount(quotation.totalAmount)}`,
+            value: `bold:${formatAmount(salesOrder.totalAmount)}`,
           },
           {
             label: `bold:DISCOUNT (${discountPct}%)`,
-            value: `bold:${formatAmount(quotation.discount || 0)}`,
+            value: `bold:${formatAmount(salesOrder.discount || 0)}`,
           },
-          ...(quotation.vatAmount
+          ...(salesOrder.vatAmount
             ? [
                 {
                   label: 'bold:VAT',
-                  value: `bold:${formatAmount(quotation.vatAmount)}`,
+                  value: `bold:${formatAmount(salesOrder.vatAmount)}`,
                 },
               ]
             : []),
           {
             label: 'bold:GRAND TOTAL',
-            value: `bold:${formatAmount(quotation.grandTotal)}`,
+            value: `bold:${formatAmount(salesOrder.grandTotal)}`,
           },
         ],
       },
@@ -317,7 +324,7 @@ export function generateOrderPdf(quotation: any): Promise<Buffer> {
       .font('Helvetica-Bold')
       .fontSize(9)
       .text(
-        `( ${(quotation.User?.name || '-').toUpperCase()} )`,
+        `( ${(salesOrder.User?.name || '-').toUpperCase()} )`,
         signatureX,
         signatureY,
         { width: signatureWidth, align: 'center' },

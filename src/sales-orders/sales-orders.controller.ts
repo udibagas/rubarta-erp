@@ -29,9 +29,10 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import * as multer from 'multer';
 import { SalesOrdersService } from './sales-orders.service';
 import { CreateSalesOrderDto, UpdateSalesOrderDto } from './sales-order.dto';
-import { SalesOrderStatus } from '../prisma/client/client';
+import { SalesOrderStatus, User } from '../prisma/client/client';
 import { Public } from '../auth/public.decorator';
 import { Response } from 'express';
+import { Auth } from '../auth/auth.decorator';
 
 @ApiTags('Orders')
 @ApiBearerAuth()
@@ -42,13 +43,10 @@ export class SalesOrdersController {
   @Post()
   @ApiOperation({ summary: 'Create new order' })
   @ApiCreatedResponse({ description: 'Order created' })
-  create(
-    @Body() createOrderDto: CreateSalesOrderDto,
-    @Query('userId', new ParseIntPipe()) userId: number,
-  ) {
+  create(@Body() createOrderDto: CreateSalesOrderDto, @Auth() user: User) {
     return this.salesOrdersService.create({
       ...createOrderDto,
-      userId: userId,
+      userId: user.id,
     });
   }
 

@@ -109,4 +109,5 @@ export async function seedOrders(
 
   console.log('✅ Created 2 orders with items');
   // return [order1, order2];
+  return [];
 }

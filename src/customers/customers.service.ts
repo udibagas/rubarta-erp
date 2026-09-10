@@ -63,7 +63,7 @@ export class CustomersService {
             Contacts: true,
             Leads: true,
             Opportunities: true,
-            Orders: true,
+            SalesOrders: true,
           },
         },
       },
@@ -89,7 +89,7 @@ export class CustomersService {
             User: { select: { name: true } },
           },
         },
-        Orders: {
+        SalesOrders: {
           orderBy: { date: 'desc' },
         },
         Quotations: {

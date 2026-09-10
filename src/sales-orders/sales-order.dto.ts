@@ -8,7 +8,6 @@ import {
   IsArray,
   ValidateNested,
   IsDateString,
-  IsBoolean,
   MaxLength,
   Min,
 } from 'class-validator';
@@ -31,7 +30,7 @@ export class SalesOrderItemDto {
   quantity: number;
 
   @ApiProperty({ example: 100000 })
-  @IsNumber()
+  @IsNumber({}, { message: 'Unit price must be number' })
   @Min(0)
   unitPrice: number;
 
@@ -50,6 +49,14 @@ export class CreateSalesOrderDto {
   @IsInt()
   customerId: number;
 
+  @ApiProperty({ required: true, example: 'Order for office equipment' })
+  @IsString()
+  title: string;
+
+  @ApiProperty({ required: true, example: 'PO1234' })
+  @IsString()
+  referenceNumber: string;
+
   @ApiProperty({ required: false, example: 'Order for office equipment' })
   @IsOptional()
   @IsString()
@@ -63,6 +70,7 @@ export class CreateSalesOrderDto {
 
   @ApiProperty({ enum: SalesOrderStatus, example: SalesOrderStatus.Pending })
   @IsEnum(SalesOrderStatus)
+  @IsOptional()
   status: SalesOrderStatus;
 
   @ApiProperty({ required: false, example: 'Jl. Sudirman No. 123' })
@@ -85,6 +93,11 @@ export class CreateSalesOrderDto {
   @IsOptional()
   @IsDateString()
   deliveryDate?: string;
+
+  @ApiProperty({ required: false, example: 'All Sea' })
+  @IsOptional()
+  @IsString()
+  deliveryMethod?: string;
 
   @ApiProperty({ required: false, example: 'Additional notes' })
   @IsOptional()
