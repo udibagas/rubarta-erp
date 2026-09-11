@@ -28,7 +28,11 @@ import {
 import { FileInterceptor } from '@nestjs/platform-express';
 import * as multer from 'multer';
 import { SalesOrdersService } from './sales-orders.service';
-import { CreateSalesOrderDto, UpdateSalesOrderDto } from './sales-order.dto';
+import {
+  CreateSalesOrderDto,
+  SendSalesOrderEmailDto,
+  UpdateSalesOrderDto,
+} from './sales-order.dto';
 import { SalesOrderStatus, User } from '../prisma/client/client';
 import { Public } from '../auth/public.decorator';
 import { Response } from 'express';
@@ -119,6 +123,18 @@ export class SalesOrdersController {
     });
 
     res.end(pdfBuffer);
+  }
+
+  @Post(':id/send')
+  @ApiOperation({
+    summary: 'Send sales order to customer via email with PDF attached',
+  })
+  @ApiOkResponse({ description: 'Sales order sent' })
+  send(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() sendSalesOrderEmailDto: SendSalesOrderEmailDto,
+  ) {
+    return this.salesOrdersService.send(id, sendSalesOrderEmailDto);
   }
 
   @Patch(':id')

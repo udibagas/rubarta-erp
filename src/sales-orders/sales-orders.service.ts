@@ -4,15 +4,20 @@ import {
   CreateSalesOrderDto,
   UpdateSalesOrderDto,
   QuerySalesOrderDto,
+  SendSalesOrderEmailDto,
 } from './sales-order.dto';
-import { Prisma } from '../prisma/client/client';
+import { Prisma, SalesOrderStatus } from '../prisma/client/client';
 import { parsePurchaseOrderItems } from './parser';
 import { generateOrderPdf } from './sales-order-pdf';
 import dayjs from 'dayjs';
+import { MailerService } from '@nestjs-modules/mailer';
 
 @Injectable()
 export class SalesOrdersService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(
+    private readonly prisma: PrismaService,
+    private readonly mailerService: MailerService,
+  ) {}
 
   async create(data: CreateSalesOrderDto & { userId: number }) {
     const { items, ...salesOrderData } = data;
@@ -93,7 +98,7 @@ export class SalesOrdersService {
         Customer: true,
         Invoice: true,
         User: {
-          select: { id: true, name: true },
+          select: { id: true, name: true, email: true },
         },
       },
     });
@@ -173,6 +178,31 @@ export class SalesOrdersService {
   async preview(id: number): Promise<Buffer> {
     const salesOrder = await this.findOne(id);
     return generateOrderPdf(salesOrder);
+  }
+
+  async send(id: number, dto: SendSalesOrderEmailDto) {
+    const { to, cc, subject, body } = dto;
+    const salesOrder = await this.findOne(id);
+    const pdfBuffer = await generateOrderPdf(salesOrder);
+
+    await this.mailerService.sendMail({
+      subject,
+      cc: [salesOrder.User.email, ...(cc || [])],
+      to,
+      html: body,
+      attachments: [
+        {
+          filename: `${salesOrder.number}.pdf`,
+          content: pdfBuffer,
+          contentType: 'application/pdf',
+        },
+      ],
+    });
+
+    return this.prisma.salesOrder.update({
+      where: { id },
+      data: { status: SalesOrderStatus.Sent },
+    });
   }
 
   private async generateNumber(): Promise<string> {

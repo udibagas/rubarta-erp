@@ -42,6 +42,11 @@ export class SalesOrderItemDto {
 }
 
 export class CreateSalesOrderDto {
+  @ApiProperty({ example: 1 })
+  @IsInt()
+  @IsOptional()
+  quotationId: number;
+
   @ApiProperty({ example: '2025-05-25T10:00:00Z' })
   @IsDateString()
   date: string;
@@ -51,7 +56,7 @@ export class CreateSalesOrderDto {
   title: string;
 
   @ApiProperty({ required: true, example: 'PO1234' })
-  @IsString()
+  @IsString({ message: 'Reference number is required' })
   referenceNumber: string;
 
   @ApiProperty({ required: false, example: 'Order for office equipment' })
@@ -161,6 +166,33 @@ export class CreateSalesOrderDto {
 }
 
 export class UpdateSalesOrderDto extends PartialType(CreateSalesOrderDto) {}
+
+export class SendSalesOrderEmailDto {
+  @ApiProperty({ example: 'Sales order SO092026-1 for your review' })
+  @IsString()
+  @MaxLength(200)
+  subject: string;
+
+  @ApiProperty({
+    example: '<p>Dear customer, please find attached our sales order.</p>',
+  })
+  @IsString()
+  body: string;
+
+  @ApiProperty({ example: 'john.doe@example.com' })
+  @IsEmail()
+  to: string;
+
+  @ApiProperty({
+    required: false,
+    type: [String],
+    example: ['manager@example.com'],
+  })
+  @IsOptional()
+  @IsArray()
+  @IsEmail({}, { each: true })
+  cc?: string[];
+}
 
 export class QuerySalesOrderDto {
   @ApiProperty({ required: false })
