@@ -45,6 +45,7 @@ model Quotation {
   User           User            @relation(fields: [userId], references: [id])
   Company        Company?        @relation(fields: [companyId], references: [id])
   QuotationItems QuotationItem[]
+  salesOrders    SalesOrder[]
 
   @@index([number])
   @@index([customerId])

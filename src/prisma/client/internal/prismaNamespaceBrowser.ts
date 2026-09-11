@@ -581,6 +581,7 @@ export const SalesOrderScalarFieldEnum = {
   contactEmail: 'contactEmail',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
+  quotationId: 'quotationId',
   customerId: 'customerId',
   userId: 'userId'
 } as const
