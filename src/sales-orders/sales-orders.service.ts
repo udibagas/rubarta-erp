@@ -92,6 +92,9 @@ export class SalesOrdersService {
         },
         Customer: true,
         Invoice: true,
+        User: {
+          select: { id: true, name: true },
+        },
       },
     });
 

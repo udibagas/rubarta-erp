@@ -68,10 +68,11 @@ async function bootstrap() {
       contentSecurityPolicy: false,
     }),
   );
+
   app.use(cookieParser());
   app.use(nestCsrf());
-
   app.useGlobalFilters(new CsrfFilter());
+  app.useBodyParser('json', { limit: '10mb' });
 
   app.useGlobalPipes(
     new ValidationPipe({
@@ -98,7 +99,6 @@ async function bootstrap() {
   app.useGlobalInterceptors(new ClassSerializerInterceptor(app.get(Reflector)));
   const { httpAdapter } = app.get(HttpAdapterHost);
   app.useGlobalFilters(new PrismaClientExceptionFilter(httpAdapter));
-
   await app.listen(3000);
 }
 bootstrap();

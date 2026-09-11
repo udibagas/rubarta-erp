@@ -10,9 +10,10 @@ import {
   IsDateString,
   MaxLength,
   Min,
+  IsEmail,
 } from 'class-validator';
 import { Type } from 'class-transformer';
-import { SalesOrderStatus } from '../prisma/client/client';
+import { Currency, SalesOrderStatus } from '../prisma/client/client';
 
 export class SalesOrderItemDto {
   @ApiProperty({ example: 'PART-001' })
@@ -44,10 +45,6 @@ export class CreateSalesOrderDto {
   @ApiProperty({ example: '2025-05-25T10:00:00Z' })
   @IsDateString()
   date: string;
-
-  @ApiProperty({ example: 1 })
-  @IsInt()
-  customerId: number;
 
   @ApiProperty({ required: true, example: 'Order for office equipment' })
   @IsString()
@@ -83,11 +80,39 @@ export class CreateSalesOrderDto {
   @IsString()
   billingAddress?: string;
 
-  @ApiProperty({ required: false, example: 'NET 30' })
+  @ApiProperty({ required: false, example: 'Terms and conditions' })
   @IsOptional()
   @IsString()
-  @MaxLength(100)
-  paymentTerms?: string;
+  termsAndConditions?: string;
+
+  @ApiProperty({ required: false, example: 'Net 30' })
+  @IsOptional()
+  @IsString()
+  termOfPayment?: string;
+
+  @ApiProperty({ required: false, example: 'FOB' })
+  @IsOptional()
+  @IsString()
+  termOfDelivery?: string;
+
+  @ApiProperty({ required: false, example: 'Credit Card' })
+  @IsOptional()
+  @IsString()
+  paymentMethod?: string;
+
+  @ApiProperty({ enum: Currency, example: Currency.IDR, default: Currency.IDR })
+  @IsOptional()
+  @IsEnum(Currency)
+  currency?: Currency;
+
+  @ApiProperty({
+    required: false,
+    example:
+      'Sales, Customer Free Program, Lending Of Goods, Fee Service, Warranty, Others',
+  })
+  @IsOptional()
+  @IsString()
+  requestType?: string;
 
   @ApiProperty({ required: false, example: '2025-06-01T10:00:00Z' })
   @IsOptional()
@@ -109,6 +134,30 @@ export class CreateSalesOrderDto {
   @ValidateNested({ each: true })
   @Type(() => SalesOrderItemDto)
   items: SalesOrderItemDto[];
+
+  // Customer information
+  @ApiProperty({ example: 1 })
+  @IsInt()
+  customerId: number;
+
+  @ApiProperty({ required: false, example: '123 Main St, City, Country' })
+  @IsOptional()
+  @IsString()
+  customerAddress: string;
+
+  @ApiProperty({ required: false, example: 'John Doe' })
+  @IsOptional()
+  @IsString()
+  contactPerson: string;
+
+  @ApiProperty({ required: false, example: '+1234567890' })
+  @IsOptional()
+  @IsString()
+  contactPhone: string;
+
+  @ApiProperty({ required: true, example: 'john.doe@example.com' })
+  @IsEmail()
+  contactEmail: string;
 }
 
 export class UpdateSalesOrderDto extends PartialType(CreateSalesOrderDto) {}
