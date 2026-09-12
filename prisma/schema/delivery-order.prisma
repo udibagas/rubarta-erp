@@ -23,6 +23,7 @@ model DeliveryOrder {
   Customer           Customer            @relation(fields: [customerId], references: [id])
   User               User                @relation(fields: [userId], references: [id])
   DeliveryOrderItems DeliveryOrderItem[]
+  invoice            Invoice?
 
   @@index([companyId])
   @@index([salesOrderId])

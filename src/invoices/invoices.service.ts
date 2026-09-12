@@ -1,31 +1,44 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateInvoiceDto, UpdateInvoiceDto } from './invoice.dto';
 import { PrismaService } from '../prisma/prisma.service';
-import { Prisma, InvoiceStatus } from '../prisma/client/client';
+import { ApprovalType, InvoiceStatus, Prisma } from '../prisma/client/client';
+import { ApprovalService } from '../approval/approval.service';
+import { OnEvent } from '@nestjs/event-emitter';
+import { generateInvoicePdf } from './invoice-pdf';
 import dayjs from 'dayjs';
 
 @Injectable()
 export class InvoicesService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(
+    private readonly prisma: PrismaService,
+    private readonly approvalService: ApprovalService,
+  ) {}
 
   async create(data: CreateInvoiceDto & { userId: number }) {
     const { items, ...invoiceData } = data;
+    const { attachments, ...invoiceFields } = invoiceData;
     const number = await this.generateNumber();
+    const totals = this.calculateTotals(items, invoiceData.discount);
+    const createData: Prisma.InvoiceUncheckedCreateInput = {
+      ...invoiceFields,
+      ...(attachments === undefined
+        ? {}
+        : { attachments: attachments as Prisma.InputJsonValue }),
+      number,
+      date: new Date(invoiceData.date),
+      dueDate: new Date(invoiceData.dueDate),
+      ...totals,
+      status: InvoiceStatus.Draft,
+      InvoiceItems: {
+        create: items.map((i) => ({
+          ...i,
+          totalPrice: i.quantity * i.unitPrice,
+        })),
+      },
+    };
 
     return this.prisma.invoice.create({
-      data: {
-        ...invoiceData,
-        number,
-        date: new Date(invoiceData.date),
-        dueDate: new Date(invoiceData.dueDate),
-        status: invoiceData.status || InvoiceStatus.Draft,
-        InvoiceItems: {
-          create: items.map((i) => ({
-            ...i,
-            totalPrice: i.quantity * i.unitPrice,
-          })),
-        },
-      },
+      data: createData,
       include: {
         Customer: {
           select: {
@@ -50,6 +63,7 @@ export class InvoicesService {
             date: true,
           },
         },
+        DeliveryOrder: { select: { id: true, number: true, date: true } },
         InvoiceItems: true,
       },
     });
@@ -139,6 +153,7 @@ export class InvoicesService {
             number: true,
           },
         },
+        DeliveryOrder: { select: { id: true, number: true } },
         InvoiceItems: true,
         Payments: {
           select: {
@@ -178,6 +193,7 @@ export class InvoicesService {
             SalesOrderItems: true,
           },
         },
+        DeliveryOrder: true,
         InvoiceItems: true,
         Payments: {
           orderBy: { date: 'desc' },
@@ -193,13 +209,16 @@ export class InvoicesService {
   }
 
   async update(id: number, data: UpdateInvoiceDto) {
-    await this.findOne(id); // Verify invoice exists
+    const invoice = await this.findOne(id);
 
     const { items, ...invoiceData } = data;
 
-    // Build update data
+    const { attachments, ...invoiceFields } = invoiceData;
     const updateData: Prisma.InvoiceUpdateInput = {
-      ...invoiceData,
+      ...invoiceFields,
+      ...(attachments === undefined
+        ? {}
+        : { attachments: attachments as Prisma.InputJsonValue }),
     };
 
     if (invoiceData.date) {
@@ -210,16 +229,28 @@ export class InvoicesService {
       updateData.dueDate = new Date(invoiceData.dueDate);
     }
 
-    // If items are provided, update them
-    if (items && items.length > 0) {
-      // Delete existing items and create new ones
+    if (items) {
+      const totals = this.calculateTotals(
+        items,
+        invoiceData.discount ?? invoice.discount,
+      );
+      Object.assign(updateData, totals);
+
       await this.prisma.invoiceItem.deleteMany({
         where: { invoiceId: id },
       });
 
       updateData.InvoiceItems = {
-        create: items,
+        create: items.map((item) => ({
+          ...item,
+          totalPrice: item.quantity * item.unitPrice,
+        })),
       };
+    } else if (invoiceData.discount !== undefined) {
+      Object.assign(
+        updateData,
+        this.calculateTotals(invoice.InvoiceItems, invoiceData.discount),
+      );
     }
 
     return this.prisma.invoice.update({
@@ -246,6 +277,7 @@ export class InvoicesService {
             number: true,
           },
         },
+        DeliveryOrder: { select: { id: true, number: true } },
         InvoiceItems: true,
       },
     });
@@ -280,6 +312,28 @@ export class InvoicesService {
         InvoiceItems: true,
       },
     });
+  }
+
+  async submit(id: number) {
+    const invoice = await this.findOne(id);
+
+    if (invoice.status !== InvoiceStatus.Draft) {
+      return invoice;
+    }
+
+    const submittedInvoice = await this.prisma.invoice.update({
+      where: { id },
+      data: { status: InvoiceStatus.Submitted },
+    });
+
+    await this.approvalService.requestApproval(ApprovalType.INVOICE, id);
+
+    return submittedInvoice;
+  }
+
+  async preview(id: number): Promise<Buffer> {
+    const invoice = await this.findOne(id);
+    return generateInvoicePdf(invoice);
   }
 
   async getTotalAmount(customerId?: number, status?: InvoiceStatus) {
@@ -320,5 +374,38 @@ export class InvoicesService {
 
     const newNumber = lastNumber + 1;
     return `INV${monthYear}-${newNumber}`;
+  }
+
+  private calculateTotals(
+    items: Array<{ quantity: number; unitPrice: number }>,
+    discount = 0,
+  ) {
+    const totalAmount = items.reduce(
+      (sum, item) => sum + item.quantity * item.unitPrice,
+      0,
+    );
+    const vatAmount = totalAmount * 0.11;
+
+    return {
+      totalAmount,
+      discount,
+      vatAmount,
+      grandTotal: totalAmount + vatAmount - discount,
+    };
+  }
+
+  @OnEvent('approval.completed')
+  private async handleApprovalCompleted(payload: {
+    approvalType: ApprovalType;
+    moduleId: number;
+  }) {
+    if (payload.approvalType !== ApprovalType.INVOICE) {
+      return;
+    }
+
+    await this.prisma.invoice.update({
+      where: { id: payload.moduleId },
+      data: { status: InvoiceStatus.Approved },
+    });
   }
 }

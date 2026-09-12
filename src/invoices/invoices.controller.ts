@@ -7,8 +7,10 @@ import {
   Param,
   Delete,
   Query,
+  Res,
   ParseIntPipe,
 } from '@nestjs/common';
+import { Response } from 'express';
 import { InvoicesService } from './invoices.service';
 import { CreateInvoiceDto, UpdateInvoiceDto } from './invoice.dto';
 import { Auth } from '../auth/auth.decorator';
@@ -59,12 +61,28 @@ export class InvoicesController {
     return this.invoicesService.findOne(id);
   }
 
+  @Get(':id/preview')
+  async preview(@Param('id', ParseIntPipe) id: number, @Res() res: Response) {
+    const pdfBuffer = await this.invoicesService.preview(id);
+    res.set({
+      'Content-Type': 'application/pdf',
+      'Content-Disposition': `inline; filename="invoice-${id}.pdf"`,
+      'Content-Length': pdfBuffer.length,
+    });
+    res.end(pdfBuffer);
+  }
+
   @Patch(':id')
   update(
     @Param('id', ParseIntPipe) id: number,
     @Body() data: UpdateInvoiceDto,
   ) {
     return this.invoicesService.update(id, data);
+  }
+
+  @Post(':id/submit')
+  submit(@Param('id', ParseIntPipe) id: number) {
+    return this.invoicesService.submit(id);
   }
 
   @Patch(':id/status')

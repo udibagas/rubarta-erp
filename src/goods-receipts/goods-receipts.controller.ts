@@ -27,7 +27,7 @@ import { User } from '../prisma/client/client';
 
 @ApiTags('Good Receipts')
 @ApiBearerAuth()
-@Controller('api/good-receipts')
+@Controller('api/goods-receipts')
 export class GoodsReceiptsController {
   constructor(private readonly goodsReceiptsService: GoodsReceiptsService) {}
 

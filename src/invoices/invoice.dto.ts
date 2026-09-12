@@ -8,9 +8,9 @@ import {
   IsOptional,
   IsArray,
   ValidateNested,
-  IsBoolean,
   IsString,
   IsObject,
+  Min,
 } from 'class-validator';
 import { Type } from 'class-transformer';
 import { PartialType } from '@nestjs/swagger';
@@ -28,29 +28,28 @@ export class InvoiceItemDto {
   @IsInt()
   quantity: number;
 
-  @IsNotEmpty({ message: 'Unit price is required' })
   @IsNumber()
+  @Min(0)
   unitPrice: number;
-
-  @IsNotEmpty({ message: 'Total price is required' })
-  @IsNumber()
-  totalPrice: number;
 }
 
 export class CreateInvoiceDto {
-  @IsNotEmpty({ message: 'Date is required' })
   @IsDateString()
   date: string;
 
-  @IsNotEmpty({ message: 'Due date is required' })
   @IsDateString()
   dueDate: string;
 
-  @IsNotEmpty({ message: 'Order ID is required' })
+  @IsOptional()
+  @IsString()
+  referenceNumber?: string;
+
   @IsInt()
   salesOrderId: number;
 
-  @IsNotEmpty({ message: 'Customer ID is required' })
+  @IsInt()
+  deliveryOrderId: number;
+
   @IsInt()
   customerId: number;
 
@@ -58,23 +57,35 @@ export class CreateInvoiceDto {
   @IsEnum(InvoiceStatus)
   status?: InvoiceStatus;
 
-  @IsNotEmpty({ message: 'Total amount is required' })
+  @IsOptional()
   @IsNumber()
-  totalAmount: number;
-
-  @IsNotEmpty({ message: 'VAT amount is required' })
-  @IsNumber()
-  vatAmount: number;
-
-  @IsNotEmpty({ message: 'Grand total is required' })
-  @IsNumber()
-  grandTotal: number;
+  @Min(0)
+  discount?: number;
 
   @IsOptional()
   @IsObject()
-  attachments?: Record<string, any>;
+  attachments?: Record<string, unknown>;
 
-  @IsNotEmpty({ message: 'Invoice items are required' })
+  @IsOptional()
+  @IsString()
+  paymentMethod?: string;
+
+  @IsOptional()
+  @IsString()
+  termOfPayment?: string;
+
+  @IsOptional()
+  @IsString()
+  contactPerson?: string;
+
+  @IsOptional()
+  @IsString()
+  contactPhone?: string;
+
+  @IsOptional()
+  @IsString()
+  contactEmail?: string;
+
   @IsArray()
   @ValidateNested({ each: true })
   @Type(() => InvoiceItemDto)

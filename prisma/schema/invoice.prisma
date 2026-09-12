@@ -1,26 +1,39 @@
 model Invoice {
-  id          Int           @id @default(autoincrement())
-  number      String        @unique
-  date        DateTime
-  dueDate     DateTime
-  status      InvoiceStatus
-  attachments Json?         @db.JsonB // Attachments related to the invoice
+  id              Int           @id @default(autoincrement())
+  number          String        @unique
+  referenceNumber String?
+  date            DateTime
+  dueDate         DateTime
+  status          InvoiceStatus
+  attachments     Json?         @db.JsonB // Attachments related to the invoice
 
   // financials
   totalAmount Float
+  discount    Float
   vatAmount   Float
   grandTotal  Float
 
-  // Relationships
-  userId       Int
-  salesOrderId Int @unique
-  customerId   Int
+  // payment details
+  paymentMethod String?
+  termOfPayment String?
 
-  Customer     Customer      @relation(fields: [customerId], references: [id])
-  Payments     Payment[]
-  SalesOrder   SalesOrder    @relation(fields: [salesOrderId], references: [id])
-  User         User          @relation(fields: [userId], references: [id])
-  InvoiceItems InvoiceItem[]
+  // contact
+  contactPerson String?
+  contactPhone  String?
+  contactEmail  String?
+
+  // Relationships
+  userId          Int
+  salesOrderId    Int
+  deliveryOrderId Int @unique
+  customerId      Int
+
+  Customer      Customer      @relation(fields: [customerId], references: [id])
+  Payments      Payment[]
+  SalesOrder    SalesOrder    @relation(fields: [salesOrderId], references: [id])
+  DeliveryOrder DeliveryOrder @relation(fields: [deliveryOrderId], references: [id])
+  User          User          @relation(fields: [userId], references: [id])
+  InvoiceItems  InvoiceItem[]
 
   // Timestamps
   createdAt DateTime @default(now())
@@ -30,9 +43,9 @@ model Invoice {
 }
 
 model InvoiceItem {
-  id          Int     @id @default(autoincrement())
+  id          Int    @id @default(autoincrement())
   invoiceId   Int
-  partNumber   String
+  partNumber  String
   description String
   quantity    Int
   unitPrice   Float

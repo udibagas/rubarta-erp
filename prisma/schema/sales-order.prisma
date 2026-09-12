@@ -41,7 +41,7 @@ model SalesOrder {
   // Relationships
   Customer        Customer         @relation(fields: [customerId], references: [id], onDelete: Cascade)
   User            User             @relation(fields: [userId], references: [id])
-  Invoice         Invoice?
+  Invoices        Invoice[]
   SalesOrderItems SalesOrderItem[]
   Quotation       Quotation?       @relation(fields: [quotationId], references: [id])
   Company         Company          @relation(fields: [companyId], references: [id], onDelete: Cascade)
