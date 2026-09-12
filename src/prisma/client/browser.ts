@@ -38,6 +38,16 @@ export type Payment = Prisma.PaymentModel
  */
 export type Expense = Prisma.ExpenseModel
 /**
+ * Model ApprovalSetting
+ * 
+ */
+export type ApprovalSetting = Prisma.ApprovalSettingModel
+/**
+ * Model ApprovalSettingItem
+ * 
+ */
+export type ApprovalSettingItem = Prisma.ApprovalSettingItemModel
+/**
  * Model Approval
  * 
  */
@@ -97,6 +107,26 @@ export type Material = Prisma.MaterialModel
  * 
  */
 export type VisitPlan = Prisma.VisitPlanModel
+/**
+ * Model DeliveryOrder
+ * 
+ */
+export type DeliveryOrder = Prisma.DeliveryOrderModel
+/**
+ * Model DeliveryOrderItem
+ * 
+ */
+export type DeliveryOrderItem = Prisma.DeliveryOrderItemModel
+/**
+ * Model GoodsReceipt
+ * 
+ */
+export type GoodsReceipt = Prisma.GoodsReceiptModel
+/**
+ * Model GoodsReceiptItem
+ * 
+ */
+export type GoodsReceiptItem = Prisma.GoodsReceiptItemModel
 /**
  * Model Invoice
  * 
@@ -182,16 +212,6 @@ export type User = Prisma.UserModel
  * 
  */
 export type UserBalance = Prisma.UserBalanceModel
-/**
- * Model ApprovalSetting
- * 
- */
-export type ApprovalSetting = Prisma.ApprovalSettingModel
-/**
- * Model ApprovalSettingItem
- * 
- */
-export type ApprovalSettingItem = Prisma.ApprovalSettingItemModel
 /**
  * Model Notification
  * 

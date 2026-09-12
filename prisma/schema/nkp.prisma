@@ -97,3 +97,15 @@ model NkpAttachment {
   @@index([nkpId])
   @@map("NkpAttachments")
 }
+
+enum NkpType {
+  CASH_ADVANCE
+  DECLARATION
+  SALARY
+  DOWN_PAYMENT
+  SETTLEMENT
+  TRANSFER_BALANCE
+  TAX
+  BPJS
+  UTILITY
+}

@@ -1,0 +1,48 @@
+model DeliveryOrder {
+  id                 Int      @id @default(autoincrement())
+  number             String   @unique
+  date               DateTime
+  sender             String?
+  recipient          String?
+  supportingDocument Json?
+  notes              String?  @db.Text
+
+  // foreign keys
+  companyId    Int
+  salesOrderId Int
+  customerId   Int
+  userId       Int
+
+  // timestamps
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // relations to other models
+  Company            Company             @relation(fields: [companyId], references: [id])
+  SalesOrder         SalesOrder          @relation(fields: [salesOrderId], references: [id])
+  Customer           Customer            @relation(fields: [customerId], references: [id])
+  User               User                @relation(fields: [userId], references: [id])
+  DeliveryOrderItems DeliveryOrderItem[]
+
+  @@index([companyId])
+  @@index([salesOrderId])
+  @@index([customerId])
+  @@index([date])
+  @@map("DeliveryOrders")
+}
+
+model DeliveryOrderItem {
+  id               Int    @id @default(autoincrement())
+  deliveryOrderId  Int
+  partNumber       String @db.VarChar(100)
+  partNumberSupply String @db.VarChar(100)
+  description      String @db.Text
+  quantityOrder    Int
+  quantitySupply   Int
+
+  // Relationships
+  DeliveryOrder DeliveryOrder @relation(fields: [deliveryOrderId], references: [id], onDelete: Cascade)
+
+  @@index([deliveryOrderId])
+  @@map("DeliveryOrderItems")
+}

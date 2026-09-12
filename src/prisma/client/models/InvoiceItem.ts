@@ -45,31 +45,31 @@ export type InvoiceItemSumAggregateOutputType = {
 export type InvoiceItemMinAggregateOutputType = {
   id: number | null
   invoiceId: number | null
+  partNumber: string | null
   description: string | null
   quantity: number | null
   unitPrice: number | null
   totalPrice: number | null
-  vat: boolean | null
 }
 
 export type InvoiceItemMaxAggregateOutputType = {
   id: number | null
   invoiceId: number | null
+  partNumber: string | null
   description: string | null
   quantity: number | null
   unitPrice: number | null
   totalPrice: number | null
-  vat: boolean | null
 }
 
 export type InvoiceItemCountAggregateOutputType = {
   id: number
   invoiceId: number
+  partNumber: number
   description: number
   quantity: number
   unitPrice: number
   totalPrice: number
-  vat: number
   _all: number
 }
 
@@ -93,31 +93,31 @@ export type InvoiceItemSumAggregateInputType = {
 export type InvoiceItemMinAggregateInputType = {
   id?: true
   invoiceId?: true
+  partNumber?: true
   description?: true
   quantity?: true
   unitPrice?: true
   totalPrice?: true
-  vat?: true
 }
 
 export type InvoiceItemMaxAggregateInputType = {
   id?: true
   invoiceId?: true
+  partNumber?: true
   description?: true
   quantity?: true
   unitPrice?: true
   totalPrice?: true
-  vat?: true
 }
 
 export type InvoiceItemCountAggregateInputType = {
   id?: true
   invoiceId?: true
+  partNumber?: true
   description?: true
   quantity?: true
   unitPrice?: true
   totalPrice?: true
-  vat?: true
   _all?: true
 }
 
@@ -210,11 +210,11 @@ export type InvoiceItemGroupByArgs<ExtArgs extends runtime.Types.Extensions.Inte
 export type InvoiceItemGroupByOutputType = {
   id: number
   invoiceId: number
+  partNumber: string
   description: string
   quantity: number
   unitPrice: number
   totalPrice: number
-  vat: boolean
   _count: InvoiceItemCountAggregateOutputType | null
   _avg: InvoiceItemAvgAggregateOutputType | null
   _sum: InvoiceItemSumAggregateOutputType | null
@@ -243,22 +243,22 @@ export type InvoiceItemWhereInput = {
   NOT?: Prisma.InvoiceItemWhereInput | Prisma.InvoiceItemWhereInput[]
   id?: Prisma.IntFilter<"InvoiceItem"> | number
   invoiceId?: Prisma.IntFilter<"InvoiceItem"> | number
+  partNumber?: Prisma.StringFilter<"InvoiceItem"> | string
   description?: Prisma.StringFilter<"InvoiceItem"> | string
   quantity?: Prisma.IntFilter<"InvoiceItem"> | number
   unitPrice?: Prisma.FloatFilter<"InvoiceItem"> | number
   totalPrice?: Prisma.FloatFilter<"InvoiceItem"> | number
-  vat?: Prisma.BoolFilter<"InvoiceItem"> | boolean
   Invoice?: Prisma.XOR<Prisma.InvoiceScalarRelationFilter, Prisma.InvoiceWhereInput>
 }
 
 export type InvoiceItemOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   invoiceId?: Prisma.SortOrder
+  partNumber?: Prisma.SortOrder
   description?: Prisma.SortOrder
   quantity?: Prisma.SortOrder
   unitPrice?: Prisma.SortOrder
   totalPrice?: Prisma.SortOrder
-  vat?: Prisma.SortOrder
   Invoice?: Prisma.InvoiceOrderByWithRelationInput
 }
 
@@ -268,22 +268,22 @@ export type InvoiceItemWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.InvoiceItemWhereInput[]
   NOT?: Prisma.InvoiceItemWhereInput | Prisma.InvoiceItemWhereInput[]
   invoiceId?: Prisma.IntFilter<"InvoiceItem"> | number
+  partNumber?: Prisma.StringFilter<"InvoiceItem"> | string
   description?: Prisma.StringFilter<"InvoiceItem"> | string
   quantity?: Prisma.IntFilter<"InvoiceItem"> | number
   unitPrice?: Prisma.FloatFilter<"InvoiceItem"> | number
   totalPrice?: Prisma.FloatFilter<"InvoiceItem"> | number
-  vat?: Prisma.BoolFilter<"InvoiceItem"> | boolean
   Invoice?: Prisma.XOR<Prisma.InvoiceScalarRelationFilter, Prisma.InvoiceWhereInput>
 }, "id">
 
 export type InvoiceItemOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   invoiceId?: Prisma.SortOrder
+  partNumber?: Prisma.SortOrder
   description?: Prisma.SortOrder
   quantity?: Prisma.SortOrder
   unitPrice?: Prisma.SortOrder
   totalPrice?: Prisma.SortOrder
-  vat?: Prisma.SortOrder
   _count?: Prisma.InvoiceItemCountOrderByAggregateInput
   _avg?: Prisma.InvoiceItemAvgOrderByAggregateInput
   _max?: Prisma.InvoiceItemMaxOrderByAggregateInput
@@ -297,77 +297,77 @@ export type InvoiceItemScalarWhereWithAggregatesInput = {
   NOT?: Prisma.InvoiceItemScalarWhereWithAggregatesInput | Prisma.InvoiceItemScalarWhereWithAggregatesInput[]
   id?: Prisma.IntWithAggregatesFilter<"InvoiceItem"> | number
   invoiceId?: Prisma.IntWithAggregatesFilter<"InvoiceItem"> | number
+  partNumber?: Prisma.StringWithAggregatesFilter<"InvoiceItem"> | string
   description?: Prisma.StringWithAggregatesFilter<"InvoiceItem"> | string
   quantity?: Prisma.IntWithAggregatesFilter<"InvoiceItem"> | number
   unitPrice?: Prisma.FloatWithAggregatesFilter<"InvoiceItem"> | number
   totalPrice?: Prisma.FloatWithAggregatesFilter<"InvoiceItem"> | number
-  vat?: Prisma.BoolWithAggregatesFilter<"InvoiceItem"> | boolean
 }
 
 export type InvoiceItemCreateInput = {
+  partNumber: string
   description: string
   quantity: number
   unitPrice: number
   totalPrice: number
-  vat?: boolean
   Invoice: Prisma.InvoiceCreateNestedOneWithoutInvoiceItemsInput
 }
 
 export type InvoiceItemUncheckedCreateInput = {
   id?: number
   invoiceId: number
+  partNumber: string
   description: string
   quantity: number
   unitPrice: number
   totalPrice: number
-  vat?: boolean
 }
 
 export type InvoiceItemUpdateInput = {
+  partNumber?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   unitPrice?: Prisma.FloatFieldUpdateOperationsInput | number
   totalPrice?: Prisma.FloatFieldUpdateOperationsInput | number
-  vat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   Invoice?: Prisma.InvoiceUpdateOneRequiredWithoutInvoiceItemsNestedInput
 }
 
 export type InvoiceItemUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   invoiceId?: Prisma.IntFieldUpdateOperationsInput | number
+  partNumber?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   unitPrice?: Prisma.FloatFieldUpdateOperationsInput | number
   totalPrice?: Prisma.FloatFieldUpdateOperationsInput | number
-  vat?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type InvoiceItemCreateManyInput = {
   id?: number
   invoiceId: number
+  partNumber: string
   description: string
   quantity: number
   unitPrice: number
   totalPrice: number
-  vat?: boolean
 }
 
 export type InvoiceItemUpdateManyMutationInput = {
+  partNumber?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   unitPrice?: Prisma.FloatFieldUpdateOperationsInput | number
   totalPrice?: Prisma.FloatFieldUpdateOperationsInput | number
-  vat?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type InvoiceItemUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   invoiceId?: Prisma.IntFieldUpdateOperationsInput | number
+  partNumber?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   unitPrice?: Prisma.FloatFieldUpdateOperationsInput | number
   totalPrice?: Prisma.FloatFieldUpdateOperationsInput | number
-  vat?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type InvoiceItemListRelationFilter = {
@@ -383,11 +383,11 @@ export type InvoiceItemOrderByRelationAggregateInput = {
 export type InvoiceItemCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   invoiceId?: Prisma.SortOrder
+  partNumber?: Prisma.SortOrder
   description?: Prisma.SortOrder
   quantity?: Prisma.SortOrder
   unitPrice?: Prisma.SortOrder
   totalPrice?: Prisma.SortOrder
-  vat?: Prisma.SortOrder
 }
 
 export type InvoiceItemAvgOrderByAggregateInput = {
@@ -401,21 +401,21 @@ export type InvoiceItemAvgOrderByAggregateInput = {
 export type InvoiceItemMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   invoiceId?: Prisma.SortOrder
+  partNumber?: Prisma.SortOrder
   description?: Prisma.SortOrder
   quantity?: Prisma.SortOrder
   unitPrice?: Prisma.SortOrder
   totalPrice?: Prisma.SortOrder
-  vat?: Prisma.SortOrder
 }
 
 export type InvoiceItemMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   invoiceId?: Prisma.SortOrder
+  partNumber?: Prisma.SortOrder
   description?: Prisma.SortOrder
   quantity?: Prisma.SortOrder
   unitPrice?: Prisma.SortOrder
   totalPrice?: Prisma.SortOrder
-  vat?: Prisma.SortOrder
 }
 
 export type InvoiceItemSumOrderByAggregateInput = {
@@ -469,20 +469,20 @@ export type InvoiceItemUncheckedUpdateManyWithoutInvoiceNestedInput = {
 }
 
 export type InvoiceItemCreateWithoutInvoiceInput = {
+  partNumber: string
   description: string
   quantity: number
   unitPrice: number
   totalPrice: number
-  vat?: boolean
 }
 
 export type InvoiceItemUncheckedCreateWithoutInvoiceInput = {
   id?: number
+  partNumber: string
   description: string
   quantity: number
   unitPrice: number
   totalPrice: number
-  vat?: boolean
 }
 
 export type InvoiceItemCreateOrConnectWithoutInvoiceInput = {
@@ -517,46 +517,46 @@ export type InvoiceItemScalarWhereInput = {
   NOT?: Prisma.InvoiceItemScalarWhereInput | Prisma.InvoiceItemScalarWhereInput[]
   id?: Prisma.IntFilter<"InvoiceItem"> | number
   invoiceId?: Prisma.IntFilter<"InvoiceItem"> | number
+  partNumber?: Prisma.StringFilter<"InvoiceItem"> | string
   description?: Prisma.StringFilter<"InvoiceItem"> | string
   quantity?: Prisma.IntFilter<"InvoiceItem"> | number
   unitPrice?: Prisma.FloatFilter<"InvoiceItem"> | number
   totalPrice?: Prisma.FloatFilter<"InvoiceItem"> | number
-  vat?: Prisma.BoolFilter<"InvoiceItem"> | boolean
 }
 
 export type InvoiceItemCreateManyInvoiceInput = {
   id?: number
+  partNumber: string
   description: string
   quantity: number
   unitPrice: number
   totalPrice: number
-  vat?: boolean
 }
 
 export type InvoiceItemUpdateWithoutInvoiceInput = {
+  partNumber?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   unitPrice?: Prisma.FloatFieldUpdateOperationsInput | number
   totalPrice?: Prisma.FloatFieldUpdateOperationsInput | number
-  vat?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type InvoiceItemUncheckedUpdateWithoutInvoiceInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
+  partNumber?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   unitPrice?: Prisma.FloatFieldUpdateOperationsInput | number
   totalPrice?: Prisma.FloatFieldUpdateOperationsInput | number
-  vat?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type InvoiceItemUncheckedUpdateManyWithoutInvoiceInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
+  partNumber?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   unitPrice?: Prisma.FloatFieldUpdateOperationsInput | number
   totalPrice?: Prisma.FloatFieldUpdateOperationsInput | number
-  vat?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 
@@ -564,47 +564,47 @@ export type InvoiceItemUncheckedUpdateManyWithoutInvoiceInput = {
 export type InvoiceItemSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   invoiceId?: boolean
+  partNumber?: boolean
   description?: boolean
   quantity?: boolean
   unitPrice?: boolean
   totalPrice?: boolean
-  vat?: boolean
   Invoice?: boolean | Prisma.InvoiceDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["invoiceItem"]>
 
 export type InvoiceItemSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   invoiceId?: boolean
+  partNumber?: boolean
   description?: boolean
   quantity?: boolean
   unitPrice?: boolean
   totalPrice?: boolean
-  vat?: boolean
   Invoice?: boolean | Prisma.InvoiceDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["invoiceItem"]>
 
 export type InvoiceItemSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   invoiceId?: boolean
+  partNumber?: boolean
   description?: boolean
   quantity?: boolean
   unitPrice?: boolean
   totalPrice?: boolean
-  vat?: boolean
   Invoice?: boolean | Prisma.InvoiceDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["invoiceItem"]>
 
 export type InvoiceItemSelectScalar = {
   id?: boolean
   invoiceId?: boolean
+  partNumber?: boolean
   description?: boolean
   quantity?: boolean
   unitPrice?: boolean
   totalPrice?: boolean
-  vat?: boolean
 }
 
-export type InvoiceItemOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "invoiceId" | "description" | "quantity" | "unitPrice" | "totalPrice" | "vat", ExtArgs["result"]["invoiceItem"]>
+export type InvoiceItemOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "invoiceId" | "partNumber" | "description" | "quantity" | "unitPrice" | "totalPrice", ExtArgs["result"]["invoiceItem"]>
 export type InvoiceItemInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   Invoice?: boolean | Prisma.InvoiceDefaultArgs<ExtArgs>
 }
@@ -623,11 +623,11 @@ export type $InvoiceItemPayload<ExtArgs extends runtime.Types.Extensions.Interna
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
     invoiceId: number
+    partNumber: string
     description: string
     quantity: number
     unitPrice: number
     totalPrice: number
-    vat: boolean
   }, ExtArgs["result"]["invoiceItem"]>
   composites: {}
 }
@@ -1054,11 +1054,11 @@ export interface Prisma__InvoiceItemClient<T, Null = never, ExtArgs extends runt
 export interface InvoiceItemFieldRefs {
   readonly id: Prisma.FieldRef<"InvoiceItem", 'Int'>
   readonly invoiceId: Prisma.FieldRef<"InvoiceItem", 'Int'>
+  readonly partNumber: Prisma.FieldRef<"InvoiceItem", 'String'>
   readonly description: Prisma.FieldRef<"InvoiceItem", 'String'>
   readonly quantity: Prisma.FieldRef<"InvoiceItem", 'Int'>
   readonly unitPrice: Prisma.FieldRef<"InvoiceItem", 'Float'>
   readonly totalPrice: Prisma.FieldRef<"InvoiceItem", 'Float'>
-  readonly vat: Prisma.FieldRef<"InvoiceItem", 'Boolean'>
 }
     
 

@@ -1,0 +1,47 @@
+model GoodsReceipt {
+  id                 Int      @id @default(autoincrement())
+  number             String   @unique
+  date               DateTime
+  sender             String
+  recipient          String
+  supportingDocument Json?
+  notes              String?  @db.Text
+
+  purchaseOrderId Int
+  supplierId      Int
+  companyId       Int
+  userId          Int
+
+  // timestamps
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime? @db.Timestamp()
+
+  // relations to other models
+  PurchaseOrder     PurchaseOrder      @relation(fields: [purchaseOrderId], references: [id])
+  Supplier          Supplier           @relation(fields: [supplierId], references: [id])
+  Company           Company            @relation(fields: [companyId], references: [id])
+  User              User               @relation(fields: [userId], references: [id])
+  GoodsReceiptItems GoodsReceiptItem[]
+
+  @@index([purchaseOrderId])
+  @@index([supplierId])
+  @@index([date])
+  @@map("GoodsReceipts")
+}
+
+model GoodsReceiptItem {
+  id                 Int    @id @default(autoincrement())
+  goodsReceiptId     Int
+  partNumber         String @db.VarChar(100)
+  partNumberSupplier String @db.VarChar(100)
+  description        String @db.Text
+  quantityOrder      Int
+  quantityReceived   Int
+
+  // Relationships
+  GoodsReceipt GoodsReceipt @relation(fields: [goodsReceiptId], references: [id], onDelete: Cascade)
+
+  @@index([goodsReceiptId])
+  @@map("GoodsReceiptItems")
+}

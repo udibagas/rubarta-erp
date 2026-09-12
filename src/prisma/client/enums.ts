@@ -18,6 +18,26 @@ export const Currency = {
 export type Currency = (typeof Currency)[keyof typeof Currency]
 
 
+export const ApprovalType = {
+  NKP: 'NKP',
+  QUOTATION: 'QUOTATION',
+  SALES_ORDER: 'SALES_ORDER',
+  PURCHASE_ORDER: 'PURCHASE_ORDER',
+  INVOICE: 'INVOICE'
+} as const
+
+export type ApprovalType = (typeof ApprovalType)[keyof typeof ApprovalType]
+
+
+export const ApprovalActionType = {
+  APPROVAL: 'APPROVAL',
+  VERIFICATION: 'VERIFICATION',
+  AUTHORIZATION: 'AUTHORIZATION'
+} as const
+
+export type ApprovalActionType = (typeof ApprovalActionType)[keyof typeof ApprovalActionType]
+
+
 export const LeadStatus = {
   New: 'New',
   Contacted: 'Contacted',
@@ -139,6 +159,21 @@ export const InvoiceStatus = {
 export type InvoiceStatus = (typeof InvoiceStatus)[keyof typeof InvoiceStatus]
 
 
+export const NkpType = {
+  CASH_ADVANCE: 'CASH_ADVANCE',
+  DECLARATION: 'DECLARATION',
+  SALARY: 'SALARY',
+  DOWN_PAYMENT: 'DOWN_PAYMENT',
+  SETTLEMENT: 'SETTLEMENT',
+  TRANSFER_BALANCE: 'TRANSFER_BALANCE',
+  TAX: 'TAX',
+  BPJS: 'BPJS',
+  UTILITY: 'UTILITY'
+} as const
+
+export type NkpType = (typeof NkpType)[keyof typeof NkpType]
+
+
 export const PurchaseOrderStatus = {
   Draft: 'Draft',
   Confirmed: 'Confirmed',
@@ -201,26 +236,6 @@ export const ApprovalStatus = {
 export type ApprovalStatus = (typeof ApprovalStatus)[keyof typeof ApprovalStatus]
 
 
-export const ApprovalType = {
-  NKP: 'NKP',
-  QUOTATION: 'QUOTATION',
-  SALES_ORDER: 'SALES_ORDER',
-  PURCHASE_ORDER: 'PURCHASE_ORDER',
-  INVOICE: 'INVOICE'
-} as const
-
-export type ApprovalType = (typeof ApprovalType)[keyof typeof ApprovalType]
-
-
-export const ApprovalActionType = {
-  APPROVAL: 'APPROVAL',
-  VERIFICATION: 'VERIFICATION',
-  AUTHORIZATION: 'AUTHORIZATION'
-} as const
-
-export type ApprovalActionType = (typeof ApprovalActionType)[keyof typeof ApprovalActionType]
-
-
 export const PaymentType = {
   EMPLOYEE: 'EMPLOYEE',
   VENDOR: 'VENDOR',
@@ -230,18 +245,3 @@ export const PaymentType = {
 } as const
 
 export type PaymentType = (typeof PaymentType)[keyof typeof PaymentType]
-
-
-export const NkpType = {
-  CASH_ADVANCE: 'CASH_ADVANCE',
-  DECLARATION: 'DECLARATION',
-  SALARY: 'SALARY',
-  DOWN_PAYMENT: 'DOWN_PAYMENT',
-  SETTLEMENT: 'SETTLEMENT',
-  TRANSFER_BALANCE: 'TRANSFER_BALANCE',
-  TAX: 'TAX',
-  BPJS: 'BPJS',
-  UTILITY: 'UTILITY'
-} as const
-
-export type NkpType = (typeof NkpType)[keyof typeof NkpType]

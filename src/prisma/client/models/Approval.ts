@@ -386,10 +386,6 @@ export type ApprovalNullableScalarRelationFilter = {
   isNot?: Prisma.ApprovalWhereInput | null
 }
 
-export type EnumApprovalTypeFieldUpdateOperationsInput = {
-  set?: $Enums.ApprovalType
-}
-
 export type NullableEnumApprovalStatusFieldUpdateOperationsInput = {
   set?: $Enums.ApprovalStatus | null
 }

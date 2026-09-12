@@ -328,16 +328,6 @@ export type ApprovalSettingUncheckedUpdateManyInput = {
   nkpType?: Prisma.NullableEnumNkpTypeFieldUpdateOperationsInput | $Enums.NkpType | null
 }
 
-export type ApprovalSettingListRelationFilter = {
-  every?: Prisma.ApprovalSettingWhereInput
-  some?: Prisma.ApprovalSettingWhereInput
-  none?: Prisma.ApprovalSettingWhereInput
-}
-
-export type ApprovalSettingOrderByRelationAggregateInput = {
-  _count?: Prisma.SortOrder
-}
-
 export type ApprovalSettingCompanyIdApprovalTypePaymentTypeNkpTypeCompoundUniqueInput = {
   companyId: number
   approvalType: $Enums.ApprovalType
@@ -384,6 +374,50 @@ export type ApprovalSettingScalarRelationFilter = {
   isNot?: Prisma.ApprovalSettingWhereInput
 }
 
+export type ApprovalSettingListRelationFilter = {
+  every?: Prisma.ApprovalSettingWhereInput
+  some?: Prisma.ApprovalSettingWhereInput
+  none?: Prisma.ApprovalSettingWhereInput
+}
+
+export type ApprovalSettingOrderByRelationAggregateInput = {
+  _count?: Prisma.SortOrder
+}
+
+export type EnumApprovalTypeFieldUpdateOperationsInput = {
+  set?: $Enums.ApprovalType
+}
+
+export type NullableEnumPaymentTypeFieldUpdateOperationsInput = {
+  set?: $Enums.PaymentType | null
+}
+
+export type NullableEnumNkpTypeFieldUpdateOperationsInput = {
+  set?: $Enums.NkpType | null
+}
+
+export type NullableIntFieldUpdateOperationsInput = {
+  set?: number | null
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
+}
+
+export type ApprovalSettingCreateNestedOneWithoutApprovalSettingItemInput = {
+  create?: Prisma.XOR<Prisma.ApprovalSettingCreateWithoutApprovalSettingItemInput, Prisma.ApprovalSettingUncheckedCreateWithoutApprovalSettingItemInput>
+  connectOrCreate?: Prisma.ApprovalSettingCreateOrConnectWithoutApprovalSettingItemInput
+  connect?: Prisma.ApprovalSettingWhereUniqueInput
+}
+
+export type ApprovalSettingUpdateOneRequiredWithoutApprovalSettingItemNestedInput = {
+  create?: Prisma.XOR<Prisma.ApprovalSettingCreateWithoutApprovalSettingItemInput, Prisma.ApprovalSettingUncheckedCreateWithoutApprovalSettingItemInput>
+  connectOrCreate?: Prisma.ApprovalSettingCreateOrConnectWithoutApprovalSettingItemInput
+  upsert?: Prisma.ApprovalSettingUpsertWithoutApprovalSettingItemInput
+  connect?: Prisma.ApprovalSettingWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ApprovalSettingUpdateToOneWithWhereWithoutApprovalSettingItemInput, Prisma.ApprovalSettingUpdateWithoutApprovalSettingItemInput>, Prisma.ApprovalSettingUncheckedUpdateWithoutApprovalSettingItemInput>
+}
+
 export type ApprovalSettingCreateNestedManyWithoutCompanyInput = {
   create?: Prisma.XOR<Prisma.ApprovalSettingCreateWithoutCompanyInput, Prisma.ApprovalSettingUncheckedCreateWithoutCompanyInput> | Prisma.ApprovalSettingCreateWithoutCompanyInput[] | Prisma.ApprovalSettingUncheckedCreateWithoutCompanyInput[]
   connectOrCreate?: Prisma.ApprovalSettingCreateOrConnectWithoutCompanyInput | Prisma.ApprovalSettingCreateOrConnectWithoutCompanyInput[]
@@ -426,26 +460,50 @@ export type ApprovalSettingUncheckedUpdateManyWithoutCompanyNestedInput = {
   deleteMany?: Prisma.ApprovalSettingScalarWhereInput | Prisma.ApprovalSettingScalarWhereInput[]
 }
 
-export type NullableEnumPaymentTypeFieldUpdateOperationsInput = {
-  set?: $Enums.PaymentType | null
+export type ApprovalSettingCreateWithoutApprovalSettingItemInput = {
+  approvalType: $Enums.ApprovalType
+  paymentType?: $Enums.PaymentType | null
+  nkpType?: $Enums.NkpType | null
+  Company?: Prisma.CompanyCreateNestedOneWithoutApprovalSettingInput
 }
 
-export type NullableEnumNkpTypeFieldUpdateOperationsInput = {
-  set?: $Enums.NkpType | null
+export type ApprovalSettingUncheckedCreateWithoutApprovalSettingItemInput = {
+  id?: number
+  companyId?: number | null
+  approvalType: $Enums.ApprovalType
+  paymentType?: $Enums.PaymentType | null
+  nkpType?: $Enums.NkpType | null
 }
 
-export type ApprovalSettingCreateNestedOneWithoutApprovalSettingItemInput = {
-  create?: Prisma.XOR<Prisma.ApprovalSettingCreateWithoutApprovalSettingItemInput, Prisma.ApprovalSettingUncheckedCreateWithoutApprovalSettingItemInput>
-  connectOrCreate?: Prisma.ApprovalSettingCreateOrConnectWithoutApprovalSettingItemInput
-  connect?: Prisma.ApprovalSettingWhereUniqueInput
+export type ApprovalSettingCreateOrConnectWithoutApprovalSettingItemInput = {
+  where: Prisma.ApprovalSettingWhereUniqueInput
+  create: Prisma.XOR<Prisma.ApprovalSettingCreateWithoutApprovalSettingItemInput, Prisma.ApprovalSettingUncheckedCreateWithoutApprovalSettingItemInput>
 }
 
-export type ApprovalSettingUpdateOneRequiredWithoutApprovalSettingItemNestedInput = {
-  create?: Prisma.XOR<Prisma.ApprovalSettingCreateWithoutApprovalSettingItemInput, Prisma.ApprovalSettingUncheckedCreateWithoutApprovalSettingItemInput>
-  connectOrCreate?: Prisma.ApprovalSettingCreateOrConnectWithoutApprovalSettingItemInput
-  upsert?: Prisma.ApprovalSettingUpsertWithoutApprovalSettingItemInput
-  connect?: Prisma.ApprovalSettingWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.ApprovalSettingUpdateToOneWithWhereWithoutApprovalSettingItemInput, Prisma.ApprovalSettingUpdateWithoutApprovalSettingItemInput>, Prisma.ApprovalSettingUncheckedUpdateWithoutApprovalSettingItemInput>
+export type ApprovalSettingUpsertWithoutApprovalSettingItemInput = {
+  update: Prisma.XOR<Prisma.ApprovalSettingUpdateWithoutApprovalSettingItemInput, Prisma.ApprovalSettingUncheckedUpdateWithoutApprovalSettingItemInput>
+  create: Prisma.XOR<Prisma.ApprovalSettingCreateWithoutApprovalSettingItemInput, Prisma.ApprovalSettingUncheckedCreateWithoutApprovalSettingItemInput>
+  where?: Prisma.ApprovalSettingWhereInput
+}
+
+export type ApprovalSettingUpdateToOneWithWhereWithoutApprovalSettingItemInput = {
+  where?: Prisma.ApprovalSettingWhereInput
+  data: Prisma.XOR<Prisma.ApprovalSettingUpdateWithoutApprovalSettingItemInput, Prisma.ApprovalSettingUncheckedUpdateWithoutApprovalSettingItemInput>
+}
+
+export type ApprovalSettingUpdateWithoutApprovalSettingItemInput = {
+  approvalType?: Prisma.EnumApprovalTypeFieldUpdateOperationsInput | $Enums.ApprovalType
+  paymentType?: Prisma.NullableEnumPaymentTypeFieldUpdateOperationsInput | $Enums.PaymentType | null
+  nkpType?: Prisma.NullableEnumNkpTypeFieldUpdateOperationsInput | $Enums.NkpType | null
+  Company?: Prisma.CompanyUpdateOneWithoutApprovalSettingNestedInput
+}
+
+export type ApprovalSettingUncheckedUpdateWithoutApprovalSettingItemInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  companyId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  approvalType?: Prisma.EnumApprovalTypeFieldUpdateOperationsInput | $Enums.ApprovalType
+  paymentType?: Prisma.NullableEnumPaymentTypeFieldUpdateOperationsInput | $Enums.PaymentType | null
+  nkpType?: Prisma.NullableEnumNkpTypeFieldUpdateOperationsInput | $Enums.NkpType | null
 }
 
 export type ApprovalSettingCreateWithoutCompanyInput = {
@@ -498,52 +556,6 @@ export type ApprovalSettingScalarWhereInput = {
   approvalType?: Prisma.EnumApprovalTypeFilter<"ApprovalSetting"> | $Enums.ApprovalType
   paymentType?: Prisma.EnumPaymentTypeNullableFilter<"ApprovalSetting"> | $Enums.PaymentType | null
   nkpType?: Prisma.EnumNkpTypeNullableFilter<"ApprovalSetting"> | $Enums.NkpType | null
-}
-
-export type ApprovalSettingCreateWithoutApprovalSettingItemInput = {
-  approvalType: $Enums.ApprovalType
-  paymentType?: $Enums.PaymentType | null
-  nkpType?: $Enums.NkpType | null
-  Company?: Prisma.CompanyCreateNestedOneWithoutApprovalSettingInput
-}
-
-export type ApprovalSettingUncheckedCreateWithoutApprovalSettingItemInput = {
-  id?: number
-  companyId?: number | null
-  approvalType: $Enums.ApprovalType
-  paymentType?: $Enums.PaymentType | null
-  nkpType?: $Enums.NkpType | null
-}
-
-export type ApprovalSettingCreateOrConnectWithoutApprovalSettingItemInput = {
-  where: Prisma.ApprovalSettingWhereUniqueInput
-  create: Prisma.XOR<Prisma.ApprovalSettingCreateWithoutApprovalSettingItemInput, Prisma.ApprovalSettingUncheckedCreateWithoutApprovalSettingItemInput>
-}
-
-export type ApprovalSettingUpsertWithoutApprovalSettingItemInput = {
-  update: Prisma.XOR<Prisma.ApprovalSettingUpdateWithoutApprovalSettingItemInput, Prisma.ApprovalSettingUncheckedUpdateWithoutApprovalSettingItemInput>
-  create: Prisma.XOR<Prisma.ApprovalSettingCreateWithoutApprovalSettingItemInput, Prisma.ApprovalSettingUncheckedCreateWithoutApprovalSettingItemInput>
-  where?: Prisma.ApprovalSettingWhereInput
-}
-
-export type ApprovalSettingUpdateToOneWithWhereWithoutApprovalSettingItemInput = {
-  where?: Prisma.ApprovalSettingWhereInput
-  data: Prisma.XOR<Prisma.ApprovalSettingUpdateWithoutApprovalSettingItemInput, Prisma.ApprovalSettingUncheckedUpdateWithoutApprovalSettingItemInput>
-}
-
-export type ApprovalSettingUpdateWithoutApprovalSettingItemInput = {
-  approvalType?: Prisma.EnumApprovalTypeFieldUpdateOperationsInput | $Enums.ApprovalType
-  paymentType?: Prisma.NullableEnumPaymentTypeFieldUpdateOperationsInput | $Enums.PaymentType | null
-  nkpType?: Prisma.NullableEnumNkpTypeFieldUpdateOperationsInput | $Enums.NkpType | null
-  Company?: Prisma.CompanyUpdateOneWithoutApprovalSettingNestedInput
-}
-
-export type ApprovalSettingUncheckedUpdateWithoutApprovalSettingItemInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  companyId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  approvalType?: Prisma.EnumApprovalTypeFieldUpdateOperationsInput | $Enums.ApprovalType
-  paymentType?: Prisma.NullableEnumPaymentTypeFieldUpdateOperationsInput | $Enums.PaymentType | null
-  nkpType?: Prisma.NullableEnumNkpTypeFieldUpdateOperationsInput | $Enums.NkpType | null
 }
 
 export type ApprovalSettingCreateManyCompanyInput = {

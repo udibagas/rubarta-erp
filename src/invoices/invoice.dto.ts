@@ -16,6 +16,10 @@ import { Type } from 'class-transformer';
 import { PartialType } from '@nestjs/swagger';
 
 export class InvoiceItemDto {
+  @IsNotEmpty({ message: 'Part number is required' })
+  @IsString()
+  partNumber: string;
+
   @IsNotEmpty({ message: 'Description is required' })
   @IsString()
   description: string;

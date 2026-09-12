@@ -32,11 +32,11 @@ model Invoice {
 model InvoiceItem {
   id          Int     @id @default(autoincrement())
   invoiceId   Int
+  partNumber   String
   description String
   quantity    Int
   unitPrice   Float
   totalPrice  Float
-  vat         Boolean @default(false) // Indicates if VAT is applicable
 
   // Relationships
   Invoice Invoice @relation(fields: [invoiceId], references: [id])

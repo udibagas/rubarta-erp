@@ -385,48 +385,6 @@ export type ApprovalSettingItemSumOrderByAggregateInput = {
   userId?: Prisma.SortOrder
 }
 
-export type ApprovalSettingItemCreateNestedManyWithoutUserInput = {
-  create?: Prisma.XOR<Prisma.ApprovalSettingItemCreateWithoutUserInput, Prisma.ApprovalSettingItemUncheckedCreateWithoutUserInput> | Prisma.ApprovalSettingItemCreateWithoutUserInput[] | Prisma.ApprovalSettingItemUncheckedCreateWithoutUserInput[]
-  connectOrCreate?: Prisma.ApprovalSettingItemCreateOrConnectWithoutUserInput | Prisma.ApprovalSettingItemCreateOrConnectWithoutUserInput[]
-  createMany?: Prisma.ApprovalSettingItemCreateManyUserInputEnvelope
-  connect?: Prisma.ApprovalSettingItemWhereUniqueInput | Prisma.ApprovalSettingItemWhereUniqueInput[]
-}
-
-export type ApprovalSettingItemUncheckedCreateNestedManyWithoutUserInput = {
-  create?: Prisma.XOR<Prisma.ApprovalSettingItemCreateWithoutUserInput, Prisma.ApprovalSettingItemUncheckedCreateWithoutUserInput> | Prisma.ApprovalSettingItemCreateWithoutUserInput[] | Prisma.ApprovalSettingItemUncheckedCreateWithoutUserInput[]
-  connectOrCreate?: Prisma.ApprovalSettingItemCreateOrConnectWithoutUserInput | Prisma.ApprovalSettingItemCreateOrConnectWithoutUserInput[]
-  createMany?: Prisma.ApprovalSettingItemCreateManyUserInputEnvelope
-  connect?: Prisma.ApprovalSettingItemWhereUniqueInput | Prisma.ApprovalSettingItemWhereUniqueInput[]
-}
-
-export type ApprovalSettingItemUpdateManyWithoutUserNestedInput = {
-  create?: Prisma.XOR<Prisma.ApprovalSettingItemCreateWithoutUserInput, Prisma.ApprovalSettingItemUncheckedCreateWithoutUserInput> | Prisma.ApprovalSettingItemCreateWithoutUserInput[] | Prisma.ApprovalSettingItemUncheckedCreateWithoutUserInput[]
-  connectOrCreate?: Prisma.ApprovalSettingItemCreateOrConnectWithoutUserInput | Prisma.ApprovalSettingItemCreateOrConnectWithoutUserInput[]
-  upsert?: Prisma.ApprovalSettingItemUpsertWithWhereUniqueWithoutUserInput | Prisma.ApprovalSettingItemUpsertWithWhereUniqueWithoutUserInput[]
-  createMany?: Prisma.ApprovalSettingItemCreateManyUserInputEnvelope
-  set?: Prisma.ApprovalSettingItemWhereUniqueInput | Prisma.ApprovalSettingItemWhereUniqueInput[]
-  disconnect?: Prisma.ApprovalSettingItemWhereUniqueInput | Prisma.ApprovalSettingItemWhereUniqueInput[]
-  delete?: Prisma.ApprovalSettingItemWhereUniqueInput | Prisma.ApprovalSettingItemWhereUniqueInput[]
-  connect?: Prisma.ApprovalSettingItemWhereUniqueInput | Prisma.ApprovalSettingItemWhereUniqueInput[]
-  update?: Prisma.ApprovalSettingItemUpdateWithWhereUniqueWithoutUserInput | Prisma.ApprovalSettingItemUpdateWithWhereUniqueWithoutUserInput[]
-  updateMany?: Prisma.ApprovalSettingItemUpdateManyWithWhereWithoutUserInput | Prisma.ApprovalSettingItemUpdateManyWithWhereWithoutUserInput[]
-  deleteMany?: Prisma.ApprovalSettingItemScalarWhereInput | Prisma.ApprovalSettingItemScalarWhereInput[]
-}
-
-export type ApprovalSettingItemUncheckedUpdateManyWithoutUserNestedInput = {
-  create?: Prisma.XOR<Prisma.ApprovalSettingItemCreateWithoutUserInput, Prisma.ApprovalSettingItemUncheckedCreateWithoutUserInput> | Prisma.ApprovalSettingItemCreateWithoutUserInput[] | Prisma.ApprovalSettingItemUncheckedCreateWithoutUserInput[]
-  connectOrCreate?: Prisma.ApprovalSettingItemCreateOrConnectWithoutUserInput | Prisma.ApprovalSettingItemCreateOrConnectWithoutUserInput[]
-  upsert?: Prisma.ApprovalSettingItemUpsertWithWhereUniqueWithoutUserInput | Prisma.ApprovalSettingItemUpsertWithWhereUniqueWithoutUserInput[]
-  createMany?: Prisma.ApprovalSettingItemCreateManyUserInputEnvelope
-  set?: Prisma.ApprovalSettingItemWhereUniqueInput | Prisma.ApprovalSettingItemWhereUniqueInput[]
-  disconnect?: Prisma.ApprovalSettingItemWhereUniqueInput | Prisma.ApprovalSettingItemWhereUniqueInput[]
-  delete?: Prisma.ApprovalSettingItemWhereUniqueInput | Prisma.ApprovalSettingItemWhereUniqueInput[]
-  connect?: Prisma.ApprovalSettingItemWhereUniqueInput | Prisma.ApprovalSettingItemWhereUniqueInput[]
-  update?: Prisma.ApprovalSettingItemUpdateWithWhereUniqueWithoutUserInput | Prisma.ApprovalSettingItemUpdateWithWhereUniqueWithoutUserInput[]
-  updateMany?: Prisma.ApprovalSettingItemUpdateManyWithWhereWithoutUserInput | Prisma.ApprovalSettingItemUpdateManyWithWhereWithoutUserInput[]
-  deleteMany?: Prisma.ApprovalSettingItemScalarWhereInput | Prisma.ApprovalSettingItemScalarWhereInput[]
-}
-
 export type ApprovalSettingItemCreateNestedManyWithoutApprovalSettingInput = {
   create?: Prisma.XOR<Prisma.ApprovalSettingItemCreateWithoutApprovalSettingInput, Prisma.ApprovalSettingItemUncheckedCreateWithoutApprovalSettingInput> | Prisma.ApprovalSettingItemCreateWithoutApprovalSettingInput[] | Prisma.ApprovalSettingItemUncheckedCreateWithoutApprovalSettingInput[]
   connectOrCreate?: Prisma.ApprovalSettingItemCreateOrConnectWithoutApprovalSettingInput | Prisma.ApprovalSettingItemCreateOrConnectWithoutApprovalSettingInput[]
@@ -469,54 +427,50 @@ export type ApprovalSettingItemUncheckedUpdateManyWithoutApprovalSettingNestedIn
   deleteMany?: Prisma.ApprovalSettingItemScalarWhereInput | Prisma.ApprovalSettingItemScalarWhereInput[]
 }
 
-export type ApprovalSettingItemCreateWithoutUserInput = {
-  level: number
-  approvalActionType?: $Enums.ApprovalActionType
-  ApprovalSetting: Prisma.ApprovalSettingCreateNestedOneWithoutApprovalSettingItemInput
+export type EnumApprovalActionTypeFieldUpdateOperationsInput = {
+  set?: $Enums.ApprovalActionType
 }
 
-export type ApprovalSettingItemUncheckedCreateWithoutUserInput = {
-  id?: number
-  approvalSettingId: number
-  level: number
-  approvalActionType?: $Enums.ApprovalActionType
+export type ApprovalSettingItemCreateNestedManyWithoutUserInput = {
+  create?: Prisma.XOR<Prisma.ApprovalSettingItemCreateWithoutUserInput, Prisma.ApprovalSettingItemUncheckedCreateWithoutUserInput> | Prisma.ApprovalSettingItemCreateWithoutUserInput[] | Prisma.ApprovalSettingItemUncheckedCreateWithoutUserInput[]
+  connectOrCreate?: Prisma.ApprovalSettingItemCreateOrConnectWithoutUserInput | Prisma.ApprovalSettingItemCreateOrConnectWithoutUserInput[]
+  createMany?: Prisma.ApprovalSettingItemCreateManyUserInputEnvelope
+  connect?: Prisma.ApprovalSettingItemWhereUniqueInput | Prisma.ApprovalSettingItemWhereUniqueInput[]
 }
 
-export type ApprovalSettingItemCreateOrConnectWithoutUserInput = {
-  where: Prisma.ApprovalSettingItemWhereUniqueInput
-  create: Prisma.XOR<Prisma.ApprovalSettingItemCreateWithoutUserInput, Prisma.ApprovalSettingItemUncheckedCreateWithoutUserInput>
+export type ApprovalSettingItemUncheckedCreateNestedManyWithoutUserInput = {
+  create?: Prisma.XOR<Prisma.ApprovalSettingItemCreateWithoutUserInput, Prisma.ApprovalSettingItemUncheckedCreateWithoutUserInput> | Prisma.ApprovalSettingItemCreateWithoutUserInput[] | Prisma.ApprovalSettingItemUncheckedCreateWithoutUserInput[]
+  connectOrCreate?: Prisma.ApprovalSettingItemCreateOrConnectWithoutUserInput | Prisma.ApprovalSettingItemCreateOrConnectWithoutUserInput[]
+  createMany?: Prisma.ApprovalSettingItemCreateManyUserInputEnvelope
+  connect?: Prisma.ApprovalSettingItemWhereUniqueInput | Prisma.ApprovalSettingItemWhereUniqueInput[]
 }
 
-export type ApprovalSettingItemCreateManyUserInputEnvelope = {
-  data: Prisma.ApprovalSettingItemCreateManyUserInput | Prisma.ApprovalSettingItemCreateManyUserInput[]
-  skipDuplicates?: boolean
+export type ApprovalSettingItemUpdateManyWithoutUserNestedInput = {
+  create?: Prisma.XOR<Prisma.ApprovalSettingItemCreateWithoutUserInput, Prisma.ApprovalSettingItemUncheckedCreateWithoutUserInput> | Prisma.ApprovalSettingItemCreateWithoutUserInput[] | Prisma.ApprovalSettingItemUncheckedCreateWithoutUserInput[]
+  connectOrCreate?: Prisma.ApprovalSettingItemCreateOrConnectWithoutUserInput | Prisma.ApprovalSettingItemCreateOrConnectWithoutUserInput[]
+  upsert?: Prisma.ApprovalSettingItemUpsertWithWhereUniqueWithoutUserInput | Prisma.ApprovalSettingItemUpsertWithWhereUniqueWithoutUserInput[]
+  createMany?: Prisma.ApprovalSettingItemCreateManyUserInputEnvelope
+  set?: Prisma.ApprovalSettingItemWhereUniqueInput | Prisma.ApprovalSettingItemWhereUniqueInput[]
+  disconnect?: Prisma.ApprovalSettingItemWhereUniqueInput | Prisma.ApprovalSettingItemWhereUniqueInput[]
+  delete?: Prisma.ApprovalSettingItemWhereUniqueInput | Prisma.ApprovalSettingItemWhereUniqueInput[]
+  connect?: Prisma.ApprovalSettingItemWhereUniqueInput | Prisma.ApprovalSettingItemWhereUniqueInput[]
+  update?: Prisma.ApprovalSettingItemUpdateWithWhereUniqueWithoutUserInput | Prisma.ApprovalSettingItemUpdateWithWhereUniqueWithoutUserInput[]
+  updateMany?: Prisma.ApprovalSettingItemUpdateManyWithWhereWithoutUserInput | Prisma.ApprovalSettingItemUpdateManyWithWhereWithoutUserInput[]
+  deleteMany?: Prisma.ApprovalSettingItemScalarWhereInput | Prisma.ApprovalSettingItemScalarWhereInput[]
 }
 
-export type ApprovalSettingItemUpsertWithWhereUniqueWithoutUserInput = {
-  where: Prisma.ApprovalSettingItemWhereUniqueInput
-  update: Prisma.XOR<Prisma.ApprovalSettingItemUpdateWithoutUserInput, Prisma.ApprovalSettingItemUncheckedUpdateWithoutUserInput>
-  create: Prisma.XOR<Prisma.ApprovalSettingItemCreateWithoutUserInput, Prisma.ApprovalSettingItemUncheckedCreateWithoutUserInput>
-}
-
-export type ApprovalSettingItemUpdateWithWhereUniqueWithoutUserInput = {
-  where: Prisma.ApprovalSettingItemWhereUniqueInput
-  data: Prisma.XOR<Prisma.ApprovalSettingItemUpdateWithoutUserInput, Prisma.ApprovalSettingItemUncheckedUpdateWithoutUserInput>
-}
-
-export type ApprovalSettingItemUpdateManyWithWhereWithoutUserInput = {
-  where: Prisma.ApprovalSettingItemScalarWhereInput
-  data: Prisma.XOR<Prisma.ApprovalSettingItemUpdateManyMutationInput, Prisma.ApprovalSettingItemUncheckedUpdateManyWithoutUserInput>
-}
-
-export type ApprovalSettingItemScalarWhereInput = {
-  AND?: Prisma.ApprovalSettingItemScalarWhereInput | Prisma.ApprovalSettingItemScalarWhereInput[]
-  OR?: Prisma.ApprovalSettingItemScalarWhereInput[]
-  NOT?: Prisma.ApprovalSettingItemScalarWhereInput | Prisma.ApprovalSettingItemScalarWhereInput[]
-  id?: Prisma.IntFilter<"ApprovalSettingItem"> | number
-  approvalSettingId?: Prisma.IntFilter<"ApprovalSettingItem"> | number
-  level?: Prisma.IntFilter<"ApprovalSettingItem"> | number
-  userId?: Prisma.IntFilter<"ApprovalSettingItem"> | number
-  approvalActionType?: Prisma.EnumApprovalActionTypeFilter<"ApprovalSettingItem"> | $Enums.ApprovalActionType
+export type ApprovalSettingItemUncheckedUpdateManyWithoutUserNestedInput = {
+  create?: Prisma.XOR<Prisma.ApprovalSettingItemCreateWithoutUserInput, Prisma.ApprovalSettingItemUncheckedCreateWithoutUserInput> | Prisma.ApprovalSettingItemCreateWithoutUserInput[] | Prisma.ApprovalSettingItemUncheckedCreateWithoutUserInput[]
+  connectOrCreate?: Prisma.ApprovalSettingItemCreateOrConnectWithoutUserInput | Prisma.ApprovalSettingItemCreateOrConnectWithoutUserInput[]
+  upsert?: Prisma.ApprovalSettingItemUpsertWithWhereUniqueWithoutUserInput | Prisma.ApprovalSettingItemUpsertWithWhereUniqueWithoutUserInput[]
+  createMany?: Prisma.ApprovalSettingItemCreateManyUserInputEnvelope
+  set?: Prisma.ApprovalSettingItemWhereUniqueInput | Prisma.ApprovalSettingItemWhereUniqueInput[]
+  disconnect?: Prisma.ApprovalSettingItemWhereUniqueInput | Prisma.ApprovalSettingItemWhereUniqueInput[]
+  delete?: Prisma.ApprovalSettingItemWhereUniqueInput | Prisma.ApprovalSettingItemWhereUniqueInput[]
+  connect?: Prisma.ApprovalSettingItemWhereUniqueInput | Prisma.ApprovalSettingItemWhereUniqueInput[]
+  update?: Prisma.ApprovalSettingItemUpdateWithWhereUniqueWithoutUserInput | Prisma.ApprovalSettingItemUpdateWithWhereUniqueWithoutUserInput[]
+  updateMany?: Prisma.ApprovalSettingItemUpdateManyWithWhereWithoutUserInput | Prisma.ApprovalSettingItemUpdateManyWithWhereWithoutUserInput[]
+  deleteMany?: Prisma.ApprovalSettingItemScalarWhereInput | Prisma.ApprovalSettingItemScalarWhereInput[]
 }
 
 export type ApprovalSettingItemCreateWithoutApprovalSettingInput = {
@@ -558,31 +512,54 @@ export type ApprovalSettingItemUpdateManyWithWhereWithoutApprovalSettingInput = 
   data: Prisma.XOR<Prisma.ApprovalSettingItemUpdateManyMutationInput, Prisma.ApprovalSettingItemUncheckedUpdateManyWithoutApprovalSettingInput>
 }
 
-export type ApprovalSettingItemCreateManyUserInput = {
+export type ApprovalSettingItemScalarWhereInput = {
+  AND?: Prisma.ApprovalSettingItemScalarWhereInput | Prisma.ApprovalSettingItemScalarWhereInput[]
+  OR?: Prisma.ApprovalSettingItemScalarWhereInput[]
+  NOT?: Prisma.ApprovalSettingItemScalarWhereInput | Prisma.ApprovalSettingItemScalarWhereInput[]
+  id?: Prisma.IntFilter<"ApprovalSettingItem"> | number
+  approvalSettingId?: Prisma.IntFilter<"ApprovalSettingItem"> | number
+  level?: Prisma.IntFilter<"ApprovalSettingItem"> | number
+  userId?: Prisma.IntFilter<"ApprovalSettingItem"> | number
+  approvalActionType?: Prisma.EnumApprovalActionTypeFilter<"ApprovalSettingItem"> | $Enums.ApprovalActionType
+}
+
+export type ApprovalSettingItemCreateWithoutUserInput = {
+  level: number
+  approvalActionType?: $Enums.ApprovalActionType
+  ApprovalSetting: Prisma.ApprovalSettingCreateNestedOneWithoutApprovalSettingItemInput
+}
+
+export type ApprovalSettingItemUncheckedCreateWithoutUserInput = {
   id?: number
   approvalSettingId: number
   level: number
   approvalActionType?: $Enums.ApprovalActionType
 }
 
-export type ApprovalSettingItemUpdateWithoutUserInput = {
-  level?: Prisma.IntFieldUpdateOperationsInput | number
-  approvalActionType?: Prisma.EnumApprovalActionTypeFieldUpdateOperationsInput | $Enums.ApprovalActionType
-  ApprovalSetting?: Prisma.ApprovalSettingUpdateOneRequiredWithoutApprovalSettingItemNestedInput
+export type ApprovalSettingItemCreateOrConnectWithoutUserInput = {
+  where: Prisma.ApprovalSettingItemWhereUniqueInput
+  create: Prisma.XOR<Prisma.ApprovalSettingItemCreateWithoutUserInput, Prisma.ApprovalSettingItemUncheckedCreateWithoutUserInput>
 }
 
-export type ApprovalSettingItemUncheckedUpdateWithoutUserInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  approvalSettingId?: Prisma.IntFieldUpdateOperationsInput | number
-  level?: Prisma.IntFieldUpdateOperationsInput | number
-  approvalActionType?: Prisma.EnumApprovalActionTypeFieldUpdateOperationsInput | $Enums.ApprovalActionType
+export type ApprovalSettingItemCreateManyUserInputEnvelope = {
+  data: Prisma.ApprovalSettingItemCreateManyUserInput | Prisma.ApprovalSettingItemCreateManyUserInput[]
+  skipDuplicates?: boolean
 }
 
-export type ApprovalSettingItemUncheckedUpdateManyWithoutUserInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  approvalSettingId?: Prisma.IntFieldUpdateOperationsInput | number
-  level?: Prisma.IntFieldUpdateOperationsInput | number
-  approvalActionType?: Prisma.EnumApprovalActionTypeFieldUpdateOperationsInput | $Enums.ApprovalActionType
+export type ApprovalSettingItemUpsertWithWhereUniqueWithoutUserInput = {
+  where: Prisma.ApprovalSettingItemWhereUniqueInput
+  update: Prisma.XOR<Prisma.ApprovalSettingItemUpdateWithoutUserInput, Prisma.ApprovalSettingItemUncheckedUpdateWithoutUserInput>
+  create: Prisma.XOR<Prisma.ApprovalSettingItemCreateWithoutUserInput, Prisma.ApprovalSettingItemUncheckedCreateWithoutUserInput>
+}
+
+export type ApprovalSettingItemUpdateWithWhereUniqueWithoutUserInput = {
+  where: Prisma.ApprovalSettingItemWhereUniqueInput
+  data: Prisma.XOR<Prisma.ApprovalSettingItemUpdateWithoutUserInput, Prisma.ApprovalSettingItemUncheckedUpdateWithoutUserInput>
+}
+
+export type ApprovalSettingItemUpdateManyWithWhereWithoutUserInput = {
+  where: Prisma.ApprovalSettingItemScalarWhereInput
+  data: Prisma.XOR<Prisma.ApprovalSettingItemUpdateManyMutationInput, Prisma.ApprovalSettingItemUncheckedUpdateManyWithoutUserInput>
 }
 
 export type ApprovalSettingItemCreateManyApprovalSettingInput = {
@@ -609,6 +586,33 @@ export type ApprovalSettingItemUncheckedUpdateManyWithoutApprovalSettingInput = 
   id?: Prisma.IntFieldUpdateOperationsInput | number
   level?: Prisma.IntFieldUpdateOperationsInput | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
+  approvalActionType?: Prisma.EnumApprovalActionTypeFieldUpdateOperationsInput | $Enums.ApprovalActionType
+}
+
+export type ApprovalSettingItemCreateManyUserInput = {
+  id?: number
+  approvalSettingId: number
+  level: number
+  approvalActionType?: $Enums.ApprovalActionType
+}
+
+export type ApprovalSettingItemUpdateWithoutUserInput = {
+  level?: Prisma.IntFieldUpdateOperationsInput | number
+  approvalActionType?: Prisma.EnumApprovalActionTypeFieldUpdateOperationsInput | $Enums.ApprovalActionType
+  ApprovalSetting?: Prisma.ApprovalSettingUpdateOneRequiredWithoutApprovalSettingItemNestedInput
+}
+
+export type ApprovalSettingItemUncheckedUpdateWithoutUserInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  approvalSettingId?: Prisma.IntFieldUpdateOperationsInput | number
+  level?: Prisma.IntFieldUpdateOperationsInput | number
+  approvalActionType?: Prisma.EnumApprovalActionTypeFieldUpdateOperationsInput | $Enums.ApprovalActionType
+}
+
+export type ApprovalSettingItemUncheckedUpdateManyWithoutUserInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  approvalSettingId?: Prisma.IntFieldUpdateOperationsInput | number
+  level?: Prisma.IntFieldUpdateOperationsInput | number
   approvalActionType?: Prisma.EnumApprovalActionTypeFieldUpdateOperationsInput | $Enums.ApprovalActionType
 }
 

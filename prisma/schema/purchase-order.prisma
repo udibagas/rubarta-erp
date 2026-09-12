@@ -50,6 +50,7 @@ model PurchaseOrder {
   PurchaseOrderItems PurchaseOrderItem[]
   Supplier           Supplier?           @relation(fields: [supplierId], references: [id])
   Company            Company             @relation(fields: [companyId], references: [id])
+  goodsReceipts       GoodsReceipt[]
 
   @@index([number])
   @@index([status])

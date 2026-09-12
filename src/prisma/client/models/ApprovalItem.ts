@@ -486,14 +486,6 @@ export type ApprovalItemUncheckedUpdateManyWithoutApprovalNestedInput = {
   deleteMany?: Prisma.ApprovalItemScalarWhereInput | Prisma.ApprovalItemScalarWhereInput[]
 }
 
-export type NullableIntFieldUpdateOperationsInput = {
-  set?: number | null
-  increment?: number
-  decrement?: number
-  multiply?: number
-  divide?: number
-}
-
 export type ApprovalItemCreateNestedManyWithoutUserInput = {
   create?: Prisma.XOR<Prisma.ApprovalItemCreateWithoutUserInput, Prisma.ApprovalItemUncheckedCreateWithoutUserInput> | Prisma.ApprovalItemCreateWithoutUserInput[] | Prisma.ApprovalItemUncheckedCreateWithoutUserInput[]
   connectOrCreate?: Prisma.ApprovalItemCreateOrConnectWithoutUserInput | Prisma.ApprovalItemCreateOrConnectWithoutUserInput[]

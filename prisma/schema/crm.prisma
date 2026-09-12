@@ -24,6 +24,7 @@ model Customer {
   Leads          Lead[]
   Opportunities  Opportunity[]
   SalesOrders    SalesOrder[]
+  DeliveryOrders DeliveryOrder[]
   CustomerNotes  CustomerNote[]
   CustomerFiles  CustomerFile[]
   Quotations     Quotation[]

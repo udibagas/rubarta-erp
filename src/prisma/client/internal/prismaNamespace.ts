@@ -401,6 +401,8 @@ export const ModelName = {
   Account: 'Account',
   Payment: 'Payment',
   Expense: 'Expense',
+  ApprovalSetting: 'ApprovalSetting',
+  ApprovalSettingItem: 'ApprovalSettingItem',
   Approval: 'Approval',
   ApprovalItem: 'ApprovalItem',
   Customer: 'Customer',
@@ -413,6 +415,10 @@ export const ModelName = {
   CustomerFile: 'CustomerFile',
   Material: 'Material',
   VisitPlan: 'VisitPlan',
+  DeliveryOrder: 'DeliveryOrder',
+  DeliveryOrderItem: 'DeliveryOrderItem',
+  GoodsReceipt: 'GoodsReceipt',
+  GoodsReceiptItem: 'GoodsReceiptItem',
   Invoice: 'Invoice',
   InvoiceItem: 'InvoiceItem',
   Nkp: 'Nkp',
@@ -430,8 +436,6 @@ export const ModelName = {
   Bank: 'Bank',
   User: 'User',
   UserBalance: 'UserBalance',
-  ApprovalSetting: 'ApprovalSetting',
-  ApprovalSettingItem: 'ApprovalSettingItem',
   Notification: 'Notification'
 } as const
 
@@ -448,7 +452,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "supplier" | "account" | "payment" | "expense" | "approval" | "approvalItem" | "customer" | "contact" | "lead" | "opportunity" | "task" | "interaction" | "customerNote" | "customerFile" | "material" | "visitPlan" | "invoice" | "invoiceItem" | "nkp" | "nkpItem" | "nkpApproval" | "nkpAttachment" | "purchaseOrder" | "purchaseOrderItem" | "quotation" | "quotationItem" | "salesOrder" | "salesOrderItem" | "company" | "department" | "bank" | "user" | "userBalance" | "approvalSetting" | "approvalSettingItem" | "notification"
+    modelProps: "supplier" | "account" | "payment" | "expense" | "approvalSetting" | "approvalSettingItem" | "approval" | "approvalItem" | "customer" | "contact" | "lead" | "opportunity" | "task" | "interaction" | "customerNote" | "customerFile" | "material" | "visitPlan" | "deliveryOrder" | "deliveryOrderItem" | "goodsReceipt" | "goodsReceiptItem" | "invoice" | "invoiceItem" | "nkp" | "nkpItem" | "nkpApproval" | "nkpAttachment" | "purchaseOrder" | "purchaseOrderItem" | "quotation" | "quotationItem" | "salesOrder" | "salesOrderItem" | "company" | "department" | "bank" | "user" | "userBalance" | "notification"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -745,6 +749,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.ExpenseCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.ExpenseCountAggregateOutputType> | number
+        }
+      }
+    }
+    ApprovalSetting: {
+      payload: Prisma.$ApprovalSettingPayload<ExtArgs>
+      fields: Prisma.ApprovalSettingFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ApprovalSettingFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ApprovalSettingPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ApprovalSettingFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ApprovalSettingPayload>
+        }
+        findFirst: {
+          args: Prisma.ApprovalSettingFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ApprovalSettingPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ApprovalSettingFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ApprovalSettingPayload>
+        }
+        findMany: {
+          args: Prisma.ApprovalSettingFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ApprovalSettingPayload>[]
+        }
+        create: {
+          args: Prisma.ApprovalSettingCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ApprovalSettingPayload>
+        }
+        createMany: {
+          args: Prisma.ApprovalSettingCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ApprovalSettingCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ApprovalSettingPayload>[]
+        }
+        delete: {
+          args: Prisma.ApprovalSettingDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ApprovalSettingPayload>
+        }
+        update: {
+          args: Prisma.ApprovalSettingUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ApprovalSettingPayload>
+        }
+        deleteMany: {
+          args: Prisma.ApprovalSettingDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ApprovalSettingUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ApprovalSettingUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ApprovalSettingPayload>[]
+        }
+        upsert: {
+          args: Prisma.ApprovalSettingUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ApprovalSettingPayload>
+        }
+        aggregate: {
+          args: Prisma.ApprovalSettingAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateApprovalSetting>
+        }
+        groupBy: {
+          args: Prisma.ApprovalSettingGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ApprovalSettingGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ApprovalSettingCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ApprovalSettingCountAggregateOutputType> | number
+        }
+      }
+    }
+    ApprovalSettingItem: {
+      payload: Prisma.$ApprovalSettingItemPayload<ExtArgs>
+      fields: Prisma.ApprovalSettingItemFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ApprovalSettingItemFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ApprovalSettingItemPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ApprovalSettingItemFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ApprovalSettingItemPayload>
+        }
+        findFirst: {
+          args: Prisma.ApprovalSettingItemFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ApprovalSettingItemPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ApprovalSettingItemFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ApprovalSettingItemPayload>
+        }
+        findMany: {
+          args: Prisma.ApprovalSettingItemFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ApprovalSettingItemPayload>[]
+        }
+        create: {
+          args: Prisma.ApprovalSettingItemCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ApprovalSettingItemPayload>
+        }
+        createMany: {
+          args: Prisma.ApprovalSettingItemCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ApprovalSettingItemCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ApprovalSettingItemPayload>[]
+        }
+        delete: {
+          args: Prisma.ApprovalSettingItemDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ApprovalSettingItemPayload>
+        }
+        update: {
+          args: Prisma.ApprovalSettingItemUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ApprovalSettingItemPayload>
+        }
+        deleteMany: {
+          args: Prisma.ApprovalSettingItemDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ApprovalSettingItemUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ApprovalSettingItemUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ApprovalSettingItemPayload>[]
+        }
+        upsert: {
+          args: Prisma.ApprovalSettingItemUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ApprovalSettingItemPayload>
+        }
+        aggregate: {
+          args: Prisma.ApprovalSettingItemAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateApprovalSettingItem>
+        }
+        groupBy: {
+          args: Prisma.ApprovalSettingItemGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ApprovalSettingItemGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ApprovalSettingItemCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ApprovalSettingItemCountAggregateOutputType> | number
         }
       }
     }
@@ -1633,6 +1785,302 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.VisitPlanCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.VisitPlanCountAggregateOutputType> | number
+        }
+      }
+    }
+    DeliveryOrder: {
+      payload: Prisma.$DeliveryOrderPayload<ExtArgs>
+      fields: Prisma.DeliveryOrderFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.DeliveryOrderFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DeliveryOrderPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.DeliveryOrderFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DeliveryOrderPayload>
+        }
+        findFirst: {
+          args: Prisma.DeliveryOrderFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DeliveryOrderPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.DeliveryOrderFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DeliveryOrderPayload>
+        }
+        findMany: {
+          args: Prisma.DeliveryOrderFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DeliveryOrderPayload>[]
+        }
+        create: {
+          args: Prisma.DeliveryOrderCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DeliveryOrderPayload>
+        }
+        createMany: {
+          args: Prisma.DeliveryOrderCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.DeliveryOrderCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DeliveryOrderPayload>[]
+        }
+        delete: {
+          args: Prisma.DeliveryOrderDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DeliveryOrderPayload>
+        }
+        update: {
+          args: Prisma.DeliveryOrderUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DeliveryOrderPayload>
+        }
+        deleteMany: {
+          args: Prisma.DeliveryOrderDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.DeliveryOrderUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.DeliveryOrderUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DeliveryOrderPayload>[]
+        }
+        upsert: {
+          args: Prisma.DeliveryOrderUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DeliveryOrderPayload>
+        }
+        aggregate: {
+          args: Prisma.DeliveryOrderAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateDeliveryOrder>
+        }
+        groupBy: {
+          args: Prisma.DeliveryOrderGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.DeliveryOrderGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.DeliveryOrderCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.DeliveryOrderCountAggregateOutputType> | number
+        }
+      }
+    }
+    DeliveryOrderItem: {
+      payload: Prisma.$DeliveryOrderItemPayload<ExtArgs>
+      fields: Prisma.DeliveryOrderItemFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.DeliveryOrderItemFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DeliveryOrderItemPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.DeliveryOrderItemFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DeliveryOrderItemPayload>
+        }
+        findFirst: {
+          args: Prisma.DeliveryOrderItemFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DeliveryOrderItemPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.DeliveryOrderItemFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DeliveryOrderItemPayload>
+        }
+        findMany: {
+          args: Prisma.DeliveryOrderItemFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DeliveryOrderItemPayload>[]
+        }
+        create: {
+          args: Prisma.DeliveryOrderItemCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DeliveryOrderItemPayload>
+        }
+        createMany: {
+          args: Prisma.DeliveryOrderItemCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.DeliveryOrderItemCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DeliveryOrderItemPayload>[]
+        }
+        delete: {
+          args: Prisma.DeliveryOrderItemDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DeliveryOrderItemPayload>
+        }
+        update: {
+          args: Prisma.DeliveryOrderItemUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DeliveryOrderItemPayload>
+        }
+        deleteMany: {
+          args: Prisma.DeliveryOrderItemDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.DeliveryOrderItemUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.DeliveryOrderItemUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DeliveryOrderItemPayload>[]
+        }
+        upsert: {
+          args: Prisma.DeliveryOrderItemUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DeliveryOrderItemPayload>
+        }
+        aggregate: {
+          args: Prisma.DeliveryOrderItemAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateDeliveryOrderItem>
+        }
+        groupBy: {
+          args: Prisma.DeliveryOrderItemGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.DeliveryOrderItemGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.DeliveryOrderItemCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.DeliveryOrderItemCountAggregateOutputType> | number
+        }
+      }
+    }
+    GoodsReceipt: {
+      payload: Prisma.$GoodsReceiptPayload<ExtArgs>
+      fields: Prisma.GoodsReceiptFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.GoodsReceiptFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GoodsReceiptPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.GoodsReceiptFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GoodsReceiptPayload>
+        }
+        findFirst: {
+          args: Prisma.GoodsReceiptFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GoodsReceiptPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.GoodsReceiptFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GoodsReceiptPayload>
+        }
+        findMany: {
+          args: Prisma.GoodsReceiptFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GoodsReceiptPayload>[]
+        }
+        create: {
+          args: Prisma.GoodsReceiptCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GoodsReceiptPayload>
+        }
+        createMany: {
+          args: Prisma.GoodsReceiptCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.GoodsReceiptCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GoodsReceiptPayload>[]
+        }
+        delete: {
+          args: Prisma.GoodsReceiptDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GoodsReceiptPayload>
+        }
+        update: {
+          args: Prisma.GoodsReceiptUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GoodsReceiptPayload>
+        }
+        deleteMany: {
+          args: Prisma.GoodsReceiptDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.GoodsReceiptUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.GoodsReceiptUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GoodsReceiptPayload>[]
+        }
+        upsert: {
+          args: Prisma.GoodsReceiptUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GoodsReceiptPayload>
+        }
+        aggregate: {
+          args: Prisma.GoodsReceiptAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateGoodsReceipt>
+        }
+        groupBy: {
+          args: Prisma.GoodsReceiptGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.GoodsReceiptGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.GoodsReceiptCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.GoodsReceiptCountAggregateOutputType> | number
+        }
+      }
+    }
+    GoodsReceiptItem: {
+      payload: Prisma.$GoodsReceiptItemPayload<ExtArgs>
+      fields: Prisma.GoodsReceiptItemFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.GoodsReceiptItemFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GoodsReceiptItemPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.GoodsReceiptItemFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GoodsReceiptItemPayload>
+        }
+        findFirst: {
+          args: Prisma.GoodsReceiptItemFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GoodsReceiptItemPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.GoodsReceiptItemFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GoodsReceiptItemPayload>
+        }
+        findMany: {
+          args: Prisma.GoodsReceiptItemFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GoodsReceiptItemPayload>[]
+        }
+        create: {
+          args: Prisma.GoodsReceiptItemCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GoodsReceiptItemPayload>
+        }
+        createMany: {
+          args: Prisma.GoodsReceiptItemCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.GoodsReceiptItemCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GoodsReceiptItemPayload>[]
+        }
+        delete: {
+          args: Prisma.GoodsReceiptItemDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GoodsReceiptItemPayload>
+        }
+        update: {
+          args: Prisma.GoodsReceiptItemUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GoodsReceiptItemPayload>
+        }
+        deleteMany: {
+          args: Prisma.GoodsReceiptItemDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.GoodsReceiptItemUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.GoodsReceiptItemUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GoodsReceiptItemPayload>[]
+        }
+        upsert: {
+          args: Prisma.GoodsReceiptItemUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GoodsReceiptItemPayload>
+        }
+        aggregate: {
+          args: Prisma.GoodsReceiptItemAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateGoodsReceiptItem>
+        }
+        groupBy: {
+          args: Prisma.GoodsReceiptItemGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.GoodsReceiptItemGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.GoodsReceiptItemCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.GoodsReceiptItemCountAggregateOutputType> | number
         }
       }
     }
@@ -2894,154 +3342,6 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
-    ApprovalSetting: {
-      payload: Prisma.$ApprovalSettingPayload<ExtArgs>
-      fields: Prisma.ApprovalSettingFieldRefs
-      operations: {
-        findUnique: {
-          args: Prisma.ApprovalSettingFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ApprovalSettingPayload> | null
-        }
-        findUniqueOrThrow: {
-          args: Prisma.ApprovalSettingFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ApprovalSettingPayload>
-        }
-        findFirst: {
-          args: Prisma.ApprovalSettingFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ApprovalSettingPayload> | null
-        }
-        findFirstOrThrow: {
-          args: Prisma.ApprovalSettingFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ApprovalSettingPayload>
-        }
-        findMany: {
-          args: Prisma.ApprovalSettingFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ApprovalSettingPayload>[]
-        }
-        create: {
-          args: Prisma.ApprovalSettingCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ApprovalSettingPayload>
-        }
-        createMany: {
-          args: Prisma.ApprovalSettingCreateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        createManyAndReturn: {
-          args: Prisma.ApprovalSettingCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ApprovalSettingPayload>[]
-        }
-        delete: {
-          args: Prisma.ApprovalSettingDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ApprovalSettingPayload>
-        }
-        update: {
-          args: Prisma.ApprovalSettingUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ApprovalSettingPayload>
-        }
-        deleteMany: {
-          args: Prisma.ApprovalSettingDeleteManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateMany: {
-          args: Prisma.ApprovalSettingUpdateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateManyAndReturn: {
-          args: Prisma.ApprovalSettingUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ApprovalSettingPayload>[]
-        }
-        upsert: {
-          args: Prisma.ApprovalSettingUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ApprovalSettingPayload>
-        }
-        aggregate: {
-          args: Prisma.ApprovalSettingAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateApprovalSetting>
-        }
-        groupBy: {
-          args: Prisma.ApprovalSettingGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.ApprovalSettingGroupByOutputType>[]
-        }
-        count: {
-          args: Prisma.ApprovalSettingCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.ApprovalSettingCountAggregateOutputType> | number
-        }
-      }
-    }
-    ApprovalSettingItem: {
-      payload: Prisma.$ApprovalSettingItemPayload<ExtArgs>
-      fields: Prisma.ApprovalSettingItemFieldRefs
-      operations: {
-        findUnique: {
-          args: Prisma.ApprovalSettingItemFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ApprovalSettingItemPayload> | null
-        }
-        findUniqueOrThrow: {
-          args: Prisma.ApprovalSettingItemFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ApprovalSettingItemPayload>
-        }
-        findFirst: {
-          args: Prisma.ApprovalSettingItemFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ApprovalSettingItemPayload> | null
-        }
-        findFirstOrThrow: {
-          args: Prisma.ApprovalSettingItemFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ApprovalSettingItemPayload>
-        }
-        findMany: {
-          args: Prisma.ApprovalSettingItemFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ApprovalSettingItemPayload>[]
-        }
-        create: {
-          args: Prisma.ApprovalSettingItemCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ApprovalSettingItemPayload>
-        }
-        createMany: {
-          args: Prisma.ApprovalSettingItemCreateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        createManyAndReturn: {
-          args: Prisma.ApprovalSettingItemCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ApprovalSettingItemPayload>[]
-        }
-        delete: {
-          args: Prisma.ApprovalSettingItemDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ApprovalSettingItemPayload>
-        }
-        update: {
-          args: Prisma.ApprovalSettingItemUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ApprovalSettingItemPayload>
-        }
-        deleteMany: {
-          args: Prisma.ApprovalSettingItemDeleteManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateMany: {
-          args: Prisma.ApprovalSettingItemUpdateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateManyAndReturn: {
-          args: Prisma.ApprovalSettingItemUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ApprovalSettingItemPayload>[]
-        }
-        upsert: {
-          args: Prisma.ApprovalSettingItemUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ApprovalSettingItemPayload>
-        }
-        aggregate: {
-          args: Prisma.ApprovalSettingItemAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateApprovalSettingItem>
-        }
-        groupBy: {
-          args: Prisma.ApprovalSettingItemGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.ApprovalSettingItemGroupByOutputType>[]
-        }
-        count: {
-          args: Prisma.ApprovalSettingItemCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.ApprovalSettingItemCountAggregateOutputType> | number
-        }
-      }
-    }
     Notification: {
       payload: Prisma.$NotificationPayload<ExtArgs>
       fields: Prisma.NotificationFieldRefs
@@ -3205,6 +3505,28 @@ export const ExpenseScalarFieldEnum = {
 } as const
 
 export type ExpenseScalarFieldEnum = (typeof ExpenseScalarFieldEnum)[keyof typeof ExpenseScalarFieldEnum]
+
+
+export const ApprovalSettingScalarFieldEnum = {
+  id: 'id',
+  companyId: 'companyId',
+  approvalType: 'approvalType',
+  paymentType: 'paymentType',
+  nkpType: 'nkpType'
+} as const
+
+export type ApprovalSettingScalarFieldEnum = (typeof ApprovalSettingScalarFieldEnum)[keyof typeof ApprovalSettingScalarFieldEnum]
+
+
+export const ApprovalSettingItemScalarFieldEnum = {
+  id: 'id',
+  approvalSettingId: 'approvalSettingId',
+  level: 'level',
+  userId: 'userId',
+  approvalActionType: 'approvalActionType'
+} as const
+
+export type ApprovalSettingItemScalarFieldEnum = (typeof ApprovalSettingItemScalarFieldEnum)[keyof typeof ApprovalSettingItemScalarFieldEnum]
 
 
 export const ApprovalScalarFieldEnum = {
@@ -3441,6 +3763,71 @@ export const VisitPlanScalarFieldEnum = {
 export type VisitPlanScalarFieldEnum = (typeof VisitPlanScalarFieldEnum)[keyof typeof VisitPlanScalarFieldEnum]
 
 
+export const DeliveryOrderScalarFieldEnum = {
+  id: 'id',
+  number: 'number',
+  date: 'date',
+  sender: 'sender',
+  recipient: 'recipient',
+  supportingDocument: 'supportingDocument',
+  notes: 'notes',
+  companyId: 'companyId',
+  salesOrderId: 'salesOrderId',
+  customerId: 'customerId',
+  userId: 'userId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type DeliveryOrderScalarFieldEnum = (typeof DeliveryOrderScalarFieldEnum)[keyof typeof DeliveryOrderScalarFieldEnum]
+
+
+export const DeliveryOrderItemScalarFieldEnum = {
+  id: 'id',
+  deliveryOrderId: 'deliveryOrderId',
+  partNumber: 'partNumber',
+  partNumberSupply: 'partNumberSupply',
+  description: 'description',
+  quantityOrder: 'quantityOrder',
+  quantitySupply: 'quantitySupply'
+} as const
+
+export type DeliveryOrderItemScalarFieldEnum = (typeof DeliveryOrderItemScalarFieldEnum)[keyof typeof DeliveryOrderItemScalarFieldEnum]
+
+
+export const GoodsReceiptScalarFieldEnum = {
+  id: 'id',
+  number: 'number',
+  date: 'date',
+  sender: 'sender',
+  recipient: 'recipient',
+  supportingDocument: 'supportingDocument',
+  notes: 'notes',
+  purchaseOrderId: 'purchaseOrderId',
+  supplierId: 'supplierId',
+  companyId: 'companyId',
+  userId: 'userId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
+} as const
+
+export type GoodsReceiptScalarFieldEnum = (typeof GoodsReceiptScalarFieldEnum)[keyof typeof GoodsReceiptScalarFieldEnum]
+
+
+export const GoodsReceiptItemScalarFieldEnum = {
+  id: 'id',
+  goodsReceiptId: 'goodsReceiptId',
+  partNumber: 'partNumber',
+  partNumberSupplier: 'partNumberSupplier',
+  description: 'description',
+  quantityOrder: 'quantityOrder',
+  quantityReceived: 'quantityReceived'
+} as const
+
+export type GoodsReceiptItemScalarFieldEnum = (typeof GoodsReceiptItemScalarFieldEnum)[keyof typeof GoodsReceiptItemScalarFieldEnum]
+
+
 export const InvoiceScalarFieldEnum = {
   id: 'id',
   number: 'number',
@@ -3464,11 +3851,11 @@ export type InvoiceScalarFieldEnum = (typeof InvoiceScalarFieldEnum)[keyof typeo
 export const InvoiceItemScalarFieldEnum = {
   id: 'id',
   invoiceId: 'invoiceId',
+  partNumber: 'partNumber',
   description: 'description',
   quantity: 'quantity',
   unitPrice: 'unitPrice',
-  totalPrice: 'totalPrice',
-  vat: 'vat'
+  totalPrice: 'totalPrice'
 } as const
 
 export type InvoiceItemScalarFieldEnum = (typeof InvoiceItemScalarFieldEnum)[keyof typeof InvoiceItemScalarFieldEnum]
@@ -3769,28 +4156,6 @@ export const UserBalanceScalarFieldEnum = {
 export type UserBalanceScalarFieldEnum = (typeof UserBalanceScalarFieldEnum)[keyof typeof UserBalanceScalarFieldEnum]
 
 
-export const ApprovalSettingScalarFieldEnum = {
-  id: 'id',
-  companyId: 'companyId',
-  approvalType: 'approvalType',
-  paymentType: 'paymentType',
-  nkpType: 'nkpType'
-} as const
-
-export type ApprovalSettingScalarFieldEnum = (typeof ApprovalSettingScalarFieldEnum)[keyof typeof ApprovalSettingScalarFieldEnum]
-
-
-export const ApprovalSettingItemScalarFieldEnum = {
-  id: 'id',
-  approvalSettingId: 'approvalSettingId',
-  level: 'level',
-  userId: 'userId',
-  approvalActionType: 'approvalActionType'
-} as const
-
-export type ApprovalSettingItemScalarFieldEnum = (typeof ApprovalSettingItemScalarFieldEnum)[keyof typeof ApprovalSettingItemScalarFieldEnum]
-
-
 export const NotificationScalarFieldEnum = {
   id: 'id',
   date: 'date',
@@ -3946,6 +4311,48 @@ export type EnumApprovalTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$Pri
  * Reference to a field of type 'ApprovalType[]'
  */
 export type ListEnumApprovalTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ApprovalType[]'>
+    
+
+
+/**
+ * Reference to a field of type 'PaymentType'
+ */
+export type EnumPaymentTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PaymentType'>
+    
+
+
+/**
+ * Reference to a field of type 'PaymentType[]'
+ */
+export type ListEnumPaymentTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PaymentType[]'>
+    
+
+
+/**
+ * Reference to a field of type 'NkpType'
+ */
+export type EnumNkpTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'NkpType'>
+    
+
+
+/**
+ * Reference to a field of type 'NkpType[]'
+ */
+export type ListEnumNkpTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'NkpType[]'>
+    
+
+
+/**
+ * Reference to a field of type 'ApprovalActionType'
+ */
+export type EnumApprovalActionTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ApprovalActionType'>
+    
+
+
+/**
+ * Reference to a field of type 'ApprovalActionType[]'
+ */
+export type ListEnumApprovalActionTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ApprovalActionType[]'>
     
 
 
@@ -4121,48 +4528,6 @@ export type EnumPaymentStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$Pr
  * Reference to a field of type 'PaymentStatus[]'
  */
 export type ListEnumPaymentStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PaymentStatus[]'>
-    
-
-
-/**
- * Reference to a field of type 'PaymentType'
- */
-export type EnumPaymentTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PaymentType'>
-    
-
-
-/**
- * Reference to a field of type 'PaymentType[]'
- */
-export type ListEnumPaymentTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PaymentType[]'>
-    
-
-
-/**
- * Reference to a field of type 'NkpType'
- */
-export type EnumNkpTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'NkpType'>
-    
-
-
-/**
- * Reference to a field of type 'NkpType[]'
- */
-export type ListEnumNkpTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'NkpType[]'>
-    
-
-
-/**
- * Reference to a field of type 'ApprovalActionType'
- */
-export type EnumApprovalActionTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ApprovalActionType'>
-    
-
-
-/**
- * Reference to a field of type 'ApprovalActionType[]'
- */
-export type ListEnumApprovalActionTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ApprovalActionType[]'>
     
 
 
@@ -4376,6 +4741,8 @@ export type GlobalOmitConfig = {
   account?: Prisma.AccountOmit
   payment?: Prisma.PaymentOmit
   expense?: Prisma.ExpenseOmit
+  approvalSetting?: Prisma.ApprovalSettingOmit
+  approvalSettingItem?: Prisma.ApprovalSettingItemOmit
   approval?: Prisma.ApprovalOmit
   approvalItem?: Prisma.ApprovalItemOmit
   customer?: Prisma.CustomerOmit
@@ -4388,6 +4755,10 @@ export type GlobalOmitConfig = {
   customerFile?: Prisma.CustomerFileOmit
   material?: Prisma.MaterialOmit
   visitPlan?: Prisma.VisitPlanOmit
+  deliveryOrder?: Prisma.DeliveryOrderOmit
+  deliveryOrderItem?: Prisma.DeliveryOrderItemOmit
+  goodsReceipt?: Prisma.GoodsReceiptOmit
+  goodsReceiptItem?: Prisma.GoodsReceiptItemOmit
   invoice?: Prisma.InvoiceOmit
   invoiceItem?: Prisma.InvoiceItemOmit
   nkp?: Prisma.NkpOmit
@@ -4405,8 +4776,6 @@ export type GlobalOmitConfig = {
   bank?: Prisma.BankOmit
   user?: Prisma.UserOmit
   userBalance?: Prisma.UserBalanceOmit
-  approvalSetting?: Prisma.ApprovalSettingOmit
-  approvalSettingItem?: Prisma.ApprovalSettingItemOmit
   notification?: Prisma.NotificationOmit
 }
 

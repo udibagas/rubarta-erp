@@ -514,10 +514,6 @@ export type NkpApprovalUncheckedUpdateManyWithoutNkpNestedInput = {
   deleteMany?: Prisma.NkpApprovalScalarWhereInput | Prisma.NkpApprovalScalarWhereInput[]
 }
 
-export type EnumApprovalActionTypeFieldUpdateOperationsInput = {
-  set?: $Enums.ApprovalActionType
-}
-
 export type NkpApprovalCreateNestedManyWithoutUserInput = {
   create?: Prisma.XOR<Prisma.NkpApprovalCreateWithoutUserInput, Prisma.NkpApprovalUncheckedCreateWithoutUserInput> | Prisma.NkpApprovalCreateWithoutUserInput[] | Prisma.NkpApprovalUncheckedCreateWithoutUserInput[]
   connectOrCreate?: Prisma.NkpApprovalCreateOrConnectWithoutUserInput | Prisma.NkpApprovalCreateOrConnectWithoutUserInput[]

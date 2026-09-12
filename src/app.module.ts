@@ -30,6 +30,8 @@ import { MaterialsModule } from './materials/materials.module';
 import { CrmDashboardModule } from './crm-dashboard/crm-dashboard.module';
 import { VisitPlansModule } from './visit-plans/visit-plans.module';
 import { PurchaseOrdersModule } from './purchase-orders/purchase-orders.module';
+import { GoodsReceiptsModule } from './goods-receipts/goods-receipts.module';
+import { DeliveryOrdersModule } from './delivery-orders/delivery-orders.module';
 import { EjsAdapter } from '@nestjs-modules/mailer/adapters/ejs.adapter';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
@@ -86,6 +88,7 @@ import { ScheduleModule } from '@nestjs/schedule';
     }),
     UsersModule,
     PrismaModule,
+    GoodsReceiptsModule,
     AuthModule,
     BanksModule,
     CompaniesModule,
@@ -101,6 +104,7 @@ import { ScheduleModule } from '@nestjs/schedule';
     CustomersModule,
     SalesOrdersModule,
     PurchaseOrdersModule,
+    DeliveryOrdersModule,
     ContactsModule,
     LeadsModule,
     OpportunitiesModule,
