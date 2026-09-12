@@ -1,11 +1,15 @@
 import { Resolver, Query, Args, Int } from '@nestjs/graphql';
 import { SalesOrdersService } from './sales-orders.service';
 import { SalesOrderType } from './sales-order.type';
-import { SalesOrderStatus } from '../prisma/client/client';
+import { Prisma, SalesOrderStatus } from '../prisma/client/client';
+import { PrismaService } from '../prisma/prisma.service';
 
 @Resolver(() => SalesOrderType)
 export class SalesOrdersResolver {
-  constructor(private readonly salesOrdersService: SalesOrdersService) {}
+  constructor(
+    private readonly salesOrdersService: SalesOrdersService,
+    private readonly prisma: PrismaService,
+  ) {}
 
   @Query(() => [SalesOrderType], {
     name: 'salesOrders',
@@ -18,7 +22,36 @@ export class SalesOrdersResolver {
     @Args('status', { type: () => SalesOrderStatus, nullable: true })
     status?: SalesOrderStatus,
   ) {
-    return this.salesOrdersService.findAll({ keyword, customerId, status });
+    const where: Prisma.SalesOrderWhereInput = {
+      deletedAt: null,
+    };
+
+    if (keyword) {
+      where.OR = [
+        { number: { contains: keyword, mode: 'insensitive' } },
+        { description: { contains: keyword, mode: 'insensitive' } },
+        {
+          Customer: { name: { contains: keyword, mode: 'insensitive' } },
+        },
+      ];
+    }
+
+    if (customerId) {
+      where.customerId = customerId;
+    }
+
+    if (status) {
+      where.status = status;
+    }
+
+    return this.prisma.salesOrder.findMany({
+      where,
+      orderBy: { date: 'desc' },
+      include: {
+        Customer: { select: { id: true, name: true } },
+        SalesOrderItems: true,
+      },
+    });
   }
 
   @Query(() => SalesOrderType, {
