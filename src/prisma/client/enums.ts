@@ -139,6 +139,19 @@ export const InvoiceStatus = {
 export type InvoiceStatus = (typeof InvoiceStatus)[keyof typeof InvoiceStatus]
 
 
+export const PurchaseOrderStatus = {
+  Draft: 'Draft',
+  Confirmed: 'Confirmed',
+  Sent: 'Sent',
+  Pending: 'Pending',
+  Processing: 'Processing',
+  Completed: 'Completed',
+  Cancelled: 'Cancelled'
+} as const
+
+export type PurchaseOrderStatus = (typeof PurchaseOrderStatus)[keyof typeof PurchaseOrderStatus]
+
+
 export const SalesOrderStatus = {
   Draft: 'Draft',
   Confirmed: 'Confirmed',

@@ -36,6 +36,7 @@ model SalesOrder {
   quotationId Int?
   customerId  Int
   userId      Int
+  companyId   Int
 
   // Relationships
   Customer        Customer         @relation(fields: [customerId], references: [id], onDelete: Cascade)
@@ -43,6 +44,7 @@ model SalesOrder {
   Invoice         Invoice?
   SalesOrderItems SalesOrderItem[]
   Quotation       Quotation?       @relation(fields: [quotationId], references: [id])
+  Company         Company          @relation(fields: [companyId], references: [id], onDelete: Cascade)
 
   @@index([number])
   @@index([customerId])

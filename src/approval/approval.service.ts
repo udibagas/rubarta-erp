@@ -248,6 +248,10 @@ export class ApprovalService {
     switch (approvalType) {
       case ApprovalType.QUOTATION:
         return this.prisma.quotation.findUnique({ where: { id: moduleId } });
+      case ApprovalType.PURCHASE_ORDER:
+        return this.prisma.purchaseOrder.findUnique({
+          where: { id: moduleId },
+        });
       default:
         throw new NotFoundException(
           'Module not found for the given approval type',
@@ -261,6 +265,8 @@ export class ApprovalService {
     switch (approvalType) {
       case ApprovalType.QUOTATION:
         return `${baseUrl}quotations/${moduleId}`;
+      case ApprovalType.PURCHASE_ORDER:
+        return `${baseUrl}purchase-orders/${moduleId}`;
       default:
         throw new NotFoundException(
           'Redirect URL not found for the given approval type',

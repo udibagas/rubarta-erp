@@ -1,0 +1,86 @@
+model PurchaseOrder {
+  id              Int                 @id @default(autoincrement())
+  number          String              @unique @db.VarChar(50)
+  orderType       String?             @db.VarChar(30) // e.g., Stock Order, Delivery, Emergency Order
+  date            DateTime
+  referenceNumber String
+  title           String              @db.VarChar(200)
+  description     String?             @db.Text
+  status          PurchaseOrderStatus @default(Draft)
+
+  // financial details
+  currency     Currency @default(IDR) // Currency code, e.g., IDR, USD
+  currencyRate Float    @default(1) // Exchange rate for the currency
+  totalAmount  Float
+  discount     Float    @default(0)
+  vatAmount    Float    @default(0)
+  grandTotal   Float
+
+  // shipping 
+  deliveryMethod   String?
+  destination      String?   @db.Text
+  warehouse        String?   @db.Text
+  packingCondition String?   @db.Text
+  shippingAddress  String?   @db.Text
+  deliveryDate     DateTime?
+  termOfDelivery   String?   @db.VarChar(20) // e.g., "FOB", "CIF", "Ex Works"
+  partialShipment  Boolean?  @default(false)
+
+  // payment
+  paymentMethod   String? @db.VarChar(30) // e.g., "Bank Transfer", "Credit Card", "Cash"
+  termOfPayment   String? @db.VarChar(30) // e.g., "Net 30", "Due on Receipt"
+  supplierAddress String? @db.Text
+  billingAddress  String? @db.Text
+
+  // terms and conditions
+  termsAndConditions String? @db.Text
+  notes              String? @db.Text
+
+  // Timestamps
+  createdAt DateTime  @default(now())
+  updatedAt DateTime? @updatedAt
+  deletedAt DateTime? @db.Timestamp()
+
+  supplierId Int?
+  userId     Int
+  companyId  Int
+
+  // Relationships
+  User               User                @relation(fields: [userId], references: [id])
+  PurchaseOrderItems PurchaseOrderItem[]
+  Supplier           Supplier?           @relation(fields: [supplierId], references: [id])
+  Company            Company             @relation(fields: [companyId], references: [id])
+
+  @@index([number])
+  @@index([status])
+  @@index([date])
+  @@index([deletedAt])
+  @@map("PurchaseOrders")
+}
+
+model PurchaseOrderItem {
+  id              Int    @id @default(autoincrement())
+  purchaseOrderId Int
+  partNumber      String @db.VarChar(100)
+  description     String @db.Text
+  quantity        Int
+  unitPrice       Float
+  totalPrice      Float
+  sortOrder       Int    @default(0)
+
+  // Relationships
+  PurchaseOrder PurchaseOrder @relation(fields: [purchaseOrderId], references: [id], onDelete: Cascade)
+
+  @@index([purchaseOrderId])
+  @@map("PurchaseOrderItems")
+}
+
+enum PurchaseOrderStatus {
+  Draft
+  Confirmed
+  Sent
+  Pending
+  Processing
+  Completed
+  Cancelled
+}

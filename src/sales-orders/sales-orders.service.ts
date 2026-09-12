@@ -20,7 +20,14 @@ export class SalesOrdersService {
   ) {}
 
   async create(data: CreateSalesOrderDto & { userId: number }) {
-    const { items, ...salesOrderData } = data;
+    const {
+      items,
+      userId,
+      customerId,
+      companyId,
+      quotationId,
+      ...salesOrderData
+    } = data;
     const number = await this.generateNumber();
 
     const totalAmount = items.reduce(
@@ -39,6 +46,10 @@ export class SalesOrdersService {
         totalAmount,
         vatAmount,
         grandTotal,
+        User: { connect: { id: userId } },
+        Customer: { connect: { id: customerId } },
+        Company: { connect: { id: companyId } },
+        ...(quotationId ? { Quotation: { connect: { id: quotationId } } } : {}),
         SalesOrderItems: {
           create: items.map((item) => ({
             ...item,

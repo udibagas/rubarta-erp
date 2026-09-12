@@ -27,6 +27,8 @@ model Company {
   Lead            Lead[]
   VisitPlans      VisitPlan[]
   quotations      Quotation[]
+  purchaseOrders  PurchaseOrder[]
+  salesOrders     SalesOrder[]
 
   @@map("Companies")
 }
@@ -85,6 +87,7 @@ model User {
   Customers           Customer[]
   approvalItems       ApprovalItem[]
   salesOrders         SalesOrder[]
+  purchaseOrders      PurchaseOrder[]
 
   @@index([bankId, departmentId])
   @@map("Users")

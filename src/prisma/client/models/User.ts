@@ -292,6 +292,7 @@ export type UserWhereInput = {
   Customers?: Prisma.CustomerListRelationFilter
   approvalItems?: Prisma.ApprovalItemListRelationFilter
   salesOrders?: Prisma.SalesOrderListRelationFilter
+  purchaseOrders?: Prisma.PurchaseOrderListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -327,6 +328,7 @@ export type UserOrderByWithRelationInput = {
   Customers?: Prisma.CustomerOrderByRelationAggregateInput
   approvalItems?: Prisma.ApprovalItemOrderByRelationAggregateInput
   salesOrders?: Prisma.SalesOrderOrderByRelationAggregateInput
+  purchaseOrders?: Prisma.PurchaseOrderOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -365,6 +367,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   Customers?: Prisma.CustomerListRelationFilter
   approvalItems?: Prisma.ApprovalItemListRelationFilter
   salesOrders?: Prisma.SalesOrderListRelationFilter
+  purchaseOrders?: Prisma.PurchaseOrderListRelationFilter
 }, "id" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -435,6 +438,7 @@ export type UserCreateInput = {
   Customers?: Prisma.CustomerCreateNestedManyWithoutAccountManagerInput
   approvalItems?: Prisma.ApprovalItemCreateNestedManyWithoutUserInput
   salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutUserInput
+  purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -468,6 +472,7 @@ export type UserUncheckedCreateInput = {
   Customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutAccountManagerInput
   approvalItems?: Prisma.ApprovalItemUncheckedCreateNestedManyWithoutUserInput
   salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutUserInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserUpdateInput = {
@@ -500,6 +505,7 @@ export type UserUpdateInput = {
   Customers?: Prisma.CustomerUpdateManyWithoutAccountManagerNestedInput
   approvalItems?: Prisma.ApprovalItemUpdateManyWithoutUserNestedInput
   salesOrders?: Prisma.SalesOrderUpdateManyWithoutUserNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -533,6 +539,7 @@ export type UserUncheckedUpdateInput = {
   Customers?: Prisma.CustomerUncheckedUpdateManyWithoutAccountManagerNestedInput
   approvalItems?: Prisma.ApprovalItemUncheckedUpdateManyWithoutUserNestedInput
   salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutUserNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -844,6 +851,20 @@ export type UserUpdateOneRequiredWithoutNkpApprovalNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutNkpApprovalInput, Prisma.UserUpdateWithoutNkpApprovalInput>, Prisma.UserUncheckedUpdateWithoutNkpApprovalInput>
 }
 
+export type UserCreateNestedOneWithoutPurchaseOrdersInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutPurchaseOrdersInput, Prisma.UserUncheckedCreateWithoutPurchaseOrdersInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutPurchaseOrdersInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutPurchaseOrdersNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutPurchaseOrdersInput, Prisma.UserUncheckedCreateWithoutPurchaseOrdersInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutPurchaseOrdersInput
+  upsert?: Prisma.UserUpsertWithoutPurchaseOrdersInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutPurchaseOrdersInput, Prisma.UserUpdateWithoutPurchaseOrdersInput>, Prisma.UserUncheckedUpdateWithoutPurchaseOrdersInput>
+}
+
 export type UserCreateNestedOneWithoutQuotationsInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutQuotationsInput, Prisma.UserUncheckedCreateWithoutQuotationsInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutQuotationsInput
@@ -1036,6 +1057,7 @@ export type UserCreateWithoutPaymentsInput = {
   Customers?: Prisma.CustomerCreateNestedManyWithoutAccountManagerInput
   approvalItems?: Prisma.ApprovalItemCreateNestedManyWithoutUserInput
   salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutUserInput
+  purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutPaymentsInput = {
@@ -1068,6 +1090,7 @@ export type UserUncheckedCreateWithoutPaymentsInput = {
   Customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutAccountManagerInput
   approvalItems?: Prisma.ApprovalItemUncheckedCreateNestedManyWithoutUserInput
   salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutUserInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutPaymentsInput = {
@@ -1115,6 +1138,7 @@ export type UserUpdateWithoutPaymentsInput = {
   Customers?: Prisma.CustomerUpdateManyWithoutAccountManagerNestedInput
   approvalItems?: Prisma.ApprovalItemUpdateManyWithoutUserNestedInput
   salesOrders?: Prisma.SalesOrderUpdateManyWithoutUserNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPaymentsInput = {
@@ -1147,6 +1171,7 @@ export type UserUncheckedUpdateWithoutPaymentsInput = {
   Customers?: Prisma.CustomerUncheckedUpdateManyWithoutAccountManagerNestedInput
   approvalItems?: Prisma.ApprovalItemUncheckedUpdateManyWithoutUserNestedInput
   salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutUserNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutApprovalItemsInput = {
@@ -1178,6 +1203,7 @@ export type UserCreateWithoutApprovalItemsInput = {
   VisitPlans?: Prisma.VisitPlanCreateNestedManyWithoutUserInput
   Customers?: Prisma.CustomerCreateNestedManyWithoutAccountManagerInput
   salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutUserInput
+  purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutApprovalItemsInput = {
@@ -1210,6 +1236,7 @@ export type UserUncheckedCreateWithoutApprovalItemsInput = {
   VisitPlans?: Prisma.VisitPlanUncheckedCreateNestedManyWithoutUserInput
   Customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutAccountManagerInput
   salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutUserInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutApprovalItemsInput = {
@@ -1257,6 +1284,7 @@ export type UserUpdateWithoutApprovalItemsInput = {
   VisitPlans?: Prisma.VisitPlanUpdateManyWithoutUserNestedInput
   Customers?: Prisma.CustomerUpdateManyWithoutAccountManagerNestedInput
   salesOrders?: Prisma.SalesOrderUpdateManyWithoutUserNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutApprovalItemsInput = {
@@ -1289,6 +1317,7 @@ export type UserUncheckedUpdateWithoutApprovalItemsInput = {
   VisitPlans?: Prisma.VisitPlanUncheckedUpdateManyWithoutUserNestedInput
   Customers?: Prisma.CustomerUncheckedUpdateManyWithoutAccountManagerNestedInput
   salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutUserNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutCustomersInput = {
@@ -1320,6 +1349,7 @@ export type UserCreateWithoutCustomersInput = {
   VisitPlans?: Prisma.VisitPlanCreateNestedManyWithoutUserInput
   approvalItems?: Prisma.ApprovalItemCreateNestedManyWithoutUserInput
   salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutUserInput
+  purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutCustomersInput = {
@@ -1352,6 +1382,7 @@ export type UserUncheckedCreateWithoutCustomersInput = {
   VisitPlans?: Prisma.VisitPlanUncheckedCreateNestedManyWithoutUserInput
   approvalItems?: Prisma.ApprovalItemUncheckedCreateNestedManyWithoutUserInput
   salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutUserInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutCustomersInput = {
@@ -1399,6 +1430,7 @@ export type UserUpdateWithoutCustomersInput = {
   VisitPlans?: Prisma.VisitPlanUpdateManyWithoutUserNestedInput
   approvalItems?: Prisma.ApprovalItemUpdateManyWithoutUserNestedInput
   salesOrders?: Prisma.SalesOrderUpdateManyWithoutUserNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCustomersInput = {
@@ -1431,6 +1463,7 @@ export type UserUncheckedUpdateWithoutCustomersInput = {
   VisitPlans?: Prisma.VisitPlanUncheckedUpdateManyWithoutUserNestedInput
   approvalItems?: Prisma.ApprovalItemUncheckedUpdateManyWithoutUserNestedInput
   salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutUserNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutLeadsInput = {
@@ -1462,6 +1495,7 @@ export type UserCreateWithoutLeadsInput = {
   Customers?: Prisma.CustomerCreateNestedManyWithoutAccountManagerInput
   approvalItems?: Prisma.ApprovalItemCreateNestedManyWithoutUserInput
   salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutUserInput
+  purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutLeadsInput = {
@@ -1494,6 +1528,7 @@ export type UserUncheckedCreateWithoutLeadsInput = {
   Customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutAccountManagerInput
   approvalItems?: Prisma.ApprovalItemUncheckedCreateNestedManyWithoutUserInput
   salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutUserInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutLeadsInput = {
@@ -1541,6 +1576,7 @@ export type UserUpdateWithoutLeadsInput = {
   Customers?: Prisma.CustomerUpdateManyWithoutAccountManagerNestedInput
   approvalItems?: Prisma.ApprovalItemUpdateManyWithoutUserNestedInput
   salesOrders?: Prisma.SalesOrderUpdateManyWithoutUserNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutLeadsInput = {
@@ -1573,6 +1609,7 @@ export type UserUncheckedUpdateWithoutLeadsInput = {
   Customers?: Prisma.CustomerUncheckedUpdateManyWithoutAccountManagerNestedInput
   approvalItems?: Prisma.ApprovalItemUncheckedUpdateManyWithoutUserNestedInput
   salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutUserNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutOpportunitiesInput = {
@@ -1604,6 +1641,7 @@ export type UserCreateWithoutOpportunitiesInput = {
   Customers?: Prisma.CustomerCreateNestedManyWithoutAccountManagerInput
   approvalItems?: Prisma.ApprovalItemCreateNestedManyWithoutUserInput
   salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutUserInput
+  purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutOpportunitiesInput = {
@@ -1636,6 +1674,7 @@ export type UserUncheckedCreateWithoutOpportunitiesInput = {
   Customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutAccountManagerInput
   approvalItems?: Prisma.ApprovalItemUncheckedCreateNestedManyWithoutUserInput
   salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutUserInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutOpportunitiesInput = {
@@ -1683,6 +1722,7 @@ export type UserUpdateWithoutOpportunitiesInput = {
   Customers?: Prisma.CustomerUpdateManyWithoutAccountManagerNestedInput
   approvalItems?: Prisma.ApprovalItemUpdateManyWithoutUserNestedInput
   salesOrders?: Prisma.SalesOrderUpdateManyWithoutUserNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutOpportunitiesInput = {
@@ -1715,6 +1755,7 @@ export type UserUncheckedUpdateWithoutOpportunitiesInput = {
   Customers?: Prisma.CustomerUncheckedUpdateManyWithoutAccountManagerNestedInput
   approvalItems?: Prisma.ApprovalItemUncheckedUpdateManyWithoutUserNestedInput
   salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutUserNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutTasksInput = {
@@ -1746,6 +1787,7 @@ export type UserCreateWithoutTasksInput = {
   Customers?: Prisma.CustomerCreateNestedManyWithoutAccountManagerInput
   approvalItems?: Prisma.ApprovalItemCreateNestedManyWithoutUserInput
   salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutUserInput
+  purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutTasksInput = {
@@ -1778,6 +1820,7 @@ export type UserUncheckedCreateWithoutTasksInput = {
   Customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutAccountManagerInput
   approvalItems?: Prisma.ApprovalItemUncheckedCreateNestedManyWithoutUserInput
   salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutUserInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutTasksInput = {
@@ -1825,6 +1868,7 @@ export type UserUpdateWithoutTasksInput = {
   Customers?: Prisma.CustomerUpdateManyWithoutAccountManagerNestedInput
   approvalItems?: Prisma.ApprovalItemUpdateManyWithoutUserNestedInput
   salesOrders?: Prisma.SalesOrderUpdateManyWithoutUserNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutTasksInput = {
@@ -1857,6 +1901,7 @@ export type UserUncheckedUpdateWithoutTasksInput = {
   Customers?: Prisma.CustomerUncheckedUpdateManyWithoutAccountManagerNestedInput
   approvalItems?: Prisma.ApprovalItemUncheckedUpdateManyWithoutUserNestedInput
   salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutUserNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutInteractionsInput = {
@@ -1888,6 +1933,7 @@ export type UserCreateWithoutInteractionsInput = {
   Customers?: Prisma.CustomerCreateNestedManyWithoutAccountManagerInput
   approvalItems?: Prisma.ApprovalItemCreateNestedManyWithoutUserInput
   salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutUserInput
+  purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutInteractionsInput = {
@@ -1920,6 +1966,7 @@ export type UserUncheckedCreateWithoutInteractionsInput = {
   Customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutAccountManagerInput
   approvalItems?: Prisma.ApprovalItemUncheckedCreateNestedManyWithoutUserInput
   salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutUserInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutInteractionsInput = {
@@ -1967,6 +2014,7 @@ export type UserUpdateWithoutInteractionsInput = {
   Customers?: Prisma.CustomerUpdateManyWithoutAccountManagerNestedInput
   approvalItems?: Prisma.ApprovalItemUpdateManyWithoutUserNestedInput
   salesOrders?: Prisma.SalesOrderUpdateManyWithoutUserNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutInteractionsInput = {
@@ -1999,6 +2047,7 @@ export type UserUncheckedUpdateWithoutInteractionsInput = {
   Customers?: Prisma.CustomerUncheckedUpdateManyWithoutAccountManagerNestedInput
   approvalItems?: Prisma.ApprovalItemUncheckedUpdateManyWithoutUserNestedInput
   salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutUserNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutCustomerNotesInput = {
@@ -2030,6 +2079,7 @@ export type UserCreateWithoutCustomerNotesInput = {
   Customers?: Prisma.CustomerCreateNestedManyWithoutAccountManagerInput
   approvalItems?: Prisma.ApprovalItemCreateNestedManyWithoutUserInput
   salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutUserInput
+  purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutCustomerNotesInput = {
@@ -2062,6 +2112,7 @@ export type UserUncheckedCreateWithoutCustomerNotesInput = {
   Customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutAccountManagerInput
   approvalItems?: Prisma.ApprovalItemUncheckedCreateNestedManyWithoutUserInput
   salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutUserInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutCustomerNotesInput = {
@@ -2109,6 +2160,7 @@ export type UserUpdateWithoutCustomerNotesInput = {
   Customers?: Prisma.CustomerUpdateManyWithoutAccountManagerNestedInput
   approvalItems?: Prisma.ApprovalItemUpdateManyWithoutUserNestedInput
   salesOrders?: Prisma.SalesOrderUpdateManyWithoutUserNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCustomerNotesInput = {
@@ -2141,6 +2193,7 @@ export type UserUncheckedUpdateWithoutCustomerNotesInput = {
   Customers?: Prisma.CustomerUncheckedUpdateManyWithoutAccountManagerNestedInput
   approvalItems?: Prisma.ApprovalItemUncheckedUpdateManyWithoutUserNestedInput
   salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutUserNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutVisitPlansInput = {
@@ -2172,6 +2225,7 @@ export type UserCreateWithoutVisitPlansInput = {
   Customers?: Prisma.CustomerCreateNestedManyWithoutAccountManagerInput
   approvalItems?: Prisma.ApprovalItemCreateNestedManyWithoutUserInput
   salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutUserInput
+  purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutVisitPlansInput = {
@@ -2204,6 +2258,7 @@ export type UserUncheckedCreateWithoutVisitPlansInput = {
   Customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutAccountManagerInput
   approvalItems?: Prisma.ApprovalItemUncheckedCreateNestedManyWithoutUserInput
   salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutUserInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutVisitPlansInput = {
@@ -2251,6 +2306,7 @@ export type UserUpdateWithoutVisitPlansInput = {
   Customers?: Prisma.CustomerUpdateManyWithoutAccountManagerNestedInput
   approvalItems?: Prisma.ApprovalItemUpdateManyWithoutUserNestedInput
   salesOrders?: Prisma.SalesOrderUpdateManyWithoutUserNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutVisitPlansInput = {
@@ -2283,6 +2339,7 @@ export type UserUncheckedUpdateWithoutVisitPlansInput = {
   Customers?: Prisma.CustomerUncheckedUpdateManyWithoutAccountManagerNestedInput
   approvalItems?: Prisma.ApprovalItemUncheckedUpdateManyWithoutUserNestedInput
   salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutUserNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutInvoicesInput = {
@@ -2314,6 +2371,7 @@ export type UserCreateWithoutInvoicesInput = {
   Customers?: Prisma.CustomerCreateNestedManyWithoutAccountManagerInput
   approvalItems?: Prisma.ApprovalItemCreateNestedManyWithoutUserInput
   salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutUserInput
+  purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutInvoicesInput = {
@@ -2346,6 +2404,7 @@ export type UserUncheckedCreateWithoutInvoicesInput = {
   Customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutAccountManagerInput
   approvalItems?: Prisma.ApprovalItemUncheckedCreateNestedManyWithoutUserInput
   salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutUserInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutInvoicesInput = {
@@ -2393,6 +2452,7 @@ export type UserUpdateWithoutInvoicesInput = {
   Customers?: Prisma.CustomerUpdateManyWithoutAccountManagerNestedInput
   approvalItems?: Prisma.ApprovalItemUpdateManyWithoutUserNestedInput
   salesOrders?: Prisma.SalesOrderUpdateManyWithoutUserNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutInvoicesInput = {
@@ -2425,6 +2485,7 @@ export type UserUncheckedUpdateWithoutInvoicesInput = {
   Customers?: Prisma.CustomerUncheckedUpdateManyWithoutAccountManagerNestedInput
   approvalItems?: Prisma.ApprovalItemUncheckedUpdateManyWithoutUserNestedInput
   salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutUserNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutNkpInput = {
@@ -2456,6 +2517,7 @@ export type UserCreateWithoutNkpInput = {
   Customers?: Prisma.CustomerCreateNestedManyWithoutAccountManagerInput
   approvalItems?: Prisma.ApprovalItemCreateNestedManyWithoutUserInput
   salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutUserInput
+  purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutNkpInput = {
@@ -2488,6 +2550,7 @@ export type UserUncheckedCreateWithoutNkpInput = {
   Customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutAccountManagerInput
   approvalItems?: Prisma.ApprovalItemUncheckedCreateNestedManyWithoutUserInput
   salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutUserInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutNkpInput = {
@@ -2524,6 +2587,7 @@ export type UserCreateWithoutNkpRequestInput = {
   Customers?: Prisma.CustomerCreateNestedManyWithoutAccountManagerInput
   approvalItems?: Prisma.ApprovalItemCreateNestedManyWithoutUserInput
   salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutUserInput
+  purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutNkpRequestInput = {
@@ -2556,6 +2620,7 @@ export type UserUncheckedCreateWithoutNkpRequestInput = {
   Customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutAccountManagerInput
   approvalItems?: Prisma.ApprovalItemUncheckedCreateNestedManyWithoutUserInput
   salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutUserInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutNkpRequestInput = {
@@ -2603,6 +2668,7 @@ export type UserUpdateWithoutNkpInput = {
   Customers?: Prisma.CustomerUpdateManyWithoutAccountManagerNestedInput
   approvalItems?: Prisma.ApprovalItemUpdateManyWithoutUserNestedInput
   salesOrders?: Prisma.SalesOrderUpdateManyWithoutUserNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutNkpInput = {
@@ -2635,6 +2701,7 @@ export type UserUncheckedUpdateWithoutNkpInput = {
   Customers?: Prisma.CustomerUncheckedUpdateManyWithoutAccountManagerNestedInput
   approvalItems?: Prisma.ApprovalItemUncheckedUpdateManyWithoutUserNestedInput
   salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutUserNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserUpsertWithoutNkpRequestInput = {
@@ -2677,6 +2744,7 @@ export type UserUpdateWithoutNkpRequestInput = {
   Customers?: Prisma.CustomerUpdateManyWithoutAccountManagerNestedInput
   approvalItems?: Prisma.ApprovalItemUpdateManyWithoutUserNestedInput
   salesOrders?: Prisma.SalesOrderUpdateManyWithoutUserNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutNkpRequestInput = {
@@ -2709,6 +2777,7 @@ export type UserUncheckedUpdateWithoutNkpRequestInput = {
   Customers?: Prisma.CustomerUncheckedUpdateManyWithoutAccountManagerNestedInput
   approvalItems?: Prisma.ApprovalItemUncheckedUpdateManyWithoutUserNestedInput
   salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutUserNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutNkpApprovalInput = {
@@ -2740,6 +2809,7 @@ export type UserCreateWithoutNkpApprovalInput = {
   Customers?: Prisma.CustomerCreateNestedManyWithoutAccountManagerInput
   approvalItems?: Prisma.ApprovalItemCreateNestedManyWithoutUserInput
   salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutUserInput
+  purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutNkpApprovalInput = {
@@ -2772,6 +2842,7 @@ export type UserUncheckedCreateWithoutNkpApprovalInput = {
   Customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutAccountManagerInput
   approvalItems?: Prisma.ApprovalItemUncheckedCreateNestedManyWithoutUserInput
   salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutUserInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutNkpApprovalInput = {
@@ -2819,6 +2890,7 @@ export type UserUpdateWithoutNkpApprovalInput = {
   Customers?: Prisma.CustomerUpdateManyWithoutAccountManagerNestedInput
   approvalItems?: Prisma.ApprovalItemUpdateManyWithoutUserNestedInput
   salesOrders?: Prisma.SalesOrderUpdateManyWithoutUserNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutNkpApprovalInput = {
@@ -2836,6 +2908,153 @@ export type UserUncheckedUpdateWithoutNkpApprovalInput = {
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   Balance?: Prisma.UserBalanceUncheckedUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedUpdateManyWithoutUserNestedInput
+  Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
+  NkpRequest?: Prisma.NkpUncheckedUpdateManyWithoutRequesterNestedInput
+  Tasks?: Prisma.TaskUncheckedUpdateManyWithoutUserNestedInput
+  Interactions?: Prisma.InteractionUncheckedUpdateManyWithoutUserNestedInput
+  CustomerNotes?: Prisma.CustomerNoteUncheckedUpdateManyWithoutUserNestedInput
+  Leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
+  Opportunities?: Prisma.OpportunityUncheckedUpdateManyWithoutUserNestedInput
+  Quotations?: Prisma.QuotationUncheckedUpdateManyWithoutUserNestedInput
+  Invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutUserNestedInput
+  Payments?: Prisma.PaymentUncheckedUpdateManyWithoutUserNestedInput
+  VisitPlans?: Prisma.VisitPlanUncheckedUpdateManyWithoutUserNestedInput
+  Customers?: Prisma.CustomerUncheckedUpdateManyWithoutAccountManagerNestedInput
+  approvalItems?: Prisma.ApprovalItemUncheckedUpdateManyWithoutUserNestedInput
+  salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutUserNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutPurchaseOrdersInput = {
+  name: string
+  code?: string | null
+  email: string
+  password: string
+  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
+  active?: boolean
+  bankAccount?: string | null
+  currency?: $Enums.Currency
+  signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
+  Bank?: Prisma.BankCreateNestedOneWithoutUserInput
+  Department?: Prisma.DepartmentCreateNestedOneWithoutUserInput
+  Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemCreateNestedManyWithoutUserInput
+  Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
+  NkpRequest?: Prisma.NkpCreateNestedManyWithoutRequesterInput
+  Tasks?: Prisma.TaskCreateNestedManyWithoutUserInput
+  Interactions?: Prisma.InteractionCreateNestedManyWithoutUserInput
+  CustomerNotes?: Prisma.CustomerNoteCreateNestedManyWithoutUserInput
+  Leads?: Prisma.LeadCreateNestedManyWithoutUserInput
+  Opportunities?: Prisma.OpportunityCreateNestedManyWithoutUserInput
+  Quotations?: Prisma.QuotationCreateNestedManyWithoutUserInput
+  Invoices?: Prisma.InvoiceCreateNestedManyWithoutUserInput
+  Payments?: Prisma.PaymentCreateNestedManyWithoutUserInput
+  VisitPlans?: Prisma.VisitPlanCreateNestedManyWithoutUserInput
+  Customers?: Prisma.CustomerCreateNestedManyWithoutAccountManagerInput
+  approvalItems?: Prisma.ApprovalItemCreateNestedManyWithoutUserInput
+  salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutPurchaseOrdersInput = {
+  id?: number
+  name: string
+  code?: string | null
+  email: string
+  password: string
+  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
+  active?: boolean
+  bankId?: number | null
+  bankAccount?: string | null
+  currency?: $Enums.Currency
+  departmentId?: number | null
+  signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  Balance?: Prisma.UserBalanceUncheckedCreateNestedOneWithoutUserInput
+  Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedCreateNestedManyWithoutUserInput
+  Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
+  NkpRequest?: Prisma.NkpUncheckedCreateNestedManyWithoutRequesterInput
+  Tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutUserInput
+  Interactions?: Prisma.InteractionUncheckedCreateNestedManyWithoutUserInput
+  CustomerNotes?: Prisma.CustomerNoteUncheckedCreateNestedManyWithoutUserInput
+  Leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
+  Opportunities?: Prisma.OpportunityUncheckedCreateNestedManyWithoutUserInput
+  Quotations?: Prisma.QuotationUncheckedCreateNestedManyWithoutUserInput
+  Invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutUserInput
+  Payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutUserInput
+  VisitPlans?: Prisma.VisitPlanUncheckedCreateNestedManyWithoutUserInput
+  Customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutAccountManagerInput
+  approvalItems?: Prisma.ApprovalItemUncheckedCreateNestedManyWithoutUserInput
+  salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutPurchaseOrdersInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutPurchaseOrdersInput, Prisma.UserUncheckedCreateWithoutPurchaseOrdersInput>
+}
+
+export type UserUpsertWithoutPurchaseOrdersInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutPurchaseOrdersInput, Prisma.UserUncheckedUpdateWithoutPurchaseOrdersInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutPurchaseOrdersInput, Prisma.UserUncheckedCreateWithoutPurchaseOrdersInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutPurchaseOrdersInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutPurchaseOrdersInput, Prisma.UserUncheckedUpdateWithoutPurchaseOrdersInput>
+}
+
+export type UserUpdateWithoutPurchaseOrdersInput = {
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
+  signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
+  Bank?: Prisma.BankUpdateOneWithoutUserNestedInput
+  Department?: Prisma.DepartmentUpdateOneWithoutUserNestedInput
+  Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemUpdateManyWithoutUserNestedInput
+  Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
+  NkpRequest?: Prisma.NkpUpdateManyWithoutRequesterNestedInput
+  Tasks?: Prisma.TaskUpdateManyWithoutUserNestedInput
+  Interactions?: Prisma.InteractionUpdateManyWithoutUserNestedInput
+  CustomerNotes?: Prisma.CustomerNoteUpdateManyWithoutUserNestedInput
+  Leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
+  Opportunities?: Prisma.OpportunityUpdateManyWithoutUserNestedInput
+  Quotations?: Prisma.QuotationUpdateManyWithoutUserNestedInput
+  Invoices?: Prisma.InvoiceUpdateManyWithoutUserNestedInput
+  Payments?: Prisma.PaymentUpdateManyWithoutUserNestedInput
+  VisitPlans?: Prisma.VisitPlanUpdateManyWithoutUserNestedInput
+  Customers?: Prisma.CustomerUpdateManyWithoutAccountManagerNestedInput
+  approvalItems?: Prisma.ApprovalItemUpdateManyWithoutUserNestedInput
+  salesOrders?: Prisma.SalesOrderUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutPurchaseOrdersInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  bankId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
+  departmentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  Balance?: Prisma.UserBalanceUncheckedUpdateOneWithoutUserNestedInput
+  Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
   ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUncheckedUpdateManyWithoutRequesterNestedInput
@@ -2882,6 +3101,7 @@ export type UserCreateWithoutQuotationsInput = {
   Customers?: Prisma.CustomerCreateNestedManyWithoutAccountManagerInput
   approvalItems?: Prisma.ApprovalItemCreateNestedManyWithoutUserInput
   salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutUserInput
+  purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutQuotationsInput = {
@@ -2914,6 +3134,7 @@ export type UserUncheckedCreateWithoutQuotationsInput = {
   Customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutAccountManagerInput
   approvalItems?: Prisma.ApprovalItemUncheckedCreateNestedManyWithoutUserInput
   salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutUserInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutQuotationsInput = {
@@ -2961,6 +3182,7 @@ export type UserUpdateWithoutQuotationsInput = {
   Customers?: Prisma.CustomerUpdateManyWithoutAccountManagerNestedInput
   approvalItems?: Prisma.ApprovalItemUpdateManyWithoutUserNestedInput
   salesOrders?: Prisma.SalesOrderUpdateManyWithoutUserNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutQuotationsInput = {
@@ -2993,6 +3215,7 @@ export type UserUncheckedUpdateWithoutQuotationsInput = {
   Customers?: Prisma.CustomerUncheckedUpdateManyWithoutAccountManagerNestedInput
   approvalItems?: Prisma.ApprovalItemUncheckedUpdateManyWithoutUserNestedInput
   salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutUserNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutSalesOrdersInput = {
@@ -3024,6 +3247,7 @@ export type UserCreateWithoutSalesOrdersInput = {
   VisitPlans?: Prisma.VisitPlanCreateNestedManyWithoutUserInput
   Customers?: Prisma.CustomerCreateNestedManyWithoutAccountManagerInput
   approvalItems?: Prisma.ApprovalItemCreateNestedManyWithoutUserInput
+  purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutSalesOrdersInput = {
@@ -3056,6 +3280,7 @@ export type UserUncheckedCreateWithoutSalesOrdersInput = {
   VisitPlans?: Prisma.VisitPlanUncheckedCreateNestedManyWithoutUserInput
   Customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutAccountManagerInput
   approvalItems?: Prisma.ApprovalItemUncheckedCreateNestedManyWithoutUserInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutSalesOrdersInput = {
@@ -3103,6 +3328,7 @@ export type UserUpdateWithoutSalesOrdersInput = {
   VisitPlans?: Prisma.VisitPlanUpdateManyWithoutUserNestedInput
   Customers?: Prisma.CustomerUpdateManyWithoutAccountManagerNestedInput
   approvalItems?: Prisma.ApprovalItemUpdateManyWithoutUserNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSalesOrdersInput = {
@@ -3135,6 +3361,7 @@ export type UserUncheckedUpdateWithoutSalesOrdersInput = {
   VisitPlans?: Prisma.VisitPlanUncheckedUpdateManyWithoutUserNestedInput
   Customers?: Prisma.CustomerUncheckedUpdateManyWithoutAccountManagerNestedInput
   approvalItems?: Prisma.ApprovalItemUncheckedUpdateManyWithoutUserNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutDepartmentInput = {
@@ -3166,6 +3393,7 @@ export type UserCreateWithoutDepartmentInput = {
   Customers?: Prisma.CustomerCreateNestedManyWithoutAccountManagerInput
   approvalItems?: Prisma.ApprovalItemCreateNestedManyWithoutUserInput
   salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutUserInput
+  purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutDepartmentInput = {
@@ -3198,6 +3426,7 @@ export type UserUncheckedCreateWithoutDepartmentInput = {
   Customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutAccountManagerInput
   approvalItems?: Prisma.ApprovalItemUncheckedCreateNestedManyWithoutUserInput
   salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutUserInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutDepartmentInput = {
@@ -3273,6 +3502,7 @@ export type UserCreateWithoutBankInput = {
   Customers?: Prisma.CustomerCreateNestedManyWithoutAccountManagerInput
   approvalItems?: Prisma.ApprovalItemCreateNestedManyWithoutUserInput
   salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutUserInput
+  purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutBankInput = {
@@ -3305,6 +3535,7 @@ export type UserUncheckedCreateWithoutBankInput = {
   Customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutAccountManagerInput
   approvalItems?: Prisma.ApprovalItemUncheckedCreateNestedManyWithoutUserInput
   salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutUserInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutBankInput = {
@@ -3362,6 +3593,7 @@ export type UserCreateWithoutBalanceInput = {
   Customers?: Prisma.CustomerCreateNestedManyWithoutAccountManagerInput
   approvalItems?: Prisma.ApprovalItemCreateNestedManyWithoutUserInput
   salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutUserInput
+  purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutBalanceInput = {
@@ -3394,6 +3626,7 @@ export type UserUncheckedCreateWithoutBalanceInput = {
   Customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutAccountManagerInput
   approvalItems?: Prisma.ApprovalItemUncheckedCreateNestedManyWithoutUserInput
   salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutUserInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutBalanceInput = {
@@ -3441,6 +3674,7 @@ export type UserUpdateWithoutBalanceInput = {
   Customers?: Prisma.CustomerUpdateManyWithoutAccountManagerNestedInput
   approvalItems?: Prisma.ApprovalItemUpdateManyWithoutUserNestedInput
   salesOrders?: Prisma.SalesOrderUpdateManyWithoutUserNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutBalanceInput = {
@@ -3473,6 +3707,7 @@ export type UserUncheckedUpdateWithoutBalanceInput = {
   Customers?: Prisma.CustomerUncheckedUpdateManyWithoutAccountManagerNestedInput
   approvalItems?: Prisma.ApprovalItemUncheckedUpdateManyWithoutUserNestedInput
   salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutUserNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutApprovalSettingItemInput = {
@@ -3504,6 +3739,7 @@ export type UserCreateWithoutApprovalSettingItemInput = {
   Customers?: Prisma.CustomerCreateNestedManyWithoutAccountManagerInput
   approvalItems?: Prisma.ApprovalItemCreateNestedManyWithoutUserInput
   salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutUserInput
+  purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutApprovalSettingItemInput = {
@@ -3536,6 +3772,7 @@ export type UserUncheckedCreateWithoutApprovalSettingItemInput = {
   Customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutAccountManagerInput
   approvalItems?: Prisma.ApprovalItemUncheckedCreateNestedManyWithoutUserInput
   salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutUserInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutApprovalSettingItemInput = {
@@ -3583,6 +3820,7 @@ export type UserUpdateWithoutApprovalSettingItemInput = {
   Customers?: Prisma.CustomerUpdateManyWithoutAccountManagerNestedInput
   approvalItems?: Prisma.ApprovalItemUpdateManyWithoutUserNestedInput
   salesOrders?: Prisma.SalesOrderUpdateManyWithoutUserNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutApprovalSettingItemInput = {
@@ -3615,6 +3853,7 @@ export type UserUncheckedUpdateWithoutApprovalSettingItemInput = {
   Customers?: Prisma.CustomerUncheckedUpdateManyWithoutAccountManagerNestedInput
   approvalItems?: Prisma.ApprovalItemUncheckedUpdateManyWithoutUserNestedInput
   salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutUserNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutNotificationInput = {
@@ -3646,6 +3885,7 @@ export type UserCreateWithoutNotificationInput = {
   Customers?: Prisma.CustomerCreateNestedManyWithoutAccountManagerInput
   approvalItems?: Prisma.ApprovalItemCreateNestedManyWithoutUserInput
   salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutUserInput
+  purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutNotificationInput = {
@@ -3678,6 +3918,7 @@ export type UserUncheckedCreateWithoutNotificationInput = {
   Customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutAccountManagerInput
   approvalItems?: Prisma.ApprovalItemUncheckedCreateNestedManyWithoutUserInput
   salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutUserInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutNotificationInput = {
@@ -3725,6 +3966,7 @@ export type UserUpdateWithoutNotificationInput = {
   Customers?: Prisma.CustomerUpdateManyWithoutAccountManagerNestedInput
   approvalItems?: Prisma.ApprovalItemUpdateManyWithoutUserNestedInput
   salesOrders?: Prisma.SalesOrderUpdateManyWithoutUserNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutNotificationInput = {
@@ -3757,6 +3999,7 @@ export type UserUncheckedUpdateWithoutNotificationInput = {
   Customers?: Prisma.CustomerUncheckedUpdateManyWithoutAccountManagerNestedInput
   approvalItems?: Prisma.ApprovalItemUncheckedUpdateManyWithoutUserNestedInput
   salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutUserNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyDepartmentInput = {
@@ -3802,6 +4045,7 @@ export type UserUpdateWithoutDepartmentInput = {
   Customers?: Prisma.CustomerUpdateManyWithoutAccountManagerNestedInput
   approvalItems?: Prisma.ApprovalItemUpdateManyWithoutUserNestedInput
   salesOrders?: Prisma.SalesOrderUpdateManyWithoutUserNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutDepartmentInput = {
@@ -3834,6 +4078,7 @@ export type UserUncheckedUpdateWithoutDepartmentInput = {
   Customers?: Prisma.CustomerUncheckedUpdateManyWithoutAccountManagerNestedInput
   approvalItems?: Prisma.ApprovalItemUncheckedUpdateManyWithoutUserNestedInput
   salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutUserNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateManyWithoutDepartmentInput = {
@@ -3893,6 +4138,7 @@ export type UserUpdateWithoutBankInput = {
   Customers?: Prisma.CustomerUpdateManyWithoutAccountManagerNestedInput
   approvalItems?: Prisma.ApprovalItemUpdateManyWithoutUserNestedInput
   salesOrders?: Prisma.SalesOrderUpdateManyWithoutUserNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutBankInput = {
@@ -3925,6 +4171,7 @@ export type UserUncheckedUpdateWithoutBankInput = {
   Customers?: Prisma.CustomerUncheckedUpdateManyWithoutAccountManagerNestedInput
   approvalItems?: Prisma.ApprovalItemUncheckedUpdateManyWithoutUserNestedInput
   salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutUserNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateManyWithoutBankInput = {
@@ -3964,6 +4211,7 @@ export type UserCountOutputType = {
   Customers: number
   approvalItems: number
   salesOrders: number
+  purchaseOrders: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -3984,6 +4232,7 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   Customers?: boolean | UserCountOutputTypeCountCustomersArgs
   approvalItems?: boolean | UserCountOutputTypeCountApprovalItemsArgs
   salesOrders?: boolean | UserCountOutputTypeCountSalesOrdersArgs
+  purchaseOrders?: boolean | UserCountOutputTypeCountPurchaseOrdersArgs
 }
 
 /**
@@ -4115,6 +4364,13 @@ export type UserCountOutputTypeCountSalesOrdersArgs<ExtArgs extends runtime.Type
   where?: Prisma.SalesOrderWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountPurchaseOrdersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PurchaseOrderWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -4149,6 +4405,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   Customers?: boolean | Prisma.User$CustomersArgs<ExtArgs>
   approvalItems?: boolean | Prisma.User$approvalItemsArgs<ExtArgs>
   salesOrders?: boolean | Prisma.User$salesOrdersArgs<ExtArgs>
+  purchaseOrders?: boolean | Prisma.User$purchaseOrdersArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -4223,6 +4480,7 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   Customers?: boolean | Prisma.User$CustomersArgs<ExtArgs>
   approvalItems?: boolean | Prisma.User$approvalItemsArgs<ExtArgs>
   salesOrders?: boolean | Prisma.User$salesOrdersArgs<ExtArgs>
+  purchaseOrders?: boolean | Prisma.User$purchaseOrdersArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -4257,6 +4515,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     Customers: Prisma.$CustomerPayload<ExtArgs>[]
     approvalItems: Prisma.$ApprovalItemPayload<ExtArgs>[]
     salesOrders: Prisma.$SalesOrderPayload<ExtArgs>[]
+    purchaseOrders: Prisma.$PurchaseOrderPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -4685,6 +4944,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   Customers<T extends Prisma.User$CustomersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$CustomersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CustomerPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   approvalItems<T extends Prisma.User$approvalItemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$approvalItemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ApprovalItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   salesOrders<T extends Prisma.User$salesOrdersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$salesOrdersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SalesOrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  purchaseOrders<T extends Prisma.User$purchaseOrdersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$purchaseOrdersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PurchaseOrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -5589,6 +5849,30 @@ export type User$salesOrdersArgs<ExtArgs extends runtime.Types.Extensions.Intern
   take?: number
   skip?: number
   distinct?: Prisma.SalesOrderScalarFieldEnum | Prisma.SalesOrderScalarFieldEnum[]
+}
+
+/**
+ * User.purchaseOrders
+ */
+export type User$purchaseOrdersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PurchaseOrder
+   */
+  select?: Prisma.PurchaseOrderSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the PurchaseOrder
+   */
+  omit?: Prisma.PurchaseOrderOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PurchaseOrderInclude<ExtArgs> | null
+  where?: Prisma.PurchaseOrderWhereInput
+  orderBy?: Prisma.PurchaseOrderOrderByWithRelationInput | Prisma.PurchaseOrderOrderByWithRelationInput[]
+  cursor?: Prisma.PurchaseOrderWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PurchaseOrderScalarFieldEnum | Prisma.PurchaseOrderScalarFieldEnum[]
 }
 
 /**

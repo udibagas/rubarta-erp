@@ -255,6 +255,7 @@ export type SupplierWhereInput = {
   Bank?: Prisma.XOR<Prisma.BankScalarRelationFilter, Prisma.BankWhereInput>
   Nkp?: Prisma.NkpListRelationFilter
   Material?: Prisma.MaterialListRelationFilter
+  purchaseOrders?: Prisma.PurchaseOrderListRelationFilter
 }
 
 export type SupplierOrderByWithRelationInput = {
@@ -270,6 +271,7 @@ export type SupplierOrderByWithRelationInput = {
   Bank?: Prisma.BankOrderByWithRelationInput
   Nkp?: Prisma.NkpOrderByRelationAggregateInput
   Material?: Prisma.MaterialOrderByRelationAggregateInput
+  purchaseOrders?: Prisma.PurchaseOrderOrderByRelationAggregateInput
 }
 
 export type SupplierWhereUniqueInput = Prisma.AtLeast<{
@@ -288,6 +290,7 @@ export type SupplierWhereUniqueInput = Prisma.AtLeast<{
   Bank?: Prisma.XOR<Prisma.BankScalarRelationFilter, Prisma.BankWhereInput>
   Nkp?: Prisma.NkpListRelationFilter
   Material?: Prisma.MaterialListRelationFilter
+  purchaseOrders?: Prisma.PurchaseOrderListRelationFilter
 }, "id">
 
 export type SupplierOrderByWithAggregationInput = {
@@ -333,6 +336,7 @@ export type SupplierCreateInput = {
   Bank: Prisma.BankCreateNestedOneWithoutSupplierInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutSupplierInput
   Material?: Prisma.MaterialCreateNestedManyWithoutSupplierInput
+  purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutSupplierInput
 }
 
 export type SupplierUncheckedCreateInput = {
@@ -347,6 +351,7 @@ export type SupplierUncheckedCreateInput = {
   bankId: number
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutSupplierInput
   Material?: Prisma.MaterialUncheckedCreateNestedManyWithoutSupplierInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutSupplierInput
 }
 
 export type SupplierUpdateInput = {
@@ -360,6 +365,7 @@ export type SupplierUpdateInput = {
   Bank?: Prisma.BankUpdateOneRequiredWithoutSupplierNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutSupplierNestedInput
   Material?: Prisma.MaterialUpdateManyWithoutSupplierNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutSupplierNestedInput
 }
 
 export type SupplierUncheckedUpdateInput = {
@@ -374,6 +380,7 @@ export type SupplierUncheckedUpdateInput = {
   bankId?: Prisma.IntFieldUpdateOperationsInput | number
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutSupplierNestedInput
   Material?: Prisma.MaterialUncheckedUpdateManyWithoutSupplierNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutSupplierNestedInput
 }
 
 export type SupplierCreateManyInput = {
@@ -523,6 +530,22 @@ export type SupplierUpdateOneWithoutNkpNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.SupplierUpdateToOneWithWhereWithoutNkpInput, Prisma.SupplierUpdateWithoutNkpInput>, Prisma.SupplierUncheckedUpdateWithoutNkpInput>
 }
 
+export type SupplierCreateNestedOneWithoutPurchaseOrdersInput = {
+  create?: Prisma.XOR<Prisma.SupplierCreateWithoutPurchaseOrdersInput, Prisma.SupplierUncheckedCreateWithoutPurchaseOrdersInput>
+  connectOrCreate?: Prisma.SupplierCreateOrConnectWithoutPurchaseOrdersInput
+  connect?: Prisma.SupplierWhereUniqueInput
+}
+
+export type SupplierUpdateOneWithoutPurchaseOrdersNestedInput = {
+  create?: Prisma.XOR<Prisma.SupplierCreateWithoutPurchaseOrdersInput, Prisma.SupplierUncheckedCreateWithoutPurchaseOrdersInput>
+  connectOrCreate?: Prisma.SupplierCreateOrConnectWithoutPurchaseOrdersInput
+  upsert?: Prisma.SupplierUpsertWithoutPurchaseOrdersInput
+  disconnect?: Prisma.SupplierWhereInput | boolean
+  delete?: Prisma.SupplierWhereInput | boolean
+  connect?: Prisma.SupplierWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.SupplierUpdateToOneWithWhereWithoutPurchaseOrdersInput, Prisma.SupplierUpdateWithoutPurchaseOrdersInput>, Prisma.SupplierUncheckedUpdateWithoutPurchaseOrdersInput>
+}
+
 export type SupplierCreateNestedManyWithoutBankInput = {
   create?: Prisma.XOR<Prisma.SupplierCreateWithoutBankInput, Prisma.SupplierUncheckedCreateWithoutBankInput> | Prisma.SupplierCreateWithoutBankInput[] | Prisma.SupplierUncheckedCreateWithoutBankInput[]
   connectOrCreate?: Prisma.SupplierCreateOrConnectWithoutBankInput | Prisma.SupplierCreateOrConnectWithoutBankInput[]
@@ -575,6 +598,7 @@ export type SupplierCreateWithoutMaterialInput = {
   currency: $Enums.Currency
   Bank: Prisma.BankCreateNestedOneWithoutSupplierInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutSupplierInput
+  purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutSupplierInput
 }
 
 export type SupplierUncheckedCreateWithoutMaterialInput = {
@@ -588,6 +612,7 @@ export type SupplierUncheckedCreateWithoutMaterialInput = {
   currency: $Enums.Currency
   bankId: number
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutSupplierInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutSupplierInput
 }
 
 export type SupplierCreateOrConnectWithoutMaterialInput = {
@@ -616,6 +641,7 @@ export type SupplierUpdateWithoutMaterialInput = {
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   Bank?: Prisma.BankUpdateOneRequiredWithoutSupplierNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutSupplierNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutSupplierNestedInput
 }
 
 export type SupplierUncheckedUpdateWithoutMaterialInput = {
@@ -629,6 +655,7 @@ export type SupplierUncheckedUpdateWithoutMaterialInput = {
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   bankId?: Prisma.IntFieldUpdateOperationsInput | number
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutSupplierNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutSupplierNestedInput
 }
 
 export type SupplierCreateWithoutNkpInput = {
@@ -641,6 +668,7 @@ export type SupplierCreateWithoutNkpInput = {
   currency: $Enums.Currency
   Bank: Prisma.BankCreateNestedOneWithoutSupplierInput
   Material?: Prisma.MaterialCreateNestedManyWithoutSupplierInput
+  purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutSupplierInput
 }
 
 export type SupplierUncheckedCreateWithoutNkpInput = {
@@ -654,6 +682,7 @@ export type SupplierUncheckedCreateWithoutNkpInput = {
   currency: $Enums.Currency
   bankId: number
   Material?: Prisma.MaterialUncheckedCreateNestedManyWithoutSupplierInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutSupplierInput
 }
 
 export type SupplierCreateOrConnectWithoutNkpInput = {
@@ -682,6 +711,7 @@ export type SupplierUpdateWithoutNkpInput = {
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   Bank?: Prisma.BankUpdateOneRequiredWithoutSupplierNestedInput
   Material?: Prisma.MaterialUpdateManyWithoutSupplierNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutSupplierNestedInput
 }
 
 export type SupplierUncheckedUpdateWithoutNkpInput = {
@@ -695,6 +725,77 @@ export type SupplierUncheckedUpdateWithoutNkpInput = {
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   bankId?: Prisma.IntFieldUpdateOperationsInput | number
   Material?: Prisma.MaterialUncheckedUpdateManyWithoutSupplierNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutSupplierNestedInput
+}
+
+export type SupplierCreateWithoutPurchaseOrdersInput = {
+  code?: string | null
+  name: string
+  address: string
+  phone?: string | null
+  email?: string | null
+  bankAccount: string
+  currency: $Enums.Currency
+  Bank: Prisma.BankCreateNestedOneWithoutSupplierInput
+  Nkp?: Prisma.NkpCreateNestedManyWithoutSupplierInput
+  Material?: Prisma.MaterialCreateNestedManyWithoutSupplierInput
+}
+
+export type SupplierUncheckedCreateWithoutPurchaseOrdersInput = {
+  id?: number
+  code?: string | null
+  name: string
+  address: string
+  phone?: string | null
+  email?: string | null
+  bankAccount: string
+  currency: $Enums.Currency
+  bankId: number
+  Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutSupplierInput
+  Material?: Prisma.MaterialUncheckedCreateNestedManyWithoutSupplierInput
+}
+
+export type SupplierCreateOrConnectWithoutPurchaseOrdersInput = {
+  where: Prisma.SupplierWhereUniqueInput
+  create: Prisma.XOR<Prisma.SupplierCreateWithoutPurchaseOrdersInput, Prisma.SupplierUncheckedCreateWithoutPurchaseOrdersInput>
+}
+
+export type SupplierUpsertWithoutPurchaseOrdersInput = {
+  update: Prisma.XOR<Prisma.SupplierUpdateWithoutPurchaseOrdersInput, Prisma.SupplierUncheckedUpdateWithoutPurchaseOrdersInput>
+  create: Prisma.XOR<Prisma.SupplierCreateWithoutPurchaseOrdersInput, Prisma.SupplierUncheckedCreateWithoutPurchaseOrdersInput>
+  where?: Prisma.SupplierWhereInput
+}
+
+export type SupplierUpdateToOneWithWhereWithoutPurchaseOrdersInput = {
+  where?: Prisma.SupplierWhereInput
+  data: Prisma.XOR<Prisma.SupplierUpdateWithoutPurchaseOrdersInput, Prisma.SupplierUncheckedUpdateWithoutPurchaseOrdersInput>
+}
+
+export type SupplierUpdateWithoutPurchaseOrdersInput = {
+  code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankAccount?: Prisma.StringFieldUpdateOperationsInput | string
+  currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
+  Bank?: Prisma.BankUpdateOneRequiredWithoutSupplierNestedInput
+  Nkp?: Prisma.NkpUpdateManyWithoutSupplierNestedInput
+  Material?: Prisma.MaterialUpdateManyWithoutSupplierNestedInput
+}
+
+export type SupplierUncheckedUpdateWithoutPurchaseOrdersInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankAccount?: Prisma.StringFieldUpdateOperationsInput | string
+  currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
+  bankId?: Prisma.IntFieldUpdateOperationsInput | number
+  Nkp?: Prisma.NkpUncheckedUpdateManyWithoutSupplierNestedInput
+  Material?: Prisma.MaterialUncheckedUpdateManyWithoutSupplierNestedInput
 }
 
 export type SupplierCreateWithoutBankInput = {
@@ -707,6 +808,7 @@ export type SupplierCreateWithoutBankInput = {
   currency: $Enums.Currency
   Nkp?: Prisma.NkpCreateNestedManyWithoutSupplierInput
   Material?: Prisma.MaterialCreateNestedManyWithoutSupplierInput
+  purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutSupplierInput
 }
 
 export type SupplierUncheckedCreateWithoutBankInput = {
@@ -720,6 +822,7 @@ export type SupplierUncheckedCreateWithoutBankInput = {
   currency: $Enums.Currency
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutSupplierInput
   Material?: Prisma.MaterialUncheckedCreateNestedManyWithoutSupplierInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutSupplierInput
 }
 
 export type SupplierCreateOrConnectWithoutBankInput = {
@@ -784,6 +887,7 @@ export type SupplierUpdateWithoutBankInput = {
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   Nkp?: Prisma.NkpUpdateManyWithoutSupplierNestedInput
   Material?: Prisma.MaterialUpdateManyWithoutSupplierNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutSupplierNestedInput
 }
 
 export type SupplierUncheckedUpdateWithoutBankInput = {
@@ -797,6 +901,7 @@ export type SupplierUncheckedUpdateWithoutBankInput = {
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutSupplierNestedInput
   Material?: Prisma.MaterialUncheckedUpdateManyWithoutSupplierNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutSupplierNestedInput
 }
 
 export type SupplierUncheckedUpdateManyWithoutBankInput = {
@@ -818,11 +923,13 @@ export type SupplierUncheckedUpdateManyWithoutBankInput = {
 export type SupplierCountOutputType = {
   Nkp: number
   Material: number
+  purchaseOrders: number
 }
 
 export type SupplierCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   Nkp?: boolean | SupplierCountOutputTypeCountNkpArgs
   Material?: boolean | SupplierCountOutputTypeCountMaterialArgs
+  purchaseOrders?: boolean | SupplierCountOutputTypeCountPurchaseOrdersArgs
 }
 
 /**
@@ -849,6 +956,13 @@ export type SupplierCountOutputTypeCountMaterialArgs<ExtArgs extends runtime.Typ
   where?: Prisma.MaterialWhereInput
 }
 
+/**
+ * SupplierCountOutputType without action
+ */
+export type SupplierCountOutputTypeCountPurchaseOrdersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PurchaseOrderWhereInput
+}
+
 
 export type SupplierSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -863,6 +977,7 @@ export type SupplierSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   Bank?: boolean | Prisma.BankDefaultArgs<ExtArgs>
   Nkp?: boolean | Prisma.Supplier$NkpArgs<ExtArgs>
   Material?: boolean | Prisma.Supplier$MaterialArgs<ExtArgs>
+  purchaseOrders?: boolean | Prisma.Supplier$purchaseOrdersArgs<ExtArgs>
   _count?: boolean | Prisma.SupplierCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["supplier"]>
 
@@ -909,6 +1024,7 @@ export type SupplierInclude<ExtArgs extends runtime.Types.Extensions.InternalArg
   Bank?: boolean | Prisma.BankDefaultArgs<ExtArgs>
   Nkp?: boolean | Prisma.Supplier$NkpArgs<ExtArgs>
   Material?: boolean | Prisma.Supplier$MaterialArgs<ExtArgs>
+  purchaseOrders?: boolean | Prisma.Supplier$purchaseOrdersArgs<ExtArgs>
   _count?: boolean | Prisma.SupplierCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type SupplierIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -924,6 +1040,7 @@ export type $SupplierPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     Bank: Prisma.$BankPayload<ExtArgs>
     Nkp: Prisma.$NkpPayload<ExtArgs>[]
     Material: Prisma.$MaterialPayload<ExtArgs>[]
+    purchaseOrders: Prisma.$PurchaseOrderPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1332,6 +1449,7 @@ export interface Prisma__SupplierClient<T, Null = never, ExtArgs extends runtime
   Bank<T extends Prisma.BankDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.BankDefaultArgs<ExtArgs>>): Prisma.Prisma__BankClient<runtime.Types.Result.GetResult<Prisma.$BankPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   Nkp<T extends Prisma.Supplier$NkpArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Supplier$NkpArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NkpPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   Material<T extends Prisma.Supplier$MaterialArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Supplier$MaterialArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MaterialPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  purchaseOrders<T extends Prisma.Supplier$purchaseOrdersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Supplier$purchaseOrdersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PurchaseOrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1816,6 +1934,30 @@ export type Supplier$MaterialArgs<ExtArgs extends runtime.Types.Extensions.Inter
   take?: number
   skip?: number
   distinct?: Prisma.MaterialScalarFieldEnum | Prisma.MaterialScalarFieldEnum[]
+}
+
+/**
+ * Supplier.purchaseOrders
+ */
+export type Supplier$purchaseOrdersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PurchaseOrder
+   */
+  select?: Prisma.PurchaseOrderSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the PurchaseOrder
+   */
+  omit?: Prisma.PurchaseOrderOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PurchaseOrderInclude<ExtArgs> | null
+  where?: Prisma.PurchaseOrderWhereInput
+  orderBy?: Prisma.PurchaseOrderOrderByWithRelationInput | Prisma.PurchaseOrderOrderByWithRelationInput[]
+  cursor?: Prisma.PurchaseOrderWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PurchaseOrderScalarFieldEnum | Prisma.PurchaseOrderScalarFieldEnum[]
 }
 
 /**

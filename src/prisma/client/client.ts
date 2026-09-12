@@ -150,6 +150,16 @@ export type NkpApproval = Prisma.NkpApprovalModel
  */
 export type NkpAttachment = Prisma.NkpAttachmentModel
 /**
+ * Model PurchaseOrder
+ * 
+ */
+export type PurchaseOrder = Prisma.PurchaseOrderModel
+/**
+ * Model PurchaseOrderItem
+ * 
+ */
+export type PurchaseOrderItem = Prisma.PurchaseOrderItemModel
+/**
  * Model Quotation
  * 
  */

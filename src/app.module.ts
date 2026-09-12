@@ -29,6 +29,7 @@ import { SalesOrdersModule } from './sales-orders/sales-orders.module';
 import { MaterialsModule } from './materials/materials.module';
 import { CrmDashboardModule } from './crm-dashboard/crm-dashboard.module';
 import { VisitPlansModule } from './visit-plans/visit-plans.module';
+import { PurchaseOrdersModule } from './purchase-orders/purchase-orders.module';
 import { EjsAdapter } from '@nestjs-modules/mailer/adapters/ejs.adapter';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
@@ -99,6 +100,7 @@ import { ScheduleModule } from '@nestjs/schedule';
     InvoicesModule,
     CustomersModule,
     SalesOrdersModule,
+    PurchaseOrdersModule,
     ContactsModule,
     LeadsModule,
     OpportunitiesModule,

@@ -47,6 +47,10 @@ export class CreateSalesOrderDto {
   @IsOptional()
   quotationId: number;
 
+  @ApiProperty({ required: true, example: 1 })
+  @IsInt({ message: 'Company is required and must be an integer' })
+  companyId: number;
+
   @ApiProperty({ example: '2025-05-25T10:00:00Z' })
   @IsDateString()
   date: string;

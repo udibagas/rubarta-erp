@@ -230,6 +230,8 @@ export type CompanyWhereInput = {
   Lead?: Prisma.LeadListRelationFilter
   VisitPlans?: Prisma.VisitPlanListRelationFilter
   quotations?: Prisma.QuotationListRelationFilter
+  purchaseOrders?: Prisma.PurchaseOrderListRelationFilter
+  salesOrders?: Prisma.SalesOrderListRelationFilter
 }
 
 export type CompanyOrderByWithRelationInput = {
@@ -245,6 +247,8 @@ export type CompanyOrderByWithRelationInput = {
   Lead?: Prisma.LeadOrderByRelationAggregateInput
   VisitPlans?: Prisma.VisitPlanOrderByRelationAggregateInput
   quotations?: Prisma.QuotationOrderByRelationAggregateInput
+  purchaseOrders?: Prisma.PurchaseOrderOrderByRelationAggregateInput
+  salesOrders?: Prisma.SalesOrderOrderByRelationAggregateInput
 }
 
 export type CompanyWhereUniqueInput = Prisma.AtLeast<{
@@ -263,6 +267,8 @@ export type CompanyWhereUniqueInput = Prisma.AtLeast<{
   Lead?: Prisma.LeadListRelationFilter
   VisitPlans?: Prisma.VisitPlanListRelationFilter
   quotations?: Prisma.QuotationListRelationFilter
+  purchaseOrders?: Prisma.PurchaseOrderListRelationFilter
+  salesOrders?: Prisma.SalesOrderListRelationFilter
 }, "id" | "code">
 
 export type CompanyOrderByWithAggregationInput = {
@@ -303,6 +309,8 @@ export type CompanyCreateInput = {
   Lead?: Prisma.LeadCreateNestedManyWithoutCompanyInput
   VisitPlans?: Prisma.VisitPlanCreateNestedManyWithoutCompanyInput
   quotations?: Prisma.QuotationCreateNestedManyWithoutCompanyInput
+  purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutCompanyInput
+  salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutCompanyInput
 }
 
 export type CompanyUncheckedCreateInput = {
@@ -318,6 +326,8 @@ export type CompanyUncheckedCreateInput = {
   Lead?: Prisma.LeadUncheckedCreateNestedManyWithoutCompanyInput
   VisitPlans?: Prisma.VisitPlanUncheckedCreateNestedManyWithoutCompanyInput
   quotations?: Prisma.QuotationUncheckedCreateNestedManyWithoutCompanyInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutCompanyInput
+  salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutCompanyInput
 }
 
 export type CompanyUpdateInput = {
@@ -332,6 +342,8 @@ export type CompanyUpdateInput = {
   Lead?: Prisma.LeadUpdateManyWithoutCompanyNestedInput
   VisitPlans?: Prisma.VisitPlanUpdateManyWithoutCompanyNestedInput
   quotations?: Prisma.QuotationUpdateManyWithoutCompanyNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutCompanyNestedInput
+  salesOrders?: Prisma.SalesOrderUpdateManyWithoutCompanyNestedInput
 }
 
 export type CompanyUncheckedUpdateInput = {
@@ -347,6 +359,8 @@ export type CompanyUncheckedUpdateInput = {
   Lead?: Prisma.LeadUncheckedUpdateManyWithoutCompanyNestedInput
   VisitPlans?: Prisma.VisitPlanUncheckedUpdateManyWithoutCompanyNestedInput
   quotations?: Prisma.QuotationUncheckedUpdateManyWithoutCompanyNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutCompanyNestedInput
+  salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutCompanyNestedInput
 }
 
 export type CompanyCreateManyInput = {
@@ -476,6 +490,20 @@ export type CompanyUpdateOneRequiredWithoutNkpNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.CompanyUpdateToOneWithWhereWithoutNkpInput, Prisma.CompanyUpdateWithoutNkpInput>, Prisma.CompanyUncheckedUpdateWithoutNkpInput>
 }
 
+export type CompanyCreateNestedOneWithoutPurchaseOrdersInput = {
+  create?: Prisma.XOR<Prisma.CompanyCreateWithoutPurchaseOrdersInput, Prisma.CompanyUncheckedCreateWithoutPurchaseOrdersInput>
+  connectOrCreate?: Prisma.CompanyCreateOrConnectWithoutPurchaseOrdersInput
+  connect?: Prisma.CompanyWhereUniqueInput
+}
+
+export type CompanyUpdateOneRequiredWithoutPurchaseOrdersNestedInput = {
+  create?: Prisma.XOR<Prisma.CompanyCreateWithoutPurchaseOrdersInput, Prisma.CompanyUncheckedCreateWithoutPurchaseOrdersInput>
+  connectOrCreate?: Prisma.CompanyCreateOrConnectWithoutPurchaseOrdersInput
+  upsert?: Prisma.CompanyUpsertWithoutPurchaseOrdersInput
+  connect?: Prisma.CompanyWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CompanyUpdateToOneWithWhereWithoutPurchaseOrdersInput, Prisma.CompanyUpdateWithoutPurchaseOrdersInput>, Prisma.CompanyUncheckedUpdateWithoutPurchaseOrdersInput>
+}
+
 export type CompanyCreateNestedOneWithoutQuotationsInput = {
   create?: Prisma.XOR<Prisma.CompanyCreateWithoutQuotationsInput, Prisma.CompanyUncheckedCreateWithoutQuotationsInput>
   connectOrCreate?: Prisma.CompanyCreateOrConnectWithoutQuotationsInput
@@ -490,6 +518,20 @@ export type CompanyUpdateOneWithoutQuotationsNestedInput = {
   delete?: Prisma.CompanyWhereInput | boolean
   connect?: Prisma.CompanyWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.CompanyUpdateToOneWithWhereWithoutQuotationsInput, Prisma.CompanyUpdateWithoutQuotationsInput>, Prisma.CompanyUncheckedUpdateWithoutQuotationsInput>
+}
+
+export type CompanyCreateNestedOneWithoutSalesOrdersInput = {
+  create?: Prisma.XOR<Prisma.CompanyCreateWithoutSalesOrdersInput, Prisma.CompanyUncheckedCreateWithoutSalesOrdersInput>
+  connectOrCreate?: Prisma.CompanyCreateOrConnectWithoutSalesOrdersInput
+  connect?: Prisma.CompanyWhereUniqueInput
+}
+
+export type CompanyUpdateOneRequiredWithoutSalesOrdersNestedInput = {
+  create?: Prisma.XOR<Prisma.CompanyCreateWithoutSalesOrdersInput, Prisma.CompanyUncheckedCreateWithoutSalesOrdersInput>
+  connectOrCreate?: Prisma.CompanyCreateOrConnectWithoutSalesOrdersInput
+  upsert?: Prisma.CompanyUpsertWithoutSalesOrdersInput
+  connect?: Prisma.CompanyWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CompanyUpdateToOneWithWhereWithoutSalesOrdersInput, Prisma.CompanyUpdateWithoutSalesOrdersInput>, Prisma.CompanyUncheckedUpdateWithoutSalesOrdersInput>
 }
 
 export type CompanyCreateNestedOneWithoutApprovalSettingInput = {
@@ -519,6 +561,8 @@ export type CompanyCreateWithoutLeadInput = {
   Opportunity?: Prisma.OpportunityCreateNestedManyWithoutCompanyInput
   VisitPlans?: Prisma.VisitPlanCreateNestedManyWithoutCompanyInput
   quotations?: Prisma.QuotationCreateNestedManyWithoutCompanyInput
+  purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutCompanyInput
+  salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutCompanyInput
 }
 
 export type CompanyUncheckedCreateWithoutLeadInput = {
@@ -533,6 +577,8 @@ export type CompanyUncheckedCreateWithoutLeadInput = {
   Opportunity?: Prisma.OpportunityUncheckedCreateNestedManyWithoutCompanyInput
   VisitPlans?: Prisma.VisitPlanUncheckedCreateNestedManyWithoutCompanyInput
   quotations?: Prisma.QuotationUncheckedCreateNestedManyWithoutCompanyInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutCompanyInput
+  salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutCompanyInput
 }
 
 export type CompanyCreateOrConnectWithoutLeadInput = {
@@ -562,6 +608,8 @@ export type CompanyUpdateWithoutLeadInput = {
   Opportunity?: Prisma.OpportunityUpdateManyWithoutCompanyNestedInput
   VisitPlans?: Prisma.VisitPlanUpdateManyWithoutCompanyNestedInput
   quotations?: Prisma.QuotationUpdateManyWithoutCompanyNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutCompanyNestedInput
+  salesOrders?: Prisma.SalesOrderUpdateManyWithoutCompanyNestedInput
 }
 
 export type CompanyUncheckedUpdateWithoutLeadInput = {
@@ -576,6 +624,8 @@ export type CompanyUncheckedUpdateWithoutLeadInput = {
   Opportunity?: Prisma.OpportunityUncheckedUpdateManyWithoutCompanyNestedInput
   VisitPlans?: Prisma.VisitPlanUncheckedUpdateManyWithoutCompanyNestedInput
   quotations?: Prisma.QuotationUncheckedUpdateManyWithoutCompanyNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutCompanyNestedInput
+  salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutCompanyNestedInput
 }
 
 export type CompanyCreateWithoutOpportunityInput = {
@@ -589,6 +639,8 @@ export type CompanyCreateWithoutOpportunityInput = {
   Lead?: Prisma.LeadCreateNestedManyWithoutCompanyInput
   VisitPlans?: Prisma.VisitPlanCreateNestedManyWithoutCompanyInput
   quotations?: Prisma.QuotationCreateNestedManyWithoutCompanyInput
+  purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutCompanyInput
+  salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutCompanyInput
 }
 
 export type CompanyUncheckedCreateWithoutOpportunityInput = {
@@ -603,6 +655,8 @@ export type CompanyUncheckedCreateWithoutOpportunityInput = {
   Lead?: Prisma.LeadUncheckedCreateNestedManyWithoutCompanyInput
   VisitPlans?: Prisma.VisitPlanUncheckedCreateNestedManyWithoutCompanyInput
   quotations?: Prisma.QuotationUncheckedCreateNestedManyWithoutCompanyInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutCompanyInput
+  salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutCompanyInput
 }
 
 export type CompanyCreateOrConnectWithoutOpportunityInput = {
@@ -632,6 +686,8 @@ export type CompanyUpdateWithoutOpportunityInput = {
   Lead?: Prisma.LeadUpdateManyWithoutCompanyNestedInput
   VisitPlans?: Prisma.VisitPlanUpdateManyWithoutCompanyNestedInput
   quotations?: Prisma.QuotationUpdateManyWithoutCompanyNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutCompanyNestedInput
+  salesOrders?: Prisma.SalesOrderUpdateManyWithoutCompanyNestedInput
 }
 
 export type CompanyUncheckedUpdateWithoutOpportunityInput = {
@@ -646,6 +702,8 @@ export type CompanyUncheckedUpdateWithoutOpportunityInput = {
   Lead?: Prisma.LeadUncheckedUpdateManyWithoutCompanyNestedInput
   VisitPlans?: Prisma.VisitPlanUncheckedUpdateManyWithoutCompanyNestedInput
   quotations?: Prisma.QuotationUncheckedUpdateManyWithoutCompanyNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutCompanyNestedInput
+  salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutCompanyNestedInput
 }
 
 export type CompanyCreateWithoutVisitPlansInput = {
@@ -659,6 +717,8 @@ export type CompanyCreateWithoutVisitPlansInput = {
   Opportunity?: Prisma.OpportunityCreateNestedManyWithoutCompanyInput
   Lead?: Prisma.LeadCreateNestedManyWithoutCompanyInput
   quotations?: Prisma.QuotationCreateNestedManyWithoutCompanyInput
+  purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutCompanyInput
+  salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutCompanyInput
 }
 
 export type CompanyUncheckedCreateWithoutVisitPlansInput = {
@@ -673,6 +733,8 @@ export type CompanyUncheckedCreateWithoutVisitPlansInput = {
   Opportunity?: Prisma.OpportunityUncheckedCreateNestedManyWithoutCompanyInput
   Lead?: Prisma.LeadUncheckedCreateNestedManyWithoutCompanyInput
   quotations?: Prisma.QuotationUncheckedCreateNestedManyWithoutCompanyInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutCompanyInput
+  salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutCompanyInput
 }
 
 export type CompanyCreateOrConnectWithoutVisitPlansInput = {
@@ -702,6 +764,8 @@ export type CompanyUpdateWithoutVisitPlansInput = {
   Opportunity?: Prisma.OpportunityUpdateManyWithoutCompanyNestedInput
   Lead?: Prisma.LeadUpdateManyWithoutCompanyNestedInput
   quotations?: Prisma.QuotationUpdateManyWithoutCompanyNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutCompanyNestedInput
+  salesOrders?: Prisma.SalesOrderUpdateManyWithoutCompanyNestedInput
 }
 
 export type CompanyUncheckedUpdateWithoutVisitPlansInput = {
@@ -716,6 +780,8 @@ export type CompanyUncheckedUpdateWithoutVisitPlansInput = {
   Opportunity?: Prisma.OpportunityUncheckedUpdateManyWithoutCompanyNestedInput
   Lead?: Prisma.LeadUncheckedUpdateManyWithoutCompanyNestedInput
   quotations?: Prisma.QuotationUncheckedUpdateManyWithoutCompanyNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutCompanyNestedInput
+  salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutCompanyNestedInput
 }
 
 export type CompanyCreateWithoutNkpInput = {
@@ -729,6 +795,8 @@ export type CompanyCreateWithoutNkpInput = {
   Lead?: Prisma.LeadCreateNestedManyWithoutCompanyInput
   VisitPlans?: Prisma.VisitPlanCreateNestedManyWithoutCompanyInput
   quotations?: Prisma.QuotationCreateNestedManyWithoutCompanyInput
+  purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutCompanyInput
+  salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutCompanyInput
 }
 
 export type CompanyUncheckedCreateWithoutNkpInput = {
@@ -743,6 +811,8 @@ export type CompanyUncheckedCreateWithoutNkpInput = {
   Lead?: Prisma.LeadUncheckedCreateNestedManyWithoutCompanyInput
   VisitPlans?: Prisma.VisitPlanUncheckedCreateNestedManyWithoutCompanyInput
   quotations?: Prisma.QuotationUncheckedCreateNestedManyWithoutCompanyInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutCompanyInput
+  salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutCompanyInput
 }
 
 export type CompanyCreateOrConnectWithoutNkpInput = {
@@ -772,6 +842,8 @@ export type CompanyUpdateWithoutNkpInput = {
   Lead?: Prisma.LeadUpdateManyWithoutCompanyNestedInput
   VisitPlans?: Prisma.VisitPlanUpdateManyWithoutCompanyNestedInput
   quotations?: Prisma.QuotationUpdateManyWithoutCompanyNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutCompanyNestedInput
+  salesOrders?: Prisma.SalesOrderUpdateManyWithoutCompanyNestedInput
 }
 
 export type CompanyUncheckedUpdateWithoutNkpInput = {
@@ -786,6 +858,86 @@ export type CompanyUncheckedUpdateWithoutNkpInput = {
   Lead?: Prisma.LeadUncheckedUpdateManyWithoutCompanyNestedInput
   VisitPlans?: Prisma.VisitPlanUncheckedUpdateManyWithoutCompanyNestedInput
   quotations?: Prisma.QuotationUncheckedUpdateManyWithoutCompanyNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutCompanyNestedInput
+  salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutCompanyNestedInput
+}
+
+export type CompanyCreateWithoutPurchaseOrdersInput = {
+  code: string
+  name: string
+  address?: string | null
+  phone?: string | null
+  isDefault?: boolean
+  Nkp?: Prisma.NkpCreateNestedManyWithoutCompanyInput
+  ApprovalSetting?: Prisma.ApprovalSettingCreateNestedManyWithoutCompanyInput
+  Opportunity?: Prisma.OpportunityCreateNestedManyWithoutCompanyInput
+  Lead?: Prisma.LeadCreateNestedManyWithoutCompanyInput
+  VisitPlans?: Prisma.VisitPlanCreateNestedManyWithoutCompanyInput
+  quotations?: Prisma.QuotationCreateNestedManyWithoutCompanyInput
+  salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutCompanyInput
+}
+
+export type CompanyUncheckedCreateWithoutPurchaseOrdersInput = {
+  id?: number
+  code: string
+  name: string
+  address?: string | null
+  phone?: string | null
+  isDefault?: boolean
+  Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutCompanyInput
+  ApprovalSetting?: Prisma.ApprovalSettingUncheckedCreateNestedManyWithoutCompanyInput
+  Opportunity?: Prisma.OpportunityUncheckedCreateNestedManyWithoutCompanyInput
+  Lead?: Prisma.LeadUncheckedCreateNestedManyWithoutCompanyInput
+  VisitPlans?: Prisma.VisitPlanUncheckedCreateNestedManyWithoutCompanyInput
+  quotations?: Prisma.QuotationUncheckedCreateNestedManyWithoutCompanyInput
+  salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutCompanyInput
+}
+
+export type CompanyCreateOrConnectWithoutPurchaseOrdersInput = {
+  where: Prisma.CompanyWhereUniqueInput
+  create: Prisma.XOR<Prisma.CompanyCreateWithoutPurchaseOrdersInput, Prisma.CompanyUncheckedCreateWithoutPurchaseOrdersInput>
+}
+
+export type CompanyUpsertWithoutPurchaseOrdersInput = {
+  update: Prisma.XOR<Prisma.CompanyUpdateWithoutPurchaseOrdersInput, Prisma.CompanyUncheckedUpdateWithoutPurchaseOrdersInput>
+  create: Prisma.XOR<Prisma.CompanyCreateWithoutPurchaseOrdersInput, Prisma.CompanyUncheckedCreateWithoutPurchaseOrdersInput>
+  where?: Prisma.CompanyWhereInput
+}
+
+export type CompanyUpdateToOneWithWhereWithoutPurchaseOrdersInput = {
+  where?: Prisma.CompanyWhereInput
+  data: Prisma.XOR<Prisma.CompanyUpdateWithoutPurchaseOrdersInput, Prisma.CompanyUncheckedUpdateWithoutPurchaseOrdersInput>
+}
+
+export type CompanyUpdateWithoutPurchaseOrdersInput = {
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isDefault?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  Nkp?: Prisma.NkpUpdateManyWithoutCompanyNestedInput
+  ApprovalSetting?: Prisma.ApprovalSettingUpdateManyWithoutCompanyNestedInput
+  Opportunity?: Prisma.OpportunityUpdateManyWithoutCompanyNestedInput
+  Lead?: Prisma.LeadUpdateManyWithoutCompanyNestedInput
+  VisitPlans?: Prisma.VisitPlanUpdateManyWithoutCompanyNestedInput
+  quotations?: Prisma.QuotationUpdateManyWithoutCompanyNestedInput
+  salesOrders?: Prisma.SalesOrderUpdateManyWithoutCompanyNestedInput
+}
+
+export type CompanyUncheckedUpdateWithoutPurchaseOrdersInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isDefault?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  Nkp?: Prisma.NkpUncheckedUpdateManyWithoutCompanyNestedInput
+  ApprovalSetting?: Prisma.ApprovalSettingUncheckedUpdateManyWithoutCompanyNestedInput
+  Opportunity?: Prisma.OpportunityUncheckedUpdateManyWithoutCompanyNestedInput
+  Lead?: Prisma.LeadUncheckedUpdateManyWithoutCompanyNestedInput
+  VisitPlans?: Prisma.VisitPlanUncheckedUpdateManyWithoutCompanyNestedInput
+  quotations?: Prisma.QuotationUncheckedUpdateManyWithoutCompanyNestedInput
+  salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutCompanyNestedInput
 }
 
 export type CompanyCreateWithoutQuotationsInput = {
@@ -799,6 +951,8 @@ export type CompanyCreateWithoutQuotationsInput = {
   Opportunity?: Prisma.OpportunityCreateNestedManyWithoutCompanyInput
   Lead?: Prisma.LeadCreateNestedManyWithoutCompanyInput
   VisitPlans?: Prisma.VisitPlanCreateNestedManyWithoutCompanyInput
+  purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutCompanyInput
+  salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutCompanyInput
 }
 
 export type CompanyUncheckedCreateWithoutQuotationsInput = {
@@ -813,6 +967,8 @@ export type CompanyUncheckedCreateWithoutQuotationsInput = {
   Opportunity?: Prisma.OpportunityUncheckedCreateNestedManyWithoutCompanyInput
   Lead?: Prisma.LeadUncheckedCreateNestedManyWithoutCompanyInput
   VisitPlans?: Prisma.VisitPlanUncheckedCreateNestedManyWithoutCompanyInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutCompanyInput
+  salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutCompanyInput
 }
 
 export type CompanyCreateOrConnectWithoutQuotationsInput = {
@@ -842,6 +998,8 @@ export type CompanyUpdateWithoutQuotationsInput = {
   Opportunity?: Prisma.OpportunityUpdateManyWithoutCompanyNestedInput
   Lead?: Prisma.LeadUpdateManyWithoutCompanyNestedInput
   VisitPlans?: Prisma.VisitPlanUpdateManyWithoutCompanyNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutCompanyNestedInput
+  salesOrders?: Prisma.SalesOrderUpdateManyWithoutCompanyNestedInput
 }
 
 export type CompanyUncheckedUpdateWithoutQuotationsInput = {
@@ -856,6 +1014,86 @@ export type CompanyUncheckedUpdateWithoutQuotationsInput = {
   Opportunity?: Prisma.OpportunityUncheckedUpdateManyWithoutCompanyNestedInput
   Lead?: Prisma.LeadUncheckedUpdateManyWithoutCompanyNestedInput
   VisitPlans?: Prisma.VisitPlanUncheckedUpdateManyWithoutCompanyNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutCompanyNestedInput
+  salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutCompanyNestedInput
+}
+
+export type CompanyCreateWithoutSalesOrdersInput = {
+  code: string
+  name: string
+  address?: string | null
+  phone?: string | null
+  isDefault?: boolean
+  Nkp?: Prisma.NkpCreateNestedManyWithoutCompanyInput
+  ApprovalSetting?: Prisma.ApprovalSettingCreateNestedManyWithoutCompanyInput
+  Opportunity?: Prisma.OpportunityCreateNestedManyWithoutCompanyInput
+  Lead?: Prisma.LeadCreateNestedManyWithoutCompanyInput
+  VisitPlans?: Prisma.VisitPlanCreateNestedManyWithoutCompanyInput
+  quotations?: Prisma.QuotationCreateNestedManyWithoutCompanyInput
+  purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutCompanyInput
+}
+
+export type CompanyUncheckedCreateWithoutSalesOrdersInput = {
+  id?: number
+  code: string
+  name: string
+  address?: string | null
+  phone?: string | null
+  isDefault?: boolean
+  Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutCompanyInput
+  ApprovalSetting?: Prisma.ApprovalSettingUncheckedCreateNestedManyWithoutCompanyInput
+  Opportunity?: Prisma.OpportunityUncheckedCreateNestedManyWithoutCompanyInput
+  Lead?: Prisma.LeadUncheckedCreateNestedManyWithoutCompanyInput
+  VisitPlans?: Prisma.VisitPlanUncheckedCreateNestedManyWithoutCompanyInput
+  quotations?: Prisma.QuotationUncheckedCreateNestedManyWithoutCompanyInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutCompanyInput
+}
+
+export type CompanyCreateOrConnectWithoutSalesOrdersInput = {
+  where: Prisma.CompanyWhereUniqueInput
+  create: Prisma.XOR<Prisma.CompanyCreateWithoutSalesOrdersInput, Prisma.CompanyUncheckedCreateWithoutSalesOrdersInput>
+}
+
+export type CompanyUpsertWithoutSalesOrdersInput = {
+  update: Prisma.XOR<Prisma.CompanyUpdateWithoutSalesOrdersInput, Prisma.CompanyUncheckedUpdateWithoutSalesOrdersInput>
+  create: Prisma.XOR<Prisma.CompanyCreateWithoutSalesOrdersInput, Prisma.CompanyUncheckedCreateWithoutSalesOrdersInput>
+  where?: Prisma.CompanyWhereInput
+}
+
+export type CompanyUpdateToOneWithWhereWithoutSalesOrdersInput = {
+  where?: Prisma.CompanyWhereInput
+  data: Prisma.XOR<Prisma.CompanyUpdateWithoutSalesOrdersInput, Prisma.CompanyUncheckedUpdateWithoutSalesOrdersInput>
+}
+
+export type CompanyUpdateWithoutSalesOrdersInput = {
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isDefault?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  Nkp?: Prisma.NkpUpdateManyWithoutCompanyNestedInput
+  ApprovalSetting?: Prisma.ApprovalSettingUpdateManyWithoutCompanyNestedInput
+  Opportunity?: Prisma.OpportunityUpdateManyWithoutCompanyNestedInput
+  Lead?: Prisma.LeadUpdateManyWithoutCompanyNestedInput
+  VisitPlans?: Prisma.VisitPlanUpdateManyWithoutCompanyNestedInput
+  quotations?: Prisma.QuotationUpdateManyWithoutCompanyNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutCompanyNestedInput
+}
+
+export type CompanyUncheckedUpdateWithoutSalesOrdersInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isDefault?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  Nkp?: Prisma.NkpUncheckedUpdateManyWithoutCompanyNestedInput
+  ApprovalSetting?: Prisma.ApprovalSettingUncheckedUpdateManyWithoutCompanyNestedInput
+  Opportunity?: Prisma.OpportunityUncheckedUpdateManyWithoutCompanyNestedInput
+  Lead?: Prisma.LeadUncheckedUpdateManyWithoutCompanyNestedInput
+  VisitPlans?: Prisma.VisitPlanUncheckedUpdateManyWithoutCompanyNestedInput
+  quotations?: Prisma.QuotationUncheckedUpdateManyWithoutCompanyNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutCompanyNestedInput
 }
 
 export type CompanyCreateWithoutApprovalSettingInput = {
@@ -869,6 +1107,8 @@ export type CompanyCreateWithoutApprovalSettingInput = {
   Lead?: Prisma.LeadCreateNestedManyWithoutCompanyInput
   VisitPlans?: Prisma.VisitPlanCreateNestedManyWithoutCompanyInput
   quotations?: Prisma.QuotationCreateNestedManyWithoutCompanyInput
+  purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutCompanyInput
+  salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutCompanyInput
 }
 
 export type CompanyUncheckedCreateWithoutApprovalSettingInput = {
@@ -883,6 +1123,8 @@ export type CompanyUncheckedCreateWithoutApprovalSettingInput = {
   Lead?: Prisma.LeadUncheckedCreateNestedManyWithoutCompanyInput
   VisitPlans?: Prisma.VisitPlanUncheckedCreateNestedManyWithoutCompanyInput
   quotations?: Prisma.QuotationUncheckedCreateNestedManyWithoutCompanyInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutCompanyInput
+  salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutCompanyInput
 }
 
 export type CompanyCreateOrConnectWithoutApprovalSettingInput = {
@@ -912,6 +1154,8 @@ export type CompanyUpdateWithoutApprovalSettingInput = {
   Lead?: Prisma.LeadUpdateManyWithoutCompanyNestedInput
   VisitPlans?: Prisma.VisitPlanUpdateManyWithoutCompanyNestedInput
   quotations?: Prisma.QuotationUpdateManyWithoutCompanyNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutCompanyNestedInput
+  salesOrders?: Prisma.SalesOrderUpdateManyWithoutCompanyNestedInput
 }
 
 export type CompanyUncheckedUpdateWithoutApprovalSettingInput = {
@@ -926,6 +1170,8 @@ export type CompanyUncheckedUpdateWithoutApprovalSettingInput = {
   Lead?: Prisma.LeadUncheckedUpdateManyWithoutCompanyNestedInput
   VisitPlans?: Prisma.VisitPlanUncheckedUpdateManyWithoutCompanyNestedInput
   quotations?: Prisma.QuotationUncheckedUpdateManyWithoutCompanyNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutCompanyNestedInput
+  salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutCompanyNestedInput
 }
 
 
@@ -940,6 +1186,8 @@ export type CompanyCountOutputType = {
   Lead: number
   VisitPlans: number
   quotations: number
+  purchaseOrders: number
+  salesOrders: number
 }
 
 export type CompanyCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -949,6 +1197,8 @@ export type CompanyCountOutputTypeSelect<ExtArgs extends runtime.Types.Extension
   Lead?: boolean | CompanyCountOutputTypeCountLeadArgs
   VisitPlans?: boolean | CompanyCountOutputTypeCountVisitPlansArgs
   quotations?: boolean | CompanyCountOutputTypeCountQuotationsArgs
+  purchaseOrders?: boolean | CompanyCountOutputTypeCountPurchaseOrdersArgs
+  salesOrders?: boolean | CompanyCountOutputTypeCountSalesOrdersArgs
 }
 
 /**
@@ -1003,6 +1253,20 @@ export type CompanyCountOutputTypeCountQuotationsArgs<ExtArgs extends runtime.Ty
   where?: Prisma.QuotationWhereInput
 }
 
+/**
+ * CompanyCountOutputType without action
+ */
+export type CompanyCountOutputTypeCountPurchaseOrdersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PurchaseOrderWhereInput
+}
+
+/**
+ * CompanyCountOutputType without action
+ */
+export type CompanyCountOutputTypeCountSalesOrdersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.SalesOrderWhereInput
+}
+
 
 export type CompanySelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1017,6 +1281,8 @@ export type CompanySelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   Lead?: boolean | Prisma.Company$LeadArgs<ExtArgs>
   VisitPlans?: boolean | Prisma.Company$VisitPlansArgs<ExtArgs>
   quotations?: boolean | Prisma.Company$quotationsArgs<ExtArgs>
+  purchaseOrders?: boolean | Prisma.Company$purchaseOrdersArgs<ExtArgs>
+  salesOrders?: boolean | Prisma.Company$salesOrdersArgs<ExtArgs>
   _count?: boolean | Prisma.CompanyCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["company"]>
 
@@ -1055,6 +1321,8 @@ export type CompanyInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs
   Lead?: boolean | Prisma.Company$LeadArgs<ExtArgs>
   VisitPlans?: boolean | Prisma.Company$VisitPlansArgs<ExtArgs>
   quotations?: boolean | Prisma.Company$quotationsArgs<ExtArgs>
+  purchaseOrders?: boolean | Prisma.Company$purchaseOrdersArgs<ExtArgs>
+  salesOrders?: boolean | Prisma.Company$salesOrdersArgs<ExtArgs>
   _count?: boolean | Prisma.CompanyCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type CompanyIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -1069,6 +1337,8 @@ export type $CompanyPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     Lead: Prisma.$LeadPayload<ExtArgs>[]
     VisitPlans: Prisma.$VisitPlanPayload<ExtArgs>[]
     quotations: Prisma.$QuotationPayload<ExtArgs>[]
+    purchaseOrders: Prisma.$PurchaseOrderPayload<ExtArgs>[]
+    salesOrders: Prisma.$SalesOrderPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1477,6 +1747,8 @@ export interface Prisma__CompanyClient<T, Null = never, ExtArgs extends runtime.
   Lead<T extends Prisma.Company$LeadArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Company$LeadArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   VisitPlans<T extends Prisma.Company$VisitPlansArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Company$VisitPlansArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$VisitPlanPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   quotations<T extends Prisma.Company$quotationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Company$quotationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$QuotationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  purchaseOrders<T extends Prisma.Company$purchaseOrdersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Company$purchaseOrdersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PurchaseOrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  salesOrders<T extends Prisma.Company$salesOrdersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Company$salesOrdersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SalesOrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2046,6 +2318,54 @@ export type Company$quotationsArgs<ExtArgs extends runtime.Types.Extensions.Inte
   take?: number
   skip?: number
   distinct?: Prisma.QuotationScalarFieldEnum | Prisma.QuotationScalarFieldEnum[]
+}
+
+/**
+ * Company.purchaseOrders
+ */
+export type Company$purchaseOrdersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PurchaseOrder
+   */
+  select?: Prisma.PurchaseOrderSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the PurchaseOrder
+   */
+  omit?: Prisma.PurchaseOrderOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PurchaseOrderInclude<ExtArgs> | null
+  where?: Prisma.PurchaseOrderWhereInput
+  orderBy?: Prisma.PurchaseOrderOrderByWithRelationInput | Prisma.PurchaseOrderOrderByWithRelationInput[]
+  cursor?: Prisma.PurchaseOrderWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PurchaseOrderScalarFieldEnum | Prisma.PurchaseOrderScalarFieldEnum[]
+}
+
+/**
+ * Company.salesOrders
+ */
+export type Company$salesOrdersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the SalesOrder
+   */
+  select?: Prisma.SalesOrderSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the SalesOrder
+   */
+  omit?: Prisma.SalesOrderOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SalesOrderInclude<ExtArgs> | null
+  where?: Prisma.SalesOrderWhereInput
+  orderBy?: Prisma.SalesOrderOrderByWithRelationInput | Prisma.SalesOrderOrderByWithRelationInput[]
+  cursor?: Prisma.SalesOrderWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.SalesOrderScalarFieldEnum | Prisma.SalesOrderScalarFieldEnum[]
 }
 
 /**
