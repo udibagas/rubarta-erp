@@ -290,7 +290,7 @@ export class QuotationsService {
   async markAsExpired() {
     await this.prisma.quotation.updateMany({
       where: {
-        expirationDate: { lt: new Date() },
+        validUntil: { lt: new Date() },
         status: {
           notIn: [
             QuotationStatus.Expired,
