@@ -107,7 +107,7 @@ export class CustomersService {
             Contacts: true,
             Leads: true,
             Opportunities: true,
-            Orders: true,
+            SalesOrders: true,
           },
         },
       },
