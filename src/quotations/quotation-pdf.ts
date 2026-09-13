@@ -83,10 +83,10 @@ export function generateQuotationPdf(quotation: any): Promise<Buffer> {
       ['No', quotation.number],
       ['Date', formatDate(quotation.date)],
       ['Valid Until', formatDate(quotation.validUntil)],
-      ['Attention', quotation.contactPerson || '-'],
       ['Payment Method', quotation.paymentMethod || ''],
       ['T.O.P.', quotation.termOfPayment || ''],
       ['Currency', currency],
+      ['Attention', quotation.contactPerson || '-'],
       ['Phone', quotation.contactPhone || ''],
     ];
 
