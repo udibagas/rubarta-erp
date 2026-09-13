@@ -107,7 +107,6 @@ export class SalesOrdersService {
           orderBy: { sortOrder: 'asc' },
         },
         Customer: true,
-        Invoice: true,
         User: {
           select: { id: true, name: true, email: true },
         },
