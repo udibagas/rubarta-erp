@@ -75,10 +75,6 @@ export class CreateQuotationDto {
   @IsInt()
   customerId: number;
 
-  @ApiProperty({ example: 1 })
-  @IsInt()
-  userId: number;
-
   @ApiProperty({ required: false, example: 1 })
   @IsOptional()
   @IsInt()

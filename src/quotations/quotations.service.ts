@@ -22,7 +22,7 @@ export class QuotationsService {
     private readonly approvalService: ApprovalService,
   ) {}
 
-  async create(data: CreateQuotationDto) {
+  async create(data: CreateQuotationDto & { userId: number }) {
     const { items, ...quotationData } = data;
     const number = await this.generateNumber();
 

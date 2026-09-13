@@ -25,6 +25,8 @@ import {
   QueryQuotationDto,
   SendQuotationEmailDto,
 } from './quotation.dto';
+import { Auth } from '../auth/auth.decorator';
+import { User } from '../prisma/client/client';
 
 @ApiTags('Quotations')
 @ApiBearerAuth()
@@ -35,8 +37,8 @@ export class QuotationsController {
   @Post()
   @ApiOperation({ summary: 'Create new quotation' })
   @ApiCreatedResponse({ description: 'Quotation created' })
-  create(@Body() createQuotationDto: CreateQuotationDto) {
-    return this.quotationsService.create(createQuotationDto);
+  create(@Body() dto: CreateQuotationDto, @Auth() user: User) {
+    return this.quotationsService.create({ ...dto, userId: user.id });
   }
 
   @Get()
