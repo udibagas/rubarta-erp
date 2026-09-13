@@ -60,6 +60,7 @@ export class SalesOrdersService {
       include: {
         SalesOrderItems: true,
         Customer: { select: { id: true, name: true, email: true } },
+        User: { select: { id: true, name: true } },
       },
     });
   }
@@ -92,6 +93,7 @@ export class SalesOrdersService {
       orderBy: { date: 'desc' },
       include: {
         Customer: { select: { id: true, name: true } },
+        User: { select: { id: true, name: true } },
         _count: {
           select: { SalesOrderItems: true },
         },
