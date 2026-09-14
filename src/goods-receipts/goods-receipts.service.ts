@@ -7,10 +7,15 @@ import {
   UpdateGoodsReceiptDto,
 } from './goods-receipt.dto';
 import dayjs from 'dayjs';
+import { parsePackingListItems } from './packing-list.parser';
 
 @Injectable()
 export class GoodsReceiptsService {
   constructor(private readonly prisma: PrismaService) {}
+
+  async parsePackingList(pdfBuffer: Buffer) {
+    return parsePackingListItems(pdfBuffer);
+  }
 
   private readonly includeRelations = {
     GoodsReceiptItems: true,

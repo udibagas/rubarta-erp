@@ -2,20 +2,29 @@ import {
   Body,
   Controller,
   Delete,
+  FileTypeValidator,
   Get,
+  MaxFileSizeValidator,
   Param,
+  ParseFilePipe,
   ParseIntPipe,
   Patch,
   Post,
   Query,
+  UploadedFile,
+  UseInterceptors,
 } from '@nestjs/common';
 import {
   ApiBearerAuth,
+  ApiBody,
+  ApiConsumes,
   ApiCreatedResponse,
   ApiOkResponse,
   ApiOperation,
   ApiTags,
 } from '@nestjs/swagger';
+import { FileInterceptor } from '@nestjs/platform-express';
+import * as multer from 'multer';
 import { GoodsReceiptsService } from './goods-receipts.service';
 import {
   CreateGoodsReceiptDto,
@@ -36,6 +45,41 @@ export class GoodsReceiptsController {
   @ApiCreatedResponse({ description: 'Good receipt created' })
   create(@Body() dto: CreateGoodsReceiptDto, @Auth() user: User) {
     return this.goodsReceiptsService.create({ ...dto, userId: user.id });
+  }
+
+  @Post('parse-packing-list')
+  @ApiOperation({ summary: 'Parse packing list PDF' })
+  @ApiConsumes('multipart/form-data')
+  @ApiBody({
+    schema: {
+      type: 'object',
+      properties: {
+        file: {
+          type: 'string',
+          format: 'binary',
+        },
+      },
+      required: ['file'],
+    },
+  })
+  @ApiOkResponse({ description: 'Parsed packing list items' })
+  @UseInterceptors(
+    FileInterceptor('file', {
+      storage: multer.memoryStorage(),
+    }),
+  )
+  parsePackingList(
+    @UploadedFile(
+      new ParseFilePipe({
+        validators: [
+          new MaxFileSizeValidator({ maxSize: 10000000 }),
+          new FileTypeValidator({ fileType: 'application/pdf' }),
+        ],
+      }),
+    )
+    file: Express.Multer.File,
+  ) {
+    return this.goodsReceiptsService.parsePackingList(file.buffer);
   }
 
   @Get()
