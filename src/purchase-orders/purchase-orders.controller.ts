@@ -10,6 +10,7 @@ import {
   Post,
   Query,
   Res,
+  Req,
 } from '@nestjs/common';
 import {
   ApiBearerAuth,
@@ -18,7 +19,7 @@ import {
   ApiOperation,
   ApiTags,
 } from '@nestjs/swagger';
-import { Response } from 'express';
+import { Response, Request } from 'express';
 import { Auth } from '../auth/auth.decorator';
 import { User, PurchaseOrderStatus } from '../prisma/client/client';
 import { PurchaseOrdersService } from './purchase-orders.service';
@@ -38,8 +39,16 @@ export class PurchaseOrdersController {
   @Post()
   @ApiOperation({ summary: 'Create new purchase order' })
   @ApiCreatedResponse({ description: 'Purchase order created' })
-  create(@Body() dto: CreatePurchaseOrderDto, @Auth() user: User) {
-    return this.purchaseOrdersService.create({ ...dto, userId: user.id });
+  create(
+    @Body() dto: CreatePurchaseOrderDto,
+    @Auth() user: User,
+    @Req() req: Request,
+  ) {
+    return this.purchaseOrdersService.create({
+      ...dto,
+      companyId: dto.companyId ?? Number(req.cookies.companyId),
+      userId: user.id,
+    });
   }
 
   @Get()
