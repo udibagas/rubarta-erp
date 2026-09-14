@@ -157,7 +157,7 @@ export class CreateSalesOrderDto {
 
   // Customer information
   @ApiProperty({ example: 1 })
-  @IsInt({ message: 'Customer ID is required and must be an integer' })
+  @IsInt({ message: 'Invalid customer' })
   customerId: number;
 
   @ApiProperty({ required: false, example: '123 Main St, City, Country' })
