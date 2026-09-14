@@ -66,7 +66,7 @@ export class CreateGoodsReceiptDto {
 
   @ApiProperty({ example: { files: [] }, type: Object })
   @IsOptional()
-  @IsObject()
+  @IsObject({ each: true })
   supportingDocument?: JsonArray;
 
   @ApiProperty({ example: 'Received in good condition', required: false })
