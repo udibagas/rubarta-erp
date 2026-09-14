@@ -159,7 +159,8 @@ export class CreatePurchaseOrderDto {
   supplierId?: number;
 
   @ApiProperty({ example: 1 })
-  @IsInt()
+  @IsOptional()
+  @IsInt({ message: 'Invalid company' })
   companyId: number;
 
   @ApiProperty({ type: [PurchaseOrderItemDto] })

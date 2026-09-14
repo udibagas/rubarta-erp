@@ -54,7 +54,7 @@ export class QuotationItemDto {
 export class CreateQuotationDto {
   @ApiProperty({ required: false, example: 1 })
   @IsOptional()
-  @IsInt()
+  @IsInt({ message: 'Invalid company' })
   companyId?: number;
 
   @ApiProperty({ example: '2025-06-25' })
