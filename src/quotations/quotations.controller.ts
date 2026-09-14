@@ -8,9 +8,10 @@ import {
   Delete,
   Query,
   Res,
+  Req,
   ParseIntPipe,
 } from '@nestjs/common';
-import { Response } from 'express';
+import { Response, Request } from 'express';
 import {
   ApiTags,
   ApiBearerAuth,
@@ -37,8 +38,16 @@ export class QuotationsController {
   @Post()
   @ApiOperation({ summary: 'Create new quotation' })
   @ApiCreatedResponse({ description: 'Quotation created' })
-  create(@Body() dto: CreateQuotationDto, @Auth() user: User) {
-    return this.quotationsService.create({ ...dto, userId: user.id });
+  create(
+    @Body() dto: CreateQuotationDto,
+    @Auth() user: User,
+    @Req() req: Request,
+  ) {
+    return this.quotationsService.create({
+      ...dto,
+      companyId: dto.companyId ?? Number(req.cookies.companyId),
+      userId: user.id,
+    });
   }
 
   @Get()

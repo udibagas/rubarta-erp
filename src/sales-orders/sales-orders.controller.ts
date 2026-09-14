@@ -56,7 +56,7 @@ export class SalesOrdersController {
   ) {
     return this.salesOrdersService.create({
       ...dto,
-      companyId: dto.companyId ?? req.cookies.companyId,
+      companyId: dto.companyId ?? Number(req.cookies.companyId),
       userId: user.id,
     });
   }
