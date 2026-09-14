@@ -1,11 +1,15 @@
 import { Resolver, Query, Args, Int } from '@nestjs/graphql';
 import { PurchaseOrdersService } from './purchase-orders.service';
 import { PurchaseOrderType } from './purchase-order.type';
-import { PurchaseOrderStatus } from '../prisma/client/client';
+import { Prisma, PurchaseOrderStatus } from '../prisma/client/client';
+import { PrismaService } from '../prisma/prisma.service';
 
 @Resolver(() => PurchaseOrderType)
 export class PurchaseOrdersResolver {
-  constructor(private readonly purchaseOrdersService: PurchaseOrdersService) {}
+  constructor(
+    private readonly purchaseOrdersService: PurchaseOrdersService,
+    private readonly prisma: PrismaService,
+  ) {}
 
   @Query(() => [PurchaseOrderType], {
     name: 'purchaseOrders',
@@ -18,7 +22,30 @@ export class PurchaseOrdersResolver {
     @Args('status', { type: () => PurchaseOrderStatus, nullable: true })
     status?: PurchaseOrderStatus,
   ) {
-    return this.purchaseOrdersService.findAll({ keyword, supplierId, status });
+    const where: Prisma.PurchaseOrderWhereInput = { deletedAt: null };
+    if (keyword) {
+      where.OR = [
+        { number: { contains: keyword, mode: 'insensitive' } },
+        { title: { contains: keyword, mode: 'insensitive' } },
+        { referenceNumber: { contains: keyword, mode: 'insensitive' } },
+        {
+          Supplier: { name: { contains: keyword, mode: 'insensitive' } },
+        },
+      ];
+    }
+    if (supplierId) where.supplierId = supplierId;
+    if (status) where.status = status;
+
+    return this.prisma.purchaseOrder.findMany({
+      where,
+      orderBy: { date: 'desc' },
+      include: {
+        PurchaseOrderItems: true,
+        Supplier: { select: { id: true, name: true } },
+        User: { select: { id: true, name: true } },
+        _count: { select: { PurchaseOrderItems: true } },
+      },
+    });
   }
 
   @Query(() => PurchaseOrderType, {

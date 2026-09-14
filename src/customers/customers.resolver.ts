@@ -1,10 +1,14 @@
 import { Resolver, Query, Args, Int } from '@nestjs/graphql';
 import { CustomersService } from './customers.service';
 import { CustomerType } from './customer.type';
+import { PrismaService } from '../prisma/prisma.service';
 
 @Resolver(() => CustomerType)
 export class CustomersResolver {
-  constructor(private readonly customersService: CustomersService) {}
+  constructor(
+    private readonly customersService: CustomersService,
+    private readonly prisma: PrismaService,
+  ) {}
 
   @Query(() => [CustomerType], {
     name: 'customers',
@@ -18,11 +22,22 @@ export class CustomersResolver {
     @Args('accountManagerId', { type: () => Int, nullable: true })
     accountManagerId?: number,
   ) {
-    return this.customersService.findAll({
-      keyword,
-      industry,
-      isActive,
-      accountManagerId,
+    return this.prisma.customer.findMany({
+      where: {
+        ...(keyword && { name: { contains: keyword, mode: 'insensitive' } }),
+        ...(industry && { industry }),
+        ...(isActive !== undefined && { isActive }),
+        ...(accountManagerId && { accountManagerId }),
+      },
+      orderBy: { name: 'asc' },
+      include: {
+        accountManager: {
+          select: { name: true },
+        },
+        Contacts: {
+          select: { name: true, phone: true, email: true },
+        },
+      },
     });
   }
 

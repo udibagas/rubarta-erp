@@ -1,0 +1,66 @@
+model Customer {
+  id               Int       @id @default(autoincrement())
+  name             String    @db.VarChar(200)
+  address          String    @db.Text
+  phone            String    @db.VarChar(50)
+  email            String    @unique @db.VarChar(100)
+  website          String?   @db.VarChar(200)
+  industry         String?   @db.VarChar(100)
+  employeeCount    Int?
+  revenue          Float?
+  tags             String[]  @default([])
+  accountManagerId Int?
+  isActive         Boolean   @default(true)
+  deletedAt        DateTime? @db.Timestamp()
+
+  // Timestamps
+  createdAt DateTime  @default(now())
+  updatedAt DateTime? @updatedAt
+
+  // Relations
+  accountManager User?           @relation(fields: [accountManagerId], references: [id])
+  Invoices       Invoice[]
+  Contacts       Contact[]
+  Leads          Lead[]
+  Opportunities  Opportunity[]
+  SalesOrders    SalesOrder[]
+  DeliveryOrders DeliveryOrder[]
+  CustomerNotes  CustomerNote[]
+  CustomerFiles  CustomerFile[]
+  Quotations     Quotation[]
+  VisitPlans     VisitPlan[]
+  Tasks          Task[]
+
+  @@index([email])
+  @@index([isActive])
+  @@index([deletedAt])
+  @@map("Customers")
+}
+
+model Contact {
+  id         Int       @id @default(autoincrement())
+  customerId Int
+  name       String    @db.VarChar(200)
+  email      String?   @db.VarChar(100)
+  phone      String    @db.VarChar(50)
+  position   String?   @db.VarChar(100)
+  notes      String?   @db.Text
+  isPrimary  Boolean   @default(false)
+  isActive   Boolean   @default(true)
+  deletedAt  DateTime? @db.Timestamp()
+
+  // Timestamps
+  createdAt DateTime  @default(now())
+  updatedAt DateTime? @updatedAt
+
+  // Relationships
+  Customer     Customer      @relation(fields: [customerId], references: [id], onDelete: Cascade)
+  Interactions Interaction[]
+  VisitPlans   VisitPlan[]
+
+  @@unique([customerId, email])
+  @@index([customerId])
+  @@index([email])
+  @@index([deletedAt])
+  @@map("Contacts")
+}
