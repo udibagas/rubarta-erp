@@ -44,18 +44,19 @@ export class SalesOrderItemDto {
 export class CreateSalesOrderDto {
   @ApiProperty({ example: 1 })
   @IsOptional()
-  @IsInt({ message: 'Quotation ID must be an integer' })
+  @IsInt({ message: 'Invalid quotation ID' })
   quotationId: number;
 
   @ApiProperty({ required: true, example: 1 })
-  @IsInt({ message: 'Company is required and must be an integer' })
+  @IsOptional()
+  @IsInt({ message: 'Invalid company' })
   companyId: number;
 
   @ApiProperty({ example: '2025-05-25T10:00:00Z' })
   @IsDateString(
     {},
     {
-      message: 'Date is required and must be a valid ISO 8601 date string',
+      message: 'Invalid date',
     },
   )
   date: string;

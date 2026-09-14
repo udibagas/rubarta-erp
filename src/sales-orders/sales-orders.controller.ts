@@ -15,7 +15,9 @@ import {
   UploadedFile,
   UseInterceptors,
   Res,
+  Req,
 } from '@nestjs/common';
+import { Request } from 'express';
 import {
   ApiTags,
   ApiBearerAuth,
@@ -47,9 +49,14 @@ export class SalesOrdersController {
   @Post()
   @ApiOperation({ summary: 'Create new order' })
   @ApiCreatedResponse({ description: 'Order created' })
-  create(@Body() createOrderDto: CreateSalesOrderDto, @Auth() user: User) {
+  create(
+    @Body() dto: CreateSalesOrderDto,
+    @Auth() user: User,
+    @Req() req: Request,
+  ) {
     return this.salesOrdersService.create({
-      ...createOrderDto,
+      ...dto,
+      companyId: dto.companyId ?? req.cookies.companyId,
       userId: user.id,
     });
   }
