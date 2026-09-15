@@ -32,6 +32,9 @@ export class PurchaseOrderItemType {
   @Field(() => Int)
   quantity: number;
 
+  @Field(() => Int)
+  receivedQuantity: number;
+
   @Field(() => Float)
   unitPrice: number;
 

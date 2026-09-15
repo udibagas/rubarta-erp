@@ -127,7 +127,7 @@ export class GoodsReceiptsService {
     }
 
     for (const item of gr.GoodsReceiptItems) {
-      this.prisma.$transaction(async (transaction) => {
+      await this.prisma.$transaction(async (transaction) => {
         await transaction.purchaseOrderItem.updateMany({
           where: {
             purchaseOrderId: gr.purchaseOrderId,
