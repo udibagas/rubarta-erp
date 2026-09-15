@@ -73,6 +73,8 @@ export class SalesOrdersService {
     if (query.keyword) {
       where.OR = [
         { number: { contains: query.keyword, mode: 'insensitive' } },
+        { title: { contains: query.keyword, mode: 'insensitive' } },
+        { referenceNumber: { contains: query.keyword, mode: 'insensitive' } },
         { description: { contains: query.keyword, mode: 'insensitive' } },
         {
           Customer: { name: { contains: query.keyword, mode: 'insensitive' } },
