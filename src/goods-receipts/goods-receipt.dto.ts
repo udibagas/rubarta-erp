@@ -12,6 +12,7 @@ import {
 } from 'class-validator';
 import { Type } from 'class-transformer';
 import { JsonArray } from '@prisma/client/runtime/client';
+import { Optional } from '@nestjs/common';
 
 export class GoodsReceiptItemDto {
   @ApiProperty({ example: 'PART-001' })
@@ -45,7 +46,8 @@ export class CreateGoodsReceiptDto {
   date: string;
 
   @ApiProperty({ example: 1 })
-  @IsInt()
+  @Optional()
+  @IsInt({ message: 'Invalid company' })
   companyId: number;
 
   @ApiProperty({ example: 1 })

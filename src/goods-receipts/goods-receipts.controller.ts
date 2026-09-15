@@ -11,6 +11,7 @@ import {
   Patch,
   Post,
   Query,
+  Req,
   Res,
   UploadedFile,
   UseInterceptors,
@@ -26,7 +27,7 @@ import {
 } from '@nestjs/swagger';
 import { FileInterceptor } from '@nestjs/platform-express';
 import * as multer from 'multer';
-import { Response } from 'express';
+import { Request, Response } from 'express';
 import { GoodsReceiptsService } from './goods-receipts.service';
 import {
   CreateGoodsReceiptDto,
@@ -45,8 +46,16 @@ export class GoodsReceiptsController {
   @Post()
   @ApiOperation({ summary: 'Create new good receipt' })
   @ApiCreatedResponse({ description: 'Good receipt created' })
-  create(@Body() dto: CreateGoodsReceiptDto, @Auth() user: User) {
-    return this.goodsReceiptsService.create({ ...dto, userId: user.id });
+  create(
+    @Body() dto: CreateGoodsReceiptDto,
+    @Auth() user: User,
+    @Req() req: Request,
+  ) {
+    return this.goodsReceiptsService.create({
+      ...dto,
+      companyId: dto.companyId ?? Number(req.cookies.companyId),
+      userId: user.id,
+    });
   }
 
   @Post('parse-packing-list')
