@@ -684,16 +684,6 @@ export type VisitPlanUncheckedUpdateManyInput = {
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
-export type VisitPlanListRelationFilter = {
-  every?: Prisma.VisitPlanWhereInput
-  some?: Prisma.VisitPlanWhereInput
-  none?: Prisma.VisitPlanWhereInput
-}
-
-export type VisitPlanOrderByRelationAggregateInput = {
-  _count?: Prisma.SortOrder
-}
-
 export type VisitPlanCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   customerId?: Prisma.SortOrder
@@ -790,6 +780,24 @@ export type VisitPlanSumOrderByAggregateInput = {
   estimatedDuration?: Prisma.SortOrder
 }
 
+export type VisitPlanListRelationFilter = {
+  every?: Prisma.VisitPlanWhereInput
+  some?: Prisma.VisitPlanWhereInput
+  none?: Prisma.VisitPlanWhereInput
+}
+
+export type VisitPlanOrderByRelationAggregateInput = {
+  _count?: Prisma.SortOrder
+}
+
+export type EnumVisitTypeFieldUpdateOperationsInput = {
+  set?: $Enums.VisitType
+}
+
+export type EnumVisitPlanStatusFieldUpdateOperationsInput = {
+  set?: $Enums.VisitPlanStatus
+}
+
 export type VisitPlanCreateNestedManyWithoutCustomerInput = {
   create?: Prisma.XOR<Prisma.VisitPlanCreateWithoutCustomerInput, Prisma.VisitPlanUncheckedCreateWithoutCustomerInput> | Prisma.VisitPlanCreateWithoutCustomerInput[] | Prisma.VisitPlanUncheckedCreateWithoutCustomerInput[]
   connectOrCreate?: Prisma.VisitPlanCreateOrConnectWithoutCustomerInput | Prisma.VisitPlanCreateOrConnectWithoutCustomerInput[]
@@ -872,14 +880,6 @@ export type VisitPlanUncheckedUpdateManyWithoutContactNestedInput = {
   update?: Prisma.VisitPlanUpdateWithWhereUniqueWithoutContactInput | Prisma.VisitPlanUpdateWithWhereUniqueWithoutContactInput[]
   updateMany?: Prisma.VisitPlanUpdateManyWithWhereWithoutContactInput | Prisma.VisitPlanUpdateManyWithWhereWithoutContactInput[]
   deleteMany?: Prisma.VisitPlanScalarWhereInput | Prisma.VisitPlanScalarWhereInput[]
-}
-
-export type EnumVisitTypeFieldUpdateOperationsInput = {
-  set?: $Enums.VisitType
-}
-
-export type EnumVisitPlanStatusFieldUpdateOperationsInput = {
-  set?: $Enums.VisitPlanStatus
 }
 
 export type VisitPlanCreateNestedManyWithoutCompanyInput = {

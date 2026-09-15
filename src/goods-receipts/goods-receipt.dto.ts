@@ -74,6 +74,11 @@ export class CreateGoodsReceiptDto {
   @IsString()
   notes?: string;
 
+  @ApiProperty({ example: 'Draft' })
+  @IsString()
+  @IsOptional()
+  status: 'Draft' | 'Confirmed';
+
   @ApiProperty({ type: [GoodsReceiptItemDto] })
   @IsArray()
   @ValidateNested({ each: true })

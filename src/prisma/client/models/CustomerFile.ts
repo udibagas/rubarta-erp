@@ -438,16 +438,6 @@ export type CustomerFileUncheckedUpdateManyInput = {
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
-export type CustomerFileListRelationFilter = {
-  every?: Prisma.CustomerFileWhereInput
-  some?: Prisma.CustomerFileWhereInput
-  none?: Prisma.CustomerFileWhereInput
-}
-
-export type CustomerFileOrderByRelationAggregateInput = {
-  _count?: Prisma.SortOrder
-}
-
 export type CustomerFileCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   customerId?: Prisma.SortOrder
@@ -500,6 +490,16 @@ export type CustomerFileSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
   customerId?: Prisma.SortOrder
   fileSize?: Prisma.SortOrder
+}
+
+export type CustomerFileListRelationFilter = {
+  every?: Prisma.CustomerFileWhereInput
+  some?: Prisma.CustomerFileWhereInput
+  none?: Prisma.CustomerFileWhereInput
+}
+
+export type CustomerFileOrderByRelationAggregateInput = {
+  _count?: Prisma.SortOrder
 }
 
 export type CustomerFileCreateNestedManyWithoutCustomerInput = {

@@ -509,16 +509,6 @@ export type LeadUncheckedUpdateManyInput = {
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
-export type LeadListRelationFilter = {
-  every?: Prisma.LeadWhereInput
-  some?: Prisma.LeadWhereInput
-  none?: Prisma.LeadWhereInput
-}
-
-export type LeadOrderByRelationAggregateInput = {
-  _count?: Prisma.SortOrder
-}
-
 export type LeadCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
@@ -588,46 +578,14 @@ export type LeadNullableScalarRelationFilter = {
   isNot?: Prisma.LeadWhereInput | null
 }
 
-export type LeadCreateNestedManyWithoutCustomerInput = {
-  create?: Prisma.XOR<Prisma.LeadCreateWithoutCustomerInput, Prisma.LeadUncheckedCreateWithoutCustomerInput> | Prisma.LeadCreateWithoutCustomerInput[] | Prisma.LeadUncheckedCreateWithoutCustomerInput[]
-  connectOrCreate?: Prisma.LeadCreateOrConnectWithoutCustomerInput | Prisma.LeadCreateOrConnectWithoutCustomerInput[]
-  createMany?: Prisma.LeadCreateManyCustomerInputEnvelope
-  connect?: Prisma.LeadWhereUniqueInput | Prisma.LeadWhereUniqueInput[]
+export type LeadListRelationFilter = {
+  every?: Prisma.LeadWhereInput
+  some?: Prisma.LeadWhereInput
+  none?: Prisma.LeadWhereInput
 }
 
-export type LeadUncheckedCreateNestedManyWithoutCustomerInput = {
-  create?: Prisma.XOR<Prisma.LeadCreateWithoutCustomerInput, Prisma.LeadUncheckedCreateWithoutCustomerInput> | Prisma.LeadCreateWithoutCustomerInput[] | Prisma.LeadUncheckedCreateWithoutCustomerInput[]
-  connectOrCreate?: Prisma.LeadCreateOrConnectWithoutCustomerInput | Prisma.LeadCreateOrConnectWithoutCustomerInput[]
-  createMany?: Prisma.LeadCreateManyCustomerInputEnvelope
-  connect?: Prisma.LeadWhereUniqueInput | Prisma.LeadWhereUniqueInput[]
-}
-
-export type LeadUpdateManyWithoutCustomerNestedInput = {
-  create?: Prisma.XOR<Prisma.LeadCreateWithoutCustomerInput, Prisma.LeadUncheckedCreateWithoutCustomerInput> | Prisma.LeadCreateWithoutCustomerInput[] | Prisma.LeadUncheckedCreateWithoutCustomerInput[]
-  connectOrCreate?: Prisma.LeadCreateOrConnectWithoutCustomerInput | Prisma.LeadCreateOrConnectWithoutCustomerInput[]
-  upsert?: Prisma.LeadUpsertWithWhereUniqueWithoutCustomerInput | Prisma.LeadUpsertWithWhereUniqueWithoutCustomerInput[]
-  createMany?: Prisma.LeadCreateManyCustomerInputEnvelope
-  set?: Prisma.LeadWhereUniqueInput | Prisma.LeadWhereUniqueInput[]
-  disconnect?: Prisma.LeadWhereUniqueInput | Prisma.LeadWhereUniqueInput[]
-  delete?: Prisma.LeadWhereUniqueInput | Prisma.LeadWhereUniqueInput[]
-  connect?: Prisma.LeadWhereUniqueInput | Prisma.LeadWhereUniqueInput[]
-  update?: Prisma.LeadUpdateWithWhereUniqueWithoutCustomerInput | Prisma.LeadUpdateWithWhereUniqueWithoutCustomerInput[]
-  updateMany?: Prisma.LeadUpdateManyWithWhereWithoutCustomerInput | Prisma.LeadUpdateManyWithWhereWithoutCustomerInput[]
-  deleteMany?: Prisma.LeadScalarWhereInput | Prisma.LeadScalarWhereInput[]
-}
-
-export type LeadUncheckedUpdateManyWithoutCustomerNestedInput = {
-  create?: Prisma.XOR<Prisma.LeadCreateWithoutCustomerInput, Prisma.LeadUncheckedCreateWithoutCustomerInput> | Prisma.LeadCreateWithoutCustomerInput[] | Prisma.LeadUncheckedCreateWithoutCustomerInput[]
-  connectOrCreate?: Prisma.LeadCreateOrConnectWithoutCustomerInput | Prisma.LeadCreateOrConnectWithoutCustomerInput[]
-  upsert?: Prisma.LeadUpsertWithWhereUniqueWithoutCustomerInput | Prisma.LeadUpsertWithWhereUniqueWithoutCustomerInput[]
-  createMany?: Prisma.LeadCreateManyCustomerInputEnvelope
-  set?: Prisma.LeadWhereUniqueInput | Prisma.LeadWhereUniqueInput[]
-  disconnect?: Prisma.LeadWhereUniqueInput | Prisma.LeadWhereUniqueInput[]
-  delete?: Prisma.LeadWhereUniqueInput | Prisma.LeadWhereUniqueInput[]
-  connect?: Prisma.LeadWhereUniqueInput | Prisma.LeadWhereUniqueInput[]
-  update?: Prisma.LeadUpdateWithWhereUniqueWithoutCustomerInput | Prisma.LeadUpdateWithWhereUniqueWithoutCustomerInput[]
-  updateMany?: Prisma.LeadUpdateManyWithWhereWithoutCustomerInput | Prisma.LeadUpdateManyWithWhereWithoutCustomerInput[]
-  deleteMany?: Prisma.LeadScalarWhereInput | Prisma.LeadScalarWhereInput[]
+export type LeadOrderByRelationAggregateInput = {
+  _count?: Prisma.SortOrder
 }
 
 export type EnumLeadSourceFieldUpdateOperationsInput = {
@@ -636,6 +594,14 @@ export type EnumLeadSourceFieldUpdateOperationsInput = {
 
 export type EnumLeadStatusFieldUpdateOperationsInput = {
   set?: $Enums.LeadStatus
+}
+
+export type NullableFloatFieldUpdateOperationsInput = {
+  set?: number | null
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
 }
 
 export type LeadCreateNestedOneWithoutOpportunitiesInput = {
@@ -684,6 +650,48 @@ export type LeadUpdateOneWithoutInteractionsNestedInput = {
   delete?: Prisma.LeadWhereInput | boolean
   connect?: Prisma.LeadWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.LeadUpdateToOneWithWhereWithoutInteractionsInput, Prisma.LeadUpdateWithoutInteractionsInput>, Prisma.LeadUncheckedUpdateWithoutInteractionsInput>
+}
+
+export type LeadCreateNestedManyWithoutCustomerInput = {
+  create?: Prisma.XOR<Prisma.LeadCreateWithoutCustomerInput, Prisma.LeadUncheckedCreateWithoutCustomerInput> | Prisma.LeadCreateWithoutCustomerInput[] | Prisma.LeadUncheckedCreateWithoutCustomerInput[]
+  connectOrCreate?: Prisma.LeadCreateOrConnectWithoutCustomerInput | Prisma.LeadCreateOrConnectWithoutCustomerInput[]
+  createMany?: Prisma.LeadCreateManyCustomerInputEnvelope
+  connect?: Prisma.LeadWhereUniqueInput | Prisma.LeadWhereUniqueInput[]
+}
+
+export type LeadUncheckedCreateNestedManyWithoutCustomerInput = {
+  create?: Prisma.XOR<Prisma.LeadCreateWithoutCustomerInput, Prisma.LeadUncheckedCreateWithoutCustomerInput> | Prisma.LeadCreateWithoutCustomerInput[] | Prisma.LeadUncheckedCreateWithoutCustomerInput[]
+  connectOrCreate?: Prisma.LeadCreateOrConnectWithoutCustomerInput | Prisma.LeadCreateOrConnectWithoutCustomerInput[]
+  createMany?: Prisma.LeadCreateManyCustomerInputEnvelope
+  connect?: Prisma.LeadWhereUniqueInput | Prisma.LeadWhereUniqueInput[]
+}
+
+export type LeadUpdateManyWithoutCustomerNestedInput = {
+  create?: Prisma.XOR<Prisma.LeadCreateWithoutCustomerInput, Prisma.LeadUncheckedCreateWithoutCustomerInput> | Prisma.LeadCreateWithoutCustomerInput[] | Prisma.LeadUncheckedCreateWithoutCustomerInput[]
+  connectOrCreate?: Prisma.LeadCreateOrConnectWithoutCustomerInput | Prisma.LeadCreateOrConnectWithoutCustomerInput[]
+  upsert?: Prisma.LeadUpsertWithWhereUniqueWithoutCustomerInput | Prisma.LeadUpsertWithWhereUniqueWithoutCustomerInput[]
+  createMany?: Prisma.LeadCreateManyCustomerInputEnvelope
+  set?: Prisma.LeadWhereUniqueInput | Prisma.LeadWhereUniqueInput[]
+  disconnect?: Prisma.LeadWhereUniqueInput | Prisma.LeadWhereUniqueInput[]
+  delete?: Prisma.LeadWhereUniqueInput | Prisma.LeadWhereUniqueInput[]
+  connect?: Prisma.LeadWhereUniqueInput | Prisma.LeadWhereUniqueInput[]
+  update?: Prisma.LeadUpdateWithWhereUniqueWithoutCustomerInput | Prisma.LeadUpdateWithWhereUniqueWithoutCustomerInput[]
+  updateMany?: Prisma.LeadUpdateManyWithWhereWithoutCustomerInput | Prisma.LeadUpdateManyWithWhereWithoutCustomerInput[]
+  deleteMany?: Prisma.LeadScalarWhereInput | Prisma.LeadScalarWhereInput[]
+}
+
+export type LeadUncheckedUpdateManyWithoutCustomerNestedInput = {
+  create?: Prisma.XOR<Prisma.LeadCreateWithoutCustomerInput, Prisma.LeadUncheckedCreateWithoutCustomerInput> | Prisma.LeadCreateWithoutCustomerInput[] | Prisma.LeadUncheckedCreateWithoutCustomerInput[]
+  connectOrCreate?: Prisma.LeadCreateOrConnectWithoutCustomerInput | Prisma.LeadCreateOrConnectWithoutCustomerInput[]
+  upsert?: Prisma.LeadUpsertWithWhereUniqueWithoutCustomerInput | Prisma.LeadUpsertWithWhereUniqueWithoutCustomerInput[]
+  createMany?: Prisma.LeadCreateManyCustomerInputEnvelope
+  set?: Prisma.LeadWhereUniqueInput | Prisma.LeadWhereUniqueInput[]
+  disconnect?: Prisma.LeadWhereUniqueInput | Prisma.LeadWhereUniqueInput[]
+  delete?: Prisma.LeadWhereUniqueInput | Prisma.LeadWhereUniqueInput[]
+  connect?: Prisma.LeadWhereUniqueInput | Prisma.LeadWhereUniqueInput[]
+  update?: Prisma.LeadUpdateWithWhereUniqueWithoutCustomerInput | Prisma.LeadUpdateWithWhereUniqueWithoutCustomerInput[]
+  updateMany?: Prisma.LeadUpdateManyWithWhereWithoutCustomerInput | Prisma.LeadUpdateManyWithWhereWithoutCustomerInput[]
+  deleteMany?: Prisma.LeadScalarWhereInput | Prisma.LeadScalarWhereInput[]
 }
 
 export type LeadCreateNestedManyWithoutCompanyInput = {
@@ -768,86 +776,6 @@ export type LeadUncheckedUpdateManyWithoutUserNestedInput = {
   update?: Prisma.LeadUpdateWithWhereUniqueWithoutUserInput | Prisma.LeadUpdateWithWhereUniqueWithoutUserInput[]
   updateMany?: Prisma.LeadUpdateManyWithWhereWithoutUserInput | Prisma.LeadUpdateManyWithWhereWithoutUserInput[]
   deleteMany?: Prisma.LeadScalarWhereInput | Prisma.LeadScalarWhereInput[]
-}
-
-export type LeadCreateWithoutCustomerInput = {
-  title: string
-  source: $Enums.LeadSource
-  status?: $Enums.LeadStatus
-  estimatedValue?: number | null
-  notes?: string | null
-  convertedDate?: Date | string | null
-  deletedAt?: Date | string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string | null
-  Company: Prisma.CompanyCreateNestedOneWithoutLeadInput
-  User: Prisma.UserCreateNestedOneWithoutLeadsInput
-  Tasks?: Prisma.TaskCreateNestedManyWithoutLeadInput
-  Interactions?: Prisma.InteractionCreateNestedManyWithoutLeadInput
-  opportunities?: Prisma.OpportunityCreateNestedManyWithoutLeadInput
-}
-
-export type LeadUncheckedCreateWithoutCustomerInput = {
-  id?: number
-  title: string
-  companyId: number
-  userId: number
-  source: $Enums.LeadSource
-  status?: $Enums.LeadStatus
-  estimatedValue?: number | null
-  notes?: string | null
-  convertedDate?: Date | string | null
-  deletedAt?: Date | string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string | null
-  Tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutLeadInput
-  Interactions?: Prisma.InteractionUncheckedCreateNestedManyWithoutLeadInput
-  opportunities?: Prisma.OpportunityUncheckedCreateNestedManyWithoutLeadInput
-}
-
-export type LeadCreateOrConnectWithoutCustomerInput = {
-  where: Prisma.LeadWhereUniqueInput
-  create: Prisma.XOR<Prisma.LeadCreateWithoutCustomerInput, Prisma.LeadUncheckedCreateWithoutCustomerInput>
-}
-
-export type LeadCreateManyCustomerInputEnvelope = {
-  data: Prisma.LeadCreateManyCustomerInput | Prisma.LeadCreateManyCustomerInput[]
-  skipDuplicates?: boolean
-}
-
-export type LeadUpsertWithWhereUniqueWithoutCustomerInput = {
-  where: Prisma.LeadWhereUniqueInput
-  update: Prisma.XOR<Prisma.LeadUpdateWithoutCustomerInput, Prisma.LeadUncheckedUpdateWithoutCustomerInput>
-  create: Prisma.XOR<Prisma.LeadCreateWithoutCustomerInput, Prisma.LeadUncheckedCreateWithoutCustomerInput>
-}
-
-export type LeadUpdateWithWhereUniqueWithoutCustomerInput = {
-  where: Prisma.LeadWhereUniqueInput
-  data: Prisma.XOR<Prisma.LeadUpdateWithoutCustomerInput, Prisma.LeadUncheckedUpdateWithoutCustomerInput>
-}
-
-export type LeadUpdateManyWithWhereWithoutCustomerInput = {
-  where: Prisma.LeadScalarWhereInput
-  data: Prisma.XOR<Prisma.LeadUpdateManyMutationInput, Prisma.LeadUncheckedUpdateManyWithoutCustomerInput>
-}
-
-export type LeadScalarWhereInput = {
-  AND?: Prisma.LeadScalarWhereInput | Prisma.LeadScalarWhereInput[]
-  OR?: Prisma.LeadScalarWhereInput[]
-  NOT?: Prisma.LeadScalarWhereInput | Prisma.LeadScalarWhereInput[]
-  id?: Prisma.IntFilter<"Lead"> | number
-  title?: Prisma.StringFilter<"Lead"> | string
-  customerId?: Prisma.IntNullableFilter<"Lead"> | number | null
-  companyId?: Prisma.IntFilter<"Lead"> | number
-  userId?: Prisma.IntFilter<"Lead"> | number
-  source?: Prisma.EnumLeadSourceFilter<"Lead"> | $Enums.LeadSource
-  status?: Prisma.EnumLeadStatusFilter<"Lead"> | $Enums.LeadStatus
-  estimatedValue?: Prisma.FloatNullableFilter<"Lead"> | number | null
-  notes?: Prisma.StringNullableFilter<"Lead"> | string | null
-  convertedDate?: Prisma.DateTimeNullableFilter<"Lead"> | Date | string | null
-  deletedAt?: Prisma.DateTimeNullableFilter<"Lead"> | Date | string | null
-  createdAt?: Prisma.DateTimeFilter<"Lead"> | Date | string
-  updatedAt?: Prisma.DateTimeNullableFilter<"Lead"> | Date | string | null
 }
 
 export type LeadCreateWithoutOpportunitiesInput = {
@@ -1106,6 +1034,86 @@ export type LeadUncheckedUpdateWithoutInteractionsInput = {
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Tasks?: Prisma.TaskUncheckedUpdateManyWithoutLeadNestedInput
   opportunities?: Prisma.OpportunityUncheckedUpdateManyWithoutLeadNestedInput
+}
+
+export type LeadCreateWithoutCustomerInput = {
+  title: string
+  source: $Enums.LeadSource
+  status?: $Enums.LeadStatus
+  estimatedValue?: number | null
+  notes?: string | null
+  convertedDate?: Date | string | null
+  deletedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string | null
+  Company: Prisma.CompanyCreateNestedOneWithoutLeadInput
+  User: Prisma.UserCreateNestedOneWithoutLeadsInput
+  Tasks?: Prisma.TaskCreateNestedManyWithoutLeadInput
+  Interactions?: Prisma.InteractionCreateNestedManyWithoutLeadInput
+  opportunities?: Prisma.OpportunityCreateNestedManyWithoutLeadInput
+}
+
+export type LeadUncheckedCreateWithoutCustomerInput = {
+  id?: number
+  title: string
+  companyId: number
+  userId: number
+  source: $Enums.LeadSource
+  status?: $Enums.LeadStatus
+  estimatedValue?: number | null
+  notes?: string | null
+  convertedDate?: Date | string | null
+  deletedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string | null
+  Tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutLeadInput
+  Interactions?: Prisma.InteractionUncheckedCreateNestedManyWithoutLeadInput
+  opportunities?: Prisma.OpportunityUncheckedCreateNestedManyWithoutLeadInput
+}
+
+export type LeadCreateOrConnectWithoutCustomerInput = {
+  where: Prisma.LeadWhereUniqueInput
+  create: Prisma.XOR<Prisma.LeadCreateWithoutCustomerInput, Prisma.LeadUncheckedCreateWithoutCustomerInput>
+}
+
+export type LeadCreateManyCustomerInputEnvelope = {
+  data: Prisma.LeadCreateManyCustomerInput | Prisma.LeadCreateManyCustomerInput[]
+  skipDuplicates?: boolean
+}
+
+export type LeadUpsertWithWhereUniqueWithoutCustomerInput = {
+  where: Prisma.LeadWhereUniqueInput
+  update: Prisma.XOR<Prisma.LeadUpdateWithoutCustomerInput, Prisma.LeadUncheckedUpdateWithoutCustomerInput>
+  create: Prisma.XOR<Prisma.LeadCreateWithoutCustomerInput, Prisma.LeadUncheckedCreateWithoutCustomerInput>
+}
+
+export type LeadUpdateWithWhereUniqueWithoutCustomerInput = {
+  where: Prisma.LeadWhereUniqueInput
+  data: Prisma.XOR<Prisma.LeadUpdateWithoutCustomerInput, Prisma.LeadUncheckedUpdateWithoutCustomerInput>
+}
+
+export type LeadUpdateManyWithWhereWithoutCustomerInput = {
+  where: Prisma.LeadScalarWhereInput
+  data: Prisma.XOR<Prisma.LeadUpdateManyMutationInput, Prisma.LeadUncheckedUpdateManyWithoutCustomerInput>
+}
+
+export type LeadScalarWhereInput = {
+  AND?: Prisma.LeadScalarWhereInput | Prisma.LeadScalarWhereInput[]
+  OR?: Prisma.LeadScalarWhereInput[]
+  NOT?: Prisma.LeadScalarWhereInput | Prisma.LeadScalarWhereInput[]
+  id?: Prisma.IntFilter<"Lead"> | number
+  title?: Prisma.StringFilter<"Lead"> | string
+  customerId?: Prisma.IntNullableFilter<"Lead"> | number | null
+  companyId?: Prisma.IntFilter<"Lead"> | number
+  userId?: Prisma.IntFilter<"Lead"> | number
+  source?: Prisma.EnumLeadSourceFilter<"Lead"> | $Enums.LeadSource
+  status?: Prisma.EnumLeadStatusFilter<"Lead"> | $Enums.LeadStatus
+  estimatedValue?: Prisma.FloatNullableFilter<"Lead"> | number | null
+  notes?: Prisma.StringNullableFilter<"Lead"> | string | null
+  convertedDate?: Prisma.DateTimeNullableFilter<"Lead"> | Date | string | null
+  deletedAt?: Prisma.DateTimeNullableFilter<"Lead"> | Date | string | null
+  createdAt?: Prisma.DateTimeFilter<"Lead"> | Date | string
+  updatedAt?: Prisma.DateTimeNullableFilter<"Lead"> | Date | string | null
 }
 
 export type LeadCreateWithoutCompanyInput = {

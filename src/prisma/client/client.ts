@@ -80,16 +80,6 @@ export type Approval = Prisma.ApprovalModel
  */
 export type ApprovalItem = Prisma.ApprovalItemModel
 /**
- * Model Customer
- * 
- */
-export type Customer = Prisma.CustomerModel
-/**
- * Model Contact
- * 
- */
-export type Contact = Prisma.ContactModel
-/**
  * Model Lead
  * 
  */
@@ -120,15 +110,20 @@ export type CustomerNote = Prisma.CustomerNoteModel
  */
 export type CustomerFile = Prisma.CustomerFileModel
 /**
- * Model Material
- * 
- */
-export type Material = Prisma.MaterialModel
-/**
  * Model VisitPlan
  * 
  */
 export type VisitPlan = Prisma.VisitPlanModel
+/**
+ * Model Customer
+ * 
+ */
+export type Customer = Prisma.CustomerModel
+/**
+ * Model Contact
+ * 
+ */
+export type Contact = Prisma.ContactModel
 /**
  * Model DeliveryOrder
  * 
@@ -159,6 +154,11 @@ export type Invoice = Prisma.InvoiceModel
  * 
  */
 export type InvoiceItem = Prisma.InvoiceItemModel
+/**
+ * Model Material
+ * 
+ */
+export type Material = Prisma.MaterialModel
 /**
  * Model Nkp
  * 

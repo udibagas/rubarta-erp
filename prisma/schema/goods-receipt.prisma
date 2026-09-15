@@ -4,6 +4,7 @@ model GoodsReceipt {
   date               DateTime
   sender             String
   recipient          String
+  status             GoodsReceiptStatus @default(Draft)
   supportingDocument Json?
   notes              String?  @db.Text
 
@@ -44,4 +45,9 @@ model GoodsReceiptItem {
 
   @@index([goodsReceiptId])
   @@map("GoodsReceiptItems")
+}
+
+enum GoodsReceiptStatus {
+  Draft
+  Confirmed
 }

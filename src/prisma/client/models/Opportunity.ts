@@ -684,48 +684,6 @@ export type OpportunityNullableScalarRelationFilter = {
   isNot?: Prisma.OpportunityWhereInput | null
 }
 
-export type OpportunityCreateNestedManyWithoutCustomerInput = {
-  create?: Prisma.XOR<Prisma.OpportunityCreateWithoutCustomerInput, Prisma.OpportunityUncheckedCreateWithoutCustomerInput> | Prisma.OpportunityCreateWithoutCustomerInput[] | Prisma.OpportunityUncheckedCreateWithoutCustomerInput[]
-  connectOrCreate?: Prisma.OpportunityCreateOrConnectWithoutCustomerInput | Prisma.OpportunityCreateOrConnectWithoutCustomerInput[]
-  createMany?: Prisma.OpportunityCreateManyCustomerInputEnvelope
-  connect?: Prisma.OpportunityWhereUniqueInput | Prisma.OpportunityWhereUniqueInput[]
-}
-
-export type OpportunityUncheckedCreateNestedManyWithoutCustomerInput = {
-  create?: Prisma.XOR<Prisma.OpportunityCreateWithoutCustomerInput, Prisma.OpportunityUncheckedCreateWithoutCustomerInput> | Prisma.OpportunityCreateWithoutCustomerInput[] | Prisma.OpportunityUncheckedCreateWithoutCustomerInput[]
-  connectOrCreate?: Prisma.OpportunityCreateOrConnectWithoutCustomerInput | Prisma.OpportunityCreateOrConnectWithoutCustomerInput[]
-  createMany?: Prisma.OpportunityCreateManyCustomerInputEnvelope
-  connect?: Prisma.OpportunityWhereUniqueInput | Prisma.OpportunityWhereUniqueInput[]
-}
-
-export type OpportunityUpdateManyWithoutCustomerNestedInput = {
-  create?: Prisma.XOR<Prisma.OpportunityCreateWithoutCustomerInput, Prisma.OpportunityUncheckedCreateWithoutCustomerInput> | Prisma.OpportunityCreateWithoutCustomerInput[] | Prisma.OpportunityUncheckedCreateWithoutCustomerInput[]
-  connectOrCreate?: Prisma.OpportunityCreateOrConnectWithoutCustomerInput | Prisma.OpportunityCreateOrConnectWithoutCustomerInput[]
-  upsert?: Prisma.OpportunityUpsertWithWhereUniqueWithoutCustomerInput | Prisma.OpportunityUpsertWithWhereUniqueWithoutCustomerInput[]
-  createMany?: Prisma.OpportunityCreateManyCustomerInputEnvelope
-  set?: Prisma.OpportunityWhereUniqueInput | Prisma.OpportunityWhereUniqueInput[]
-  disconnect?: Prisma.OpportunityWhereUniqueInput | Prisma.OpportunityWhereUniqueInput[]
-  delete?: Prisma.OpportunityWhereUniqueInput | Prisma.OpportunityWhereUniqueInput[]
-  connect?: Prisma.OpportunityWhereUniqueInput | Prisma.OpportunityWhereUniqueInput[]
-  update?: Prisma.OpportunityUpdateWithWhereUniqueWithoutCustomerInput | Prisma.OpportunityUpdateWithWhereUniqueWithoutCustomerInput[]
-  updateMany?: Prisma.OpportunityUpdateManyWithWhereWithoutCustomerInput | Prisma.OpportunityUpdateManyWithWhereWithoutCustomerInput[]
-  deleteMany?: Prisma.OpportunityScalarWhereInput | Prisma.OpportunityScalarWhereInput[]
-}
-
-export type OpportunityUncheckedUpdateManyWithoutCustomerNestedInput = {
-  create?: Prisma.XOR<Prisma.OpportunityCreateWithoutCustomerInput, Prisma.OpportunityUncheckedCreateWithoutCustomerInput> | Prisma.OpportunityCreateWithoutCustomerInput[] | Prisma.OpportunityUncheckedCreateWithoutCustomerInput[]
-  connectOrCreate?: Prisma.OpportunityCreateOrConnectWithoutCustomerInput | Prisma.OpportunityCreateOrConnectWithoutCustomerInput[]
-  upsert?: Prisma.OpportunityUpsertWithWhereUniqueWithoutCustomerInput | Prisma.OpportunityUpsertWithWhereUniqueWithoutCustomerInput[]
-  createMany?: Prisma.OpportunityCreateManyCustomerInputEnvelope
-  set?: Prisma.OpportunityWhereUniqueInput | Prisma.OpportunityWhereUniqueInput[]
-  disconnect?: Prisma.OpportunityWhereUniqueInput | Prisma.OpportunityWhereUniqueInput[]
-  delete?: Prisma.OpportunityWhereUniqueInput | Prisma.OpportunityWhereUniqueInput[]
-  connect?: Prisma.OpportunityWhereUniqueInput | Prisma.OpportunityWhereUniqueInput[]
-  update?: Prisma.OpportunityUpdateWithWhereUniqueWithoutCustomerInput | Prisma.OpportunityUpdateWithWhereUniqueWithoutCustomerInput[]
-  updateMany?: Prisma.OpportunityUpdateManyWithWhereWithoutCustomerInput | Prisma.OpportunityUpdateManyWithWhereWithoutCustomerInput[]
-  deleteMany?: Prisma.OpportunityScalarWhereInput | Prisma.OpportunityScalarWhereInput[]
-}
-
 export type OpportunityCreateNestedManyWithoutLeadInput = {
   create?: Prisma.XOR<Prisma.OpportunityCreateWithoutLeadInput, Prisma.OpportunityUncheckedCreateWithoutLeadInput> | Prisma.OpportunityCreateWithoutLeadInput[] | Prisma.OpportunityUncheckedCreateWithoutLeadInput[]
   connectOrCreate?: Prisma.OpportunityCreateOrConnectWithoutLeadInput | Prisma.OpportunityCreateOrConnectWithoutLeadInput[]
@@ -810,6 +768,48 @@ export type OpportunityUpdateOneWithoutInteractionsNestedInput = {
   delete?: Prisma.OpportunityWhereInput | boolean
   connect?: Prisma.OpportunityWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.OpportunityUpdateToOneWithWhereWithoutInteractionsInput, Prisma.OpportunityUpdateWithoutInteractionsInput>, Prisma.OpportunityUncheckedUpdateWithoutInteractionsInput>
+}
+
+export type OpportunityCreateNestedManyWithoutCustomerInput = {
+  create?: Prisma.XOR<Prisma.OpportunityCreateWithoutCustomerInput, Prisma.OpportunityUncheckedCreateWithoutCustomerInput> | Prisma.OpportunityCreateWithoutCustomerInput[] | Prisma.OpportunityUncheckedCreateWithoutCustomerInput[]
+  connectOrCreate?: Prisma.OpportunityCreateOrConnectWithoutCustomerInput | Prisma.OpportunityCreateOrConnectWithoutCustomerInput[]
+  createMany?: Prisma.OpportunityCreateManyCustomerInputEnvelope
+  connect?: Prisma.OpportunityWhereUniqueInput | Prisma.OpportunityWhereUniqueInput[]
+}
+
+export type OpportunityUncheckedCreateNestedManyWithoutCustomerInput = {
+  create?: Prisma.XOR<Prisma.OpportunityCreateWithoutCustomerInput, Prisma.OpportunityUncheckedCreateWithoutCustomerInput> | Prisma.OpportunityCreateWithoutCustomerInput[] | Prisma.OpportunityUncheckedCreateWithoutCustomerInput[]
+  connectOrCreate?: Prisma.OpportunityCreateOrConnectWithoutCustomerInput | Prisma.OpportunityCreateOrConnectWithoutCustomerInput[]
+  createMany?: Prisma.OpportunityCreateManyCustomerInputEnvelope
+  connect?: Prisma.OpportunityWhereUniqueInput | Prisma.OpportunityWhereUniqueInput[]
+}
+
+export type OpportunityUpdateManyWithoutCustomerNestedInput = {
+  create?: Prisma.XOR<Prisma.OpportunityCreateWithoutCustomerInput, Prisma.OpportunityUncheckedCreateWithoutCustomerInput> | Prisma.OpportunityCreateWithoutCustomerInput[] | Prisma.OpportunityUncheckedCreateWithoutCustomerInput[]
+  connectOrCreate?: Prisma.OpportunityCreateOrConnectWithoutCustomerInput | Prisma.OpportunityCreateOrConnectWithoutCustomerInput[]
+  upsert?: Prisma.OpportunityUpsertWithWhereUniqueWithoutCustomerInput | Prisma.OpportunityUpsertWithWhereUniqueWithoutCustomerInput[]
+  createMany?: Prisma.OpportunityCreateManyCustomerInputEnvelope
+  set?: Prisma.OpportunityWhereUniqueInput | Prisma.OpportunityWhereUniqueInput[]
+  disconnect?: Prisma.OpportunityWhereUniqueInput | Prisma.OpportunityWhereUniqueInput[]
+  delete?: Prisma.OpportunityWhereUniqueInput | Prisma.OpportunityWhereUniqueInput[]
+  connect?: Prisma.OpportunityWhereUniqueInput | Prisma.OpportunityWhereUniqueInput[]
+  update?: Prisma.OpportunityUpdateWithWhereUniqueWithoutCustomerInput | Prisma.OpportunityUpdateWithWhereUniqueWithoutCustomerInput[]
+  updateMany?: Prisma.OpportunityUpdateManyWithWhereWithoutCustomerInput | Prisma.OpportunityUpdateManyWithWhereWithoutCustomerInput[]
+  deleteMany?: Prisma.OpportunityScalarWhereInput | Prisma.OpportunityScalarWhereInput[]
+}
+
+export type OpportunityUncheckedUpdateManyWithoutCustomerNestedInput = {
+  create?: Prisma.XOR<Prisma.OpportunityCreateWithoutCustomerInput, Prisma.OpportunityUncheckedCreateWithoutCustomerInput> | Prisma.OpportunityCreateWithoutCustomerInput[] | Prisma.OpportunityUncheckedCreateWithoutCustomerInput[]
+  connectOrCreate?: Prisma.OpportunityCreateOrConnectWithoutCustomerInput | Prisma.OpportunityCreateOrConnectWithoutCustomerInput[]
+  upsert?: Prisma.OpportunityUpsertWithWhereUniqueWithoutCustomerInput | Prisma.OpportunityUpsertWithWhereUniqueWithoutCustomerInput[]
+  createMany?: Prisma.OpportunityCreateManyCustomerInputEnvelope
+  set?: Prisma.OpportunityWhereUniqueInput | Prisma.OpportunityWhereUniqueInput[]
+  disconnect?: Prisma.OpportunityWhereUniqueInput | Prisma.OpportunityWhereUniqueInput[]
+  delete?: Prisma.OpportunityWhereUniqueInput | Prisma.OpportunityWhereUniqueInput[]
+  connect?: Prisma.OpportunityWhereUniqueInput | Prisma.OpportunityWhereUniqueInput[]
+  update?: Prisma.OpportunityUpdateWithWhereUniqueWithoutCustomerInput | Prisma.OpportunityUpdateWithWhereUniqueWithoutCustomerInput[]
+  updateMany?: Prisma.OpportunityUpdateManyWithWhereWithoutCustomerInput | Prisma.OpportunityUpdateManyWithWhereWithoutCustomerInput[]
+  deleteMany?: Prisma.OpportunityScalarWhereInput | Prisma.OpportunityScalarWhereInput[]
 }
 
 export type OpportunityCreateNestedOneWithoutQuotationsInput = {
@@ -912,98 +912,6 @@ export type OpportunityUncheckedUpdateManyWithoutUserNestedInput = {
   deleteMany?: Prisma.OpportunityScalarWhereInput | Prisma.OpportunityScalarWhereInput[]
 }
 
-export type OpportunityCreateWithoutCustomerInput = {
-  name: string
-  description?: string | null
-  amount: number
-  probability?: number | null
-  stage: $Enums.OpportunityStages
-  expectedCloseDate: Date | string
-  actualCloseDate?: Date | string | null
-  lostReason?: string | null
-  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  deletedAt?: Date | string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string | null
-  User: Prisma.UserCreateNestedOneWithoutOpportunitiesInput
-  Company: Prisma.CompanyCreateNestedOneWithoutOpportunityInput
-  Quotations?: Prisma.QuotationCreateNestedManyWithoutOpportunityInput
-  Tasks?: Prisma.TaskCreateNestedManyWithoutOpportunityInput
-  Interactions?: Prisma.InteractionCreateNestedManyWithoutOpportunityInput
-  Lead?: Prisma.LeadCreateNestedOneWithoutOpportunitiesInput
-}
-
-export type OpportunityUncheckedCreateWithoutCustomerInput = {
-  id?: number
-  companyId: number
-  leadId?: number | null
-  userId: number
-  name: string
-  description?: string | null
-  amount: number
-  probability?: number | null
-  stage: $Enums.OpportunityStages
-  expectedCloseDate: Date | string
-  actualCloseDate?: Date | string | null
-  lostReason?: string | null
-  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  deletedAt?: Date | string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string | null
-  Quotations?: Prisma.QuotationUncheckedCreateNestedManyWithoutOpportunityInput
-  Tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutOpportunityInput
-  Interactions?: Prisma.InteractionUncheckedCreateNestedManyWithoutOpportunityInput
-}
-
-export type OpportunityCreateOrConnectWithoutCustomerInput = {
-  where: Prisma.OpportunityWhereUniqueInput
-  create: Prisma.XOR<Prisma.OpportunityCreateWithoutCustomerInput, Prisma.OpportunityUncheckedCreateWithoutCustomerInput>
-}
-
-export type OpportunityCreateManyCustomerInputEnvelope = {
-  data: Prisma.OpportunityCreateManyCustomerInput | Prisma.OpportunityCreateManyCustomerInput[]
-  skipDuplicates?: boolean
-}
-
-export type OpportunityUpsertWithWhereUniqueWithoutCustomerInput = {
-  where: Prisma.OpportunityWhereUniqueInput
-  update: Prisma.XOR<Prisma.OpportunityUpdateWithoutCustomerInput, Prisma.OpportunityUncheckedUpdateWithoutCustomerInput>
-  create: Prisma.XOR<Prisma.OpportunityCreateWithoutCustomerInput, Prisma.OpportunityUncheckedCreateWithoutCustomerInput>
-}
-
-export type OpportunityUpdateWithWhereUniqueWithoutCustomerInput = {
-  where: Prisma.OpportunityWhereUniqueInput
-  data: Prisma.XOR<Prisma.OpportunityUpdateWithoutCustomerInput, Prisma.OpportunityUncheckedUpdateWithoutCustomerInput>
-}
-
-export type OpportunityUpdateManyWithWhereWithoutCustomerInput = {
-  where: Prisma.OpportunityScalarWhereInput
-  data: Prisma.XOR<Prisma.OpportunityUpdateManyMutationInput, Prisma.OpportunityUncheckedUpdateManyWithoutCustomerInput>
-}
-
-export type OpportunityScalarWhereInput = {
-  AND?: Prisma.OpportunityScalarWhereInput | Prisma.OpportunityScalarWhereInput[]
-  OR?: Prisma.OpportunityScalarWhereInput[]
-  NOT?: Prisma.OpportunityScalarWhereInput | Prisma.OpportunityScalarWhereInput[]
-  id?: Prisma.IntFilter<"Opportunity"> | number
-  customerId?: Prisma.IntFilter<"Opportunity"> | number
-  companyId?: Prisma.IntFilter<"Opportunity"> | number
-  leadId?: Prisma.IntNullableFilter<"Opportunity"> | number | null
-  userId?: Prisma.IntFilter<"Opportunity"> | number
-  name?: Prisma.StringFilter<"Opportunity"> | string
-  description?: Prisma.StringNullableFilter<"Opportunity"> | string | null
-  amount?: Prisma.FloatFilter<"Opportunity"> | number
-  probability?: Prisma.IntNullableFilter<"Opportunity"> | number | null
-  stage?: Prisma.EnumOpportunityStagesFilter<"Opportunity"> | $Enums.OpportunityStages
-  expectedCloseDate?: Prisma.DateTimeFilter<"Opportunity"> | Date | string
-  actualCloseDate?: Prisma.DateTimeNullableFilter<"Opportunity"> | Date | string | null
-  lostReason?: Prisma.StringNullableFilter<"Opportunity"> | string | null
-  attachments?: Prisma.JsonNullableFilter<"Opportunity">
-  deletedAt?: Prisma.DateTimeNullableFilter<"Opportunity"> | Date | string | null
-  createdAt?: Prisma.DateTimeFilter<"Opportunity"> | Date | string
-  updatedAt?: Prisma.DateTimeNullableFilter<"Opportunity"> | Date | string | null
-}
-
 export type OpportunityCreateWithoutLeadInput = {
   name: string
   description?: string | null
@@ -1071,6 +979,29 @@ export type OpportunityUpdateWithWhereUniqueWithoutLeadInput = {
 export type OpportunityUpdateManyWithWhereWithoutLeadInput = {
   where: Prisma.OpportunityScalarWhereInput
   data: Prisma.XOR<Prisma.OpportunityUpdateManyMutationInput, Prisma.OpportunityUncheckedUpdateManyWithoutLeadInput>
+}
+
+export type OpportunityScalarWhereInput = {
+  AND?: Prisma.OpportunityScalarWhereInput | Prisma.OpportunityScalarWhereInput[]
+  OR?: Prisma.OpportunityScalarWhereInput[]
+  NOT?: Prisma.OpportunityScalarWhereInput | Prisma.OpportunityScalarWhereInput[]
+  id?: Prisma.IntFilter<"Opportunity"> | number
+  customerId?: Prisma.IntFilter<"Opportunity"> | number
+  companyId?: Prisma.IntFilter<"Opportunity"> | number
+  leadId?: Prisma.IntNullableFilter<"Opportunity"> | number | null
+  userId?: Prisma.IntFilter<"Opportunity"> | number
+  name?: Prisma.StringFilter<"Opportunity"> | string
+  description?: Prisma.StringNullableFilter<"Opportunity"> | string | null
+  amount?: Prisma.FloatFilter<"Opportunity"> | number
+  probability?: Prisma.IntNullableFilter<"Opportunity"> | number | null
+  stage?: Prisma.EnumOpportunityStagesFilter<"Opportunity"> | $Enums.OpportunityStages
+  expectedCloseDate?: Prisma.DateTimeFilter<"Opportunity"> | Date | string
+  actualCloseDate?: Prisma.DateTimeNullableFilter<"Opportunity"> | Date | string | null
+  lostReason?: Prisma.StringNullableFilter<"Opportunity"> | string | null
+  attachments?: Prisma.JsonNullableFilter<"Opportunity">
+  deletedAt?: Prisma.DateTimeNullableFilter<"Opportunity"> | Date | string | null
+  createdAt?: Prisma.DateTimeFilter<"Opportunity"> | Date | string
+  updatedAt?: Prisma.DateTimeNullableFilter<"Opportunity"> | Date | string | null
 }
 
 export type OpportunityCreateWithoutTasksInput = {
@@ -1275,6 +1206,75 @@ export type OpportunityUncheckedUpdateWithoutInteractionsInput = {
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Quotations?: Prisma.QuotationUncheckedUpdateManyWithoutOpportunityNestedInput
   Tasks?: Prisma.TaskUncheckedUpdateManyWithoutOpportunityNestedInput
+}
+
+export type OpportunityCreateWithoutCustomerInput = {
+  name: string
+  description?: string | null
+  amount: number
+  probability?: number | null
+  stage: $Enums.OpportunityStages
+  expectedCloseDate: Date | string
+  actualCloseDate?: Date | string | null
+  lostReason?: string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  deletedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string | null
+  User: Prisma.UserCreateNestedOneWithoutOpportunitiesInput
+  Company: Prisma.CompanyCreateNestedOneWithoutOpportunityInput
+  Quotations?: Prisma.QuotationCreateNestedManyWithoutOpportunityInput
+  Tasks?: Prisma.TaskCreateNestedManyWithoutOpportunityInput
+  Interactions?: Prisma.InteractionCreateNestedManyWithoutOpportunityInput
+  Lead?: Prisma.LeadCreateNestedOneWithoutOpportunitiesInput
+}
+
+export type OpportunityUncheckedCreateWithoutCustomerInput = {
+  id?: number
+  companyId: number
+  leadId?: number | null
+  userId: number
+  name: string
+  description?: string | null
+  amount: number
+  probability?: number | null
+  stage: $Enums.OpportunityStages
+  expectedCloseDate: Date | string
+  actualCloseDate?: Date | string | null
+  lostReason?: string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  deletedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string | null
+  Quotations?: Prisma.QuotationUncheckedCreateNestedManyWithoutOpportunityInput
+  Tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutOpportunityInput
+  Interactions?: Prisma.InteractionUncheckedCreateNestedManyWithoutOpportunityInput
+}
+
+export type OpportunityCreateOrConnectWithoutCustomerInput = {
+  where: Prisma.OpportunityWhereUniqueInput
+  create: Prisma.XOR<Prisma.OpportunityCreateWithoutCustomerInput, Prisma.OpportunityUncheckedCreateWithoutCustomerInput>
+}
+
+export type OpportunityCreateManyCustomerInputEnvelope = {
+  data: Prisma.OpportunityCreateManyCustomerInput | Prisma.OpportunityCreateManyCustomerInput[]
+  skipDuplicates?: boolean
+}
+
+export type OpportunityUpsertWithWhereUniqueWithoutCustomerInput = {
+  where: Prisma.OpportunityWhereUniqueInput
+  update: Prisma.XOR<Prisma.OpportunityUpdateWithoutCustomerInput, Prisma.OpportunityUncheckedUpdateWithoutCustomerInput>
+  create: Prisma.XOR<Prisma.OpportunityCreateWithoutCustomerInput, Prisma.OpportunityUncheckedCreateWithoutCustomerInput>
+}
+
+export type OpportunityUpdateWithWhereUniqueWithoutCustomerInput = {
+  where: Prisma.OpportunityWhereUniqueInput
+  data: Prisma.XOR<Prisma.OpportunityUpdateWithoutCustomerInput, Prisma.OpportunityUncheckedUpdateWithoutCustomerInput>
+}
+
+export type OpportunityUpdateManyWithWhereWithoutCustomerInput = {
+  where: Prisma.OpportunityScalarWhereInput
+  data: Prisma.XOR<Prisma.OpportunityUpdateManyMutationInput, Prisma.OpportunityUncheckedUpdateManyWithoutCustomerInput>
 }
 
 export type OpportunityCreateWithoutQuotationsInput = {
@@ -1517,87 +1517,6 @@ export type OpportunityUpdateManyWithWhereWithoutUserInput = {
   data: Prisma.XOR<Prisma.OpportunityUpdateManyMutationInput, Prisma.OpportunityUncheckedUpdateManyWithoutUserInput>
 }
 
-export type OpportunityCreateManyCustomerInput = {
-  id?: number
-  companyId: number
-  leadId?: number | null
-  userId: number
-  name: string
-  description?: string | null
-  amount: number
-  probability?: number | null
-  stage: $Enums.OpportunityStages
-  expectedCloseDate: Date | string
-  actualCloseDate?: Date | string | null
-  lostReason?: string | null
-  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  deletedAt?: Date | string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string | null
-}
-
-export type OpportunityUpdateWithoutCustomerInput = {
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  amount?: Prisma.FloatFieldUpdateOperationsInput | number
-  probability?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  stage?: Prisma.EnumOpportunityStagesFieldUpdateOperationsInput | $Enums.OpportunityStages
-  expectedCloseDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  actualCloseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  lostReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  User?: Prisma.UserUpdateOneRequiredWithoutOpportunitiesNestedInput
-  Company?: Prisma.CompanyUpdateOneRequiredWithoutOpportunityNestedInput
-  Quotations?: Prisma.QuotationUpdateManyWithoutOpportunityNestedInput
-  Tasks?: Prisma.TaskUpdateManyWithoutOpportunityNestedInput
-  Interactions?: Prisma.InteractionUpdateManyWithoutOpportunityNestedInput
-  Lead?: Prisma.LeadUpdateOneWithoutOpportunitiesNestedInput
-}
-
-export type OpportunityUncheckedUpdateWithoutCustomerInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  companyId?: Prisma.IntFieldUpdateOperationsInput | number
-  leadId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  userId?: Prisma.IntFieldUpdateOperationsInput | number
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  amount?: Prisma.FloatFieldUpdateOperationsInput | number
-  probability?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  stage?: Prisma.EnumOpportunityStagesFieldUpdateOperationsInput | $Enums.OpportunityStages
-  expectedCloseDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  actualCloseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  lostReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  Quotations?: Prisma.QuotationUncheckedUpdateManyWithoutOpportunityNestedInput
-  Tasks?: Prisma.TaskUncheckedUpdateManyWithoutOpportunityNestedInput
-  Interactions?: Prisma.InteractionUncheckedUpdateManyWithoutOpportunityNestedInput
-}
-
-export type OpportunityUncheckedUpdateManyWithoutCustomerInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  companyId?: Prisma.IntFieldUpdateOperationsInput | number
-  leadId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  userId?: Prisma.IntFieldUpdateOperationsInput | number
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  amount?: Prisma.FloatFieldUpdateOperationsInput | number
-  probability?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  stage?: Prisma.EnumOpportunityStagesFieldUpdateOperationsInput | $Enums.OpportunityStages
-  expectedCloseDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  actualCloseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  lostReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-}
-
 export type OpportunityCreateManyLeadInput = {
   id?: number
   customerId: number
@@ -1664,6 +1583,87 @@ export type OpportunityUncheckedUpdateManyWithoutLeadInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   customerId?: Prisma.IntFieldUpdateOperationsInput | number
   companyId?: Prisma.IntFieldUpdateOperationsInput | number
+  userId?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  amount?: Prisma.FloatFieldUpdateOperationsInput | number
+  probability?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  stage?: Prisma.EnumOpportunityStagesFieldUpdateOperationsInput | $Enums.OpportunityStages
+  expectedCloseDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  actualCloseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lostReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+}
+
+export type OpportunityCreateManyCustomerInput = {
+  id?: number
+  companyId: number
+  leadId?: number | null
+  userId: number
+  name: string
+  description?: string | null
+  amount: number
+  probability?: number | null
+  stage: $Enums.OpportunityStages
+  expectedCloseDate: Date | string
+  actualCloseDate?: Date | string | null
+  lostReason?: string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  deletedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string | null
+}
+
+export type OpportunityUpdateWithoutCustomerInput = {
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  amount?: Prisma.FloatFieldUpdateOperationsInput | number
+  probability?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  stage?: Prisma.EnumOpportunityStagesFieldUpdateOperationsInput | $Enums.OpportunityStages
+  expectedCloseDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  actualCloseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lostReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  User?: Prisma.UserUpdateOneRequiredWithoutOpportunitiesNestedInput
+  Company?: Prisma.CompanyUpdateOneRequiredWithoutOpportunityNestedInput
+  Quotations?: Prisma.QuotationUpdateManyWithoutOpportunityNestedInput
+  Tasks?: Prisma.TaskUpdateManyWithoutOpportunityNestedInput
+  Interactions?: Prisma.InteractionUpdateManyWithoutOpportunityNestedInput
+  Lead?: Prisma.LeadUpdateOneWithoutOpportunitiesNestedInput
+}
+
+export type OpportunityUncheckedUpdateWithoutCustomerInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  companyId?: Prisma.IntFieldUpdateOperationsInput | number
+  leadId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  userId?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  amount?: Prisma.FloatFieldUpdateOperationsInput | number
+  probability?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  stage?: Prisma.EnumOpportunityStagesFieldUpdateOperationsInput | $Enums.OpportunityStages
+  expectedCloseDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  actualCloseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lostReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  Quotations?: Prisma.QuotationUncheckedUpdateManyWithoutOpportunityNestedInput
+  Tasks?: Prisma.TaskUncheckedUpdateManyWithoutOpportunityNestedInput
+  Interactions?: Prisma.InteractionUncheckedUpdateManyWithoutOpportunityNestedInput
+}
+
+export type OpportunityUncheckedUpdateManyWithoutCustomerInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  companyId?: Prisma.IntFieldUpdateOperationsInput | number
+  leadId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null

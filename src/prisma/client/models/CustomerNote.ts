@@ -383,16 +383,6 @@ export type CustomerNoteUncheckedUpdateManyInput = {
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
-export type CustomerNoteListRelationFilter = {
-  every?: Prisma.CustomerNoteWhereInput
-  some?: Prisma.CustomerNoteWhereInput
-  none?: Prisma.CustomerNoteWhereInput
-}
-
-export type CustomerNoteOrderByRelationAggregateInput = {
-  _count?: Prisma.SortOrder
-}
-
 export type CustomerNoteCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   customerId?: Prisma.SortOrder
@@ -436,6 +426,20 @@ export type CustomerNoteSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
   customerId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+}
+
+export type CustomerNoteListRelationFilter = {
+  every?: Prisma.CustomerNoteWhereInput
+  some?: Prisma.CustomerNoteWhereInput
+  none?: Prisma.CustomerNoteWhereInput
+}
+
+export type CustomerNoteOrderByRelationAggregateInput = {
+  _count?: Prisma.SortOrder
+}
+
+export type BoolFieldUpdateOperationsInput = {
+  set?: boolean
 }
 
 export type CustomerNoteCreateNestedManyWithoutCustomerInput = {

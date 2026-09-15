@@ -602,48 +602,6 @@ export type TaskSumOrderByAggregateInput = {
   opportunityId?: Prisma.SortOrder
 }
 
-export type TaskCreateNestedManyWithoutCustomerInput = {
-  create?: Prisma.XOR<Prisma.TaskCreateWithoutCustomerInput, Prisma.TaskUncheckedCreateWithoutCustomerInput> | Prisma.TaskCreateWithoutCustomerInput[] | Prisma.TaskUncheckedCreateWithoutCustomerInput[]
-  connectOrCreate?: Prisma.TaskCreateOrConnectWithoutCustomerInput | Prisma.TaskCreateOrConnectWithoutCustomerInput[]
-  createMany?: Prisma.TaskCreateManyCustomerInputEnvelope
-  connect?: Prisma.TaskWhereUniqueInput | Prisma.TaskWhereUniqueInput[]
-}
-
-export type TaskUncheckedCreateNestedManyWithoutCustomerInput = {
-  create?: Prisma.XOR<Prisma.TaskCreateWithoutCustomerInput, Prisma.TaskUncheckedCreateWithoutCustomerInput> | Prisma.TaskCreateWithoutCustomerInput[] | Prisma.TaskUncheckedCreateWithoutCustomerInput[]
-  connectOrCreate?: Prisma.TaskCreateOrConnectWithoutCustomerInput | Prisma.TaskCreateOrConnectWithoutCustomerInput[]
-  createMany?: Prisma.TaskCreateManyCustomerInputEnvelope
-  connect?: Prisma.TaskWhereUniqueInput | Prisma.TaskWhereUniqueInput[]
-}
-
-export type TaskUpdateManyWithoutCustomerNestedInput = {
-  create?: Prisma.XOR<Prisma.TaskCreateWithoutCustomerInput, Prisma.TaskUncheckedCreateWithoutCustomerInput> | Prisma.TaskCreateWithoutCustomerInput[] | Prisma.TaskUncheckedCreateWithoutCustomerInput[]
-  connectOrCreate?: Prisma.TaskCreateOrConnectWithoutCustomerInput | Prisma.TaskCreateOrConnectWithoutCustomerInput[]
-  upsert?: Prisma.TaskUpsertWithWhereUniqueWithoutCustomerInput | Prisma.TaskUpsertWithWhereUniqueWithoutCustomerInput[]
-  createMany?: Prisma.TaskCreateManyCustomerInputEnvelope
-  set?: Prisma.TaskWhereUniqueInput | Prisma.TaskWhereUniqueInput[]
-  disconnect?: Prisma.TaskWhereUniqueInput | Prisma.TaskWhereUniqueInput[]
-  delete?: Prisma.TaskWhereUniqueInput | Prisma.TaskWhereUniqueInput[]
-  connect?: Prisma.TaskWhereUniqueInput | Prisma.TaskWhereUniqueInput[]
-  update?: Prisma.TaskUpdateWithWhereUniqueWithoutCustomerInput | Prisma.TaskUpdateWithWhereUniqueWithoutCustomerInput[]
-  updateMany?: Prisma.TaskUpdateManyWithWhereWithoutCustomerInput | Prisma.TaskUpdateManyWithWhereWithoutCustomerInput[]
-  deleteMany?: Prisma.TaskScalarWhereInput | Prisma.TaskScalarWhereInput[]
-}
-
-export type TaskUncheckedUpdateManyWithoutCustomerNestedInput = {
-  create?: Prisma.XOR<Prisma.TaskCreateWithoutCustomerInput, Prisma.TaskUncheckedCreateWithoutCustomerInput> | Prisma.TaskCreateWithoutCustomerInput[] | Prisma.TaskUncheckedCreateWithoutCustomerInput[]
-  connectOrCreate?: Prisma.TaskCreateOrConnectWithoutCustomerInput | Prisma.TaskCreateOrConnectWithoutCustomerInput[]
-  upsert?: Prisma.TaskUpsertWithWhereUniqueWithoutCustomerInput | Prisma.TaskUpsertWithWhereUniqueWithoutCustomerInput[]
-  createMany?: Prisma.TaskCreateManyCustomerInputEnvelope
-  set?: Prisma.TaskWhereUniqueInput | Prisma.TaskWhereUniqueInput[]
-  disconnect?: Prisma.TaskWhereUniqueInput | Prisma.TaskWhereUniqueInput[]
-  delete?: Prisma.TaskWhereUniqueInput | Prisma.TaskWhereUniqueInput[]
-  connect?: Prisma.TaskWhereUniqueInput | Prisma.TaskWhereUniqueInput[]
-  update?: Prisma.TaskUpdateWithWhereUniqueWithoutCustomerInput | Prisma.TaskUpdateWithWhereUniqueWithoutCustomerInput[]
-  updateMany?: Prisma.TaskUpdateManyWithWhereWithoutCustomerInput | Prisma.TaskUpdateManyWithWhereWithoutCustomerInput[]
-  deleteMany?: Prisma.TaskScalarWhereInput | Prisma.TaskScalarWhereInput[]
-}
-
 export type TaskCreateNestedManyWithoutLeadInput = {
   create?: Prisma.XOR<Prisma.TaskCreateWithoutLeadInput, Prisma.TaskUncheckedCreateWithoutLeadInput> | Prisma.TaskCreateWithoutLeadInput[] | Prisma.TaskUncheckedCreateWithoutLeadInput[]
   connectOrCreate?: Prisma.TaskCreateOrConnectWithoutLeadInput | Prisma.TaskCreateOrConnectWithoutLeadInput[]
@@ -736,6 +694,48 @@ export type EnumTaskPriorityFieldUpdateOperationsInput = {
   set?: $Enums.TaskPriority
 }
 
+export type TaskCreateNestedManyWithoutCustomerInput = {
+  create?: Prisma.XOR<Prisma.TaskCreateWithoutCustomerInput, Prisma.TaskUncheckedCreateWithoutCustomerInput> | Prisma.TaskCreateWithoutCustomerInput[] | Prisma.TaskUncheckedCreateWithoutCustomerInput[]
+  connectOrCreate?: Prisma.TaskCreateOrConnectWithoutCustomerInput | Prisma.TaskCreateOrConnectWithoutCustomerInput[]
+  createMany?: Prisma.TaskCreateManyCustomerInputEnvelope
+  connect?: Prisma.TaskWhereUniqueInput | Prisma.TaskWhereUniqueInput[]
+}
+
+export type TaskUncheckedCreateNestedManyWithoutCustomerInput = {
+  create?: Prisma.XOR<Prisma.TaskCreateWithoutCustomerInput, Prisma.TaskUncheckedCreateWithoutCustomerInput> | Prisma.TaskCreateWithoutCustomerInput[] | Prisma.TaskUncheckedCreateWithoutCustomerInput[]
+  connectOrCreate?: Prisma.TaskCreateOrConnectWithoutCustomerInput | Prisma.TaskCreateOrConnectWithoutCustomerInput[]
+  createMany?: Prisma.TaskCreateManyCustomerInputEnvelope
+  connect?: Prisma.TaskWhereUniqueInput | Prisma.TaskWhereUniqueInput[]
+}
+
+export type TaskUpdateManyWithoutCustomerNestedInput = {
+  create?: Prisma.XOR<Prisma.TaskCreateWithoutCustomerInput, Prisma.TaskUncheckedCreateWithoutCustomerInput> | Prisma.TaskCreateWithoutCustomerInput[] | Prisma.TaskUncheckedCreateWithoutCustomerInput[]
+  connectOrCreate?: Prisma.TaskCreateOrConnectWithoutCustomerInput | Prisma.TaskCreateOrConnectWithoutCustomerInput[]
+  upsert?: Prisma.TaskUpsertWithWhereUniqueWithoutCustomerInput | Prisma.TaskUpsertWithWhereUniqueWithoutCustomerInput[]
+  createMany?: Prisma.TaskCreateManyCustomerInputEnvelope
+  set?: Prisma.TaskWhereUniqueInput | Prisma.TaskWhereUniqueInput[]
+  disconnect?: Prisma.TaskWhereUniqueInput | Prisma.TaskWhereUniqueInput[]
+  delete?: Prisma.TaskWhereUniqueInput | Prisma.TaskWhereUniqueInput[]
+  connect?: Prisma.TaskWhereUniqueInput | Prisma.TaskWhereUniqueInput[]
+  update?: Prisma.TaskUpdateWithWhereUniqueWithoutCustomerInput | Prisma.TaskUpdateWithWhereUniqueWithoutCustomerInput[]
+  updateMany?: Prisma.TaskUpdateManyWithWhereWithoutCustomerInput | Prisma.TaskUpdateManyWithWhereWithoutCustomerInput[]
+  deleteMany?: Prisma.TaskScalarWhereInput | Prisma.TaskScalarWhereInput[]
+}
+
+export type TaskUncheckedUpdateManyWithoutCustomerNestedInput = {
+  create?: Prisma.XOR<Prisma.TaskCreateWithoutCustomerInput, Prisma.TaskUncheckedCreateWithoutCustomerInput> | Prisma.TaskCreateWithoutCustomerInput[] | Prisma.TaskUncheckedCreateWithoutCustomerInput[]
+  connectOrCreate?: Prisma.TaskCreateOrConnectWithoutCustomerInput | Prisma.TaskCreateOrConnectWithoutCustomerInput[]
+  upsert?: Prisma.TaskUpsertWithWhereUniqueWithoutCustomerInput | Prisma.TaskUpsertWithWhereUniqueWithoutCustomerInput[]
+  createMany?: Prisma.TaskCreateManyCustomerInputEnvelope
+  set?: Prisma.TaskWhereUniqueInput | Prisma.TaskWhereUniqueInput[]
+  disconnect?: Prisma.TaskWhereUniqueInput | Prisma.TaskWhereUniqueInput[]
+  delete?: Prisma.TaskWhereUniqueInput | Prisma.TaskWhereUniqueInput[]
+  connect?: Prisma.TaskWhereUniqueInput | Prisma.TaskWhereUniqueInput[]
+  update?: Prisma.TaskUpdateWithWhereUniqueWithoutCustomerInput | Prisma.TaskUpdateWithWhereUniqueWithoutCustomerInput[]
+  updateMany?: Prisma.TaskUpdateManyWithWhereWithoutCustomerInput | Prisma.TaskUpdateManyWithWhereWithoutCustomerInput[]
+  deleteMany?: Prisma.TaskScalarWhereInput | Prisma.TaskScalarWhereInput[]
+}
+
 export type TaskCreateNestedManyWithoutUserInput = {
   create?: Prisma.XOR<Prisma.TaskCreateWithoutUserInput, Prisma.TaskUncheckedCreateWithoutUserInput> | Prisma.TaskCreateWithoutUserInput[] | Prisma.TaskUncheckedCreateWithoutUserInput[]
   connectOrCreate?: Prisma.TaskCreateOrConnectWithoutUserInput | Prisma.TaskCreateOrConnectWithoutUserInput[]
@@ -776,86 +776,6 @@ export type TaskUncheckedUpdateManyWithoutUserNestedInput = {
   update?: Prisma.TaskUpdateWithWhereUniqueWithoutUserInput | Prisma.TaskUpdateWithWhereUniqueWithoutUserInput[]
   updateMany?: Prisma.TaskUpdateManyWithWhereWithoutUserInput | Prisma.TaskUpdateManyWithWhereWithoutUserInput[]
   deleteMany?: Prisma.TaskScalarWhereInput | Prisma.TaskScalarWhereInput[]
-}
-
-export type TaskCreateWithoutCustomerInput = {
-  title: string
-  description?: string | null
-  dueDate: Date | string
-  completedAt?: Date | string | null
-  status?: $Enums.TaskStatus
-  priority?: $Enums.TaskPriority
-  deletedAt?: Date | string | null
-  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  createdAt?: Date | string
-  updatedAt?: Date | string | null
-  User: Prisma.UserCreateNestedOneWithoutTasksInput
-  Lead?: Prisma.LeadCreateNestedOneWithoutTasksInput
-  Opportunity?: Prisma.OpportunityCreateNestedOneWithoutTasksInput
-}
-
-export type TaskUncheckedCreateWithoutCustomerInput = {
-  id?: number
-  userId: number
-  leadId?: number | null
-  opportunityId?: number | null
-  title: string
-  description?: string | null
-  dueDate: Date | string
-  completedAt?: Date | string | null
-  status?: $Enums.TaskStatus
-  priority?: $Enums.TaskPriority
-  deletedAt?: Date | string | null
-  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  createdAt?: Date | string
-  updatedAt?: Date | string | null
-}
-
-export type TaskCreateOrConnectWithoutCustomerInput = {
-  where: Prisma.TaskWhereUniqueInput
-  create: Prisma.XOR<Prisma.TaskCreateWithoutCustomerInput, Prisma.TaskUncheckedCreateWithoutCustomerInput>
-}
-
-export type TaskCreateManyCustomerInputEnvelope = {
-  data: Prisma.TaskCreateManyCustomerInput | Prisma.TaskCreateManyCustomerInput[]
-  skipDuplicates?: boolean
-}
-
-export type TaskUpsertWithWhereUniqueWithoutCustomerInput = {
-  where: Prisma.TaskWhereUniqueInput
-  update: Prisma.XOR<Prisma.TaskUpdateWithoutCustomerInput, Prisma.TaskUncheckedUpdateWithoutCustomerInput>
-  create: Prisma.XOR<Prisma.TaskCreateWithoutCustomerInput, Prisma.TaskUncheckedCreateWithoutCustomerInput>
-}
-
-export type TaskUpdateWithWhereUniqueWithoutCustomerInput = {
-  where: Prisma.TaskWhereUniqueInput
-  data: Prisma.XOR<Prisma.TaskUpdateWithoutCustomerInput, Prisma.TaskUncheckedUpdateWithoutCustomerInput>
-}
-
-export type TaskUpdateManyWithWhereWithoutCustomerInput = {
-  where: Prisma.TaskScalarWhereInput
-  data: Prisma.XOR<Prisma.TaskUpdateManyMutationInput, Prisma.TaskUncheckedUpdateManyWithoutCustomerInput>
-}
-
-export type TaskScalarWhereInput = {
-  AND?: Prisma.TaskScalarWhereInput | Prisma.TaskScalarWhereInput[]
-  OR?: Prisma.TaskScalarWhereInput[]
-  NOT?: Prisma.TaskScalarWhereInput | Prisma.TaskScalarWhereInput[]
-  id?: Prisma.IntFilter<"Task"> | number
-  userId?: Prisma.IntFilter<"Task"> | number
-  leadId?: Prisma.IntNullableFilter<"Task"> | number | null
-  customerId?: Prisma.IntNullableFilter<"Task"> | number | null
-  opportunityId?: Prisma.IntNullableFilter<"Task"> | number | null
-  title?: Prisma.StringFilter<"Task"> | string
-  description?: Prisma.StringNullableFilter<"Task"> | string | null
-  dueDate?: Prisma.DateTimeFilter<"Task"> | Date | string
-  completedAt?: Prisma.DateTimeNullableFilter<"Task"> | Date | string | null
-  status?: Prisma.EnumTaskStatusFilter<"Task"> | $Enums.TaskStatus
-  priority?: Prisma.EnumTaskPriorityFilter<"Task"> | $Enums.TaskPriority
-  deletedAt?: Prisma.DateTimeNullableFilter<"Task"> | Date | string | null
-  attachments?: Prisma.JsonNullableFilter<"Task">
-  createdAt?: Prisma.DateTimeFilter<"Task"> | Date | string
-  updatedAt?: Prisma.DateTimeNullableFilter<"Task"> | Date | string | null
 }
 
 export type TaskCreateWithoutLeadInput = {
@@ -917,6 +837,27 @@ export type TaskUpdateManyWithWhereWithoutLeadInput = {
   data: Prisma.XOR<Prisma.TaskUpdateManyMutationInput, Prisma.TaskUncheckedUpdateManyWithoutLeadInput>
 }
 
+export type TaskScalarWhereInput = {
+  AND?: Prisma.TaskScalarWhereInput | Prisma.TaskScalarWhereInput[]
+  OR?: Prisma.TaskScalarWhereInput[]
+  NOT?: Prisma.TaskScalarWhereInput | Prisma.TaskScalarWhereInput[]
+  id?: Prisma.IntFilter<"Task"> | number
+  userId?: Prisma.IntFilter<"Task"> | number
+  leadId?: Prisma.IntNullableFilter<"Task"> | number | null
+  customerId?: Prisma.IntNullableFilter<"Task"> | number | null
+  opportunityId?: Prisma.IntNullableFilter<"Task"> | number | null
+  title?: Prisma.StringFilter<"Task"> | string
+  description?: Prisma.StringNullableFilter<"Task"> | string | null
+  dueDate?: Prisma.DateTimeFilter<"Task"> | Date | string
+  completedAt?: Prisma.DateTimeNullableFilter<"Task"> | Date | string | null
+  status?: Prisma.EnumTaskStatusFilter<"Task"> | $Enums.TaskStatus
+  priority?: Prisma.EnumTaskPriorityFilter<"Task"> | $Enums.TaskPriority
+  deletedAt?: Prisma.DateTimeNullableFilter<"Task"> | Date | string | null
+  attachments?: Prisma.JsonNullableFilter<"Task">
+  createdAt?: Prisma.DateTimeFilter<"Task"> | Date | string
+  updatedAt?: Prisma.DateTimeNullableFilter<"Task"> | Date | string | null
+}
+
 export type TaskCreateWithoutOpportunityInput = {
   title: string
   description?: string | null
@@ -976,6 +917,65 @@ export type TaskUpdateManyWithWhereWithoutOpportunityInput = {
   data: Prisma.XOR<Prisma.TaskUpdateManyMutationInput, Prisma.TaskUncheckedUpdateManyWithoutOpportunityInput>
 }
 
+export type TaskCreateWithoutCustomerInput = {
+  title: string
+  description?: string | null
+  dueDate: Date | string
+  completedAt?: Date | string | null
+  status?: $Enums.TaskStatus
+  priority?: $Enums.TaskPriority
+  deletedAt?: Date | string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  createdAt?: Date | string
+  updatedAt?: Date | string | null
+  User: Prisma.UserCreateNestedOneWithoutTasksInput
+  Lead?: Prisma.LeadCreateNestedOneWithoutTasksInput
+  Opportunity?: Prisma.OpportunityCreateNestedOneWithoutTasksInput
+}
+
+export type TaskUncheckedCreateWithoutCustomerInput = {
+  id?: number
+  userId: number
+  leadId?: number | null
+  opportunityId?: number | null
+  title: string
+  description?: string | null
+  dueDate: Date | string
+  completedAt?: Date | string | null
+  status?: $Enums.TaskStatus
+  priority?: $Enums.TaskPriority
+  deletedAt?: Date | string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  createdAt?: Date | string
+  updatedAt?: Date | string | null
+}
+
+export type TaskCreateOrConnectWithoutCustomerInput = {
+  where: Prisma.TaskWhereUniqueInput
+  create: Prisma.XOR<Prisma.TaskCreateWithoutCustomerInput, Prisma.TaskUncheckedCreateWithoutCustomerInput>
+}
+
+export type TaskCreateManyCustomerInputEnvelope = {
+  data: Prisma.TaskCreateManyCustomerInput | Prisma.TaskCreateManyCustomerInput[]
+  skipDuplicates?: boolean
+}
+
+export type TaskUpsertWithWhereUniqueWithoutCustomerInput = {
+  where: Prisma.TaskWhereUniqueInput
+  update: Prisma.XOR<Prisma.TaskUpdateWithoutCustomerInput, Prisma.TaskUncheckedUpdateWithoutCustomerInput>
+  create: Prisma.XOR<Prisma.TaskCreateWithoutCustomerInput, Prisma.TaskUncheckedCreateWithoutCustomerInput>
+}
+
+export type TaskUpdateWithWhereUniqueWithoutCustomerInput = {
+  where: Prisma.TaskWhereUniqueInput
+  data: Prisma.XOR<Prisma.TaskUpdateWithoutCustomerInput, Prisma.TaskUncheckedUpdateWithoutCustomerInput>
+}
+
+export type TaskUpdateManyWithWhereWithoutCustomerInput = {
+  where: Prisma.TaskScalarWhereInput
+  data: Prisma.XOR<Prisma.TaskUpdateManyMutationInput, Prisma.TaskUncheckedUpdateManyWithoutCustomerInput>
+}
+
 export type TaskCreateWithoutUserInput = {
   title: string
   description?: string | null
@@ -1033,73 +1033,6 @@ export type TaskUpdateWithWhereUniqueWithoutUserInput = {
 export type TaskUpdateManyWithWhereWithoutUserInput = {
   where: Prisma.TaskScalarWhereInput
   data: Prisma.XOR<Prisma.TaskUpdateManyMutationInput, Prisma.TaskUncheckedUpdateManyWithoutUserInput>
-}
-
-export type TaskCreateManyCustomerInput = {
-  id?: number
-  userId: number
-  leadId?: number | null
-  opportunityId?: number | null
-  title: string
-  description?: string | null
-  dueDate: Date | string
-  completedAt?: Date | string | null
-  status?: $Enums.TaskStatus
-  priority?: $Enums.TaskPriority
-  deletedAt?: Date | string | null
-  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  createdAt?: Date | string
-  updatedAt?: Date | string | null
-}
-
-export type TaskUpdateWithoutCustomerInput = {
-  title?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  dueDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  status?: Prisma.EnumTaskStatusFieldUpdateOperationsInput | $Enums.TaskStatus
-  priority?: Prisma.EnumTaskPriorityFieldUpdateOperationsInput | $Enums.TaskPriority
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  User?: Prisma.UserUpdateOneRequiredWithoutTasksNestedInput
-  Lead?: Prisma.LeadUpdateOneWithoutTasksNestedInput
-  Opportunity?: Prisma.OpportunityUpdateOneWithoutTasksNestedInput
-}
-
-export type TaskUncheckedUpdateWithoutCustomerInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  userId?: Prisma.IntFieldUpdateOperationsInput | number
-  leadId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  opportunityId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  title?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  dueDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  status?: Prisma.EnumTaskStatusFieldUpdateOperationsInput | $Enums.TaskStatus
-  priority?: Prisma.EnumTaskPriorityFieldUpdateOperationsInput | $Enums.TaskPriority
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-}
-
-export type TaskUncheckedUpdateManyWithoutCustomerInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  userId?: Prisma.IntFieldUpdateOperationsInput | number
-  leadId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  opportunityId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  title?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  dueDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  status?: Prisma.EnumTaskStatusFieldUpdateOperationsInput | $Enums.TaskStatus
-  priority?: Prisma.EnumTaskPriorityFieldUpdateOperationsInput | $Enums.TaskPriority
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type TaskCreateManyLeadInput = {
@@ -1224,6 +1157,73 @@ export type TaskUncheckedUpdateManyWithoutOpportunityInput = {
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   leadId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   customerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dueDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.EnumTaskStatusFieldUpdateOperationsInput | $Enums.TaskStatus
+  priority?: Prisma.EnumTaskPriorityFieldUpdateOperationsInput | $Enums.TaskPriority
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+}
+
+export type TaskCreateManyCustomerInput = {
+  id?: number
+  userId: number
+  leadId?: number | null
+  opportunityId?: number | null
+  title: string
+  description?: string | null
+  dueDate: Date | string
+  completedAt?: Date | string | null
+  status?: $Enums.TaskStatus
+  priority?: $Enums.TaskPriority
+  deletedAt?: Date | string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  createdAt?: Date | string
+  updatedAt?: Date | string | null
+}
+
+export type TaskUpdateWithoutCustomerInput = {
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dueDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.EnumTaskStatusFieldUpdateOperationsInput | $Enums.TaskStatus
+  priority?: Prisma.EnumTaskPriorityFieldUpdateOperationsInput | $Enums.TaskPriority
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  User?: Prisma.UserUpdateOneRequiredWithoutTasksNestedInput
+  Lead?: Prisma.LeadUpdateOneWithoutTasksNestedInput
+  Opportunity?: Prisma.OpportunityUpdateOneWithoutTasksNestedInput
+}
+
+export type TaskUncheckedUpdateWithoutCustomerInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  userId?: Prisma.IntFieldUpdateOperationsInput | number
+  leadId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  opportunityId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dueDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.EnumTaskStatusFieldUpdateOperationsInput | $Enums.TaskStatus
+  priority?: Prisma.EnumTaskPriorityFieldUpdateOperationsInput | $Enums.TaskPriority
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+}
+
+export type TaskUncheckedUpdateManyWithoutCustomerInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  userId?: Prisma.IntFieldUpdateOperationsInput | number
+  leadId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  opportunityId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dueDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string

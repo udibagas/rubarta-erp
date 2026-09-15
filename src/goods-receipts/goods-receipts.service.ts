@@ -8,6 +8,7 @@ import {
 } from './goods-receipt.dto';
 import dayjs from 'dayjs';
 import { parsePackingListItems } from './packing-list.parser';
+import { generateGoodsReceiptPdf } from './goods-receipt-pdf';
 
 @Injectable()
 export class GoodsReceiptsService {
@@ -15,6 +16,10 @@ export class GoodsReceiptsService {
 
   async parsePackingList(pdfBuffer: Buffer) {
     return parsePackingListItems(pdfBuffer);
+  }
+
+  async preview(id: number) {
+    return generateGoodsReceiptPdf(await this.findOne(id));
   }
 
   private readonly includeRelations = {

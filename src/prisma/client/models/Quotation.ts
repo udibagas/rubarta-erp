@@ -1052,48 +1052,6 @@ export type QuotationNullableScalarRelationFilter = {
   isNot?: Prisma.QuotationWhereInput | null
 }
 
-export type QuotationCreateNestedManyWithoutCustomerInput = {
-  create?: Prisma.XOR<Prisma.QuotationCreateWithoutCustomerInput, Prisma.QuotationUncheckedCreateWithoutCustomerInput> | Prisma.QuotationCreateWithoutCustomerInput[] | Prisma.QuotationUncheckedCreateWithoutCustomerInput[]
-  connectOrCreate?: Prisma.QuotationCreateOrConnectWithoutCustomerInput | Prisma.QuotationCreateOrConnectWithoutCustomerInput[]
-  createMany?: Prisma.QuotationCreateManyCustomerInputEnvelope
-  connect?: Prisma.QuotationWhereUniqueInput | Prisma.QuotationWhereUniqueInput[]
-}
-
-export type QuotationUncheckedCreateNestedManyWithoutCustomerInput = {
-  create?: Prisma.XOR<Prisma.QuotationCreateWithoutCustomerInput, Prisma.QuotationUncheckedCreateWithoutCustomerInput> | Prisma.QuotationCreateWithoutCustomerInput[] | Prisma.QuotationUncheckedCreateWithoutCustomerInput[]
-  connectOrCreate?: Prisma.QuotationCreateOrConnectWithoutCustomerInput | Prisma.QuotationCreateOrConnectWithoutCustomerInput[]
-  createMany?: Prisma.QuotationCreateManyCustomerInputEnvelope
-  connect?: Prisma.QuotationWhereUniqueInput | Prisma.QuotationWhereUniqueInput[]
-}
-
-export type QuotationUpdateManyWithoutCustomerNestedInput = {
-  create?: Prisma.XOR<Prisma.QuotationCreateWithoutCustomerInput, Prisma.QuotationUncheckedCreateWithoutCustomerInput> | Prisma.QuotationCreateWithoutCustomerInput[] | Prisma.QuotationUncheckedCreateWithoutCustomerInput[]
-  connectOrCreate?: Prisma.QuotationCreateOrConnectWithoutCustomerInput | Prisma.QuotationCreateOrConnectWithoutCustomerInput[]
-  upsert?: Prisma.QuotationUpsertWithWhereUniqueWithoutCustomerInput | Prisma.QuotationUpsertWithWhereUniqueWithoutCustomerInput[]
-  createMany?: Prisma.QuotationCreateManyCustomerInputEnvelope
-  set?: Prisma.QuotationWhereUniqueInput | Prisma.QuotationWhereUniqueInput[]
-  disconnect?: Prisma.QuotationWhereUniqueInput | Prisma.QuotationWhereUniqueInput[]
-  delete?: Prisma.QuotationWhereUniqueInput | Prisma.QuotationWhereUniqueInput[]
-  connect?: Prisma.QuotationWhereUniqueInput | Prisma.QuotationWhereUniqueInput[]
-  update?: Prisma.QuotationUpdateWithWhereUniqueWithoutCustomerInput | Prisma.QuotationUpdateWithWhereUniqueWithoutCustomerInput[]
-  updateMany?: Prisma.QuotationUpdateManyWithWhereWithoutCustomerInput | Prisma.QuotationUpdateManyWithWhereWithoutCustomerInput[]
-  deleteMany?: Prisma.QuotationScalarWhereInput | Prisma.QuotationScalarWhereInput[]
-}
-
-export type QuotationUncheckedUpdateManyWithoutCustomerNestedInput = {
-  create?: Prisma.XOR<Prisma.QuotationCreateWithoutCustomerInput, Prisma.QuotationUncheckedCreateWithoutCustomerInput> | Prisma.QuotationCreateWithoutCustomerInput[] | Prisma.QuotationUncheckedCreateWithoutCustomerInput[]
-  connectOrCreate?: Prisma.QuotationCreateOrConnectWithoutCustomerInput | Prisma.QuotationCreateOrConnectWithoutCustomerInput[]
-  upsert?: Prisma.QuotationUpsertWithWhereUniqueWithoutCustomerInput | Prisma.QuotationUpsertWithWhereUniqueWithoutCustomerInput[]
-  createMany?: Prisma.QuotationCreateManyCustomerInputEnvelope
-  set?: Prisma.QuotationWhereUniqueInput | Prisma.QuotationWhereUniqueInput[]
-  disconnect?: Prisma.QuotationWhereUniqueInput | Prisma.QuotationWhereUniqueInput[]
-  delete?: Prisma.QuotationWhereUniqueInput | Prisma.QuotationWhereUniqueInput[]
-  connect?: Prisma.QuotationWhereUniqueInput | Prisma.QuotationWhereUniqueInput[]
-  update?: Prisma.QuotationUpdateWithWhereUniqueWithoutCustomerInput | Prisma.QuotationUpdateWithWhereUniqueWithoutCustomerInput[]
-  updateMany?: Prisma.QuotationUpdateManyWithWhereWithoutCustomerInput | Prisma.QuotationUpdateManyWithWhereWithoutCustomerInput[]
-  deleteMany?: Prisma.QuotationScalarWhereInput | Prisma.QuotationScalarWhereInput[]
-}
-
 export type QuotationCreateNestedManyWithoutOpportunityInput = {
   create?: Prisma.XOR<Prisma.QuotationCreateWithoutOpportunityInput, Prisma.QuotationUncheckedCreateWithoutOpportunityInput> | Prisma.QuotationCreateWithoutOpportunityInput[] | Prisma.QuotationUncheckedCreateWithoutOpportunityInput[]
   connectOrCreate?: Prisma.QuotationCreateOrConnectWithoutOpportunityInput | Prisma.QuotationCreateOrConnectWithoutOpportunityInput[]
@@ -1133,6 +1091,48 @@ export type QuotationUncheckedUpdateManyWithoutOpportunityNestedInput = {
   connect?: Prisma.QuotationWhereUniqueInput | Prisma.QuotationWhereUniqueInput[]
   update?: Prisma.QuotationUpdateWithWhereUniqueWithoutOpportunityInput | Prisma.QuotationUpdateWithWhereUniqueWithoutOpportunityInput[]
   updateMany?: Prisma.QuotationUpdateManyWithWhereWithoutOpportunityInput | Prisma.QuotationUpdateManyWithWhereWithoutOpportunityInput[]
+  deleteMany?: Prisma.QuotationScalarWhereInput | Prisma.QuotationScalarWhereInput[]
+}
+
+export type QuotationCreateNestedManyWithoutCustomerInput = {
+  create?: Prisma.XOR<Prisma.QuotationCreateWithoutCustomerInput, Prisma.QuotationUncheckedCreateWithoutCustomerInput> | Prisma.QuotationCreateWithoutCustomerInput[] | Prisma.QuotationUncheckedCreateWithoutCustomerInput[]
+  connectOrCreate?: Prisma.QuotationCreateOrConnectWithoutCustomerInput | Prisma.QuotationCreateOrConnectWithoutCustomerInput[]
+  createMany?: Prisma.QuotationCreateManyCustomerInputEnvelope
+  connect?: Prisma.QuotationWhereUniqueInput | Prisma.QuotationWhereUniqueInput[]
+}
+
+export type QuotationUncheckedCreateNestedManyWithoutCustomerInput = {
+  create?: Prisma.XOR<Prisma.QuotationCreateWithoutCustomerInput, Prisma.QuotationUncheckedCreateWithoutCustomerInput> | Prisma.QuotationCreateWithoutCustomerInput[] | Prisma.QuotationUncheckedCreateWithoutCustomerInput[]
+  connectOrCreate?: Prisma.QuotationCreateOrConnectWithoutCustomerInput | Prisma.QuotationCreateOrConnectWithoutCustomerInput[]
+  createMany?: Prisma.QuotationCreateManyCustomerInputEnvelope
+  connect?: Prisma.QuotationWhereUniqueInput | Prisma.QuotationWhereUniqueInput[]
+}
+
+export type QuotationUpdateManyWithoutCustomerNestedInput = {
+  create?: Prisma.XOR<Prisma.QuotationCreateWithoutCustomerInput, Prisma.QuotationUncheckedCreateWithoutCustomerInput> | Prisma.QuotationCreateWithoutCustomerInput[] | Prisma.QuotationUncheckedCreateWithoutCustomerInput[]
+  connectOrCreate?: Prisma.QuotationCreateOrConnectWithoutCustomerInput | Prisma.QuotationCreateOrConnectWithoutCustomerInput[]
+  upsert?: Prisma.QuotationUpsertWithWhereUniqueWithoutCustomerInput | Prisma.QuotationUpsertWithWhereUniqueWithoutCustomerInput[]
+  createMany?: Prisma.QuotationCreateManyCustomerInputEnvelope
+  set?: Prisma.QuotationWhereUniqueInput | Prisma.QuotationWhereUniqueInput[]
+  disconnect?: Prisma.QuotationWhereUniqueInput | Prisma.QuotationWhereUniqueInput[]
+  delete?: Prisma.QuotationWhereUniqueInput | Prisma.QuotationWhereUniqueInput[]
+  connect?: Prisma.QuotationWhereUniqueInput | Prisma.QuotationWhereUniqueInput[]
+  update?: Prisma.QuotationUpdateWithWhereUniqueWithoutCustomerInput | Prisma.QuotationUpdateWithWhereUniqueWithoutCustomerInput[]
+  updateMany?: Prisma.QuotationUpdateManyWithWhereWithoutCustomerInput | Prisma.QuotationUpdateManyWithWhereWithoutCustomerInput[]
+  deleteMany?: Prisma.QuotationScalarWhereInput | Prisma.QuotationScalarWhereInput[]
+}
+
+export type QuotationUncheckedUpdateManyWithoutCustomerNestedInput = {
+  create?: Prisma.XOR<Prisma.QuotationCreateWithoutCustomerInput, Prisma.QuotationUncheckedCreateWithoutCustomerInput> | Prisma.QuotationCreateWithoutCustomerInput[] | Prisma.QuotationUncheckedCreateWithoutCustomerInput[]
+  connectOrCreate?: Prisma.QuotationCreateOrConnectWithoutCustomerInput | Prisma.QuotationCreateOrConnectWithoutCustomerInput[]
+  upsert?: Prisma.QuotationUpsertWithWhereUniqueWithoutCustomerInput | Prisma.QuotationUpsertWithWhereUniqueWithoutCustomerInput[]
+  createMany?: Prisma.QuotationCreateManyCustomerInputEnvelope
+  set?: Prisma.QuotationWhereUniqueInput | Prisma.QuotationWhereUniqueInput[]
+  disconnect?: Prisma.QuotationWhereUniqueInput | Prisma.QuotationWhereUniqueInput[]
+  delete?: Prisma.QuotationWhereUniqueInput | Prisma.QuotationWhereUniqueInput[]
+  connect?: Prisma.QuotationWhereUniqueInput | Prisma.QuotationWhereUniqueInput[]
+  update?: Prisma.QuotationUpdateWithWhereUniqueWithoutCustomerInput | Prisma.QuotationUpdateWithWhereUniqueWithoutCustomerInput[]
+  updateMany?: Prisma.QuotationUpdateManyWithWhereWithoutCustomerInput | Prisma.QuotationUpdateManyWithWhereWithoutCustomerInput[]
   deleteMany?: Prisma.QuotationScalarWhereInput | Prisma.QuotationScalarWhereInput[]
 }
 
@@ -1254,144 +1254,6 @@ export type QuotationUncheckedUpdateManyWithoutUserNestedInput = {
   deleteMany?: Prisma.QuotationScalarWhereInput | Prisma.QuotationScalarWhereInput[]
 }
 
-export type QuotationCreateWithoutCustomerInput = {
-  number: string
-  date?: Date | string | null
-  title: string
-  description?: string | null
-  totalAmount: number
-  discount?: number
-  vatAmount?: number
-  grandTotal: number
-  status?: $Enums.QuotationStatus
-  currency?: $Enums.Currency
-  validity?: number
-  validUntil: Date | string
-  sentDate?: Date | string | null
-  acceptedDate?: Date | string | null
-  deletedAt?: Date | string | null
-  notes?: string | null
-  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  termOfPayment?: string | null
-  termsAndConditions?: string | null
-  termOfDelivery?: string | null
-  paymentMethod?: string | null
-  requestType?: string | null
-  customerAddress?: string | null
-  contactPerson?: string | null
-  contactPhone?: string | null
-  contactEmail?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string | null
-  Opportunity?: Prisma.OpportunityCreateNestedOneWithoutQuotationsInput
-  User: Prisma.UserCreateNestedOneWithoutQuotationsInput
-  Company?: Prisma.CompanyCreateNestedOneWithoutQuotationsInput
-  QuotationItems?: Prisma.QuotationItemCreateNestedManyWithoutQuotationInput
-  salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutQuotationInput
-}
-
-export type QuotationUncheckedCreateWithoutCustomerInput = {
-  id?: number
-  number: string
-  date?: Date | string | null
-  title: string
-  description?: string | null
-  totalAmount: number
-  discount?: number
-  vatAmount?: number
-  grandTotal: number
-  status?: $Enums.QuotationStatus
-  currency?: $Enums.Currency
-  validity?: number
-  validUntil: Date | string
-  sentDate?: Date | string | null
-  acceptedDate?: Date | string | null
-  deletedAt?: Date | string | null
-  notes?: string | null
-  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  termOfPayment?: string | null
-  termsAndConditions?: string | null
-  termOfDelivery?: string | null
-  paymentMethod?: string | null
-  requestType?: string | null
-  customerAddress?: string | null
-  contactPerson?: string | null
-  contactPhone?: string | null
-  contactEmail?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string | null
-  userId: number
-  opportunityId?: number | null
-  companyId?: number | null
-  QuotationItems?: Prisma.QuotationItemUncheckedCreateNestedManyWithoutQuotationInput
-  salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutQuotationInput
-}
-
-export type QuotationCreateOrConnectWithoutCustomerInput = {
-  where: Prisma.QuotationWhereUniqueInput
-  create: Prisma.XOR<Prisma.QuotationCreateWithoutCustomerInput, Prisma.QuotationUncheckedCreateWithoutCustomerInput>
-}
-
-export type QuotationCreateManyCustomerInputEnvelope = {
-  data: Prisma.QuotationCreateManyCustomerInput | Prisma.QuotationCreateManyCustomerInput[]
-  skipDuplicates?: boolean
-}
-
-export type QuotationUpsertWithWhereUniqueWithoutCustomerInput = {
-  where: Prisma.QuotationWhereUniqueInput
-  update: Prisma.XOR<Prisma.QuotationUpdateWithoutCustomerInput, Prisma.QuotationUncheckedUpdateWithoutCustomerInput>
-  create: Prisma.XOR<Prisma.QuotationCreateWithoutCustomerInput, Prisma.QuotationUncheckedCreateWithoutCustomerInput>
-}
-
-export type QuotationUpdateWithWhereUniqueWithoutCustomerInput = {
-  where: Prisma.QuotationWhereUniqueInput
-  data: Prisma.XOR<Prisma.QuotationUpdateWithoutCustomerInput, Prisma.QuotationUncheckedUpdateWithoutCustomerInput>
-}
-
-export type QuotationUpdateManyWithWhereWithoutCustomerInput = {
-  where: Prisma.QuotationScalarWhereInput
-  data: Prisma.XOR<Prisma.QuotationUpdateManyMutationInput, Prisma.QuotationUncheckedUpdateManyWithoutCustomerInput>
-}
-
-export type QuotationScalarWhereInput = {
-  AND?: Prisma.QuotationScalarWhereInput | Prisma.QuotationScalarWhereInput[]
-  OR?: Prisma.QuotationScalarWhereInput[]
-  NOT?: Prisma.QuotationScalarWhereInput | Prisma.QuotationScalarWhereInput[]
-  id?: Prisma.IntFilter<"Quotation"> | number
-  number?: Prisma.StringFilter<"Quotation"> | string
-  date?: Prisma.DateTimeNullableFilter<"Quotation"> | Date | string | null
-  title?: Prisma.StringFilter<"Quotation"> | string
-  description?: Prisma.StringNullableFilter<"Quotation"> | string | null
-  totalAmount?: Prisma.FloatFilter<"Quotation"> | number
-  discount?: Prisma.FloatFilter<"Quotation"> | number
-  vatAmount?: Prisma.FloatFilter<"Quotation"> | number
-  grandTotal?: Prisma.FloatFilter<"Quotation"> | number
-  status?: Prisma.EnumQuotationStatusFilter<"Quotation"> | $Enums.QuotationStatus
-  currency?: Prisma.EnumCurrencyFilter<"Quotation"> | $Enums.Currency
-  validity?: Prisma.IntFilter<"Quotation"> | number
-  validUntil?: Prisma.DateTimeFilter<"Quotation"> | Date | string
-  sentDate?: Prisma.DateTimeNullableFilter<"Quotation"> | Date | string | null
-  acceptedDate?: Prisma.DateTimeNullableFilter<"Quotation"> | Date | string | null
-  deletedAt?: Prisma.DateTimeNullableFilter<"Quotation"> | Date | string | null
-  notes?: Prisma.StringNullableFilter<"Quotation"> | string | null
-  attachments?: Prisma.JsonNullableFilter<"Quotation">
-  termOfPayment?: Prisma.StringNullableFilter<"Quotation"> | string | null
-  termsAndConditions?: Prisma.StringNullableFilter<"Quotation"> | string | null
-  termOfDelivery?: Prisma.StringNullableFilter<"Quotation"> | string | null
-  paymentMethod?: Prisma.StringNullableFilter<"Quotation"> | string | null
-  requestType?: Prisma.StringNullableFilter<"Quotation"> | string | null
-  customerAddress?: Prisma.StringNullableFilter<"Quotation"> | string | null
-  contactPerson?: Prisma.StringNullableFilter<"Quotation"> | string | null
-  contactPhone?: Prisma.StringNullableFilter<"Quotation"> | string | null
-  contactEmail?: Prisma.StringNullableFilter<"Quotation"> | string | null
-  createdAt?: Prisma.DateTimeFilter<"Quotation"> | Date | string
-  updatedAt?: Prisma.DateTimeNullableFilter<"Quotation"> | Date | string | null
-  customerId?: Prisma.IntFilter<"Quotation"> | number
-  userId?: Prisma.IntFilter<"Quotation"> | number
-  opportunityId?: Prisma.IntNullableFilter<"Quotation"> | number | null
-  companyId?: Prisma.IntNullableFilter<"Quotation"> | number | null
-}
-
 export type QuotationCreateWithoutOpportunityInput = {
   number: string
   date?: Date | string | null
@@ -1489,6 +1351,144 @@ export type QuotationUpdateWithWhereUniqueWithoutOpportunityInput = {
 export type QuotationUpdateManyWithWhereWithoutOpportunityInput = {
   where: Prisma.QuotationScalarWhereInput
   data: Prisma.XOR<Prisma.QuotationUpdateManyMutationInput, Prisma.QuotationUncheckedUpdateManyWithoutOpportunityInput>
+}
+
+export type QuotationScalarWhereInput = {
+  AND?: Prisma.QuotationScalarWhereInput | Prisma.QuotationScalarWhereInput[]
+  OR?: Prisma.QuotationScalarWhereInput[]
+  NOT?: Prisma.QuotationScalarWhereInput | Prisma.QuotationScalarWhereInput[]
+  id?: Prisma.IntFilter<"Quotation"> | number
+  number?: Prisma.StringFilter<"Quotation"> | string
+  date?: Prisma.DateTimeNullableFilter<"Quotation"> | Date | string | null
+  title?: Prisma.StringFilter<"Quotation"> | string
+  description?: Prisma.StringNullableFilter<"Quotation"> | string | null
+  totalAmount?: Prisma.FloatFilter<"Quotation"> | number
+  discount?: Prisma.FloatFilter<"Quotation"> | number
+  vatAmount?: Prisma.FloatFilter<"Quotation"> | number
+  grandTotal?: Prisma.FloatFilter<"Quotation"> | number
+  status?: Prisma.EnumQuotationStatusFilter<"Quotation"> | $Enums.QuotationStatus
+  currency?: Prisma.EnumCurrencyFilter<"Quotation"> | $Enums.Currency
+  validity?: Prisma.IntFilter<"Quotation"> | number
+  validUntil?: Prisma.DateTimeFilter<"Quotation"> | Date | string
+  sentDate?: Prisma.DateTimeNullableFilter<"Quotation"> | Date | string | null
+  acceptedDate?: Prisma.DateTimeNullableFilter<"Quotation"> | Date | string | null
+  deletedAt?: Prisma.DateTimeNullableFilter<"Quotation"> | Date | string | null
+  notes?: Prisma.StringNullableFilter<"Quotation"> | string | null
+  attachments?: Prisma.JsonNullableFilter<"Quotation">
+  termOfPayment?: Prisma.StringNullableFilter<"Quotation"> | string | null
+  termsAndConditions?: Prisma.StringNullableFilter<"Quotation"> | string | null
+  termOfDelivery?: Prisma.StringNullableFilter<"Quotation"> | string | null
+  paymentMethod?: Prisma.StringNullableFilter<"Quotation"> | string | null
+  requestType?: Prisma.StringNullableFilter<"Quotation"> | string | null
+  customerAddress?: Prisma.StringNullableFilter<"Quotation"> | string | null
+  contactPerson?: Prisma.StringNullableFilter<"Quotation"> | string | null
+  contactPhone?: Prisma.StringNullableFilter<"Quotation"> | string | null
+  contactEmail?: Prisma.StringNullableFilter<"Quotation"> | string | null
+  createdAt?: Prisma.DateTimeFilter<"Quotation"> | Date | string
+  updatedAt?: Prisma.DateTimeNullableFilter<"Quotation"> | Date | string | null
+  customerId?: Prisma.IntFilter<"Quotation"> | number
+  userId?: Prisma.IntFilter<"Quotation"> | number
+  opportunityId?: Prisma.IntNullableFilter<"Quotation"> | number | null
+  companyId?: Prisma.IntNullableFilter<"Quotation"> | number | null
+}
+
+export type QuotationCreateWithoutCustomerInput = {
+  number: string
+  date?: Date | string | null
+  title: string
+  description?: string | null
+  totalAmount: number
+  discount?: number
+  vatAmount?: number
+  grandTotal: number
+  status?: $Enums.QuotationStatus
+  currency?: $Enums.Currency
+  validity?: number
+  validUntil: Date | string
+  sentDate?: Date | string | null
+  acceptedDate?: Date | string | null
+  deletedAt?: Date | string | null
+  notes?: string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  termOfPayment?: string | null
+  termsAndConditions?: string | null
+  termOfDelivery?: string | null
+  paymentMethod?: string | null
+  requestType?: string | null
+  customerAddress?: string | null
+  contactPerson?: string | null
+  contactPhone?: string | null
+  contactEmail?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string | null
+  Opportunity?: Prisma.OpportunityCreateNestedOneWithoutQuotationsInput
+  User: Prisma.UserCreateNestedOneWithoutQuotationsInput
+  Company?: Prisma.CompanyCreateNestedOneWithoutQuotationsInput
+  QuotationItems?: Prisma.QuotationItemCreateNestedManyWithoutQuotationInput
+  salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutQuotationInput
+}
+
+export type QuotationUncheckedCreateWithoutCustomerInput = {
+  id?: number
+  number: string
+  date?: Date | string | null
+  title: string
+  description?: string | null
+  totalAmount: number
+  discount?: number
+  vatAmount?: number
+  grandTotal: number
+  status?: $Enums.QuotationStatus
+  currency?: $Enums.Currency
+  validity?: number
+  validUntil: Date | string
+  sentDate?: Date | string | null
+  acceptedDate?: Date | string | null
+  deletedAt?: Date | string | null
+  notes?: string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  termOfPayment?: string | null
+  termsAndConditions?: string | null
+  termOfDelivery?: string | null
+  paymentMethod?: string | null
+  requestType?: string | null
+  customerAddress?: string | null
+  contactPerson?: string | null
+  contactPhone?: string | null
+  contactEmail?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string | null
+  userId: number
+  opportunityId?: number | null
+  companyId?: number | null
+  QuotationItems?: Prisma.QuotationItemUncheckedCreateNestedManyWithoutQuotationInput
+  salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutQuotationInput
+}
+
+export type QuotationCreateOrConnectWithoutCustomerInput = {
+  where: Prisma.QuotationWhereUniqueInput
+  create: Prisma.XOR<Prisma.QuotationCreateWithoutCustomerInput, Prisma.QuotationUncheckedCreateWithoutCustomerInput>
+}
+
+export type QuotationCreateManyCustomerInputEnvelope = {
+  data: Prisma.QuotationCreateManyCustomerInput | Prisma.QuotationCreateManyCustomerInput[]
+  skipDuplicates?: boolean
+}
+
+export type QuotationUpsertWithWhereUniqueWithoutCustomerInput = {
+  where: Prisma.QuotationWhereUniqueInput
+  update: Prisma.XOR<Prisma.QuotationUpdateWithoutCustomerInput, Prisma.QuotationUncheckedUpdateWithoutCustomerInput>
+  create: Prisma.XOR<Prisma.QuotationCreateWithoutCustomerInput, Prisma.QuotationUncheckedCreateWithoutCustomerInput>
+}
+
+export type QuotationUpdateWithWhereUniqueWithoutCustomerInput = {
+  where: Prisma.QuotationWhereUniqueInput
+  data: Prisma.XOR<Prisma.QuotationUpdateWithoutCustomerInput, Prisma.QuotationUncheckedUpdateWithoutCustomerInput>
+}
+
+export type QuotationUpdateManyWithWhereWithoutCustomerInput = {
+  where: Prisma.QuotationScalarWhereInput
+  data: Prisma.XOR<Prisma.QuotationUpdateManyMutationInput, Prisma.QuotationUncheckedUpdateManyWithoutCustomerInput>
 }
 
 export type QuotationCreateWithoutQuotationItemsInput = {
@@ -2013,149 +2013,6 @@ export type QuotationUpdateManyWithWhereWithoutUserInput = {
   data: Prisma.XOR<Prisma.QuotationUpdateManyMutationInput, Prisma.QuotationUncheckedUpdateManyWithoutUserInput>
 }
 
-export type QuotationCreateManyCustomerInput = {
-  id?: number
-  number: string
-  date?: Date | string | null
-  title: string
-  description?: string | null
-  totalAmount: number
-  discount?: number
-  vatAmount?: number
-  grandTotal: number
-  status?: $Enums.QuotationStatus
-  currency?: $Enums.Currency
-  validity?: number
-  validUntil: Date | string
-  sentDate?: Date | string | null
-  acceptedDate?: Date | string | null
-  deletedAt?: Date | string | null
-  notes?: string | null
-  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  termOfPayment?: string | null
-  termsAndConditions?: string | null
-  termOfDelivery?: string | null
-  paymentMethod?: string | null
-  requestType?: string | null
-  customerAddress?: string | null
-  contactPerson?: string | null
-  contactPhone?: string | null
-  contactEmail?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string | null
-  userId: number
-  opportunityId?: number | null
-  companyId?: number | null
-}
-
-export type QuotationUpdateWithoutCustomerInput = {
-  number?: Prisma.StringFieldUpdateOperationsInput | string
-  date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  title?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
-  discount?: Prisma.FloatFieldUpdateOperationsInput | number
-  vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
-  grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
-  status?: Prisma.EnumQuotationStatusFieldUpdateOperationsInput | $Enums.QuotationStatus
-  currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
-  validity?: Prisma.IntFieldUpdateOperationsInput | number
-  validUntil?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  sentDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  acceptedDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  termOfPayment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  termsAndConditions?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  termOfDelivery?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  requestType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  customerAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  contactPerson?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  contactPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  contactEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  Opportunity?: Prisma.OpportunityUpdateOneWithoutQuotationsNestedInput
-  User?: Prisma.UserUpdateOneRequiredWithoutQuotationsNestedInput
-  Company?: Prisma.CompanyUpdateOneWithoutQuotationsNestedInput
-  QuotationItems?: Prisma.QuotationItemUpdateManyWithoutQuotationNestedInput
-  salesOrders?: Prisma.SalesOrderUpdateManyWithoutQuotationNestedInput
-}
-
-export type QuotationUncheckedUpdateWithoutCustomerInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  number?: Prisma.StringFieldUpdateOperationsInput | string
-  date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  title?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
-  discount?: Prisma.FloatFieldUpdateOperationsInput | number
-  vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
-  grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
-  status?: Prisma.EnumQuotationStatusFieldUpdateOperationsInput | $Enums.QuotationStatus
-  currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
-  validity?: Prisma.IntFieldUpdateOperationsInput | number
-  validUntil?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  sentDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  acceptedDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  termOfPayment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  termsAndConditions?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  termOfDelivery?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  requestType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  customerAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  contactPerson?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  contactPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  contactEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  userId?: Prisma.IntFieldUpdateOperationsInput | number
-  opportunityId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  companyId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  QuotationItems?: Prisma.QuotationItemUncheckedUpdateManyWithoutQuotationNestedInput
-  salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutQuotationNestedInput
-}
-
-export type QuotationUncheckedUpdateManyWithoutCustomerInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  number?: Prisma.StringFieldUpdateOperationsInput | string
-  date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  title?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
-  discount?: Prisma.FloatFieldUpdateOperationsInput | number
-  vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
-  grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
-  status?: Prisma.EnumQuotationStatusFieldUpdateOperationsInput | $Enums.QuotationStatus
-  currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
-  validity?: Prisma.IntFieldUpdateOperationsInput | number
-  validUntil?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  sentDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  acceptedDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  termOfPayment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  termsAndConditions?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  termOfDelivery?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  requestType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  customerAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  contactPerson?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  contactPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  contactEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  userId?: Prisma.IntFieldUpdateOperationsInput | number
-  opportunityId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  companyId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-}
-
 export type QuotationCreateManyOpportunityInput = {
   id?: number
   number: string
@@ -2296,6 +2153,149 @@ export type QuotationUncheckedUpdateManyWithoutOpportunityInput = {
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   customerId?: Prisma.IntFieldUpdateOperationsInput | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
+  companyId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+}
+
+export type QuotationCreateManyCustomerInput = {
+  id?: number
+  number: string
+  date?: Date | string | null
+  title: string
+  description?: string | null
+  totalAmount: number
+  discount?: number
+  vatAmount?: number
+  grandTotal: number
+  status?: $Enums.QuotationStatus
+  currency?: $Enums.Currency
+  validity?: number
+  validUntil: Date | string
+  sentDate?: Date | string | null
+  acceptedDate?: Date | string | null
+  deletedAt?: Date | string | null
+  notes?: string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  termOfPayment?: string | null
+  termsAndConditions?: string | null
+  termOfDelivery?: string | null
+  paymentMethod?: string | null
+  requestType?: string | null
+  customerAddress?: string | null
+  contactPerson?: string | null
+  contactPhone?: string | null
+  contactEmail?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string | null
+  userId: number
+  opportunityId?: number | null
+  companyId?: number | null
+}
+
+export type QuotationUpdateWithoutCustomerInput = {
+  number?: Prisma.StringFieldUpdateOperationsInput | string
+  date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
+  discount?: Prisma.FloatFieldUpdateOperationsInput | number
+  vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
+  grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
+  status?: Prisma.EnumQuotationStatusFieldUpdateOperationsInput | $Enums.QuotationStatus
+  currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
+  validity?: Prisma.IntFieldUpdateOperationsInput | number
+  validUntil?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sentDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  acceptedDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  termOfPayment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  termsAndConditions?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  termOfDelivery?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  requestType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  customerAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactPerson?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  Opportunity?: Prisma.OpportunityUpdateOneWithoutQuotationsNestedInput
+  User?: Prisma.UserUpdateOneRequiredWithoutQuotationsNestedInput
+  Company?: Prisma.CompanyUpdateOneWithoutQuotationsNestedInput
+  QuotationItems?: Prisma.QuotationItemUpdateManyWithoutQuotationNestedInput
+  salesOrders?: Prisma.SalesOrderUpdateManyWithoutQuotationNestedInput
+}
+
+export type QuotationUncheckedUpdateWithoutCustomerInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  number?: Prisma.StringFieldUpdateOperationsInput | string
+  date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
+  discount?: Prisma.FloatFieldUpdateOperationsInput | number
+  vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
+  grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
+  status?: Prisma.EnumQuotationStatusFieldUpdateOperationsInput | $Enums.QuotationStatus
+  currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
+  validity?: Prisma.IntFieldUpdateOperationsInput | number
+  validUntil?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sentDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  acceptedDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  termOfPayment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  termsAndConditions?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  termOfDelivery?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  requestType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  customerAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactPerson?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  userId?: Prisma.IntFieldUpdateOperationsInput | number
+  opportunityId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  companyId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  QuotationItems?: Prisma.QuotationItemUncheckedUpdateManyWithoutQuotationNestedInput
+  salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutQuotationNestedInput
+}
+
+export type QuotationUncheckedUpdateManyWithoutCustomerInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  number?: Prisma.StringFieldUpdateOperationsInput | string
+  date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
+  discount?: Prisma.FloatFieldUpdateOperationsInput | number
+  vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
+  grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
+  status?: Prisma.EnumQuotationStatusFieldUpdateOperationsInput | $Enums.QuotationStatus
+  currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
+  validity?: Prisma.IntFieldUpdateOperationsInput | number
+  validUntil?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sentDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  acceptedDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  termOfPayment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  termsAndConditions?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  termOfDelivery?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  requestType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  customerAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactPerson?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  userId?: Prisma.IntFieldUpdateOperationsInput | number
+  opportunityId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   companyId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 

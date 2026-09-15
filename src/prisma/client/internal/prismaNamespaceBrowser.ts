@@ -59,22 +59,22 @@ export const ModelName = {
   ApprovalSettingItem: 'ApprovalSettingItem',
   Approval: 'Approval',
   ApprovalItem: 'ApprovalItem',
-  Customer: 'Customer',
-  Contact: 'Contact',
   Lead: 'Lead',
   Opportunity: 'Opportunity',
   Task: 'Task',
   Interaction: 'Interaction',
   CustomerNote: 'CustomerNote',
   CustomerFile: 'CustomerFile',
-  Material: 'Material',
   VisitPlan: 'VisitPlan',
+  Customer: 'Customer',
+  Contact: 'Contact',
   DeliveryOrder: 'DeliveryOrder',
   DeliveryOrderItem: 'DeliveryOrderItem',
   GoodsReceipt: 'GoodsReceipt',
   GoodsReceiptItem: 'GoodsReceiptItem',
   Invoice: 'Invoice',
   InvoiceItem: 'InvoiceItem',
+  Material: 'Material',
   Nkp: 'Nkp',
   NkpItem: 'NkpItem',
   NkpApproval: 'NkpApproval',
@@ -209,45 +209,6 @@ export const ApprovalItemScalarFieldEnum = {
 export type ApprovalItemScalarFieldEnum = (typeof ApprovalItemScalarFieldEnum)[keyof typeof ApprovalItemScalarFieldEnum]
 
 
-export const CustomerScalarFieldEnum = {
-  id: 'id',
-  name: 'name',
-  address: 'address',
-  phone: 'phone',
-  email: 'email',
-  website: 'website',
-  industry: 'industry',
-  employeeCount: 'employeeCount',
-  revenue: 'revenue',
-  tags: 'tags',
-  accountManagerId: 'accountManagerId',
-  isActive: 'isActive',
-  deletedAt: 'deletedAt',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-} as const
-
-export type CustomerScalarFieldEnum = (typeof CustomerScalarFieldEnum)[keyof typeof CustomerScalarFieldEnum]
-
-
-export const ContactScalarFieldEnum = {
-  id: 'id',
-  customerId: 'customerId',
-  name: 'name',
-  email: 'email',
-  phone: 'phone',
-  position: 'position',
-  notes: 'notes',
-  isPrimary: 'isPrimary',
-  isActive: 'isActive',
-  deletedAt: 'deletedAt',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-} as const
-
-export type ContactScalarFieldEnum = (typeof ContactScalarFieldEnum)[keyof typeof ContactScalarFieldEnum]
-
-
 export const LeadScalarFieldEnum = {
   id: 'id',
   title: 'title',
@@ -362,32 +323,6 @@ export const CustomerFileScalarFieldEnum = {
 export type CustomerFileScalarFieldEnum = (typeof CustomerFileScalarFieldEnum)[keyof typeof CustomerFileScalarFieldEnum]
 
 
-export const MaterialScalarFieldEnum = {
-  id: 'id',
-  partNumber: 'partNumber',
-  name: 'name',
-  model: 'model',
-  description: 'description',
-  category: 'category',
-  unit: 'unit',
-  weight: 'weight',
-  purchaseCurrency: 'purchaseCurrency',
-  sellingCurrency: 'sellingCurrency',
-  purchasePrice: 'purchasePrice',
-  sellingPrice: 'sellingPrice',
-  minStock: 'minStock',
-  currentStock: 'currentStock',
-  isActive: 'isActive',
-  supplierId: 'supplierId',
-  leadTime: 'leadTime',
-  deletedAt: 'deletedAt',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-} as const
-
-export type MaterialScalarFieldEnum = (typeof MaterialScalarFieldEnum)[keyof typeof MaterialScalarFieldEnum]
-
-
 export const VisitPlanScalarFieldEnum = {
   id: 'id',
   customerId: 'customerId',
@@ -415,6 +350,45 @@ export const VisitPlanScalarFieldEnum = {
 } as const
 
 export type VisitPlanScalarFieldEnum = (typeof VisitPlanScalarFieldEnum)[keyof typeof VisitPlanScalarFieldEnum]
+
+
+export const CustomerScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  address: 'address',
+  phone: 'phone',
+  email: 'email',
+  website: 'website',
+  industry: 'industry',
+  employeeCount: 'employeeCount',
+  revenue: 'revenue',
+  tags: 'tags',
+  accountManagerId: 'accountManagerId',
+  isActive: 'isActive',
+  deletedAt: 'deletedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CustomerScalarFieldEnum = (typeof CustomerScalarFieldEnum)[keyof typeof CustomerScalarFieldEnum]
+
+
+export const ContactScalarFieldEnum = {
+  id: 'id',
+  customerId: 'customerId',
+  name: 'name',
+  email: 'email',
+  phone: 'phone',
+  position: 'position',
+  notes: 'notes',
+  isPrimary: 'isPrimary',
+  isActive: 'isActive',
+  deletedAt: 'deletedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ContactScalarFieldEnum = (typeof ContactScalarFieldEnum)[keyof typeof ContactScalarFieldEnum]
 
 
 export const DeliveryOrderScalarFieldEnum = {
@@ -455,6 +429,7 @@ export const GoodsReceiptScalarFieldEnum = {
   date: 'date',
   sender: 'sender',
   recipient: 'recipient',
+  status: 'status',
   supportingDocument: 'supportingDocument',
   notes: 'notes',
   purchaseOrderId: 'purchaseOrderId',
@@ -521,6 +496,32 @@ export const InvoiceItemScalarFieldEnum = {
 } as const
 
 export type InvoiceItemScalarFieldEnum = (typeof InvoiceItemScalarFieldEnum)[keyof typeof InvoiceItemScalarFieldEnum]
+
+
+export const MaterialScalarFieldEnum = {
+  id: 'id',
+  partNumber: 'partNumber',
+  name: 'name',
+  model: 'model',
+  description: 'description',
+  category: 'category',
+  unit: 'unit',
+  weight: 'weight',
+  purchaseCurrency: 'purchaseCurrency',
+  sellingCurrency: 'sellingCurrency',
+  purchasePrice: 'purchasePrice',
+  sellingPrice: 'sellingPrice',
+  minStock: 'minStock',
+  currentStock: 'currentStock',
+  isActive: 'isActive',
+  supplierId: 'supplierId',
+  leadTime: 'leadTime',
+  deletedAt: 'deletedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type MaterialScalarFieldEnum = (typeof MaterialScalarFieldEnum)[keyof typeof MaterialScalarFieldEnum]
 
 
 export const NkpScalarFieldEnum = {

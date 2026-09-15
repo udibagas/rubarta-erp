@@ -11,6 +11,7 @@ import {
   Patch,
   Post,
   Query,
+  Res,
   UploadedFile,
   UseInterceptors,
 } from '@nestjs/common';
@@ -25,6 +26,7 @@ import {
 } from '@nestjs/swagger';
 import { FileInterceptor } from '@nestjs/platform-express';
 import * as multer from 'multer';
+import { Response } from 'express';
 import { GoodsReceiptsService } from './goods-receipts.service';
 import {
   CreateGoodsReceiptDto,
@@ -94,6 +96,18 @@ export class GoodsReceiptsController {
   @ApiOkResponse({ description: 'Good receipt details' })
   findOne(@Param('id', ParseIntPipe) id: number) {
     return this.goodsReceiptsService.findOne(id);
+  }
+
+  @Get(':id/preview')
+  @ApiOperation({ summary: 'Preview good receipt PDF' })
+  async preview(@Param('id', ParseIntPipe) id: number, @Res() res: Response) {
+    const pdfBuffer = await this.goodsReceiptsService.preview(id);
+    res.set({
+      'Content-Type': 'application/pdf',
+      'Content-Disposition': `inline; filename="goods-receipt-${id}.pdf"`,
+      'Content-Length': pdfBuffer.length,
+    });
+    res.end(pdfBuffer);
   }
 
   @Patch(':id')

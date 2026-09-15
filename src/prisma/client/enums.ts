@@ -146,6 +146,14 @@ export const VisitType = {
 export type VisitType = (typeof VisitType)[keyof typeof VisitType]
 
 
+export const GoodsReceiptStatus = {
+  Draft: 'Draft',
+  Confirmed: 'Confirmed'
+} as const
+
+export type GoodsReceiptStatus = (typeof GoodsReceiptStatus)[keyof typeof GoodsReceiptStatus]
+
+
 export const InvoiceStatus = {
   Draft: 'Draft',
   Submitted: 'Submitted',
