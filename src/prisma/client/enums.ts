@@ -188,6 +188,7 @@ export const PurchaseOrderStatus = {
   Sent: 'Sent',
   Pending: 'Pending',
   Processing: 'Processing',
+  PartiallyReceived: 'PartiallyReceived',
   Completed: 'Completed',
   Cancelled: 'Cancelled'
 } as const
@@ -201,6 +202,7 @@ export const SalesOrderStatus = {
   Sent: 'Sent',
   Pending: 'Pending',
   Processing: 'Processing',
+  PartiallyDelivered: 'PartiallyDelivered',
   Completed: 'Completed',
   Cancelled: 'Cancelled'
 } as const

@@ -3,6 +3,7 @@ import { SalesOrdersService } from './sales-orders.service';
 import { SalesOrderType } from './sales-order.type';
 import { Prisma, SalesOrderStatus } from '../prisma/client/client';
 import { PrismaService } from '../prisma/prisma.service';
+import { NotFoundException } from '@nestjs/common';
 
 @Resolver(() => SalesOrderType)
 export class SalesOrdersResolver {
@@ -59,6 +60,25 @@ export class SalesOrdersResolver {
     description: 'Get sales order by ID',
   })
   async findOne(@Args('id', { type: () => Int }) id: number) {
-    return this.salesOrdersService.findOne(id);
+    const salesOrder = await this.prisma.salesOrder.findFirst({
+      where: { id, deletedAt: null },
+      include: {
+        SalesOrderItems: {
+          orderBy: { sortOrder: 'asc' },
+        },
+        Customer: {
+          select: { id: true, name: true },
+        },
+        User: {
+          select: { id: true, name: true, email: true },
+        },
+      },
+    });
+
+    if (!salesOrder) {
+      throw new NotFoundException(`Order with ID ${id} not found`);
+    }
+
+    return salesOrder;
   }
 }

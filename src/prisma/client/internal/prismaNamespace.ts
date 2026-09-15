@@ -3990,6 +3990,7 @@ export const PurchaseOrderItemScalarFieldEnum = {
   partNumber: 'partNumber',
   description: 'description',
   quantity: 'quantity',
+  receivedQuantity: 'receivedQuantity',
   unitPrice: 'unitPrice',
   totalPrice: 'totalPrice',
   sortOrder: 'sortOrder'
@@ -4098,6 +4099,7 @@ export const SalesOrderItemScalarFieldEnum = {
   partNumber: 'partNumber',
   description: 'description',
   quantity: 'quantity',
+  deliveredQuantity: 'deliveredQuantity',
   unitPrice: 'unitPrice',
   totalPrice: 'totalPrice',
   sortOrder: 'sortOrder'

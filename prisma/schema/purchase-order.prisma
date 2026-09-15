@@ -65,6 +65,7 @@ model PurchaseOrderItem {
   partNumber      String @db.VarChar(100)
   description     String @db.Text
   quantity        Int
+  receivedQuantity  Int     @default(0)
   unitPrice       Float
   totalPrice      Float
   sortOrder       Int    @default(0)
@@ -82,6 +83,7 @@ enum PurchaseOrderStatus {
   Sent
   Pending
   Processing
+  PartiallyReceived
   Completed
   Cancelled
 }
