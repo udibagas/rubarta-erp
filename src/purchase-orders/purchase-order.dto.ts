@@ -31,6 +31,11 @@ export class PurchaseOrderItemDto {
   @Min(1)
   quantity: number;
 
+  @ApiProperty({ required: false, example: 0, default: 0 })
+  @IsOptional()
+  @IsInt()
+  receivedQuantity?: number;
+
   @ApiProperty({ example: 100000 })
   @IsNumber()
   @Min(0)

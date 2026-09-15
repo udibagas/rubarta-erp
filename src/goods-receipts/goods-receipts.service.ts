@@ -1,5 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { Prisma } from '../prisma/client/client';
+import { Prisma, PurchaseOrderStatus } from '../prisma/client/client';
 import { PrismaService } from '../prisma/prisma.service';
 import {
   CreateGoodsReceiptDto,
@@ -114,6 +114,54 @@ export class GoodsReceiptsService {
   async remove(id: number) {
     await this.findOne(id);
     return this.prisma.goodsReceipt.delete({ where: { id } });
+  }
+
+  async updatePoItemReceivedQuantities(id: number) {
+    const gr = await this.prisma.goodsReceipt.findUnique({
+      where: { id, status: 'Confirmed' },
+      include: { GoodsReceiptItems: true },
+    });
+
+    if (!gr) {
+      throw new NotFoundException(`Goods receipt with ID ${id} not found`);
+    }
+
+    for (const item of gr.GoodsReceiptItems) {
+      this.prisma.$transaction(async (transaction) => {
+        await transaction.purchaseOrderItem.updateMany({
+          where: {
+            purchaseOrderId: gr.purchaseOrderId,
+            partNumber: item.partNumber,
+          },
+          data: {
+            receivedQuantity: {
+              increment: item.quantityReceived,
+            },
+          },
+        });
+      });
+    }
+
+    let status: PurchaseOrderStatus = 'PartiallyReceived';
+
+    // check if all purchase order items have been fully received
+    const hasOutstandingItems = await this.prisma.purchaseOrderItem.count({
+      where: {
+        purchaseOrderId: gr.purchaseOrderId,
+        receivedQuantity: {
+          lt: this.prisma.purchaseOrderItem.fields.quantity,
+        },
+      },
+    });
+
+    if (hasOutstandingItems === 0) {
+      status = 'Completed';
+    }
+
+    await this.prisma.purchaseOrder.update({
+      where: { id: gr.purchaseOrderId },
+      data: { status },
+    });
   }
 
   private async generateNumber(): Promise<string> {

@@ -30,6 +30,11 @@ export class SalesOrderItemDto {
   @Min(1)
   quantity: number;
 
+  @ApiProperty({ required: false, example: 0, default: 0 })
+  @IsOptional()
+  @IsInt()
+  deliveredQuantity?: number;
+
   @ApiProperty({ example: 100000 })
   @IsNumber({}, { message: 'Unit price is required and must be a number' })
   @Min(0)

@@ -122,11 +122,30 @@ export class GoodsReceiptsController {
   @Patch(':id')
   @ApiOperation({ summary: 'Update good receipt' })
   @ApiOkResponse({ description: 'Good receipt updated' })
-  update(
+  async update(
     @Param('id', ParseIntPipe) id: number,
     @Body() dto: UpdateGoodsReceiptDto,
   ) {
-    return this.goodsReceiptsService.update(id, dto);
+    const gr = await this.goodsReceiptsService.findOne(id);
+    const updatedGr = await this.goodsReceiptsService.update(id, dto);
+
+    // If the goods receipt was in Draft status and is now being confirmed,
+    // update the received quantities of the related purchase order items asynchronously.
+    if (gr.status == 'Draft' && dto.status === 'Confirmed') {
+      this.goodsReceiptsService
+        .updatePoItemReceivedQuantities(id)
+        .then(() => {
+          console.log(
+            `Successfully updated purchase order item received quantities for goods receipt ID ${id}`,
+          );
+        })
+        .catch((error) => {
+          // Handle any errors that occurred during the update
+          console.error(error);
+        });
+    }
+
+    return updatedGr;
   }
 
   @Delete(':id')
