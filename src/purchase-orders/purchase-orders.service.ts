@@ -64,6 +64,7 @@ export class PurchaseOrdersService {
       where.OR = [
         { number: { contains: query.keyword, mode: 'insensitive' } },
         { title: { contains: query.keyword, mode: 'insensitive' } },
+        { description: { contains: query.keyword, mode: 'insensitive' } },
         { referenceNumber: { contains: query.keyword, mode: 'insensitive' } },
         {
           Supplier: { name: { contains: query.keyword, mode: 'insensitive' } },
