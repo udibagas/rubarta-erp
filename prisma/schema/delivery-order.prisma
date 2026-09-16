@@ -3,15 +3,19 @@ model DeliveryOrder {
   number             String   @unique
   date               DateTime
   sender             String?
-  recipient          String?
+  receiptNumber      String?
+  pickUpBy           String?
+  pickUpName         String?
+  pickUpContact      String?
   supportingDocument Json?
   notes              String?  @db.Text
 
   // foreign keys
-  companyId    Int
-  salesOrderId Int
-  customerId   Int
-  userId       Int
+  companyId      Int
+  salesOrderId   Int
+  goodsReceiptId Int @unique
+  customerId     Int
+  userId         Int
 
   // timestamps
   createdAt DateTime @default(now())
@@ -23,11 +27,14 @@ model DeliveryOrder {
   Customer           Customer            @relation(fields: [customerId], references: [id])
   User               User                @relation(fields: [userId], references: [id])
   DeliveryOrderItems DeliveryOrderItem[]
-  invoice            Invoice?
+  GoodsReceipt       GoodsReceipt        @relation(fields: [goodsReceiptId], references: [id])
+  Invoice            Invoice?
 
   @@index([companyId])
   @@index([salesOrderId])
   @@index([customerId])
+  @@index([goodsReceiptId])
+  @@index([userId])
   @@index([date])
   @@map("DeliveryOrders")
 }

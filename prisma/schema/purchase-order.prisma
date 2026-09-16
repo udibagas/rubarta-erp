@@ -41,34 +41,40 @@ model PurchaseOrder {
   updatedAt DateTime? @updatedAt
   deletedAt DateTime? @db.Timestamp()
 
-  supplierId Int?
-  userId     Int
-  companyId  Int
+  salesOrderId Int?
+  supplierId   Int?
+  userId       Int
+  companyId    Int
 
   // Relationships
   User               User                @relation(fields: [userId], references: [id])
   PurchaseOrderItems PurchaseOrderItem[]
   Supplier           Supplier?           @relation(fields: [supplierId], references: [id])
   Company            Company             @relation(fields: [companyId], references: [id])
-  goodsReceipts       GoodsReceipt[]
+  goodsReceipts      GoodsReceipt[]
+  SalesOrder         SalesOrder?         @relation(fields: [salesOrderId], references: [id])
 
   @@index([number])
   @@index([status])
   @@index([date])
   @@index([deletedAt])
+  @@index([salesOrderId])
+  @@index([supplierId])
+  @@index([userId])
+  @@index([companyId])
   @@map("PurchaseOrders")
 }
 
 model PurchaseOrderItem {
-  id              Int    @id @default(autoincrement())
-  purchaseOrderId Int
-  partNumber      String @db.VarChar(100)
-  description     String @db.Text
-  quantity        Int
-  receivedQuantity  Int     @default(0)
-  unitPrice       Float
-  totalPrice      Float
-  sortOrder       Int    @default(0)
+  id               Int    @id @default(autoincrement())
+  purchaseOrderId  Int
+  partNumber       String @db.VarChar(100)
+  description      String @db.Text
+  quantity         Int
+  receivedQuantity Int    @default(0)
+  unitPrice        Float
+  totalPrice       Float
+  sortOrder        Int    @default(0)
 
   // Relationships
   PurchaseOrder PurchaseOrder @relation(fields: [purchaseOrderId], references: [id], onDelete: Cascade)

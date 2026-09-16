@@ -56,15 +56,34 @@ export class CreateDeliveryOrderDto {
   @IsInt()
   customerId: number;
 
+  @ApiProperty({ example: 1 })
+  @IsInt()
+  goodsReceiptId: number;
+
   @ApiProperty({ required: false, example: 'John Doe' })
   @IsString()
   @IsOptional()
   sender?: string | null;
 
+  @ApiProperty({ required: false, example: 'RCPT-001' })
+  @IsString()
+  @IsOptional()
+  receiptNumber?: string | null;
+
+  @ApiProperty({ required: false, example: 'John Doe' })
+  @IsString()
+  @IsOptional()
+  pickUpBy?: string | null;
+
   @ApiProperty({ required: false, example: 'Jane Doe' })
   @IsString()
   @IsOptional()
-  recipient?: string | null;
+  pickUpName?: string | null;
+
+  @ApiProperty({ required: false, example: '+1 555 0100' })
+  @IsString()
+  @IsOptional()
+  pickUpContact?: string | null;
 
   @ApiProperty({
     required: false,

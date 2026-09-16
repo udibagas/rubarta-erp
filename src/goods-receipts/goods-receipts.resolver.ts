@@ -19,6 +19,8 @@ export class GoodsReceiptsResolver {
     @Args('keyword', { nullable: true }) keyword?: string,
     @Args('purchaseOrderId', { type: () => Int, nullable: true })
     purchaseOrderId?: number,
+    @Args('salesOrderId', { type: () => Int, nullable: true })
+    salesOrderId?: number,
     @Args('supplierId', { type: () => Int, nullable: true })
     supplierId?: number,
     @Args('status', { type: () => GoodsReceiptStatus, nullable: true })
@@ -35,7 +37,9 @@ export class GoodsReceiptsResolver {
         },
       ];
     }
+
     if (purchaseOrderId) where.purchaseOrderId = purchaseOrderId;
+    if (salesOrderId) where.PurchaseOrder = { salesOrderId };
     if (supplierId) where.supplierId = supplierId;
     if (status) where.status = status;
 

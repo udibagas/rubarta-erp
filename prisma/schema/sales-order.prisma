@@ -46,6 +46,7 @@ model SalesOrder {
   Quotation       Quotation?       @relation(fields: [quotationId], references: [id])
   Company         Company          @relation(fields: [companyId], references: [id], onDelete: Cascade)
   DeliveryOrders  DeliveryOrder[]
+  purchaseOrders  PurchaseOrder[]
 
   @@index([number])
   @@index([customerId])
@@ -56,15 +57,15 @@ model SalesOrder {
 }
 
 model SalesOrderItem {
-  id           Int    @id @default(autoincrement())
-  salesOrderId Int
-  partNumber   String @db.VarChar(100)
-  description  String @db.Text
-  quantity     Int
-  deliveredQuantity Int     @default(0)
-  unitPrice    Float
-  totalPrice   Float
-  sortOrder    Int    @default(0)
+  id                Int    @id @default(autoincrement())
+  salesOrderId      Int
+  partNumber        String @db.VarChar(100)
+  description       String @db.Text
+  quantity          Int
+  deliveredQuantity Int    @default(0)
+  unitPrice         Float
+  totalPrice        Float
+  sortOrder         Int    @default(0)
 
   // Relationships
   SalesOrder SalesOrder @relation(fields: [salesOrderId], references: [id], onDelete: Cascade)

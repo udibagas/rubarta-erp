@@ -1,8 +1,10 @@
 import { ObjectType, Field, Int } from '@nestjs/graphql';
+import GraphQLJSON from 'graphql-type-json';
 import { SalesOrderType } from '../sales-orders/sales-order.type';
 import { CustomerType } from '../customers/customer.type';
 import { CompanyType } from '../companies/company.type';
 import { UserType } from '../users/user.type';
+import { GoodsReceiptType } from '../goods-receipts/goods-receipt.type';
 
 @ObjectType('DeliveryOrderItem')
 export class DeliveryOrderItemType {
@@ -43,7 +45,19 @@ export class DeliveryOrderType {
   sender?: string;
 
   @Field({ nullable: true })
-  recipient?: string;
+  receiptNumber?: string;
+
+  @Field({ nullable: true })
+  pickUpBy?: string;
+
+  @Field({ nullable: true })
+  pickUpName?: string;
+
+  @Field({ nullable: true })
+  pickUpContact?: string;
+
+  @Field(() => GraphQLJSON, { nullable: true })
+  supportingDocument?: unknown;
 
   @Field({ nullable: true })
   notes?: string;
@@ -61,6 +75,9 @@ export class DeliveryOrderType {
   salesOrderId: number;
 
   @Field(() => Int)
+  goodsReceiptId: number;
+
+  @Field(() => Int)
   customerId: number;
 
   @Field(() => Int)
@@ -74,6 +91,9 @@ export class DeliveryOrderType {
 
   @Field(() => CustomerType, { nullable: true })
   Customer?: CustomerType;
+
+  @Field(() => GoodsReceiptType, { nullable: true })
+  GoodsReceipt?: GoodsReceiptType;
 
   @Field(() => UserType, { nullable: true })
   User?: UserType;

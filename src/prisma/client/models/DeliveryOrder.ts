@@ -30,6 +30,7 @@ export type DeliveryOrderAvgAggregateOutputType = {
   id: number | null
   companyId: number | null
   salesOrderId: number | null
+  goodsReceiptId: number | null
   customerId: number | null
   userId: number | null
 }
@@ -38,6 +39,7 @@ export type DeliveryOrderSumAggregateOutputType = {
   id: number | null
   companyId: number | null
   salesOrderId: number | null
+  goodsReceiptId: number | null
   customerId: number | null
   userId: number | null
 }
@@ -47,10 +49,14 @@ export type DeliveryOrderMinAggregateOutputType = {
   number: string | null
   date: Date | null
   sender: string | null
-  recipient: string | null
+  receiptNumber: string | null
+  pickUpBy: string | null
+  pickUpName: string | null
+  pickUpContact: string | null
   notes: string | null
   companyId: number | null
   salesOrderId: number | null
+  goodsReceiptId: number | null
   customerId: number | null
   userId: number | null
   createdAt: Date | null
@@ -62,10 +68,14 @@ export type DeliveryOrderMaxAggregateOutputType = {
   number: string | null
   date: Date | null
   sender: string | null
-  recipient: string | null
+  receiptNumber: string | null
+  pickUpBy: string | null
+  pickUpName: string | null
+  pickUpContact: string | null
   notes: string | null
   companyId: number | null
   salesOrderId: number | null
+  goodsReceiptId: number | null
   customerId: number | null
   userId: number | null
   createdAt: Date | null
@@ -77,11 +87,15 @@ export type DeliveryOrderCountAggregateOutputType = {
   number: number
   date: number
   sender: number
-  recipient: number
+  receiptNumber: number
+  pickUpBy: number
+  pickUpName: number
+  pickUpContact: number
   supportingDocument: number
   notes: number
   companyId: number
   salesOrderId: number
+  goodsReceiptId: number
   customerId: number
   userId: number
   createdAt: number
@@ -94,6 +108,7 @@ export type DeliveryOrderAvgAggregateInputType = {
   id?: true
   companyId?: true
   salesOrderId?: true
+  goodsReceiptId?: true
   customerId?: true
   userId?: true
 }
@@ -102,6 +117,7 @@ export type DeliveryOrderSumAggregateInputType = {
   id?: true
   companyId?: true
   salesOrderId?: true
+  goodsReceiptId?: true
   customerId?: true
   userId?: true
 }
@@ -111,10 +127,14 @@ export type DeliveryOrderMinAggregateInputType = {
   number?: true
   date?: true
   sender?: true
-  recipient?: true
+  receiptNumber?: true
+  pickUpBy?: true
+  pickUpName?: true
+  pickUpContact?: true
   notes?: true
   companyId?: true
   salesOrderId?: true
+  goodsReceiptId?: true
   customerId?: true
   userId?: true
   createdAt?: true
@@ -126,10 +146,14 @@ export type DeliveryOrderMaxAggregateInputType = {
   number?: true
   date?: true
   sender?: true
-  recipient?: true
+  receiptNumber?: true
+  pickUpBy?: true
+  pickUpName?: true
+  pickUpContact?: true
   notes?: true
   companyId?: true
   salesOrderId?: true
+  goodsReceiptId?: true
   customerId?: true
   userId?: true
   createdAt?: true
@@ -141,11 +165,15 @@ export type DeliveryOrderCountAggregateInputType = {
   number?: true
   date?: true
   sender?: true
-  recipient?: true
+  receiptNumber?: true
+  pickUpBy?: true
+  pickUpName?: true
+  pickUpContact?: true
   supportingDocument?: true
   notes?: true
   companyId?: true
   salesOrderId?: true
+  goodsReceiptId?: true
   customerId?: true
   userId?: true
   createdAt?: true
@@ -244,11 +272,15 @@ export type DeliveryOrderGroupByOutputType = {
   number: string
   date: Date
   sender: string | null
-  recipient: string | null
+  receiptNumber: string | null
+  pickUpBy: string | null
+  pickUpName: string | null
+  pickUpContact: string | null
   supportingDocument: runtime.JsonValue | null
   notes: string | null
   companyId: number
   salesOrderId: number
+  goodsReceiptId: number
   customerId: number
   userId: number
   createdAt: Date
@@ -283,11 +315,15 @@ export type DeliveryOrderWhereInput = {
   number?: Prisma.StringFilter<"DeliveryOrder"> | string
   date?: Prisma.DateTimeFilter<"DeliveryOrder"> | Date | string
   sender?: Prisma.StringNullableFilter<"DeliveryOrder"> | string | null
-  recipient?: Prisma.StringNullableFilter<"DeliveryOrder"> | string | null
+  receiptNumber?: Prisma.StringNullableFilter<"DeliveryOrder"> | string | null
+  pickUpBy?: Prisma.StringNullableFilter<"DeliveryOrder"> | string | null
+  pickUpName?: Prisma.StringNullableFilter<"DeliveryOrder"> | string | null
+  pickUpContact?: Prisma.StringNullableFilter<"DeliveryOrder"> | string | null
   supportingDocument?: Prisma.JsonNullableFilter<"DeliveryOrder">
   notes?: Prisma.StringNullableFilter<"DeliveryOrder"> | string | null
   companyId?: Prisma.IntFilter<"DeliveryOrder"> | number
   salesOrderId?: Prisma.IntFilter<"DeliveryOrder"> | number
+  goodsReceiptId?: Prisma.IntFilter<"DeliveryOrder"> | number
   customerId?: Prisma.IntFilter<"DeliveryOrder"> | number
   userId?: Prisma.IntFilter<"DeliveryOrder"> | number
   createdAt?: Prisma.DateTimeFilter<"DeliveryOrder"> | Date | string
@@ -297,7 +333,8 @@ export type DeliveryOrderWhereInput = {
   Customer?: Prisma.XOR<Prisma.CustomerScalarRelationFilter, Prisma.CustomerWhereInput>
   User?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   DeliveryOrderItems?: Prisma.DeliveryOrderItemListRelationFilter
-  invoice?: Prisma.XOR<Prisma.InvoiceNullableScalarRelationFilter, Prisma.InvoiceWhereInput> | null
+  GoodsReceipt?: Prisma.XOR<Prisma.GoodsReceiptScalarRelationFilter, Prisma.GoodsReceiptWhereInput>
+  Invoice?: Prisma.XOR<Prisma.InvoiceNullableScalarRelationFilter, Prisma.InvoiceWhereInput> | null
 }
 
 export type DeliveryOrderOrderByWithRelationInput = {
@@ -305,11 +342,15 @@ export type DeliveryOrderOrderByWithRelationInput = {
   number?: Prisma.SortOrder
   date?: Prisma.SortOrder
   sender?: Prisma.SortOrderInput | Prisma.SortOrder
-  recipient?: Prisma.SortOrderInput | Prisma.SortOrder
+  receiptNumber?: Prisma.SortOrderInput | Prisma.SortOrder
+  pickUpBy?: Prisma.SortOrderInput | Prisma.SortOrder
+  pickUpName?: Prisma.SortOrderInput | Prisma.SortOrder
+  pickUpContact?: Prisma.SortOrderInput | Prisma.SortOrder
   supportingDocument?: Prisma.SortOrderInput | Prisma.SortOrder
   notes?: Prisma.SortOrderInput | Prisma.SortOrder
   companyId?: Prisma.SortOrder
   salesOrderId?: Prisma.SortOrder
+  goodsReceiptId?: Prisma.SortOrder
   customerId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -319,18 +360,23 @@ export type DeliveryOrderOrderByWithRelationInput = {
   Customer?: Prisma.CustomerOrderByWithRelationInput
   User?: Prisma.UserOrderByWithRelationInput
   DeliveryOrderItems?: Prisma.DeliveryOrderItemOrderByRelationAggregateInput
-  invoice?: Prisma.InvoiceOrderByWithRelationInput
+  GoodsReceipt?: Prisma.GoodsReceiptOrderByWithRelationInput
+  Invoice?: Prisma.InvoiceOrderByWithRelationInput
 }
 
 export type DeliveryOrderWhereUniqueInput = Prisma.AtLeast<{
   id?: number
   number?: string
+  goodsReceiptId?: number
   AND?: Prisma.DeliveryOrderWhereInput | Prisma.DeliveryOrderWhereInput[]
   OR?: Prisma.DeliveryOrderWhereInput[]
   NOT?: Prisma.DeliveryOrderWhereInput | Prisma.DeliveryOrderWhereInput[]
   date?: Prisma.DateTimeFilter<"DeliveryOrder"> | Date | string
   sender?: Prisma.StringNullableFilter<"DeliveryOrder"> | string | null
-  recipient?: Prisma.StringNullableFilter<"DeliveryOrder"> | string | null
+  receiptNumber?: Prisma.StringNullableFilter<"DeliveryOrder"> | string | null
+  pickUpBy?: Prisma.StringNullableFilter<"DeliveryOrder"> | string | null
+  pickUpName?: Prisma.StringNullableFilter<"DeliveryOrder"> | string | null
+  pickUpContact?: Prisma.StringNullableFilter<"DeliveryOrder"> | string | null
   supportingDocument?: Prisma.JsonNullableFilter<"DeliveryOrder">
   notes?: Prisma.StringNullableFilter<"DeliveryOrder"> | string | null
   companyId?: Prisma.IntFilter<"DeliveryOrder"> | number
@@ -344,19 +390,24 @@ export type DeliveryOrderWhereUniqueInput = Prisma.AtLeast<{
   Customer?: Prisma.XOR<Prisma.CustomerScalarRelationFilter, Prisma.CustomerWhereInput>
   User?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   DeliveryOrderItems?: Prisma.DeliveryOrderItemListRelationFilter
-  invoice?: Prisma.XOR<Prisma.InvoiceNullableScalarRelationFilter, Prisma.InvoiceWhereInput> | null
-}, "id" | "number">
+  GoodsReceipt?: Prisma.XOR<Prisma.GoodsReceiptScalarRelationFilter, Prisma.GoodsReceiptWhereInput>
+  Invoice?: Prisma.XOR<Prisma.InvoiceNullableScalarRelationFilter, Prisma.InvoiceWhereInput> | null
+}, "id" | "number" | "goodsReceiptId">
 
 export type DeliveryOrderOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   number?: Prisma.SortOrder
   date?: Prisma.SortOrder
   sender?: Prisma.SortOrderInput | Prisma.SortOrder
-  recipient?: Prisma.SortOrderInput | Prisma.SortOrder
+  receiptNumber?: Prisma.SortOrderInput | Prisma.SortOrder
+  pickUpBy?: Prisma.SortOrderInput | Prisma.SortOrder
+  pickUpName?: Prisma.SortOrderInput | Prisma.SortOrder
+  pickUpContact?: Prisma.SortOrderInput | Prisma.SortOrder
   supportingDocument?: Prisma.SortOrderInput | Prisma.SortOrder
   notes?: Prisma.SortOrderInput | Prisma.SortOrder
   companyId?: Prisma.SortOrder
   salesOrderId?: Prisma.SortOrder
+  goodsReceiptId?: Prisma.SortOrder
   customerId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -376,11 +427,15 @@ export type DeliveryOrderScalarWhereWithAggregatesInput = {
   number?: Prisma.StringWithAggregatesFilter<"DeliveryOrder"> | string
   date?: Prisma.DateTimeWithAggregatesFilter<"DeliveryOrder"> | Date | string
   sender?: Prisma.StringNullableWithAggregatesFilter<"DeliveryOrder"> | string | null
-  recipient?: Prisma.StringNullableWithAggregatesFilter<"DeliveryOrder"> | string | null
+  receiptNumber?: Prisma.StringNullableWithAggregatesFilter<"DeliveryOrder"> | string | null
+  pickUpBy?: Prisma.StringNullableWithAggregatesFilter<"DeliveryOrder"> | string | null
+  pickUpName?: Prisma.StringNullableWithAggregatesFilter<"DeliveryOrder"> | string | null
+  pickUpContact?: Prisma.StringNullableWithAggregatesFilter<"DeliveryOrder"> | string | null
   supportingDocument?: Prisma.JsonNullableWithAggregatesFilter<"DeliveryOrder">
   notes?: Prisma.StringNullableWithAggregatesFilter<"DeliveryOrder"> | string | null
   companyId?: Prisma.IntWithAggregatesFilter<"DeliveryOrder"> | number
   salesOrderId?: Prisma.IntWithAggregatesFilter<"DeliveryOrder"> | number
+  goodsReceiptId?: Prisma.IntWithAggregatesFilter<"DeliveryOrder"> | number
   customerId?: Prisma.IntWithAggregatesFilter<"DeliveryOrder"> | number
   userId?: Prisma.IntWithAggregatesFilter<"DeliveryOrder"> | number
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"DeliveryOrder"> | Date | string
@@ -391,7 +446,10 @@ export type DeliveryOrderCreateInput = {
   number: string
   date: Date | string
   sender?: string | null
-  recipient?: string | null
+  receiptNumber?: string | null
+  pickUpBy?: string | null
+  pickUpName?: string | null
+  pickUpContact?: string | null
   supportingDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   notes?: string | null
   createdAt?: Date | string
@@ -401,7 +459,8 @@ export type DeliveryOrderCreateInput = {
   Customer: Prisma.CustomerCreateNestedOneWithoutDeliveryOrdersInput
   User: Prisma.UserCreateNestedOneWithoutDeliveryOrdersInput
   DeliveryOrderItems?: Prisma.DeliveryOrderItemCreateNestedManyWithoutDeliveryOrderInput
-  invoice?: Prisma.InvoiceCreateNestedOneWithoutDeliveryOrderInput
+  GoodsReceipt: Prisma.GoodsReceiptCreateNestedOneWithoutDeliveryOrderInput
+  Invoice?: Prisma.InvoiceCreateNestedOneWithoutDeliveryOrderInput
 }
 
 export type DeliveryOrderUncheckedCreateInput = {
@@ -409,24 +468,31 @@ export type DeliveryOrderUncheckedCreateInput = {
   number: string
   date: Date | string
   sender?: string | null
-  recipient?: string | null
+  receiptNumber?: string | null
+  pickUpBy?: string | null
+  pickUpName?: string | null
+  pickUpContact?: string | null
   supportingDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   notes?: string | null
   companyId: number
   salesOrderId: number
+  goodsReceiptId: number
   customerId: number
   userId: number
   createdAt?: Date | string
   updatedAt?: Date | string
   DeliveryOrderItems?: Prisma.DeliveryOrderItemUncheckedCreateNestedManyWithoutDeliveryOrderInput
-  invoice?: Prisma.InvoiceUncheckedCreateNestedOneWithoutDeliveryOrderInput
+  Invoice?: Prisma.InvoiceUncheckedCreateNestedOneWithoutDeliveryOrderInput
 }
 
 export type DeliveryOrderUpdateInput = {
   number?: Prisma.StringFieldUpdateOperationsInput | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  recipient?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  receiptNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pickUpBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pickUpName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pickUpContact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   supportingDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -436,7 +502,8 @@ export type DeliveryOrderUpdateInput = {
   Customer?: Prisma.CustomerUpdateOneRequiredWithoutDeliveryOrdersNestedInput
   User?: Prisma.UserUpdateOneRequiredWithoutDeliveryOrdersNestedInput
   DeliveryOrderItems?: Prisma.DeliveryOrderItemUpdateManyWithoutDeliveryOrderNestedInput
-  invoice?: Prisma.InvoiceUpdateOneWithoutDeliveryOrderNestedInput
+  GoodsReceipt?: Prisma.GoodsReceiptUpdateOneRequiredWithoutDeliveryOrderNestedInput
+  Invoice?: Prisma.InvoiceUpdateOneWithoutDeliveryOrderNestedInput
 }
 
 export type DeliveryOrderUncheckedUpdateInput = {
@@ -444,17 +511,21 @@ export type DeliveryOrderUncheckedUpdateInput = {
   number?: Prisma.StringFieldUpdateOperationsInput | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  recipient?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  receiptNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pickUpBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pickUpName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pickUpContact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   supportingDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   companyId?: Prisma.IntFieldUpdateOperationsInput | number
   salesOrderId?: Prisma.IntFieldUpdateOperationsInput | number
+  goodsReceiptId?: Prisma.IntFieldUpdateOperationsInput | number
   customerId?: Prisma.IntFieldUpdateOperationsInput | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   DeliveryOrderItems?: Prisma.DeliveryOrderItemUncheckedUpdateManyWithoutDeliveryOrderNestedInput
-  invoice?: Prisma.InvoiceUncheckedUpdateOneWithoutDeliveryOrderNestedInput
+  Invoice?: Prisma.InvoiceUncheckedUpdateOneWithoutDeliveryOrderNestedInput
 }
 
 export type DeliveryOrderCreateManyInput = {
@@ -462,11 +533,15 @@ export type DeliveryOrderCreateManyInput = {
   number: string
   date: Date | string
   sender?: string | null
-  recipient?: string | null
+  receiptNumber?: string | null
+  pickUpBy?: string | null
+  pickUpName?: string | null
+  pickUpContact?: string | null
   supportingDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   notes?: string | null
   companyId: number
   salesOrderId: number
+  goodsReceiptId: number
   customerId: number
   userId: number
   createdAt?: Date | string
@@ -477,7 +552,10 @@ export type DeliveryOrderUpdateManyMutationInput = {
   number?: Prisma.StringFieldUpdateOperationsInput | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  recipient?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  receiptNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pickUpBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pickUpName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pickUpContact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   supportingDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -489,11 +567,15 @@ export type DeliveryOrderUncheckedUpdateManyInput = {
   number?: Prisma.StringFieldUpdateOperationsInput | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  recipient?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  receiptNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pickUpBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pickUpName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pickUpContact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   supportingDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   companyId?: Prisma.IntFieldUpdateOperationsInput | number
   salesOrderId?: Prisma.IntFieldUpdateOperationsInput | number
+  goodsReceiptId?: Prisma.IntFieldUpdateOperationsInput | number
   customerId?: Prisma.IntFieldUpdateOperationsInput | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -515,11 +597,15 @@ export type DeliveryOrderCountOrderByAggregateInput = {
   number?: Prisma.SortOrder
   date?: Prisma.SortOrder
   sender?: Prisma.SortOrder
-  recipient?: Prisma.SortOrder
+  receiptNumber?: Prisma.SortOrder
+  pickUpBy?: Prisma.SortOrder
+  pickUpName?: Prisma.SortOrder
+  pickUpContact?: Prisma.SortOrder
   supportingDocument?: Prisma.SortOrder
   notes?: Prisma.SortOrder
   companyId?: Prisma.SortOrder
   salesOrderId?: Prisma.SortOrder
+  goodsReceiptId?: Prisma.SortOrder
   customerId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -530,6 +616,7 @@ export type DeliveryOrderAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
   companyId?: Prisma.SortOrder
   salesOrderId?: Prisma.SortOrder
+  goodsReceiptId?: Prisma.SortOrder
   customerId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
 }
@@ -539,10 +626,14 @@ export type DeliveryOrderMaxOrderByAggregateInput = {
   number?: Prisma.SortOrder
   date?: Prisma.SortOrder
   sender?: Prisma.SortOrder
-  recipient?: Prisma.SortOrder
+  receiptNumber?: Prisma.SortOrder
+  pickUpBy?: Prisma.SortOrder
+  pickUpName?: Prisma.SortOrder
+  pickUpContact?: Prisma.SortOrder
   notes?: Prisma.SortOrder
   companyId?: Prisma.SortOrder
   salesOrderId?: Prisma.SortOrder
+  goodsReceiptId?: Prisma.SortOrder
   customerId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -554,10 +645,14 @@ export type DeliveryOrderMinOrderByAggregateInput = {
   number?: Prisma.SortOrder
   date?: Prisma.SortOrder
   sender?: Prisma.SortOrder
-  recipient?: Prisma.SortOrder
+  receiptNumber?: Prisma.SortOrder
+  pickUpBy?: Prisma.SortOrder
+  pickUpName?: Prisma.SortOrder
+  pickUpContact?: Prisma.SortOrder
   notes?: Prisma.SortOrder
   companyId?: Prisma.SortOrder
   salesOrderId?: Prisma.SortOrder
+  goodsReceiptId?: Prisma.SortOrder
   customerId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -568,6 +663,7 @@ export type DeliveryOrderSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
   companyId?: Prisma.SortOrder
   salesOrderId?: Prisma.SortOrder
+  goodsReceiptId?: Prisma.SortOrder
   customerId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
 }
@@ -575,6 +671,11 @@ export type DeliveryOrderSumOrderByAggregateInput = {
 export type DeliveryOrderScalarRelationFilter = {
   is?: Prisma.DeliveryOrderWhereInput
   isNot?: Prisma.DeliveryOrderWhereInput
+}
+
+export type DeliveryOrderNullableScalarRelationFilter = {
+  is?: Prisma.DeliveryOrderWhereInput | null
+  isNot?: Prisma.DeliveryOrderWhereInput | null
 }
 
 export type DeliveryOrderCreateNestedManyWithoutCustomerInput = {
@@ -631,6 +732,38 @@ export type DeliveryOrderUpdateOneRequiredWithoutDeliveryOrderItemsNestedInput =
   upsert?: Prisma.DeliveryOrderUpsertWithoutDeliveryOrderItemsInput
   connect?: Prisma.DeliveryOrderWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.DeliveryOrderUpdateToOneWithWhereWithoutDeliveryOrderItemsInput, Prisma.DeliveryOrderUpdateWithoutDeliveryOrderItemsInput>, Prisma.DeliveryOrderUncheckedUpdateWithoutDeliveryOrderItemsInput>
+}
+
+export type DeliveryOrderCreateNestedOneWithoutGoodsReceiptInput = {
+  create?: Prisma.XOR<Prisma.DeliveryOrderCreateWithoutGoodsReceiptInput, Prisma.DeliveryOrderUncheckedCreateWithoutGoodsReceiptInput>
+  connectOrCreate?: Prisma.DeliveryOrderCreateOrConnectWithoutGoodsReceiptInput
+  connect?: Prisma.DeliveryOrderWhereUniqueInput
+}
+
+export type DeliveryOrderUncheckedCreateNestedOneWithoutGoodsReceiptInput = {
+  create?: Prisma.XOR<Prisma.DeliveryOrderCreateWithoutGoodsReceiptInput, Prisma.DeliveryOrderUncheckedCreateWithoutGoodsReceiptInput>
+  connectOrCreate?: Prisma.DeliveryOrderCreateOrConnectWithoutGoodsReceiptInput
+  connect?: Prisma.DeliveryOrderWhereUniqueInput
+}
+
+export type DeliveryOrderUpdateOneWithoutGoodsReceiptNestedInput = {
+  create?: Prisma.XOR<Prisma.DeliveryOrderCreateWithoutGoodsReceiptInput, Prisma.DeliveryOrderUncheckedCreateWithoutGoodsReceiptInput>
+  connectOrCreate?: Prisma.DeliveryOrderCreateOrConnectWithoutGoodsReceiptInput
+  upsert?: Prisma.DeliveryOrderUpsertWithoutGoodsReceiptInput
+  disconnect?: Prisma.DeliveryOrderWhereInput | boolean
+  delete?: Prisma.DeliveryOrderWhereInput | boolean
+  connect?: Prisma.DeliveryOrderWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.DeliveryOrderUpdateToOneWithWhereWithoutGoodsReceiptInput, Prisma.DeliveryOrderUpdateWithoutGoodsReceiptInput>, Prisma.DeliveryOrderUncheckedUpdateWithoutGoodsReceiptInput>
+}
+
+export type DeliveryOrderUncheckedUpdateOneWithoutGoodsReceiptNestedInput = {
+  create?: Prisma.XOR<Prisma.DeliveryOrderCreateWithoutGoodsReceiptInput, Prisma.DeliveryOrderUncheckedCreateWithoutGoodsReceiptInput>
+  connectOrCreate?: Prisma.DeliveryOrderCreateOrConnectWithoutGoodsReceiptInput
+  upsert?: Prisma.DeliveryOrderUpsertWithoutGoodsReceiptInput
+  disconnect?: Prisma.DeliveryOrderWhereInput | boolean
+  delete?: Prisma.DeliveryOrderWhereInput | boolean
+  connect?: Prisma.DeliveryOrderWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.DeliveryOrderUpdateToOneWithWhereWithoutGoodsReceiptInput, Prisma.DeliveryOrderUpdateWithoutGoodsReceiptInput>, Prisma.DeliveryOrderUncheckedUpdateWithoutGoodsReceiptInput>
 }
 
 export type DeliveryOrderCreateNestedOneWithoutInvoiceInput = {
@@ -777,7 +910,10 @@ export type DeliveryOrderCreateWithoutCustomerInput = {
   number: string
   date: Date | string
   sender?: string | null
-  recipient?: string | null
+  receiptNumber?: string | null
+  pickUpBy?: string | null
+  pickUpName?: string | null
+  pickUpContact?: string | null
   supportingDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   notes?: string | null
   createdAt?: Date | string
@@ -786,7 +922,8 @@ export type DeliveryOrderCreateWithoutCustomerInput = {
   SalesOrder: Prisma.SalesOrderCreateNestedOneWithoutDeliveryOrdersInput
   User: Prisma.UserCreateNestedOneWithoutDeliveryOrdersInput
   DeliveryOrderItems?: Prisma.DeliveryOrderItemCreateNestedManyWithoutDeliveryOrderInput
-  invoice?: Prisma.InvoiceCreateNestedOneWithoutDeliveryOrderInput
+  GoodsReceipt: Prisma.GoodsReceiptCreateNestedOneWithoutDeliveryOrderInput
+  Invoice?: Prisma.InvoiceCreateNestedOneWithoutDeliveryOrderInput
 }
 
 export type DeliveryOrderUncheckedCreateWithoutCustomerInput = {
@@ -794,16 +931,20 @@ export type DeliveryOrderUncheckedCreateWithoutCustomerInput = {
   number: string
   date: Date | string
   sender?: string | null
-  recipient?: string | null
+  receiptNumber?: string | null
+  pickUpBy?: string | null
+  pickUpName?: string | null
+  pickUpContact?: string | null
   supportingDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   notes?: string | null
   companyId: number
   salesOrderId: number
+  goodsReceiptId: number
   userId: number
   createdAt?: Date | string
   updatedAt?: Date | string
   DeliveryOrderItems?: Prisma.DeliveryOrderItemUncheckedCreateNestedManyWithoutDeliveryOrderInput
-  invoice?: Prisma.InvoiceUncheckedCreateNestedOneWithoutDeliveryOrderInput
+  Invoice?: Prisma.InvoiceUncheckedCreateNestedOneWithoutDeliveryOrderInput
 }
 
 export type DeliveryOrderCreateOrConnectWithoutCustomerInput = {
@@ -840,11 +981,15 @@ export type DeliveryOrderScalarWhereInput = {
   number?: Prisma.StringFilter<"DeliveryOrder"> | string
   date?: Prisma.DateTimeFilter<"DeliveryOrder"> | Date | string
   sender?: Prisma.StringNullableFilter<"DeliveryOrder"> | string | null
-  recipient?: Prisma.StringNullableFilter<"DeliveryOrder"> | string | null
+  receiptNumber?: Prisma.StringNullableFilter<"DeliveryOrder"> | string | null
+  pickUpBy?: Prisma.StringNullableFilter<"DeliveryOrder"> | string | null
+  pickUpName?: Prisma.StringNullableFilter<"DeliveryOrder"> | string | null
+  pickUpContact?: Prisma.StringNullableFilter<"DeliveryOrder"> | string | null
   supportingDocument?: Prisma.JsonNullableFilter<"DeliveryOrder">
   notes?: Prisma.StringNullableFilter<"DeliveryOrder"> | string | null
   companyId?: Prisma.IntFilter<"DeliveryOrder"> | number
   salesOrderId?: Prisma.IntFilter<"DeliveryOrder"> | number
+  goodsReceiptId?: Prisma.IntFilter<"DeliveryOrder"> | number
   customerId?: Prisma.IntFilter<"DeliveryOrder"> | number
   userId?: Prisma.IntFilter<"DeliveryOrder"> | number
   createdAt?: Prisma.DateTimeFilter<"DeliveryOrder"> | Date | string
@@ -855,7 +1000,10 @@ export type DeliveryOrderCreateWithoutDeliveryOrderItemsInput = {
   number: string
   date: Date | string
   sender?: string | null
-  recipient?: string | null
+  receiptNumber?: string | null
+  pickUpBy?: string | null
+  pickUpName?: string | null
+  pickUpContact?: string | null
   supportingDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   notes?: string | null
   createdAt?: Date | string
@@ -864,7 +1012,8 @@ export type DeliveryOrderCreateWithoutDeliveryOrderItemsInput = {
   SalesOrder: Prisma.SalesOrderCreateNestedOneWithoutDeliveryOrdersInput
   Customer: Prisma.CustomerCreateNestedOneWithoutDeliveryOrdersInput
   User: Prisma.UserCreateNestedOneWithoutDeliveryOrdersInput
-  invoice?: Prisma.InvoiceCreateNestedOneWithoutDeliveryOrderInput
+  GoodsReceipt: Prisma.GoodsReceiptCreateNestedOneWithoutDeliveryOrderInput
+  Invoice?: Prisma.InvoiceCreateNestedOneWithoutDeliveryOrderInput
 }
 
 export type DeliveryOrderUncheckedCreateWithoutDeliveryOrderItemsInput = {
@@ -872,16 +1021,20 @@ export type DeliveryOrderUncheckedCreateWithoutDeliveryOrderItemsInput = {
   number: string
   date: Date | string
   sender?: string | null
-  recipient?: string | null
+  receiptNumber?: string | null
+  pickUpBy?: string | null
+  pickUpName?: string | null
+  pickUpContact?: string | null
   supportingDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   notes?: string | null
   companyId: number
   salesOrderId: number
+  goodsReceiptId: number
   customerId: number
   userId: number
   createdAt?: Date | string
   updatedAt?: Date | string
-  invoice?: Prisma.InvoiceUncheckedCreateNestedOneWithoutDeliveryOrderInput
+  Invoice?: Prisma.InvoiceUncheckedCreateNestedOneWithoutDeliveryOrderInput
 }
 
 export type DeliveryOrderCreateOrConnectWithoutDeliveryOrderItemsInput = {
@@ -904,7 +1057,10 @@ export type DeliveryOrderUpdateWithoutDeliveryOrderItemsInput = {
   number?: Prisma.StringFieldUpdateOperationsInput | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  recipient?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  receiptNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pickUpBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pickUpName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pickUpContact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   supportingDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -913,7 +1069,8 @@ export type DeliveryOrderUpdateWithoutDeliveryOrderItemsInput = {
   SalesOrder?: Prisma.SalesOrderUpdateOneRequiredWithoutDeliveryOrdersNestedInput
   Customer?: Prisma.CustomerUpdateOneRequiredWithoutDeliveryOrdersNestedInput
   User?: Prisma.UserUpdateOneRequiredWithoutDeliveryOrdersNestedInput
-  invoice?: Prisma.InvoiceUpdateOneWithoutDeliveryOrderNestedInput
+  GoodsReceipt?: Prisma.GoodsReceiptUpdateOneRequiredWithoutDeliveryOrderNestedInput
+  Invoice?: Prisma.InvoiceUpdateOneWithoutDeliveryOrderNestedInput
 }
 
 export type DeliveryOrderUncheckedUpdateWithoutDeliveryOrderItemsInput = {
@@ -921,23 +1078,30 @@ export type DeliveryOrderUncheckedUpdateWithoutDeliveryOrderItemsInput = {
   number?: Prisma.StringFieldUpdateOperationsInput | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  recipient?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  receiptNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pickUpBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pickUpName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pickUpContact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   supportingDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   companyId?: Prisma.IntFieldUpdateOperationsInput | number
   salesOrderId?: Prisma.IntFieldUpdateOperationsInput | number
+  goodsReceiptId?: Prisma.IntFieldUpdateOperationsInput | number
   customerId?: Prisma.IntFieldUpdateOperationsInput | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  invoice?: Prisma.InvoiceUncheckedUpdateOneWithoutDeliveryOrderNestedInput
+  Invoice?: Prisma.InvoiceUncheckedUpdateOneWithoutDeliveryOrderNestedInput
 }
 
-export type DeliveryOrderCreateWithoutInvoiceInput = {
+export type DeliveryOrderCreateWithoutGoodsReceiptInput = {
   number: string
   date: Date | string
   sender?: string | null
-  recipient?: string | null
+  receiptNumber?: string | null
+  pickUpBy?: string | null
+  pickUpName?: string | null
+  pickUpContact?: string | null
   supportingDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   notes?: string | null
   createdAt?: Date | string
@@ -947,6 +1111,105 @@ export type DeliveryOrderCreateWithoutInvoiceInput = {
   Customer: Prisma.CustomerCreateNestedOneWithoutDeliveryOrdersInput
   User: Prisma.UserCreateNestedOneWithoutDeliveryOrdersInput
   DeliveryOrderItems?: Prisma.DeliveryOrderItemCreateNestedManyWithoutDeliveryOrderInput
+  Invoice?: Prisma.InvoiceCreateNestedOneWithoutDeliveryOrderInput
+}
+
+export type DeliveryOrderUncheckedCreateWithoutGoodsReceiptInput = {
+  id?: number
+  number: string
+  date: Date | string
+  sender?: string | null
+  receiptNumber?: string | null
+  pickUpBy?: string | null
+  pickUpName?: string | null
+  pickUpContact?: string | null
+  supportingDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  notes?: string | null
+  companyId: number
+  salesOrderId: number
+  customerId: number
+  userId: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  DeliveryOrderItems?: Prisma.DeliveryOrderItemUncheckedCreateNestedManyWithoutDeliveryOrderInput
+  Invoice?: Prisma.InvoiceUncheckedCreateNestedOneWithoutDeliveryOrderInput
+}
+
+export type DeliveryOrderCreateOrConnectWithoutGoodsReceiptInput = {
+  where: Prisma.DeliveryOrderWhereUniqueInput
+  create: Prisma.XOR<Prisma.DeliveryOrderCreateWithoutGoodsReceiptInput, Prisma.DeliveryOrderUncheckedCreateWithoutGoodsReceiptInput>
+}
+
+export type DeliveryOrderUpsertWithoutGoodsReceiptInput = {
+  update: Prisma.XOR<Prisma.DeliveryOrderUpdateWithoutGoodsReceiptInput, Prisma.DeliveryOrderUncheckedUpdateWithoutGoodsReceiptInput>
+  create: Prisma.XOR<Prisma.DeliveryOrderCreateWithoutGoodsReceiptInput, Prisma.DeliveryOrderUncheckedCreateWithoutGoodsReceiptInput>
+  where?: Prisma.DeliveryOrderWhereInput
+}
+
+export type DeliveryOrderUpdateToOneWithWhereWithoutGoodsReceiptInput = {
+  where?: Prisma.DeliveryOrderWhereInput
+  data: Prisma.XOR<Prisma.DeliveryOrderUpdateWithoutGoodsReceiptInput, Prisma.DeliveryOrderUncheckedUpdateWithoutGoodsReceiptInput>
+}
+
+export type DeliveryOrderUpdateWithoutGoodsReceiptInput = {
+  number?: Prisma.StringFieldUpdateOperationsInput | string
+  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  receiptNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pickUpBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pickUpName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pickUpContact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  supportingDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  Company?: Prisma.CompanyUpdateOneRequiredWithoutDeliveryOrdersNestedInput
+  SalesOrder?: Prisma.SalesOrderUpdateOneRequiredWithoutDeliveryOrdersNestedInput
+  Customer?: Prisma.CustomerUpdateOneRequiredWithoutDeliveryOrdersNestedInput
+  User?: Prisma.UserUpdateOneRequiredWithoutDeliveryOrdersNestedInput
+  DeliveryOrderItems?: Prisma.DeliveryOrderItemUpdateManyWithoutDeliveryOrderNestedInput
+  Invoice?: Prisma.InvoiceUpdateOneWithoutDeliveryOrderNestedInput
+}
+
+export type DeliveryOrderUncheckedUpdateWithoutGoodsReceiptInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  number?: Prisma.StringFieldUpdateOperationsInput | string
+  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  receiptNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pickUpBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pickUpName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pickUpContact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  supportingDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyId?: Prisma.IntFieldUpdateOperationsInput | number
+  salesOrderId?: Prisma.IntFieldUpdateOperationsInput | number
+  customerId?: Prisma.IntFieldUpdateOperationsInput | number
+  userId?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  DeliveryOrderItems?: Prisma.DeliveryOrderItemUncheckedUpdateManyWithoutDeliveryOrderNestedInput
+  Invoice?: Prisma.InvoiceUncheckedUpdateOneWithoutDeliveryOrderNestedInput
+}
+
+export type DeliveryOrderCreateWithoutInvoiceInput = {
+  number: string
+  date: Date | string
+  sender?: string | null
+  receiptNumber?: string | null
+  pickUpBy?: string | null
+  pickUpName?: string | null
+  pickUpContact?: string | null
+  supportingDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  notes?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  Company: Prisma.CompanyCreateNestedOneWithoutDeliveryOrdersInput
+  SalesOrder: Prisma.SalesOrderCreateNestedOneWithoutDeliveryOrdersInput
+  Customer: Prisma.CustomerCreateNestedOneWithoutDeliveryOrdersInput
+  User: Prisma.UserCreateNestedOneWithoutDeliveryOrdersInput
+  DeliveryOrderItems?: Prisma.DeliveryOrderItemCreateNestedManyWithoutDeliveryOrderInput
+  GoodsReceipt: Prisma.GoodsReceiptCreateNestedOneWithoutDeliveryOrderInput
 }
 
 export type DeliveryOrderUncheckedCreateWithoutInvoiceInput = {
@@ -954,11 +1217,15 @@ export type DeliveryOrderUncheckedCreateWithoutInvoiceInput = {
   number: string
   date: Date | string
   sender?: string | null
-  recipient?: string | null
+  receiptNumber?: string | null
+  pickUpBy?: string | null
+  pickUpName?: string | null
+  pickUpContact?: string | null
   supportingDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   notes?: string | null
   companyId: number
   salesOrderId: number
+  goodsReceiptId: number
   customerId: number
   userId: number
   createdAt?: Date | string
@@ -986,7 +1253,10 @@ export type DeliveryOrderUpdateWithoutInvoiceInput = {
   number?: Prisma.StringFieldUpdateOperationsInput | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  recipient?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  receiptNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pickUpBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pickUpName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pickUpContact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   supportingDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -996,6 +1266,7 @@ export type DeliveryOrderUpdateWithoutInvoiceInput = {
   Customer?: Prisma.CustomerUpdateOneRequiredWithoutDeliveryOrdersNestedInput
   User?: Prisma.UserUpdateOneRequiredWithoutDeliveryOrdersNestedInput
   DeliveryOrderItems?: Prisma.DeliveryOrderItemUpdateManyWithoutDeliveryOrderNestedInput
+  GoodsReceipt?: Prisma.GoodsReceiptUpdateOneRequiredWithoutDeliveryOrderNestedInput
 }
 
 export type DeliveryOrderUncheckedUpdateWithoutInvoiceInput = {
@@ -1003,11 +1274,15 @@ export type DeliveryOrderUncheckedUpdateWithoutInvoiceInput = {
   number?: Prisma.StringFieldUpdateOperationsInput | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  recipient?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  receiptNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pickUpBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pickUpName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pickUpContact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   supportingDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   companyId?: Prisma.IntFieldUpdateOperationsInput | number
   salesOrderId?: Prisma.IntFieldUpdateOperationsInput | number
+  goodsReceiptId?: Prisma.IntFieldUpdateOperationsInput | number
   customerId?: Prisma.IntFieldUpdateOperationsInput | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1019,7 +1294,10 @@ export type DeliveryOrderCreateWithoutSalesOrderInput = {
   number: string
   date: Date | string
   sender?: string | null
-  recipient?: string | null
+  receiptNumber?: string | null
+  pickUpBy?: string | null
+  pickUpName?: string | null
+  pickUpContact?: string | null
   supportingDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   notes?: string | null
   createdAt?: Date | string
@@ -1028,7 +1306,8 @@ export type DeliveryOrderCreateWithoutSalesOrderInput = {
   Customer: Prisma.CustomerCreateNestedOneWithoutDeliveryOrdersInput
   User: Prisma.UserCreateNestedOneWithoutDeliveryOrdersInput
   DeliveryOrderItems?: Prisma.DeliveryOrderItemCreateNestedManyWithoutDeliveryOrderInput
-  invoice?: Prisma.InvoiceCreateNestedOneWithoutDeliveryOrderInput
+  GoodsReceipt: Prisma.GoodsReceiptCreateNestedOneWithoutDeliveryOrderInput
+  Invoice?: Prisma.InvoiceCreateNestedOneWithoutDeliveryOrderInput
 }
 
 export type DeliveryOrderUncheckedCreateWithoutSalesOrderInput = {
@@ -1036,16 +1315,20 @@ export type DeliveryOrderUncheckedCreateWithoutSalesOrderInput = {
   number: string
   date: Date | string
   sender?: string | null
-  recipient?: string | null
+  receiptNumber?: string | null
+  pickUpBy?: string | null
+  pickUpName?: string | null
+  pickUpContact?: string | null
   supportingDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   notes?: string | null
   companyId: number
+  goodsReceiptId: number
   customerId: number
   userId: number
   createdAt?: Date | string
   updatedAt?: Date | string
   DeliveryOrderItems?: Prisma.DeliveryOrderItemUncheckedCreateNestedManyWithoutDeliveryOrderInput
-  invoice?: Prisma.InvoiceUncheckedCreateNestedOneWithoutDeliveryOrderInput
+  Invoice?: Prisma.InvoiceUncheckedCreateNestedOneWithoutDeliveryOrderInput
 }
 
 export type DeliveryOrderCreateOrConnectWithoutSalesOrderInput = {
@@ -1078,7 +1361,10 @@ export type DeliveryOrderCreateWithoutCompanyInput = {
   number: string
   date: Date | string
   sender?: string | null
-  recipient?: string | null
+  receiptNumber?: string | null
+  pickUpBy?: string | null
+  pickUpName?: string | null
+  pickUpContact?: string | null
   supportingDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   notes?: string | null
   createdAt?: Date | string
@@ -1087,7 +1373,8 @@ export type DeliveryOrderCreateWithoutCompanyInput = {
   Customer: Prisma.CustomerCreateNestedOneWithoutDeliveryOrdersInput
   User: Prisma.UserCreateNestedOneWithoutDeliveryOrdersInput
   DeliveryOrderItems?: Prisma.DeliveryOrderItemCreateNestedManyWithoutDeliveryOrderInput
-  invoice?: Prisma.InvoiceCreateNestedOneWithoutDeliveryOrderInput
+  GoodsReceipt: Prisma.GoodsReceiptCreateNestedOneWithoutDeliveryOrderInput
+  Invoice?: Prisma.InvoiceCreateNestedOneWithoutDeliveryOrderInput
 }
 
 export type DeliveryOrderUncheckedCreateWithoutCompanyInput = {
@@ -1095,16 +1382,20 @@ export type DeliveryOrderUncheckedCreateWithoutCompanyInput = {
   number: string
   date: Date | string
   sender?: string | null
-  recipient?: string | null
+  receiptNumber?: string | null
+  pickUpBy?: string | null
+  pickUpName?: string | null
+  pickUpContact?: string | null
   supportingDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   notes?: string | null
   salesOrderId: number
+  goodsReceiptId: number
   customerId: number
   userId: number
   createdAt?: Date | string
   updatedAt?: Date | string
   DeliveryOrderItems?: Prisma.DeliveryOrderItemUncheckedCreateNestedManyWithoutDeliveryOrderInput
-  invoice?: Prisma.InvoiceUncheckedCreateNestedOneWithoutDeliveryOrderInput
+  Invoice?: Prisma.InvoiceUncheckedCreateNestedOneWithoutDeliveryOrderInput
 }
 
 export type DeliveryOrderCreateOrConnectWithoutCompanyInput = {
@@ -1137,7 +1428,10 @@ export type DeliveryOrderCreateWithoutUserInput = {
   number: string
   date: Date | string
   sender?: string | null
-  recipient?: string | null
+  receiptNumber?: string | null
+  pickUpBy?: string | null
+  pickUpName?: string | null
+  pickUpContact?: string | null
   supportingDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   notes?: string | null
   createdAt?: Date | string
@@ -1146,7 +1440,8 @@ export type DeliveryOrderCreateWithoutUserInput = {
   SalesOrder: Prisma.SalesOrderCreateNestedOneWithoutDeliveryOrdersInput
   Customer: Prisma.CustomerCreateNestedOneWithoutDeliveryOrdersInput
   DeliveryOrderItems?: Prisma.DeliveryOrderItemCreateNestedManyWithoutDeliveryOrderInput
-  invoice?: Prisma.InvoiceCreateNestedOneWithoutDeliveryOrderInput
+  GoodsReceipt: Prisma.GoodsReceiptCreateNestedOneWithoutDeliveryOrderInput
+  Invoice?: Prisma.InvoiceCreateNestedOneWithoutDeliveryOrderInput
 }
 
 export type DeliveryOrderUncheckedCreateWithoutUserInput = {
@@ -1154,16 +1449,20 @@ export type DeliveryOrderUncheckedCreateWithoutUserInput = {
   number: string
   date: Date | string
   sender?: string | null
-  recipient?: string | null
+  receiptNumber?: string | null
+  pickUpBy?: string | null
+  pickUpName?: string | null
+  pickUpContact?: string | null
   supportingDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   notes?: string | null
   companyId: number
   salesOrderId: number
+  goodsReceiptId: number
   customerId: number
   createdAt?: Date | string
   updatedAt?: Date | string
   DeliveryOrderItems?: Prisma.DeliveryOrderItemUncheckedCreateNestedManyWithoutDeliveryOrderInput
-  invoice?: Prisma.InvoiceUncheckedCreateNestedOneWithoutDeliveryOrderInput
+  Invoice?: Prisma.InvoiceUncheckedCreateNestedOneWithoutDeliveryOrderInput
 }
 
 export type DeliveryOrderCreateOrConnectWithoutUserInput = {
@@ -1197,11 +1496,15 @@ export type DeliveryOrderCreateManyCustomerInput = {
   number: string
   date: Date | string
   sender?: string | null
-  recipient?: string | null
+  receiptNumber?: string | null
+  pickUpBy?: string | null
+  pickUpName?: string | null
+  pickUpContact?: string | null
   supportingDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   notes?: string | null
   companyId: number
   salesOrderId: number
+  goodsReceiptId: number
   userId: number
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1211,7 +1514,10 @@ export type DeliveryOrderUpdateWithoutCustomerInput = {
   number?: Prisma.StringFieldUpdateOperationsInput | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  recipient?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  receiptNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pickUpBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pickUpName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pickUpContact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   supportingDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1220,7 +1526,8 @@ export type DeliveryOrderUpdateWithoutCustomerInput = {
   SalesOrder?: Prisma.SalesOrderUpdateOneRequiredWithoutDeliveryOrdersNestedInput
   User?: Prisma.UserUpdateOneRequiredWithoutDeliveryOrdersNestedInput
   DeliveryOrderItems?: Prisma.DeliveryOrderItemUpdateManyWithoutDeliveryOrderNestedInput
-  invoice?: Prisma.InvoiceUpdateOneWithoutDeliveryOrderNestedInput
+  GoodsReceipt?: Prisma.GoodsReceiptUpdateOneRequiredWithoutDeliveryOrderNestedInput
+  Invoice?: Prisma.InvoiceUpdateOneWithoutDeliveryOrderNestedInput
 }
 
 export type DeliveryOrderUncheckedUpdateWithoutCustomerInput = {
@@ -1228,16 +1535,20 @@ export type DeliveryOrderUncheckedUpdateWithoutCustomerInput = {
   number?: Prisma.StringFieldUpdateOperationsInput | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  recipient?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  receiptNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pickUpBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pickUpName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pickUpContact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   supportingDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   companyId?: Prisma.IntFieldUpdateOperationsInput | number
   salesOrderId?: Prisma.IntFieldUpdateOperationsInput | number
+  goodsReceiptId?: Prisma.IntFieldUpdateOperationsInput | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   DeliveryOrderItems?: Prisma.DeliveryOrderItemUncheckedUpdateManyWithoutDeliveryOrderNestedInput
-  invoice?: Prisma.InvoiceUncheckedUpdateOneWithoutDeliveryOrderNestedInput
+  Invoice?: Prisma.InvoiceUncheckedUpdateOneWithoutDeliveryOrderNestedInput
 }
 
 export type DeliveryOrderUncheckedUpdateManyWithoutCustomerInput = {
@@ -1245,11 +1556,15 @@ export type DeliveryOrderUncheckedUpdateManyWithoutCustomerInput = {
   number?: Prisma.StringFieldUpdateOperationsInput | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  recipient?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  receiptNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pickUpBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pickUpName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pickUpContact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   supportingDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   companyId?: Prisma.IntFieldUpdateOperationsInput | number
   salesOrderId?: Prisma.IntFieldUpdateOperationsInput | number
+  goodsReceiptId?: Prisma.IntFieldUpdateOperationsInput | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1260,10 +1575,14 @@ export type DeliveryOrderCreateManySalesOrderInput = {
   number: string
   date: Date | string
   sender?: string | null
-  recipient?: string | null
+  receiptNumber?: string | null
+  pickUpBy?: string | null
+  pickUpName?: string | null
+  pickUpContact?: string | null
   supportingDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   notes?: string | null
   companyId: number
+  goodsReceiptId: number
   customerId: number
   userId: number
   createdAt?: Date | string
@@ -1274,7 +1593,10 @@ export type DeliveryOrderUpdateWithoutSalesOrderInput = {
   number?: Prisma.StringFieldUpdateOperationsInput | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  recipient?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  receiptNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pickUpBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pickUpName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pickUpContact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   supportingDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1283,7 +1605,8 @@ export type DeliveryOrderUpdateWithoutSalesOrderInput = {
   Customer?: Prisma.CustomerUpdateOneRequiredWithoutDeliveryOrdersNestedInput
   User?: Prisma.UserUpdateOneRequiredWithoutDeliveryOrdersNestedInput
   DeliveryOrderItems?: Prisma.DeliveryOrderItemUpdateManyWithoutDeliveryOrderNestedInput
-  invoice?: Prisma.InvoiceUpdateOneWithoutDeliveryOrderNestedInput
+  GoodsReceipt?: Prisma.GoodsReceiptUpdateOneRequiredWithoutDeliveryOrderNestedInput
+  Invoice?: Prisma.InvoiceUpdateOneWithoutDeliveryOrderNestedInput
 }
 
 export type DeliveryOrderUncheckedUpdateWithoutSalesOrderInput = {
@@ -1291,16 +1614,20 @@ export type DeliveryOrderUncheckedUpdateWithoutSalesOrderInput = {
   number?: Prisma.StringFieldUpdateOperationsInput | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  recipient?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  receiptNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pickUpBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pickUpName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pickUpContact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   supportingDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   companyId?: Prisma.IntFieldUpdateOperationsInput | number
+  goodsReceiptId?: Prisma.IntFieldUpdateOperationsInput | number
   customerId?: Prisma.IntFieldUpdateOperationsInput | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   DeliveryOrderItems?: Prisma.DeliveryOrderItemUncheckedUpdateManyWithoutDeliveryOrderNestedInput
-  invoice?: Prisma.InvoiceUncheckedUpdateOneWithoutDeliveryOrderNestedInput
+  Invoice?: Prisma.InvoiceUncheckedUpdateOneWithoutDeliveryOrderNestedInput
 }
 
 export type DeliveryOrderUncheckedUpdateManyWithoutSalesOrderInput = {
@@ -1308,10 +1635,14 @@ export type DeliveryOrderUncheckedUpdateManyWithoutSalesOrderInput = {
   number?: Prisma.StringFieldUpdateOperationsInput | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  recipient?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  receiptNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pickUpBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pickUpName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pickUpContact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   supportingDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   companyId?: Prisma.IntFieldUpdateOperationsInput | number
+  goodsReceiptId?: Prisma.IntFieldUpdateOperationsInput | number
   customerId?: Prisma.IntFieldUpdateOperationsInput | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1323,10 +1654,14 @@ export type DeliveryOrderCreateManyCompanyInput = {
   number: string
   date: Date | string
   sender?: string | null
-  recipient?: string | null
+  receiptNumber?: string | null
+  pickUpBy?: string | null
+  pickUpName?: string | null
+  pickUpContact?: string | null
   supportingDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   notes?: string | null
   salesOrderId: number
+  goodsReceiptId: number
   customerId: number
   userId: number
   createdAt?: Date | string
@@ -1337,7 +1672,10 @@ export type DeliveryOrderUpdateWithoutCompanyInput = {
   number?: Prisma.StringFieldUpdateOperationsInput | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  recipient?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  receiptNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pickUpBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pickUpName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pickUpContact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   supportingDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1346,7 +1684,8 @@ export type DeliveryOrderUpdateWithoutCompanyInput = {
   Customer?: Prisma.CustomerUpdateOneRequiredWithoutDeliveryOrdersNestedInput
   User?: Prisma.UserUpdateOneRequiredWithoutDeliveryOrdersNestedInput
   DeliveryOrderItems?: Prisma.DeliveryOrderItemUpdateManyWithoutDeliveryOrderNestedInput
-  invoice?: Prisma.InvoiceUpdateOneWithoutDeliveryOrderNestedInput
+  GoodsReceipt?: Prisma.GoodsReceiptUpdateOneRequiredWithoutDeliveryOrderNestedInput
+  Invoice?: Prisma.InvoiceUpdateOneWithoutDeliveryOrderNestedInput
 }
 
 export type DeliveryOrderUncheckedUpdateWithoutCompanyInput = {
@@ -1354,16 +1693,20 @@ export type DeliveryOrderUncheckedUpdateWithoutCompanyInput = {
   number?: Prisma.StringFieldUpdateOperationsInput | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  recipient?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  receiptNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pickUpBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pickUpName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pickUpContact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   supportingDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   salesOrderId?: Prisma.IntFieldUpdateOperationsInput | number
+  goodsReceiptId?: Prisma.IntFieldUpdateOperationsInput | number
   customerId?: Prisma.IntFieldUpdateOperationsInput | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   DeliveryOrderItems?: Prisma.DeliveryOrderItemUncheckedUpdateManyWithoutDeliveryOrderNestedInput
-  invoice?: Prisma.InvoiceUncheckedUpdateOneWithoutDeliveryOrderNestedInput
+  Invoice?: Prisma.InvoiceUncheckedUpdateOneWithoutDeliveryOrderNestedInput
 }
 
 export type DeliveryOrderUncheckedUpdateManyWithoutCompanyInput = {
@@ -1371,10 +1714,14 @@ export type DeliveryOrderUncheckedUpdateManyWithoutCompanyInput = {
   number?: Prisma.StringFieldUpdateOperationsInput | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  recipient?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  receiptNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pickUpBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pickUpName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pickUpContact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   supportingDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   salesOrderId?: Prisma.IntFieldUpdateOperationsInput | number
+  goodsReceiptId?: Prisma.IntFieldUpdateOperationsInput | number
   customerId?: Prisma.IntFieldUpdateOperationsInput | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1386,11 +1733,15 @@ export type DeliveryOrderCreateManyUserInput = {
   number: string
   date: Date | string
   sender?: string | null
-  recipient?: string | null
+  receiptNumber?: string | null
+  pickUpBy?: string | null
+  pickUpName?: string | null
+  pickUpContact?: string | null
   supportingDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   notes?: string | null
   companyId: number
   salesOrderId: number
+  goodsReceiptId: number
   customerId: number
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1400,7 +1751,10 @@ export type DeliveryOrderUpdateWithoutUserInput = {
   number?: Prisma.StringFieldUpdateOperationsInput | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  recipient?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  receiptNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pickUpBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pickUpName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pickUpContact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   supportingDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1409,7 +1763,8 @@ export type DeliveryOrderUpdateWithoutUserInput = {
   SalesOrder?: Prisma.SalesOrderUpdateOneRequiredWithoutDeliveryOrdersNestedInput
   Customer?: Prisma.CustomerUpdateOneRequiredWithoutDeliveryOrdersNestedInput
   DeliveryOrderItems?: Prisma.DeliveryOrderItemUpdateManyWithoutDeliveryOrderNestedInput
-  invoice?: Prisma.InvoiceUpdateOneWithoutDeliveryOrderNestedInput
+  GoodsReceipt?: Prisma.GoodsReceiptUpdateOneRequiredWithoutDeliveryOrderNestedInput
+  Invoice?: Prisma.InvoiceUpdateOneWithoutDeliveryOrderNestedInput
 }
 
 export type DeliveryOrderUncheckedUpdateWithoutUserInput = {
@@ -1417,16 +1772,20 @@ export type DeliveryOrderUncheckedUpdateWithoutUserInput = {
   number?: Prisma.StringFieldUpdateOperationsInput | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  recipient?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  receiptNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pickUpBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pickUpName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pickUpContact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   supportingDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   companyId?: Prisma.IntFieldUpdateOperationsInput | number
   salesOrderId?: Prisma.IntFieldUpdateOperationsInput | number
+  goodsReceiptId?: Prisma.IntFieldUpdateOperationsInput | number
   customerId?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   DeliveryOrderItems?: Prisma.DeliveryOrderItemUncheckedUpdateManyWithoutDeliveryOrderNestedInput
-  invoice?: Prisma.InvoiceUncheckedUpdateOneWithoutDeliveryOrderNestedInput
+  Invoice?: Prisma.InvoiceUncheckedUpdateOneWithoutDeliveryOrderNestedInput
 }
 
 export type DeliveryOrderUncheckedUpdateManyWithoutUserInput = {
@@ -1434,11 +1793,15 @@ export type DeliveryOrderUncheckedUpdateManyWithoutUserInput = {
   number?: Prisma.StringFieldUpdateOperationsInput | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  recipient?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  receiptNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pickUpBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pickUpName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pickUpContact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   supportingDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   companyId?: Prisma.IntFieldUpdateOperationsInput | number
   salesOrderId?: Prisma.IntFieldUpdateOperationsInput | number
+  goodsReceiptId?: Prisma.IntFieldUpdateOperationsInput | number
   customerId?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1480,11 +1843,15 @@ export type DeliveryOrderSelect<ExtArgs extends runtime.Types.Extensions.Interna
   number?: boolean
   date?: boolean
   sender?: boolean
-  recipient?: boolean
+  receiptNumber?: boolean
+  pickUpBy?: boolean
+  pickUpName?: boolean
+  pickUpContact?: boolean
   supportingDocument?: boolean
   notes?: boolean
   companyId?: boolean
   salesOrderId?: boolean
+  goodsReceiptId?: boolean
   customerId?: boolean
   userId?: boolean
   createdAt?: boolean
@@ -1494,7 +1861,8 @@ export type DeliveryOrderSelect<ExtArgs extends runtime.Types.Extensions.Interna
   Customer?: boolean | Prisma.CustomerDefaultArgs<ExtArgs>
   User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   DeliveryOrderItems?: boolean | Prisma.DeliveryOrder$DeliveryOrderItemsArgs<ExtArgs>
-  invoice?: boolean | Prisma.DeliveryOrder$invoiceArgs<ExtArgs>
+  GoodsReceipt?: boolean | Prisma.GoodsReceiptDefaultArgs<ExtArgs>
+  Invoice?: boolean | Prisma.DeliveryOrder$InvoiceArgs<ExtArgs>
   _count?: boolean | Prisma.DeliveryOrderCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["deliveryOrder"]>
 
@@ -1503,11 +1871,15 @@ export type DeliveryOrderSelectCreateManyAndReturn<ExtArgs extends runtime.Types
   number?: boolean
   date?: boolean
   sender?: boolean
-  recipient?: boolean
+  receiptNumber?: boolean
+  pickUpBy?: boolean
+  pickUpName?: boolean
+  pickUpContact?: boolean
   supportingDocument?: boolean
   notes?: boolean
   companyId?: boolean
   salesOrderId?: boolean
+  goodsReceiptId?: boolean
   customerId?: boolean
   userId?: boolean
   createdAt?: boolean
@@ -1516,6 +1888,7 @@ export type DeliveryOrderSelectCreateManyAndReturn<ExtArgs extends runtime.Types
   SalesOrder?: boolean | Prisma.SalesOrderDefaultArgs<ExtArgs>
   Customer?: boolean | Prisma.CustomerDefaultArgs<ExtArgs>
   User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  GoodsReceipt?: boolean | Prisma.GoodsReceiptDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["deliveryOrder"]>
 
 export type DeliveryOrderSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1523,11 +1896,15 @@ export type DeliveryOrderSelectUpdateManyAndReturn<ExtArgs extends runtime.Types
   number?: boolean
   date?: boolean
   sender?: boolean
-  recipient?: boolean
+  receiptNumber?: boolean
+  pickUpBy?: boolean
+  pickUpName?: boolean
+  pickUpContact?: boolean
   supportingDocument?: boolean
   notes?: boolean
   companyId?: boolean
   salesOrderId?: boolean
+  goodsReceiptId?: boolean
   customerId?: boolean
   userId?: boolean
   createdAt?: boolean
@@ -1536,6 +1913,7 @@ export type DeliveryOrderSelectUpdateManyAndReturn<ExtArgs extends runtime.Types
   SalesOrder?: boolean | Prisma.SalesOrderDefaultArgs<ExtArgs>
   Customer?: boolean | Prisma.CustomerDefaultArgs<ExtArgs>
   User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  GoodsReceipt?: boolean | Prisma.GoodsReceiptDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["deliveryOrder"]>
 
 export type DeliveryOrderSelectScalar = {
@@ -1543,25 +1921,30 @@ export type DeliveryOrderSelectScalar = {
   number?: boolean
   date?: boolean
   sender?: boolean
-  recipient?: boolean
+  receiptNumber?: boolean
+  pickUpBy?: boolean
+  pickUpName?: boolean
+  pickUpContact?: boolean
   supportingDocument?: boolean
   notes?: boolean
   companyId?: boolean
   salesOrderId?: boolean
+  goodsReceiptId?: boolean
   customerId?: boolean
   userId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type DeliveryOrderOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "number" | "date" | "sender" | "recipient" | "supportingDocument" | "notes" | "companyId" | "salesOrderId" | "customerId" | "userId" | "createdAt" | "updatedAt", ExtArgs["result"]["deliveryOrder"]>
+export type DeliveryOrderOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "number" | "date" | "sender" | "receiptNumber" | "pickUpBy" | "pickUpName" | "pickUpContact" | "supportingDocument" | "notes" | "companyId" | "salesOrderId" | "goodsReceiptId" | "customerId" | "userId" | "createdAt" | "updatedAt", ExtArgs["result"]["deliveryOrder"]>
 export type DeliveryOrderInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   Company?: boolean | Prisma.CompanyDefaultArgs<ExtArgs>
   SalesOrder?: boolean | Prisma.SalesOrderDefaultArgs<ExtArgs>
   Customer?: boolean | Prisma.CustomerDefaultArgs<ExtArgs>
   User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   DeliveryOrderItems?: boolean | Prisma.DeliveryOrder$DeliveryOrderItemsArgs<ExtArgs>
-  invoice?: boolean | Prisma.DeliveryOrder$invoiceArgs<ExtArgs>
+  GoodsReceipt?: boolean | Prisma.GoodsReceiptDefaultArgs<ExtArgs>
+  Invoice?: boolean | Prisma.DeliveryOrder$InvoiceArgs<ExtArgs>
   _count?: boolean | Prisma.DeliveryOrderCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type DeliveryOrderIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1569,12 +1952,14 @@ export type DeliveryOrderIncludeCreateManyAndReturn<ExtArgs extends runtime.Type
   SalesOrder?: boolean | Prisma.SalesOrderDefaultArgs<ExtArgs>
   Customer?: boolean | Prisma.CustomerDefaultArgs<ExtArgs>
   User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  GoodsReceipt?: boolean | Prisma.GoodsReceiptDefaultArgs<ExtArgs>
 }
 export type DeliveryOrderIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   Company?: boolean | Prisma.CompanyDefaultArgs<ExtArgs>
   SalesOrder?: boolean | Prisma.SalesOrderDefaultArgs<ExtArgs>
   Customer?: boolean | Prisma.CustomerDefaultArgs<ExtArgs>
   User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  GoodsReceipt?: boolean | Prisma.GoodsReceiptDefaultArgs<ExtArgs>
 }
 
 export type $DeliveryOrderPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1585,18 +1970,23 @@ export type $DeliveryOrderPayload<ExtArgs extends runtime.Types.Extensions.Inter
     Customer: Prisma.$CustomerPayload<ExtArgs>
     User: Prisma.$UserPayload<ExtArgs>
     DeliveryOrderItems: Prisma.$DeliveryOrderItemPayload<ExtArgs>[]
-    invoice: Prisma.$InvoicePayload<ExtArgs> | null
+    GoodsReceipt: Prisma.$GoodsReceiptPayload<ExtArgs>
+    Invoice: Prisma.$InvoicePayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
     number: string
     date: Date
     sender: string | null
-    recipient: string | null
+    receiptNumber: string | null
+    pickUpBy: string | null
+    pickUpName: string | null
+    pickUpContact: string | null
     supportingDocument: runtime.JsonValue | null
     notes: string | null
     companyId: number
     salesOrderId: number
+    goodsReceiptId: number
     customerId: number
     userId: number
     createdAt: Date
@@ -2000,7 +2390,8 @@ export interface Prisma__DeliveryOrderClient<T, Null = never, ExtArgs extends ru
   Customer<T extends Prisma.CustomerDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CustomerDefaultArgs<ExtArgs>>): Prisma.Prisma__CustomerClient<runtime.Types.Result.GetResult<Prisma.$CustomerPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   User<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   DeliveryOrderItems<T extends Prisma.DeliveryOrder$DeliveryOrderItemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.DeliveryOrder$DeliveryOrderItemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DeliveryOrderItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  invoice<T extends Prisma.DeliveryOrder$invoiceArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.DeliveryOrder$invoiceArgs<ExtArgs>>): Prisma.Prisma__InvoiceClient<runtime.Types.Result.GetResult<Prisma.$InvoicePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  GoodsReceipt<T extends Prisma.GoodsReceiptDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.GoodsReceiptDefaultArgs<ExtArgs>>): Prisma.Prisma__GoodsReceiptClient<runtime.Types.Result.GetResult<Prisma.$GoodsReceiptPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  Invoice<T extends Prisma.DeliveryOrder$InvoiceArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.DeliveryOrder$InvoiceArgs<ExtArgs>>): Prisma.Prisma__InvoiceClient<runtime.Types.Result.GetResult<Prisma.$InvoicePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2034,11 +2425,15 @@ export interface DeliveryOrderFieldRefs {
   readonly number: Prisma.FieldRef<"DeliveryOrder", 'String'>
   readonly date: Prisma.FieldRef<"DeliveryOrder", 'DateTime'>
   readonly sender: Prisma.FieldRef<"DeliveryOrder", 'String'>
-  readonly recipient: Prisma.FieldRef<"DeliveryOrder", 'String'>
+  readonly receiptNumber: Prisma.FieldRef<"DeliveryOrder", 'String'>
+  readonly pickUpBy: Prisma.FieldRef<"DeliveryOrder", 'String'>
+  readonly pickUpName: Prisma.FieldRef<"DeliveryOrder", 'String'>
+  readonly pickUpContact: Prisma.FieldRef<"DeliveryOrder", 'String'>
   readonly supportingDocument: Prisma.FieldRef<"DeliveryOrder", 'Json'>
   readonly notes: Prisma.FieldRef<"DeliveryOrder", 'String'>
   readonly companyId: Prisma.FieldRef<"DeliveryOrder", 'Int'>
   readonly salesOrderId: Prisma.FieldRef<"DeliveryOrder", 'Int'>
+  readonly goodsReceiptId: Prisma.FieldRef<"DeliveryOrder", 'Int'>
   readonly customerId: Prisma.FieldRef<"DeliveryOrder", 'Int'>
   readonly userId: Prisma.FieldRef<"DeliveryOrder", 'Int'>
   readonly createdAt: Prisma.FieldRef<"DeliveryOrder", 'DateTime'>
@@ -2468,9 +2863,9 @@ export type DeliveryOrder$DeliveryOrderItemsArgs<ExtArgs extends runtime.Types.E
 }
 
 /**
- * DeliveryOrder.invoice
+ * DeliveryOrder.Invoice
  */
-export type DeliveryOrder$invoiceArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type DeliveryOrder$InvoiceArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
    * Select specific fields to fetch from the Invoice
    */

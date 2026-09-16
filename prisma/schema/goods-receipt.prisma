@@ -1,12 +1,12 @@
 model GoodsReceipt {
-  id                 Int      @id @default(autoincrement())
-  number             String   @unique
+  id                 Int                @id @default(autoincrement())
+  number             String             @unique
   date               DateTime
   sender             String
   recipient          String
   status             GoodsReceiptStatus @default(Draft)
   supportingDocument Json?
-  notes              String?  @db.Text
+  notes              String?            @db.Text
 
   purchaseOrderId Int
   supplierId      Int
@@ -24,6 +24,7 @@ model GoodsReceipt {
   Company           Company            @relation(fields: [companyId], references: [id])
   User              User               @relation(fields: [userId], references: [id])
   GoodsReceiptItems GoodsReceiptItem[]
+  deliveryOrder     DeliveryOrder?
 
   @@index([purchaseOrderId])
   @@index([supplierId])

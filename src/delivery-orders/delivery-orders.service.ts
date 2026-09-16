@@ -38,7 +38,7 @@ export class DeliveryOrdersService {
       where.OR = [
         { number: { contains: query.keyword, mode: 'insensitive' } },
         { sender: { contains: query.keyword, mode: 'insensitive' } },
-        { recipient: { contains: query.keyword, mode: 'insensitive' } },
+        { receiptNumber: { contains: query.keyword, mode: 'insensitive' } },
         {
           Customer: { name: { contains: query.keyword, mode: 'insensitive' } },
         },
