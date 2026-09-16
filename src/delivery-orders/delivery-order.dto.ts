@@ -3,6 +3,7 @@ import {
   IsArray,
   IsDateString,
   IsInt,
+  IsNotEmpty,
   IsObject,
   IsOptional,
   IsString,
@@ -15,13 +16,19 @@ import { JsonArray } from '@prisma/client/runtime/client';
 
 export class DeliveryOrderItemDto {
   @ApiProperty({ example: 'PART-001' })
-  @IsString()
-  @MaxLength(100)
+  @IsString({ message: 'Invalid part number' })
+  @IsNotEmpty({ message: 'Part number should not be empty' })
+  @MaxLength(100, {
+    message: 'Part number must be at most 100 characters',
+  })
   partNumber: string;
 
   @ApiProperty({ example: 'SUP-PART-001' })
-  @IsString()
-  @MaxLength(100)
+  @IsString({ message: 'Invalid part number supplier' })
+  @IsOptional()
+  @MaxLength(100, {
+    message: 'Part number supplier must be at most 100 characters',
+  })
   partNumberSupply: string;
 
   @ApiProperty({ example: 'Product description' })
@@ -49,7 +56,7 @@ export class CreateDeliveryOrderDto {
   date: string;
 
   @ApiProperty({ example: 1 })
-  @IsInt({ message: 'Invalid sales order' })
+  @IsInt({ message: 'Invalid SO number' })
   salesOrderId: number;
 
   @ApiProperty({ example: 1 })
@@ -57,7 +64,7 @@ export class CreateDeliveryOrderDto {
   customerId: number;
 
   @ApiProperty({ example: 1 })
-  @IsInt({ message: 'Invalid goods receipt' })
+  @IsInt({ message: 'Invalid GR number' })
   goodsReceiptId: number;
 
   @ApiProperty({ required: false, example: 'John Doe' })
