@@ -29,13 +29,13 @@ export class DeliveryOrderItemDto {
   description: string;
 
   @ApiProperty({ example: 10 })
-  @IsInt()
-  @Min(0)
+  @IsInt({ message: 'Invalid quantity order' })
+  @Min(1, { message: 'Quantity order must be at least 1' })
   quantityOrder: number;
 
   @ApiProperty({ example: 10 })
-  @IsInt()
-  @Min(0)
+  @IsInt({ message: 'Invalid quantity supply' })
+  @Min(1, { message: 'Quantity supply must be at least 1' })
   quantitySupply: number;
 }
 
@@ -85,14 +85,9 @@ export class CreateDeliveryOrderDto {
   @IsOptional()
   pickUpContact?: string | null;
 
-  @ApiProperty({
-    required: false,
-    nullable: true,
-    example: { files: [] },
-    type: Object,
-  })
+  @ApiProperty({ example: { files: [] }, type: Object })
   @IsOptional()
-  @IsObject()
+  @IsObject({ each: true })
   supportingDocument?: JsonArray;
 
   @ApiProperty({ required: false, example: 'Delivered in good condition' })
