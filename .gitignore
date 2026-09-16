@@ -60,4 +60,4 @@ public
 uploads
 
 # Prisma
-/src/prisma/client
+src/prisma/client
