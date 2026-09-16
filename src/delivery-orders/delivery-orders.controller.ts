@@ -55,11 +55,29 @@ export class DeliveryOrdersController {
   @Patch(':id')
   @ApiOperation({ summary: 'Update delivery order' })
   @ApiOkResponse({ description: 'Delivery order updated' })
-  update(
+  async update(
     @Param('id', ParseIntPipe) id: number,
     @Body() dto: UpdateDeliveryOrderDto,
   ) {
-    return this.deliveryOrdersService.update(id, dto);
+    const updatedDo = await this.deliveryOrdersService.update(id, dto);
+
+    // If the delivery order was in Draft status and is now being confirmed,
+    // update the delivered quantities of the related sales order items asynchronously.
+    if (updatedDo.status == 'Draft' && dto.status === 'Confirmed') {
+      this.deliveryOrdersService
+        .updateSoItemReceivedQuantities(id)
+        .then(() => {
+          console.log(
+            `Successfully updated sales order item delivered quantities for delivery order ID ${id}`,
+          );
+        })
+        .catch((error) => {
+          // Handle any errors that occurred during the update
+          console.error(error);
+        });
+    }
+
+    return updatedDo;
   }
 
   @Delete(':id')

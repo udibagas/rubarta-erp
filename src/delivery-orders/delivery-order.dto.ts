@@ -102,6 +102,10 @@ export class CreateDeliveryOrderDto {
   @IsString()
   notes?: string | null;
 
+  @ApiProperty({ example: 'Draft' })
+  @IsString()
+  status: 'Draft' | 'Confirmed';
+
   @ApiProperty({ type: [DeliveryOrderItemDto] })
   @IsArray()
   @ValidateNested({ each: true })

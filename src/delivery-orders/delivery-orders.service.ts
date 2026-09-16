@@ -1,5 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { Prisma } from '../prisma/client/client';
+import { Prisma, SalesOrderStatus } from '../prisma/client/client';
 import { PrismaService } from '../prisma/prisma.service';
 import {
   CreateDeliveryOrderDto,
@@ -16,6 +16,8 @@ export class DeliveryOrdersService {
     DeliveryOrderItems: true,
     Customer: true,
     SalesOrder: true,
+    GoodsReceipt: true,
+    User: { select: { id: true, name: true } },
   } satisfies Prisma.DeliveryOrderInclude;
 
   async create(data: CreateDeliveryOrderDto & { userId: number }) {
@@ -54,6 +56,7 @@ export class DeliveryOrdersService {
       include: {
         Customer: { select: { id: true, name: true } },
         SalesOrder: { select: { id: true, number: true, title: true } },
+        User: { select: { id: true, name: true } },
         _count: { select: { DeliveryOrderItems: true } },
       },
     });
@@ -103,6 +106,54 @@ export class DeliveryOrdersService {
   async remove(id: number) {
     await this.findOne(id);
     return this.prisma.deliveryOrder.delete({ where: { id } });
+  }
+
+  async updateSoItemReceivedQuantities(id: number) {
+    const gr = await this.prisma.deliveryOrder.findUnique({
+      where: { id, status: 'Confirmed' },
+      include: { DeliveryOrderItems: true },
+    });
+
+    if (!gr) {
+      throw new NotFoundException(`Delivery order with ID ${id} not found`);
+    }
+
+    for (const item of gr.DeliveryOrderItems) {
+      await this.prisma.$transaction(async (transaction) => {
+        await transaction.salesOrderItem.updateMany({
+          where: {
+            salesOrderId: gr.salesOrderId,
+            partNumber: item.partNumber,
+          },
+          data: {
+            deliveredQuantity: {
+              increment: item.quantitySupply,
+            },
+          },
+        });
+      });
+    }
+
+    let status: SalesOrderStatus = 'PartiallyDelivered';
+
+    // check if all sales order items have been fully delivered
+    const hasOutstandingItems = await this.prisma.salesOrderItem.count({
+      where: {
+        salesOrderId: gr.salesOrderId,
+        deliveredQuantity: {
+          lt: this.prisma.salesOrderItem.fields.deliveredQuantity,
+        },
+      },
+    });
+
+    if (hasOutstandingItems === 0) {
+      status = 'Completed';
+    }
+
+    await this.prisma.salesOrder.update({
+      where: { id: gr.salesOrderId },
+      data: { status },
+    });
   }
 
   private async generateNumber(): Promise<string> {
