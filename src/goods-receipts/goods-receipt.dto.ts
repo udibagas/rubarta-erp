@@ -3,6 +3,7 @@ import {
   IsArray,
   IsDateString,
   IsInt,
+  IsNotEmpty,
   IsObject,
   IsOptional,
   IsString,
@@ -15,27 +16,34 @@ import { JsonArray } from '@prisma/client/runtime/client';
 
 export class GoodsReceiptItemDto {
   @ApiProperty({ example: 'PART-001' })
-  @IsString()
-  @MaxLength(100)
+  @IsString({ message: 'Invalid part number' })
+  @IsNotEmpty({ message: 'Part number should not be empty' })
+  @MaxLength(100, {
+    message: 'Part number must be at most 100 characters',
+  })
   partNumber: string;
 
   @ApiProperty({ example: 'SUP-PART-001' })
-  @IsString()
-  @MaxLength(100)
+  @IsString({ message: 'Invalid part number supplier' })
+  @IsNotEmpty({ message: 'Part number supplier should not be empty' })
+  @MaxLength(100, {
+    message: 'Part number supplier must be at most 100 characters',
+  })
   partNumberSupplier: string;
 
   @ApiProperty({ example: 'Product description' })
-  @IsString()
+  @IsString({ message: 'Invalid description' })
+  @IsNotEmpty({ message: 'Description should not be empty' })
   description: string;
 
   @ApiProperty({ example: 10 })
-  @IsInt()
-  @Min(0)
+  @IsInt({ message: 'Invalid quantity order' })
+  @Min(1, { message: 'Quantity order must be at least 1' })
   quantityOrder: number;
 
   @ApiProperty({ example: 10 })
-  @IsInt()
-  @Min(0)
+  @IsInt({ message: 'Invalid quantity received' })
+  @Min(1, { message: 'Quantity received must be at least 1' })
   quantityReceived: number;
 }
 
@@ -50,19 +58,19 @@ export class CreateGoodsReceiptDto {
   companyId: number;
 
   @ApiProperty({ example: 1 })
-  @IsInt()
+  @IsInt({ message: 'Invalid purchase order' })
   purchaseOrderId: number;
 
   @ApiProperty({ example: 1 })
-  @IsInt()
+  @IsInt({ message: 'Invalid supplier' })
   supplierId: number;
 
   @ApiProperty({ example: 'John Doe' })
-  @IsString()
+  @IsString({ message: 'Invalid sender' })
   sender: string;
 
   @ApiProperty({ example: 'Jane Doe' })
-  @IsString()
+  @IsString({ message: 'Invalid recipient' })
   recipient: string;
 
   @ApiProperty({ example: { files: [] }, type: Object })
@@ -76,7 +84,7 @@ export class CreateGoodsReceiptDto {
   notes?: string;
 
   @ApiProperty({ example: 'Draft' })
-  @IsString()
+  @IsString({ message: 'Invalid status' })
   @IsOptional()
   status: 'Draft' | 'Confirmed';
 
