@@ -41,7 +41,7 @@ export class DeliveryOrderItemDto {
 
 export class CreateDeliveryOrderDto {
   @ApiProperty({ example: 1 })
-  @IsInt()
+  @IsInt({ message: 'Invalid company' })
   companyId: number;
 
   @ApiProperty({ example: '2026-09-12T10:00:00Z' })
@@ -49,15 +49,15 @@ export class CreateDeliveryOrderDto {
   date: string;
 
   @ApiProperty({ example: 1 })
-  @IsInt()
+  @IsInt({ message: 'Invalid sales order' })
   salesOrderId: number;
 
   @ApiProperty({ example: 1 })
-  @IsInt()
+  @IsInt({ message: 'Invalid customer' })
   customerId: number;
 
   @ApiProperty({ example: 1 })
-  @IsInt()
+  @IsInt({ message: 'Invalid goods receipt' })
   goodsReceiptId: number;
 
   @ApiProperty({ required: false, example: 'John Doe' })
