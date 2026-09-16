@@ -253,11 +253,6 @@ export function generatePurchaseOrderPdf(order: any): Promise<Buffer> {
       { hideHeader: true, x: right - 200, width: 200 },
     );
     doc.moveDown();
-    doc
-      .font('Helvetica')
-      .fontSize(9)
-      .text(`Payment: ${order.paymentMethod || '-'}`);
-    doc.text(`Delivery: ${order.deliveryMethod || '-'}`);
     doc.text(`Terms: ${order.termsAndConditions || '-'}`);
     doc.end();
   });
