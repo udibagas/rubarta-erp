@@ -31,6 +31,9 @@ export class SalesOrderItemType {
   @Field(() => Int)
   quantity: number;
 
+  @Field(() => Int)
+  deliveredQuantity: number;
+
   @Field(() => Float)
   unitPrice: number;
 
