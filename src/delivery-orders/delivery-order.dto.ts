@@ -103,7 +103,8 @@ export class CreateDeliveryOrderDto {
   notes?: string | null;
 
   @ApiProperty({ example: 'Draft' })
-  @IsString()
+  @IsOptional()
+  @IsString({ message: 'Invalid status' })
   status: 'Draft' | 'Confirmed';
 
   @ApiProperty({ type: [DeliveryOrderItemDto] })
