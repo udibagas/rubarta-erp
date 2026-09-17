@@ -73,10 +73,10 @@ export function generateDeliveryOrderPdf(deliveryOrder: any): Promise<Buffer> {
     const infoBoxX = right - infoBoxWidth;
     const contentTop = 220;
     const infoRows: [string, string][] = [
-      ['No', deliveryOrder.number],
+      ['Delivery Order Number', deliveryOrder.number],
       ['Date', formatDate(deliveryOrder.date)],
       ['SO Number', deliveryOrder.SalesOrder?.number || '-'],
-      ['Sender', deliveryOrder.sender || '-'],
+      ['Sender', deliveryOrder.referenceNumber || '-'],
       ['Receipt Number', deliveryOrder.receiptNumber || '-'],
     ];
 
@@ -144,6 +144,36 @@ export function generateDeliveryOrderPdf(deliveryOrder: any): Promise<Buffer> {
         .fontSize(9)
         .font('Helvetica-Bold')
         .text(deliveryOrder.Customer?.name || '-', left, 132);
+      doc
+        .fillColor('#000000')
+        .fontSize(9)
+        .font('Helvetica')
+        .text(deliveryOrder.Customer?.address || '-', left, 144);
+
+      // contact person
+      doc
+        .fillColor('#000000')
+        .fontSize(9)
+        .font('Helvetica')
+        .text(
+          'Attn'.padEnd(15, ' ') +
+            ': ' +
+            (deliveryOrder.Customer?.Contacts?.[0]?.name || ''),
+          left,
+          180,
+        );
+
+      doc
+        .fillColor('#000000')
+        .fontSize(9)
+        .font('Helvetica')
+        .text(
+          'Phone'.padEnd(12, ' ') +
+            ': ' +
+            (deliveryOrder.Customer?.Contacts?.[0]?.phone || ''),
+          left,
+          192,
+        );
 
       doc.y = contentTop;
     };
@@ -190,7 +220,7 @@ export function generateDeliveryOrderPdf(deliveryOrder: any): Promise<Buffer> {
           quantitySupply: String(item.quantitySupply),
         })),
       },
-      { y: contentTop - 30, absolutePosition: true },
+      { y: contentTop, absolutePosition: true },
     );
 
     doc.moveDown();

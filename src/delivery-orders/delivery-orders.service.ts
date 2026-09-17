@@ -19,7 +19,11 @@ export class DeliveryOrdersService {
 
   private readonly includeRelations = {
     DeliveryOrderItems: true,
-    Customer: true,
+    Customer: {
+      include: {
+        Contacts: true,
+      },
+    },
     SalesOrder: true,
     GoodsReceipt: true,
     User: { select: { id: true, name: true } },
