@@ -33,11 +33,11 @@ model GoodsReceipt {
 }
 
 model GoodsReceiptItem {
-  id                 Int    @id @default(autoincrement())
+  id                 Int     @id @default(autoincrement())
   goodsReceiptId     Int
-  partNumber         String @db.VarChar(100)
-  partNumberSupplier String @db.VarChar(100)
-  description        String @db.Text
+  partNumber         String  @db.VarChar(100)
+  partNumberSupplier String? @db.VarChar(100)
+  description        String  @db.Text
   quantityOrder      Int
   quantityReceived   Int
 

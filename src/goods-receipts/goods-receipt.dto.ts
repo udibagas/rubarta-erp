@@ -25,11 +25,11 @@ export class GoodsReceiptItemDto {
 
   @ApiProperty({ example: 'SUP-PART-001' })
   @IsString({ message: 'Invalid part number supplier' })
-  @IsNotEmpty({ message: 'Part number supplier should not be empty' })
+  @IsOptional()
   @MaxLength(100, {
     message: 'Part number supplier must be at most 100 characters',
   })
-  partNumberSupplier: string;
+  partNumberSupplier?: string;
 
   @ApiProperty({ example: 'Product description' })
   @IsString({ message: 'Invalid description' })
