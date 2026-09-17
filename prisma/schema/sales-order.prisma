@@ -46,7 +46,7 @@ model SalesOrder {
   Quotation       Quotation?       @relation(fields: [quotationId], references: [id])
   Company         Company          @relation(fields: [companyId], references: [id], onDelete: Cascade)
   DeliveryOrders  DeliveryOrder[]
-  purchaseOrders  PurchaseOrder[]
+  PurchaseOrders  PurchaseOrder[]
 
   @@index([number])
   @@index([customerId])
