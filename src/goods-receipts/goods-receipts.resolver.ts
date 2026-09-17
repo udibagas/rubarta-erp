@@ -49,7 +49,9 @@ export class GoodsReceiptsResolver {
       include: {
         GoodsReceiptItems: true,
         Supplier: { select: { id: true, name: true } },
-        PurchaseOrder: { select: { id: true, number: true, title: true } },
+        PurchaseOrder: {
+          select: { id: true, number: true, title: true, salesOrderId: true },
+        },
         User: { select: { id: true, name: true } },
       },
     });

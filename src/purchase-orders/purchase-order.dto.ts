@@ -48,6 +48,11 @@ export class PurchaseOrderItemDto {
 }
 
 export class CreatePurchaseOrderDto {
+  @ApiProperty({ required: false, example: 1 })
+  @IsOptional()
+  @IsInt({ message: 'Invalid sales order' })
+  salesOrderId?: number;
+
   @ApiProperty({ required: false, example: 'Stock Order' })
   @IsOptional()
   @IsString()
