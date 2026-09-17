@@ -7,10 +7,15 @@ import {
   UpdateDeliveryOrderDto,
 } from './delivery-order.dto';
 import dayjs from 'dayjs';
+import { generateDeliveryOrderPdf } from './delivery-order-pdf';
 
 @Injectable()
 export class DeliveryOrdersService {
   constructor(private readonly prisma: PrismaService) {}
+
+  async preview(id: number) {
+    return generateDeliveryOrderPdf(await this.findOne(id));
+  }
 
   private readonly includeRelations = {
     DeliveryOrderItems: true,

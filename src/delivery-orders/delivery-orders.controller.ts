@@ -8,6 +8,7 @@ import {
   Patch,
   Post,
   Query,
+  Res,
 } from '@nestjs/common';
 import {
   ApiBearerAuth,
@@ -16,6 +17,7 @@ import {
   ApiOperation,
   ApiTags,
 } from '@nestjs/swagger';
+import { Response } from 'express';
 import { DeliveryOrdersService } from './delivery-orders.service';
 import {
   CreateDeliveryOrderDto,
@@ -50,6 +52,18 @@ export class DeliveryOrdersController {
   @ApiOkResponse({ description: 'Delivery order details' })
   findOne(@Param('id', ParseIntPipe) id: number) {
     return this.deliveryOrdersService.findOne(id);
+  }
+
+  @Get(':id/preview')
+  @ApiOperation({ summary: 'Preview delivery order PDF' })
+  async preview(@Param('id', ParseIntPipe) id: number, @Res() res: Response) {
+    const pdfBuffer = await this.deliveryOrdersService.preview(id);
+    res.set({
+      'Content-Type': 'application/pdf',
+      'Content-Disposition': `inline; filename="delivery-order-${id}.pdf"`,
+      'Content-Length': pdfBuffer.length,
+    });
+    res.end(pdfBuffer);
   }
 
   @Patch(':id')
