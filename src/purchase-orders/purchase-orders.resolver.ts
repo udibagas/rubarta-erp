@@ -19,8 +19,8 @@ export class PurchaseOrdersResolver {
     @Args('keyword', { nullable: true }) keyword?: string,
     @Args('supplierId', { type: () => Int, nullable: true })
     supplierId?: number,
-    @Args('status', { type: () => PurchaseOrderStatus, nullable: true })
-    status?: PurchaseOrderStatus,
+    @Args('status', { type: () => [PurchaseOrderStatus], nullable: true })
+    status?: PurchaseOrderStatus[],
   ) {
     const where: Prisma.PurchaseOrderWhereInput = { deletedAt: null };
     if (keyword) {
@@ -33,8 +33,9 @@ export class PurchaseOrdersResolver {
         },
       ];
     }
+
     if (supplierId) where.supplierId = supplierId;
-    if (status) where.status = status;
+    if (status && status.length > 0) where.status = { in: status };
 
     return this.prisma.purchaseOrder.findMany({
       where,
