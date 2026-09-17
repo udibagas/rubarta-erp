@@ -109,20 +109,20 @@ export class DeliveryOrdersService {
   }
 
   async updateSoItemReceivedQuantities(id: number) {
-    const gr = await this.prisma.deliveryOrder.findUnique({
+    const deliveryOrder = await this.prisma.deliveryOrder.findUnique({
       where: { id, status: 'Confirmed' },
       include: { DeliveryOrderItems: true },
     });
 
-    if (!gr) {
+    if (!deliveryOrder) {
       throw new NotFoundException(`Delivery order with ID ${id} not found`);
     }
 
-    for (const item of gr.DeliveryOrderItems) {
+    for (const item of deliveryOrder.DeliveryOrderItems) {
       await this.prisma.$transaction(async (transaction) => {
         await transaction.salesOrderItem.updateMany({
           where: {
-            salesOrderId: gr.salesOrderId,
+            salesOrderId: deliveryOrder.salesOrderId,
             partNumber: item.partNumber,
           },
           data: {
@@ -137,21 +137,21 @@ export class DeliveryOrdersService {
     let status: SalesOrderStatus = 'PartiallyDelivered';
 
     // check if all sales order items have been fully delivered
-    const hasOutstandingItems = await this.prisma.salesOrderItem.count({
+    const outstandingItemsCount = await this.prisma.salesOrderItem.count({
       where: {
-        salesOrderId: gr.salesOrderId,
+        salesOrderId: deliveryOrder.salesOrderId,
         deliveredQuantity: {
-          lt: this.prisma.salesOrderItem.fields.deliveredQuantity,
+          lt: this.prisma.salesOrderItem.fields.quantity,
         },
       },
     });
 
-    if (hasOutstandingItems === 0) {
+    if (outstandingItemsCount === 0) {
       status = 'Completed';
     }
 
     await this.prisma.salesOrder.update({
-      where: { id: gr.salesOrderId },
+      where: { id: deliveryOrder.salesOrderId },
       data: { status },
     });
   }
