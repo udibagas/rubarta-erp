@@ -17,32 +17,21 @@ export class SalesOrdersResolver {
     description: 'Get all sales orders',
   })
   async findAll(
-    @Args('keyword', { nullable: true }) keyword?: string,
     @Args('customerId', { type: () => Int, nullable: true })
     customerId?: number,
-    @Args('status', { type: () => SalesOrderStatus, nullable: true })
-    status?: SalesOrderStatus,
+    @Args('status', { type: () => [SalesOrderStatus], nullable: true })
+    status?: SalesOrderStatus[],
   ) {
     const where: Prisma.SalesOrderWhereInput = {
       deletedAt: null,
     };
 
-    if (keyword) {
-      where.OR = [
-        { number: { contains: keyword, mode: 'insensitive' } },
-        { description: { contains: keyword, mode: 'insensitive' } },
-        {
-          Customer: { name: { contains: keyword, mode: 'insensitive' } },
-        },
-      ];
-    }
-
     if (customerId) {
       where.customerId = customerId;
     }
 
-    if (status) {
-      where.status = status;
+    if (status && status.length > 0) {
+      where.status = { in: status };
     }
 
     return this.prisma.salesOrder.findMany({
