@@ -13,7 +13,8 @@ import {
   Min,
 } from 'class-validator';
 import { Type } from 'class-transformer';
-import { PartialType } from '@nestjs/swagger';
+import { ApiProperty, PartialType } from '@nestjs/swagger';
+import { JsonArray } from '@prisma/client/runtime/client';
 
 export class InvoiceItemDto {
   @IsNotEmpty({ message: 'Part number is required' })
@@ -62,9 +63,10 @@ export class CreateInvoiceDto {
   @Min(0)
   discount?: number;
 
+  @ApiProperty({ example: { files: [] }, type: Object })
   @IsOptional()
-  @IsObject()
-  attachments?: Record<string, unknown>;
+  @IsObject({ each: true })
+  attachments?: JsonArray;
 
   @IsOptional()
   @IsString()
