@@ -15,8 +15,6 @@ export class CustomersResolver {
     description: 'Get all customers',
   })
   async findAll(
-    @Args('keyword', { nullable: true }) keyword?: string,
-    @Args('industry', { nullable: true }) industry?: string,
     @Args('isActive', { type: () => Boolean, nullable: true })
     isActive?: boolean,
     @Args('accountManagerId', { type: () => Int, nullable: true })
@@ -24,8 +22,6 @@ export class CustomersResolver {
   ) {
     return this.prisma.customer.findMany({
       where: {
-        ...(keyword && { name: { contains: keyword, mode: 'insensitive' } }),
-        ...(industry && { industry }),
         ...(isActive !== undefined && { isActive }),
         ...(accountManagerId && { accountManagerId }),
       },

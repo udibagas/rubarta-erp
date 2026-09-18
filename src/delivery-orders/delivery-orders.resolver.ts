@@ -1,10 +1,15 @@
 import { Resolver, Query, Args, Int } from '@nestjs/graphql';
 import { DeliveryOrdersService } from './delivery-orders.service';
 import { DeliveryOrderType } from './delivery-order.type';
+import { Prisma, DeliveryOrderStatus } from '../prisma/client/client';
+import { PrismaService } from '../prisma/prisma.service';
 
 @Resolver(() => DeliveryOrderType)
 export class DeliveryOrdersResolver {
-  constructor(private readonly deliveryOrdersService: DeliveryOrdersService) {}
+  constructor(
+    private readonly deliveryOrdersService: DeliveryOrdersService,
+    private readonly prisma: PrismaService,
+  ) {}
 
   @Query(() => [DeliveryOrderType], {
     name: 'deliveryOrders',
@@ -16,11 +21,20 @@ export class DeliveryOrdersResolver {
     salesOrderId?: number,
     @Args('customerId', { type: () => Int, nullable: true })
     customerId?: number,
+    @Args('status', { nullable: true }) status?: DeliveryOrderStatus,
   ) {
-    return this.deliveryOrdersService.findAll({
-      keyword,
-      salesOrderId,
-      customerId,
+    const where: Prisma.DeliveryOrderWhereInput = {};
+
+    if (salesOrderId) where.salesOrderId = salesOrderId;
+    if (customerId) where.customerId = customerId;
+    if (status) where.status = status;
+
+    return this.prisma.deliveryOrder.findMany({
+      where,
+      orderBy: { number: 'asc' },
+      include: {
+        DeliveryOrderItems: true,
+      },
     });
   }
 
