@@ -1,4 +1,4 @@
-import { InvoiceStatus } from '../prisma/client/client';
+import { InvoiceStatus, Currency } from '../prisma/client/client';
 import {
   IsNotEmpty,
   IsInt,
@@ -60,7 +60,7 @@ export class CreateInvoiceDto {
 
   @IsOptional()
   @IsString()
-  currency?: string;
+  currency?: Currency;
 
   @IsOptional()
   @IsNumber()
