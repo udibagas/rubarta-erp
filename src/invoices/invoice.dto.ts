@@ -59,6 +59,10 @@ export class CreateInvoiceDto {
   status?: InvoiceStatus;
 
   @IsOptional()
+  @IsString()
+  currency?: string;
+
+  @IsOptional()
   @IsNumber()
   @Min(0)
   discount?: number;

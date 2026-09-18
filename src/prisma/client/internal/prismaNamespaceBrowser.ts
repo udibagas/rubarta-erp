@@ -470,6 +470,7 @@ export const InvoiceScalarFieldEnum = {
   dueDate: 'dueDate',
   status: 'status',
   attachments: 'attachments',
+  currency: 'currency',
   totalAmount: 'totalAmount',
   discount: 'discount',
   vatAmount: 'vatAmount',

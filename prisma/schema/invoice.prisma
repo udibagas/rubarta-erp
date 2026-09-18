@@ -8,6 +8,7 @@ model Invoice {
   attachments     Json?         @db.JsonB // Attachments related to the invoice
 
   // financials
+  currency    Currency @default(IDR)
   totalAmount Float
   discount    Float
   vatAmount   Float

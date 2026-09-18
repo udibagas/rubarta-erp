@@ -57,6 +57,7 @@ export type InvoiceMinAggregateOutputType = {
   date: Date | null
   dueDate: Date | null
   status: $Enums.InvoiceStatus | null
+  currency: $Enums.Currency | null
   totalAmount: number | null
   discount: number | null
   vatAmount: number | null
@@ -81,6 +82,7 @@ export type InvoiceMaxAggregateOutputType = {
   date: Date | null
   dueDate: Date | null
   status: $Enums.InvoiceStatus | null
+  currency: $Enums.Currency | null
   totalAmount: number | null
   discount: number | null
   vatAmount: number | null
@@ -106,6 +108,7 @@ export type InvoiceCountAggregateOutputType = {
   dueDate: number
   status: number
   attachments: number
+  currency: number
   totalAmount: number
   discount: number
   vatAmount: number
@@ -156,6 +159,7 @@ export type InvoiceMinAggregateInputType = {
   date?: true
   dueDate?: true
   status?: true
+  currency?: true
   totalAmount?: true
   discount?: true
   vatAmount?: true
@@ -180,6 +184,7 @@ export type InvoiceMaxAggregateInputType = {
   date?: true
   dueDate?: true
   status?: true
+  currency?: true
   totalAmount?: true
   discount?: true
   vatAmount?: true
@@ -205,6 +210,7 @@ export type InvoiceCountAggregateInputType = {
   dueDate?: true
   status?: true
   attachments?: true
+  currency?: true
   totalAmount?: true
   discount?: true
   vatAmount?: true
@@ -317,6 +323,7 @@ export type InvoiceGroupByOutputType = {
   dueDate: Date
   status: $Enums.InvoiceStatus
   attachments: runtime.JsonValue | null
+  currency: $Enums.Currency
   totalAmount: number
   discount: number
   vatAmount: number
@@ -365,6 +372,7 @@ export type InvoiceWhereInput = {
   dueDate?: Prisma.DateTimeFilter<"Invoice"> | Date | string
   status?: Prisma.EnumInvoiceStatusFilter<"Invoice"> | $Enums.InvoiceStatus
   attachments?: Prisma.JsonNullableFilter<"Invoice">
+  currency?: Prisma.EnumCurrencyFilter<"Invoice"> | $Enums.Currency
   totalAmount?: Prisma.FloatFilter<"Invoice"> | number
   discount?: Prisma.FloatFilter<"Invoice"> | number
   vatAmount?: Prisma.FloatFilter<"Invoice"> | number
@@ -396,6 +404,7 @@ export type InvoiceOrderByWithRelationInput = {
   dueDate?: Prisma.SortOrder
   status?: Prisma.SortOrder
   attachments?: Prisma.SortOrderInput | Prisma.SortOrder
+  currency?: Prisma.SortOrder
   totalAmount?: Prisma.SortOrder
   discount?: Prisma.SortOrder
   vatAmount?: Prisma.SortOrder
@@ -431,6 +440,7 @@ export type InvoiceWhereUniqueInput = Prisma.AtLeast<{
   dueDate?: Prisma.DateTimeFilter<"Invoice"> | Date | string
   status?: Prisma.EnumInvoiceStatusFilter<"Invoice"> | $Enums.InvoiceStatus
   attachments?: Prisma.JsonNullableFilter<"Invoice">
+  currency?: Prisma.EnumCurrencyFilter<"Invoice"> | $Enums.Currency
   totalAmount?: Prisma.FloatFilter<"Invoice"> | number
   discount?: Prisma.FloatFilter<"Invoice"> | number
   vatAmount?: Prisma.FloatFilter<"Invoice"> | number
@@ -461,6 +471,7 @@ export type InvoiceOrderByWithAggregationInput = {
   dueDate?: Prisma.SortOrder
   status?: Prisma.SortOrder
   attachments?: Prisma.SortOrderInput | Prisma.SortOrder
+  currency?: Prisma.SortOrder
   totalAmount?: Prisma.SortOrder
   discount?: Prisma.SortOrder
   vatAmount?: Prisma.SortOrder
@@ -494,6 +505,7 @@ export type InvoiceScalarWhereWithAggregatesInput = {
   dueDate?: Prisma.DateTimeWithAggregatesFilter<"Invoice"> | Date | string
   status?: Prisma.EnumInvoiceStatusWithAggregatesFilter<"Invoice"> | $Enums.InvoiceStatus
   attachments?: Prisma.JsonNullableWithAggregatesFilter<"Invoice">
+  currency?: Prisma.EnumCurrencyWithAggregatesFilter<"Invoice"> | $Enums.Currency
   totalAmount?: Prisma.FloatWithAggregatesFilter<"Invoice"> | number
   discount?: Prisma.FloatWithAggregatesFilter<"Invoice"> | number
   vatAmount?: Prisma.FloatWithAggregatesFilter<"Invoice"> | number
@@ -518,6 +530,7 @@ export type InvoiceCreateInput = {
   dueDate: Date | string
   status: $Enums.InvoiceStatus
   attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  currency?: $Enums.Currency
   totalAmount: number
   discount: number
   vatAmount: number
@@ -545,6 +558,7 @@ export type InvoiceUncheckedCreateInput = {
   dueDate: Date | string
   status: $Enums.InvoiceStatus
   attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  currency?: $Enums.Currency
   totalAmount: number
   discount: number
   vatAmount: number
@@ -571,6 +585,7 @@ export type InvoiceUpdateInput = {
   dueDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumInvoiceStatusFieldUpdateOperationsInput | $Enums.InvoiceStatus
   attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   discount?: Prisma.FloatFieldUpdateOperationsInput | number
   vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -598,6 +613,7 @@ export type InvoiceUncheckedUpdateInput = {
   dueDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumInvoiceStatusFieldUpdateOperationsInput | $Enums.InvoiceStatus
   attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   discount?: Prisma.FloatFieldUpdateOperationsInput | number
   vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -625,6 +641,7 @@ export type InvoiceCreateManyInput = {
   dueDate: Date | string
   status: $Enums.InvoiceStatus
   attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  currency?: $Enums.Currency
   totalAmount: number
   discount: number
   vatAmount: number
@@ -649,6 +666,7 @@ export type InvoiceUpdateManyMutationInput = {
   dueDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumInvoiceStatusFieldUpdateOperationsInput | $Enums.InvoiceStatus
   attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   discount?: Prisma.FloatFieldUpdateOperationsInput | number
   vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -670,6 +688,7 @@ export type InvoiceUncheckedUpdateManyInput = {
   dueDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumInvoiceStatusFieldUpdateOperationsInput | $Enums.InvoiceStatus
   attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   discount?: Prisma.FloatFieldUpdateOperationsInput | number
   vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -715,6 +734,7 @@ export type InvoiceCountOrderByAggregateInput = {
   dueDate?: Prisma.SortOrder
   status?: Prisma.SortOrder
   attachments?: Prisma.SortOrder
+  currency?: Prisma.SortOrder
   totalAmount?: Prisma.SortOrder
   discount?: Prisma.SortOrder
   vatAmount?: Prisma.SortOrder
@@ -751,6 +771,7 @@ export type InvoiceMaxOrderByAggregateInput = {
   date?: Prisma.SortOrder
   dueDate?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  currency?: Prisma.SortOrder
   totalAmount?: Prisma.SortOrder
   discount?: Prisma.SortOrder
   vatAmount?: Prisma.SortOrder
@@ -775,6 +796,7 @@ export type InvoiceMinOrderByAggregateInput = {
   date?: Prisma.SortOrder
   dueDate?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  currency?: Prisma.SortOrder
   totalAmount?: Prisma.SortOrder
   discount?: Prisma.SortOrder
   vatAmount?: Prisma.SortOrder
@@ -1001,6 +1023,7 @@ export type InvoiceCreateWithoutPaymentsInput = {
   dueDate: Date | string
   status: $Enums.InvoiceStatus
   attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  currency?: $Enums.Currency
   totalAmount: number
   discount: number
   vatAmount: number
@@ -1027,6 +1050,7 @@ export type InvoiceUncheckedCreateWithoutPaymentsInput = {
   dueDate: Date | string
   status: $Enums.InvoiceStatus
   attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  currency?: $Enums.Currency
   totalAmount: number
   discount: number
   vatAmount: number
@@ -1068,6 +1092,7 @@ export type InvoiceUpdateWithoutPaymentsInput = {
   dueDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumInvoiceStatusFieldUpdateOperationsInput | $Enums.InvoiceStatus
   attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   discount?: Prisma.FloatFieldUpdateOperationsInput | number
   vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -1094,6 +1119,7 @@ export type InvoiceUncheckedUpdateWithoutPaymentsInput = {
   dueDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumInvoiceStatusFieldUpdateOperationsInput | $Enums.InvoiceStatus
   attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   discount?: Prisma.FloatFieldUpdateOperationsInput | number
   vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -1119,6 +1145,7 @@ export type InvoiceCreateWithoutCustomerInput = {
   dueDate: Date | string
   status: $Enums.InvoiceStatus
   attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  currency?: $Enums.Currency
   totalAmount: number
   discount: number
   vatAmount: number
@@ -1145,6 +1172,7 @@ export type InvoiceUncheckedCreateWithoutCustomerInput = {
   dueDate: Date | string
   status: $Enums.InvoiceStatus
   attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  currency?: $Enums.Currency
   totalAmount: number
   discount: number
   vatAmount: number
@@ -1200,6 +1228,7 @@ export type InvoiceScalarWhereInput = {
   dueDate?: Prisma.DateTimeFilter<"Invoice"> | Date | string
   status?: Prisma.EnumInvoiceStatusFilter<"Invoice"> | $Enums.InvoiceStatus
   attachments?: Prisma.JsonNullableFilter<"Invoice">
+  currency?: Prisma.EnumCurrencyFilter<"Invoice"> | $Enums.Currency
   totalAmount?: Prisma.FloatFilter<"Invoice"> | number
   discount?: Prisma.FloatFilter<"Invoice"> | number
   vatAmount?: Prisma.FloatFilter<"Invoice"> | number
@@ -1224,6 +1253,7 @@ export type InvoiceCreateWithoutDeliveryOrderInput = {
   dueDate: Date | string
   status: $Enums.InvoiceStatus
   attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  currency?: $Enums.Currency
   totalAmount: number
   discount: number
   vatAmount: number
@@ -1250,6 +1280,7 @@ export type InvoiceUncheckedCreateWithoutDeliveryOrderInput = {
   dueDate: Date | string
   status: $Enums.InvoiceStatus
   attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  currency?: $Enums.Currency
   totalAmount: number
   discount: number
   vatAmount: number
@@ -1291,6 +1322,7 @@ export type InvoiceUpdateWithoutDeliveryOrderInput = {
   dueDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumInvoiceStatusFieldUpdateOperationsInput | $Enums.InvoiceStatus
   attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   discount?: Prisma.FloatFieldUpdateOperationsInput | number
   vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -1317,6 +1349,7 @@ export type InvoiceUncheckedUpdateWithoutDeliveryOrderInput = {
   dueDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumInvoiceStatusFieldUpdateOperationsInput | $Enums.InvoiceStatus
   attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   discount?: Prisma.FloatFieldUpdateOperationsInput | number
   vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -1342,6 +1375,7 @@ export type InvoiceCreateWithoutInvoiceItemsInput = {
   dueDate: Date | string
   status: $Enums.InvoiceStatus
   attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  currency?: $Enums.Currency
   totalAmount: number
   discount: number
   vatAmount: number
@@ -1368,6 +1402,7 @@ export type InvoiceUncheckedCreateWithoutInvoiceItemsInput = {
   dueDate: Date | string
   status: $Enums.InvoiceStatus
   attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  currency?: $Enums.Currency
   totalAmount: number
   discount: number
   vatAmount: number
@@ -1409,6 +1444,7 @@ export type InvoiceUpdateWithoutInvoiceItemsInput = {
   dueDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumInvoiceStatusFieldUpdateOperationsInput | $Enums.InvoiceStatus
   attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   discount?: Prisma.FloatFieldUpdateOperationsInput | number
   vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -1435,6 +1471,7 @@ export type InvoiceUncheckedUpdateWithoutInvoiceItemsInput = {
   dueDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumInvoiceStatusFieldUpdateOperationsInput | $Enums.InvoiceStatus
   attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   discount?: Prisma.FloatFieldUpdateOperationsInput | number
   vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -1460,6 +1497,7 @@ export type InvoiceCreateWithoutSalesOrderInput = {
   dueDate: Date | string
   status: $Enums.InvoiceStatus
   attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  currency?: $Enums.Currency
   totalAmount: number
   discount: number
   vatAmount: number
@@ -1486,6 +1524,7 @@ export type InvoiceUncheckedCreateWithoutSalesOrderInput = {
   dueDate: Date | string
   status: $Enums.InvoiceStatus
   attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  currency?: $Enums.Currency
   totalAmount: number
   discount: number
   vatAmount: number
@@ -1537,6 +1576,7 @@ export type InvoiceCreateWithoutUserInput = {
   dueDate: Date | string
   status: $Enums.InvoiceStatus
   attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  currency?: $Enums.Currency
   totalAmount: number
   discount: number
   vatAmount: number
@@ -1563,6 +1603,7 @@ export type InvoiceUncheckedCreateWithoutUserInput = {
   dueDate: Date | string
   status: $Enums.InvoiceStatus
   attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  currency?: $Enums.Currency
   totalAmount: number
   discount: number
   vatAmount: number
@@ -1615,6 +1656,7 @@ export type InvoiceCreateManyCustomerInput = {
   dueDate: Date | string
   status: $Enums.InvoiceStatus
   attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  currency?: $Enums.Currency
   totalAmount: number
   discount: number
   vatAmount: number
@@ -1638,6 +1680,7 @@ export type InvoiceUpdateWithoutCustomerInput = {
   dueDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumInvoiceStatusFieldUpdateOperationsInput | $Enums.InvoiceStatus
   attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   discount?: Prisma.FloatFieldUpdateOperationsInput | number
   vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -1664,6 +1707,7 @@ export type InvoiceUncheckedUpdateWithoutCustomerInput = {
   dueDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumInvoiceStatusFieldUpdateOperationsInput | $Enums.InvoiceStatus
   attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   discount?: Prisma.FloatFieldUpdateOperationsInput | number
   vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -1690,6 +1734,7 @@ export type InvoiceUncheckedUpdateManyWithoutCustomerInput = {
   dueDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumInvoiceStatusFieldUpdateOperationsInput | $Enums.InvoiceStatus
   attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   discount?: Prisma.FloatFieldUpdateOperationsInput | number
   vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -1714,6 +1759,7 @@ export type InvoiceCreateManySalesOrderInput = {
   dueDate: Date | string
   status: $Enums.InvoiceStatus
   attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  currency?: $Enums.Currency
   totalAmount: number
   discount: number
   vatAmount: number
@@ -1737,6 +1783,7 @@ export type InvoiceUpdateWithoutSalesOrderInput = {
   dueDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumInvoiceStatusFieldUpdateOperationsInput | $Enums.InvoiceStatus
   attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   discount?: Prisma.FloatFieldUpdateOperationsInput | number
   vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -1763,6 +1810,7 @@ export type InvoiceUncheckedUpdateWithoutSalesOrderInput = {
   dueDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumInvoiceStatusFieldUpdateOperationsInput | $Enums.InvoiceStatus
   attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   discount?: Prisma.FloatFieldUpdateOperationsInput | number
   vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -1789,6 +1837,7 @@ export type InvoiceUncheckedUpdateManyWithoutSalesOrderInput = {
   dueDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumInvoiceStatusFieldUpdateOperationsInput | $Enums.InvoiceStatus
   attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   discount?: Prisma.FloatFieldUpdateOperationsInput | number
   vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -1813,6 +1862,7 @@ export type InvoiceCreateManyUserInput = {
   dueDate: Date | string
   status: $Enums.InvoiceStatus
   attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  currency?: $Enums.Currency
   totalAmount: number
   discount: number
   vatAmount: number
@@ -1836,6 +1886,7 @@ export type InvoiceUpdateWithoutUserInput = {
   dueDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumInvoiceStatusFieldUpdateOperationsInput | $Enums.InvoiceStatus
   attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   discount?: Prisma.FloatFieldUpdateOperationsInput | number
   vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -1862,6 +1913,7 @@ export type InvoiceUncheckedUpdateWithoutUserInput = {
   dueDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumInvoiceStatusFieldUpdateOperationsInput | $Enums.InvoiceStatus
   attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   discount?: Prisma.FloatFieldUpdateOperationsInput | number
   vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -1888,6 +1940,7 @@ export type InvoiceUncheckedUpdateManyWithoutUserInput = {
   dueDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumInvoiceStatusFieldUpdateOperationsInput | $Enums.InvoiceStatus
   attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   discount?: Prisma.FloatFieldUpdateOperationsInput | number
   vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -1952,6 +2005,7 @@ export type InvoiceSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   dueDate?: boolean
   status?: boolean
   attachments?: boolean
+  currency?: boolean
   totalAmount?: boolean
   discount?: boolean
   vatAmount?: boolean
@@ -1984,6 +2038,7 @@ export type InvoiceSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   dueDate?: boolean
   status?: boolean
   attachments?: boolean
+  currency?: boolean
   totalAmount?: boolean
   discount?: boolean
   vatAmount?: boolean
@@ -2013,6 +2068,7 @@ export type InvoiceSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   dueDate?: boolean
   status?: boolean
   attachments?: boolean
+  currency?: boolean
   totalAmount?: boolean
   discount?: boolean
   vatAmount?: boolean
@@ -2042,6 +2098,7 @@ export type InvoiceSelectScalar = {
   dueDate?: boolean
   status?: boolean
   attachments?: boolean
+  currency?: boolean
   totalAmount?: boolean
   discount?: boolean
   vatAmount?: boolean
@@ -2059,7 +2116,7 @@ export type InvoiceSelectScalar = {
   updatedAt?: boolean
 }
 
-export type InvoiceOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "number" | "referenceNumber" | "date" | "dueDate" | "status" | "attachments" | "totalAmount" | "discount" | "vatAmount" | "grandTotal" | "paymentMethod" | "termOfPayment" | "contactPerson" | "contactPhone" | "contactEmail" | "userId" | "salesOrderId" | "deliveryOrderId" | "customerId" | "createdAt" | "updatedAt", ExtArgs["result"]["invoice"]>
+export type InvoiceOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "number" | "referenceNumber" | "date" | "dueDate" | "status" | "attachments" | "currency" | "totalAmount" | "discount" | "vatAmount" | "grandTotal" | "paymentMethod" | "termOfPayment" | "contactPerson" | "contactPhone" | "contactEmail" | "userId" | "salesOrderId" | "deliveryOrderId" | "customerId" | "createdAt" | "updatedAt", ExtArgs["result"]["invoice"]>
 export type InvoiceInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   Customer?: boolean | Prisma.CustomerDefaultArgs<ExtArgs>
   Payments?: boolean | Prisma.Invoice$PaymentsArgs<ExtArgs>
@@ -2100,6 +2157,7 @@ export type $InvoicePayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     dueDate: Date
     status: $Enums.InvoiceStatus
     attachments: runtime.JsonValue | null
+    currency: $Enums.Currency
     totalAmount: number
     discount: number
     vatAmount: number
@@ -2551,6 +2609,7 @@ export interface InvoiceFieldRefs {
   readonly dueDate: Prisma.FieldRef<"Invoice", 'DateTime'>
   readonly status: Prisma.FieldRef<"Invoice", 'InvoiceStatus'>
   readonly attachments: Prisma.FieldRef<"Invoice", 'Json'>
+  readonly currency: Prisma.FieldRef<"Invoice", 'Currency'>
   readonly totalAmount: Prisma.FieldRef<"Invoice", 'Float'>
   readonly discount: Prisma.FieldRef<"Invoice", 'Float'>
   readonly vatAmount: Prisma.FieldRef<"Invoice", 'Float'>
