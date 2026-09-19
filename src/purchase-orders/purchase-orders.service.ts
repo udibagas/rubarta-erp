@@ -49,17 +49,12 @@ export class PurchaseOrdersService {
           })),
         },
       },
-      include: {
-        PurchaseOrderItems: true,
-        Supplier: true,
-        Company: true,
-        User: { select: { id: true, name: true, email: true } },
-      },
     });
   }
 
   async findAll(query: QueryPurchaseOrderDto) {
     const where: Prisma.PurchaseOrderWhereInput = { deletedAt: null };
+
     if (query.keyword) {
       where.OR = [
         { number: { contains: query.keyword, mode: 'insensitive' } },
@@ -71,11 +66,17 @@ export class PurchaseOrdersService {
         },
       ];
     }
+
     if (query.supplierId) where.supplierId = query.supplierId;
     if (query.status) where.status = query.status;
 
-    return this.prisma.purchaseOrder.findMany({
+    const skip = (Number(query.page) - 1) * Number(query.pageSize) || undefined;
+    const take = Number(query.pageSize) || undefined;
+
+    const data = await this.prisma.purchaseOrder.findMany({
       where,
+      skip,
+      take,
       orderBy: { date: 'desc' },
       include: {
         Supplier: { select: { id: true, name: true } },
@@ -83,6 +84,13 @@ export class PurchaseOrdersService {
         _count: { select: { PurchaseOrderItems: true } },
       },
     });
+
+    if (query.page && query.pageSize) {
+      const total = await this.prisma.purchaseOrder.count({ where });
+      return { data, total };
+    }
+
+    return data;
   }
 
   async findOne(id: number) {
@@ -127,7 +135,6 @@ export class PurchaseOrdersService {
             })),
           },
         },
-        include: { PurchaseOrderItems: true, Supplier: true },
       });
     }
     return this.prisma.purchaseOrder.update({

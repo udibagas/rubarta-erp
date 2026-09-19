@@ -12,6 +12,7 @@ import {
   MaxLength,
   Min,
   ValidateNested,
+  IsNumberString,
 } from 'class-validator';
 import { Type } from 'class-transformer';
 import { Currency, PurchaseOrderStatus } from '../prisma/client/client';
@@ -190,6 +191,16 @@ export class UpdatePurchaseOrderDto extends PartialType(
 ) {}
 
 export class QueryPurchaseOrderDto {
+  @ApiProperty({ required: false })
+  @IsOptional()
+  @IsNumberString()
+  page?: string;
+
+  @ApiProperty({ required: false })
+  @IsOptional()
+  @IsNumberString()
+  pageSize?: string;
+
   @ApiProperty({ required: false })
   @IsOptional()
   @IsString()

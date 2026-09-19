@@ -21,7 +21,7 @@ import {
 } from '@nestjs/swagger';
 import { Response, Request } from 'express';
 import { Auth } from '../auth/auth.decorator';
-import { User, PurchaseOrderStatus } from '../prisma/client/client';
+import { User } from '../prisma/client/client';
 import { PurchaseOrdersService } from './purchase-orders.service';
 import {
   CreatePurchaseOrderDto,
@@ -54,14 +54,8 @@ export class PurchaseOrdersController {
   @Get()
   @ApiOperation({ summary: 'Get all purchase orders' })
   @ApiOkResponse({ description: 'List of purchase orders' })
-  findAll(
-    @Query('keyword') keyword?: string,
-    @Query('supplierId', new ParseIntPipe({ optional: true }))
-    supplierId?: number,
-    @Query('status', new ParseEnumPipe(PurchaseOrderStatus, { optional: true }))
-    status?: PurchaseOrderStatus,
-  ) {
-    return this.purchaseOrdersService.findAll({ keyword, supplierId, status });
+  findAll(@Query() query: QueryPurchaseOrderDto) {
+    return this.purchaseOrdersService.findAll(query);
   }
 
   @Get(':id')
