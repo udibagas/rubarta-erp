@@ -93,10 +93,12 @@ export class InvoicesService {
         ? (parseInt(query.page) - 1) * parseInt(query.pageSize)
         : undefined;
 
+    const take = query.pageSize ? parseInt(query.pageSize) : undefined;
+
     const data = await this.prisma.invoice.findMany({
       where,
-      take: pageSize ? Number(pageSize) : undefined,
-      skip: skip,
+      take,
+      skip,
       orderBy: { date: 'desc' },
       include: {
         Customer: {
@@ -219,30 +221,6 @@ export class InvoicesService {
     return this.prisma.invoice.update({
       where: { id },
       data: updateData,
-      include: {
-        Customer: {
-          select: {
-            id: true,
-            name: true,
-            email: true,
-            phone: true,
-          },
-        },
-        User: {
-          select: {
-            id: true,
-            name: true,
-          },
-        },
-        SalesOrder: {
-          select: {
-            id: true,
-            number: true,
-          },
-        },
-        DeliveryOrder: { select: { id: true, number: true } },
-        InvoiceItems: true,
-      },
     });
   }
 
@@ -265,15 +243,6 @@ export class InvoicesService {
     return this.prisma.invoice.update({
       where: { id },
       data: { status },
-      include: {
-        Customer: {
-          select: {
-            id: true,
-            name: true,
-          },
-        },
-        InvoiceItems: true,
-      },
     });
   }
 
