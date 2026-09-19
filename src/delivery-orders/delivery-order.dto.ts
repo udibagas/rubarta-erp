@@ -4,6 +4,7 @@ import {
   IsDateString,
   IsInt,
   IsNotEmpty,
+  IsNumberString,
   IsObject,
   IsOptional,
   IsString,
@@ -119,6 +120,16 @@ export class UpdateDeliveryOrderDto extends PartialType(
 ) {}
 
 export class QueryDeliveryOrderDto {
+  @ApiProperty({ required: false })
+  @IsOptional()
+  @IsNumberString()
+  page?: string;
+
+  @ApiProperty({ required: false })
+  @IsOptional()
+  @IsNumberString()
+  pageSize?: string;
+
   @ApiProperty({ required: false })
   @IsOptional()
   @IsString()

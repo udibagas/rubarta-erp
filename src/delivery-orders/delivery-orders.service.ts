@@ -59,9 +59,17 @@ export class DeliveryOrdersService {
     if (query.salesOrderId) where.salesOrderId = query.salesOrderId;
     if (query.customerId) where.customerId = query.customerId;
 
-    return this.prisma.deliveryOrder.findMany({
+    const take = query.pageSize ? parseInt(query.pageSize, 10) : undefined;
+    const skip =
+      query.page && query.pageSize
+        ? (parseInt(query.page, 10) - 1) * parseInt(query.pageSize, 10)
+        : undefined;
+
+    const data = await this.prisma.deliveryOrder.findMany({
       where,
       orderBy: { date: 'desc' },
+      take,
+      skip,
       include: {
         Customer: { select: { id: true, name: true } },
         SalesOrder: { select: { id: true, number: true, title: true } },
@@ -69,6 +77,13 @@ export class DeliveryOrdersService {
         _count: { select: { DeliveryOrderItems: true } },
       },
     });
+
+    if (query.page && query.pageSize) {
+      const total = await this.prisma.deliveryOrder.count({ where });
+      return { data, total };
+    }
+
+    return data;
   }
 
   async findOne(id: number) {
