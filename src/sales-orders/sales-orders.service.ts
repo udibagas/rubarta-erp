@@ -20,14 +20,7 @@ export class SalesOrdersService {
   ) {}
 
   async create(data: CreateSalesOrderDto & { userId: number }) {
-    const {
-      items,
-      userId,
-      customerId,
-      companyId,
-      quotationId,
-      ...salesOrderData
-    } = data;
+    const { items, ...salesOrderData } = data;
     const number = await this.generateNumber();
 
     const totalAmount = items.reduce(
@@ -46,21 +39,12 @@ export class SalesOrdersService {
         totalAmount,
         vatAmount,
         grandTotal,
-        User: { connect: { id: userId } },
-        Customer: { connect: { id: customerId } },
-        Company: { connect: { id: companyId } },
-        ...(quotationId ? { Quotation: { connect: { id: quotationId } } } : {}),
         SalesOrderItems: {
           create: items.map((item) => ({
             ...item,
             totalPrice: item.quantity * item.unitPrice,
           })),
         },
-      },
-      include: {
-        SalesOrderItems: true,
-        Customer: { select: { id: true, name: true, email: true } },
-        User: { select: { id: true, name: true } },
       },
     });
   }
@@ -97,7 +81,7 @@ export class SalesOrdersService {
 
     const take = query.pageSize ? parseInt(query.pageSize) : undefined;
 
-    const salesOrders = await this.prisma.salesOrder.findMany({
+    const data = await this.prisma.salesOrder.findMany({
       where,
       orderBy: { date: 'desc' },
       skip,
@@ -113,10 +97,10 @@ export class SalesOrdersService {
 
     if (query.page && query.pageSize) {
       const total = await this.prisma.salesOrder.count({ where });
-      return { data: salesOrders, total };
+      return { data, total };
     }
 
-    return salesOrders;
+    return data;
   }
 
   async findOne(id: number) {
@@ -174,20 +158,12 @@ export class SalesOrdersService {
             })),
           },
         },
-        include: {
-          SalesOrderItems: true,
-          Customer: { select: { id: true, name: true } },
-        },
       });
     }
 
     return this.prisma.salesOrder.update({
       where: { id },
       data: salesOrderData,
-      include: {
-        SalesOrderItems: true,
-        Customer: { select: { id: true, name: true } },
-      },
     });
   }
 
