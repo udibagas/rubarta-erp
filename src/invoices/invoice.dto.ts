@@ -12,6 +12,8 @@ import {
   IsObject,
   Min,
   IsNumberString,
+  IsEmail,
+  MaxLength,
 } from 'class-validator';
 import { Type } from 'class-transformer';
 import { ApiProperty, PartialType } from '@nestjs/swagger';
@@ -108,6 +110,33 @@ export class CreateInvoiceDto {
 }
 
 export class UpdateInvoiceDto extends PartialType(CreateInvoiceDto) {}
+
+export class SendInvoiceEmailDto {
+  @ApiProperty({ example: 'Invoice INV092026-1 for your review' })
+  @IsString()
+  @MaxLength(200)
+  subject: string;
+
+  @ApiProperty({
+    example: '<p>Dear customer, please find attached our invoice.</p>',
+  })
+  @IsString()
+  body: string;
+
+  @ApiProperty({ example: 'john.doe@example.com' })
+  @IsEmail()
+  to: string;
+
+  @ApiProperty({
+    required: false,
+    type: [String],
+    example: ['manager@example.com'],
+  })
+  @IsOptional()
+  @IsArray()
+  @IsEmail({}, { each: true })
+  cc?: string[];
+}
 
 export class QueryInvoiceDto {
   @IsOptional()

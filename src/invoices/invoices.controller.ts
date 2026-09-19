@@ -16,6 +16,7 @@ import {
   CreateInvoiceDto,
   UpdateInvoiceDto,
   QueryInvoiceDto,
+  SendInvoiceEmailDto,
 } from './invoice.dto';
 import { Auth } from '../auth/auth.decorator';
 import { User, InvoiceStatus } from '../prisma/client/client';
@@ -57,6 +58,14 @@ export class InvoicesController {
       'Content-Length': pdfBuffer.length,
     });
     res.end(pdfBuffer);
+  }
+
+  @Post(':id/send')
+  send(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() sendInvoiceEmailDto: SendInvoiceEmailDto,
+  ) {
+    return this.invoicesService.send(id, sendInvoiceEmailDto);
   }
 
   @Patch(':id')

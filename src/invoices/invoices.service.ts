@@ -3,16 +3,21 @@ import {
   CreateInvoiceDto,
   UpdateInvoiceDto,
   QueryInvoiceDto,
+  SendInvoiceEmailDto,
 } from './invoice.dto';
 import { PrismaService } from '../prisma/prisma.service';
 import { InvoiceStatus, Prisma } from '../prisma/client/client';
 import { generateInvoicePdf } from './invoice-pdf';
 import dayjs from 'dayjs';
 import { Cron, CronExpression } from '@nestjs/schedule';
+import { MailerService } from '@nestjs-modules/mailer';
 
 @Injectable()
 export class InvoicesService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(
+    private readonly prisma: PrismaService,
+    private readonly mailerService: MailerService,
+  ) {}
 
   async create(data: CreateInvoiceDto & { userId: number }) {
     const { items, ...invoiceData } = data;
@@ -275,6 +280,31 @@ export class InvoicesService {
   async preview(id: number): Promise<Buffer> {
     const invoice = await this.findOne(id);
     return generateInvoicePdf(invoice);
+  }
+
+  async send(id: number, dto: SendInvoiceEmailDto) {
+    const { to, cc, subject, body } = dto;
+    const invoice = await this.findOne(id);
+    const pdfBuffer = await generateInvoicePdf(invoice);
+
+    await this.mailerService.sendMail({
+      subject,
+      cc: [invoice.User.email, ...(cc || [])],
+      to,
+      html: body,
+      attachments: [
+        {
+          filename: `${invoice.number}.pdf`,
+          content: pdfBuffer,
+          contentType: 'application/pdf',
+        },
+      ],
+    });
+
+    return this.prisma.invoice.update({
+      where: { id },
+      data: { status: InvoiceStatus.Sent },
+    });
   }
 
   async getTotalAmount(customerId?: number, status?: InvoiceStatus) {
