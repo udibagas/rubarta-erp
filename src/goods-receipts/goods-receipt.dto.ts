@@ -4,6 +4,7 @@ import {
   IsDateString,
   IsInt,
   IsNotEmpty,
+  IsNumberString,
   IsObject,
   IsOptional,
   IsString,
@@ -98,6 +99,16 @@ export class CreateGoodsReceiptDto {
 export class UpdateGoodsReceiptDto extends PartialType(CreateGoodsReceiptDto) {}
 
 export class QueryGoodsReceiptDto {
+  @ApiProperty({ required: false })
+  @IsOptional()
+  @IsNumberString()
+  page?: string;
+
+  @ApiProperty({ required: false })
+  @IsOptional()
+  @IsNumberString()
+  pageSize?: string;
+
   @ApiProperty({ required: false })
   @IsOptional()
   @IsString()

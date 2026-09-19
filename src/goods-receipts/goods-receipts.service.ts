@@ -59,15 +59,30 @@ export class GoodsReceiptsService {
     if (query.purchaseOrderId) where.purchaseOrderId = query.purchaseOrderId;
     if (query.supplierId) where.supplierId = query.supplierId;
 
-    return this.prisma.goodsReceipt.findMany({
+    const take = query.pageSize ? parseInt(query.pageSize, 10) : undefined;
+    const skip =
+      query.page && query.pageSize
+        ? (parseInt(query.page, 10) - 1) * parseInt(query.pageSize, 10)
+        : undefined;
+
+    const data = await this.prisma.goodsReceipt.findMany({
       where,
       orderBy: { date: 'desc' },
+      take,
+      skip,
       include: {
         Supplier: { select: { id: true, name: true } },
         PurchaseOrder: { select: { id: true, number: true, title: true } },
         _count: { select: { GoodsReceiptItems: true } },
       },
     });
+
+    if (query.page && query.pageSize) {
+      const total = await this.prisma.goodsReceipt.count({ where });
+      return { data, total };
+    }
+
+    return data;
   }
 
   async findOne(id: number) {
