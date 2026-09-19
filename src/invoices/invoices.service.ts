@@ -76,10 +76,30 @@ export class InvoicesService {
             contains: keyword,
             mode: 'insensitive',
           },
+          referenceNumber: {
+            contains: keyword,
+            mode: 'insensitive',
+          },
         },
         {
           Customer: {
             name: {
+              contains: keyword,
+              mode: 'insensitive',
+            },
+          },
+        },
+        {
+          SalesOrder: {
+            number: {
+              contains: keyword,
+              mode: 'insensitive',
+            },
+          },
+        },
+        {
+          DeliveryOrder: {
+            number: {
               contains: keyword,
               mode: 'insensitive',
             },
@@ -129,6 +149,9 @@ export class InvoicesService {
             date: true,
             amountPaid: true,
           },
+        },
+        _count: {
+          select: { InvoiceItems: true },
         },
       },
     });
