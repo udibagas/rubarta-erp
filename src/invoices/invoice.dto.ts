@@ -92,6 +92,14 @@ export class CreateInvoiceDto {
   @IsString()
   contactEmail?: string;
 
+  @IsOptional()
+  @IsString()
+  billingAddress?: string;
+
+  @IsOptional()
+  @IsString()
+  shippingAddress?: string;
+
   @IsArray()
   @ValidateNested({ each: true })
   @Type(() => InvoiceItemDto)

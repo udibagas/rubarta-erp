@@ -5,6 +5,8 @@ model Invoice {
   date            DateTime
   dueDate         DateTime
   status          InvoiceStatus
+  billingAddress  String?
+  shippingAddress String?
   attachments     Json?         @db.JsonB // Attachments related to the invoice
 
   // financials

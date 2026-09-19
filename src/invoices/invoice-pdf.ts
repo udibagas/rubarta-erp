@@ -1,14 +1,20 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import PDFDocument from 'pdfkit';
+import { PDFDocument as PdfLibDocument, StandardFonts, rgb } from 'pdf-lib';
+import { createPdfDocumentWithTables } from 'pdfkit-table';
 
 const LOGO_PATH = path.join(process.cwd(), 'logo.png');
-const COMPANY_NAME = 'PT. RUBARTA PRIMA ABADI';
-const COMPANY_ADDRESS = [
-  'The Savoy Blok B1-20. River Garden Boulevard',
-  'Jakarta Garden City, Cakung',
-  'Jakarta Timur 13910',
-];
+
+const COMPANY = {
+  name: 'PT. RUBARTA PRIMA ABADI',
+  address: [
+    'The Savoy Blok B1-20. River Garden Boulevard',
+    'Jakarta Garden City, Cakung',
+    'Jakarta Timur 13910',
+  ],
+};
+
 const COLORS = {
   green: '#1CA84B',
   navy: '#12355B',
@@ -19,7 +25,7 @@ const COLORS = {
 function formatDate(value?: Date | string | null): string {
   if (!value) return '-';
   const date = new Date(value);
-  return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
+  return `${String(date.getDate()).padStart(2, '0')}-${String(date.getMonth() + 1).padStart(2, '0')}-${date.getFullYear()}`;
 }
 
 function formatAmount(value: number): string {
@@ -29,169 +35,357 @@ function formatAmount(value: number): string {
   });
 }
 
+async function addPageNumbers(pdfBuffer: Buffer): Promise<Buffer> {
+  const doc = await PdfLibDocument.load(pdfBuffer);
+  const pages = doc.getPages();
+  const font = await doc.embedFont(StandardFonts.Helvetica);
+  const fontSize = 8;
+
+  pages.forEach((page, index) => {
+    const label = `Page ${index + 1} of ${pages.length}`;
+    const { width } = page.getSize();
+    const labelWidth = font.widthOfTextAtSize(label, fontSize);
+
+    page.drawText(label, {
+      x: (width - labelWidth) / 2,
+      y: 50,
+      size: fontSize,
+      font,
+      color: rgb(0.33, 0.33, 0.33),
+    });
+  });
+
+  return Buffer.from(await doc.save());
+}
+
 export function generateInvoicePdf(invoice: any): Promise<Buffer> {
   return new Promise((resolve, reject) => {
-    const document = new PDFDocument({ size: 'A4', margin: 40 });
+    const PDFDocumentWithTables = createPdfDocumentWithTables(PDFDocument);
+    const doc = new PDFDocumentWithTables({
+      size: 'A4',
+      margin: 40,
+      bufferPages: true,
+    });
     const chunks: Buffer[] = [];
 
-    document.on('data', (chunk) => chunks.push(chunk));
-    document.on('end', () => resolve(Buffer.concat(chunks)));
-    document.on('error', reject);
+    doc.on('data', (chunk) => chunks.push(chunk));
+    doc.on('end', () => {
+      addPageNumbers(Buffer.concat(chunks)).then(resolve).catch(reject);
+    });
+    doc.on('error', reject);
 
-    const left = document.page.margins.left;
-    const right = document.page.width - document.page.margins.right;
+    const left = doc.page.margins.left;
+    const right = doc.page.width - doc.page.margins.right;
     const width = right - left;
     const infoWidth = 190;
     const infoX = right - infoWidth;
+    const contentTop = 250;
 
-    if (fs.existsSync(LOGO_PATH)) {
-      document.image(LOGO_PATH, left, 40, { width: 45 });
-    }
+    const drawPageHeader = () => {
+      const headerTop = doc.page.margins.top;
 
-    document
-      .fillColor(COLORS.green)
-      .font('Helvetica-Bold')
-      .fontSize(13)
-      .text(COMPANY_NAME, left + 55, 40, { width: 260 });
-    document
-      .fillColor(COLORS.gray)
-      .font('Helvetica')
-      .fontSize(8)
-      .text(COMPANY_ADDRESS.join('\n'), left + 55, 58, { width: 260 });
+      if (fs.existsSync(LOGO_PATH)) {
+        doc.image(LOGO_PATH, left, headerTop, { width: 45 });
+      }
 
-    document
-      .fillColor(COLORS.navy)
-      .font('Helvetica-Bold')
-      .fontSize(20)
-      .text('INVOICE', infoX, 40, { width: infoWidth, align: 'right' });
+      doc
+        .fillColor(COLORS.green)
+        .font('Helvetica-Bold')
+        .fontSize(13)
+        .text(COMPANY.name, left + 55, headerTop, { width: 260 });
+      doc
+        .fillColor(COLORS.gray)
+        .font('Helvetica')
+        .fontSize(8)
+        .text(COMPANY.address.join('\n'), left + 55, headerTop + 18, {
+          width: 260,
+        });
 
-    const infoRows = [
-      ['No', invoice.number],
-      ['Date', formatDate(invoice.date)],
-      ['Due Date', formatDate(invoice.dueDate)],
-      ['Reference', invoice.referenceNumber || '-'],
-      ['Status', invoice.status],
-    ];
-    let infoY = 75;
-    document.fontSize(8).lineWidth(0.5).strokeColor(COLORS.border);
-    for (const [label, value] of infoRows) {
-      document.rect(infoX, infoY, infoWidth, 16).stroke();
-      document
+      doc
+        .fillColor(COLORS.navy)
+        .font('Helvetica-Bold')
+        .fontSize(20)
+        .text('INVOICE', infoX, headerTop, {
+          width: infoWidth,
+          align: 'right',
+        });
+
+      doc.table({
+        headers: [
+          { label: 'Property', width: 65, property: 'property' },
+          { label: 'Value', width: 125, property: 'value' },
+        ],
+        data: [
+          { property: 'bold:No', value: invoice.number || '-' },
+          { property: 'bold:Date', value: formatDate(invoice.date) },
+          { property: 'bold:Attn', value: invoice.contactPerson || '-' },
+          { property: 'bold:Phone', value: invoice.contactPhone || '-' },
+        ],
+        options: {
+          x: infoX,
+          y: headerTop + 35,
+          width: infoWidth,
+          hideHeader: true,
+        },
+      });
+
+      const partyY = 150;
+      const partyColumnWidth = width / 2;
+      const shipToX = left + partyColumnWidth + 65;
+
+      doc
+        .fillColor(COLORS.navy)
+        .font('Helvetica-Bold')
+        .fontSize(9)
+        .text('BILL TO:', left, partyY, { width: partyColumnWidth });
+      doc
         .fillColor('#000000')
         .font('Helvetica-Bold')
-        .text(label, infoX + 4, infoY + 4, { width: 65 });
-      document
+        .fontSize(9)
+        .text(invoice.Customer?.name || '-', left, partyY + 14, {
+          width: partyColumnWidth,
+        });
+      doc
         .font('Helvetica')
-        .text(value || '-', infoX + 70, infoY + 4, { width: infoWidth - 74 });
-      infoY += 16;
-    }
+        .fontSize(8)
+        .text(invoice.billingAddress || '-', left, partyY + 27, {
+          width: partyColumnWidth - 10,
+        })
+        .text('T.O.P', left, partyY + 60, { width: 48 })
+        .text(`: ${invoice.termOfPayment || '-'}`, left + 48, partyY + 60, {
+          width: partyColumnWidth - 58,
+        })
+        .text('TERMS', left, partyY + 72, { width: 48 })
+        .text(`: ${invoice.paymentMethod || '-'}`, left + 48, partyY + 72, {
+          width: partyColumnWidth - 58,
+        });
 
-    let y = 170;
-    document
-      .fillColor(COLORS.navy)
-      .font('Helvetica-Bold')
-      .fontSize(9)
-      .text('BILL TO', left, y);
-    y += 14;
-    document
-      .fillColor('#000000')
-      .font('Helvetica-Bold')
-      .fontSize(9)
-      .text(invoice.Customer?.name || '-', left, y);
-    y += 13;
-    document
-      .font('Helvetica')
-      .fontSize(8)
-      .text(invoice.contactPerson || '-', left, y);
-    y += 12;
-    document.text(
-      [invoice.contactPhone, invoice.contactEmail]
-        .filter(Boolean)
-        .join(' | ') || '-',
-      left,
-      y,
-    );
-    y += 28;
+      doc
+        .fillColor(COLORS.navy)
+        .font('Helvetica-Bold')
+        .fontSize(9)
+        .text('SHIP TO:', shipToX, partyY);
+      doc
+        .fillColor('#000000')
+        .font('Helvetica-Bold')
+        .fontSize(9)
+        .text(invoice.Customer?.name || '-', shipToX, partyY + 14);
+      doc
+        .font('Helvetica')
+        .fontSize(8)
+        .text(invoice.shippingAddress || '-', shipToX, partyY + 27)
+        .text('Reference No', shipToX, partyY + 60)
+        .text(
+          `: ${invoice.referenceNumber || '-'}`,
+          shipToX + 70,
+          partyY + 60,
+          {
+            width: partyColumnWidth - 80,
+          },
+        )
+        .text('DO No', shipToX, partyY + 72)
+        .text(
+          `: ${invoice.DeliveryOrder?.number || '-'}`,
+          shipToX + 70,
+          partyY + 72,
+        );
+
+      doc.y = contentTop;
+    };
+
+    drawPageHeader();
+    doc.on('pageAdded', drawPageHeader);
+
+    let y = contentTop;
 
     const columns = [
-      { label: 'NO.', width: 30, align: 'center' as const },
-      { label: 'PART NO.', width: 90, align: 'left' as const },
       {
+        property: 'no',
+        label: 'NO.',
+        width: 30,
+        align: 'center' as const,
+      },
+      {
+        property: 'partNumber',
+        label: 'PART NO.',
+        width: 90,
+        align: 'left' as const,
+      },
+      {
+        property: 'description',
         label: 'DESCRIPTION',
         width: width - 30 - 90 - 55 - 95 - 95,
         align: 'left' as const,
       },
-      { label: 'QTY', width: 55, align: 'center' as const },
-      { label: 'UNIT PRICE', width: 95, align: 'right' as const },
-      { label: 'AMOUNT', width: 95, align: 'right' as const },
+      {
+        property: 'quantity',
+        label: 'QTY',
+        width: 55,
+        align: 'center' as const,
+      },
+      {
+        property: 'unitPrice',
+        label: 'UNIT PRICE',
+        width: 95,
+        align: 'right' as const,
+      },
+      {
+        property: 'totalPrice',
+        label: 'AMOUNT',
+        width: 95,
+        align: 'right' as const,
+      },
     ];
-    const rowHeight = 20;
 
-    const drawRow = (
-      values: string[],
-      fill?: string,
-      textColor = '#000000',
-    ) => {
-      let x = left;
-      if (fill) document.rect(left, y, width, rowHeight).fill(fill);
-      document.fillColor(textColor).fontSize(8);
-      columns.forEach((column, index) => {
-        document.text(values[index] || '-', x + 4, y + 6, {
-          width: column.width - 8,
-          align: column.align,
-        });
-        x += column.width;
-      });
-      document
-        .strokeColor(COLORS.border)
-        .rect(left, y, width, rowHeight)
-        .stroke();
-      y += rowHeight;
-    };
-
-    drawRow(
-      columns.map((column) => column.label),
-      COLORS.navy,
-      '#FFFFFF',
+    doc.table(
+      {
+        headers: columns,
+        data: (invoice.InvoiceItems || []).map((item: any, index: number) => ({
+          no: String(index + 1),
+          partNumber: item.partNumber || '-',
+          description: item.description || '-',
+          quantity: String(item.quantity),
+          unitPrice: formatAmount(item.unitPrice),
+          totalPrice: formatAmount(item.totalPrice),
+        })),
+      },
+      { y, x: left, absolutePosition: true },
     );
-    (invoice.InvoiceItems || []).forEach((item: any, index: number) => {
-      drawRow([
-        String(index + 1),
-        item.partNumber,
-        item.description,
-        String(item.quantity),
-        formatAmount(item.unitPrice),
-        formatAmount(item.totalPrice),
-      ]);
-    });
 
-    y += 16;
-    const totalsX = right - 220;
-    const drawTotal = (label: string, value: number, bold = false) => {
-      document
-        .fillColor('#000000')
-        .font(bold ? 'Helvetica-Bold' : 'Helvetica')
-        .fontSize(bold ? 10 : 8)
-        .text(label, totalsX, y, { width: 110 });
-      document.text(formatAmount(value), totalsX + 110, y, {
-        width: 110,
-        align: 'right',
-      });
-      y += bold ? 18 : 14;
+    const summaryY = doc.y + 16;
+    const commentsWidth = width - 240;
+    const commentsHeight = 126;
+    const commentsPadding = 7;
+    const commentsTextWidth = commentsWidth - commentsPadding * 2;
+
+    doc
+      .lineWidth(0.75)
+      .strokeColor(COLORS.gray)
+      .rect(left, summaryY, commentsWidth, commentsHeight)
+      .stroke();
+
+    doc
+      .fillColor('#000000')
+      .font('Helvetica-Bold')
+      .fontSize(8)
+      .text(
+        'Others Comments Or Special Instructions',
+        left + commentsPadding,
+        summaryY + commentsPadding,
+        {
+          width: commentsTextWidth,
+        },
+      );
+
+    doc
+      .lineWidth(0.5)
+      .moveTo(left, summaryY + 18)
+      .lineTo(left + commentsWidth, summaryY + 18)
+      .stroke();
+
+    const commentX = left + commentsPadding;
+    const labelWidth = 48;
+    const valueX = commentX + labelWidth;
+    const valueWidth = commentsTextWidth - labelWidth;
+    const drawCommentRow = (
+      label: string,
+      value: string,
+      rowY: number,
+      boldValue = false,
+    ) => {
+      doc
+        .font('Helvetica')
+        .fontSize(8)
+        .text(label, commentX, rowY, { width: labelWidth })
+        .font(boldValue ? 'Helvetica-Bold' : 'Helvetica')
+        .text(`: ${value}`, valueX, rowY, { width: valueWidth });
     };
 
-    drawTotal('Subtotal', invoice.totalAmount);
-    drawTotal('Discount', invoice.discount);
-    drawTotal('VAT', invoice.vatAmount);
-    drawTotal('Grand Total', invoice.grandTotal, true);
-
-    document
-      .fillColor(COLORS.gray)
+    doc
       .font('Helvetica')
       .fontSize(8)
-      .text(`Payment Method: ${invoice.paymentMethod || '-'}`, left, y + 20)
-      .text(`Term of Payment: ${invoice.termOfPayment || '-'}`, left, y + 34);
+      .text(
+        'Payment is made in FULL AMOUNT to Bank Account:',
+        commentX,
+        summaryY + 24,
+        { width: commentsTextWidth },
+      );
+    drawCommentRow('Name', 'PT. RUBARTA PRIMA ABADI', summaryY + 36);
+    drawCommentRow(
+      'Bank',
+      'UOB - KCP KELAPA GADING BOULEVARD RAYA',
+      summaryY + 48,
+    );
+    drawCommentRow('A/C No', '5953006953', summaryY + 60, true);
+    doc.text('Please Send the transfer slip to :', commentX, summaryY + 84, {
+      width: commentsTextWidth,
+    });
+    drawCommentRow('E-mail', 'finance@rubarta.co.id', summaryY + 96);
+    doc.text('Put Invoice No. for reference.', commentX, summaryY + 108, {
+      width: commentsTextWidth,
+    });
 
-    document.end();
+    doc.table(
+      {
+        headers: [
+          { label: 'Label', property: 'label' },
+          { label: 'Value', property: 'value', align: 'right' },
+        ],
+        data: [
+          {
+            label: 'bold:SUBTOTAL',
+            value: `bold:${formatAmount(invoice.totalAmount)}`,
+          },
+          {
+            label: 'bold:DISCOUNT',
+            value: `bold:${formatAmount(invoice.discount)}`,
+          },
+          {
+            label: 'bold:VAT',
+            value: `bold:${formatAmount(invoice.vatAmount)}`,
+          },
+          {
+            label: 'bold:GRAND TOTAL',
+            value: `bold:${formatAmount(invoice.grandTotal)}`,
+          },
+        ],
+      },
+      {
+        hideHeader: true,
+        x: right - 220,
+        y: summaryY,
+        width: 220,
+      },
+    );
+
+    y = Math.max(doc.y, summaryY + 126);
+
+    // ---------- Signature ----------
+    const signatureWidth = 220;
+    const signatureX = right - signatureWidth;
+    let signatureY = doc.y + 20;
+
+    doc
+      .font('Helvetica-Bold')
+      .fontSize(9)
+      .fillColor('#000000')
+      .text(COMPANY.name, signatureX, signatureY, {
+        width: signatureWidth,
+        align: 'center',
+      });
+
+    signatureY += 50;
+
+    doc
+      .font('Helvetica-Bold')
+      .fontSize(9)
+      .text(
+        `( ${(invoice.User?.name || '-').toUpperCase()} )`,
+        signatureX,
+        signatureY,
+        { width: signatureWidth, align: 'center' },
+      );
+
+    doc.end();
   });
 }
