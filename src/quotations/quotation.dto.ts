@@ -11,6 +11,7 @@ import {
   MaxLength,
   Min,
   IsEmail,
+  IsNumberString,
 } from 'class-validator';
 import { Type } from 'class-transformer';
 import { QuotationStatus, Currency } from '../prisma/client/client';
@@ -200,6 +201,16 @@ export class SendQuotationEmailDto {
 }
 
 export class QueryQuotationDto {
+  @ApiProperty({ required: false })
+  @IsOptional()
+  @IsNumberString()
+  page?: string;
+
+  @ApiProperty({ required: false })
+  @IsOptional()
+  @IsNumberString()
+  pageSize?: string;
+
   @ApiProperty({ required: false })
   @IsOptional()
   @IsString()

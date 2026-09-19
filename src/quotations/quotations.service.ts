@@ -85,9 +85,16 @@ export class QuotationsService {
       where.status = query.status;
     }
 
-    return this.prisma.quotation.findMany({
+    const skip =
+      query.page && query.pageSize
+        ? (parseInt(query.page) - 1) * parseInt(query.pageSize)
+        : undefined;
+
+    const quotations = await this.prisma.quotation.findMany({
       where,
       orderBy: { createdAt: 'desc' },
+      skip,
+      take: query.pageSize ? parseInt(query.pageSize) : undefined,
       include: {
         Customer: { select: { id: true, name: true } },
         User: { select: { id: true, name: true } },
@@ -97,6 +104,13 @@ export class QuotationsService {
         },
       },
     });
+
+    if (query.page && query.pageSize) {
+      const total = await this.prisma.quotation.count({ where });
+      return { data: quotations, total };
+    }
+
+    return quotations;
   }
 
   async findOne(id: number) {
