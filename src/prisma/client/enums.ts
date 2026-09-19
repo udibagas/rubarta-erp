@@ -164,8 +164,7 @@ export type GoodsReceiptStatus = (typeof GoodsReceiptStatus)[keyof typeof GoodsR
 
 export const InvoiceStatus = {
   Draft: 'Draft',
-  Submitted: 'Submitted',
-  Approved: 'Approved',
+  Confirmed: 'Confirmed',
   Sent: 'Sent',
   Pending: 'Pending',
   Paid: 'Paid',

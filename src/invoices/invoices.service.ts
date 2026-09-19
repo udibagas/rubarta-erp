@@ -1,18 +1,18 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { CreateInvoiceDto, UpdateInvoiceDto } from './invoice.dto';
+import {
+  CreateInvoiceDto,
+  UpdateInvoiceDto,
+  QueryInvoiceDto,
+} from './invoice.dto';
 import { PrismaService } from '../prisma/prisma.service';
-import { ApprovalType, InvoiceStatus, Prisma } from '../prisma/client/client';
-import { ApprovalService } from '../approval/approval.service';
-import { OnEvent } from '@nestjs/event-emitter';
+import { InvoiceStatus, Prisma } from '../prisma/client/client';
 import { generateInvoicePdf } from './invoice-pdf';
 import dayjs from 'dayjs';
+import { Cron, CronExpression } from '@nestjs/schedule';
 
 @Injectable()
 export class InvoicesService {
-  constructor(
-    private readonly prisma: PrismaService,
-    private readonly approvalService: ApprovalService,
-  ) {}
+  constructor(private readonly prisma: PrismaService) {}
 
   async create(data: CreateInvoiceDto & { userId: number }) {
     const { items, ...invoiceData } = data;
@@ -37,61 +37,17 @@ export class InvoicesService {
       },
     };
 
-    return this.prisma.invoice.create({
-      data: createData,
-      include: {
-        Customer: {
-          select: {
-            id: true,
-            name: true,
-            email: true,
-            phone: true,
-            address: true,
-          },
-        },
-        User: {
-          select: {
-            id: true,
-            name: true,
-            email: true,
-          },
-        },
-        SalesOrder: {
-          select: {
-            id: true,
-            number: true,
-            date: true,
-          },
-        },
-        DeliveryOrder: { select: { id: true, number: true, date: true } },
-        InvoiceItems: true,
-      },
-    });
+    return this.prisma.invoice.create({ data: createData });
   }
 
-  async findAll(params: {
-    page?: number;
-    pageSize?: number;
-    keyword?: string;
-    customerId?: number;
-    status?: InvoiceStatus;
-    startDate?: Date;
-    endDate?: Date;
-  }) {
-    const {
-      page = 1,
-      pageSize = 10,
-      keyword,
-      customerId,
-      status,
-      startDate,
-      endDate,
-    } = params;
+  async findAll(query: QueryInvoiceDto) {
+    const { page, pageSize, keyword, customerId, status, startDate, endDate } =
+      query;
 
     const where: Prisma.InvoiceWhereInput = {};
 
     if (customerId) {
-      where.customerId = customerId;
+      where.customerId = Number(customerId);
     }
 
     if (status) {
@@ -127,10 +83,15 @@ export class InvoicesService {
       ];
     }
 
+    const skip =
+      query.page && query.pageSize
+        ? (parseInt(query.page) - 1) * parseInt(query.pageSize)
+        : undefined;
+
     const data = await this.prisma.invoice.findMany({
       where,
-      take: pageSize,
-      skip: (page - 1) * pageSize,
+      take: pageSize ? Number(pageSize) : undefined,
+      skip: skip,
       orderBy: { date: 'desc' },
       include: {
         Customer: {
@@ -165,15 +126,12 @@ export class InvoicesService {
       },
     });
 
-    const total = await this.prisma.invoice.count({ where });
+    if (page && pageSize) {
+      const total = await this.prisma.invoice.count({ where });
+      return { data, total };
+    }
 
-    return {
-      data,
-      page,
-      pageSize,
-      total,
-      totalPages: Math.ceil(total / pageSize),
-    };
+    return data;
   }
 
   async findOne(id: number) {
@@ -314,23 +272,6 @@ export class InvoicesService {
     });
   }
 
-  async submit(id: number) {
-    const invoice = await this.findOne(id);
-
-    if (invoice.status !== InvoiceStatus.Draft) {
-      return invoice;
-    }
-
-    const submittedInvoice = await this.prisma.invoice.update({
-      where: { id },
-      data: { status: InvoiceStatus.Submitted },
-    });
-
-    await this.approvalService.requestApproval(ApprovalType.INVOICE, id);
-
-    return submittedInvoice;
-  }
-
   async preview(id: number): Promise<Buffer> {
     const invoice = await this.findOne(id);
     return generateInvoicePdf(invoice);
@@ -394,18 +335,24 @@ export class InvoicesService {
     };
   }
 
-  @OnEvent('approval.completed')
-  private async handleApprovalCompleted(payload: {
-    approvalType: ApprovalType;
-    moduleId: number;
-  }) {
-    if (payload.approvalType !== ApprovalType.INVOICE) {
-      return;
-    }
-
-    await this.prisma.invoice.update({
-      where: { id: payload.moduleId },
-      data: { status: InvoiceStatus.Approved },
+  @Cron(CronExpression.EVERY_DAY_AT_8AM)
+  async markAsExpired() {
+    await this.prisma.invoice.updateMany({
+      where: {
+        dueDate: { lt: new Date() },
+        status: {
+          notIn: [
+            InvoiceStatus.Draft,
+            InvoiceStatus.Overdue,
+            InvoiceStatus.Paid,
+          ],
+        },
+      },
+      data: {
+        status: InvoiceStatus.Overdue,
+      },
     });
+
+    // TODO: apakah perlu kirim notifikasi ke user & customer bahwa invoice sudah overdue?
   }
 }

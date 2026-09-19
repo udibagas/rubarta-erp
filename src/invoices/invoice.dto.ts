@@ -11,6 +11,7 @@ import {
   IsString,
   IsObject,
   Min,
+  IsNumberString,
 } from 'class-validator';
 import { Type } from 'class-transformer';
 import { ApiProperty, PartialType } from '@nestjs/swagger';
@@ -107,3 +108,33 @@ export class CreateInvoiceDto {
 }
 
 export class UpdateInvoiceDto extends PartialType(CreateInvoiceDto) {}
+
+export class QueryInvoiceDto {
+  @IsOptional()
+  @IsNumberString()
+  page?: string;
+
+  @IsOptional()
+  @IsNumberString()
+  pageSize?: string;
+
+  @IsOptional()
+  @IsInt()
+  customerId?: string;
+
+  @IsOptional()
+  @IsEnum(InvoiceStatus)
+  status?: InvoiceStatus;
+
+  @IsOptional()
+  @IsDateString()
+  startDate?: string;
+
+  @IsOptional()
+  @IsDateString()
+  endDate?: string;
+
+  @IsOptional()
+  @IsString()
+  keyword?: string;
+}

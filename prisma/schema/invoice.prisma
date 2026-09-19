@@ -62,8 +62,7 @@ model InvoiceItem {
 
 enum InvoiceStatus {
   Draft
-  Submitted
-  Approved
+  Confirmed
   Sent
   Pending
   Paid

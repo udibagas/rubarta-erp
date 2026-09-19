@@ -12,7 +12,11 @@ import {
 } from '@nestjs/common';
 import { Response } from 'express';
 import { InvoicesService } from './invoices.service';
-import { CreateInvoiceDto, UpdateInvoiceDto } from './invoice.dto';
+import {
+  CreateInvoiceDto,
+  UpdateInvoiceDto,
+  QueryInvoiceDto,
+} from './invoice.dto';
 import { Auth } from '../auth/auth.decorator';
 import { User, InvoiceStatus } from '../prisma/client/client';
 
@@ -26,25 +30,8 @@ export class InvoicesController {
   }
 
   @Get()
-  findAll(
-    @Query('page', new ParseIntPipe({ optional: true })) page?: number,
-    @Query('pageSize', new ParseIntPipe({ optional: true })) pageSize?: number,
-    @Query('customerId', new ParseIntPipe({ optional: true }))
-    customerId?: number,
-    @Query('status') status?: InvoiceStatus,
-    @Query('startDate') startDate?: string,
-    @Query('endDate') endDate?: string,
-    @Query('keyword') keyword?: string,
-  ) {
-    return this.invoicesService.findAll({
-      page,
-      pageSize,
-      keyword,
-      customerId,
-      status,
-      startDate: startDate ? new Date(startDate) : undefined,
-      endDate: endDate ? new Date(endDate) : undefined,
-    });
+  findAll(@Query() query: QueryInvoiceDto) {
+    return this.invoicesService.findAll(query);
   }
 
   @Get('summary')
@@ -78,11 +65,6 @@ export class InvoicesController {
     @Body() data: UpdateInvoiceDto,
   ) {
     return this.invoicesService.update(id, data);
-  }
-
-  @Post(':id/submit')
-  submit(@Param('id', ParseIntPipe) id: number) {
-    return this.invoicesService.submit(id);
   }
 
   @Patch(':id/status')
