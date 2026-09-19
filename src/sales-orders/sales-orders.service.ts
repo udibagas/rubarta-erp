@@ -90,9 +90,18 @@ export class SalesOrdersService {
       where.status = query.status;
     }
 
-    return this.prisma.salesOrder.findMany({
+    const skip =
+      query.page && query.pageSize
+        ? (parseInt(query.page) - 1) * parseInt(query.pageSize)
+        : undefined;
+
+    const take = query.pageSize ? parseInt(query.pageSize) : undefined;
+
+    const salesOrders = await this.prisma.salesOrder.findMany({
       where,
       orderBy: { date: 'desc' },
+      skip,
+      take,
       include: {
         Customer: { select: { id: true, name: true } },
         User: { select: { id: true, name: true } },
@@ -101,6 +110,13 @@ export class SalesOrdersService {
         },
       },
     });
+
+    if (query.page && query.pageSize) {
+      const total = await this.prisma.salesOrder.count({ where });
+      return { data: salesOrders, total };
+    }
+
+    return salesOrders;
   }
 
   async findOne(id: number) {

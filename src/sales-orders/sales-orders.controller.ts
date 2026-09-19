@@ -8,7 +8,6 @@ import {
   Delete,
   Query,
   ParseIntPipe,
-  ParseEnumPipe,
   FileTypeValidator,
   MaxFileSizeValidator,
   ParseFilePipe,
@@ -32,6 +31,7 @@ import * as multer from 'multer';
 import { SalesOrdersService } from './sales-orders.service';
 import {
   CreateSalesOrderDto,
+  QuerySalesOrderDto,
   SendSalesOrderEmailDto,
   UpdateSalesOrderDto,
 } from './sales-order.dto';
@@ -64,14 +64,8 @@ export class SalesOrdersController {
   @Get()
   @ApiOperation({ summary: 'Get all orders' })
   @ApiOkResponse({ description: 'List of orders' })
-  findAll(
-    @Query('keyword') keyword?: string,
-    @Query('customerId', new ParseIntPipe({ optional: true }))
-    customerId?: number,
-    @Query('status', new ParseEnumPipe(SalesOrderStatus, { optional: true }))
-    status?: SalesOrderStatus,
-  ) {
-    return this.salesOrdersService.findAll({ keyword, customerId, status });
+  findAll(@Query() query: QuerySalesOrderDto) {
+    return this.salesOrdersService.findAll(query);
   }
 
   @Public()

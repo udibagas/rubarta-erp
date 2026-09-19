@@ -11,6 +11,7 @@ import {
   MaxLength,
   Min,
   IsEmail,
+  IsNumberString,
 } from 'class-validator';
 import { Type } from 'class-transformer';
 import { Currency, SalesOrderStatus } from '../prisma/client/client';
@@ -215,6 +216,16 @@ export class SendSalesOrderEmailDto {
 }
 
 export class QuerySalesOrderDto {
+  @ApiProperty({ required: false })
+  @IsOptional()
+  @IsNumberString()
+  page?: string;
+
+  @ApiProperty({ required: false })
+  @IsOptional()
+  @IsNumberString()
+  pageSize?: string;
+
   @ApiProperty({ required: false })
   @IsOptional()
   @IsString()
