@@ -233,8 +233,18 @@ export class QuerySalesOrderDto {
 
   @ApiProperty({ required: false })
   @IsOptional()
-  @IsInt()
-  customerId?: number;
+  @IsNumberString()
+  customerId?: string;
+
+  @ApiProperty({
+    required: false,
+    type: [String],
+    example: ['2024-01-01', '2024-12-31'],
+  })
+  @IsOptional()
+  @IsArray()
+  @IsString({ each: true })
+  dateRange?: string[];
 
   @ApiProperty({ required: false, enum: SalesOrderStatus })
   @IsOptional()

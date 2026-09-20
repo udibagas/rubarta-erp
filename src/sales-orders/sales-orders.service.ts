@@ -67,11 +67,19 @@ export class SalesOrdersService {
     }
 
     if (query.customerId) {
-      where.customerId = query.customerId;
+      where.customerId = parseInt(query.customerId);
     }
 
     if (query.status) {
       where.status = query.status;
+    }
+
+    if (query.dateRange && query.dateRange.length === 2) {
+      const [startDate, endDate] = query.dateRange;
+      where.date = {
+        gte: dayjs(startDate).startOf('day').toDate(),
+        lte: dayjs(endDate).endOf('day').toDate(),
+      };
     }
 
     const skip =
