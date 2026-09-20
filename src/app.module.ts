@@ -36,6 +36,7 @@ import { EjsAdapter } from '@nestjs-modules/mailer/adapters/ejs.adapter';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { ScheduleModule } from '@nestjs/schedule';
+import { SalesDashboardModule } from './sales-dashboard/sales-dashboard.module';
 
 @Module({
   imports: [
@@ -114,6 +115,7 @@ import { ScheduleModule } from '@nestjs/schedule';
     MaterialsModule,
     CrmDashboardModule,
     VisitPlansModule,
+    SalesDashboardModule,
   ],
   controllers: [],
   providers: [],
