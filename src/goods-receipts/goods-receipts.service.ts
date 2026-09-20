@@ -56,8 +56,9 @@ export class GoodsReceiptsService {
       ];
     }
 
-    if (query.purchaseOrderId) where.purchaseOrderId = query.purchaseOrderId;
-    if (query.supplierId) where.supplierId = query.supplierId;
+    if (query.purchaseOrderId)
+      where.purchaseOrderId = Number(query.purchaseOrderId);
+    if (query.supplierId) where.supplierId = Number(query.supplierId);
 
     const take = query.pageSize ? parseInt(query.pageSize, 10) : undefined;
     const skip =

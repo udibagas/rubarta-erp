@@ -116,11 +116,11 @@ export class QueryGoodsReceiptDto {
 
   @ApiProperty({ required: false })
   @IsOptional()
-  @IsInt()
-  purchaseOrderId?: number;
+  @IsNumberString()
+  purchaseOrderId?: string;
 
   @ApiProperty({ required: false })
   @IsOptional()
-  @IsInt()
-  supplierId?: number;
+  @IsNumberString()
+  supplierId?: string;
 }
