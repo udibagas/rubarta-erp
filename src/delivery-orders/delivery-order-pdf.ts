@@ -73,7 +73,7 @@ export function generateDeliveryOrderPdf(deliveryOrder: any): Promise<Buffer> {
     const infoBoxX = right - infoBoxWidth;
     const contentTop = 220;
     const infoRows: [string, string][] = [
-      ['Delivery Order Number', deliveryOrder.number],
+      ['DO Number', deliveryOrder.number],
       ['Date', formatDate(deliveryOrder.date)],
       ['SO Number', deliveryOrder.SalesOrder?.number || '-'],
       ['Sender', deliveryOrder.referenceNumber || '-'],
