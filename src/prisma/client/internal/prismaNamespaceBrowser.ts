@@ -478,6 +478,7 @@ export const InvoiceScalarFieldEnum = {
   vatAmount: 'vatAmount',
   grandTotal: 'grandTotal',
   withTaxInvoice: 'withTaxInvoice',
+  taxInvoiceNumber: 'taxInvoiceNumber',
   paymentMethod: 'paymentMethod',
   termOfPayment: 'termOfPayment',
   contactPerson: 'contactPerson',

@@ -65,6 +65,7 @@ export type InvoiceMinAggregateOutputType = {
   vatAmount: number | null
   grandTotal: number | null
   withTaxInvoice: boolean | null
+  taxInvoiceNumber: string | null
   paymentMethod: string | null
   termOfPayment: string | null
   contactPerson: string | null
@@ -93,6 +94,7 @@ export type InvoiceMaxAggregateOutputType = {
   vatAmount: number | null
   grandTotal: number | null
   withTaxInvoice: boolean | null
+  taxInvoiceNumber: string | null
   paymentMethod: string | null
   termOfPayment: string | null
   contactPerson: string | null
@@ -122,6 +124,7 @@ export type InvoiceCountAggregateOutputType = {
   vatAmount: number
   grandTotal: number
   withTaxInvoice: number
+  taxInvoiceNumber: number
   paymentMethod: number
   termOfPayment: number
   contactPerson: number
@@ -176,6 +179,7 @@ export type InvoiceMinAggregateInputType = {
   vatAmount?: true
   grandTotal?: true
   withTaxInvoice?: true
+  taxInvoiceNumber?: true
   paymentMethod?: true
   termOfPayment?: true
   contactPerson?: true
@@ -204,6 +208,7 @@ export type InvoiceMaxAggregateInputType = {
   vatAmount?: true
   grandTotal?: true
   withTaxInvoice?: true
+  taxInvoiceNumber?: true
   paymentMethod?: true
   termOfPayment?: true
   contactPerson?: true
@@ -233,6 +238,7 @@ export type InvoiceCountAggregateInputType = {
   vatAmount?: true
   grandTotal?: true
   withTaxInvoice?: true
+  taxInvoiceNumber?: true
   paymentMethod?: true
   termOfPayment?: true
   contactPerson?: true
@@ -349,6 +355,7 @@ export type InvoiceGroupByOutputType = {
   vatAmount: number
   grandTotal: number
   withTaxInvoice: boolean
+  taxInvoiceNumber: string | null
   paymentMethod: string | null
   termOfPayment: string | null
   contactPerson: string | null
@@ -401,6 +408,7 @@ export type InvoiceWhereInput = {
   vatAmount?: Prisma.FloatFilter<"Invoice"> | number
   grandTotal?: Prisma.FloatFilter<"Invoice"> | number
   withTaxInvoice?: Prisma.BoolFilter<"Invoice"> | boolean
+  taxInvoiceNumber?: Prisma.StringNullableFilter<"Invoice"> | string | null
   paymentMethod?: Prisma.StringNullableFilter<"Invoice"> | string | null
   termOfPayment?: Prisma.StringNullableFilter<"Invoice"> | string | null
   contactPerson?: Prisma.StringNullableFilter<"Invoice"> | string | null
@@ -436,6 +444,7 @@ export type InvoiceOrderByWithRelationInput = {
   vatAmount?: Prisma.SortOrder
   grandTotal?: Prisma.SortOrder
   withTaxInvoice?: Prisma.SortOrder
+  taxInvoiceNumber?: Prisma.SortOrderInput | Prisma.SortOrder
   paymentMethod?: Prisma.SortOrderInput | Prisma.SortOrder
   termOfPayment?: Prisma.SortOrderInput | Prisma.SortOrder
   contactPerson?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -475,6 +484,7 @@ export type InvoiceWhereUniqueInput = Prisma.AtLeast<{
   vatAmount?: Prisma.FloatFilter<"Invoice"> | number
   grandTotal?: Prisma.FloatFilter<"Invoice"> | number
   withTaxInvoice?: Prisma.BoolFilter<"Invoice"> | boolean
+  taxInvoiceNumber?: Prisma.StringNullableFilter<"Invoice"> | string | null
   paymentMethod?: Prisma.StringNullableFilter<"Invoice"> | string | null
   termOfPayment?: Prisma.StringNullableFilter<"Invoice"> | string | null
   contactPerson?: Prisma.StringNullableFilter<"Invoice"> | string | null
@@ -509,6 +519,7 @@ export type InvoiceOrderByWithAggregationInput = {
   vatAmount?: Prisma.SortOrder
   grandTotal?: Prisma.SortOrder
   withTaxInvoice?: Prisma.SortOrder
+  taxInvoiceNumber?: Prisma.SortOrderInput | Prisma.SortOrder
   paymentMethod?: Prisma.SortOrderInput | Prisma.SortOrder
   termOfPayment?: Prisma.SortOrderInput | Prisma.SortOrder
   contactPerson?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -546,6 +557,7 @@ export type InvoiceScalarWhereWithAggregatesInput = {
   vatAmount?: Prisma.FloatWithAggregatesFilter<"Invoice"> | number
   grandTotal?: Prisma.FloatWithAggregatesFilter<"Invoice"> | number
   withTaxInvoice?: Prisma.BoolWithAggregatesFilter<"Invoice"> | boolean
+  taxInvoiceNumber?: Prisma.StringNullableWithAggregatesFilter<"Invoice"> | string | null
   paymentMethod?: Prisma.StringNullableWithAggregatesFilter<"Invoice"> | string | null
   termOfPayment?: Prisma.StringNullableWithAggregatesFilter<"Invoice"> | string | null
   contactPerson?: Prisma.StringNullableWithAggregatesFilter<"Invoice"> | string | null
@@ -574,6 +586,7 @@ export type InvoiceCreateInput = {
   vatAmount: number
   grandTotal: number
   withTaxInvoice?: boolean
+  taxInvoiceNumber?: string | null
   paymentMethod?: string | null
   termOfPayment?: string | null
   contactPerson?: string | null
@@ -605,6 +618,7 @@ export type InvoiceUncheckedCreateInput = {
   vatAmount: number
   grandTotal: number
   withTaxInvoice?: boolean
+  taxInvoiceNumber?: string | null
   paymentMethod?: string | null
   termOfPayment?: string | null
   contactPerson?: string | null
@@ -635,6 +649,7 @@ export type InvoiceUpdateInput = {
   vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
   withTaxInvoice?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  taxInvoiceNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   termOfPayment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPerson?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -666,6 +681,7 @@ export type InvoiceUncheckedUpdateInput = {
   vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
   withTaxInvoice?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  taxInvoiceNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   termOfPayment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPerson?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -697,6 +713,7 @@ export type InvoiceCreateManyInput = {
   vatAmount: number
   grandTotal: number
   withTaxInvoice?: boolean
+  taxInvoiceNumber?: string | null
   paymentMethod?: string | null
   termOfPayment?: string | null
   contactPerson?: string | null
@@ -725,6 +742,7 @@ export type InvoiceUpdateManyMutationInput = {
   vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
   withTaxInvoice?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  taxInvoiceNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   termOfPayment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPerson?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -750,6 +768,7 @@ export type InvoiceUncheckedUpdateManyInput = {
   vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
   withTaxInvoice?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  taxInvoiceNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   termOfPayment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPerson?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -799,6 +818,7 @@ export type InvoiceCountOrderByAggregateInput = {
   vatAmount?: Prisma.SortOrder
   grandTotal?: Prisma.SortOrder
   withTaxInvoice?: Prisma.SortOrder
+  taxInvoiceNumber?: Prisma.SortOrder
   paymentMethod?: Prisma.SortOrder
   termOfPayment?: Prisma.SortOrder
   contactPerson?: Prisma.SortOrder
@@ -839,6 +859,7 @@ export type InvoiceMaxOrderByAggregateInput = {
   vatAmount?: Prisma.SortOrder
   grandTotal?: Prisma.SortOrder
   withTaxInvoice?: Prisma.SortOrder
+  taxInvoiceNumber?: Prisma.SortOrder
   paymentMethod?: Prisma.SortOrder
   termOfPayment?: Prisma.SortOrder
   contactPerson?: Prisma.SortOrder
@@ -867,6 +888,7 @@ export type InvoiceMinOrderByAggregateInput = {
   vatAmount?: Prisma.SortOrder
   grandTotal?: Prisma.SortOrder
   withTaxInvoice?: Prisma.SortOrder
+  taxInvoiceNumber?: Prisma.SortOrder
   paymentMethod?: Prisma.SortOrder
   termOfPayment?: Prisma.SortOrder
   contactPerson?: Prisma.SortOrder
@@ -1097,6 +1119,7 @@ export type InvoiceCreateWithoutPaymentsInput = {
   vatAmount: number
   grandTotal: number
   withTaxInvoice?: boolean
+  taxInvoiceNumber?: string | null
   paymentMethod?: string | null
   termOfPayment?: string | null
   contactPerson?: string | null
@@ -1127,6 +1150,7 @@ export type InvoiceUncheckedCreateWithoutPaymentsInput = {
   vatAmount: number
   grandTotal: number
   withTaxInvoice?: boolean
+  taxInvoiceNumber?: string | null
   paymentMethod?: string | null
   termOfPayment?: string | null
   contactPerson?: string | null
@@ -1172,6 +1196,7 @@ export type InvoiceUpdateWithoutPaymentsInput = {
   vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
   withTaxInvoice?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  taxInvoiceNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   termOfPayment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPerson?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1202,6 +1227,7 @@ export type InvoiceUncheckedUpdateWithoutPaymentsInput = {
   vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
   withTaxInvoice?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  taxInvoiceNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   termOfPayment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPerson?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1231,6 +1257,7 @@ export type InvoiceCreateWithoutCustomerInput = {
   vatAmount: number
   grandTotal: number
   withTaxInvoice?: boolean
+  taxInvoiceNumber?: string | null
   paymentMethod?: string | null
   termOfPayment?: string | null
   contactPerson?: string | null
@@ -1261,6 +1288,7 @@ export type InvoiceUncheckedCreateWithoutCustomerInput = {
   vatAmount: number
   grandTotal: number
   withTaxInvoice?: boolean
+  taxInvoiceNumber?: string | null
   paymentMethod?: string | null
   termOfPayment?: string | null
   contactPerson?: string | null
@@ -1320,6 +1348,7 @@ export type InvoiceScalarWhereInput = {
   vatAmount?: Prisma.FloatFilter<"Invoice"> | number
   grandTotal?: Prisma.FloatFilter<"Invoice"> | number
   withTaxInvoice?: Prisma.BoolFilter<"Invoice"> | boolean
+  taxInvoiceNumber?: Prisma.StringNullableFilter<"Invoice"> | string | null
   paymentMethod?: Prisma.StringNullableFilter<"Invoice"> | string | null
   termOfPayment?: Prisma.StringNullableFilter<"Invoice"> | string | null
   contactPerson?: Prisma.StringNullableFilter<"Invoice"> | string | null
@@ -1348,6 +1377,7 @@ export type InvoiceCreateWithoutDeliveryOrderInput = {
   vatAmount: number
   grandTotal: number
   withTaxInvoice?: boolean
+  taxInvoiceNumber?: string | null
   paymentMethod?: string | null
   termOfPayment?: string | null
   contactPerson?: string | null
@@ -1378,6 +1408,7 @@ export type InvoiceUncheckedCreateWithoutDeliveryOrderInput = {
   vatAmount: number
   grandTotal: number
   withTaxInvoice?: boolean
+  taxInvoiceNumber?: string | null
   paymentMethod?: string | null
   termOfPayment?: string | null
   contactPerson?: string | null
@@ -1423,6 +1454,7 @@ export type InvoiceUpdateWithoutDeliveryOrderInput = {
   vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
   withTaxInvoice?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  taxInvoiceNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   termOfPayment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPerson?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1453,6 +1485,7 @@ export type InvoiceUncheckedUpdateWithoutDeliveryOrderInput = {
   vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
   withTaxInvoice?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  taxInvoiceNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   termOfPayment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPerson?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1482,6 +1515,7 @@ export type InvoiceCreateWithoutInvoiceItemsInput = {
   vatAmount: number
   grandTotal: number
   withTaxInvoice?: boolean
+  taxInvoiceNumber?: string | null
   paymentMethod?: string | null
   termOfPayment?: string | null
   contactPerson?: string | null
@@ -1512,6 +1546,7 @@ export type InvoiceUncheckedCreateWithoutInvoiceItemsInput = {
   vatAmount: number
   grandTotal: number
   withTaxInvoice?: boolean
+  taxInvoiceNumber?: string | null
   paymentMethod?: string | null
   termOfPayment?: string | null
   contactPerson?: string | null
@@ -1557,6 +1592,7 @@ export type InvoiceUpdateWithoutInvoiceItemsInput = {
   vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
   withTaxInvoice?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  taxInvoiceNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   termOfPayment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPerson?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1587,6 +1623,7 @@ export type InvoiceUncheckedUpdateWithoutInvoiceItemsInput = {
   vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
   withTaxInvoice?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  taxInvoiceNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   termOfPayment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPerson?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1616,6 +1653,7 @@ export type InvoiceCreateWithoutSalesOrderInput = {
   vatAmount: number
   grandTotal: number
   withTaxInvoice?: boolean
+  taxInvoiceNumber?: string | null
   paymentMethod?: string | null
   termOfPayment?: string | null
   contactPerson?: string | null
@@ -1646,6 +1684,7 @@ export type InvoiceUncheckedCreateWithoutSalesOrderInput = {
   vatAmount: number
   grandTotal: number
   withTaxInvoice?: boolean
+  taxInvoiceNumber?: string | null
   paymentMethod?: string | null
   termOfPayment?: string | null
   contactPerson?: string | null
@@ -1701,6 +1740,7 @@ export type InvoiceCreateWithoutUserInput = {
   vatAmount: number
   grandTotal: number
   withTaxInvoice?: boolean
+  taxInvoiceNumber?: string | null
   paymentMethod?: string | null
   termOfPayment?: string | null
   contactPerson?: string | null
@@ -1731,6 +1771,7 @@ export type InvoiceUncheckedCreateWithoutUserInput = {
   vatAmount: number
   grandTotal: number
   withTaxInvoice?: boolean
+  taxInvoiceNumber?: string | null
   paymentMethod?: string | null
   termOfPayment?: string | null
   contactPerson?: string | null
@@ -1787,6 +1828,7 @@ export type InvoiceCreateManyCustomerInput = {
   vatAmount: number
   grandTotal: number
   withTaxInvoice?: boolean
+  taxInvoiceNumber?: string | null
   paymentMethod?: string | null
   termOfPayment?: string | null
   contactPerson?: string | null
@@ -1814,6 +1856,7 @@ export type InvoiceUpdateWithoutCustomerInput = {
   vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
   withTaxInvoice?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  taxInvoiceNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   termOfPayment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPerson?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1844,6 +1887,7 @@ export type InvoiceUncheckedUpdateWithoutCustomerInput = {
   vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
   withTaxInvoice?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  taxInvoiceNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   termOfPayment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPerson?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1874,6 +1918,7 @@ export type InvoiceUncheckedUpdateManyWithoutCustomerInput = {
   vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
   withTaxInvoice?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  taxInvoiceNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   termOfPayment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPerson?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1902,6 +1947,7 @@ export type InvoiceCreateManySalesOrderInput = {
   vatAmount: number
   grandTotal: number
   withTaxInvoice?: boolean
+  taxInvoiceNumber?: string | null
   paymentMethod?: string | null
   termOfPayment?: string | null
   contactPerson?: string | null
@@ -1929,6 +1975,7 @@ export type InvoiceUpdateWithoutSalesOrderInput = {
   vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
   withTaxInvoice?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  taxInvoiceNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   termOfPayment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPerson?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1959,6 +2006,7 @@ export type InvoiceUncheckedUpdateWithoutSalesOrderInput = {
   vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
   withTaxInvoice?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  taxInvoiceNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   termOfPayment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPerson?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1989,6 +2037,7 @@ export type InvoiceUncheckedUpdateManyWithoutSalesOrderInput = {
   vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
   withTaxInvoice?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  taxInvoiceNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   termOfPayment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPerson?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2017,6 +2066,7 @@ export type InvoiceCreateManyUserInput = {
   vatAmount: number
   grandTotal: number
   withTaxInvoice?: boolean
+  taxInvoiceNumber?: string | null
   paymentMethod?: string | null
   termOfPayment?: string | null
   contactPerson?: string | null
@@ -2044,6 +2094,7 @@ export type InvoiceUpdateWithoutUserInput = {
   vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
   withTaxInvoice?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  taxInvoiceNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   termOfPayment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPerson?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2074,6 +2125,7 @@ export type InvoiceUncheckedUpdateWithoutUserInput = {
   vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
   withTaxInvoice?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  taxInvoiceNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   termOfPayment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPerson?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2104,6 +2156,7 @@ export type InvoiceUncheckedUpdateManyWithoutUserInput = {
   vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
   withTaxInvoice?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  taxInvoiceNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   termOfPayment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPerson?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2172,6 +2225,7 @@ export type InvoiceSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   vatAmount?: boolean
   grandTotal?: boolean
   withTaxInvoice?: boolean
+  taxInvoiceNumber?: boolean
   paymentMethod?: boolean
   termOfPayment?: boolean
   contactPerson?: boolean
@@ -2208,6 +2262,7 @@ export type InvoiceSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   vatAmount?: boolean
   grandTotal?: boolean
   withTaxInvoice?: boolean
+  taxInvoiceNumber?: boolean
   paymentMethod?: boolean
   termOfPayment?: boolean
   contactPerson?: boolean
@@ -2241,6 +2296,7 @@ export type InvoiceSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   vatAmount?: boolean
   grandTotal?: boolean
   withTaxInvoice?: boolean
+  taxInvoiceNumber?: boolean
   paymentMethod?: boolean
   termOfPayment?: boolean
   contactPerson?: boolean
@@ -2274,6 +2330,7 @@ export type InvoiceSelectScalar = {
   vatAmount?: boolean
   grandTotal?: boolean
   withTaxInvoice?: boolean
+  taxInvoiceNumber?: boolean
   paymentMethod?: boolean
   termOfPayment?: boolean
   contactPerson?: boolean
@@ -2287,7 +2344,7 @@ export type InvoiceSelectScalar = {
   updatedAt?: boolean
 }
 
-export type InvoiceOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "number" | "referenceNumber" | "date" | "dueDate" | "status" | "billingAddress" | "shippingAddress" | "attachments" | "currency" | "totalAmount" | "discount" | "vatAmount" | "grandTotal" | "withTaxInvoice" | "paymentMethod" | "termOfPayment" | "contactPerson" | "contactPhone" | "contactEmail" | "userId" | "salesOrderId" | "deliveryOrderId" | "customerId" | "createdAt" | "updatedAt", ExtArgs["result"]["invoice"]>
+export type InvoiceOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "number" | "referenceNumber" | "date" | "dueDate" | "status" | "billingAddress" | "shippingAddress" | "attachments" | "currency" | "totalAmount" | "discount" | "vatAmount" | "grandTotal" | "withTaxInvoice" | "taxInvoiceNumber" | "paymentMethod" | "termOfPayment" | "contactPerson" | "contactPhone" | "contactEmail" | "userId" | "salesOrderId" | "deliveryOrderId" | "customerId" | "createdAt" | "updatedAt", ExtArgs["result"]["invoice"]>
 export type InvoiceInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   Customer?: boolean | Prisma.CustomerDefaultArgs<ExtArgs>
   Payments?: boolean | Prisma.Invoice$PaymentsArgs<ExtArgs>
@@ -2336,6 +2393,7 @@ export type $InvoicePayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     vatAmount: number
     grandTotal: number
     withTaxInvoice: boolean
+    taxInvoiceNumber: string | null
     paymentMethod: string | null
     termOfPayment: string | null
     contactPerson: string | null
@@ -2791,6 +2849,7 @@ export interface InvoiceFieldRefs {
   readonly vatAmount: Prisma.FieldRef<"Invoice", 'Float'>
   readonly grandTotal: Prisma.FieldRef<"Invoice", 'Float'>
   readonly withTaxInvoice: Prisma.FieldRef<"Invoice", 'Boolean'>
+  readonly taxInvoiceNumber: Prisma.FieldRef<"Invoice", 'String'>
   readonly paymentMethod: Prisma.FieldRef<"Invoice", 'String'>
   readonly termOfPayment: Prisma.FieldRef<"Invoice", 'String'>
   readonly contactPerson: Prisma.FieldRef<"Invoice", 'String'>

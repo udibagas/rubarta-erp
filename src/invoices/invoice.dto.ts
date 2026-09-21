@@ -75,6 +75,10 @@ export class CreateInvoiceDto {
   @IsBoolean()
   withTaxInvoice?: boolean;
 
+  @IsOptional()
+  @IsString()
+  taxInvoiceNumber?: string;
+
   @ApiProperty({ example: { files: [] }, type: Object })
   @IsOptional()
   @IsObject({ each: true })
