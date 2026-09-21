@@ -148,22 +148,25 @@ export class QueryInvoiceDto {
   pageSize?: string;
 
   @IsOptional()
-  @IsInt()
-  customerId?: string;
-
-  @IsOptional()
   @IsEnum(InvoiceStatus)
   status?: InvoiceStatus;
 
   @IsOptional()
-  @IsDateString()
-  startDate?: string;
-
-  @IsOptional()
-  @IsDateString()
-  endDate?: string;
-
-  @IsOptional()
   @IsString()
   keyword?: string;
+
+  @ApiProperty({ required: false })
+  @IsOptional()
+  @IsNumberString()
+  customerId?: string;
+
+  @ApiProperty({
+    required: false,
+    type: [String],
+    example: ['2024-01-01', '2024-12-31'],
+  })
+  @IsOptional()
+  @IsArray()
+  @IsString({ each: true })
+  dateRange?: string[];
 }

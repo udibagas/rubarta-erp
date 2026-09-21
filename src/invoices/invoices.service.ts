@@ -46,8 +46,7 @@ export class InvoicesService {
   }
 
   async findAll(query: QueryInvoiceDto) {
-    const { page, pageSize, keyword, customerId, status, startDate, endDate } =
-      query;
+    const { page, pageSize, keyword, customerId, status, dateRange } = query;
 
     const where: Prisma.InvoiceWhereInput = {};
 
@@ -59,14 +58,12 @@ export class InvoicesService {
       where.status = status;
     }
 
-    if (startDate || endDate) {
-      where.date = {};
-      if (startDate) {
-        where.date.gte = startDate;
-      }
-      if (endDate) {
-        where.date.lte = endDate;
-      }
+    if (dateRange && dateRange.length === 2) {
+      const [startDate, endDate] = dateRange;
+      where.date = {
+        gte: dayjs(startDate).startOf('day').toDate(),
+        lte: dayjs(endDate).endOf('day').toDate(),
+      };
     }
 
     if (keyword) {
