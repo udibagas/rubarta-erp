@@ -28,8 +28,10 @@ function formatDate(value?: Date | string | null): string {
   return `${String(date.getDate()).padStart(2, '0')}-${String(date.getMonth() + 1).padStart(2, '0')}-${date.getFullYear()}`;
 }
 
-function formatAmount(value: number): string {
-  return (value || 0).toLocaleString('en-US', {
+function formatAmount(value: number, currency?: string): string {
+  return (value || 0).toLocaleString('id-ID', {
+    style: currency ? 'currency' : 'decimal',
+    currency: currency,
     minimumFractionDigits: 2,
     maximumFractionDigits: 2,
   });
@@ -334,19 +336,19 @@ export function generateInvoicePdf(invoice: any): Promise<Buffer> {
         data: [
           {
             label: 'bold:SUBTOTAL',
-            value: `bold:${formatAmount(invoice.totalAmount)}`,
+            value: `bold:${formatAmount(invoice.totalAmount, invoice.currency)}`,
           },
           {
             label: 'bold:DISCOUNT',
-            value: `bold:${formatAmount(invoice.discount)}`,
+            value: `bold:${formatAmount(invoice.discount, invoice.currency)}`,
           },
           {
             label: 'bold:VAT',
-            value: `bold:${formatAmount(invoice.vatAmount)}`,
+            value: `bold:${formatAmount(invoice.vatAmount, invoice.currency)}`,
           },
           {
             label: 'bold:GRAND TOTAL',
-            value: `bold:${formatAmount(invoice.grandTotal)}`,
+            value: `bold:${formatAmount(invoice.grandTotal, invoice.currency)}`,
           },
         ],
       },
