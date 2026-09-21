@@ -123,13 +123,6 @@ export function generateOrderPdf(salesOrder: any): Promise<Buffer> {
           align: 'right',
         });
 
-      // doc
-      //   .lineWidth(0.5)
-      //   .strokeColor(COLORS.border)
-      //   .moveTo(infoBoxX, headerTop + 28)
-      //   .lineTo(infoBoxX + infoBoxWidth, headerTop + 28)
-      //   .stroke();
-
       doc
         .lineWidth(0.5)
         .strokeColor(COLORS.border)
