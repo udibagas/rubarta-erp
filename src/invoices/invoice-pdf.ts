@@ -20,6 +20,7 @@ const COLORS = {
   navy: '#12355B',
   gray: '#555555',
   border: '#B7B7B7',
+  borderGray: '#808181',
 };
 
 function formatDate(value?: Date | string | null): string {
@@ -83,6 +84,34 @@ export function generateInvoicePdf(invoice: any): Promise<Buffer> {
     const infoX = right - infoWidth;
     const contentTop = 250;
 
+    const drawDraftWatermark = () => {
+      const status = String(invoice?.status ?? '')
+        .trim()
+        .toUpperCase();
+      if (!['DRAFT', 'PAID'].includes(status)) {
+        return;
+      }
+
+      const centerX = doc.page.width / 2;
+      const centerY = doc.page.height / 2;
+
+      const strokeColor = status === 'DRAFT' ? '#FF0000' : '#008000';
+
+      doc
+        .save()
+        .rotate(315, { origin: [centerX, centerY] })
+        .font('Helvetica-Bold')
+        .fontSize(90)
+        .strokeColor(strokeColor)
+        .lineWidth(1.2)
+        .text(status.split('').join(' '), centerX - 180, centerY - 28, {
+          align: 'center',
+          stroke: true,
+          fill: false,
+        })
+        .restore();
+    };
+
     const drawPageHeader = () => {
       const headerTop = doc.page.margins.top;
 
@@ -113,9 +142,9 @@ export function generateInvoicePdf(invoice: any): Promise<Buffer> {
         });
 
       doc
-        .lineWidth(0.75)
-        .strokeColor(COLORS.gray)
-        .rect(infoX, headerTop + 32, 190, 65)
+        .lineWidth(0.5)
+        .strokeColor(COLORS.borderGray)
+        .rect(infoX, headerTop + 32, 190, 65.2)
         .stroke();
 
       doc.table({
@@ -203,6 +232,7 @@ export function generateInvoicePdf(invoice: any): Promise<Buffer> {
           partyY + 72,
         );
 
+      drawDraftWatermark();
       doc.y = contentTop;
     };
 
