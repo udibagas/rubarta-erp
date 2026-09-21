@@ -125,18 +125,22 @@ export function generateQuotationPdf(quotation: any): Promise<Buffer> {
       doc
         .lineWidth(0.5)
         .strokeColor(COLORS.border)
-        .moveTo(infoBoxX, headerTop + 28)
-        .lineTo(infoBoxX + infoBoxWidth, headerTop + 28)
+        .rect(infoBoxX, headerTop + 28, infoBoxWidth, 127.4)
         .stroke();
 
       doc.table({
         headers: [
-          { label: 'Property', width: 80, property: 'property' },
+          {
+            label: 'Property',
+            width: 80,
+            property: 'property',
+            padding: [0, 0, 0, 5],
+          },
           { label: 'Value', width: 120, property: 'value' },
         ],
         data: infoRows.map(([label, value]) => ({
           property: `bold:${label}`,
-          value,
+          value: `: ${value}`,
         })),
         options: {
           x: infoBoxX,
@@ -165,7 +169,36 @@ export function generateQuotationPdf(quotation: any): Promise<Buffer> {
           width: contentWidth / 2,
         });
 
+      drawWatermark();
       doc.y = contentTop;
+    };
+
+    const drawWatermark = () => {
+      const status = String(quotation?.status ?? '')
+        .trim()
+        .toUpperCase();
+      if (!['DRAFT'].includes(status)) {
+        return;
+      }
+
+      const centerX = doc.page.width / 2;
+      const centerY = doc.page.height / 2;
+
+      const strokeColor = status === 'DRAFT' ? '#FF0000' : '#008000';
+
+      doc
+        .save()
+        .rotate(315, { origin: [centerX, centerY] })
+        .font('Helvetica-Bold')
+        .fontSize(90)
+        .strokeColor(strokeColor)
+        .lineWidth(1.2)
+        .text(status.split('').join(' '), centerX - 180, centerY - 28, {
+          align: 'center',
+          stroke: true,
+          fill: false,
+        })
+        .restore();
     };
 
     drawPageHeader();
@@ -220,7 +253,7 @@ export function generateQuotationPdf(quotation: any): Promise<Buffer> {
           totalPrice: formatAmount(item.totalPrice),
         })),
       },
-      { y, absolutePosition: true },
+      { y, x: left, absolutePosition: true },
     );
 
     const tableRowHeight = 20;

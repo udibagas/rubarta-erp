@@ -76,7 +76,7 @@ export function generatePurchaseOrderPdf(order: any): Promise<Buffer> {
     const left = doc.page.margins.left;
     const right = doc.page.width - doc.page.margins.right;
     const width = right - left;
-    const infoBoxWidth = 190;
+    const infoBoxWidth = 200;
     const infoBoxX = right - infoBoxWidth;
     const contentTop = 220;
     const infoRows: [string, string][] = [
@@ -246,7 +246,7 @@ export function generatePurchaseOrderPdf(order: any): Promise<Buffer> {
           totalPrice: formatAmount(item.totalPrice),
         })),
       },
-      { y: contentTop, absolutePosition: true },
+      { y: contentTop, x: left, absolutePosition: true },
     );
 
     doc.moveDown();
