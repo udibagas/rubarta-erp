@@ -19,8 +19,7 @@ const COLORS = {
   green: '#1CA84B',
   navy: '#12355B',
   gray: '#555555',
-  border: '#B7B7B7',
-  borderGray: '#808181',
+  border: '#808181',
 };
 
 function formatDate(value?: Date | string | null): string {
@@ -84,7 +83,7 @@ export function generateInvoicePdf(invoice: any): Promise<Buffer> {
     const infoX = right - infoWidth;
     const contentTop = 250;
 
-    const drawDraftWatermark = () => {
+    const drawWatermark = () => {
       const status = String(invoice?.status ?? '')
         .trim()
         .toUpperCase();
@@ -143,8 +142,8 @@ export function generateInvoicePdf(invoice: any): Promise<Buffer> {
 
       doc
         .lineWidth(0.5)
-        .strokeColor(COLORS.borderGray)
-        .rect(infoX, headerTop + 32, 190, 65.2)
+        .strokeColor(COLORS.border)
+        .rect(infoX, headerTop + 32, infoWidth, 65.2)
         .stroke();
 
       doc.table({
@@ -232,7 +231,7 @@ export function generateInvoicePdf(invoice: any): Promise<Buffer> {
           partyY + 72,
         );
 
-      drawDraftWatermark();
+      drawWatermark();
       doc.y = contentTop;
     };
 
