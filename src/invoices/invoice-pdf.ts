@@ -112,16 +112,27 @@ export function generateInvoicePdf(invoice: any): Promise<Buffer> {
           align: 'right',
         });
 
+      doc
+        .lineWidth(0.75)
+        .strokeColor(COLORS.gray)
+        .rect(infoX, headerTop + 32, 190, 65)
+        .stroke();
+
       doc.table({
         headers: [
-          { label: 'Property', width: 65, property: 'property' },
+          {
+            label: 'Property',
+            width: 65,
+            property: 'property',
+            padding: [0, 0, 0, 5],
+          },
           { label: 'Value', width: 125, property: 'value' },
         ],
         data: [
-          { property: 'bold:No', value: invoice.number || '-' },
-          { property: 'bold:Date', value: formatDate(invoice.date) },
-          { property: 'bold:Attn', value: invoice.contactPerson || '-' },
-          { property: 'bold:Phone', value: invoice.contactPhone || '-' },
+          { property: 'bold:No', value: `: ${invoice.number || '-'}` },
+          { property: 'bold:Date', value: `: ${formatDate(invoice.date)}` },
+          { property: 'bold:Attn', value: `: ${invoice.contactPerson || '-'}` },
+          { property: 'bold:Phone', value: `: ${invoice.contactPhone || '-'}` },
         ],
         options: {
           x: infoX,
