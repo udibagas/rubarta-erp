@@ -9,6 +9,7 @@ import {
   IsNumber,
   MaxLength,
   IsUrl,
+  IsNumberString,
 } from 'class-validator';
 
 export class CreateCustomerDto {
@@ -77,6 +78,16 @@ export class CreateCustomerDto {
 export class UpdateCustomerDto extends PartialType(CreateCustomerDto) {}
 
 export class QueryCustomerDto {
+  @ApiProperty({ required: false, example: 1 })
+  @IsOptional()
+  @IsNumberString()
+  readonly page?: string;
+
+  @ApiProperty({ required: false, example: 10 })
+  @IsOptional()
+  @IsNumberString()
+  readonly pageSize?: string;
+
   @ApiProperty({ required: false, description: 'Search by name or email' })
   @IsOptional()
   @IsString()

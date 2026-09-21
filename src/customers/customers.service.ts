@@ -11,7 +11,9 @@ import {
 export class CustomersService {
   constructor(private readonly prisma: PrismaService) {}
 
-  async findAll(query: QueryCustomerDto): Promise<Customer[]> {
+  async findAll(
+    query: QueryCustomerDto,
+  ): Promise<Customer[] | { data: Customer[]; total: number }> {
     const where: Prisma.CustomerWhereInput = {
       deletedAt: null,
     };
@@ -48,9 +50,17 @@ export class CustomersService {
       where.accountManagerId = query.accountManagerId;
     }
 
-    return this.prisma.customer.findMany({
+    const skip =
+      query.page && query.pageSize
+        ? (parseInt(query.page) - 1) * parseInt(query.pageSize)
+        : undefined;
+    const take = query.pageSize ? parseInt(query.pageSize) : undefined;
+
+    const data = await this.prisma.customer.findMany({
       where,
       orderBy: { name: 'asc' },
+      skip,
+      take,
       include: {
         accountManager: {
           select: { name: true },
@@ -68,6 +78,13 @@ export class CustomersService {
         },
       },
     });
+
+    if (query.page && query.pageSize) {
+      const total = await this.prisma.customer.count({ where });
+      return { data, total };
+    }
+
+    return data;
   }
 
   async findOne(id: number): Promise<Customer> {

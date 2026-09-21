@@ -33,7 +33,9 @@ export class CustomersController {
   @Get()
   @ApiOperation({ summary: 'Get all customers' })
   @ApiOkResponse({ description: 'List of customers' })
-  async findAll(@Query() query: QueryCustomerDto): Promise<Customer[]> {
+  async findAll(
+    @Query() query: QueryCustomerDto,
+  ): Promise<Customer[] | { data: Customer[]; total: number }> {
     return this.customersService.findAll(query);
   }
 
