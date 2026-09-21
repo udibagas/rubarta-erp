@@ -14,6 +14,7 @@ import {
   IsNumberString,
   IsEmail,
   MaxLength,
+  IsBoolean,
 } from 'class-validator';
 import { Type } from 'class-transformer';
 import { ApiProperty, PartialType } from '@nestjs/swagger';
@@ -69,6 +70,10 @@ export class CreateInvoiceDto {
   @IsNumber()
   @Min(0)
   discount?: number;
+
+  @IsOptional()
+  @IsBoolean()
+  withTaxInvoice?: boolean;
 
   @ApiProperty({ example: { files: [] }, type: Object })
   @IsOptional()

@@ -10,11 +10,12 @@ model Invoice {
   attachments     Json?         @db.JsonB // Attachments related to the invoice
 
   // financials
-  currency    Currency @default(IDR)
-  totalAmount Float
-  discount    Float
-  vatAmount   Float
-  grandTotal  Float
+  currency       Currency @default(IDR)
+  totalAmount    Float
+  discount       Float
+  vatAmount      Float
+  grandTotal     Float
+  withTaxInvoice Boolean  @default(true)
 
   // payment details
   paymentMethod String?
