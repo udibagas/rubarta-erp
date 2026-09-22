@@ -15,6 +15,7 @@ import {
   UseInterceptors,
   Res,
   Req,
+  StreamableFile,
 } from '@nestjs/common';
 import { Request } from 'express';
 import {
@@ -68,7 +69,6 @@ export class SalesOrdersController {
     return this.salesOrdersService.findAll(query);
   }
 
-  @Public()
   @Post('parse-po')
   @ApiOperation({ summary: 'Parse PO PDF' })
   @ApiConsumes('multipart/form-data')
@@ -102,6 +102,49 @@ export class SalesOrdersController {
     file: Express.Multer.File,
   ) {
     return this.salesOrdersService.parsePo(file.buffer);
+  }
+
+  @Get('export/pdf')
+  @ApiOperation({ summary: 'Export sales orders to PDF' })
+  @ApiOkResponse({ description: 'Sales orders PDF download' })
+  async exportPdf(
+    @Res({ passthrough: true }) res: Response,
+    @Query() query: QuerySalesOrderDto,
+  ) {
+    const buffer = await this.salesOrdersService.exportToPdf(query);
+
+    // res.set({
+    //   'Content-Type': 'application/pdf',
+    //   'Content-Disposition': `attachment; filename="sales-orders-${new Date().toISOString().split('T')[0]}.pdf"`,
+    // });
+
+    // return new StreamableFile(buffer);
+
+    res.set({
+      'Content-Type': 'application/pdf',
+      'Content-Disposition': `inline; filename="sales-orders.pdf"`,
+      'Content-Length': buffer.length,
+    });
+
+    res.end(buffer);
+  }
+
+  @Get('export/excel')
+  @ApiOperation({ summary: 'Export sales orders to Excel' })
+  @ApiOkResponse({ description: 'Sales orders Excel download' })
+  async exportExcel(
+    @Res({ passthrough: true }) res: Response,
+    @Query() query: QuerySalesOrderDto,
+  ) {
+    const buffer = await this.salesOrdersService.exportToExcel(query);
+
+    res.set({
+      'Content-Type':
+        'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+      'Content-Disposition': `attachment; filename="sales-orders-${new Date().toISOString().split('T')[0]}.xlsx"`,
+    });
+
+    return new StreamableFile(buffer);
   }
 
   @Get(':id')
