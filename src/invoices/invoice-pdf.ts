@@ -196,7 +196,7 @@ export function generateInvoicePdf(invoice: any): Promise<Buffer> {
         .text(`: ${invoice.termOfPayment || '-'}`, left + 48, partyY + 60, {
           width: partyColumnWidth - 58,
         })
-        .text('TERMS', left, partyY + 72, { width: 48 })
+        .text('PAYMENT', left, partyY + 72, { width: 48 })
         .text(`: ${invoice.paymentMethod || '-'}`, left + 48, partyY + 72, {
           width: partyColumnWidth - 58,
         });
@@ -211,6 +211,7 @@ export function generateInvoicePdf(invoice: any): Promise<Buffer> {
         .font('Helvetica-Bold')
         .fontSize(9)
         .text(invoice.Customer?.name || '-', shipToX, partyY + 14);
+
       doc
         .font('Helvetica')
         .fontSize(8)
@@ -229,6 +230,12 @@ export function generateInvoicePdf(invoice: any): Promise<Buffer> {
           `: ${invoice.DeliveryOrder?.number || '-'}`,
           shipToX + 70,
           partyY + 72,
+        )
+        .text('Tax Invoice No', shipToX, partyY + 84)
+        .text(
+          `: ${invoice.taxInvoiceNumber || '-'}`,
+          shipToX + 70,
+          partyY + 84,
         );
 
       drawWatermark();
@@ -291,7 +298,7 @@ export function generateInvoicePdf(invoice: any): Promise<Buffer> {
           totalPrice: formatAmount(item.totalPrice),
         })),
       },
-      { y, x: left, absolutePosition: true },
+      { y: y + 20, x: left, absolutePosition: true },
     );
 
     const summaryY = doc.y + 16;
