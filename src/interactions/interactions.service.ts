@@ -4,7 +4,7 @@ import {
   CreateInteractionDto,
   UpdateInteractionDto,
   QueryInteractionDto,
-} from './dto/interaction.dto';
+} from './interaction.dto';
 import { Prisma } from '../prisma/client/client';
 
 @Injectable()
@@ -69,32 +69,26 @@ export class InteractionsService {
       Contact: { select: { id: true, name: true, email: true, phone: true } },
     };
 
-    // If pagination is requested
-    if (query.isPaginated) {
-      const page = query.page || 1;
-      const limit = query.limit || 10;
-      const skip = (page - 1) * limit;
+    const take = query.pageSize;
+    const skip =
+      query.page && query.pageSize
+        ? (query.page - 1) * query.pageSize
+        : undefined;
 
-      const [data, total] = await Promise.all([
-        this.prisma.interaction.findMany({
-          where,
-          orderBy,
-          include,
-          skip,
-          take: limit,
-        }),
-        this.prisma.interaction.count({ where }),
-      ]);
-
-      return { data, page, total };
-    }
-
-    // Return all results without pagination
-    return this.prisma.interaction.findMany({
+    const data = await this.prisma.interaction.findMany({
       where,
       orderBy,
       include,
+      skip,
+      take,
     });
+
+    if (query.page && query.pageSize) {
+      const total = await this.prisma.interaction.count({ where });
+      return { data, total };
+    }
+
+    return data;
   }
 
   async findOne(id: number) {

@@ -9,7 +9,8 @@ import {
   Min,
   IsBoolean,
 } from 'class-validator';
-import { InteractionType } from '../../prisma/client/client';
+import { Transform, Type } from 'class-transformer';
+import { InteractionType } from '../prisma/client/client';
 
 export class CreateInteractionDto {
   @ApiProperty({ required: false, example: 1 })
@@ -67,21 +68,25 @@ export class UpdateInteractionDto extends PartialType(CreateInteractionDto) {}
 export class QueryInteractionDto {
   @ApiProperty({ required: false })
   @IsOptional()
+  @Type(() => Number)
   @IsInt()
   leadId?: number;
 
   @ApiProperty({ required: false })
   @IsOptional()
+  @Type(() => Number)
   @IsInt()
   opportunityId?: number;
 
   @ApiProperty({ required: false })
   @IsOptional()
+  @Type(() => Number)
   @IsInt()
   contactId?: number;
 
   @ApiProperty({ required: false })
   @IsOptional()
+  @Type(() => Number)
   @IsInt()
   userId?: number;
 
@@ -97,21 +102,19 @@ export class QueryInteractionDto {
 
   @ApiProperty({ required: false })
   @IsOptional()
+  @Type(() => Number)
   @IsInt()
   customerId?: number;
 
-  @ApiProperty({ required: false })
-  @IsOptional()
-  @IsBoolean()
-  isPaginated?: boolean;
-
   @ApiProperty({ required: false, default: 1 })
   @IsOptional()
+  @Type(() => Number)
   @IsInt()
   page?: number;
 
   @ApiProperty({ required: false, default: 10 })
   @IsOptional()
+  @Type(() => Number)
   @IsInt()
-  limit?: number;
+  pageSize?: number;
 }
