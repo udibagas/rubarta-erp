@@ -46,12 +46,24 @@ export class InvoicesService {
   }
 
   async findAll(query: QueryInvoiceDto) {
-    const { page, pageSize, keyword, customerId, status, dateRange } = query;
+    const {
+      page,
+      pageSize,
+      keyword,
+      customerId,
+      status,
+      dateRange,
+      salesOrderId,
+    } = query;
 
     const where: Prisma.InvoiceWhereInput = {};
 
     if (customerId) {
       where.customerId = Number(customerId);
+    }
+
+    if (salesOrderId) {
+      where.salesOrderId = Number(salesOrderId);
     }
 
     if (status) {

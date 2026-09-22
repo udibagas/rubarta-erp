@@ -169,6 +169,11 @@ export class QueryInvoiceDto {
   @IsNumberString()
   customerId?: string;
 
+  @ApiProperty({ required: false })
+  @IsOptional()
+  @IsNumberString()
+  salesOrderId?: string;
+
   @ApiProperty({
     required: false,
     type: [String],
