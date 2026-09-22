@@ -192,13 +192,13 @@ export function generateInvoicePdf(invoice: any): Promise<Buffer> {
         .text(invoice.billingAddress || '-', left, partyY + 27, {
           width: partyColumnWidth - 10,
         })
-        .text('T.O.P', left, partyY + 60, { width: 48 })
-        .text(`: ${invoice.termOfPayment || '-'}`, left + 48, partyY + 60, {
-          width: partyColumnWidth - 58,
+        .text('T.O.P', left, partyY + 60, { width: 70 })
+        .text(`: ${invoice.termOfPayment || '-'}`, left + 70, partyY + 60, {
+          width: partyColumnWidth - 70,
         })
-        .text('PAYMENT', left, partyY + 72, { width: 48 })
-        .text(`: ${invoice.paymentMethod || '-'}`, left + 48, partyY + 72, {
-          width: partyColumnWidth - 58,
+        .text('Payment Method', left, partyY + 72, { width: 70 })
+        .text(`: ${invoice.paymentMethod || '-'}`, left + 70, partyY + 72, {
+          width: partyColumnWidth - 70,
         });
 
       doc
