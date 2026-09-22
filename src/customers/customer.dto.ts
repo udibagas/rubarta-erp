@@ -12,6 +12,40 @@ import {
   IsNumberString,
 } from 'class-validator';
 
+export class ContactDto {
+  @ApiProperty({ example: 'John Doe' })
+  @IsString()
+  @MaxLength(200)
+  readonly name: string;
+
+  @ApiProperty({ required: false, example: 'john.doe@example.com' })
+  @IsOptional()
+  @IsEmail()
+  @MaxLength(100)
+  readonly email?: string;
+
+  @ApiProperty({ example: '+628123456789' })
+  @IsString()
+  @MaxLength(50)
+  readonly phone: string;
+
+  @ApiProperty({ required: false, example: 'Sales Manager' })
+  @IsOptional()
+  @IsString()
+  @MaxLength(100)
+  readonly position?: string;
+
+  @ApiProperty({ required: false, example: 'Primary contact for sales' })
+  @IsOptional()
+  @IsString()
+  readonly notes?: string;
+
+  @ApiProperty({ required: false, example: true, default: false })
+  @IsOptional()
+  @IsBoolean()
+  readonly isPrimary?: boolean;
+}
+
 export class CreateCustomerDto {
   @ApiProperty({ example: 'PT Maju Jaya' })
   @IsString()
@@ -73,6 +107,11 @@ export class CreateCustomerDto {
   @IsOptional()
   @IsInt()
   readonly accountManagerId?: number;
+
+  @ApiProperty({ type: [ContactDto], required: false })
+  @IsOptional()
+  @IsArray()
+  Contacts?: ContactDto[];
 }
 
 export class UpdateCustomerDto extends PartialType(CreateCustomerDto) {}

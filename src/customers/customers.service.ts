@@ -134,17 +134,30 @@ export class CustomersService {
   }
 
   async create(data: CreateCustomerDto): Promise<Customer> {
+    const { Contacts, ...customerData } = data;
     return this.prisma.customer.create({
-      data,
+      data: {
+        ...customerData,
+        Contacts: {
+          create: Contacts,
+        },
+      },
     });
   }
 
   async update(id: number, data: UpdateCustomerDto): Promise<Customer> {
     await this.findOne(id); // Verify customer exists
+    const { Contacts, ...customerData } = data;
 
     return this.prisma.customer.update({
       where: { id },
-      data,
+      data: {
+        ...customerData,
+        Contacts: {
+          deleteMany: {},
+          create: Contacts,
+        },
+      },
     });
   }
 
