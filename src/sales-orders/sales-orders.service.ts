@@ -115,10 +115,26 @@ export class SalesOrdersService {
     const salesOrder = await this.prisma.salesOrder.findFirst({
       where: { id, deletedAt: null },
       include: {
+        Customer: true,
         SalesOrderItems: {
           orderBy: { sortOrder: 'asc' },
         },
-        Customer: true,
+        DeliveryOrders: {
+          orderBy: { date: 'desc' },
+          include: {
+            _count: {
+              select: { DeliveryOrderItems: true },
+            },
+          },
+        },
+        Invoices: {
+          orderBy: { date: 'desc' },
+          include: {
+            _count: {
+              select: { InvoiceItems: true },
+            },
+          },
+        },
         User: {
           select: { id: true, name: true, email: true },
         },
