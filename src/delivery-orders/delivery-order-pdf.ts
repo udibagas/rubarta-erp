@@ -76,7 +76,6 @@ export function generateDeliveryOrderPdf(deliveryOrder: any): Promise<Buffer> {
       ['DO Number', deliveryOrder.number],
       ['Date', formatDate(deliveryOrder.date)],
       ['SO Number', deliveryOrder.SalesOrder?.number || '-'],
-      ['Sender', deliveryOrder.referenceNumber || '-'],
       ['Receipt Number', deliveryOrder.receiptNumber || '-'],
     ];
 
@@ -113,7 +112,7 @@ export function generateDeliveryOrderPdf(deliveryOrder: any): Promise<Buffer> {
       doc
         .lineWidth(0.5)
         .strokeColor(COLORS.border)
-        .rect(infoBoxX, headerTop + 28, infoBoxWidth, 80)
+        .rect(infoBoxX, headerTop + 28, infoBoxWidth, 64.2)
         .stroke();
 
       doc.table({
@@ -268,8 +267,7 @@ export function generateDeliveryOrderPdf(deliveryOrder: any): Promise<Buffer> {
       {
         title: 'Pengirim :',
         organization: COMPANY.name,
-        // name: deliveryOrder.sender || deliveryOrder.User?.name || '-',
-        name: 'ADMIN',
+        name: deliveryOrder.sender || '-',
       },
       {
         title: 'Expedisi/Courier :',
