@@ -218,8 +218,8 @@ export class QueryQuotationDto {
 
   @ApiProperty({ required: false })
   @IsOptional()
-  @IsInt()
-  customerId?: number;
+  @IsNumberString()
+  customerId?: string;
 
   @ApiProperty({ required: false })
   @IsOptional()

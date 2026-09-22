@@ -74,7 +74,7 @@ export class QuotationsService {
     }
 
     if (query.customerId) {
-      where.customerId = query.customerId;
+      where.customerId = Number(query.customerId);
     }
 
     if (query.opportunityId) {
