@@ -225,6 +225,7 @@ export class SalesOrdersService {
       size: 'A4',
       margin: 40,
       bufferPages: true,
+      layout: 'landscape',
     });
 
     return new Promise((resolve, reject) => {
