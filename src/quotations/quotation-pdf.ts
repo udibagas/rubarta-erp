@@ -193,7 +193,7 @@ export function generateQuotationPdf(quotation: any): Promise<Buffer> {
         .fontSize(90)
         .strokeColor(strokeColor)
         .lineWidth(1.2)
-        .text(status.split('').join(' '), centerX - 180, centerY - 28, {
+        .text(status.split('').join(' '), centerX - 250, centerY - 28, {
           align: 'center',
           stroke: true,
           fill: false,
