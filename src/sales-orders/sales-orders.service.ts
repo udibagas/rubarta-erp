@@ -106,6 +106,13 @@ export class SalesOrdersService {
         SalesOrderItems: {
           select: {
             quantity: true,
+            deliveredQuantity: true,
+          },
+        },
+        Invoices: {
+          where: { status: 'Paid' },
+          select: {
+            grandTotal: true,
           },
         },
       },
