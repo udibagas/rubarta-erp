@@ -170,11 +170,16 @@ export class PurchaseOrdersService {
     const { to, cc, subject, body } = dto;
     const order = await this.findOne(id);
     const pdfBuffer = await generatePurchaseOrderPdf(order);
+
     await this.mailerService.sendMail({
       subject,
       to,
       cc: [order.User.email, ...(cc || [])],
-      html: body,
+      template: 'purchase-order',
+      context: {
+        order,
+        body,
+      },
       attachments: [
         {
           filename: `${order.number}.pdf`,
@@ -183,6 +188,7 @@ export class PurchaseOrdersService {
         },
       ],
     });
+
     return this.prisma.purchaseOrder.update({
       where: { id },
       data: { status: PurchaseOrderStatus.Sent },

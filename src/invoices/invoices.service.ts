@@ -292,7 +292,11 @@ export class InvoicesService {
       subject,
       cc: [invoice.User.email, ...(cc || [])],
       to,
-      html: body,
+      template: 'invoice',
+      context: {
+        invoice,
+        body,
+      },
       attachments: [
         {
           filename: `${invoice.number}.pdf`,

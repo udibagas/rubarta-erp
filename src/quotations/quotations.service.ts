@@ -226,7 +226,11 @@ export class QuotationsService {
       subject,
       cc: [quotation.User.email, ...(cc || [])],
       to,
-      html: body,
+      template: 'quotation',
+      context: {
+        quotation,
+        body,
+      },
       attachments: [
         {
           filename: `${quotation.number}.pdf`,
