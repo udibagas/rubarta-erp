@@ -137,11 +137,11 @@ export class QueryDeliveryOrderDto {
 
   @ApiProperty({ required: false })
   @IsOptional()
-  @IsInt()
-  salesOrderId?: number;
+  @IsNumberString()
+  salesOrderId?: string;
 
   @ApiProperty({ required: false })
   @IsOptional()
-  @IsInt()
-  customerId?: number;
+  @IsNumberString()
+  customerId?: string;
 }

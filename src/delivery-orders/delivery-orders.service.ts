@@ -56,8 +56,8 @@ export class DeliveryOrdersService {
       ];
     }
 
-    if (query.salesOrderId) where.salesOrderId = query.salesOrderId;
-    if (query.customerId) where.customerId = query.customerId;
+    if (query.salesOrderId) where.salesOrderId = Number(query.salesOrderId);
+    if (query.customerId) where.customerId = Number(query.customerId);
 
     const take = query.pageSize ? parseInt(query.pageSize, 10) : undefined;
     const skip =
