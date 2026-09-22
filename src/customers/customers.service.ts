@@ -62,19 +62,9 @@ export class CustomersService {
       skip,
       take,
       include: {
+        Contacts: true,
         accountManager: {
           select: { name: true },
-        },
-        Contacts: {
-          select: { name: true, phone: true, email: true },
-        },
-        _count: {
-          select: {
-            Contacts: true,
-            Leads: true,
-            Opportunities: true,
-            SalesOrders: true,
-          },
         },
       },
     });
@@ -91,6 +81,9 @@ export class CustomersService {
     const customer = await this.prisma.customer.findFirst({
       where: { id, deletedAt: null },
       include: {
+        accountManager: {
+          select: { name: true },
+        },
         Contacts: { where: { deletedAt: null } },
         Leads: {
           where: { deletedAt: null },
@@ -125,6 +118,9 @@ export class CustomersService {
             Leads: true,
             Opportunities: true,
             SalesOrders: true,
+            Invoices: true,
+            Quotations: true,
+            DeliveryOrders: true,
           },
         },
       },
