@@ -100,6 +100,11 @@ export class SalesOrdersService {
         _count: {
           select: { SalesOrderItems: true },
         },
+        SalesOrderItems: {
+          select: {
+            quantity: true,
+          },
+        },
       },
     });
 
