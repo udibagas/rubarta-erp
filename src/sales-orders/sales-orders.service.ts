@@ -224,7 +224,11 @@ export class SalesOrdersService {
       subject,
       cc: [salesOrder.User.email, ...(cc || [])],
       to,
-      html: body,
+      template: 'sales-order',
+      context: {
+        salesOrder,
+        body,
+      },
       attachments: [
         {
           filename: `${salesOrder.number}.pdf`,
