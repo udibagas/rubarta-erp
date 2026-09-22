@@ -13,7 +13,7 @@ export class ContactsResolver {
   async findAll(
     @Args('keyword', { nullable: true }) keyword?: string,
     @Args('customerId', { type: () => Int, nullable: true })
-    customerId?: number,
+    customerId?: string,
     @Args('isActive', { type: () => Boolean, nullable: true })
     isActive?: boolean,
   ) {

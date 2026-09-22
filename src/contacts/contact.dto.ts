@@ -6,6 +6,7 @@ import {
   IsInt,
   IsBoolean,
   MaxLength,
+  IsNumberString,
 } from 'class-validator';
 
 export class CreateContactDto {
@@ -54,10 +55,20 @@ export class CreateContactDto {
 export class UpdateContactDto extends PartialType(CreateContactDto) {}
 
 export class QueryContactDto {
+  @ApiProperty({ required: false, description: 'Page number for pagination' })
+  @IsOptional()
+  @IsNumberString()
+  readonly page?: string;
+
+  @ApiProperty({ required: false, description: 'Page size for pagination' })
+  @IsOptional()
+  @IsNumberString()
+  readonly pageSize?: string;
+
   @ApiProperty({ required: false, description: 'Filter by customer ID' })
   @IsOptional()
-  @IsInt()
-  readonly customerId?: number;
+  @IsNumberString()
+  readonly customerId?: string;
 
   @ApiProperty({ required: false, description: 'Search by name or email' })
   @IsOptional()

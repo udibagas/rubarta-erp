@@ -1,6 +1,9 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { CreateContactDto } from './dto/create-contact.dto';
-import { UpdateContactDto } from './dto/update-contact.dto';
+import {
+  CreateContactDto,
+  QueryContactDto,
+  UpdateContactDto,
+} from './contact.dto';
 import { PrismaService } from '../prisma/prisma.service';
 import { Prisma } from '../prisma/client/client';
 
@@ -32,11 +35,7 @@ export class ContactsService {
     });
   }
 
-  findAll(params: {
-    keyword?: string;
-    customerId?: number;
-    isActive?: boolean;
-  }) {
+  async findAll(params: QueryContactDto) {
     const where: Prisma.ContactWhereInput = {
       deletedAt: null,
     };
@@ -44,7 +43,7 @@ export class ContactsService {
     const { keyword, customerId, isActive } = params;
 
     if (customerId) {
-      where.customerId = customerId;
+      where.customerId = parseInt(customerId, 10);
     }
 
     if (keyword) {
@@ -61,8 +60,16 @@ export class ContactsService {
       where.isActive = isActive;
     }
 
-    return this.prisma.contact.findMany({
+    const take = params.pageSize ? parseInt(params.pageSize, 10) : undefined;
+    const skip =
+      params.page && params.pageSize
+        ? (Number(params.page) - 1) * Number(params.pageSize)
+        : undefined;
+
+    const data = await this.prisma.contact.findMany({
       where,
+      skip,
+      take,
       orderBy: [{ isPrimary: 'desc' }, { name: 'asc' }],
       include: {
         Customer: {
@@ -70,6 +77,13 @@ export class ContactsService {
         },
       },
     });
+
+    if (params.page && params.pageSize) {
+      const total = await this.prisma.contact.count({ where });
+      return { data, total };
+    }
+
+    return data;
   }
 
   async findOne(id: number) {

@@ -18,8 +18,11 @@ import {
   ApiCreatedResponse,
 } from '@nestjs/swagger';
 import { ContactsService } from './contacts.service';
-import { CreateContactDto } from './dto/create-contact.dto';
-import { UpdateContactDto } from './dto/update-contact.dto';
+import {
+  CreateContactDto,
+  UpdateContactDto,
+  QueryContactDto,
+} from './contact.dto';
 
 @ApiTags('Contacts')
 @ApiBearerAuth()
@@ -37,14 +40,8 @@ export class ContactsController {
   @Get()
   @ApiOperation({ summary: 'Get all contacts' })
   @ApiOkResponse({ description: 'List of contacts' })
-  findAll(
-    @Query('keyword') keyword?: string,
-    @Query('customerId', new ParseIntPipe({ optional: true }))
-    customerId?: number,
-    @Query('isActive', new ParseBoolPipe({ optional: true }))
-    isActive?: boolean,
-  ) {
-    return this.contactsService.findAll({ keyword, customerId, isActive });
+  findAll(@Query() query: QueryContactDto) {
+    return this.contactsService.findAll(query);
   }
 
   @Get(':id')
