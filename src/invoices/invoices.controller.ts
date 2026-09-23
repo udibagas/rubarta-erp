@@ -9,6 +9,7 @@ import {
   Query,
   Res,
   ParseIntPipe,
+  StreamableFile,
 } from '@nestjs/common';
 import { Response } from 'express';
 import { InvoicesService } from './invoices.service';
@@ -42,6 +43,38 @@ export class InvoicesController {
     @Query('status') status?: InvoiceStatus,
   ) {
     return this.invoicesService.getTotalAmount(customerId, status);
+  }
+
+  @Get('export/pdf')
+  async exportPdf(
+    @Res({ passthrough: true }) res: Response,
+    @Query() query: QueryInvoiceDto,
+  ) {
+    const buffer = await this.invoicesService.exportToPdf(query);
+
+    res.set({
+      'Content-Type': 'application/pdf',
+      'Content-Disposition': `inline; filename="invoices.pdf"`,
+      'Content-Length': buffer.length,
+    });
+
+    res.end(buffer);
+  }
+
+  @Get('export/excel')
+  async exportExcel(
+    @Res({ passthrough: true }) res: Response,
+    @Query() query: QueryInvoiceDto,
+  ) {
+    const buffer = await this.invoicesService.exportToExcel(query);
+
+    res.set({
+      'Content-Type':
+        'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+      'Content-Disposition': `attachment; filename="invoices-${new Date().toISOString().split('T')[0]}.xlsx"`,
+    });
+
+    return new StreamableFile(buffer);
   }
 
   @Get(':id')

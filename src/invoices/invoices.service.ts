@@ -11,6 +11,9 @@ import { generateInvoicePdf } from './invoice-pdf';
 import dayjs from 'dayjs';
 import { Cron, CronExpression } from '@nestjs/schedule';
 import { MailerService } from '@nestjs-modules/mailer';
+import * as ExcelJS from 'exceljs';
+import PDFDocument from 'pdfkit';
+import { createPdfDocumentWithTables } from 'pdfkit-table';
 
 @Injectable()
 export class InvoicesService {
@@ -281,6 +284,118 @@ export class InvoicesService {
   async preview(id: number): Promise<Buffer> {
     const invoice = await this.findOne(id);
     return generateInvoicePdf(invoice);
+  }
+
+  async exportToPdf(query: QueryInvoiceDto): Promise<Buffer> {
+    const invoices = (await this.findAll(query)) as any[];
+    const PDFDocumentWithTables = createPdfDocumentWithTables(PDFDocument);
+    const doc = new PDFDocumentWithTables({
+      size: 'A4',
+      margin: 40,
+      bufferPages: true,
+      layout: 'landscape',
+    });
+
+    return new Promise((resolve, reject) => {
+      const chunks: Buffer[] = [];
+
+      doc.on('data', (chunk) => chunks.push(chunk));
+      doc.on('end', () => resolve(Buffer.concat(chunks)));
+      doc.on('error', reject);
+
+      doc
+        .font('Helvetica-Bold')
+        .fontSize(16)
+        .text('INVOICES', { align: 'center' });
+
+      doc.moveDown(1.5);
+
+      doc.table(
+        {
+          headers: [
+            {
+              label: 'Date',
+              property: 'date',
+              width: 70,
+              padding: [0, 0, 0, 5],
+            },
+            { label: 'Invoice No', property: 'number', width: 80 },
+            {
+              label: 'Customer',
+              property: 'customer',
+              width: doc.page.width - 80 - 70 - 80 - 80 - 90 - 100,
+            },
+            { label: 'Due Date', property: 'dueDate', width: 80 },
+            { label: 'Total', property: 'total', width: 90, align: 'right' },
+            {
+              label: 'Status',
+              property: 'status',
+              width: 100,
+              align: 'center',
+            },
+          ],
+          data: invoices.map((invoice) => ({
+            date: dayjs(invoice.date).format('DD-MM-YYYY'),
+            number: invoice.number || '-',
+            customer: invoice.Customer?.name || '-',
+            dueDate: dayjs(invoice.dueDate).format('DD-MM-YYYY'),
+            total: (invoice.grandTotal || 0).toLocaleString('id-ID', {
+              style: 'currency',
+              currency: invoice.currency || 'IDR',
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2,
+            }),
+            status: invoice.status || '-',
+          })),
+        },
+        {
+          x: 40,
+          y: 80,
+          width: doc.page.width - 80,
+          hideHeader: false,
+        },
+      );
+
+      doc.end();
+    });
+  }
+
+  async exportToExcel(query: QueryInvoiceDto): Promise<Buffer> {
+    const invoices = (await this.findAll(query)) as any[];
+    const workbook = new ExcelJS.Workbook();
+    const worksheet = workbook.addWorksheet('Invoices');
+
+    worksheet.columns = [
+      { header: 'Date', key: 'date', width: 15 },
+      { header: 'No', key: 'number', width: 18 },
+      { header: 'Customer', key: 'customer', width: 30 },
+      { header: 'Due Date', key: 'dueDate', width: 15 },
+      { header: 'Grand Total', key: 'grandTotal', width: 18 },
+      { header: 'Currency', key: 'currency', width: 12 },
+      { header: 'Status', key: 'status', width: 18 },
+    ];
+
+    worksheet.getRow(1).font = { bold: true };
+    worksheet.getRow(1).fill = {
+      type: 'pattern',
+      pattern: 'solid',
+      fgColor: { argb: 'FFE0E0E0' },
+    };
+
+    invoices.forEach((invoice) => {
+      worksheet.addRow({
+        date: dayjs(invoice.date).format('DD-MM-YYYY'),
+        number: invoice.number,
+        customer: invoice.Customer?.name || '-',
+        dueDate: dayjs(invoice.dueDate).format('DD-MM-YYYY'),
+        grandTotal: invoice.grandTotal || 0,
+        currency: invoice.currency || 'IDR',
+        status: invoice.status,
+      });
+    });
+
+    const buffer = await workbook.xlsx.writeBuffer();
+    return Buffer.from(buffer);
   }
 
   async send(id: number, dto: SendInvoiceEmailDto) {
