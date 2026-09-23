@@ -10,6 +10,7 @@ import {
   Res,
   Req,
   ParseIntPipe,
+  StreamableFile,
 } from '@nestjs/common';
 import { Response, Request } from 'express';
 import {
@@ -55,6 +56,42 @@ export class QuotationsController {
   @ApiOkResponse({ description: 'List of quotations' })
   findAll(@Query() query: QueryQuotationDto) {
     return this.quotationsService.findAll(query);
+  }
+
+  @Get('export/pdf')
+  @ApiOperation({ summary: 'Export quotations to PDF' })
+  @ApiOkResponse({ description: 'Quotations PDF download' })
+  async exportPdf(
+    @Res({ passthrough: true }) res: Response,
+    @Query() query: QueryQuotationDto,
+  ) {
+    const buffer = await this.quotationsService.exportToPdf(query);
+
+    res.set({
+      'Content-Type': 'application/pdf',
+      'Content-Disposition': `inline; filename="quotations.pdf"`,
+      'Content-Length': buffer.length,
+    });
+
+    res.end(buffer);
+  }
+
+  @Get('export/excel')
+  @ApiOperation({ summary: 'Export quotations to Excel' })
+  @ApiOkResponse({ description: 'Quotations Excel download' })
+  async exportExcel(
+    @Res({ passthrough: true }) res: Response,
+    @Query() query: QueryQuotationDto,
+  ) {
+    const buffer = await this.quotationsService.exportToExcel(query);
+
+    res.set({
+      'Content-Type':
+        'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+      'Content-Disposition': `attachment; filename="quotations-${new Date().toISOString().split('T')[0]}.xlsx"`,
+    });
+
+    return new StreamableFile(buffer);
   }
 
   @Get(':id')

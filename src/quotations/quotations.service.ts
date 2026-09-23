@@ -10,6 +10,9 @@ import {
 import { ApprovalType, Prisma, QuotationStatus } from '../prisma/client/client';
 import dayjs from 'dayjs';
 import { MailerService } from '@nestjs-modules/mailer';
+import * as ExcelJS from 'exceljs';
+import PDFDocument from 'pdfkit';
+import { createPdfDocumentWithTables } from 'pdfkit-table';
 import { generateQuotationPdf } from './quotation-pdf';
 import { Cron, CronExpression } from '@nestjs/schedule';
 import { OnEvent } from '@nestjs/event-emitter';
@@ -260,6 +263,118 @@ export class QuotationsService {
   async preview(id: number): Promise<Buffer> {
     const quotation = await this.findOne(id);
     return generateQuotationPdf(quotation);
+  }
+
+  async exportToPdf(query: QueryQuotationDto): Promise<Buffer> {
+    const quotations = (await this.findAll(query)) as any[];
+    const PDFDocumentWithTables = createPdfDocumentWithTables(PDFDocument);
+    const doc = new PDFDocumentWithTables({
+      size: 'A4',
+      margin: 40,
+      bufferPages: true,
+      layout: 'landscape',
+    });
+
+    return new Promise((resolve, reject) => {
+      const chunks: Buffer[] = [];
+
+      doc.on('data', (chunk) => chunks.push(chunk));
+      doc.on('end', () => resolve(Buffer.concat(chunks)));
+      doc.on('error', reject);
+
+      doc
+        .font('Helvetica-Bold')
+        .fontSize(16)
+        .text('QUOTATIONS', { align: 'center' });
+
+      doc.moveDown(1.5);
+
+      doc.table(
+        {
+          headers: [
+            {
+              label: 'Date',
+              property: 'date',
+              width: 70,
+              padding: [0, 0, 0, 5],
+            },
+            { label: 'Q Number', property: 'number', width: 80 },
+            {
+              label: 'Customer',
+              property: 'customer',
+              width: doc.page.width - 80 - 70 - 80 - 80 - 90 - 100,
+            },
+            { label: 'Valid Until', property: 'validUntil', width: 80 },
+            { label: 'Total', property: 'total', width: 90, align: 'right' },
+            {
+              label: 'Status',
+              property: 'status',
+              width: 100,
+              align: 'center',
+            },
+          ],
+          data: quotations.map((quotation) => ({
+            date: dayjs(quotation.date).format('DD-MM-YYYY'),
+            number: quotation.number || '-',
+            customer: quotation.Customer?.name || '-',
+            validUntil: dayjs(quotation.validUntil).format('DD-MM-YYYY'),
+            total: (quotation.grandTotal || 0).toLocaleString('id-ID', {
+              style: 'currency',
+              currency: quotation.currency || 'IDR',
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2,
+            }),
+            status: quotation.status || '-',
+          })),
+        },
+        {
+          x: 40,
+          y: 80,
+          width: doc.page.width - 80,
+          hideHeader: false,
+        },
+      );
+
+      doc.end();
+    });
+  }
+
+  async exportToExcel(query: QueryQuotationDto): Promise<Buffer> {
+    const quotations = (await this.findAll(query)) as any[];
+    const workbook = new ExcelJS.Workbook();
+    const worksheet = workbook.addWorksheet('Quotations');
+
+    worksheet.columns = [
+      { header: 'Date', key: 'date', width: 15 },
+      { header: 'No', key: 'number', width: 18 },
+      { header: 'Customer', key: 'customer', width: 30 },
+      { header: 'Valid Until', key: 'validUntil', width: 15 },
+      { header: 'Grand Total', key: 'grandTotal', width: 18 },
+      { header: 'Currency', key: 'currency', width: 12 },
+      { header: 'Status', key: 'status', width: 18 },
+    ];
+
+    worksheet.getRow(1).font = { bold: true };
+    worksheet.getRow(1).fill = {
+      type: 'pattern',
+      pattern: 'solid',
+      fgColor: { argb: 'FFE0E0E0' },
+    };
+
+    quotations.forEach((quotation) => {
+      worksheet.addRow({
+        date: dayjs(quotation.date).format('DD-MM-YYYY'),
+        number: quotation.number,
+        customer: quotation.Customer?.name || '-',
+        validUntil: dayjs(quotation.validUntil).format('DD-MM-YYYY'),
+        grandTotal: quotation.grandTotal || 0,
+        currency: quotation.currency || 'IDR',
+        status: quotation.status,
+      });
+    });
+
+    const buffer = await workbook.xlsx.writeBuffer();
+    return Buffer.from(buffer);
   }
 
   private async generateNumber(): Promise<string> {
