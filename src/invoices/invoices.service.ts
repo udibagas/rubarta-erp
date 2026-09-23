@@ -14,6 +14,7 @@ import { MailerService } from '@nestjs-modules/mailer';
 import * as ExcelJS from 'exceljs';
 import PDFDocument from 'pdfkit';
 import { createPdfDocumentWithTables } from 'pdfkit-table';
+import * as fs from 'node:fs';
 
 @Injectable()
 export class InvoicesService {
@@ -403,6 +404,46 @@ export class InvoicesService {
     const invoice = await this.findOne(id);
     const pdfBuffer = await generateInvoicePdf(invoice);
 
+    const invoiceAttachments = Array.isArray(invoice.attachments)
+      ? invoice.attachments
+          .map((attachment: any) => {
+            if (!attachment || typeof attachment !== 'object') return null;
+
+            const filePath =
+              typeof attachment.filePath === 'string'
+                ? attachment.filePath
+                : null;
+            const fileName =
+              typeof attachment.fileName === 'string'
+                ? attachment.fileName
+                : filePath?.split('/').pop() || 'attachment';
+            const fileType =
+              typeof attachment.fileType === 'string'
+                ? attachment.fileType
+                : 'application/octet-stream';
+
+            if (!filePath) return null;
+
+            try {
+              return {
+                filename: fileName,
+                content: fs.readFileSync(filePath),
+                contentType: fileType,
+              };
+            } catch (error) {
+              console.warn(
+                `Skipping invoice attachment for ${invoice.id}: ${filePath}`,
+                error,
+              );
+              return null;
+            }
+          })
+          .filter(
+            (attachment): attachment is NonNullable<typeof attachment> =>
+              !!attachment,
+          )
+      : [];
+
     await this.mailerService.sendMail({
       subject,
       cc: [invoice.User.email, ...(cc || [])],
@@ -418,6 +459,7 @@ export class InvoicesService {
           content: pdfBuffer,
           contentType: 'application/pdf',
         },
+        ...invoiceAttachments,
       ],
     });
 
