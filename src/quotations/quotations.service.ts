@@ -81,6 +81,14 @@ export class QuotationsService {
       where.opportunityId = query.opportunityId;
     }
 
+    if (query.dateRange && query.dateRange.length === 2) {
+      const [startDate, endDate] = query.dateRange;
+      where.date = {
+        gte: dayjs(startDate).startOf('day').toDate(),
+        lte: dayjs(endDate).endOf('day').toDate(),
+      };
+    }
+
     if (query.status) {
       where.status = query.status;
     }
