@@ -260,17 +260,15 @@ export class ApprovalService {
   }
 
   private getRedirectUrl(approvalType: ApprovalType, moduleId: number) {
-    const baseUrl = 'https://erp.rubarta.co.id/';
+    const baseUrl = 'https://erp.rubarta.co.id';
 
     switch (approvalType) {
       case ApprovalType.QUOTATION:
-        return `${baseUrl}quotations/${moduleId}`;
+        return `${baseUrl}/sales/quotations/${moduleId}`;
       case ApprovalType.PURCHASE_ORDER:
-        return `${baseUrl}purchase-orders/${moduleId}`;
+        return `${baseUrl}/purchasing-logistics/purchase-orders/${moduleId}`;
       default:
-        throw new NotFoundException(
-          'Redirect URL not found for the given approval type',
-        );
+        return null;
     }
   }
 }
