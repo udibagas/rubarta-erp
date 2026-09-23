@@ -16,6 +16,9 @@ import {
 import { generatePurchaseOrderPdf } from './purchase-order-pdf';
 import dayjs from 'dayjs';
 import { OnEvent } from '@nestjs/event-emitter';
+import * as ExcelJS from 'exceljs';
+import PDFDocument from 'pdfkit';
+import { createPdfDocumentWithTables } from 'pdfkit-table';
 
 @Injectable()
 export class PurchaseOrdersService {
@@ -205,6 +208,118 @@ export class PurchaseOrdersService {
 
   async preview(id: number) {
     return generatePurchaseOrderPdf(await this.findOne(id));
+  }
+
+  async exportToPdf(query: QueryPurchaseOrderDto): Promise<Buffer> {
+    const purchaseOrders = (await this.findAll(query)) as any[];
+    const PDFDocumentWithTables = createPdfDocumentWithTables(PDFDocument);
+    const doc = new PDFDocumentWithTables({
+      size: 'A4',
+      margin: 40,
+      bufferPages: true,
+      layout: 'landscape',
+    });
+
+    return new Promise((resolve, reject) => {
+      const chunks: Buffer[] = [];
+
+      doc.on('data', (chunk) => chunks.push(chunk));
+      doc.on('end', () => resolve(Buffer.concat(chunks)));
+      doc.on('error', reject);
+
+      doc
+        .font('Helvetica-Bold')
+        .fontSize(16)
+        .text('PURCHASE ORDERS', { align: 'center' });
+
+      doc.moveDown(1.5);
+
+      doc.table(
+        {
+          headers: [
+            {
+              label: 'Date',
+              property: 'date',
+              width: 70,
+              padding: [0, 0, 0, 5],
+            },
+            { label: 'PO Number', property: 'number', width: 80 },
+            {
+              label: 'Supplier',
+              property: 'supplier',
+              width: doc.page.width - 80 - 70 - 80 - 80 - 90 - 100,
+            },
+            { label: 'Reference', property: 'referenceNumber', width: 80 },
+            { label: 'Total', property: 'total', width: 90, align: 'right' },
+            {
+              label: 'Status',
+              property: 'status',
+              width: 100,
+              align: 'center',
+            },
+          ],
+          data: purchaseOrders.map((order) => ({
+            date: dayjs(order.date).format('DD-MM-YYYY'),
+            number: order.number || '-',
+            supplier: order.Supplier?.name || '-',
+            referenceNumber: order.referenceNumber || '-',
+            total: (order.grandTotal || 0).toLocaleString('id-ID', {
+              style: 'currency',
+              currency: order.currency || 'IDR',
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2,
+            }),
+            status: order.status || '-',
+          })),
+        },
+        {
+          x: 40,
+          y: 80,
+          width: doc.page.width - 80,
+          hideHeader: false,
+        },
+      );
+
+      doc.end();
+    });
+  }
+
+  async exportToExcel(query: QueryPurchaseOrderDto): Promise<Buffer> {
+    const purchaseOrders = (await this.findAll(query)) as any[];
+    const workbook = new ExcelJS.Workbook();
+    const worksheet = workbook.addWorksheet('PurchaseOrders');
+
+    worksheet.columns = [
+      { header: 'Date', key: 'date', width: 15 },
+      { header: 'No', key: 'number', width: 18 },
+      { header: 'Supplier', key: 'supplier', width: 30 },
+      { header: 'Reference Number', key: 'referenceNumber', width: 30 },
+      { header: 'Grand Total', key: 'grandTotal', width: 18 },
+      { header: 'Currency', key: 'currency', width: 12 },
+      { header: 'Status', key: 'status', width: 18 },
+    ];
+
+    worksheet.getRow(1).font = { bold: true };
+    worksheet.getRow(1).fill = {
+      type: 'pattern',
+      pattern: 'solid',
+      fgColor: { argb: 'FFE0E0E0' },
+    };
+
+    purchaseOrders.forEach((order) => {
+      worksheet.addRow({
+        date: dayjs(order.date).format('DD-MM-YYYY'),
+        number: order.number,
+        supplier: order.Supplier?.name || '-',
+        referenceNumber: order.referenceNumber || '-',
+        grandTotal: order.grandTotal || 0,
+        currency: order.currency || 'IDR',
+        status: order.status,
+      });
+    });
+
+    const buffer = await workbook.xlsx.writeBuffer();
+    return Buffer.from(buffer);
   }
 
   @OnEvent('approval.completed')

@@ -11,6 +11,7 @@ import {
   Query,
   Res,
   Req,
+  StreamableFile,
 } from '@nestjs/common';
 import {
   ApiBearerAuth,
@@ -56,6 +57,42 @@ export class PurchaseOrdersController {
   @ApiOkResponse({ description: 'List of purchase orders' })
   findAll(@Query() query: QueryPurchaseOrderDto) {
     return this.purchaseOrdersService.findAll(query);
+  }
+
+  @Get('export/pdf')
+  @ApiOperation({ summary: 'Export purchase orders to PDF' })
+  @ApiOkResponse({ description: 'Purchase orders PDF download' })
+  async exportPdf(
+    @Res({ passthrough: true }) res: Response,
+    @Query() query: QueryPurchaseOrderDto,
+  ) {
+    const buffer = await this.purchaseOrdersService.exportToPdf(query);
+
+    res.set({
+      'Content-Type': 'application/pdf',
+      'Content-Disposition': `inline; filename="purchase-orders.pdf"`,
+      'Content-Length': buffer.length,
+    });
+
+    res.end(buffer);
+  }
+
+  @Get('export/excel')
+  @ApiOperation({ summary: 'Export purchase orders to Excel' })
+  @ApiOkResponse({ description: 'Purchase orders Excel download' })
+  async exportExcel(
+    @Res({ passthrough: true }) res: Response,
+    @Query() query: QueryPurchaseOrderDto,
+  ) {
+    const buffer = await this.purchaseOrdersService.exportToExcel(query);
+
+    res.set({
+      'Content-Type':
+        'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+      'Content-Disposition': `attachment; filename="purchase-orders-${new Date().toISOString().split('T')[0]}.xlsx"`,
+    });
+
+    return new StreamableFile(buffer);
   }
 
   @Get(':id')
