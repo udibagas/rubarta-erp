@@ -123,4 +123,14 @@ export class QueryGoodsReceiptDto {
   @IsOptional()
   @IsNumberString()
   supplierId?: string;
+
+  @ApiProperty({
+    required: false,
+    type: [String],
+    example: ['2024-01-01', '2024-12-31'],
+  })
+  @IsOptional()
+  @IsArray()
+  @IsString({ each: true })
+  dateRange?: string[];
 }

@@ -60,6 +60,14 @@ export class GoodsReceiptsService {
       where.purchaseOrderId = Number(query.purchaseOrderId);
     if (query.supplierId) where.supplierId = Number(query.supplierId);
 
+    if (query.dateRange && query.dateRange.length === 2) {
+      const [startDate, endDate] = query.dateRange;
+      where.date = {
+        gte: dayjs(startDate).startOf('day').toDate(),
+        lte: dayjs(endDate).endOf('day').toDate(),
+      };
+    }
+
     const take = query.pageSize ? parseInt(query.pageSize, 10) : undefined;
     const skip =
       query.page && query.pageSize
