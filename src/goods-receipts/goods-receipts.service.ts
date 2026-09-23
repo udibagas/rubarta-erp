@@ -9,6 +9,9 @@ import {
 import dayjs from 'dayjs';
 import { parsePackingListItems } from './packing-list.parser';
 import { generateGoodsReceiptPdf } from './goods-receipt-pdf';
+import * as ExcelJS from 'exceljs';
+import PDFDocument from 'pdfkit';
+import { createPdfDocumentWithTables } from 'pdfkit-table';
 
 @Injectable()
 export class GoodsReceiptsService {
@@ -20,6 +23,107 @@ export class GoodsReceiptsService {
 
   async preview(id: number) {
     return generateGoodsReceiptPdf(await this.findOne(id));
+  }
+
+  async exportToPdf(query: QueryGoodsReceiptDto): Promise<Buffer> {
+    const goodsReceipts = (await this.findAll(query)) as any[];
+    const PDFDocumentWithTables = createPdfDocumentWithTables(PDFDocument);
+    const doc = new PDFDocumentWithTables({
+      size: 'A4',
+      margin: 40,
+      bufferPages: true,
+      layout: 'landscape',
+    });
+
+    return new Promise((resolve, reject) => {
+      const chunks: Buffer[] = [];
+
+      doc.on('data', (chunk) => chunks.push(chunk));
+      doc.on('end', () => resolve(Buffer.concat(chunks)));
+      doc.on('error', reject);
+
+      doc
+        .font('Helvetica-Bold')
+        .fontSize(16)
+        .text('GOOD RECEIPTS', { align: 'center' });
+
+      doc.moveDown(1.5);
+
+      doc.table(
+        {
+          headers: [
+            {
+              label: 'Date',
+              property: 'date',
+              width: 70,
+              padding: [0, 0, 0, 5],
+            },
+            { label: 'GR Number', property: 'number', width: 80 },
+            {
+              label: 'Supplier',
+              property: 'supplier',
+              width: doc.page.width - 80 - 70 - 80 - 80 - 90 - 100,
+            },
+            { label: 'PO Ref', property: 'purchaseOrder', width: 80 },
+            {
+              label: 'Status',
+              property: 'status',
+              width: 100,
+              align: 'center',
+            },
+          ],
+          data: goodsReceipts.map((receipt) => ({
+            date: dayjs(receipt.date).format('DD-MM-YYYY'),
+            number: receipt.number || '-',
+            supplier: receipt.Supplier?.name || '-',
+            purchaseOrder: receipt.PurchaseOrder?.number || '-',
+            status: receipt.status || '-',
+          })),
+        },
+        {
+          x: 40,
+          y: 80,
+          width: doc.page.width - 80,
+          hideHeader: false,
+        },
+      );
+
+      doc.end();
+    });
+  }
+
+  async exportToExcel(query: QueryGoodsReceiptDto): Promise<Buffer> {
+    const goodsReceipts = (await this.findAll(query)) as any[];
+    const workbook = new ExcelJS.Workbook();
+    const worksheet = workbook.addWorksheet('GoodsReceipts');
+
+    worksheet.columns = [
+      { header: 'Date', key: 'date', width: 15 },
+      { header: 'No', key: 'number', width: 18 },
+      { header: 'Supplier', key: 'supplier', width: 30 },
+      { header: 'Purchase Order', key: 'purchaseOrder', width: 22 },
+      { header: 'Status', key: 'status', width: 18 },
+    ];
+
+    worksheet.getRow(1).font = { bold: true };
+    worksheet.getRow(1).fill = {
+      type: 'pattern',
+      pattern: 'solid',
+      fgColor: { argb: 'FFE0E0E0' },
+    };
+
+    goodsReceipts.forEach((receipt) => {
+      worksheet.addRow({
+        date: dayjs(receipt.date).format('DD-MM-YYYY'),
+        number: receipt.number,
+        supplier: receipt.Supplier?.name || '-',
+        purchaseOrder: receipt.PurchaseOrder?.number || '-',
+        status: receipt.status,
+      });
+    });
+
+    const buffer = await workbook.xlsx.writeBuffer();
+    return Buffer.from(buffer);
   }
 
   private readonly includeRelations = {

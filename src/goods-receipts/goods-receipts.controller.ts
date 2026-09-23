@@ -13,6 +13,7 @@ import {
   Query,
   Req,
   Res,
+  StreamableFile,
   UploadedFile,
   UseInterceptors,
 } from '@nestjs/common';
@@ -98,6 +99,42 @@ export class GoodsReceiptsController {
   @ApiOkResponse({ description: 'List of good receipts' })
   findAll(@Query() query: QueryGoodsReceiptDto) {
     return this.goodsReceiptsService.findAll(query);
+  }
+
+  @Get('export/pdf')
+  @ApiOperation({ summary: 'Export goods receipts to PDF' })
+  @ApiOkResponse({ description: 'Goods receipts PDF download' })
+  async exportPdf(
+    @Res({ passthrough: true }) res: Response,
+    @Query() query: QueryGoodsReceiptDto,
+  ) {
+    const buffer = await this.goodsReceiptsService.exportToPdf(query);
+
+    res.set({
+      'Content-Type': 'application/pdf',
+      'Content-Disposition': `inline; filename="goods-receipts.pdf"`,
+      'Content-Length': buffer.length,
+    });
+
+    res.end(buffer);
+  }
+
+  @Get('export/excel')
+  @ApiOperation({ summary: 'Export goods receipts to Excel' })
+  @ApiOkResponse({ description: 'Goods receipts Excel download' })
+  async exportExcel(
+    @Res({ passthrough: true }) res: Response,
+    @Query() query: QueryGoodsReceiptDto,
+  ) {
+    const buffer = await this.goodsReceiptsService.exportToExcel(query);
+
+    res.set({
+      'Content-Type':
+        'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+      'Content-Disposition': `attachment; filename="goods-receipts-${new Date().toISOString().split('T')[0]}.xlsx"`,
+    });
+
+    return new StreamableFile(buffer);
   }
 
   @Get(':id')
