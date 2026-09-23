@@ -208,8 +208,18 @@ export class QueryPurchaseOrderDto {
 
   @ApiProperty({ required: false })
   @IsOptional()
-  @IsInt()
-  supplierId?: number;
+  @IsNumberString()
+  supplierId?: string;
+
+  @ApiProperty({
+    required: false,
+    type: [String],
+    example: ['2024-01-01', '2024-12-31'],
+  })
+  @IsOptional()
+  @IsArray()
+  @IsString({ each: true })
+  dateRange?: string[];
 
   @ApiProperty({ required: false, enum: PurchaseOrderStatus })
   @IsOptional()

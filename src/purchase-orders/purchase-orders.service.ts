@@ -67,8 +67,16 @@ export class PurchaseOrdersService {
       ];
     }
 
-    if (query.supplierId) where.supplierId = query.supplierId;
+    if (query.supplierId) where.supplierId = Number(query.supplierId);
     if (query.status) where.status = query.status;
+
+    if (query.dateRange && query.dateRange.length === 2) {
+      const [startDate, endDate] = query.dateRange;
+      where.date = {
+        gte: dayjs(startDate).startOf('day').toDate(),
+        lte: dayjs(endDate).endOf('day').toDate(),
+      };
+    }
 
     const skip = (Number(query.page) - 1) * Number(query.pageSize) || undefined;
     const take = Number(query.pageSize) || undefined;
