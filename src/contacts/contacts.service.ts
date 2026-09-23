@@ -70,7 +70,7 @@ export class ContactsService {
       where,
       skip,
       take,
-      orderBy: [{ isPrimary: 'desc' }, { name: 'asc' }],
+      orderBy: [{ name: 'asc' }, { Customer: { name: 'asc' } }],
       include: {
         Customer: {
           select: { id: true, name: true },
