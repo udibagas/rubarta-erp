@@ -59,6 +59,14 @@ export class DeliveryOrdersService {
     if (query.salesOrderId) where.salesOrderId = Number(query.salesOrderId);
     if (query.customerId) where.customerId = Number(query.customerId);
 
+    if (query.dateRange && query.dateRange.length === 2) {
+      const [startDate, endDate] = query.dateRange;
+      where.date = {
+        gte: dayjs(startDate).startOf('day').toDate(),
+        lte: dayjs(endDate).endOf('day').toDate(),
+      };
+    }
+
     const take = query.pageSize ? parseInt(query.pageSize, 10) : undefined;
     const skip =
       query.page && query.pageSize
