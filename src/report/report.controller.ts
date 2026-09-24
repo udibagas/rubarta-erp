@@ -1,4 +1,12 @@
-import { Controller, Get, ParseIntPipe, Query } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  ParseIntPipe,
+  Query,
+  Res,
+  StreamableFile,
+} from '@nestjs/common';
+import { Response } from 'express';
 import { ReportService } from './report.service';
 import { Auth } from '../auth/auth.decorator';
 import { User } from '../prisma/client/client';
@@ -36,5 +44,47 @@ export class ReportController {
     @Query('asOfDate') asOfDate?: string,
   ) {
     return this.reportService.agingReport({ customerId, asOfDate });
+  }
+
+  @Get('export/aging-report/pdf')
+  async exportAgingReportPdf(
+    @Res({ passthrough: true }) res: Response,
+    @Query('customerId', new ParseIntPipe({ optional: true }))
+    customerId?: number,
+    @Query('asOfDate') asOfDate?: string,
+  ) {
+    const buffer = await this.reportService.exportAgingReportToPdf({
+      customerId,
+      asOfDate,
+    });
+
+    res.set({
+      'Content-Type': 'application/pdf',
+      'Content-Disposition': `inline; filename="aging-report.pdf"`,
+      'Content-Length': buffer.length,
+    });
+
+    res.end(buffer);
+  }
+
+  @Get('export/aging-report/excel')
+  async exportAgingReportExcel(
+    @Res({ passthrough: true }) res: Response,
+    @Query('customerId', new ParseIntPipe({ optional: true }))
+    customerId?: number,
+    @Query('asOfDate') asOfDate?: string,
+  ) {
+    const buffer = await this.reportService.exportAgingReportToExcel({
+      customerId,
+      asOfDate,
+    });
+
+    res.set({
+      'Content-Type':
+        'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+      'Content-Disposition': `attachment; filename="aging-report-${new Date().toISOString().split('T')[0]}.xlsx"`,
+    });
+
+    return new StreamableFile(buffer);
   }
 }

@@ -1,5 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import dayjs from 'dayjs';
+import * as ExcelJS from 'exceljs';
+import PDFDocument from 'pdfkit';
+import { createPdfDocumentWithTables } from 'pdfkit-table';
 import { PrismaService } from '../prisma/prisma.service';
 
 @Injectable()
@@ -128,7 +131,7 @@ export class ReportService {
       ? dayjs(params.asOfDate).endOf('day')
       : dayjs();
     const where: any = {
-      status: { not: 'Draft' },
+      status: { notIn: ['Draft', 'Paid'] },
     };
 
     if (params.customerId) {
@@ -144,7 +147,6 @@ export class ReportService {
         dueDate: true,
         grandTotal: true,
         Customer: { select: { name: true } },
-        Payments: { select: { amountPaid: true } },
       },
       orderBy: { dueDate: 'asc' },
     });
@@ -174,11 +176,7 @@ export class ReportService {
     }));
 
     for (const invoice of invoices) {
-      const paid = invoice.Payments.reduce(
-        (sum, payment) => sum + Number(payment.amountPaid || 0),
-        0,
-      );
-      const outstanding = Math.max(Number(invoice.grandTotal || 0) - paid, 0);
+      const outstanding = Number(invoice.grandTotal || 0);
 
       if (outstanding === 0) {
         continue;
@@ -225,5 +223,159 @@ export class ReportService {
         0,
       ),
     };
+  }
+
+  async exportAgingReportToPdf(params: {
+    customerId?: number;
+    asOfDate?: string;
+  }): Promise<Buffer> {
+    const report = await this.agingReport(params);
+    const rows = report.buckets.flatMap((bucket) => bucket.invoices);
+
+    const PDFDocumentWithTables = createPdfDocumentWithTables(PDFDocument);
+    const doc = new PDFDocumentWithTables({
+      size: 'A4',
+      margin: 40,
+      bufferPages: true,
+      layout: 'landscape',
+    });
+
+    return new Promise((resolve, reject) => {
+      const chunks: Buffer[] = [];
+
+      doc.on('data', (chunk) => chunks.push(chunk));
+      doc.on('end', () => resolve(Buffer.concat(chunks)));
+      doc.on('error', reject);
+
+      doc
+        .font('Helvetica-Bold')
+        .fontSize(16)
+        .text('AGING REPORT', { align: 'center' });
+
+      doc
+        .font('Helvetica')
+        .fontSize(10)
+        .text(`As of ${dayjs(report.asOfDate).format('DD-MM-YYYY')}`, {
+          align: 'center',
+        });
+
+      doc.moveDown(1.5);
+
+      doc.table(
+        {
+          headers: [
+            { label: 'Invoice No', property: 'number', width: 90 },
+            {
+              label: 'Customer',
+              property: 'customerName',
+              width: doc.page.width - 80 - 90 - 80 - 90 - 90 - 90,
+            },
+            { label: 'Due Date', property: 'dueDate', width: 80 },
+            {
+              label: 'Days Overdue',
+              property: 'daysOverdue',
+              width: 90,
+              align: 'right',
+            },
+            {
+              label: 'Outstanding',
+              property: 'outstanding',
+              width: 90,
+              align: 'right',
+            },
+            { label: 'Bucket', property: 'bucket', width: 90 },
+          ],
+          data: rows.map((row) => ({
+            number: row.number || '-',
+            customerName: row.customerName || '-',
+            dueDate: dayjs(row.dueDate).format('DD-MM-YYYY'),
+            daysOverdue: row.daysOverdue,
+            outstanding: row.outstanding.toLocaleString('id-ID', {
+              style: 'currency',
+              currency: 'IDR',
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2,
+            }),
+            bucket: report.buckets.find((bucket) =>
+              bucket.invoices.includes(row),
+            )?.label,
+          })),
+        },
+        {
+          x: 40,
+          y: 100,
+          width: doc.page.width - 80,
+          hideHeader: false,
+        },
+      );
+
+      doc.moveDown(1);
+      doc
+        .font('Helvetica-Bold')
+        .fontSize(11)
+        .text(
+          `Total Outstanding: ${report.totalOutstanding.toLocaleString(
+            'id-ID',
+            {
+              style: 'currency',
+              currency: 'IDR',
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2,
+            },
+          )}`,
+          { align: 'right' },
+        );
+
+      doc.end();
+    });
+  }
+
+  async exportAgingReportToExcel(params: {
+    customerId?: number;
+    asOfDate?: string;
+  }): Promise<Buffer> {
+    const report = await this.agingReport(params);
+    const rows = report.buckets.flatMap((bucket) =>
+      bucket.invoices.map((invoice) => ({ ...invoice, bucket: bucket.label })),
+    );
+
+    const workbook = new ExcelJS.Workbook();
+    const worksheet = workbook.addWorksheet('Aging Report');
+
+    worksheet.columns = [
+      { header: 'Invoice No', key: 'number', width: 18 },
+      { header: 'Customer', key: 'customerName', width: 30 },
+      { header: 'Due Date', key: 'dueDate', width: 15 },
+      { header: 'Days Overdue', key: 'daysOverdue', width: 15 },
+      { header: 'Outstanding', key: 'outstanding', width: 18 },
+      { header: 'Bucket', key: 'bucket', width: 15 },
+    ];
+
+    worksheet.getRow(1).font = { bold: true };
+    worksheet.getRow(1).fill = {
+      type: 'pattern',
+      pattern: 'solid',
+      fgColor: { argb: 'FFE0E0E0' },
+    };
+
+    rows.forEach((row) => {
+      worksheet.addRow({
+        number: row.number,
+        customerName: row.customerName,
+        dueDate: dayjs(row.dueDate).format('DD-MM-YYYY'),
+        daysOverdue: row.daysOverdue,
+        outstanding: row.outstanding,
+        bucket: row.bucket,
+      });
+    });
+
+    const totalRow = worksheet.addRow({
+      customerName: 'Total',
+      outstanding: report.totalOutstanding,
+    });
+    totalRow.font = { bold: true };
+
+    const buffer = await workbook.xlsx.writeBuffer();
+    return Buffer.from(buffer);
   }
 }
