@@ -2,6 +2,7 @@ import { ApiProperty, PartialType } from '@nestjs/swagger';
 import {
   IsArray,
   IsDateString,
+  IsEnum,
   IsInt,
   IsNotEmpty,
   IsNumberString,
@@ -14,6 +15,7 @@ import {
 } from 'class-validator';
 import { Type } from 'class-transformer';
 import { JsonArray } from '@prisma/client/runtime/client';
+import { GoodsReceiptStatus } from '../prisma/client/client';
 
 export class GoodsReceiptItemDto {
   @ApiProperty({ example: 'PART-001' })
@@ -133,4 +135,12 @@ export class QueryGoodsReceiptDto {
   @IsArray()
   @IsString({ each: true })
   dateRange?: string[];
+
+  @ApiProperty({ required: false, enum: GoodsReceiptStatus })
+  @IsOptional()
+  @IsEnum(GoodsReceiptStatus, {
+    each: true,
+    message: 'Invalid purchase order status',
+  })
+  status?: GoodsReceiptStatus | GoodsReceiptStatus[];
 }
