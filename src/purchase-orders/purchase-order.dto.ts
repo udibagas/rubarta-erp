@@ -223,8 +223,11 @@ export class QueryPurchaseOrderDto {
 
   @ApiProperty({ required: false, enum: PurchaseOrderStatus })
   @IsOptional()
-  @IsEnum(PurchaseOrderStatus)
-  status?: PurchaseOrderStatus;
+  @IsEnum(PurchaseOrderStatus, {
+    each: true,
+    message: 'Invalid purchase order status',
+  })
+  status?: PurchaseOrderStatus | PurchaseOrderStatus[];
 }
 
 export class SendPurchaseOrderEmailDto {

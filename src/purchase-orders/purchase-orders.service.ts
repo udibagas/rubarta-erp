@@ -71,7 +71,11 @@ export class PurchaseOrdersService {
     }
 
     if (query.supplierId) where.supplierId = Number(query.supplierId);
-    if (query.status) where.status = query.status;
+
+    if (query.status)
+      where.status = Array.isArray(query.status)
+        ? { in: query.status }
+        : query.status;
 
     if (query.dateRange && query.dateRange.length === 2) {
       const [startDate, endDate] = query.dateRange;
