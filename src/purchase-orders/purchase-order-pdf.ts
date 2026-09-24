@@ -80,9 +80,9 @@ export function generatePurchaseOrderPdf(order: any): Promise<Buffer> {
     const infoBoxX = right - infoBoxWidth;
     const contentTop = 220;
     const infoRows: [string, string][] = [
-      ['No', order.number],
+      ['PO Number', order.number],
       ['Date', formatDate(order.date)],
-      ['Reference', order.referenceNumber || '-'],
+      ['Reference Number', order.referenceNumber || '-'],
       ['Order Type', order.orderType || '-'],
       ['Payment Method', order.paymentMethod || '-'],
       ['T.O.P.', order.termOfPayment || '-'],
