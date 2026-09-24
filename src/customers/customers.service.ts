@@ -154,7 +154,7 @@ export class CustomersService {
       data: {
         ...customerData,
         Contacts: {
-          deleteMany: {},
+          ...(Contacts ? { deleteMany: {} } : {}),
           create: Contacts
             ? Contacts.map(
                 ({ name, email, phone, position, notes, isPrimary }) => ({
