@@ -96,6 +96,12 @@ export class PurchaseOrdersService {
       include: {
         Supplier: { select: { id: true, name: true } },
         User: { select: { id: true, name: true } },
+        PurchaseOrderItems: {
+          select: {
+            quantity: true,
+            receivedQuantity: true,
+          },
+        },
         _count: { select: { PurchaseOrderItems: true } },
       },
     });
