@@ -70,6 +70,14 @@ export class ReportController {
     return this.reportService.outstandingPurchaseOrdersReport({ supplierId });
   }
 
+  @Get('outstanding-sales-orders')
+  outstandingSalesOrdersReport(
+    @Query('customerId', new ParseIntPipe({ optional: true }))
+    customerId?: number,
+  ) {
+    return this.reportService.outstandingSalesOrdersReport({ customerId });
+  }
+
   @Get('export/aging-report/pdf')
   async exportAgingReportPdf(
     @Res({ passthrough: true }) res: Response,

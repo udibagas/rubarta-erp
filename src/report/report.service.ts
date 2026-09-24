@@ -330,6 +330,117 @@ export class ReportService {
     };
   }
 
+  async outstandingSalesOrdersReport(params: { customerId?: number }) {
+    const where: any = {
+      SalesOrder: { deletedAt: null },
+    };
+
+    if (params.customerId) {
+      where.SalesOrder.customerId = params.customerId;
+    }
+
+    const salesOrderItems = await this.prisma.salesOrderItem.findMany({
+      where,
+      select: {
+        id: true,
+        partNumber: true,
+        description: true,
+        quantity: true,
+        deliveredQuantity: true,
+        SalesOrder: {
+          select: {
+            id: true,
+            number: true,
+            date: true,
+            status: true,
+            customerId: true,
+            Customer: { select: { name: true } },
+          },
+        },
+      },
+      orderBy: [
+        { SalesOrder: { customerId: 'asc' } },
+        { SalesOrder: { date: 'asc' } },
+        { id: 'asc' },
+      ],
+    });
+
+    const grouped = new Map<
+      number | string,
+      {
+        customerId: number | null;
+        customerName: string;
+        outstandingItemCount: number;
+        outstandingQuantity: number;
+        items: Array<{
+          salesOrderId: number;
+          salesOrderNumber: string;
+          salesOrderDate: Date;
+          salesOrderStatus: string;
+          salesOrderItemId: number;
+          partNumber: string;
+          description: string;
+          orderedQuantity: number;
+          deliveredQuantity: number;
+          outstandingQuantity: number;
+        }>;
+      }
+    >();
+
+    for (const item of salesOrderItems) {
+      const outstandingQuantity = Math.max(
+        0,
+        item.quantity - item.deliveredQuantity,
+      );
+
+      if (outstandingQuantity === 0) {
+        continue;
+      }
+
+      const salesOrder = item.SalesOrder;
+      const key = salesOrder.customerId ?? 'unassigned';
+      const current = grouped.get(key) ?? {
+        customerId: salesOrder.customerId,
+        customerName: salesOrder.Customer?.name ?? 'Unassigned',
+        outstandingItemCount: 0,
+        outstandingQuantity: 0,
+        items: [],
+      };
+
+      current.outstandingItemCount += 1;
+      current.outstandingQuantity += outstandingQuantity;
+      current.items.push({
+        salesOrderId: salesOrder.id,
+        salesOrderNumber: salesOrder.number,
+        salesOrderDate: salesOrder.date,
+        salesOrderStatus: salesOrder.status,
+        salesOrderItemId: item.id,
+        partNumber: item.partNumber,
+        description: item.description,
+        orderedQuantity: item.quantity,
+        deliveredQuantity: item.deliveredQuantity,
+        outstandingQuantity,
+      });
+      grouped.set(key, current);
+    }
+
+    const data = [...grouped.values()].sort((a, b) =>
+      a.customerName.localeCompare(b.customerName),
+    );
+
+    return {
+      data,
+      totalOutstandingItemCount: data.reduce(
+        (sum, customer) => sum + customer.outstandingItemCount,
+        0,
+      ),
+      totalOutstandingQuantity: data.reduce(
+        (sum, customer) => sum + customer.outstandingQuantity,
+        0,
+      ),
+    };
+  }
+
   async agingReport(params: { customerId?: number; asOfDate?: string }) {
     const asOfDate = params.asOfDate
       ? dayjs(params.asOfDate).endOf('day')
