@@ -3743,6 +3743,7 @@ export const DeliveryOrderScalarFieldEnum = {
   date: 'date',
   sender: 'sender',
   receiptNumber: 'receiptNumber',
+  referenceNumber: 'referenceNumber',
   pickUpBy: 'pickUpBy',
   pickUpName: 'pickUpName',
   pickUpContact: 'pickUpContact',

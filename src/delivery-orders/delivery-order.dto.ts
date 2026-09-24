@@ -80,6 +80,11 @@ export class CreateDeliveryOrderDto {
   @IsOptional()
   receiptNumber?: string | null;
 
+  @ApiProperty({ required: false, example: 'REF-001' })
+  @IsString()
+  @IsOptional()
+  referenceNumber?: string | null;
+
   @ApiProperty({ required: false, example: 'John Doe' })
   @IsString()
   @IsOptional()

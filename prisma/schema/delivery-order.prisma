@@ -4,6 +4,7 @@ model DeliveryOrder {
   date               DateTime
   sender             String?
   receiptNumber      String?
+  referenceNumber    String?
   pickUpBy           String?
   pickUpName         String?
   pickUpContact      String?
