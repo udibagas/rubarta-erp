@@ -157,8 +157,8 @@ export class QueryInvoiceDto {
   pageSize?: string;
 
   @IsOptional()
-  @IsEnum(InvoiceStatus)
-  status?: InvoiceStatus;
+  @IsEnum(InvoiceStatus, { each: true, message: 'Invalid invoice status' })
+  status?: InvoiceStatus | InvoiceStatus[];
 
   @IsOptional()
   @IsString()

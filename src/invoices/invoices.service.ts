@@ -71,7 +71,7 @@ export class InvoicesService {
     }
 
     if (status) {
-      where.status = status;
+      where.status = Array.isArray(status) ? { in: status } : status;
     }
 
     if (dateRange && dateRange.length === 2) {
@@ -121,12 +121,11 @@ export class InvoicesService {
       ];
     }
 
+    const take = query.pageSize ? parseInt(query.pageSize) : undefined;
     const skip =
       query.page && query.pageSize
         ? (parseInt(query.page) - 1) * parseInt(query.pageSize)
         : undefined;
-
-    const take = query.pageSize ? parseInt(query.pageSize) : undefined;
 
     const data = await this.prisma.invoice.findMany({
       where,
