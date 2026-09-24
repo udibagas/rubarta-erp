@@ -36,8 +36,7 @@ import {
   SendSalesOrderEmailDto,
   UpdateSalesOrderDto,
 } from './sales-order.dto';
-import { SalesOrderStatus, User } from '../prisma/client/client';
-import { Public } from '../auth/public.decorator';
+import { User } from '../prisma/client/client';
 import { Response } from 'express';
 import { Auth } from '../auth/auth.decorator';
 

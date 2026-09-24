@@ -248,6 +248,9 @@ export class QuerySalesOrderDto {
 
   @ApiProperty({ required: false, enum: SalesOrderStatus })
   @IsOptional()
-  @IsEnum(SalesOrderStatus)
-  status?: SalesOrderStatus;
+  @IsEnum(SalesOrderStatus, {
+    each: true,
+    message: 'Invalid sales order status',
+  })
+  status?: SalesOrderStatus | SalesOrderStatus[];
 }

@@ -74,7 +74,9 @@ export class SalesOrdersService {
     }
 
     if (query.status) {
-      where.status = query.status;
+      where.status = Array.isArray(query.status)
+        ? { in: query.status }
+        : query.status;
     }
 
     if (query.dateRange && query.dateRange.length === 2) {
