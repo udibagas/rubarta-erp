@@ -219,6 +219,117 @@ export class ReportService {
     };
   }
 
+  async outstandingPurchaseOrdersReport(params: { supplierId?: number }) {
+    const where: any = {
+      PurchaseOrder: { deletedAt: null },
+    };
+
+    if (params.supplierId) {
+      where.PurchaseOrder.supplierId = params.supplierId;
+    }
+
+    const purchaseOrderItems = await this.prisma.purchaseOrderItem.findMany({
+      where,
+      select: {
+        id: true,
+        partNumber: true,
+        description: true,
+        quantity: true,
+        receivedQuantity: true,
+        PurchaseOrder: {
+          select: {
+            id: true,
+            number: true,
+            date: true,
+            status: true,
+            supplierId: true,
+            Supplier: { select: { name: true } },
+          },
+        },
+      },
+      orderBy: [
+        { PurchaseOrder: { supplierId: 'asc' } },
+        { PurchaseOrder: { date: 'asc' } },
+        { id: 'asc' },
+      ],
+    });
+
+    const grouped = new Map<
+      number | string,
+      {
+        supplierId: number | null;
+        supplierName: string;
+        outstandingItemCount: number;
+        outstandingQuantity: number;
+        items: Array<{
+          purchaseOrderId: number;
+          purchaseOrderNumber: string;
+          purchaseOrderDate: Date;
+          purchaseOrderStatus: string;
+          purchaseOrderItemId: number;
+          partNumber: string;
+          description: string;
+          orderedQuantity: number;
+          receivedQuantity: number;
+          outstandingQuantity: number;
+        }>;
+      }
+    >();
+
+    for (const item of purchaseOrderItems) {
+      const outstandingQuantity = Math.max(
+        0,
+        item.quantity - item.receivedQuantity,
+      );
+
+      if (outstandingQuantity === 0) {
+        continue;
+      }
+
+      const purchaseOrder = item.PurchaseOrder;
+      const key = purchaseOrder.supplierId ?? 'unassigned';
+      const current = grouped.get(key) ?? {
+        supplierId: purchaseOrder.supplierId,
+        supplierName: purchaseOrder.Supplier?.name ?? 'Unassigned',
+        outstandingItemCount: 0,
+        outstandingQuantity: 0,
+        items: [],
+      };
+
+      current.outstandingItemCount += 1;
+      current.outstandingQuantity += outstandingQuantity;
+      current.items.push({
+        purchaseOrderId: purchaseOrder.id,
+        purchaseOrderNumber: purchaseOrder.number,
+        purchaseOrderDate: purchaseOrder.date,
+        purchaseOrderStatus: purchaseOrder.status,
+        purchaseOrderItemId: item.id,
+        partNumber: item.partNumber,
+        description: item.description,
+        orderedQuantity: item.quantity,
+        receivedQuantity: item.receivedQuantity,
+        outstandingQuantity,
+      });
+      grouped.set(key, current);
+    }
+
+    const data = [...grouped.values()].sort((a, b) =>
+      a.supplierName.localeCompare(b.supplierName),
+    );
+
+    return {
+      data,
+      totalOutstandingItemCount: data.reduce(
+        (sum, supplier) => sum + supplier.outstandingItemCount,
+        0,
+      ),
+      totalOutstandingQuantity: data.reduce(
+        (sum, supplier) => sum + supplier.outstandingQuantity,
+        0,
+      ),
+    };
+  }
+
   async agingReport(params: { customerId?: number; asOfDate?: string }) {
     const asOfDate = params.asOfDate
       ? dayjs(params.asOfDate).endOf('day')

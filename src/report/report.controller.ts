@@ -62,6 +62,14 @@ export class ReportController {
     });
   }
 
+  @Get('outstanding-purchase-orders')
+  outstandingPurchaseOrdersReport(
+    @Query('supplierId', new ParseIntPipe({ optional: true }))
+    supplierId?: number,
+  ) {
+    return this.reportService.outstandingPurchaseOrdersReport({ supplierId });
+  }
+
   @Get('export/aging-report/pdf')
   async exportAgingReportPdf(
     @Res({ passthrough: true }) res: Response,
