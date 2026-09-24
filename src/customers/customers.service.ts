@@ -155,7 +155,18 @@ export class CustomersService {
         ...customerData,
         Contacts: {
           deleteMany: {},
-          create: Contacts,
+          create: Contacts
+            ? Contacts.map(
+                ({ name, email, phone, position, notes, isPrimary }) => ({
+                  name,
+                  email,
+                  phone,
+                  position,
+                  notes,
+                  isPrimary,
+                }),
+              )
+            : [],
         },
       },
     });
