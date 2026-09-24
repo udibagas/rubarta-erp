@@ -46,6 +46,22 @@ export class ReportController {
     return this.reportService.agingReport({ customerId, asOfDate });
   }
 
+  @Get('purchase-orders')
+  purchaseOrdersReport(
+    @Query('supplierId', new ParseIntPipe({ optional: true }))
+    supplierId?: number,
+    @Query('startDate') startDate?: string,
+    @Query('endDate') endDate?: string,
+    @Query('dateRange') dateRange?: string | string[],
+  ) {
+    return this.reportService.purchaseOrdersReport({
+      supplierId,
+      startDate,
+      endDate,
+      dateRange,
+    });
+  }
+
   @Get('export/aging-report/pdf')
   async exportAgingReportPdf(
     @Res({ passthrough: true }) res: Response,

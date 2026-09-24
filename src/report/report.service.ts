@@ -126,6 +126,99 @@ export class ReportService {
     };
   }
 
+  async purchaseOrdersReport(params: {
+    supplierId?: number;
+    startDate?: string;
+    endDate?: string;
+    dateRange?: string | string[];
+  }) {
+    const normalizedDateRange = Array.isArray(params.dateRange)
+      ? params.dateRange
+      : params.dateRange
+        ? [params.dateRange]
+        : [];
+
+    const startDate = params.startDate || normalizedDateRange[0];
+    const endDate = params.endDate || normalizedDateRange[1];
+
+    const where: any = { deletedAt: null };
+
+    if (params.supplierId) {
+      where.supplierId = params.supplierId;
+    }
+
+    if (startDate || endDate) {
+      where.date = {};
+
+      if (startDate) {
+        where.date.gte = dayjs(startDate).startOf('day').toDate();
+      }
+
+      if (endDate) {
+        where.date.lte = dayjs(endDate).endOf('day').toDate();
+      }
+    }
+
+    const purchaseOrders = await this.prisma.purchaseOrder.findMany({
+      where,
+      select: {
+        id: true,
+        number: true,
+        date: true,
+        status: true,
+        supplierId: true,
+        grandTotal: true,
+        Supplier: { select: { name: true } },
+      },
+      orderBy: [{ supplierId: 'asc' }, { date: 'asc' }],
+    });
+
+    const grouped = new Map<
+      number | string,
+      {
+        supplierId: number | null;
+        supplierName: string;
+        total: number;
+        orders: Array<{
+          id: number;
+          number: string;
+          date: Date;
+          status: string;
+          grandTotal: number;
+        }>;
+      }
+    >();
+
+    for (const po of purchaseOrders) {
+      const key = po.supplierId ?? 'unassigned';
+      const current = grouped.get(key) ?? {
+        supplierId: po.supplierId,
+        supplierName: po.Supplier?.name ?? 'Unassigned',
+        total: 0,
+        orders: [],
+      };
+
+      current.total += Number(po.grandTotal || 0);
+      current.orders.push({
+        id: po.id,
+        number: po.number,
+        date: po.date,
+        status: po.status,
+        grandTotal: Number(po.grandTotal || 0),
+      });
+      grouped.set(key, current);
+    }
+
+    const data = [...grouped.values()].sort((a, b) =>
+      a.supplierName.localeCompare(b.supplierName),
+    );
+
+    return {
+      data,
+      total: data.reduce((sum, group) => sum + group.total, 0),
+    };
+  }
+
   async agingReport(params: { customerId?: number; asOfDate?: string }) {
     const asOfDate = params.asOfDate
       ? dayjs(params.asOfDate).endOf('day')
