@@ -2,6 +2,7 @@ import { ApiProperty, PartialType } from '@nestjs/swagger';
 import {
   IsArray,
   IsDateString,
+  IsEnum,
   IsInt,
   IsNotEmpty,
   IsNumberString,
@@ -14,6 +15,7 @@ import {
 } from 'class-validator';
 import { Type } from 'class-transformer';
 import { JsonArray } from '@prisma/client/runtime/client';
+import { DeliveryOrderStatus } from '../prisma/client/client';
 
 export class DeliveryOrderItemDto {
   @ApiProperty({ example: 'PART-001' })
@@ -154,4 +156,12 @@ export class QueryDeliveryOrderDto {
   @IsArray()
   @IsString({ each: true })
   dateRange?: string[];
+
+  @ApiProperty({ required: false, enum: DeliveryOrderStatus })
+  @IsOptional()
+  @IsEnum(DeliveryOrderStatus, {
+    each: true,
+    message: 'Invalid delivery order status',
+  })
+  status?: DeliveryOrderStatus | DeliveryOrderStatus[];
 }

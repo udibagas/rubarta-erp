@@ -67,6 +67,12 @@ export class DeliveryOrdersService {
       };
     }
 
+    if (query.status) {
+      where.status = Array.isArray(query.status)
+        ? { in: query.status }
+        : query.status;
+    }
+
     const take = query.pageSize ? parseInt(query.pageSize, 10) : undefined;
     const skip =
       query.page && query.pageSize
