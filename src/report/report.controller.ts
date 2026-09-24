@@ -28,4 +28,13 @@ export class ReportController {
       dateRange,
     });
   }
+
+  @Get('aging-report')
+  agingReport(
+    @Query('customerId', new ParseIntPipe({ optional: true }))
+    customerId?: number,
+    @Query('asOfDate') asOfDate?: string,
+  ) {
+    return this.reportService.agingReport({ customerId, asOfDate });
+  }
 }
