@@ -76,6 +76,7 @@ export function generateDeliveryOrderPdf(deliveryOrder: any): Promise<Buffer> {
       ['DO Number', deliveryOrder.number],
       ['Date', formatDate(deliveryOrder.date)],
       ['SO Number', deliveryOrder.SalesOrder?.number || '-'],
+      ['Reference Number', deliveryOrder.referenceNumber || deliveryOrder.SalesOrder?.referenceNumber || '-'],
       ['Receipt Number', deliveryOrder.receiptNumber || '-'],
     ];
 
@@ -112,7 +113,7 @@ export function generateDeliveryOrderPdf(deliveryOrder: any): Promise<Buffer> {
       doc
         .lineWidth(0.5)
         .strokeColor(COLORS.border)
-        .rect(infoBoxX, headerTop + 28, infoBoxWidth, 64.2)
+        .rect(infoBoxX, headerTop + 28, infoBoxWidth, 80.2)
         .stroke();
 
       doc.table({
