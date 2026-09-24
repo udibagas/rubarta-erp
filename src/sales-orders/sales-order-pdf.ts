@@ -82,13 +82,12 @@ export function generateOrderPdf(salesOrder: any): Promise<Buffer> {
     const infoRows: [string, string][] = [
       ['No', salesOrder.number],
       ['Date', formatDate(salesOrder.date)],
+      ['Reference Number', salesOrder.referenceNumber || '-'],
       ['Request Type', salesOrder.requestType || '-'],
       ['Delivery Method', salesOrder.deliveryMethod || ''],
       ['Payment Method', salesOrder.paymentMethod || ''],
       ['T.O.P.', salesOrder.termOfPayment || ''],
       ['Currency', currency],
-      ['Attention', salesOrder.contactPerson || '-'],
-      ['Phone', salesOrder.contactPhone || ''],
     ];
 
     const contentTop = 220;
@@ -126,7 +125,7 @@ export function generateOrderPdf(salesOrder: any): Promise<Buffer> {
       doc
         .lineWidth(0.5)
         .strokeColor(COLORS.border)
-        .rect(infoBoxX, headerTop + 28, infoBoxWidth, 142.8)
+        .rect(infoBoxX, headerTop + 28, infoBoxWidth, 127.1)
         .stroke();
 
       doc.table({
@@ -169,6 +168,30 @@ export function generateOrderPdf(salesOrder: any): Promise<Buffer> {
         .text(salesOrder.customerAddress || '', left, 143, {
           width: contentWidth / 2,
         });
+      
+      doc
+        .fillColor('#000000')
+        .fontSize(9)
+        .font('Helvetica')
+        .text(
+          'Attn'.padEnd(15, ' ') +
+            ': ' +
+            (salesOrder.contactPerson || ''),
+          left,
+          180,
+        );
+
+      doc
+        .fillColor('#000000')
+        .fontSize(9)
+        .font('Helvetica')
+        .text(
+          'Phone'.padEnd(12, ' ') +
+            ': ' +
+            (salesOrder.contactPhone || ''),
+          left,
+          192,
+        );
 
       drawWatermark();
       doc.y = contentTop;
@@ -254,7 +277,7 @@ export function generateOrderPdf(salesOrder: any): Promise<Buffer> {
           totalPrice: formatAmount(item.totalPrice),
         })),
       },
-      { y, x: left, absolutePosition: true },
+      { y: y - 20, x: left, absolutePosition: true },
     );
 
     const tableRowHeight = 20;
