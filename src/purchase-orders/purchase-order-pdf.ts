@@ -285,8 +285,8 @@ export function generatePurchaseOrderPdf(order: any): Promise<Buffer> {
       },
       { hideHeader: true, x: right - 200, width: 200 },
     );
+    
     doc.moveDown();
-    doc.text(`Terms: ${order.termsAndConditions || '-'}`);
     doc.end();
   });
 }
