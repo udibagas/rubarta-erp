@@ -93,7 +93,9 @@ export class QuotationsService {
     }
 
     if (query.status) {
-      where.status = query.status;
+      where.status = Array.isArray(query.status)
+        ? { in: query.status }
+        : query.status;
     }
 
     const skip =

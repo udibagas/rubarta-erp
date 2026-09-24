@@ -238,6 +238,6 @@ export class QueryQuotationDto {
 
   @ApiProperty({ required: false, enum: QuotationStatus })
   @IsOptional()
-  @IsEnum(QuotationStatus)
-  status?: QuotationStatus;
+  @IsEnum(QuotationStatus, { each: true, message: 'Invalid quotation status' })
+  status?: QuotationStatus | QuotationStatus[];
 }
