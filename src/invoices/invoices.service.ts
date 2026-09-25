@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import {
   CreateInvoiceDto,
   UpdateInvoiceDto,
@@ -260,7 +260,11 @@ export class InvoicesService {
   }
 
   async remove(id: number) {
-    await this.findOne(id); // Verify invoice exists
+    const invoice = await this.findOne(id); // Verify invoice exists
+
+     if (invoice.status !== InvoiceStatus.Draft) {
+      throw new BadRequestException(`Cannot delete an invoice that is not in draft status`);
+    }
 
     // Delete invoice items first (cascade should handle this, but being explicit)
     await this.prisma.invoiceItem.deleteMany({

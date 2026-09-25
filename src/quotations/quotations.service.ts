@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { ApprovalService } from '../approval/approval.service';
 import { PrismaService } from '../prisma/prisma.service';
 import {
@@ -202,7 +202,11 @@ export class QuotationsService {
   }
 
   async remove(id: number) {
-    await this.findOne(id); // Verify exists
+    const quotation = await this.findOne(id); // Verify exists
+
+    if (quotation.status !== QuotationStatus.Draft) {
+      throw new BadRequestException(`Cannot delete a quotation that is not in draft status`);
+    }
 
     // Soft delete
     return this.prisma.quotation.update({
