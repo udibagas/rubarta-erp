@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
+import { CreateUserDto, QueryUserDto, UpdateUserDto } from './user.dto';
 import { PrismaService } from '../prisma/prisma.service';
 import * as bcrypt from 'bcrypt';
 import * as fs from 'node:fs/promises';
@@ -19,17 +18,20 @@ export class UsersService {
     });
   }
 
-  findAll(keyword?: string) {
+  async findAll(query: QueryUserDto) {
     const where: Prisma.UserWhereInput = {};
 
-    if (keyword) {
+    if (query.keyword) {
       where.OR = [
-        { name: { contains: keyword, mode: 'insensitive' } },
-        { email: { contains: keyword, mode: 'insensitive' } },
+        { name: { contains: query.keyword, mode: 'insensitive' } },
+        { email: { contains: query.keyword, mode: 'insensitive' } },
       ];
     }
 
-    return this.prisma.user.findMany({
+    const skip = query?.page ? (Number(query.page) - 1) * Number(query.pageSize || 10) : undefined;
+    const take = query?.pageSize ? Number(query.pageSize) : undefined; 
+
+    const data = await this.prisma.user.findMany({
       orderBy: { name: 'asc' },
       omit: { password: true },
       where,
@@ -37,7 +39,16 @@ export class UsersService {
         Department: true,
         Bank: true,
       },
+      skip,
+      take,
     });
+
+    if (query.page && query.pageSize) {
+      const total = await this.prisma.user.count({ where });
+      return { data, total, };
+    }
+
+    return data;
   }
 
   findOne(id: number) {

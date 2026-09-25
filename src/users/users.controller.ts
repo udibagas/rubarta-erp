@@ -10,8 +10,7 @@ import {
   Query,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
-import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
+import { CreateUserDto, QueryUserDto, UpdateUserDto } from './user.dto';
 import { Roles } from '../auth/role.decorator';
 import {
   ApiBearerAuth,
@@ -44,8 +43,8 @@ export class UsersController {
   @Get()
   @ApiOperation({ summary: 'Get all users' })
   @ApiOkResponse({ type: UserEntity, isArray: true })
-  findAll(@Query('keyword') keyword?: string) {
-    return this.usersService.findAll(keyword);
+  findAll(@Query() query?: QueryUserDto) {
+    return this.usersService.findAll(query);
   }
 
   @Get('balance')

@@ -1,5 +1,6 @@
-import { ApiProperty } from '@nestjs/swagger';
-import { Currency, Role } from '../../prisma/client/client';
+import { ApiProperty, PartialType } from '@nestjs/swagger';
+import { Currency, Role } from '../prisma/client/client';
+import { IsNumberString } from 'class-validator';
 import { JsonObject } from 'type-fest';
 import {
   ArrayNotEmpty,
@@ -70,4 +71,22 @@ export class CreateUserDto {
   @IsBoolean({ message: 'Invalid status' })
   @IsOptional()
   active?: boolean;
+}
+
+export class UpdateUserDto extends PartialType(CreateUserDto) { }
+
+export class QueryUserDto {
+  @ApiProperty({ required: false, example: 'Bagas Udi S.' })
+  @IsOptional()
+  keyword?: string;
+
+  @ApiProperty({ required: false, example: 1 })
+  @IsOptional()
+  @IsNumberString({}, { message: 'Page must be a number' })
+  page?: string;
+
+  @ApiProperty({ required: false, example: 10 })
+  @IsOptional()
+  @IsNumberString({}, { message: 'Page size must be a number' })
+  pageSize?: string;
 }

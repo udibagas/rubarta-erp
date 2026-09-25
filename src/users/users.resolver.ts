@@ -8,7 +8,7 @@ export class UsersResolver {
 
   @Query(() => [UserType], { name: 'users', description: 'Get all users' })
   async findAll(@Args('keyword', { nullable: true }) keyword?: string) {
-    return this.usersService.findAll(keyword);
+    return this.usersService.findAll({keyword});
   }
 
   @Query(() => UserType, { name: 'user', description: 'Get user by ID' })
