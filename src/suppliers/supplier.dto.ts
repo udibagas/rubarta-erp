@@ -3,11 +3,13 @@ import {
   IsEmail,
   IsEnum,
   IsNumber,
+  IsNumberString,
   IsOptional,
   IsString,
 } from 'class-validator';
+import { PartialType } from '@nestjs/mapped-types';
 
-export class SupplierDto {
+export class CreateSupplierDto {
   code: string;
 
   @IsString({ message: 'Name is required' })
@@ -33,4 +35,20 @@ export class SupplierDto {
 
   @IsEnum(Currency, { message: 'Invalid currency' })
   currency: Currency;
+}
+
+export class UpdateSupplierDto extends PartialType(CreateSupplierDto) { }
+
+export class QuerySupplierDto {
+  @IsOptional()
+  @IsNumberString()
+  page?: string;
+
+  @IsOptional()
+  @IsNumberString()
+  pageSize?: string;
+
+  @IsOptional()
+  @IsString()
+  keyword?: string;
 }

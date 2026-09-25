@@ -10,7 +10,7 @@ import {
   Query,
 } from '@nestjs/common';
 import { SuppliersService } from './suppliers.service';
-import { SupplierDto } from './supplier.dto';
+import { CreateSupplierDto, UpdateSupplierDto, QuerySupplierDto } from './supplier.dto';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('Suppliers')
@@ -20,13 +20,13 @@ export class SuppliersController {
   constructor(private readonly suppliersService: SuppliersService) {}
 
   @Post()
-  create(@Body() data: SupplierDto) {
+  create(@Body() data: CreateSupplierDto) {
     return this.suppliersService.create(data);
   }
 
   @Get()
-  findAll(@Query('keyword') keyword?: string) {
-    return this.suppliersService.findAll({ keyword });
+  findAll(@Query() query: QuerySupplierDto) {
+    return this.suppliersService.findAll(query);
   }
 
   @Get(':id')
@@ -35,7 +35,7 @@ export class SuppliersController {
   }
 
   @Patch(':id')
-  update(@Param('id', ParseIntPipe) id: number, @Body() data: SupplierDto) {
+  update(@Param('id', ParseIntPipe) id: number, @Body() data: UpdateSupplierDto) {
     return this.suppliersService.update(id, data);
   }
 
