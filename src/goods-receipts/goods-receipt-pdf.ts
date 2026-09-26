@@ -6,7 +6,7 @@ import { createPdfDocumentWithTables } from 'pdfkit-table';
 
 const LOGO_PATH = path.join(process.cwd(), 'logo.png');
 
-const COMPANY = {
+const DEFAULT_COMPANY = {
   name: 'PT. RUBARTA PRIMA ABADI',
   address: [
     'The Savoy Blok B1-20. River Garden Boulevard',
@@ -52,6 +52,12 @@ async function addPageNumbers(pdfBuffer: Buffer): Promise<Buffer> {
 }
 
 export function generateGoodsReceiptPdf(goodsReceipt: any): Promise<Buffer> {
+  const COMPANY = {
+    name: goodsReceipt.Company?.name?.toUpperCase() ?? DEFAULT_COMPANY.name,
+    address:
+      goodsReceipt.Company?.address?.split('\n') ?? DEFAULT_COMPANY.address,
+  };
+
   return new Promise((resolve, reject) => {
     const PDFDocumentWithTables = createPdfDocumentWithTables(PDFDocument);
     const doc = new PDFDocumentWithTables({
