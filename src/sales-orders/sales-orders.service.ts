@@ -1,4 +1,8 @@
-import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import {
   CreateSalesOrderDto,
@@ -155,6 +159,9 @@ export class SalesOrdersService {
         User: {
           select: { id: true, name: true, email: true },
         },
+        Company: {
+          select: { id: true, name: true, address: true },
+        },
       },
     });
 
@@ -213,7 +220,9 @@ export class SalesOrdersService {
 
     // Soft delete
     if (salesOrder.status !== SalesOrderStatus.Draft) {
-      throw new BadRequestException(`Cannot delete a sales order that is not in draft status`);
+      throw new BadRequestException(
+        `Cannot delete a sales order that is not in draft status`,
+      );
     }
 
     return this.prisma.salesOrder.update({

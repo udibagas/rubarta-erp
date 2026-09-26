@@ -7,7 +7,7 @@ import { createPdfDocumentWithTables } from 'pdfkit-table';
 const LOGO_PATH = path.join(process.cwd(), 'logo.png');
 
 // Static issuer info (Quotation model has no Company relation)
-const COMPANY = {
+const DEFAULT_COMPANY = {
   name: 'PT. RUBARTA PRIMA ABADI',
   address: [
     'The Savoy Blok B1-20. River Garden Boulevard',
@@ -60,6 +60,12 @@ async function addPageNumbers(pdfBuffer: Buffer): Promise<Buffer> {
 }
 
 export function generateQuotationPdf(quotation: any): Promise<Buffer> {
+  const COMPANY = {
+    name: quotation.Company?.name?.toUpperCase() ?? DEFAULT_COMPANY.name,
+    address: quotation.Company?.address?.split('\n') ?? DEFAULT_COMPANY.address,
+  };
+
+  console.log('COMPANY:', COMPANY);
   return new Promise((resolve, reject) => {
     const PDFDocument = createPdfDocumentWithTables(pdfkit);
 

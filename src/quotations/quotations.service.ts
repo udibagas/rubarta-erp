@@ -1,4 +1,8 @@
-import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { ApprovalService } from '../approval/approval.service';
 import { PrismaService } from '../prisma/prisma.service';
 import {
@@ -136,6 +140,9 @@ export class QuotationsService {
         Customer: true,
         User: { select: { id: true, name: true, email: true } },
         Opportunity: true,
+        Company: {
+          select: { id: true, name: true, address: true },
+        },
       },
     });
 
@@ -205,7 +212,9 @@ export class QuotationsService {
     const quotation = await this.findOne(id); // Verify exists
 
     if (quotation.status !== QuotationStatus.Draft) {
-      throw new BadRequestException(`Cannot delete a quotation that is not in draft status`);
+      throw new BadRequestException(
+        `Cannot delete a quotation that is not in draft status`,
+      );
     }
 
     // Soft delete
