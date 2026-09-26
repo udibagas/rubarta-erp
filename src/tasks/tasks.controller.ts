@@ -8,7 +8,6 @@ import {
   Delete,
   Query,
   ParseIntPipe,
-  ParseEnumPipe,
 } from '@nestjs/common';
 import {
   ApiTags,
@@ -18,8 +17,7 @@ import {
   ApiCreatedResponse,
 } from '@nestjs/swagger';
 import { TasksService } from './tasks.service';
-import { CreateTaskDto, UpdateTaskDto } from './dto/task.dto';
-import { TaskStatus, TaskPriority } from '../prisma/client/client';
+import { CreateTaskDto, UpdateTaskDto, QueryTaskDto } from './task.dto';
 
 @ApiTags('Tasks')
 @ApiBearerAuth()
@@ -37,31 +35,8 @@ export class TasksController {
   @Get()
   @ApiOperation({ summary: 'Get all tasks' })
   @ApiOkResponse({ description: 'List of tasks' })
-  findAll(
-    @Query('keyword') keyword?: string,
-    @Query('userId', new ParseIntPipe({ optional: true })) userId?: number,
-    @Query('leadId', new ParseIntPipe({ optional: true })) leadId?: number,
-    @Query('opportunityId', new ParseIntPipe({ optional: true }))
-    opportunityId?: number,
-    @Query('status', new ParseEnumPipe(TaskStatus, { optional: true }))
-    status?: TaskStatus,
-    @Query('priority', new ParseEnumPipe(TaskPriority, { optional: true }))
-    priority?: TaskPriority,
-    @Query('isPaginated') isPaginated?: boolean,
-    @Query('page', new ParseIntPipe({ optional: true })) page?: number,
-    @Query('limit', new ParseIntPipe({ optional: true })) limit?: number,
-  ) {
-    return this.tasksService.findAll({
-      keyword,
-      userId,
-      leadId,
-      opportunityId,
-      status,
-      priority,
-      isPaginated: isPaginated === true,
-      page,
-      limit,
-    });
+  findAll(@Query() query: QueryTaskDto) {
+    return this.tasksService.findAll(query);
   }
 
   @Get(':id')

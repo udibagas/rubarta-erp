@@ -8,8 +8,9 @@ import {
   MaxLength,
   IsBoolean,
   IsArray,
+  IsNumberString,
 } from 'class-validator';
-import { TaskStatus, TaskPriority } from '../../prisma/client/client';
+import { TaskStatus, TaskPriority } from '../prisma/client/client';
 
 export class CreateTaskDto {
   @ApiProperty({ example: 1 })
@@ -88,18 +89,18 @@ export class UpdateTaskDto extends PartialType(CreateTaskDto) {}
 export class QueryTaskDto {
   @ApiProperty({ required: false })
   @IsOptional()
-  @IsInt()
-  userId?: number;
+  @IsNumberString()
+  userId?: string;
 
   @ApiProperty({ required: false })
   @IsOptional()
-  @IsInt()
-  leadId?: number;
+  @IsNumberString()
+  leadId?: string;
 
   @ApiProperty({ required: false })
   @IsOptional()
-  @IsInt()
-  opportunityId?: number;
+  @IsNumberString()
+  opportunityId?: string;
 
   @ApiProperty({ required: false, enum: TaskStatus })
   @IsOptional()
@@ -116,18 +117,23 @@ export class QueryTaskDto {
   @IsString()
   keyword?: string;
 
-  @ApiProperty({ required: false })
-  @IsOptional()
-  @IsBoolean()
-  isPaginated?: boolean;
-
   @ApiProperty({ required: false, default: 1 })
   @IsOptional()
-  @IsInt()
+  @IsNumberString()
   page?: number;
 
   @ApiProperty({ required: false, default: 10 })
   @IsOptional()
-  @IsInt()
-  limit?: number;
+  @IsNumberString()
+  pageSize?: number;
+
+  @ApiProperty({ required: false })
+  @IsOptional()
+  @IsString()
+  sortBy?: 'priority' | 'dueDate' | 'status' | '';
+
+  @ApiProperty({ required: false })
+  @IsOptional()
+  @IsString()
+  sortOrder?: 'asc' | 'desc';
 }

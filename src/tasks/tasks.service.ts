@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
-import { CreateTaskDto, UpdateTaskDto, QueryTaskDto } from './dto/task.dto';
+import { CreateTaskDto, UpdateTaskDto, QueryTaskDto } from './task.dto';
 import { Prisma, TaskStatus } from '../prisma/client/client';
 
 @Injectable()
@@ -22,15 +22,15 @@ export class TasksService {
     };
 
     if (query.userId) {
-      where.userId = query.userId;
+      where.userId = Number(query.userId);
     }
 
     if (query.leadId) {
-      where.leadId = query.leadId;
+      where.leadId = Number(query.leadId);
     }
 
     if (query.opportunityId) {
-      where.opportunityId = query.opportunityId;
+      where.opportunityId = Number(query.opportunityId);
     }
 
     if (query.status) {
@@ -52,15 +52,20 @@ export class TasksService {
       { priority: 'desc' },
       { dueDate: 'asc' },
     ] as Prisma.TaskOrderByWithRelationInput[];
+
+    if (query.sortBy) {
+      const sortOrder = query.sortOrder || 'asc';
+      orderBy.unshift({ [query.sortBy]: sortOrder });
+    }
+
     const include = {
       User: { select: { id: true, name: true } },
     };
 
-    // If pagination is requested
-    if (query.isPaginated) {
-      const page = query.page || 1;
-      const limit = query.limit || 10;
-      const skip = (page - 1) * limit;
+    if (query.page && query.pageSize) {
+      const page = Number(query.page) || 1;
+      const take = Number(query.pageSize) || 10;
+      const skip = (page - 1) * take;
 
       const [data, total] = await Promise.all([
         this.prisma.task.findMany({
@@ -68,28 +73,17 @@ export class TasksService {
           orderBy,
           include,
           skip,
-          take: limit,
+          take,
         }),
+
         this.prisma.task.count({ where }),
       ]);
 
-      return {
-        data,
-        meta: {
-          total,
-          page,
-          limit,
-          totalPages: Math.ceil(total / limit),
-        },
-      };
+      return { data, total };
     }
 
     // Return all results without pagination
-    return this.prisma.task.findMany({
-      where,
-      orderBy,
-      include,
-    });
+    return this.prisma.task.findMany({ where, orderBy, include });
   }
 
   async findOne(id: number) {
