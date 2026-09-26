@@ -127,4 +127,46 @@ export class TasksService {
       data: { deletedAt: new Date() },
     });
   }
+
+  async summary(query: QueryTaskDto) {
+    const where: Prisma.TaskWhereInput = {
+      deletedAt: null,
+    };
+
+    if (query.userId) {
+      where.userId = Number(query.userId);
+    }
+
+    if (query.leadId) {
+      where.leadId = Number(query.leadId);
+    }
+
+    if (query.opportunityId) {
+      where.opportunityId = Number(query.opportunityId);
+    }
+
+    if (query.status) {
+      where.status = query.status;
+    }
+
+    if (query.priority) {
+      where.priority = query.priority;
+    }
+
+    const [total, completed, overdue] = await Promise.all([
+      this.prisma.task.count({ where }),
+      this.prisma.task.count({
+        where: { ...where, status: TaskStatus.Completed },
+      }),
+      this.prisma.task.count({
+        where: {
+          ...where,
+          dueDate: { lt: new Date() },
+          status: { not: TaskStatus.Completed },
+        },
+      }),
+    ]);
+
+    return { total, completed, overdue, pending: total - completed };
+  }
 }

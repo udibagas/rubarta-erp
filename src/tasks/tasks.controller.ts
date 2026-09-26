@@ -39,6 +39,13 @@ export class TasksController {
     return this.tasksService.findAll(query);
   }
 
+  @Get('summary')
+  @ApiOperation({ summary: 'Get task summary' })
+  @ApiOkResponse({ description: 'Task summary' })
+  summary(@Query() query: QueryTaskDto) {
+    return this.tasksService.summary(query);
+  }
+
   @Get(':id')
   @ApiOperation({ summary: 'Get task by ID' })
   @ApiOkResponse({ description: 'Task details' })
