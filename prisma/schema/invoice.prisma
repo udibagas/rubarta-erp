@@ -30,10 +30,12 @@ model Invoice {
   // Relationships
   userId          Int
   salesOrderId    Int
-  deliveryOrderId Int @unique
+  deliveryOrderId Int  @unique
   customerId      Int
+  companyId       Int?
 
   Customer      Customer      @relation(fields: [customerId], references: [id])
+  Company       Company?      @relation(fields: [companyId], references: [id])
   Payments      Payment[]
   SalesOrder    SalesOrder    @relation(fields: [salesOrderId], references: [id])
   DeliveryOrder DeliveryOrder @relation(fields: [deliveryOrderId], references: [id])

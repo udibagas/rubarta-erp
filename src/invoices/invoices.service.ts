@@ -1,4 +1,8 @@
-import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import {
   CreateInvoiceDto,
   UpdateInvoiceDto,
@@ -195,8 +199,12 @@ export class InvoicesService {
         },
         DeliveryOrder: true,
         InvoiceItems: true,
-        Payments: {
-          orderBy: { date: 'desc' },
+        Company: {
+          select: {
+            id: true,
+            name: true,
+            address: true,
+          },
         },
       },
     });
@@ -262,8 +270,10 @@ export class InvoicesService {
   async remove(id: number) {
     const invoice = await this.findOne(id); // Verify invoice exists
 
-     if (invoice.status !== InvoiceStatus.Draft) {
-      throw new BadRequestException(`Cannot delete an invoice that is not in draft status`);
+    if (invoice.status !== InvoiceStatus.Draft) {
+      throw new BadRequestException(
+        `Cannot delete an invoice that is not in draft status`,
+      );
     }
 
     // Delete invoice items first (cascade should handle this, but being explicit)

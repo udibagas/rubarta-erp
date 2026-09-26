@@ -39,6 +39,11 @@ export class InvoiceItemDto {
 }
 
 export class CreateInvoiceDto {
+  @ApiProperty({ required: true, example: 1 })
+  @IsOptional()
+  @IsInt({ message: 'Invalid company' })
+  companyId?: number;
+
   @IsDateString()
   date: string;
 

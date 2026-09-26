@@ -489,6 +489,7 @@ export const InvoiceScalarFieldEnum = {
   salesOrderId: 'salesOrderId',
   deliveryOrderId: 'deliveryOrderId',
   customerId: 'customerId',
+  companyId: 'companyId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
