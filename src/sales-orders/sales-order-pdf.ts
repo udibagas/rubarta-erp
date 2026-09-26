@@ -7,7 +7,7 @@ import { createPdfDocumentWithTables } from 'pdfkit-table';
 const LOGO_PATH = path.join(process.cwd(), 'logo.png');
 
 // Static issuer info (Order model has no Company relation)
-const COMPANY = {
+const DEFAULT_COMPANY = {
   name: 'PT. RUBARTA PRIMA ABADI',
   address: [
     'The Savoy Blok B1-20. River Garden Boulevard',
@@ -60,6 +60,12 @@ async function addPageNumbers(pdfBuffer: Buffer): Promise<Buffer> {
 }
 
 export function generateOrderPdf(salesOrder: any): Promise<Buffer> {
+  const COMPANY = {
+    name: salesOrder.Company?.name?.toUpperCase() ?? DEFAULT_COMPANY.name,
+    address:
+      salesOrder.Company?.address?.split('\n') ?? DEFAULT_COMPANY.address,
+  };
+
   return new Promise((resolve, reject) => {
     const PDFDocument = createPdfDocumentWithTables(pdfkit);
 
@@ -168,15 +174,13 @@ export function generateOrderPdf(salesOrder: any): Promise<Buffer> {
         .text(salesOrder.customerAddress || '', left, 143, {
           width: contentWidth / 2,
         });
-      
+
       doc
         .fillColor('#000000')
         .fontSize(9)
         .font('Helvetica')
         .text(
-          'Attn'.padEnd(15, ' ') +
-            ': ' +
-            (salesOrder.contactPerson || ''),
+          'Attn'.padEnd(15, ' ') + ': ' + (salesOrder.contactPerson || ''),
           left,
           180,
         );
@@ -186,9 +190,7 @@ export function generateOrderPdf(salesOrder: any): Promise<Buffer> {
         .fontSize(9)
         .font('Helvetica')
         .text(
-          'Phone'.padEnd(12, ' ') +
-            ': ' +
-            (salesOrder.contactPhone || ''),
+          'Phone'.padEnd(12, ' ') + ': ' + (salesOrder.contactPhone || ''),
           left,
           192,
         );

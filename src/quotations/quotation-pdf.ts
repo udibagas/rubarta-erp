@@ -65,7 +65,6 @@ export function generateQuotationPdf(quotation: any): Promise<Buffer> {
     address: quotation.Company?.address?.split('\n') ?? DEFAULT_COMPANY.address,
   };
 
-  console.log('COMPANY:', COMPANY);
   return new Promise((resolve, reject) => {
     const PDFDocument = createPdfDocumentWithTables(pdfkit);
 
