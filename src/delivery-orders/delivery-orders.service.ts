@@ -86,7 +86,7 @@ export class DeliveryOrdersService {
       skip,
       include: {
         Customer: { select: { id: true, name: true } },
-        SalesOrder: { select: { id: true, number: true, title: true } },
+        SalesOrder: { select: { id: true, number: true, referenceNumber: true } },
         User: { select: { id: true, name: true } },
         _count: { select: { DeliveryOrderItems: true } },
       },
