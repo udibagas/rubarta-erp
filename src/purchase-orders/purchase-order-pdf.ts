@@ -6,7 +6,7 @@ import { createPdfDocumentWithTables } from 'pdfkit-table';
 
 const LOGO_PATH = path.join(process.cwd(), 'logo.png');
 
-const COMPANY = {
+const DEFAULT_COMPANY = {
   name: 'PT. RUBARTA PRIMA ABADI',
   address: [
     'The Savoy Blok B1-20. River Garden Boulevard',
@@ -59,6 +59,11 @@ async function addPageNumbers(pdfBuffer: Buffer): Promise<Buffer> {
 }
 
 export function generatePurchaseOrderPdf(order: any): Promise<Buffer> {
+  const COMPANY = {
+    name: order.Company?.name?.toUpperCase() ?? DEFAULT_COMPANY.name,
+    address: order.Company?.address?.split('\n') ?? DEFAULT_COMPANY.address,
+  };
+
   return new Promise((resolve, reject) => {
     const PDFDocumentWithTables = createPdfDocumentWithTables(PDFDocument);
     const doc = new PDFDocumentWithTables({
@@ -285,7 +290,7 @@ export function generatePurchaseOrderPdf(order: any): Promise<Buffer> {
       },
       { hideHeader: true, x: right - 200, width: 200 },
     );
-    
+
     doc.moveDown();
     doc.end();
   });

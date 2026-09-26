@@ -1,4 +1,8 @@
-import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { MailerService } from '@nestjs-modules/mailer';
 import { ApprovalService } from '../approval/approval.service';
 import { PrismaService } from '../prisma/prisma.service';
@@ -120,7 +124,7 @@ export class PurchaseOrdersService {
       include: {
         PurchaseOrderItems: { orderBy: { sortOrder: 'asc' } },
         Supplier: true,
-        Company: true,
+        Company: { select: { id: true, name: true, address: true } },
         User: { select: { id: true, name: true, email: true } },
       },
     });
@@ -167,9 +171,11 @@ export class PurchaseOrdersService {
 
   async remove(id: number) {
     const order = await this.findOne(id);
-    
+
     if (order.status !== PurchaseOrderStatus.Draft) {
-      throw new BadRequestException(`Cannot delete a purchase order that is not in draft status`);
+      throw new BadRequestException(
+        `Cannot delete a purchase order that is not in draft status`,
+      );
     }
 
     return this.prisma.purchaseOrder.update({
