@@ -1,5 +1,13 @@
-import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
-import { Prisma, SalesOrderStatus, DeliveryOrderStatus } from '../prisma/client/client';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
+import {
+  Prisma,
+  SalesOrderStatus,
+  DeliveryOrderStatus,
+} from '../prisma/client/client';
 import { PrismaService } from '../prisma/prisma.service';
 import {
   CreateDeliveryOrderDto,
@@ -27,6 +35,7 @@ export class DeliveryOrdersService {
     SalesOrder: true,
     GoodsReceipt: true,
     User: { select: { id: true, name: true } },
+    Company: { select: { id: true, name: true, address: true } },
   } satisfies Prisma.DeliveryOrderInclude;
 
   async create(data: CreateDeliveryOrderDto & { userId: number }) {
@@ -86,7 +95,9 @@ export class DeliveryOrdersService {
       skip,
       include: {
         Customer: { select: { id: true, name: true } },
-        SalesOrder: { select: { id: true, number: true, referenceNumber: true } },
+        SalesOrder: {
+          select: { id: true, number: true, referenceNumber: true },
+        },
         User: { select: { id: true, name: true } },
         _count: { select: { DeliveryOrderItems: true } },
       },
@@ -145,9 +156,11 @@ export class DeliveryOrdersService {
     const deliveryOrder = await this.findOne(id);
 
     if (deliveryOrder.status !== DeliveryOrderStatus.Draft) {
-      throw new BadRequestException(`Cannot delete a delivery order that is not in draft status`);
+      throw new BadRequestException(
+        `Cannot delete a delivery order that is not in draft status`,
+      );
     }
-    
+
     return this.prisma.deliveryOrder.delete({ where: { id } });
   }
 
