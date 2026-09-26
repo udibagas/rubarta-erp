@@ -86,8 +86,6 @@ export function generateQuotationPdf(quotation: any): Promise<Buffer> {
       ['Payment Method', quotation.paymentMethod || ''],
       ['T.O.P.', quotation.termOfPayment || ''],
       ['Currency', currency],
-      ['Attention', quotation.contactPerson || '-'],
-      ['Phone', quotation.contactPhone || ''],
     ];
 
     const contentTop = 220;
@@ -125,7 +123,7 @@ export function generateQuotationPdf(quotation: any): Promise<Buffer> {
       doc
         .lineWidth(0.5)
         .strokeColor(COLORS.border)
-        .rect(infoBoxX, headerTop + 28, infoBoxWidth, 127.4)
+        .rect(infoBoxX, headerTop + 28, infoBoxWidth, 95.7)
         .stroke();
 
       doc.table({
@@ -168,6 +166,26 @@ export function generateQuotationPdf(quotation: any): Promise<Buffer> {
         .text(quotation.customerAddress || '', left, 143, {
           width: contentWidth / 2,
         });
+
+      doc
+        .fillColor('#000000')
+        .fontSize(9)
+        .font('Helvetica')
+        .text(
+          'Attn'.padEnd(15, ' ') + ': ' + (quotation.contactPerson || ''),
+          left,
+          180,
+        );
+
+      doc
+        .fillColor('#000000')
+        .fontSize(9)
+        .font('Helvetica')
+        .text(
+          'Phone'.padEnd(12, ' ') + ': ' + (quotation.contactPhone || ''),
+          left,
+          192,
+        );
 
       drawWatermark();
       doc.y = contentTop;
