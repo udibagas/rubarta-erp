@@ -132,6 +132,11 @@ export class NkpService {
             name: { contains: keyword, mode: 'insensitive' },
           },
         },
+        {
+          Supplier: {
+            name: { contains: keyword, mode: 'insensitive' },
+          },
+        },
       ];
     }
 
