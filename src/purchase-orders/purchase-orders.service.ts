@@ -231,6 +231,47 @@ export class PurchaseOrdersService {
     return generatePurchaseOrderPdf(await this.findOne(id));
   }
 
+  async getOutstandingOrders(supplierId?: number) {
+    return this.prisma.purchaseOrder.findMany({
+      select: {
+        id: true,
+        number: true,
+        date: true,
+        referenceNumber: true,
+        currency: true,
+        grandTotal: true,
+        Supplier: { select: { id: true, name: true } },
+        PurchaseOrderItems: {
+          select: {
+            partNumber: true,
+            description: true,
+            quantity: true,
+            receivedQuantity: true,
+            totalPrice: true,
+          },
+        },
+      },
+      where: {
+        deletedAt: null,
+        status: {
+          notIn: [
+            PurchaseOrderStatus.Draft,
+            PurchaseOrderStatus.Completed,
+            PurchaseOrderStatus.Cancelled,
+          ],
+        },
+        PurchaseOrderItems: {
+          some: {
+            receivedQuantity: {
+              lt: this.prisma.purchaseOrderItem.fields.quantity,
+            },
+          },
+        },
+        ...(supplierId ? { supplierId } : {}),
+      },
+    });
+  }
+
   async exportToPdf(query: QueryPurchaseOrderDto): Promise<Buffer> {
     const purchaseOrders = (await this.findAll(query)) as any[];
     const PDFDocumentWithTables = createPdfDocumentWithTables(PDFDocument);

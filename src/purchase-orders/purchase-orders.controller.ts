@@ -4,7 +4,6 @@ import {
   Delete,
   Get,
   Param,
-  ParseEnumPipe,
   ParseIntPipe,
   Patch,
   Post,
@@ -93,6 +92,15 @@ export class PurchaseOrdersController {
     });
 
     return new StreamableFile(buffer);
+  }
+
+  @Get('outstanding')
+  @ApiOperation({ summary: 'Get outstanding purchase orders' })
+  getOutstandingOrders(
+    @Query('supplierId', new ParseIntPipe({ optional: true }))
+    supplierId?: number,
+  ) {
+    return this.purchaseOrdersService.getOutstandingOrders(supplierId);
   }
 
   @Get(':id')
