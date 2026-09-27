@@ -245,7 +245,7 @@ export class PurchaseOrdersService {
         SUM(poi."quantity")::int AS "orderedQty",
         SUM(poi."receivedQuantity")::int AS "receivedQty",
         SUM(poi."quantity" - poi."receivedQuantity")::int AS "outstandingQty",
-        SUM((poi."quantity" - poi."receivedQuantity") * poi."unitPrice")::int AS "outstandingAmount"
+        SUM((poi."quantity" - poi."receivedQuantity") * poi."unitPrice")::varchar AS "outstandingAmount"
       FROM "PurchaseOrders" po
       JOIN "Suppliers" s ON po."supplierId" = s.id
       JOIN "PurchaseOrderItems" poi ON po.id = poi."purchaseOrderId" 
@@ -267,7 +267,7 @@ export class PurchaseOrdersService {
         SUM(poi."quantity")::int AS "orderedQty",
         SUM(poi."receivedQuantity")::int AS "receivedQty",
         SUM(poi."quantity" - poi."receivedQuantity")::int AS "outstandingQty",
-        SUM((poi."quantity" - poi."receivedQuantity") * poi."unitPrice")::int AS "outstandingAmount"
+        SUM((poi."quantity" - poi."receivedQuantity") * poi."unitPrice")::varchar AS "outstandingAmount"
       FROM "PurchaseOrders" po
       JOIN "Suppliers" s ON po."supplierId" = s.id
       JOIN "PurchaseOrderItems" poi ON po.id = poi."purchaseOrderId" 
@@ -291,7 +291,7 @@ export class PurchaseOrdersService {
         poi."quantity"::int AS "orderedQty",
         poi."receivedQuantity"::int AS "receivedQty",
         (poi."quantity" - poi."receivedQuantity")::int AS "outstandingQty",
-        ((poi."quantity" - poi."receivedQuantity") * poi."unitPrice")::int AS "outstandingAmount"
+        ((poi."quantity" - poi."receivedQuantity") * poi."unitPrice")::varchar AS "outstandingAmount"
       FROM "PurchaseOrderItems" poi
       JOIN "PurchaseOrders" po ON po.id = poi."purchaseOrderId"
       JOIN "Suppliers" s ON po."supplierId" = s.id

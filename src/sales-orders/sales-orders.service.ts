@@ -186,7 +186,7 @@ export class SalesOrdersService {
         SUM(soi."quantity")::int AS "orderedQty",
         SUM(soi."deliveredQuantity")::int AS "deliveredQty",
         SUM(soi."quantity" - soi."deliveredQuantity")::int AS "outstandingQty",
-        SUM((soi."quantity" - soi."deliveredQuantity") * soi."unitPrice")::int AS "outstandingAmount"
+        SUM((soi."quantity" - soi."deliveredQuantity") * soi."unitPrice")::varchar AS "outstandingAmount"
       FROM "SalesOrders" so
       JOIN "Customers" c ON so."customerId" = c.id
       JOIN "SalesOrderItems" soi ON so.id = soi."salesOrderId"
@@ -208,7 +208,7 @@ export class SalesOrdersService {
         SUM(soi."quantity")::int AS "orderedQty",
         SUM(soi."deliveredQuantity")::int AS "deliveredQty",
         SUM(soi."quantity" - soi."deliveredQuantity")::int AS "outstandingQty",
-        SUM((soi."quantity" - soi."deliveredQuantity") * soi."unitPrice")::int AS "outstandingAmount"
+        SUM((soi."quantity" - soi."deliveredQuantity") * soi."unitPrice")::varchar AS "outstandingAmount"
       FROM "SalesOrders" so
       JOIN "Customers" c ON so."customerId" = c.id
       JOIN "SalesOrderItems" soi ON so.id = soi."salesOrderId"
@@ -232,7 +232,7 @@ export class SalesOrdersService {
         soi."quantity"::int AS "orderedQty",
         soi."deliveredQuantity"::int AS "deliveredQty",
         (soi."quantity" - soi."deliveredQuantity")::int AS "outstandingQty",
-        ((soi."quantity" - soi."deliveredQuantity") * soi."unitPrice")::int AS "outstandingAmount"
+        ((soi."quantity" - soi."deliveredQuantity") * soi."unitPrice")::varchar AS "outstandingAmount"
       FROM "SalesOrderItems" soi
       JOIN "SalesOrders" so ON so.id = soi."salesOrderId"
       JOIN "Customers" c ON so."customerId" = c.id
