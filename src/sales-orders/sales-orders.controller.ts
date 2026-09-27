@@ -156,6 +156,48 @@ export class SalesOrdersController {
     return this.salesOrdersService.getOutstandingOrders(groupBy, customerId);
   }
 
+  @Get('outstanding/export/pdf')
+  @ApiOperation({ summary: 'Export outstanding sales orders to PDF' })
+  async exportOutstandingPdf(
+    @Res({ passthrough: true }) res: Response,
+    @Query('groupBy') groupBy = 'customer',
+    @Query('customerId', new ParseIntPipe({ optional: true }))
+    customerId?: number,
+  ) {
+    const buffer = await this.salesOrdersService.exportOutstandingToPdf(
+      groupBy,
+      customerId,
+    );
+
+    res.set({
+      'Content-Type': 'application/pdf',
+      'Content-Disposition': `inline; filename="sales-orders.pdf"`,
+      'Content-Length': buffer.length,
+    });
+
+    res.end(buffer);
+  }
+
+  @Get('outstanding/export/excel')
+  @ApiOperation({ summary: 'Export outstanding sales orders to Excel' })
+  async exportOutstandingExcel(
+    @Res({ passthrough: true }) res: Response,
+    @Query('groupBy') groupBy = 'customer',
+    @Query('customerId', new ParseIntPipe({ optional: true }))
+    customerId?: number,
+  ) {
+    const buffer = await this.salesOrdersService.exportOutstandingToExcel(
+      groupBy,
+      customerId,
+    );
+    res.set({
+      'Content-Type':
+        'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+      'Content-Disposition': `attachment; filename="outstanding-sales-orders-${new Date().toISOString().split('T')[0]}.xlsx"`,
+    });
+    return new StreamableFile(buffer);
+  }
+
   @Get(':id')
   @ApiOperation({ summary: 'Get order by ID' })
   @ApiOkResponse({ description: 'Order details' })

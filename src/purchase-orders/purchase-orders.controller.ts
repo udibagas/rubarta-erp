@@ -105,6 +105,48 @@ export class PurchaseOrdersController {
     return this.purchaseOrdersService.getOutstandingOrders(groupBy, supplierId);
   }
 
+  @Get('outstanding/export/pdf')
+  @ApiOperation({ summary: 'Export outstanding purchase orders to PDF' })
+  async exportOutstandingPdf(
+    @Res({ passthrough: true }) res: Response,
+    @Query('groupBy') groupBy = 'supplier',
+    @Query('supplierId', new ParseIntPipe({ optional: true }))
+    supplierId?: number,
+  ) {
+    const buffer = await this.purchaseOrdersService.exportOutstandingToPdf(
+      groupBy,
+      supplierId,
+    );
+
+    res.set({
+      'Content-Type': 'application/pdf',
+      'Content-Disposition': `inline; filename="purchase-orders.pdf"`,
+      'Content-Length': buffer.length,
+    });
+
+    res.end(buffer);
+  }
+
+  @Get('outstanding/export/excel')
+  @ApiOperation({ summary: 'Export outstanding purchase orders to Excel' })
+  async exportOutstandingExcel(
+    @Res({ passthrough: true }) res: Response,
+    @Query('groupBy') groupBy = 'supplier',
+    @Query('supplierId', new ParseIntPipe({ optional: true }))
+    supplierId?: number,
+  ) {
+    const buffer = await this.purchaseOrdersService.exportOutstandingToExcel(
+      groupBy,
+      supplierId,
+    );
+    res.set({
+      'Content-Type':
+        'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+      'Content-Disposition': `attachment; filename="outstanding-purchase-orders-${new Date().toISOString().split('T')[0]}.xlsx"`,
+    });
+    return new StreamableFile(buffer);
+  }
+
   @Get(':id')
   @ApiOperation({ summary: 'Get purchase order by ID' })
   findOne(@Param('id', ParseIntPipe) id: number) {

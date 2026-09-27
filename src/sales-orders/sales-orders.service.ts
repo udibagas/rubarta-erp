@@ -172,7 +172,7 @@ export class SalesOrdersService {
     return salesOrder;
   }
 
-  getOutstandingOrders(groupBy: string, customerId?: number) {
+  getOutstandingOrders(groupBy: string = 'customer', customerId?: number) {
     const customerFilter =
       customerId != null
         ? Prisma.sql`AND so."customerId" = ${customerId}`
@@ -245,6 +245,119 @@ export class SalesOrdersService {
     }
 
     return [];
+  }
+
+  async exportOutstandingToPdf(
+    groupBy: string = 'customer',
+    customerId?: number,
+  ): Promise<Buffer> {
+    const rows = await this.getOutstandingOrders(groupBy, customerId);
+    const columns = this.getOutstandingExportColumns(groupBy);
+    const PDFDocumentWithTables = createPdfDocumentWithTables(PDFDocument);
+    const doc = new PDFDocumentWithTables({
+      size: 'A4',
+      margin: 40,
+      layout: 'landscape',
+    });
+    const totalColumnWidth = columns.reduce(
+      (sum, column) => sum + column.width,
+      0,
+    );
+    const availableWidth = doc.page.width - 80;
+
+    return new Promise((resolve, reject) => {
+      const chunks: Buffer[] = [];
+
+      doc.on('data', (chunk) => chunks.push(chunk));
+      doc.on('end', () => resolve(Buffer.concat(chunks)));
+      doc.on('error', reject);
+
+      doc
+        .font('Helvetica-Bold')
+        .fontSize(16)
+        .text('OUTSTANDING SALES ORDERS', { align: 'center' });
+      doc.moveDown(1.5);
+      doc.table(
+        {
+          headers: columns.map((column) => ({
+            label: column.header,
+            property: column.key,
+            width: (column.width / totalColumnWidth) * availableWidth,
+          })),
+          data: rows,
+        },
+        { x: 40, y: 80, width: availableWidth, hideHeader: false },
+      );
+
+      doc.end();
+    });
+  }
+
+  async exportOutstandingToExcel(
+    groupBy: string = 'customer',
+    customerId?: number,
+  ): Promise<Buffer> {
+    const rows = await this.getOutstandingOrders(groupBy, customerId);
+    const columns = this.getOutstandingExportColumns(groupBy);
+    const workbook = new ExcelJS.Workbook();
+    const worksheet = workbook.addWorksheet('OutstandingOrders');
+
+    worksheet.columns = columns.map((column) => ({
+      header: column.header,
+      key: column.key,
+      width: column.width,
+    }));
+    worksheet.getRow(1).font = { bold: true };
+    worksheet.getRow(1).fill = {
+      type: 'pattern',
+      pattern: 'solid',
+      fgColor: { argb: 'FFE0E0E0' },
+    };
+    rows.forEach((row) => {
+      worksheet.addRow({
+        ...row,
+        outstandingAmount: Number(row.outstandingAmount),
+      });
+    });
+
+    return Buffer.from(await workbook.xlsx.writeBuffer());
+  }
+
+  private getOutstandingExportColumns(groupBy: string) {
+    if (groupBy === 'so') {
+      return [
+        { header: 'SO Number', key: 'soNumber', width: 20 },
+        { header: 'Customer', key: 'customerName', width: 30 },
+        { header: 'Item Count', key: 'itemCount', width: 14 },
+        { header: 'Ordered Qty', key: 'orderedQty', width: 14 },
+        { header: 'Delivered Qty', key: 'deliveredQty', width: 16 },
+        { header: 'Outstanding Qty', key: 'outstandingQty', width: 18 },
+        { header: 'Outstanding Amount', key: 'outstandingAmount', width: 22 },
+      ];
+    }
+
+    if (groupBy === 'item') {
+      return [
+        { header: 'Item ID', key: 'itemId', width: 12 },
+        { header: 'Part Number', key: 'partNumber', width: 20 },
+        { header: 'Description', key: 'description', width: 35 },
+        { header: 'SO Number', key: 'soNumber', width: 20 },
+        { header: 'Customer', key: 'customerName', width: 30 },
+        { header: 'Ordered Qty', key: 'orderedQty', width: 14 },
+        { header: 'Delivered Qty', key: 'deliveredQty', width: 16 },
+        { header: 'Outstanding Qty', key: 'outstandingQty', width: 18 },
+        { header: 'Outstanding Amount', key: 'outstandingAmount', width: 22 },
+      ];
+    }
+
+    return [
+      { header: 'Customer', key: 'customerName', width: 30 },
+      { header: 'Order Count', key: 'orderCount', width: 14 },
+      { header: 'Ordered Qty', key: 'orderedQty', width: 14 },
+      { header: 'Delivered Qty', key: 'deliveredQty', width: 16 },
+      { header: 'Outstanding Qty', key: 'outstandingQty', width: 18 },
+      { header: 'Outstanding Amount', key: 'outstandingAmount', width: 22 },
+    ];
   }
 
   async update(id: number, data: UpdateSalesOrderDto) {
