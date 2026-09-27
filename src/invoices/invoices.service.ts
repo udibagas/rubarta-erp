@@ -30,6 +30,22 @@ export class InvoicesService {
   async create(data: CreateInvoiceDto & { userId: number }) {
     const { items, attachments, ...invoiceFields } = data;
 
+    const doExists = await this.prisma.invoice.findUnique({
+      where: { deliveryOrderId: invoiceFields.deliveryOrderId },
+    });
+
+    if (doExists) {
+      throw new BadRequestException({
+        message: 'Duplicate delivery order',
+        errors: [
+          {
+            property: 'deliveryOrderId',
+            error: 'Delivery order has already been invoiced',
+          },
+        ],
+      });
+    }
+
     const number = await this.generateNumber();
     const totals = this.calculateTotals(items, invoiceFields.discount);
 
