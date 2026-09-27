@@ -231,45 +231,71 @@ export class PurchaseOrdersService {
     return generatePurchaseOrderPdf(await this.findOne(id));
   }
 
-  async getOutstandingOrders(supplierId?: number) {
-    return this.prisma.purchaseOrder.findMany({
-      select: {
-        id: true,
-        number: true,
-        date: true,
-        referenceNumber: true,
-        currency: true,
-        grandTotal: true,
-        Supplier: { select: { id: true, name: true } },
-        PurchaseOrderItems: {
-          select: {
-            partNumber: true,
-            description: true,
-            quantity: true,
-            receivedQuantity: true,
-            totalPrice: true,
-          },
-        },
-      },
-      where: {
-        deletedAt: null,
-        status: {
-          notIn: [
-            PurchaseOrderStatus.Draft,
-            PurchaseOrderStatus.Completed,
-            PurchaseOrderStatus.Cancelled,
-          ],
-        },
-        PurchaseOrderItems: {
-          some: {
-            receivedQuantity: {
-              lt: this.prisma.purchaseOrderItem.fields.quantity,
-            },
-          },
-        },
-        ...(supplierId ? { supplierId } : {}),
-      },
-    });
+  getOutstandingOrders(groupBy: string, supplierId?: number) {
+    if (groupBy == 'supplier') {
+      return this.prisma.$queryRaw<any[]>`
+      SELECT 
+        s.name AS "supplierName",
+        COUNT(DISTINCT po.id)::int AS "orderCount",
+        SUM(poi."quantity")::int AS "orderedQty",
+        SUM(poi."receivedQuantity")::int AS "receivedQty",
+        SUM(poi."quantity" - poi."receivedQuantity")::int AS "outstandingQty",
+        SUM((poi."quantity" - poi."receivedQuantity") * poi."unitPrice")::int AS "outstandingAmount"
+      FROM "PurchaseOrders" po
+      JOIN "Suppliers" s ON po."supplierId" = s.id
+      JOIN "PurchaseOrderItems" poi ON po.id = poi."purchaseOrderId" 
+      WHERE po."deletedAt" IS NULL
+        AND po.status NOT IN ('Draft', 'Completed', 'Cancelled')
+        AND poi."receivedQuantity" < poi."quantity"
+      GROUP BY s.name
+    `;
+    }
+
+    if (groupBy == 'po') {
+      return this.prisma.$queryRaw<any[]>`
+      SELECT 
+        po.id AS "poId",
+        po."number" AS "poNumber",
+        s.name AS "supplierName",
+        COUNT(poi.id)::int AS "itemCount",
+        SUM(poi."quantity")::int AS "orderedQty",
+        SUM(poi."receivedQuantity")::int AS "receivedQty",
+        SUM(poi."quantity" - poi."receivedQuantity")::int AS "outstandingQty",
+        SUM((poi."quantity" - poi."receivedQuantity") * poi."unitPrice")::int AS "outstandingAmount"
+      FROM "PurchaseOrders" po
+      JOIN "Suppliers" s ON po."supplierId" = s.id
+      JOIN "PurchaseOrderItems" poi ON po.id = poi."purchaseOrderId" 
+      WHERE po."deletedAt" IS NULL
+        AND po.status NOT IN ('Draft', 'Completed', 'Cancelled')
+        AND poi."receivedQuantity" < poi."quantity"
+      GROUP BY po.id, po."number", s.name
+    `;
+    }
+
+    if (groupBy === 'item') {
+      return this.prisma.$queryRaw<any[]>`
+      SELECT 
+        poi.id AS "itemId",
+        poi."partNumber" AS "partNumber",
+        poi."description" AS "description",
+        po.id AS "poId",
+        po."number" AS "poNumber",
+        s.name AS "supplierName",
+        poi."quantity"::int AS "orderedQty",
+        poi."receivedQuantity"::int AS "receivedQty",
+        (poi."quantity" - poi."receivedQuantity")::int AS "outstandingQty",
+        ((poi."quantity" - poi."receivedQuantity") * poi."unitPrice")::int AS "outstandingAmount"
+      FROM "PurchaseOrderItems" poi
+      JOIN "PurchaseOrders" po ON po.id = poi."purchaseOrderId"
+      JOIN "Suppliers" s ON po."supplierId" = s.id
+      WHERE po."deletedAt" IS NULL
+        AND po.status NOT IN ('Draft', 'Completed', 'Cancelled')
+        AND poi."receivedQuantity" < poi."quantity"
+      GROUP BY poi.id, poi."partNumber", poi."description", po.id, po."number", s.name
+    `;
+    }
+
+    return [];
   }
 
   async exportToPdf(query: QueryPurchaseOrderDto): Promise<Buffer> {

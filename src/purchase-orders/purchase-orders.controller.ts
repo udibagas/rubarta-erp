@@ -11,6 +11,7 @@ import {
   Res,
   Req,
   StreamableFile,
+  ParseEnumPipe,
 } from '@nestjs/common';
 import {
   ApiBearerAuth,
@@ -97,10 +98,11 @@ export class PurchaseOrdersController {
   @Get('outstanding')
   @ApiOperation({ summary: 'Get outstanding purchase orders' })
   getOutstandingOrders(
+    @Query('groupBy') groupBy: string,
     @Query('supplierId', new ParseIntPipe({ optional: true }))
     supplierId?: number,
   ) {
-    return this.purchaseOrdersService.getOutstandingOrders(supplierId);
+    return this.purchaseOrdersService.getOutstandingOrders(groupBy, supplierId);
   }
 
   @Get(':id')
