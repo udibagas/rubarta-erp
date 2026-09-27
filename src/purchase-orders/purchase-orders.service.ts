@@ -341,6 +341,7 @@ export class PurchaseOrdersService {
           headers: columns.map((column) => ({
             label: column.header,
             property: column.key,
+            align: column.align,
             width: (column.width / totalColumnWidth) * availableWidth,
           })),
           data: rows,
@@ -387,11 +388,26 @@ export class PurchaseOrdersService {
       return [
         { header: 'PO Number', key: 'poNumber', width: 20 },
         { header: 'Supplier', key: 'supplierName', width: 30 },
-        { header: 'Item Count', key: 'itemCount', width: 14 },
-        { header: 'Ordered Qty', key: 'orderedQty', width: 14 },
-        { header: 'Received Qty', key: 'receivedQty', width: 14 },
-        { header: 'Outstanding Qty', key: 'outstandingQty', width: 18 },
-        { header: 'Outstanding Amount', key: 'outstandingAmount', width: 22 },
+        { header: 'Item Count', key: 'itemCount', width: 14, align: 'center' },
+        {
+          header: 'Ordered Qty',
+          key: 'orderedQty',
+          width: 14,
+          align: 'center',
+        },
+        {
+          header: 'Received Qty',
+          key: 'receivedQty',
+          width: 14,
+          align: 'center',
+        },
+        {
+          header: 'Outstanding Qty',
+          key: 'outstandingQty',
+          width: 18,
+          align: 'center',
+        },
+        // { header: 'Outstanding Amount', key: 'outstandingAmount', width: 22 },
       ];
     }
 
@@ -402,20 +418,45 @@ export class PurchaseOrdersService {
         { header: 'Description', key: 'description', width: 35 },
         { header: 'PO Number', key: 'poNumber', width: 20 },
         { header: 'Supplier', key: 'supplierName', width: 30 },
-        { header: 'Ordered Qty', key: 'orderedQty', width: 14 },
-        { header: 'Received Qty', key: 'receivedQty', width: 14 },
-        { header: 'Outstanding Qty', key: 'outstandingQty', width: 18 },
-        { header: 'Outstanding Amount', key: 'outstandingAmount', width: 22 },
+        {
+          header: 'Ordered Qty',
+          key: 'orderedQty',
+          width: 14,
+          align: 'center',
+        },
+        {
+          header: 'Received Qty',
+          key: 'receivedQty',
+          width: 14,
+          align: 'center',
+        },
+        {
+          header: 'Outstanding Qty',
+          key: 'outstandingQty',
+          width: 18,
+          align: 'center',
+        },
+        // { header: 'Outstanding Amount', key: 'outstandingAmount', width: 22 },
       ];
     }
 
     return [
       { header: 'Supplier', key: 'supplierName', width: 30 },
-      { header: 'Order Count', key: 'orderCount', width: 14 },
-      { header: 'Ordered Qty', key: 'orderedQty', width: 14 },
-      { header: 'Received Qty', key: 'receivedQty', width: 14 },
-      { header: 'Outstanding Qty', key: 'outstandingQty', width: 18 },
-      { header: 'Outstanding Amount', key: 'outstandingAmount', width: 22 },
+      { header: 'Order Count', key: 'orderCount', width: 14, align: 'center' },
+      { header: 'Ordered Qty', key: 'orderedQty', width: 14, align: 'center' },
+      {
+        header: 'Received Qty',
+        key: 'receivedQty',
+        width: 14,
+        align: 'center',
+      },
+      {
+        header: 'Outstanding Qty',
+        key: 'outstandingQty',
+        width: 18,
+        align: 'center',
+      },
+      // { header: 'Outstanding Amount', key: 'outstandingAmount', width: 22 },
     ];
   }
 
