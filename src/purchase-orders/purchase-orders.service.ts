@@ -232,6 +232,11 @@ export class PurchaseOrdersService {
   }
 
   getOutstandingOrders(groupBy: string, supplierId?: number) {
+    const supplierFilter =
+      supplierId != null
+        ? Prisma.sql`AND po."supplierId" = ${supplierId}`
+        : Prisma.empty;
+
     if (groupBy == 'supplier') {
       return this.prisma.$queryRaw<any[]>`
       SELECT 
@@ -247,6 +252,7 @@ export class PurchaseOrdersService {
       WHERE po."deletedAt" IS NULL
         AND po.status NOT IN ('Draft', 'Completed', 'Cancelled')
         AND poi."receivedQuantity" < poi."quantity"
+        ${supplierFilter}
       GROUP BY s.name
     `;
     }
@@ -268,6 +274,7 @@ export class PurchaseOrdersService {
       WHERE po."deletedAt" IS NULL
         AND po.status NOT IN ('Draft', 'Completed', 'Cancelled')
         AND poi."receivedQuantity" < poi."quantity"
+        ${supplierFilter}
       GROUP BY po.id, po."number", s.name
     `;
     }
@@ -291,6 +298,7 @@ export class PurchaseOrdersService {
       WHERE po."deletedAt" IS NULL
         AND po.status NOT IN ('Draft', 'Completed', 'Cancelled')
         AND poi."receivedQuantity" < poi."quantity"
+        ${supplierFilter}
       GROUP BY poi.id, poi."partNumber", poi."description", po.id, po."number", s.name
     `;
     }
