@@ -26,7 +26,10 @@ export class PrismaClientExceptionFilter
 
       case 'P2002': {
         const statusCode = HttpStatus.BAD_REQUEST;
-        const property = exception.meta.target[0];
+        const target = exception.meta?.target;
+        const property = Array.isArray(target)
+          ? target[0]
+          : target || 'unknown';
         const error = `Duplicate value`;
         response.status(statusCode).json({
           statusCode,

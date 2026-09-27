@@ -28,18 +28,19 @@ export class InvoicesService {
   ) {}
 
   async create(data: CreateInvoiceDto & { userId: number }) {
-    const { items, ...invoiceData } = data;
-    const { attachments, ...invoiceFields } = invoiceData;
+    const { items, attachments, ...invoiceFields } = data;
+
     const number = await this.generateNumber();
-    const totals = this.calculateTotals(items, invoiceData.discount);
-    const createData: Prisma.InvoiceUncheckedCreateInput = {
+    const totals = this.calculateTotals(items, invoiceFields.discount);
+
+    const invoiceData = {
       ...invoiceFields,
       ...(attachments === undefined
         ? {}
         : { attachments: attachments as Prisma.InputJsonValue }),
       number,
-      date: new Date(invoiceData.date),
-      dueDate: new Date(invoiceData.dueDate),
+      date: new Date(invoiceFields.date),
+      dueDate: new Date(invoiceFields.dueDate),
       ...totals,
       status: InvoiceStatus.Draft,
       InvoiceItems: {
@@ -50,7 +51,9 @@ export class InvoicesService {
       },
     };
 
-    return this.prisma.invoice.create({ data: createData });
+    return this.prisma.invoice.create({
+      data: invoiceData,
+    });
   }
 
   async findAll(query: QueryInvoiceDto) {
@@ -235,6 +238,13 @@ export class InvoicesService {
 
     if (invoiceData.dueDate) {
       updateData.dueDate = new Date(invoiceData.dueDate);
+    }
+
+    if (
+      invoice.status !== InvoiceStatus.Paid &&
+      data.status === InvoiceStatus.Paid
+    ) {
+      updateData.receiptDate = new Date().toISOString();
     }
 
     if (items) {
@@ -508,14 +518,13 @@ export class InvoicesService {
   }
 
   private async generateNumber(): Promise<string> {
-    const lastQuotation = await this.prisma.invoice.findFirst({
+    const lastInvoice = await this.prisma.invoice.findFirst({
       orderBy: { id: 'desc' },
     });
 
     const monthYear = dayjs().format('MMYYYY');
-
-    const lastNumber = lastQuotation
-      ? parseInt(lastQuotation.number.split('-').pop())
+    const lastNumber = lastInvoice
+      ? parseInt(lastInvoice.number.split('-').pop())
       : 0;
 
     const newNumber = lastNumber + 1;

@@ -8,6 +8,9 @@ model Invoice {
   billingAddress  String?
   shippingAddress String?
   attachments     Json?         @db.JsonB // Attachments related to the invoice
+  receiptNumber   String?
+  receiptDate     DateTime?
+  receiptFile     Json?
 
   // financials
   currency         Currency @default(IDR)

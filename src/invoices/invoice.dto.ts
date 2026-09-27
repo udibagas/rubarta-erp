@@ -123,7 +123,19 @@ export class CreateInvoiceDto {
   items: InvoiceItemDto[];
 }
 
-export class UpdateInvoiceDto extends PartialType(CreateInvoiceDto) {}
+export class UpdateInvoiceDto extends PartialType(CreateInvoiceDto) {
+  @IsOptional()
+  @IsString()
+  receiptNumber?: string;
+
+  @IsOptional()
+  @IsDateString()
+  receiptDate?: string;
+
+  @IsOptional()
+  @IsObject({ each: true })
+  receiptFile?: JsonArray;
+}
 
 export class SendInvoiceEmailDto {
   @ApiProperty({ example: 'Invoice INV092026-1 for your review' })
