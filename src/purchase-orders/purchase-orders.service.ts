@@ -237,7 +237,7 @@ export class PurchaseOrdersService {
         ? Prisma.sql`AND po."supplierId" = ${supplierId}`
         : Prisma.empty;
 
-    if (groupBy == 'supplier') {
+    if (groupBy === 'supplier') {
       return this.prisma.$queryRaw<any[]>`
       SELECT 
         s.name AS "supplierName",
@@ -257,7 +257,7 @@ export class PurchaseOrdersService {
     `;
     }
 
-    if (groupBy == 'po') {
+    if (groupBy === 'po') {
       return this.prisma.$queryRaw<any[]>`
       SELECT 
         po.id AS "poId",
