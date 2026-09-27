@@ -25,7 +25,6 @@ import { Role, User } from '../prisma/client/client';
 import { terbilang, toCurrency, toDecimal } from '../helpers/number';
 import { formatDate, formatDateNumeric } from '../helpers/date';
 import { Response } from 'express';
-import * as ExcelJS from 'exceljs';
 
 @ApiTags('Nota Kuasa Pembayaran')
 @ApiBearerAuth()
@@ -70,89 +69,46 @@ export class NkpController {
   @Get()
   @ApiOperation({ summary: 'Get all NKP' })
   async findAll(
+    @Auth() user: User & { Role: Role },
+    @Query() query: QueryNkpDto,
+  ) {
+    return this.nkpService.findAll({ ...query, user });
+  }
+
+  @Get('download/pdf')
+  @ApiOperation({ summary: 'Download NKP report as PDF' })
+  async downloadPdf(
     @Res() res: Response,
     @Auth() user: User & { Role: Role },
     @Query() query: QueryNkpDto,
   ) {
-    const data = await this.nkpService.findAll({ ...query, user });
+    const buffer = await this.nkpService.exportReportToPdf({ ...query, user });
+    const filename = `NKP_Report_${formatDateNumeric(new Date())}.pdf`;
 
-    if (query.action == 'download' && query.format == 'pdf') {
-      return res.render('nkp/report', {
-        data,
-        paymentType: query.paymentType,
-        dateRange: query.dateRange,
-        formatDateNumeric,
-        toDecimal,
-      });
-    }
+    res.setHeader('Content-Type', 'application/pdf');
+    res.setHeader('Content-Disposition', `inline; filename="${filename}"`);
+    return res.send(buffer);
+  }
 
-    if (query.action == 'download' && query.format == 'excel') {
-      const workbook = new ExcelJS.Workbook();
-      const worksheet = workbook.addWorksheet('NKP Report');
+  @Get('download/excel')
+  @ApiOperation({ summary: 'Download NKP report as Excel' })
+  async downloadExcel(
+    @Res() res: Response,
+    @Auth() user: User & { Role: Role },
+    @Query() query: QueryNkpDto,
+  ) {
+    const buffer = await this.nkpService.exportReportToExcel({
+      ...query,
+      user,
+    });
+    const filename = `NKP_Report_${formatDateNumeric(new Date())}.xlsx`;
 
-      // Define columns
-      worksheet.columns = [
-        { header: 'No', key: 'no', width: 5 },
-        { header: 'Date', key: 'date', width: 15 },
-        { header: 'Number', key: 'number', width: 30 },
-        { header: 'Type', key: 'type', width: 30 },
-        { header: 'Bank Ref No.', key: 'bankRefNo', width: 30 },
-        { header: 'Invoice No.', key: 'invoiceNumber', width: 30 },
-        { header: 'Description', key: 'description', width: 50 },
-        { header: 'Amount', key: 'amount', width: 15 },
-        { header: 'Curr', key: 'curr', width: 10 },
-      ];
-
-      // Style header row
-      worksheet.getRow(1).font = { bold: true };
-      worksheet.getRow(1).fill = {
-        type: 'pattern',
-        pattern: 'solid',
-        fgColor: { argb: 'FFD3D3D3' },
-      };
-
-      // Add data rows
-      const items = Array.isArray(data) ? data : data.data || [];
-      items.forEach((item: any, index: number) => {
-        const row = worksheet.addRow({
-          no: index + 1,
-          date: item.createdAt ? formatDateNumeric(item.createdAt) : '',
-          number: item.number || '',
-          type: `${item.paymentType} / ${item.nkpType}` || '',
-          bankRefNo: item.bankRefNo || '',
-          invoiceNumber: item.invoiceNumber || '',
-          description: item.description || '',
-          amount: item.finalPayment > 0 ? item.finalPayment : item.grandTotal,
-          curr: item.currency || '',
-        });
-
-        // Apply alternating background color
-        if (index % 2 === 1) {
-          row.fill = {
-            type: 'pattern',
-            pattern: 'solid',
-            fgColor: { argb: 'FFF5F5F5' },
-          };
-        }
-      });
-
-      // Set response headers
-      const filename = `NKP_Report_${formatDateNumeric(new Date())}.xlsx`;
-      res.setHeader(
-        'Content-Type',
-        'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-      );
-      res.setHeader(
-        'Content-Disposition',
-        `attachment; filename="${filename}"`,
-      );
-
-      // Write to response
-      await workbook.xlsx.write(res);
-      return res.end();
-    }
-
-    res.json(data);
+    res.setHeader(
+      'Content-Type',
+      'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+    );
+    res.setHeader('Content-Disposition', `attachment; filename="${filename}"`);
+    return res.send(buffer);
   }
 
   @Get('get-by-number')

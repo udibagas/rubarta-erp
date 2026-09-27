@@ -15,6 +15,11 @@ import {
 } from '../prisma/client/client';
 import { EventEmitter2, OnEvent } from '@nestjs/event-emitter';
 import { NotificationsService } from '../notifications/notifications.service';
+import * as ExcelJS from 'exceljs';
+import PDFDocument from 'pdfkit';
+import { createPdfDocumentWithTables } from 'pdfkit-table';
+import { formatDateNumeric } from '../helpers/date';
+import { toDecimal } from '../helpers/number';
 
 @Injectable()
 export class NkpService {
@@ -70,7 +75,6 @@ export class NkpService {
       paymentType,
       dateRange,
       action,
-      format,
       orderBy = 'updatedAt',
       orderDirection = 'desc',
     } = params;
@@ -169,20 +173,152 @@ export class NkpService {
 
     const data = await this.prisma.nkp.findMany(options);
 
-    if (action == 'download') {
-      if (format == 'pdf') {
-        const company = await this.prisma.company.findUniqueOrThrow({
-          where: { id: Number(companyId) },
-        });
-
-        return { data, company };
-      }
-
-      if (format == 'excel') return data;
-    }
-
     const total = await this.prisma.nkp.count({ where });
     return { data, page, total };
+  }
+
+  async exportReportToPdf(
+    params: QueryNkpDto & { user?: User },
+  ): Promise<Buffer> {
+    const result = await this.findAll({ ...params, action: 'download' });
+    const company = await this.prisma.company.findUniqueOrThrow({
+      where: { id: Number(params.companyId) },
+    });
+    const PDFDocumentWithTables = createPdfDocumentWithTables(PDFDocument);
+    const doc = new PDFDocumentWithTables({
+      size: 'A4',
+      margin: 40,
+      layout: 'landscape',
+    });
+    const headers = [
+      { label: 'NO', property: 'no', align: 'center' as const, width: 35 },
+      { label: 'DATE', property: 'date', align: 'center' as const, width: 65 },
+      {
+        label: 'NUMBER',
+        property: 'number',
+        align: 'center' as const,
+        width: 115,
+      },
+      {
+        label: 'BANK REF NO',
+        property: 'bankRefNo',
+        width: 105,
+      },
+      {
+        label: 'DESCRIPTION',
+        property: 'description',
+        align: 'left' as const,
+        width: 230,
+      },
+      {
+        label: 'AMOUNT',
+        property: 'amount',
+        align: 'right' as const,
+        width: 90,
+      },
+      {
+        label: 'CURR',
+        property: 'currency',
+        align: 'center' as const,
+        width: 45,
+      },
+    ];
+    const totalColumnWidth = headers.reduce(
+      (sum, header) => sum + header.width,
+      0,
+    );
+    const availableWidth = doc.page.width - 80;
+    const rows = result.data.map((item, index) => ({
+      no: index + 1,
+      date: item.date ? formatDateNumeric(item.date) : '',
+      number: item.number || '',
+      bankRefNo: item.bankRefNo || '',
+      description: item.description || '',
+      amount: toDecimal(
+        item.finalPayment > 0 ? item.finalPayment : item.grandTotal,
+      ),
+      currency: item.currency || '',
+    }));
+
+    return new Promise((resolve, reject) => {
+      const chunks: Buffer[] = [];
+      doc.on('data', (chunk) => chunks.push(chunk));
+      doc.on('end', () => resolve(Buffer.concat(chunks)));
+      doc.on('error', reject);
+
+      doc
+        .font('Helvetica-Bold')
+        .fontSize(16)
+        .text('LAPORAN NKP', { align: 'center' });
+      doc.moveDown(0.3);
+      doc.fontSize(12).text(company.name.toUpperCase(), { align: 'center' });
+      doc.moveDown(0.8);
+      doc.font('Helvetica').fontSize(10);
+      doc.text(`TYPE: ${params.paymentType || 'ALL'}`);
+      doc.text(`DATE: ${params.dateRange || ''}`);
+      doc.moveDown(0.8);
+      doc.table(
+        {
+          headers: headers.map((header) => ({
+            ...header,
+            width: (header.width / totalColumnWidth) * availableWidth,
+          })),
+          data: rows,
+        },
+        { x: 40, width: availableWidth },
+      );
+      doc.end();
+    });
+  }
+
+  async exportReportToExcel(
+    params: QueryNkpDto & { user?: User },
+  ): Promise<Buffer> {
+    const result = await this.findAll({ ...params, action: 'download' });
+    const workbook = new ExcelJS.Workbook();
+    const worksheet = workbook.addWorksheet('NKP Report');
+
+    worksheet.columns = [
+      { header: 'No', key: 'no', width: 5 },
+      { header: 'Date', key: 'date', width: 15 },
+      { header: 'Number', key: 'number', width: 30 },
+      { header: 'Type', key: 'type', width: 30 },
+      { header: 'Bank Ref No.', key: 'bankRefNo', width: 30 },
+      { header: 'Invoice No.', key: 'invoiceNumber', width: 30 },
+      { header: 'Description', key: 'description', width: 50 },
+      { header: 'Amount', key: 'amount', width: 15 },
+      { header: 'Curr', key: 'curr', width: 10 },
+    ];
+    worksheet.getRow(1).font = { bold: true };
+    worksheet.getRow(1).fill = {
+      type: 'pattern',
+      pattern: 'solid',
+      fgColor: { argb: 'FFD3D3D3' },
+    };
+
+    result.data.forEach((item, index) => {
+      const row = worksheet.addRow({
+        no: index + 1,
+        date: item.createdAt ? formatDateNumeric(item.createdAt) : '',
+        number: item.number || '',
+        type: `${item.paymentType} / ${item.nkpType}`,
+        bankRefNo: item.bankRefNo || '',
+        invoiceNumber: item.invoiceNumber || '',
+        description: item.description || '',
+        amount: item.finalPayment > 0 ? item.finalPayment : item.grandTotal,
+        curr: item.currency || '',
+      });
+
+      if (index % 2 === 1) {
+        row.fill = {
+          type: 'pattern',
+          pattern: 'solid',
+          fgColor: { argb: 'FFF5F5F5' },
+        };
+      }
+    });
+
+    return Buffer.from(await workbook.xlsx.writeBuffer());
   }
 
   findOne(id: any) {
