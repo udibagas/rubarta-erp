@@ -3,6 +3,27 @@ import { CreateVisitPlanDto } from './dto/create-visit-plan.dto';
 import { UpdateVisitPlanDto } from './dto/update-visit-plan.dto';
 import { PrismaService } from '../prisma/prisma.service';
 import { Prisma, VisitPlanStatus, VisitType } from '../prisma/client/client';
+import dayjs from 'dayjs';
+import * as ExcelJS from 'exceljs';
+import PDFDocument from 'pdfkit';
+import { createPdfDocumentWithTables } from 'pdfkit-table';
+
+export interface VisitPlanQueryParams {
+  page?: number;
+  pageSize?: number;
+  keyword?: string;
+  companyId?: number | string | number[] | string[];
+  userId?: number | number[] | string | string[];
+  customerId?: number | string | number[] | string[];
+  status?: VisitPlanStatus | VisitPlanStatus[];
+  visitType?: VisitType | VisitType[];
+  startDate?: Date;
+  endDate?: Date;
+  year?: number;
+  month?: number;
+  sortBy?: string;
+  sortOrder?: 'asc' | 'desc';
+}
 
 @Injectable()
 export class VisitPlansService {
@@ -30,29 +51,11 @@ export class VisitPlansService {
     });
   }
 
-  async findAll(params: {
-    page?: number;
-    pageSize?: number;
-    keyword?: string;
-    companyId?: number | string | number[] | string[];
-    userId?: number | number[] | string | string[];
-    customerId?: number | string | number[] | string[];
-    status?: VisitPlanStatus | VisitPlanStatus[];
-    visitType?: VisitType | VisitType[];
-    startDate?: Date;
-    endDate?: Date;
-    year?: number;
-    month?: number;
-    sortBy?: string;
-    sortOrder?: 'asc' | 'desc';
-  }) {
+  private buildWhere(params: VisitPlanQueryParams): Prisma.VisitPlanWhereInput {
     const where: Prisma.VisitPlanWhereInput = {
       deletedAt: null,
     };
     const {
-      page = 1,
-      pageSize = 10,
-      keyword,
       companyId,
       userId,
       customerId,
@@ -62,6 +65,7 @@ export class VisitPlansService {
       endDate,
       year,
       month,
+      keyword,
     } = params;
 
     if (companyId) {
@@ -164,6 +168,13 @@ export class VisitPlansService {
       ];
     }
 
+    return where;
+  }
+
+  async findAll(params: VisitPlanQueryParams) {
+    const { page = 1, pageSize = 10 } = params;
+    const where = this.buildWhere(params);
+
     const data = await this.prisma.visitPlan.findMany({
       where,
       take: pageSize,
@@ -191,6 +202,135 @@ export class VisitPlansService {
 
     const total = await this.prisma.visitPlan.count({ where });
     return { data, page, total };
+  }
+
+  private async findAllForExport(params: VisitPlanQueryParams) {
+    const where = this.buildWhere(params);
+
+    return this.prisma.visitPlan.findMany({
+      where,
+      orderBy: params.sortBy
+        ? { [params.sortBy]: params.sortOrder || 'asc' }
+        : { scheduledDate: 'desc' },
+      include: {
+        Customer: { select: { id: true, name: true } },
+        User: { select: { id: true, name: true } },
+      },
+    });
+  }
+
+  private getVisitLocation(visitPlan: {
+    visitType: VisitType;
+    address?: string | null;
+    meetingUrl?: string | null;
+  }) {
+    if (visitPlan.visitType === VisitType.Online) {
+      return visitPlan.meetingUrl || '-';
+    }
+    return visitPlan.address || '-';
+  }
+
+  async exportToPdf(params: VisitPlanQueryParams): Promise<Buffer> {
+    const visitPlans = await this.findAllForExport(params);
+    const PDFDocumentWithTables = createPdfDocumentWithTables(PDFDocument);
+    const doc = new PDFDocumentWithTables({
+      size: 'A4',
+      margin: 40,
+      bufferPages: true,
+      layout: 'landscape',
+    });
+
+    return new Promise((resolve, reject) => {
+      const chunks: Buffer[] = [];
+
+      doc.on('data', (chunk) => chunks.push(chunk));
+      doc.on('end', () => resolve(Buffer.concat(chunks)));
+      doc.on('error', reject);
+
+      doc
+        .font('Helvetica-Bold')
+        .fontSize(16)
+        .text('VISIT PLANS', { align: 'center' });
+
+      doc.moveDown(1.5);
+
+      doc.table(
+        {
+          headers: [
+            { label: 'Scheduled Date', property: 'scheduledDate', width: 90 },
+            {
+              label: 'Title',
+              property: 'title',
+              width: (doc.page.width - 80 - 90 - 90 - 100 - 70 - 70) / 2,
+            },
+            { label: 'Assigned To', property: 'assignedTo', width: 90 },
+            { label: 'Customer', property: 'customer', width: 100 },
+            { label: 'Status', property: 'status', width: 70 },
+            { label: 'Visit Type', property: 'visitType', width: 70 },
+            {
+              label: 'Location',
+              property: 'location',
+              width: (doc.page.width - 80 - 90 - 90 - 100 - 70 - 70) / 2,
+            },
+          ],
+          data: visitPlans.map((visitPlan) => ({
+            scheduledDate: dayjs(visitPlan.scheduledDate).format('DD-MM-YYYY'),
+            title: visitPlan.title,
+            assignedTo: visitPlan.User?.name || '-',
+            customer: visitPlan.Customer?.name || '-',
+            status: visitPlan.status,
+            visitType: visitPlan.visitType,
+            location: this.getVisitLocation(visitPlan),
+          })),
+        },
+        {
+          x: 40,
+          y: 80,
+          width: doc.page.width - 80,
+          hideHeader: false,
+        },
+      );
+
+      doc.end();
+    });
+  }
+
+  async exportToExcel(params: VisitPlanQueryParams): Promise<Buffer> {
+    const visitPlans = await this.findAllForExport(params);
+    const workbook = new ExcelJS.Workbook();
+    const worksheet = workbook.addWorksheet('Visit Plans');
+
+    worksheet.columns = [
+      { header: 'Scheduled Date', key: 'scheduledDate', width: 18 },
+      { header: 'Title', key: 'title', width: 30 },
+      { header: 'Assigned To', key: 'assignedTo', width: 20 },
+      { header: 'Customer', key: 'customer', width: 25 },
+      { header: 'Status', key: 'status', width: 15 },
+      { header: 'Visit Type', key: 'visitType', width: 15 },
+      { header: 'Location', key: 'location', width: 35 },
+    ];
+
+    worksheet.getRow(1).font = { bold: true };
+    worksheet.getRow(1).fill = {
+      type: 'pattern',
+      pattern: 'solid',
+      fgColor: { argb: 'FFE0E0E0' },
+    };
+
+    visitPlans.forEach((visitPlan) => {
+      worksheet.addRow({
+        scheduledDate: dayjs(visitPlan.scheduledDate).format('DD-MM-YYYY'),
+        title: visitPlan.title,
+        assignedTo: visitPlan.User?.name || '-',
+        customer: visitPlan.Customer?.name || '-',
+        status: visitPlan.status,
+        visitType: visitPlan.visitType,
+        location: this.getVisitLocation(visitPlan),
+      });
+    });
+
+    const buffer = await workbook.xlsx.writeBuffer();
+    return Buffer.from(buffer);
   }
 
   async findOne(id: number) {

@@ -8,7 +8,10 @@ import {
   Delete,
   ParseIntPipe,
   Query,
+  Res,
+  StreamableFile,
 } from '@nestjs/common';
+import { Response } from 'express';
 import { VisitPlansService } from './visit-plans.service';
 import { CreateVisitPlanDto } from './dto/create-visit-plan.dto';
 import { UpdateVisitPlanDto } from './dto/update-visit-plan.dto';
@@ -57,6 +60,86 @@ export class VisitPlansController {
       sortBy,
       sortOrder,
     });
+  }
+
+  @Get('export/pdf')
+  async exportPdf(
+    @Res({ passthrough: true }) res: Response,
+    @Query('companyId') companyId?: number | string | number[] | string[],
+    @Query('customerId') customerId?: number | string | number[] | string[],
+    @Query('userId') userId?: number | number[] | string | string[],
+    @Query('status') status?: VisitPlanStatus | VisitPlanStatus[],
+    @Query('visitType') visitType?: VisitType | VisitType[],
+    @Query('startDate') startDate?: string,
+    @Query('endDate') endDate?: string,
+    @Query('keyword') keyword?: string,
+    @Query('year', new ParseIntPipe({ optional: true })) year?: number,
+    @Query('month', new ParseIntPipe({ optional: true })) month?: number,
+    @Query('sortBy') sortBy?: string,
+    @Query('sortOrder') sortOrder?: 'asc' | 'desc',
+  ) {
+    const buffer = await this.visitPlansService.exportToPdf({
+      keyword,
+      year,
+      month,
+      companyId,
+      customerId,
+      userId,
+      status,
+      visitType,
+      startDate: startDate ? new Date(startDate) : undefined,
+      endDate: endDate ? new Date(endDate) : undefined,
+      sortBy,
+      sortOrder,
+    });
+
+    res.set({
+      'Content-Type': 'application/pdf',
+      'Content-Disposition': `inline; filename="visit-plans.pdf"`,
+      'Content-Length': buffer.length,
+    });
+
+    res.end(buffer);
+  }
+
+  @Get('export/excel')
+  async exportExcel(
+    @Res({ passthrough: true }) res: Response,
+    @Query('companyId') companyId?: number | string | number[] | string[],
+    @Query('customerId') customerId?: number | string | number[] | string[],
+    @Query('userId') userId?: number | number[] | string | string[],
+    @Query('status') status?: VisitPlanStatus | VisitPlanStatus[],
+    @Query('visitType') visitType?: VisitType | VisitType[],
+    @Query('startDate') startDate?: string,
+    @Query('endDate') endDate?: string,
+    @Query('keyword') keyword?: string,
+    @Query('year', new ParseIntPipe({ optional: true })) year?: number,
+    @Query('month', new ParseIntPipe({ optional: true })) month?: number,
+    @Query('sortBy') sortBy?: string,
+    @Query('sortOrder') sortOrder?: 'asc' | 'desc',
+  ) {
+    const buffer = await this.visitPlansService.exportToExcel({
+      keyword,
+      year,
+      month,
+      companyId,
+      customerId,
+      userId,
+      status,
+      visitType,
+      startDate: startDate ? new Date(startDate) : undefined,
+      endDate: endDate ? new Date(endDate) : undefined,
+      sortBy,
+      sortOrder,
+    });
+
+    res.set({
+      'Content-Type':
+        'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+      'Content-Disposition': `attachment; filename="visit-plans-${new Date().toISOString().split('T')[0]}.xlsx"`,
+    });
+
+    return new StreamableFile(buffer);
   }
 
   @Get(':id')
