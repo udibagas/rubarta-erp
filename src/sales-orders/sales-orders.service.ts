@@ -172,6 +172,81 @@ export class SalesOrdersService {
     return salesOrder;
   }
 
+  getOutstandingOrders(groupBy: string, customerId?: number) {
+    const customerFilter =
+      customerId != null
+        ? Prisma.sql`AND so."customerId" = ${customerId}`
+        : Prisma.empty;
+
+    if (groupBy === 'customer') {
+      return this.prisma.$queryRaw<any[]>`
+      SELECT
+        c.name AS "customerName",
+        COUNT(DISTINCT so.id)::int AS "orderCount",
+        SUM(soi."quantity")::int AS "orderedQty",
+        SUM(soi."deliveredQuantity")::int AS "deliveredQty",
+        SUM(soi."quantity" - soi."deliveredQuantity")::int AS "outstandingQty",
+        SUM((soi."quantity" - soi."deliveredQuantity") * soi."unitPrice")::int AS "outstandingAmount"
+      FROM "SalesOrders" so
+      JOIN "Customers" c ON so."customerId" = c.id
+      JOIN "SalesOrderItems" soi ON so.id = soi."salesOrderId"
+      WHERE so."deletedAt" IS NULL
+        AND so.status NOT IN ('Draft', 'Completed', 'Cancelled')
+        AND soi."deliveredQuantity" < soi."quantity"
+        ${customerFilter}
+      GROUP BY c.name
+    `;
+    }
+
+    if (groupBy === 'so') {
+      return this.prisma.$queryRaw<any[]>`
+      SELECT
+        so.id AS "soId",
+        so."number" AS "soNumber",
+        c.name AS "customerName",
+        COUNT(soi.id)::int AS "itemCount",
+        SUM(soi."quantity")::int AS "orderedQty",
+        SUM(soi."deliveredQuantity")::int AS "deliveredQty",
+        SUM(soi."quantity" - soi."deliveredQuantity")::int AS "outstandingQty",
+        SUM((soi."quantity" - soi."deliveredQuantity") * soi."unitPrice")::int AS "outstandingAmount"
+      FROM "SalesOrders" so
+      JOIN "Customers" c ON so."customerId" = c.id
+      JOIN "SalesOrderItems" soi ON so.id = soi."salesOrderId"
+      WHERE so."deletedAt" IS NULL
+        AND so.status NOT IN ('Draft', 'Completed', 'Cancelled')
+        AND soi."deliveredQuantity" < soi."quantity"
+        ${customerFilter}
+      GROUP BY so.id, so."number", c.name
+    `;
+    }
+
+    if (groupBy === 'item') {
+      return this.prisma.$queryRaw<any[]>`
+      SELECT
+        soi.id AS "itemId",
+        soi."partNumber" AS "partNumber",
+        soi."description" AS "description",
+        so.id AS "soId",
+        so."number" AS "soNumber",
+        c.name AS "customerName",
+        soi."quantity"::int AS "orderedQty",
+        soi."deliveredQuantity"::int AS "deliveredQty",
+        (soi."quantity" - soi."deliveredQuantity")::int AS "outstandingQty",
+        ((soi."quantity" - soi."deliveredQuantity") * soi."unitPrice")::int AS "outstandingAmount"
+      FROM "SalesOrderItems" soi
+      JOIN "SalesOrders" so ON so.id = soi."salesOrderId"
+      JOIN "Customers" c ON so."customerId" = c.id
+      WHERE so."deletedAt" IS NULL
+        AND so.status NOT IN ('Draft', 'Completed', 'Cancelled')
+        AND soi."deliveredQuantity" < soi."quantity"
+        ${customerFilter}
+      GROUP BY soi.id, soi."partNumber", soi."description", so.id, so."number", c.name
+    `;
+    }
+
+    return [];
+  }
+
   async update(id: number, data: UpdateSalesOrderDto) {
     await this.findOne(id); // Verify exists
     const { items, ...salesOrderData } = data;

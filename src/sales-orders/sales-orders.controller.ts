@@ -146,6 +146,16 @@ export class SalesOrdersController {
     return new StreamableFile(buffer);
   }
 
+  @Get('outstanding')
+  @ApiOperation({ summary: 'Get outstanding sales orders' })
+  getOutstandingOrders(
+    @Query('groupBy') groupBy: string,
+    @Query('customerId', new ParseIntPipe({ optional: true }))
+    customerId?: number,
+  ) {
+    return this.salesOrdersService.getOutstandingOrders(groupBy, customerId);
+  }
+
   @Get(':id')
   @ApiOperation({ summary: 'Get order by ID' })
   @ApiOkResponse({ description: 'Order details' })
