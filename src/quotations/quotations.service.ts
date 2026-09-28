@@ -313,11 +313,12 @@ export class QuotationsService {
               width: 70,
               padding: [0, 0, 0, 5],
             },
-            { label: 'Q Number', property: 'number', width: 80 },
+            { label: 'Quotation No.', property: 'number', width: 80 },
+            { label: 'Sales Rep', property: 'salesRep', width: 120 },
             {
               label: 'Customer',
               property: 'customer',
-              width: doc.page.width - 80 - 70 - 80 - 80 - 90 - 100,
+              width: doc.page.width - 80 - 70 - 120 - 80 - 80 - 90 - 100,
             },
             { label: 'Valid Until', property: 'validUntil', width: 80 },
             { label: 'Total', property: 'total', width: 90, align: 'right' },
@@ -331,6 +332,7 @@ export class QuotationsService {
           data: quotations.map((quotation) => ({
             date: dayjs(quotation.date).format('DD-MM-YYYY'),
             number: quotation.number || '-',
+            salesRep: quotation.User?.name || '-',
             customer: quotation.Customer?.name || '-',
             validUntil: dayjs(quotation.validUntil).format('DD-MM-YYYY'),
             total: (quotation.grandTotal || 0).toLocaleString('id-ID', {
