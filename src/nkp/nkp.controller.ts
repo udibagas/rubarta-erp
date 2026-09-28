@@ -22,9 +22,10 @@ import {
 import { CloseNkpDto, NkpDto, QueryNkpDto } from './nkp.dto';
 import { Auth } from '../auth/auth.decorator';
 import { Role, User } from '../prisma/client/client';
-import { terbilang, toCurrency, toDecimal } from '../helpers/number';
 import { formatDate, formatDateNumeric } from '../helpers/date';
 import { Response } from 'express';
+import { generateNkpPdf } from './nkp-pdf';
+import { terbilang, toCurrency, toDecimal } from '../helpers/number';
 
 @ApiTags('Nota Kuasa Pembayaran')
 @ApiBearerAuth()
@@ -181,6 +182,12 @@ export class NkpController {
   @Get('/print/:id')
   async print(@Param('id', ParseIntPipe) id: number, @Res() res: Response) {
     const data = await this.nkpService.findOne(id);
+    // const buffer = await generateNkpPdf(data);
+    // const filename = `${data.number || 'NKP'}.pdf`;
+
+    // res.setHeader('Content-Type', 'application/pdf');
+    // res.setHeader('Content-Disposition', `inline; filename="${filename}"`);
+    // res.send(buffer);
 
     const actions = {
       APPROVAL: 'APPROVED BY',
