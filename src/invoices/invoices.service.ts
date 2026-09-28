@@ -8,6 +8,7 @@ import {
   UpdateInvoiceDto,
   QueryInvoiceDto,
   SendInvoiceEmailDto,
+  InvoiceStatusUpdateDto,
 } from './invoice.dto';
 import { PrismaService } from '../prisma/prisma.service';
 import { InvoiceStatus, Prisma } from '../prisma/client/client';
@@ -312,12 +313,12 @@ export class InvoicesService {
     });
   }
 
-  async updateStatus(id: number, status: InvoiceStatus) {
+  async updateStatus(id: number, data: InvoiceStatusUpdateDto) {
     await this.findOne(id); // Verify invoice exists
 
     return this.prisma.invoice.update({
       where: { id },
-      data: { status },
+      data,
     });
   }
 

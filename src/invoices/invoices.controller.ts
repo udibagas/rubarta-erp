@@ -18,6 +18,7 @@ import {
   UpdateInvoiceDto,
   QueryInvoiceDto,
   SendInvoiceEmailDto,
+  InvoiceStatusUpdateDto,
 } from './invoice.dto';
 import { Auth } from '../auth/auth.decorator';
 import { User, InvoiceStatus } from '../prisma/client/client';
@@ -112,9 +113,9 @@ export class InvoicesController {
   @Patch(':id/status')
   updateStatus(
     @Param('id', ParseIntPipe) id: number,
-    @Body('status') status: InvoiceStatus,
+    @Body() statusUpdateDto: InvoiceStatusUpdateDto,
   ) {
-    return this.invoicesService.updateStatus(id, status);
+    return this.invoicesService.updateStatus(id, statusUpdateDto);
   }
 
   @Delete(':id')

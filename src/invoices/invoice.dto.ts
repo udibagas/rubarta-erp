@@ -123,7 +123,12 @@ export class CreateInvoiceDto {
   items: InvoiceItemDto[];
 }
 
-export class UpdateInvoiceDto extends PartialType(CreateInvoiceDto) {
+export class UpdateInvoiceDto extends PartialType(CreateInvoiceDto) {}
+
+export class InvoiceStatusUpdateDto {
+  @IsEnum(InvoiceStatus)
+  status: InvoiceStatus;
+
   @IsOptional()
   @IsString()
   receiptNumber?: string;
