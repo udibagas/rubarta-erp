@@ -16,6 +16,9 @@ import {
 } from './delivery-order.dto';
 import dayjs from 'dayjs';
 import { generateDeliveryOrderPdf } from './delivery-order-pdf';
+import * as ExcelJS from 'exceljs';
+import PDFDocument from 'pdfkit';
+import { createPdfDocumentWithTables } from 'pdfkit-table';
 
 @Injectable()
 export class DeliveryOrdersService {
@@ -23,6 +26,107 @@ export class DeliveryOrdersService {
 
   async preview(id: number) {
     return generateDeliveryOrderPdf(await this.findOne(id));
+  }
+
+  async exportToPdf(query: QueryDeliveryOrderDto): Promise<Buffer> {
+    const deliveryOrders = (await this.findAll(query)) as any[];
+    const PDFDocumentWithTables = createPdfDocumentWithTables(PDFDocument);
+    const doc = new PDFDocumentWithTables({
+      size: 'A4',
+      margin: 40,
+      bufferPages: true,
+      layout: 'landscape',
+    });
+
+    return new Promise((resolve, reject) => {
+      const chunks: Buffer[] = [];
+
+      doc.on('data', (chunk) => chunks.push(chunk));
+      doc.on('end', () => resolve(Buffer.concat(chunks)));
+      doc.on('error', reject);
+
+      doc
+        .font('Helvetica-Bold')
+        .fontSize(16)
+        .text('DELIVERY ORDERS', { align: 'center' });
+
+      doc.moveDown(1.5);
+
+      doc.table(
+        {
+          headers: [
+            {
+              label: 'Date',
+              property: 'date',
+              width: 70,
+              padding: [0, 0, 0, 5],
+            },
+            { label: 'DO Number', property: 'number', width: 80 },
+            {
+              label: 'Customer',
+              property: 'customer',
+              width: doc.page.width - 80 - 70 - 80 - 80 - 90 - 100,
+            },
+            { label: 'SO Ref', property: 'salesOrder', width: 80 },
+            {
+              label: 'Status',
+              property: 'status',
+              width: 100,
+              align: 'center',
+            },
+          ],
+          data: deliveryOrders.map((deliveryOrder) => ({
+            date: dayjs(deliveryOrder.date).format('DD-MM-YYYY'),
+            number: deliveryOrder.number || '-',
+            customer: deliveryOrder.Customer?.name || '-',
+            salesOrder: deliveryOrder.SalesOrder?.number || '-',
+            status: deliveryOrder.status || '-',
+          })),
+        },
+        {
+          x: 40,
+          y: 80,
+          width: doc.page.width - 80,
+          hideHeader: false,
+        },
+      );
+
+      doc.end();
+    });
+  }
+
+  async exportToExcel(query: QueryDeliveryOrderDto): Promise<Buffer> {
+    const deliveryOrders = (await this.findAll(query)) as any[];
+    const workbook = new ExcelJS.Workbook();
+    const worksheet = workbook.addWorksheet('DeliveryOrders');
+
+    worksheet.columns = [
+      { header: 'Date', key: 'date', width: 15 },
+      { header: 'No', key: 'number', width: 18 },
+      { header: 'Customer', key: 'customer', width: 30 },
+      { header: 'Sales Order', key: 'salesOrder', width: 22 },
+      { header: 'Status', key: 'status', width: 18 },
+    ];
+
+    worksheet.getRow(1).font = { bold: true };
+    worksheet.getRow(1).fill = {
+      type: 'pattern',
+      pattern: 'solid',
+      fgColor: { argb: 'FFE0E0E0' },
+    };
+
+    deliveryOrders.forEach((deliveryOrder) => {
+      worksheet.addRow({
+        date: dayjs(deliveryOrder.date).format('DD-MM-YYYY'),
+        number: deliveryOrder.number,
+        customer: deliveryOrder.Customer?.name || '-',
+        salesOrder: deliveryOrder.SalesOrder?.number || '-',
+        status: deliveryOrder.status,
+      });
+    });
+
+    const buffer = await workbook.xlsx.writeBuffer();
+    return Buffer.from(buffer);
   }
 
   private readonly includeRelations = {

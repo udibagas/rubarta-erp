@@ -9,6 +9,7 @@ import {
   Post,
   Query,
   Res,
+  StreamableFile,
 } from '@nestjs/common';
 import {
   ApiBearerAuth,
@@ -45,6 +46,42 @@ export class DeliveryOrdersController {
   @ApiOkResponse({ description: 'List of delivery orders' })
   findAll(@Query() query: QueryDeliveryOrderDto) {
     return this.deliveryOrdersService.findAll(query);
+  }
+
+  @Get('export/pdf')
+  @ApiOperation({ summary: 'Export delivery orders to PDF' })
+  @ApiOkResponse({ description: 'Delivery orders PDF download' })
+  async exportPdf(
+    @Res({ passthrough: true }) res: Response,
+    @Query() query: QueryDeliveryOrderDto,
+  ) {
+    const buffer = await this.deliveryOrdersService.exportToPdf(query);
+
+    res.set({
+      'Content-Type': 'application/pdf',
+      'Content-Disposition': `inline; filename="delivery-orders.pdf"`,
+      'Content-Length': buffer.length,
+    });
+
+    res.end(buffer);
+  }
+
+  @Get('export/excel')
+  @ApiOperation({ summary: 'Export delivery orders to Excel' })
+  @ApiOkResponse({ description: 'Delivery orders Excel download' })
+  async exportExcel(
+    @Res({ passthrough: true }) res: Response,
+    @Query() query: QueryDeliveryOrderDto,
+  ) {
+    const buffer = await this.deliveryOrdersService.exportToExcel(query);
+
+    res.set({
+      'Content-Type':
+        'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+      'Content-Disposition': `attachment; filename="delivery-orders-${new Date().toISOString().split('T')[0]}.xlsx"`,
+    });
+
+    return new StreamableFile(buffer);
   }
 
   @Get(':id')
