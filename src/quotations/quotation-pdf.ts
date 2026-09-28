@@ -200,20 +200,22 @@ export function generateQuotationPdf(quotation: any): Promise<Buffer> {
       const status = String(quotation?.status ?? '')
         .trim()
         .toUpperCase();
-      if (!['DRAFT'].includes(status)) {
+      if (!['DRAFT', 'SUBMITTED'].includes(status)) {
         return;
       }
 
       const centerX = doc.page.width / 2;
       const centerY = doc.page.height / 2;
 
-      const strokeColor = status === 'DRAFT' ? '#FF0000' : '#008000';
+      const strokeColor = ['DRAFT', 'SUBMITTED'].includes(status)
+        ? '#FF0000'
+        : '#008000';
 
       doc
         .save()
         .rotate(315, { origin: [centerX, centerY] })
         .font('Helvetica-Bold')
-        .fontSize(90)
+        .fontSize(status.length > 5 ? 60 : 90)
         .strokeColor(strokeColor)
         .lineWidth(1.2)
         .text(status.split('').join(' '), centerX - 250, centerY - 28, {
