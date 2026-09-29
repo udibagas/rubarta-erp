@@ -57,12 +57,15 @@ export class NkpDto {
   @IsNumber()
   companyId: number;
 
+  @ApiProperty({ example: 'EMPLOYEE', description: 'Payment Type' })
   @IsEnum(PaymentType, { message: 'Please select payment target' })
   paymentType: PaymentType;
 
+  @ApiProperty({ example: 'TYPE_A', description: 'Nkp Type' })
   @IsEnum(NkpType, { message: 'Please select payment type' })
   nkpType: NkpType;
 
+  @ApiProperty({ example: 'INV-12345', description: 'Invoice Number' })
   @IsOptional()
   invoiceNumber?: string;
 
@@ -70,11 +73,22 @@ export class NkpDto {
   @IsOptional()
   employeeId: number;
 
-  @ApiProperty({ example: 1, description: 'Vendor ID' })
+  @ApiProperty({ example: 1, description: 'Supplier ID' })
   @IsOptional()
   supplierId: number;
 
+  @ApiProperty({ example: 1, description: 'Requester ID' })
+  @IsNotEmpty({ message: 'Requester is required' })
+  @IsNumber()
   requesterId: number;
+
+  @ApiProperty({ example: 1, description: 'Purchase Order ID' })
+  @IsOptional()
+  purchaseOrderId?: number;
+
+  @ApiProperty({ example: 1, description: 'Goods Receipt ID' })
+  @IsOptional()
+  goodsReceiptId?: number;
 
   @ApiProperty({ example: 1, description: 'Bank ID' })
   @IsNotEmpty({ message: 'Bank is required' })
