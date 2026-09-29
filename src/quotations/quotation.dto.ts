@@ -44,7 +44,7 @@ export class QuotationItemDto {
   @ApiProperty({ required: false, example: 1, default: 1 })
   @IsOptional()
   @IsInt()
-  @Min(1)
+  @Min(0)
   moq?: number;
 
   @ApiProperty({ example: 100000 })
