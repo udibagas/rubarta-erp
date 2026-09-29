@@ -375,7 +375,7 @@ export function generateQuotationPdf(quotation: any): Promise<Buffer> {
         align: 'center',
       });
 
-    signatureY += 50;
+    signatureY += 100;
 
     doc
       .font('Helvetica-Bold')
