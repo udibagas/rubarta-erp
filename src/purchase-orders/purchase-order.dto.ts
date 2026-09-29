@@ -15,7 +15,11 @@ import {
   IsNumberString,
 } from 'class-validator';
 import { Type } from 'class-transformer';
-import { Currency, PurchaseOrderStatus } from '../prisma/client/client';
+import {
+  Currency,
+  PaymentStatus,
+  PurchaseOrderStatus,
+} from '../prisma/client/client';
 
 export class PurchaseOrderItemDto {
   @ApiProperty({ example: 'PART-001' })
@@ -228,6 +232,14 @@ export class QueryPurchaseOrderDto {
     message: 'Invalid purchase order status',
   })
   status?: PurchaseOrderStatus | PurchaseOrderStatus[];
+
+  @ApiProperty({ required: false, enum: PaymentStatus })
+  @IsOptional()
+  @IsEnum(PaymentStatus, {
+    each: true,
+    message: 'Invalid purchase order payment status',
+  })
+  paymentStatus?: PaymentStatus | PaymentStatus[];
 }
 
 export class SendPurchaseOrderEmailDto {

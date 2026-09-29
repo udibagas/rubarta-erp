@@ -15,7 +15,7 @@ import {
 } from 'class-validator';
 import { Type } from 'class-transformer';
 import { JsonArray } from '@prisma/client/runtime/client';
-import { GoodsReceiptStatus } from '../prisma/client/client';
+import { GoodsReceiptStatus, PaymentStatus } from '../prisma/client/client';
 
 export class GoodsReceiptItemDto {
   @ApiProperty({ example: 'PART-001' })
@@ -143,4 +143,12 @@ export class QueryGoodsReceiptDto {
     message: 'Invalid purchase order status',
   })
   status?: GoodsReceiptStatus | GoodsReceiptStatus[];
+
+  @ApiProperty({ required: false, enum: PaymentStatus })
+  @IsOptional()
+  @IsEnum(PaymentStatus, {
+    each: true,
+    message: 'Invalid purchase order payment status',
+  })
+  paymentStatus?: PaymentStatus | PaymentStatus[];
 }

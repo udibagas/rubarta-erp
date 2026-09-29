@@ -186,6 +186,11 @@ export class GoodsReceiptsService {
         ? { in: query.status }
         : query.status;
 
+    if (query.paymentStatus)
+      where.paymentStatus = Array.isArray(query.paymentStatus)
+        ? { in: query.paymentStatus }
+        : query.paymentStatus;
+
     const take = query.pageSize ? parseInt(query.pageSize, 10) : undefined;
     const skip =
       query.page && query.pageSize

@@ -81,6 +81,11 @@ export class PurchaseOrdersService {
         ? { in: query.status }
         : query.status;
 
+    if (query.paymentStatus)
+      where.paymentStatus = Array.isArray(query.paymentStatus)
+        ? { in: query.paymentStatus }
+        : query.paymentStatus;
+
     if (query.dateRange && query.dateRange.length === 2) {
       const [startDate, endDate] = query.dateRange;
       where.date = {
