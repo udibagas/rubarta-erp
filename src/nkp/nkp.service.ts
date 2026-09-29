@@ -552,6 +552,38 @@ export class NkpService {
     if (nkp.paymentType == PaymentType.EMPLOYEE)
       await this.updateUserBalance(nkp);
 
+    if (nkp.goodsReceiptId) {
+      const gr = await this.prisma.goodsReceipt.findUnique({
+        where: { id: nkp.goodsReceiptId },
+      });
+
+      if (gr) {
+        await this.prisma.goodsReceipt.update({
+          where: { id: gr.id },
+          data: {
+            paymentStatus: PaymentStatus.PAID,
+          },
+        });
+
+        const po = await this.prisma.purchaseOrder.findUnique({
+          where: { id: gr.purchaseOrderId },
+        });
+
+        if (po) {
+          const paymentAmount = po.paymentAmount + nkp.finalPayment;
+          const paymentStatus =
+            paymentAmount >= po.grandTotal
+              ? PaymentStatus.PAID
+              : PaymentStatus.PARTIAL;
+
+          await this.prisma.purchaseOrder.update({
+            where: { id: po.id },
+            data: { paymentAmount, paymentStatus },
+          });
+        }
+      }
+    }
+
     return request;
   }
 
