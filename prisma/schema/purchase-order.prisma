@@ -55,6 +55,7 @@ model PurchaseOrder {
   Company            Company             @relation(fields: [companyId], references: [id])
   goodsReceipts      GoodsReceipt[]
   SalesOrder         SalesOrder?         @relation(fields: [salesOrderId], references: [id])
+  nkps               Nkp[]
 
   @@index([number])
   @@index([status])
