@@ -64,6 +64,7 @@ model QuotationItem {
   model       String? @db.VarChar(100)
   description String? @db.Text
   quantity    Int
+  moq         Int?    @default(1) // Minimum order quantity
   unitPrice   Float
   totalPrice  Float
   sortOrder   Int     @default(0)

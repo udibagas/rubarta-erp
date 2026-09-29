@@ -56,12 +56,6 @@ export class QuotationsService {
           })),
         },
       },
-      include: {
-        QuotationItems: true,
-        Customer: { select: { id: true, name: true, email: true } },
-        User: { select: { id: true, name: true } },
-        Opportunity: { select: { id: true, name: true } },
-      },
     });
   }
 
@@ -187,24 +181,12 @@ export class QuotationsService {
             })),
           },
         },
-        include: {
-          QuotationItems: true,
-          Customer: { select: { id: true, name: true } },
-          User: { select: { id: true, name: true } },
-          Opportunity: { select: { id: true, name: true } },
-        },
       });
     }
 
     return this.prisma.quotation.update({
       where: { id },
       data: quotationData,
-      include: {
-        QuotationItems: true,
-        Customer: { select: { id: true, name: true } },
-        User: { select: { id: true, name: true } },
-        Opportunity: { select: { id: true, name: true } },
-      },
     });
   }
 
