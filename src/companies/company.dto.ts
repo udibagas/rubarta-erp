@@ -1,5 +1,6 @@
 import { ApiProperty, PartialType } from '@nestjs/swagger';
-import { IsBoolean, IsNotEmpty } from 'class-validator';
+import { JsonArray } from '@prisma/client/runtime/client';
+import { IsBoolean, IsNotEmpty, IsObject, IsOptional } from 'class-validator';
 
 export class CreateCompanyDto {
   @ApiProperty()
@@ -19,6 +20,11 @@ export class CreateCompanyDto {
   @ApiProperty({ default: false })
   @IsBoolean({ message: 'Is Default must be a boolean' })
   isDefault: boolean;
+
+  @ApiProperty({ example: { files: [] }, type: Object })
+  @IsOptional()
+  @IsObject({ each: true })
+  banks?: JsonArray;
 }
 
 export class UpdateCompanyDto extends PartialType(CreateCompanyDto) {}
