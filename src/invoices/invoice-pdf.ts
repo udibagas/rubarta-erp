@@ -15,6 +15,13 @@ const DEFAULT_COMPANY = {
   ],
 };
 
+const DEFAULT_BANK = {
+  name: 'BANK MANDIRI',
+  bankOffice: 'KCP Pulo Gadung',
+  accountName: 'PT. RUBARTA PRIMA ABADI',
+  accountNumber: '1660 0075 2317 8',
+};
+
 const COLORS = {
   green: '#1CA84B',
   navy: '#12355B',
@@ -64,6 +71,13 @@ export function generateInvoicePdf(invoice: any): Promise<Buffer> {
   const COMPANY = {
     name: invoice.Compmany?.name?.toUpperCase() ?? DEFAULT_COMPANY.name,
     address: invoice.Compmany?.address?.split('\n') ?? DEFAULT_COMPANY.address,
+  };
+
+  const BANK = {
+    name: invoice.bank?.name ?? DEFAULT_BANK.name,
+    bankOffice: invoice.bank?.bankOffice ?? DEFAULT_BANK.bankOffice,
+    accountName: invoice.bank?.accountName ?? DEFAULT_BANK.accountName,
+    accountNumber: invoice.bank?.accountNumber ?? DEFAULT_BANK.accountNumber,
   };
 
   return new Promise((resolve, reject) => {
@@ -364,13 +378,9 @@ export function generateInvoicePdf(invoice: any): Promise<Buffer> {
         summaryY + 24,
         { width: commentsTextWidth },
       );
-    drawCommentRow('Name', 'PT. RUBARTA PRIMA ABADI', summaryY + 36);
-    drawCommentRow(
-      'Bank',
-      'MANDIRI - KCP KELAPA GADING BOULEVARD RAYA',
-      summaryY + 48,
-    );
-    drawCommentRow('A/C No', '5953006953', summaryY + 60, true);
+    drawCommentRow('Name', BANK.accountName, summaryY + 36);
+    drawCommentRow('Bank', `${BANK.name} - ${BANK.bankOffice}`, summaryY + 48);
+    drawCommentRow('A/C No', BANK.accountNumber, summaryY + 60, true);
     doc.text('Please Send the transfer slip to :', commentX, summaryY + 84, {
       width: commentsTextWidth,
     });

@@ -11,6 +11,7 @@ model Invoice {
   receiptNumber   String?
   receiptDate     DateTime?
   receiptFile     Json?
+  bank            Json?         @db.JsonB // Bank details related to the invoice
 
   // financials
   currency         Currency @default(IDR)

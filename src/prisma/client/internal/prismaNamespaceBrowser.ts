@@ -477,6 +477,7 @@ export const InvoiceScalarFieldEnum = {
   receiptNumber: 'receiptNumber',
   receiptDate: 'receiptDate',
   receiptFile: 'receiptFile',
+  bank: 'bank',
   currency: 'currency',
   totalAmount: 'totalAmount',
   discount: 'discount',

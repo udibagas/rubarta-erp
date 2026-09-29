@@ -17,6 +17,9 @@ export class MaterialType {
   @Field({ nullable: true })
   description?: string;
 
+  @Field(() => Int, { nullable: true })
+  moq?: number;
+
   @Field({ nullable: true })
   category?: string;
 
