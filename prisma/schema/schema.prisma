@@ -142,6 +142,8 @@ enum PaymentStatus {
   REJECTED
   VERIFIED
   AUTHORIZED
+  UNPAID
+  PARTIAL
   PAID
   CLOSED
 }

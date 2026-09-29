@@ -1062,10 +1062,6 @@ export type NkpUncheckedCreateNestedOneWithoutParentInput = {
   connect?: Prisma.NkpWhereUniqueInput
 }
 
-export type EnumPaymentStatusFieldUpdateOperationsInput = {
-  set?: $Enums.PaymentStatus
-}
-
 export type EnumPaymentTypeFieldUpdateOperationsInput = {
   set?: $Enums.PaymentType
 }

@@ -237,6 +237,8 @@ export const PaymentStatus = {
   REJECTED: 'REJECTED',
   VERIFIED: 'VERIFIED',
   AUTHORIZED: 'AUTHORIZED',
+  UNPAID: 'UNPAID',
+  PARTIAL: 'PARTIAL',
   PAID: 'PAID',
   CLOSED: 'CLOSED'
 } as const

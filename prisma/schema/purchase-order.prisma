@@ -7,6 +7,8 @@ model PurchaseOrder {
   title           String              @db.VarChar(200)
   description     String?             @db.Text
   status          PurchaseOrderStatus @default(Draft)
+  paymentAmount   Float               @default(0)
+  paymentStatus   PaymentStatus       @default(UNPAID)
 
   // financial details
   currency     Currency @default(IDR) // Currency code, e.g., IDR, USD

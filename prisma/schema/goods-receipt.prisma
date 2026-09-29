@@ -5,6 +5,7 @@ model GoodsReceipt {
   sender             String
   recipient          String
   status             GoodsReceiptStatus @default(Draft)
+  paymentStatus      PaymentStatus      @default(UNPAID)
   supportingDocument Json?
   notes              String?            @db.Text
 

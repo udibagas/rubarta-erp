@@ -28,6 +28,7 @@ export type AggregatePurchaseOrder = {
 
 export type PurchaseOrderAvgAggregateOutputType = {
   id: number | null
+  paymentAmount: number | null
   currencyRate: number | null
   totalAmount: number | null
   discount: number | null
@@ -41,6 +42,7 @@ export type PurchaseOrderAvgAggregateOutputType = {
 
 export type PurchaseOrderSumAggregateOutputType = {
   id: number | null
+  paymentAmount: number | null
   currencyRate: number | null
   totalAmount: number | null
   discount: number | null
@@ -61,6 +63,8 @@ export type PurchaseOrderMinAggregateOutputType = {
   title: string | null
   description: string | null
   status: $Enums.PurchaseOrderStatus | null
+  paymentAmount: number | null
+  paymentStatus: $Enums.PaymentStatus | null
   currency: $Enums.Currency | null
   currencyRate: number | null
   totalAmount: number | null
@@ -99,6 +103,8 @@ export type PurchaseOrderMaxAggregateOutputType = {
   title: string | null
   description: string | null
   status: $Enums.PurchaseOrderStatus | null
+  paymentAmount: number | null
+  paymentStatus: $Enums.PaymentStatus | null
   currency: $Enums.Currency | null
   currencyRate: number | null
   totalAmount: number | null
@@ -137,6 +143,8 @@ export type PurchaseOrderCountAggregateOutputType = {
   title: number
   description: number
   status: number
+  paymentAmount: number
+  paymentStatus: number
   currency: number
   currencyRate: number
   totalAmount: number
@@ -170,6 +178,7 @@ export type PurchaseOrderCountAggregateOutputType = {
 
 export type PurchaseOrderAvgAggregateInputType = {
   id?: true
+  paymentAmount?: true
   currencyRate?: true
   totalAmount?: true
   discount?: true
@@ -183,6 +192,7 @@ export type PurchaseOrderAvgAggregateInputType = {
 
 export type PurchaseOrderSumAggregateInputType = {
   id?: true
+  paymentAmount?: true
   currencyRate?: true
   totalAmount?: true
   discount?: true
@@ -203,6 +213,8 @@ export type PurchaseOrderMinAggregateInputType = {
   title?: true
   description?: true
   status?: true
+  paymentAmount?: true
+  paymentStatus?: true
   currency?: true
   currencyRate?: true
   totalAmount?: true
@@ -241,6 +253,8 @@ export type PurchaseOrderMaxAggregateInputType = {
   title?: true
   description?: true
   status?: true
+  paymentAmount?: true
+  paymentStatus?: true
   currency?: true
   currencyRate?: true
   totalAmount?: true
@@ -279,6 +293,8 @@ export type PurchaseOrderCountAggregateInputType = {
   title?: true
   description?: true
   status?: true
+  paymentAmount?: true
+  paymentStatus?: true
   currency?: true
   currencyRate?: true
   totalAmount?: true
@@ -404,6 +420,8 @@ export type PurchaseOrderGroupByOutputType = {
   title: string
   description: string | null
   status: $Enums.PurchaseOrderStatus
+  paymentAmount: number
+  paymentStatus: $Enums.PaymentStatus
   currency: $Enums.Currency
   currencyRate: number
   totalAmount: number
@@ -465,6 +483,8 @@ export type PurchaseOrderWhereInput = {
   title?: Prisma.StringFilter<"PurchaseOrder"> | string
   description?: Prisma.StringNullableFilter<"PurchaseOrder"> | string | null
   status?: Prisma.EnumPurchaseOrderStatusFilter<"PurchaseOrder"> | $Enums.PurchaseOrderStatus
+  paymentAmount?: Prisma.FloatFilter<"PurchaseOrder"> | number
+  paymentStatus?: Prisma.EnumPaymentStatusFilter<"PurchaseOrder"> | $Enums.PaymentStatus
   currency?: Prisma.EnumCurrencyFilter<"PurchaseOrder"> | $Enums.Currency
   currencyRate?: Prisma.FloatFilter<"PurchaseOrder"> | number
   totalAmount?: Prisma.FloatFilter<"PurchaseOrder"> | number
@@ -509,6 +529,8 @@ export type PurchaseOrderOrderByWithRelationInput = {
   title?: Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
+  paymentAmount?: Prisma.SortOrder
+  paymentStatus?: Prisma.SortOrder
   currency?: Prisma.SortOrder
   currencyRate?: Prisma.SortOrder
   totalAmount?: Prisma.SortOrder
@@ -556,6 +578,8 @@ export type PurchaseOrderWhereUniqueInput = Prisma.AtLeast<{
   title?: Prisma.StringFilter<"PurchaseOrder"> | string
   description?: Prisma.StringNullableFilter<"PurchaseOrder"> | string | null
   status?: Prisma.EnumPurchaseOrderStatusFilter<"PurchaseOrder"> | $Enums.PurchaseOrderStatus
+  paymentAmount?: Prisma.FloatFilter<"PurchaseOrder"> | number
+  paymentStatus?: Prisma.EnumPaymentStatusFilter<"PurchaseOrder"> | $Enums.PaymentStatus
   currency?: Prisma.EnumCurrencyFilter<"PurchaseOrder"> | $Enums.Currency
   currencyRate?: Prisma.FloatFilter<"PurchaseOrder"> | number
   totalAmount?: Prisma.FloatFilter<"PurchaseOrder"> | number
@@ -600,6 +624,8 @@ export type PurchaseOrderOrderByWithAggregationInput = {
   title?: Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
+  paymentAmount?: Prisma.SortOrder
+  paymentStatus?: Prisma.SortOrder
   currency?: Prisma.SortOrder
   currencyRate?: Prisma.SortOrder
   totalAmount?: Prisma.SortOrder
@@ -646,6 +672,8 @@ export type PurchaseOrderScalarWhereWithAggregatesInput = {
   title?: Prisma.StringWithAggregatesFilter<"PurchaseOrder"> | string
   description?: Prisma.StringNullableWithAggregatesFilter<"PurchaseOrder"> | string | null
   status?: Prisma.EnumPurchaseOrderStatusWithAggregatesFilter<"PurchaseOrder"> | $Enums.PurchaseOrderStatus
+  paymentAmount?: Prisma.FloatWithAggregatesFilter<"PurchaseOrder"> | number
+  paymentStatus?: Prisma.EnumPaymentStatusWithAggregatesFilter<"PurchaseOrder"> | $Enums.PaymentStatus
   currency?: Prisma.EnumCurrencyWithAggregatesFilter<"PurchaseOrder"> | $Enums.Currency
   currencyRate?: Prisma.FloatWithAggregatesFilter<"PurchaseOrder"> | number
   totalAmount?: Prisma.FloatWithAggregatesFilter<"PurchaseOrder"> | number
@@ -683,6 +711,8 @@ export type PurchaseOrderCreateInput = {
   title: string
   description?: string | null
   status?: $Enums.PurchaseOrderStatus
+  paymentAmount?: number
+  paymentStatus?: $Enums.PaymentStatus
   currency?: $Enums.Currency
   currencyRate?: number
   totalAmount: number
@@ -723,6 +753,8 @@ export type PurchaseOrderUncheckedCreateInput = {
   title: string
   description?: string | null
   status?: $Enums.PurchaseOrderStatus
+  paymentAmount?: number
+  paymentStatus?: $Enums.PaymentStatus
   currency?: $Enums.Currency
   currencyRate?: number
   totalAmount: number
@@ -762,6 +794,8 @@ export type PurchaseOrderUpdateInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumPurchaseOrderStatusFieldUpdateOperationsInput | $Enums.PurchaseOrderStatus
+  paymentAmount?: Prisma.FloatFieldUpdateOperationsInput | number
+  paymentStatus?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   currencyRate?: Prisma.FloatFieldUpdateOperationsInput | number
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -802,6 +836,8 @@ export type PurchaseOrderUncheckedUpdateInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumPurchaseOrderStatusFieldUpdateOperationsInput | $Enums.PurchaseOrderStatus
+  paymentAmount?: Prisma.FloatFieldUpdateOperationsInput | number
+  paymentStatus?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   currencyRate?: Prisma.FloatFieldUpdateOperationsInput | number
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -842,6 +878,8 @@ export type PurchaseOrderCreateManyInput = {
   title: string
   description?: string | null
   status?: $Enums.PurchaseOrderStatus
+  paymentAmount?: number
+  paymentStatus?: $Enums.PaymentStatus
   currency?: $Enums.Currency
   currencyRate?: number
   totalAmount: number
@@ -879,6 +917,8 @@ export type PurchaseOrderUpdateManyMutationInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumPurchaseOrderStatusFieldUpdateOperationsInput | $Enums.PurchaseOrderStatus
+  paymentAmount?: Prisma.FloatFieldUpdateOperationsInput | number
+  paymentStatus?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   currencyRate?: Prisma.FloatFieldUpdateOperationsInput | number
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -913,6 +953,8 @@ export type PurchaseOrderUncheckedUpdateManyInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumPurchaseOrderStatusFieldUpdateOperationsInput | $Enums.PurchaseOrderStatus
+  paymentAmount?: Prisma.FloatFieldUpdateOperationsInput | number
+  paymentStatus?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   currencyRate?: Prisma.FloatFieldUpdateOperationsInput | number
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -966,6 +1008,8 @@ export type PurchaseOrderCountOrderByAggregateInput = {
   title?: Prisma.SortOrder
   description?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  paymentAmount?: Prisma.SortOrder
+  paymentStatus?: Prisma.SortOrder
   currency?: Prisma.SortOrder
   currencyRate?: Prisma.SortOrder
   totalAmount?: Prisma.SortOrder
@@ -997,6 +1041,7 @@ export type PurchaseOrderCountOrderByAggregateInput = {
 
 export type PurchaseOrderAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  paymentAmount?: Prisma.SortOrder
   currencyRate?: Prisma.SortOrder
   totalAmount?: Prisma.SortOrder
   discount?: Prisma.SortOrder
@@ -1017,6 +1062,8 @@ export type PurchaseOrderMaxOrderByAggregateInput = {
   title?: Prisma.SortOrder
   description?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  paymentAmount?: Prisma.SortOrder
+  paymentStatus?: Prisma.SortOrder
   currency?: Prisma.SortOrder
   currencyRate?: Prisma.SortOrder
   totalAmount?: Prisma.SortOrder
@@ -1055,6 +1102,8 @@ export type PurchaseOrderMinOrderByAggregateInput = {
   title?: Prisma.SortOrder
   description?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  paymentAmount?: Prisma.SortOrder
+  paymentStatus?: Prisma.SortOrder
   currency?: Prisma.SortOrder
   currencyRate?: Prisma.SortOrder
   totalAmount?: Prisma.SortOrder
@@ -1086,6 +1135,7 @@ export type PurchaseOrderMinOrderByAggregateInput = {
 
 export type PurchaseOrderSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  paymentAmount?: Prisma.SortOrder
   currencyRate?: Prisma.SortOrder
   totalAmount?: Prisma.SortOrder
   discount?: Prisma.SortOrder
@@ -1309,6 +1359,8 @@ export type PurchaseOrderCreateWithoutSupplierInput = {
   title: string
   description?: string | null
   status?: $Enums.PurchaseOrderStatus
+  paymentAmount?: number
+  paymentStatus?: $Enums.PaymentStatus
   currency?: $Enums.Currency
   currencyRate?: number
   totalAmount: number
@@ -1348,6 +1400,8 @@ export type PurchaseOrderUncheckedCreateWithoutSupplierInput = {
   title: string
   description?: string | null
   status?: $Enums.PurchaseOrderStatus
+  paymentAmount?: number
+  paymentStatus?: $Enums.PaymentStatus
   currency?: $Enums.Currency
   currencyRate?: number
   totalAmount: number
@@ -1416,6 +1470,8 @@ export type PurchaseOrderScalarWhereInput = {
   title?: Prisma.StringFilter<"PurchaseOrder"> | string
   description?: Prisma.StringNullableFilter<"PurchaseOrder"> | string | null
   status?: Prisma.EnumPurchaseOrderStatusFilter<"PurchaseOrder"> | $Enums.PurchaseOrderStatus
+  paymentAmount?: Prisma.FloatFilter<"PurchaseOrder"> | number
+  paymentStatus?: Prisma.EnumPaymentStatusFilter<"PurchaseOrder"> | $Enums.PaymentStatus
   currency?: Prisma.EnumCurrencyFilter<"PurchaseOrder"> | $Enums.Currency
   currencyRate?: Prisma.FloatFilter<"PurchaseOrder"> | number
   totalAmount?: Prisma.FloatFilter<"PurchaseOrder"> | number
@@ -1453,6 +1509,8 @@ export type PurchaseOrderCreateWithoutGoodsReceiptsInput = {
   title: string
   description?: string | null
   status?: $Enums.PurchaseOrderStatus
+  paymentAmount?: number
+  paymentStatus?: $Enums.PaymentStatus
   currency?: $Enums.Currency
   currencyRate?: number
   totalAmount: number
@@ -1492,6 +1550,8 @@ export type PurchaseOrderUncheckedCreateWithoutGoodsReceiptsInput = {
   title: string
   description?: string | null
   status?: $Enums.PurchaseOrderStatus
+  paymentAmount?: number
+  paymentStatus?: $Enums.PaymentStatus
   currency?: $Enums.Currency
   currencyRate?: number
   totalAmount: number
@@ -1546,6 +1606,8 @@ export type PurchaseOrderUpdateWithoutGoodsReceiptsInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumPurchaseOrderStatusFieldUpdateOperationsInput | $Enums.PurchaseOrderStatus
+  paymentAmount?: Prisma.FloatFieldUpdateOperationsInput | number
+  paymentStatus?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   currencyRate?: Prisma.FloatFieldUpdateOperationsInput | number
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -1585,6 +1647,8 @@ export type PurchaseOrderUncheckedUpdateWithoutGoodsReceiptsInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumPurchaseOrderStatusFieldUpdateOperationsInput | $Enums.PurchaseOrderStatus
+  paymentAmount?: Prisma.FloatFieldUpdateOperationsInput | number
+  paymentStatus?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   currencyRate?: Prisma.FloatFieldUpdateOperationsInput | number
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -1623,6 +1687,8 @@ export type PurchaseOrderCreateWithoutPurchaseOrderItemsInput = {
   title: string
   description?: string | null
   status?: $Enums.PurchaseOrderStatus
+  paymentAmount?: number
+  paymentStatus?: $Enums.PaymentStatus
   currency?: $Enums.Currency
   currencyRate?: number
   totalAmount: number
@@ -1662,6 +1728,8 @@ export type PurchaseOrderUncheckedCreateWithoutPurchaseOrderItemsInput = {
   title: string
   description?: string | null
   status?: $Enums.PurchaseOrderStatus
+  paymentAmount?: number
+  paymentStatus?: $Enums.PaymentStatus
   currency?: $Enums.Currency
   currencyRate?: number
   totalAmount: number
@@ -1716,6 +1784,8 @@ export type PurchaseOrderUpdateWithoutPurchaseOrderItemsInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumPurchaseOrderStatusFieldUpdateOperationsInput | $Enums.PurchaseOrderStatus
+  paymentAmount?: Prisma.FloatFieldUpdateOperationsInput | number
+  paymentStatus?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   currencyRate?: Prisma.FloatFieldUpdateOperationsInput | number
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -1755,6 +1825,8 @@ export type PurchaseOrderUncheckedUpdateWithoutPurchaseOrderItemsInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumPurchaseOrderStatusFieldUpdateOperationsInput | $Enums.PurchaseOrderStatus
+  paymentAmount?: Prisma.FloatFieldUpdateOperationsInput | number
+  paymentStatus?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   currencyRate?: Prisma.FloatFieldUpdateOperationsInput | number
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -1793,6 +1865,8 @@ export type PurchaseOrderCreateWithoutSalesOrderInput = {
   title: string
   description?: string | null
   status?: $Enums.PurchaseOrderStatus
+  paymentAmount?: number
+  paymentStatus?: $Enums.PaymentStatus
   currency?: $Enums.Currency
   currencyRate?: number
   totalAmount: number
@@ -1832,6 +1906,8 @@ export type PurchaseOrderUncheckedCreateWithoutSalesOrderInput = {
   title: string
   description?: string | null
   status?: $Enums.PurchaseOrderStatus
+  paymentAmount?: number
+  paymentStatus?: $Enums.PaymentStatus
   currency?: $Enums.Currency
   currencyRate?: number
   totalAmount: number
@@ -1896,6 +1972,8 @@ export type PurchaseOrderCreateWithoutCompanyInput = {
   title: string
   description?: string | null
   status?: $Enums.PurchaseOrderStatus
+  paymentAmount?: number
+  paymentStatus?: $Enums.PaymentStatus
   currency?: $Enums.Currency
   currencyRate?: number
   totalAmount: number
@@ -1935,6 +2013,8 @@ export type PurchaseOrderUncheckedCreateWithoutCompanyInput = {
   title: string
   description?: string | null
   status?: $Enums.PurchaseOrderStatus
+  paymentAmount?: number
+  paymentStatus?: $Enums.PaymentStatus
   currency?: $Enums.Currency
   currencyRate?: number
   totalAmount: number
@@ -1999,6 +2079,8 @@ export type PurchaseOrderCreateWithoutUserInput = {
   title: string
   description?: string | null
   status?: $Enums.PurchaseOrderStatus
+  paymentAmount?: number
+  paymentStatus?: $Enums.PaymentStatus
   currency?: $Enums.Currency
   currencyRate?: number
   totalAmount: number
@@ -2038,6 +2120,8 @@ export type PurchaseOrderUncheckedCreateWithoutUserInput = {
   title: string
   description?: string | null
   status?: $Enums.PurchaseOrderStatus
+  paymentAmount?: number
+  paymentStatus?: $Enums.PaymentStatus
   currency?: $Enums.Currency
   currencyRate?: number
   totalAmount: number
@@ -2103,6 +2187,8 @@ export type PurchaseOrderCreateManySupplierInput = {
   title: string
   description?: string | null
   status?: $Enums.PurchaseOrderStatus
+  paymentAmount?: number
+  paymentStatus?: $Enums.PaymentStatus
   currency?: $Enums.Currency
   currencyRate?: number
   totalAmount: number
@@ -2139,6 +2225,8 @@ export type PurchaseOrderUpdateWithoutSupplierInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumPurchaseOrderStatusFieldUpdateOperationsInput | $Enums.PurchaseOrderStatus
+  paymentAmount?: Prisma.FloatFieldUpdateOperationsInput | number
+  paymentStatus?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   currencyRate?: Prisma.FloatFieldUpdateOperationsInput | number
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -2178,6 +2266,8 @@ export type PurchaseOrderUncheckedUpdateWithoutSupplierInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumPurchaseOrderStatusFieldUpdateOperationsInput | $Enums.PurchaseOrderStatus
+  paymentAmount?: Prisma.FloatFieldUpdateOperationsInput | number
+  paymentStatus?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   currencyRate?: Prisma.FloatFieldUpdateOperationsInput | number
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -2217,6 +2307,8 @@ export type PurchaseOrderUncheckedUpdateManyWithoutSupplierInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumPurchaseOrderStatusFieldUpdateOperationsInput | $Enums.PurchaseOrderStatus
+  paymentAmount?: Prisma.FloatFieldUpdateOperationsInput | number
+  paymentStatus?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   currencyRate?: Prisma.FloatFieldUpdateOperationsInput | number
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -2254,6 +2346,8 @@ export type PurchaseOrderCreateManySalesOrderInput = {
   title: string
   description?: string | null
   status?: $Enums.PurchaseOrderStatus
+  paymentAmount?: number
+  paymentStatus?: $Enums.PaymentStatus
   currency?: $Enums.Currency
   currencyRate?: number
   totalAmount: number
@@ -2290,6 +2384,8 @@ export type PurchaseOrderUpdateWithoutSalesOrderInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumPurchaseOrderStatusFieldUpdateOperationsInput | $Enums.PurchaseOrderStatus
+  paymentAmount?: Prisma.FloatFieldUpdateOperationsInput | number
+  paymentStatus?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   currencyRate?: Prisma.FloatFieldUpdateOperationsInput | number
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -2329,6 +2425,8 @@ export type PurchaseOrderUncheckedUpdateWithoutSalesOrderInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumPurchaseOrderStatusFieldUpdateOperationsInput | $Enums.PurchaseOrderStatus
+  paymentAmount?: Prisma.FloatFieldUpdateOperationsInput | number
+  paymentStatus?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   currencyRate?: Prisma.FloatFieldUpdateOperationsInput | number
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -2368,6 +2466,8 @@ export type PurchaseOrderUncheckedUpdateManyWithoutSalesOrderInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumPurchaseOrderStatusFieldUpdateOperationsInput | $Enums.PurchaseOrderStatus
+  paymentAmount?: Prisma.FloatFieldUpdateOperationsInput | number
+  paymentStatus?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   currencyRate?: Prisma.FloatFieldUpdateOperationsInput | number
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -2405,6 +2505,8 @@ export type PurchaseOrderCreateManyCompanyInput = {
   title: string
   description?: string | null
   status?: $Enums.PurchaseOrderStatus
+  paymentAmount?: number
+  paymentStatus?: $Enums.PaymentStatus
   currency?: $Enums.Currency
   currencyRate?: number
   totalAmount: number
@@ -2441,6 +2543,8 @@ export type PurchaseOrderUpdateWithoutCompanyInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumPurchaseOrderStatusFieldUpdateOperationsInput | $Enums.PurchaseOrderStatus
+  paymentAmount?: Prisma.FloatFieldUpdateOperationsInput | number
+  paymentStatus?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   currencyRate?: Prisma.FloatFieldUpdateOperationsInput | number
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -2480,6 +2584,8 @@ export type PurchaseOrderUncheckedUpdateWithoutCompanyInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumPurchaseOrderStatusFieldUpdateOperationsInput | $Enums.PurchaseOrderStatus
+  paymentAmount?: Prisma.FloatFieldUpdateOperationsInput | number
+  paymentStatus?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   currencyRate?: Prisma.FloatFieldUpdateOperationsInput | number
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -2519,6 +2625,8 @@ export type PurchaseOrderUncheckedUpdateManyWithoutCompanyInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumPurchaseOrderStatusFieldUpdateOperationsInput | $Enums.PurchaseOrderStatus
+  paymentAmount?: Prisma.FloatFieldUpdateOperationsInput | number
+  paymentStatus?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   currencyRate?: Prisma.FloatFieldUpdateOperationsInput | number
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -2556,6 +2664,8 @@ export type PurchaseOrderCreateManyUserInput = {
   title: string
   description?: string | null
   status?: $Enums.PurchaseOrderStatus
+  paymentAmount?: number
+  paymentStatus?: $Enums.PaymentStatus
   currency?: $Enums.Currency
   currencyRate?: number
   totalAmount: number
@@ -2592,6 +2702,8 @@ export type PurchaseOrderUpdateWithoutUserInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumPurchaseOrderStatusFieldUpdateOperationsInput | $Enums.PurchaseOrderStatus
+  paymentAmount?: Prisma.FloatFieldUpdateOperationsInput | number
+  paymentStatus?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   currencyRate?: Prisma.FloatFieldUpdateOperationsInput | number
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -2631,6 +2743,8 @@ export type PurchaseOrderUncheckedUpdateWithoutUserInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumPurchaseOrderStatusFieldUpdateOperationsInput | $Enums.PurchaseOrderStatus
+  paymentAmount?: Prisma.FloatFieldUpdateOperationsInput | number
+  paymentStatus?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   currencyRate?: Prisma.FloatFieldUpdateOperationsInput | number
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -2670,6 +2784,8 @@ export type PurchaseOrderUncheckedUpdateManyWithoutUserInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumPurchaseOrderStatusFieldUpdateOperationsInput | $Enums.PurchaseOrderStatus
+  paymentAmount?: Prisma.FloatFieldUpdateOperationsInput | number
+  paymentStatus?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   currencyRate?: Prisma.FloatFieldUpdateOperationsInput | number
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -2747,6 +2863,8 @@ export type PurchaseOrderSelect<ExtArgs extends runtime.Types.Extensions.Interna
   title?: boolean
   description?: boolean
   status?: boolean
+  paymentAmount?: boolean
+  paymentStatus?: boolean
   currency?: boolean
   currencyRate?: boolean
   totalAmount?: boolean
@@ -2792,6 +2910,8 @@ export type PurchaseOrderSelectCreateManyAndReturn<ExtArgs extends runtime.Types
   title?: boolean
   description?: boolean
   status?: boolean
+  paymentAmount?: boolean
+  paymentStatus?: boolean
   currency?: boolean
   currencyRate?: boolean
   totalAmount?: boolean
@@ -2834,6 +2954,8 @@ export type PurchaseOrderSelectUpdateManyAndReturn<ExtArgs extends runtime.Types
   title?: boolean
   description?: boolean
   status?: boolean
+  paymentAmount?: boolean
+  paymentStatus?: boolean
   currency?: boolean
   currencyRate?: boolean
   totalAmount?: boolean
@@ -2876,6 +2998,8 @@ export type PurchaseOrderSelectScalar = {
   title?: boolean
   description?: boolean
   status?: boolean
+  paymentAmount?: boolean
+  paymentStatus?: boolean
   currency?: boolean
   currencyRate?: boolean
   totalAmount?: boolean
@@ -2905,7 +3029,7 @@ export type PurchaseOrderSelectScalar = {
   companyId?: boolean
 }
 
-export type PurchaseOrderOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "number" | "orderType" | "date" | "referenceNumber" | "title" | "description" | "status" | "currency" | "currencyRate" | "totalAmount" | "discount" | "vatAmount" | "grandTotal" | "deliveryMethod" | "destination" | "warehouse" | "packingCondition" | "shippingAddress" | "deliveryDate" | "termOfDelivery" | "partialShipment" | "paymentMethod" | "termOfPayment" | "supplierAddress" | "billingAddress" | "termsAndConditions" | "notes" | "createdAt" | "updatedAt" | "deletedAt" | "salesOrderId" | "supplierId" | "userId" | "companyId", ExtArgs["result"]["purchaseOrder"]>
+export type PurchaseOrderOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "number" | "orderType" | "date" | "referenceNumber" | "title" | "description" | "status" | "paymentAmount" | "paymentStatus" | "currency" | "currencyRate" | "totalAmount" | "discount" | "vatAmount" | "grandTotal" | "deliveryMethod" | "destination" | "warehouse" | "packingCondition" | "shippingAddress" | "deliveryDate" | "termOfDelivery" | "partialShipment" | "paymentMethod" | "termOfPayment" | "supplierAddress" | "billingAddress" | "termsAndConditions" | "notes" | "createdAt" | "updatedAt" | "deletedAt" | "salesOrderId" | "supplierId" | "userId" | "companyId", ExtArgs["result"]["purchaseOrder"]>
 export type PurchaseOrderInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   PurchaseOrderItems?: boolean | Prisma.PurchaseOrder$PurchaseOrderItemsArgs<ExtArgs>
@@ -2947,6 +3071,8 @@ export type $PurchaseOrderPayload<ExtArgs extends runtime.Types.Extensions.Inter
     title: string
     description: string | null
     status: $Enums.PurchaseOrderStatus
+    paymentAmount: number
+    paymentStatus: $Enums.PaymentStatus
     currency: $Enums.Currency
     currencyRate: number
     totalAmount: number
@@ -3411,6 +3537,8 @@ export interface PurchaseOrderFieldRefs {
   readonly title: Prisma.FieldRef<"PurchaseOrder", 'String'>
   readonly description: Prisma.FieldRef<"PurchaseOrder", 'String'>
   readonly status: Prisma.FieldRef<"PurchaseOrder", 'PurchaseOrderStatus'>
+  readonly paymentAmount: Prisma.FieldRef<"PurchaseOrder", 'Float'>
+  readonly paymentStatus: Prisma.FieldRef<"PurchaseOrder", 'PaymentStatus'>
   readonly currency: Prisma.FieldRef<"PurchaseOrder", 'Currency'>
   readonly currencyRate: Prisma.FieldRef<"PurchaseOrder", 'Float'>
   readonly totalAmount: Prisma.FieldRef<"PurchaseOrder", 'Float'>
