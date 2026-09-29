@@ -29,7 +29,7 @@ export class NkpService {
     private notification: NotificationsService,
   ) {}
 
-  async create(dto: NkpDto) {
+  async create(dto: NkpDto & { requesterId: number }) {
     const { NkpItem: items, NkpAttachment: attachments, ...data } = dto;
     let number = 'DRAFT';
 
@@ -47,6 +47,7 @@ export class NkpService {
       include: { Requester: true },
       data: {
         ...data,
+        requesterId: dto.requesterId,
         number,
         NkpItem: {
           create: items.map((i) => ({

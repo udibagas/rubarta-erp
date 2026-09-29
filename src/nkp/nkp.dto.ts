@@ -77,11 +77,6 @@ export class NkpDto {
   @IsOptional()
   supplierId: number;
 
-  @ApiProperty({ example: 1, description: 'Requester ID' })
-  @IsNotEmpty({ message: 'Requester is required' })
-  @IsNumber()
-  requesterId: number;
-
   @ApiProperty({ example: 1, description: 'Purchase Order ID' })
   @IsOptional()
   purchaseOrderId?: number;
