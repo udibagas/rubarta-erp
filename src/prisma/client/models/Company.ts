@@ -59,6 +59,7 @@ export type CompanyCountAggregateOutputType = {
   address: number
   phone: number
   isDefault: number
+  banks: number
   _all: number
 }
 
@@ -96,6 +97,7 @@ export type CompanyCountAggregateInputType = {
   address?: true
   phone?: true
   isDefault?: true
+  banks?: true
   _all?: true
 }
 
@@ -192,6 +194,7 @@ export type CompanyGroupByOutputType = {
   address: string | null
   phone: string | null
   isDefault: boolean
+  banks: runtime.JsonValue[]
   _count: CompanyCountAggregateOutputType | null
   _avg: CompanyAvgAggregateOutputType | null
   _sum: CompanySumAggregateOutputType | null
@@ -224,6 +227,7 @@ export type CompanyWhereInput = {
   address?: Prisma.StringNullableFilter<"Company"> | string | null
   phone?: Prisma.StringNullableFilter<"Company"> | string | null
   isDefault?: Prisma.BoolFilter<"Company"> | boolean
+  banks?: Prisma.JsonNullableListFilter<"Company">
   Nkp?: Prisma.NkpListRelationFilter
   ApprovalSetting?: Prisma.ApprovalSettingListRelationFilter
   Opportunity?: Prisma.OpportunityListRelationFilter
@@ -244,6 +248,7 @@ export type CompanyOrderByWithRelationInput = {
   address?: Prisma.SortOrderInput | Prisma.SortOrder
   phone?: Prisma.SortOrderInput | Prisma.SortOrder
   isDefault?: Prisma.SortOrder
+  banks?: Prisma.SortOrder
   Nkp?: Prisma.NkpOrderByRelationAggregateInput
   ApprovalSetting?: Prisma.ApprovalSettingOrderByRelationAggregateInput
   Opportunity?: Prisma.OpportunityOrderByRelationAggregateInput
@@ -267,6 +272,7 @@ export type CompanyWhereUniqueInput = Prisma.AtLeast<{
   address?: Prisma.StringNullableFilter<"Company"> | string | null
   phone?: Prisma.StringNullableFilter<"Company"> | string | null
   isDefault?: Prisma.BoolFilter<"Company"> | boolean
+  banks?: Prisma.JsonNullableListFilter<"Company">
   Nkp?: Prisma.NkpListRelationFilter
   ApprovalSetting?: Prisma.ApprovalSettingListRelationFilter
   Opportunity?: Prisma.OpportunityListRelationFilter
@@ -287,6 +293,7 @@ export type CompanyOrderByWithAggregationInput = {
   address?: Prisma.SortOrderInput | Prisma.SortOrder
   phone?: Prisma.SortOrderInput | Prisma.SortOrder
   isDefault?: Prisma.SortOrder
+  banks?: Prisma.SortOrder
   _count?: Prisma.CompanyCountOrderByAggregateInput
   _avg?: Prisma.CompanyAvgOrderByAggregateInput
   _max?: Prisma.CompanyMaxOrderByAggregateInput
@@ -304,6 +311,7 @@ export type CompanyScalarWhereWithAggregatesInput = {
   address?: Prisma.StringNullableWithAggregatesFilter<"Company"> | string | null
   phone?: Prisma.StringNullableWithAggregatesFilter<"Company"> | string | null
   isDefault?: Prisma.BoolWithAggregatesFilter<"Company"> | boolean
+  banks?: Prisma.JsonNullableListFilter<"Company">
 }
 
 export type CompanyCreateInput = {
@@ -312,6 +320,7 @@ export type CompanyCreateInput = {
   address?: string | null
   phone?: string | null
   isDefault?: boolean
+  banks?: Prisma.CompanyCreatebanksInput | runtime.InputJsonValue[]
   Nkp?: Prisma.NkpCreateNestedManyWithoutCompanyInput
   ApprovalSetting?: Prisma.ApprovalSettingCreateNestedManyWithoutCompanyInput
   Opportunity?: Prisma.OpportunityCreateNestedManyWithoutCompanyInput
@@ -332,6 +341,7 @@ export type CompanyUncheckedCreateInput = {
   address?: string | null
   phone?: string | null
   isDefault?: boolean
+  banks?: Prisma.CompanyCreatebanksInput | runtime.InputJsonValue[]
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutCompanyInput
   ApprovalSetting?: Prisma.ApprovalSettingUncheckedCreateNestedManyWithoutCompanyInput
   Opportunity?: Prisma.OpportunityUncheckedCreateNestedManyWithoutCompanyInput
@@ -351,6 +361,7 @@ export type CompanyUpdateInput = {
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isDefault?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  banks?: Prisma.CompanyUpdatebanksInput | runtime.InputJsonValue[]
   Nkp?: Prisma.NkpUpdateManyWithoutCompanyNestedInput
   ApprovalSetting?: Prisma.ApprovalSettingUpdateManyWithoutCompanyNestedInput
   Opportunity?: Prisma.OpportunityUpdateManyWithoutCompanyNestedInput
@@ -371,6 +382,7 @@ export type CompanyUncheckedUpdateInput = {
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isDefault?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  banks?: Prisma.CompanyUpdatebanksInput | runtime.InputJsonValue[]
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutCompanyNestedInput
   ApprovalSetting?: Prisma.ApprovalSettingUncheckedUpdateManyWithoutCompanyNestedInput
   Opportunity?: Prisma.OpportunityUncheckedUpdateManyWithoutCompanyNestedInput
@@ -391,6 +403,7 @@ export type CompanyCreateManyInput = {
   address?: string | null
   phone?: string | null
   isDefault?: boolean
+  banks?: Prisma.CompanyCreatebanksInput | runtime.InputJsonValue[]
 }
 
 export type CompanyUpdateManyMutationInput = {
@@ -399,6 +412,7 @@ export type CompanyUpdateManyMutationInput = {
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isDefault?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  banks?: Prisma.CompanyUpdatebanksInput | runtime.InputJsonValue[]
 }
 
 export type CompanyUncheckedUpdateManyInput = {
@@ -408,6 +422,7 @@ export type CompanyUncheckedUpdateManyInput = {
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isDefault?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  banks?: Prisma.CompanyUpdatebanksInput | runtime.InputJsonValue[]
 }
 
 export type CompanyNullableScalarRelationFilter = {
@@ -420,6 +435,21 @@ export type CompanyScalarRelationFilter = {
   isNot?: Prisma.CompanyWhereInput
 }
 
+export type JsonNullableListFilter<$PrismaModel = never> =
+| Prisma.PatchUndefined<
+    Prisma.Either<Required<JsonNullableListFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonNullableListFilterBase<$PrismaModel>>, 'path'>>,
+    Required<JsonNullableListFilterBase<$PrismaModel>>
+  >
+| Prisma.OptionalFlat<Omit<Required<JsonNullableListFilterBase<$PrismaModel>>, 'path'>>
+
+export type JsonNullableListFilterBase<$PrismaModel = never> = {
+  equals?: runtime.InputJsonValue[] | Prisma.ListJsonFieldRefInput<$PrismaModel> | null
+  has?: runtime.InputJsonValue | Prisma.JsonFieldRefInput<$PrismaModel> | null
+  hasEvery?: runtime.InputJsonValue[] | Prisma.ListJsonFieldRefInput<$PrismaModel>
+  hasSome?: runtime.InputJsonValue[] | Prisma.ListJsonFieldRefInput<$PrismaModel>
+  isEmpty?: boolean
+}
+
 export type CompanyCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   code?: Prisma.SortOrder
@@ -427,6 +457,7 @@ export type CompanyCountOrderByAggregateInput = {
   address?: Prisma.SortOrder
   phone?: Prisma.SortOrder
   isDefault?: Prisma.SortOrder
+  banks?: Prisma.SortOrder
 }
 
 export type CompanyAvgOrderByAggregateInput = {
@@ -615,12 +646,22 @@ export type CompanyUpdateOneRequiredWithoutSalesOrdersNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.CompanyUpdateToOneWithWhereWithoutSalesOrdersInput, Prisma.CompanyUpdateWithoutSalesOrdersInput>, Prisma.CompanyUncheckedUpdateWithoutSalesOrdersInput>
 }
 
+export type CompanyCreatebanksInput = {
+  set: runtime.InputJsonValue[]
+}
+
+export type CompanyUpdatebanksInput = {
+  set?: runtime.InputJsonValue[]
+  push?: runtime.InputJsonValue | runtime.InputJsonValue[]
+}
+
 export type CompanyCreateWithoutApprovalSettingInput = {
   code: string
   name: string
   address?: string | null
   phone?: string | null
   isDefault?: boolean
+  banks?: Prisma.CompanyCreatebanksInput | runtime.InputJsonValue[]
   Nkp?: Prisma.NkpCreateNestedManyWithoutCompanyInput
   Opportunity?: Prisma.OpportunityCreateNestedManyWithoutCompanyInput
   Lead?: Prisma.LeadCreateNestedManyWithoutCompanyInput
@@ -640,6 +681,7 @@ export type CompanyUncheckedCreateWithoutApprovalSettingInput = {
   address?: string | null
   phone?: string | null
   isDefault?: boolean
+  banks?: Prisma.CompanyCreatebanksInput | runtime.InputJsonValue[]
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutCompanyInput
   Opportunity?: Prisma.OpportunityUncheckedCreateNestedManyWithoutCompanyInput
   Lead?: Prisma.LeadUncheckedCreateNestedManyWithoutCompanyInput
@@ -674,6 +716,7 @@ export type CompanyUpdateWithoutApprovalSettingInput = {
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isDefault?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  banks?: Prisma.CompanyUpdatebanksInput | runtime.InputJsonValue[]
   Nkp?: Prisma.NkpUpdateManyWithoutCompanyNestedInput
   Opportunity?: Prisma.OpportunityUpdateManyWithoutCompanyNestedInput
   Lead?: Prisma.LeadUpdateManyWithoutCompanyNestedInput
@@ -693,6 +736,7 @@ export type CompanyUncheckedUpdateWithoutApprovalSettingInput = {
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isDefault?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  banks?: Prisma.CompanyUpdatebanksInput | runtime.InputJsonValue[]
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutCompanyNestedInput
   Opportunity?: Prisma.OpportunityUncheckedUpdateManyWithoutCompanyNestedInput
   Lead?: Prisma.LeadUncheckedUpdateManyWithoutCompanyNestedInput
@@ -711,6 +755,7 @@ export type CompanyCreateWithoutLeadInput = {
   address?: string | null
   phone?: string | null
   isDefault?: boolean
+  banks?: Prisma.CompanyCreatebanksInput | runtime.InputJsonValue[]
   Nkp?: Prisma.NkpCreateNestedManyWithoutCompanyInput
   ApprovalSetting?: Prisma.ApprovalSettingCreateNestedManyWithoutCompanyInput
   Opportunity?: Prisma.OpportunityCreateNestedManyWithoutCompanyInput
@@ -730,6 +775,7 @@ export type CompanyUncheckedCreateWithoutLeadInput = {
   address?: string | null
   phone?: string | null
   isDefault?: boolean
+  banks?: Prisma.CompanyCreatebanksInput | runtime.InputJsonValue[]
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutCompanyInput
   ApprovalSetting?: Prisma.ApprovalSettingUncheckedCreateNestedManyWithoutCompanyInput
   Opportunity?: Prisma.OpportunityUncheckedCreateNestedManyWithoutCompanyInput
@@ -764,6 +810,7 @@ export type CompanyUpdateWithoutLeadInput = {
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isDefault?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  banks?: Prisma.CompanyUpdatebanksInput | runtime.InputJsonValue[]
   Nkp?: Prisma.NkpUpdateManyWithoutCompanyNestedInput
   ApprovalSetting?: Prisma.ApprovalSettingUpdateManyWithoutCompanyNestedInput
   Opportunity?: Prisma.OpportunityUpdateManyWithoutCompanyNestedInput
@@ -783,6 +830,7 @@ export type CompanyUncheckedUpdateWithoutLeadInput = {
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isDefault?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  banks?: Prisma.CompanyUpdatebanksInput | runtime.InputJsonValue[]
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutCompanyNestedInput
   ApprovalSetting?: Prisma.ApprovalSettingUncheckedUpdateManyWithoutCompanyNestedInput
   Opportunity?: Prisma.OpportunityUncheckedUpdateManyWithoutCompanyNestedInput
@@ -801,6 +849,7 @@ export type CompanyCreateWithoutOpportunityInput = {
   address?: string | null
   phone?: string | null
   isDefault?: boolean
+  banks?: Prisma.CompanyCreatebanksInput | runtime.InputJsonValue[]
   Nkp?: Prisma.NkpCreateNestedManyWithoutCompanyInput
   ApprovalSetting?: Prisma.ApprovalSettingCreateNestedManyWithoutCompanyInput
   Lead?: Prisma.LeadCreateNestedManyWithoutCompanyInput
@@ -820,6 +869,7 @@ export type CompanyUncheckedCreateWithoutOpportunityInput = {
   address?: string | null
   phone?: string | null
   isDefault?: boolean
+  banks?: Prisma.CompanyCreatebanksInput | runtime.InputJsonValue[]
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutCompanyInput
   ApprovalSetting?: Prisma.ApprovalSettingUncheckedCreateNestedManyWithoutCompanyInput
   Lead?: Prisma.LeadUncheckedCreateNestedManyWithoutCompanyInput
@@ -854,6 +904,7 @@ export type CompanyUpdateWithoutOpportunityInput = {
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isDefault?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  banks?: Prisma.CompanyUpdatebanksInput | runtime.InputJsonValue[]
   Nkp?: Prisma.NkpUpdateManyWithoutCompanyNestedInput
   ApprovalSetting?: Prisma.ApprovalSettingUpdateManyWithoutCompanyNestedInput
   Lead?: Prisma.LeadUpdateManyWithoutCompanyNestedInput
@@ -873,6 +924,7 @@ export type CompanyUncheckedUpdateWithoutOpportunityInput = {
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isDefault?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  banks?: Prisma.CompanyUpdatebanksInput | runtime.InputJsonValue[]
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutCompanyNestedInput
   ApprovalSetting?: Prisma.ApprovalSettingUncheckedUpdateManyWithoutCompanyNestedInput
   Lead?: Prisma.LeadUncheckedUpdateManyWithoutCompanyNestedInput
@@ -891,6 +943,7 @@ export type CompanyCreateWithoutVisitPlansInput = {
   address?: string | null
   phone?: string | null
   isDefault?: boolean
+  banks?: Prisma.CompanyCreatebanksInput | runtime.InputJsonValue[]
   Nkp?: Prisma.NkpCreateNestedManyWithoutCompanyInput
   ApprovalSetting?: Prisma.ApprovalSettingCreateNestedManyWithoutCompanyInput
   Opportunity?: Prisma.OpportunityCreateNestedManyWithoutCompanyInput
@@ -910,6 +963,7 @@ export type CompanyUncheckedCreateWithoutVisitPlansInput = {
   address?: string | null
   phone?: string | null
   isDefault?: boolean
+  banks?: Prisma.CompanyCreatebanksInput | runtime.InputJsonValue[]
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutCompanyInput
   ApprovalSetting?: Prisma.ApprovalSettingUncheckedCreateNestedManyWithoutCompanyInput
   Opportunity?: Prisma.OpportunityUncheckedCreateNestedManyWithoutCompanyInput
@@ -944,6 +998,7 @@ export type CompanyUpdateWithoutVisitPlansInput = {
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isDefault?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  banks?: Prisma.CompanyUpdatebanksInput | runtime.InputJsonValue[]
   Nkp?: Prisma.NkpUpdateManyWithoutCompanyNestedInput
   ApprovalSetting?: Prisma.ApprovalSettingUpdateManyWithoutCompanyNestedInput
   Opportunity?: Prisma.OpportunityUpdateManyWithoutCompanyNestedInput
@@ -963,6 +1018,7 @@ export type CompanyUncheckedUpdateWithoutVisitPlansInput = {
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isDefault?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  banks?: Prisma.CompanyUpdatebanksInput | runtime.InputJsonValue[]
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutCompanyNestedInput
   ApprovalSetting?: Prisma.ApprovalSettingUncheckedUpdateManyWithoutCompanyNestedInput
   Opportunity?: Prisma.OpportunityUncheckedUpdateManyWithoutCompanyNestedInput
@@ -981,6 +1037,7 @@ export type CompanyCreateWithoutDeliveryOrdersInput = {
   address?: string | null
   phone?: string | null
   isDefault?: boolean
+  banks?: Prisma.CompanyCreatebanksInput | runtime.InputJsonValue[]
   Nkp?: Prisma.NkpCreateNestedManyWithoutCompanyInput
   ApprovalSetting?: Prisma.ApprovalSettingCreateNestedManyWithoutCompanyInput
   Opportunity?: Prisma.OpportunityCreateNestedManyWithoutCompanyInput
@@ -1000,6 +1057,7 @@ export type CompanyUncheckedCreateWithoutDeliveryOrdersInput = {
   address?: string | null
   phone?: string | null
   isDefault?: boolean
+  banks?: Prisma.CompanyCreatebanksInput | runtime.InputJsonValue[]
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutCompanyInput
   ApprovalSetting?: Prisma.ApprovalSettingUncheckedCreateNestedManyWithoutCompanyInput
   Opportunity?: Prisma.OpportunityUncheckedCreateNestedManyWithoutCompanyInput
@@ -1034,6 +1092,7 @@ export type CompanyUpdateWithoutDeliveryOrdersInput = {
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isDefault?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  banks?: Prisma.CompanyUpdatebanksInput | runtime.InputJsonValue[]
   Nkp?: Prisma.NkpUpdateManyWithoutCompanyNestedInput
   ApprovalSetting?: Prisma.ApprovalSettingUpdateManyWithoutCompanyNestedInput
   Opportunity?: Prisma.OpportunityUpdateManyWithoutCompanyNestedInput
@@ -1053,6 +1112,7 @@ export type CompanyUncheckedUpdateWithoutDeliveryOrdersInput = {
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isDefault?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  banks?: Prisma.CompanyUpdatebanksInput | runtime.InputJsonValue[]
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutCompanyNestedInput
   ApprovalSetting?: Prisma.ApprovalSettingUncheckedUpdateManyWithoutCompanyNestedInput
   Opportunity?: Prisma.OpportunityUncheckedUpdateManyWithoutCompanyNestedInput
@@ -1071,6 +1131,7 @@ export type CompanyCreateWithoutGoodsReceiptsInput = {
   address?: string | null
   phone?: string | null
   isDefault?: boolean
+  banks?: Prisma.CompanyCreatebanksInput | runtime.InputJsonValue[]
   Nkp?: Prisma.NkpCreateNestedManyWithoutCompanyInput
   ApprovalSetting?: Prisma.ApprovalSettingCreateNestedManyWithoutCompanyInput
   Opportunity?: Prisma.OpportunityCreateNestedManyWithoutCompanyInput
@@ -1090,6 +1151,7 @@ export type CompanyUncheckedCreateWithoutGoodsReceiptsInput = {
   address?: string | null
   phone?: string | null
   isDefault?: boolean
+  banks?: Prisma.CompanyCreatebanksInput | runtime.InputJsonValue[]
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutCompanyInput
   ApprovalSetting?: Prisma.ApprovalSettingUncheckedCreateNestedManyWithoutCompanyInput
   Opportunity?: Prisma.OpportunityUncheckedCreateNestedManyWithoutCompanyInput
@@ -1124,6 +1186,7 @@ export type CompanyUpdateWithoutGoodsReceiptsInput = {
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isDefault?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  banks?: Prisma.CompanyUpdatebanksInput | runtime.InputJsonValue[]
   Nkp?: Prisma.NkpUpdateManyWithoutCompanyNestedInput
   ApprovalSetting?: Prisma.ApprovalSettingUpdateManyWithoutCompanyNestedInput
   Opportunity?: Prisma.OpportunityUpdateManyWithoutCompanyNestedInput
@@ -1143,6 +1206,7 @@ export type CompanyUncheckedUpdateWithoutGoodsReceiptsInput = {
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isDefault?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  banks?: Prisma.CompanyUpdatebanksInput | runtime.InputJsonValue[]
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutCompanyNestedInput
   ApprovalSetting?: Prisma.ApprovalSettingUncheckedUpdateManyWithoutCompanyNestedInput
   Opportunity?: Prisma.OpportunityUncheckedUpdateManyWithoutCompanyNestedInput
@@ -1161,6 +1225,7 @@ export type CompanyCreateWithoutInvoicesInput = {
   address?: string | null
   phone?: string | null
   isDefault?: boolean
+  banks?: Prisma.CompanyCreatebanksInput | runtime.InputJsonValue[]
   Nkp?: Prisma.NkpCreateNestedManyWithoutCompanyInput
   ApprovalSetting?: Prisma.ApprovalSettingCreateNestedManyWithoutCompanyInput
   Opportunity?: Prisma.OpportunityCreateNestedManyWithoutCompanyInput
@@ -1180,6 +1245,7 @@ export type CompanyUncheckedCreateWithoutInvoicesInput = {
   address?: string | null
   phone?: string | null
   isDefault?: boolean
+  banks?: Prisma.CompanyCreatebanksInput | runtime.InputJsonValue[]
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutCompanyInput
   ApprovalSetting?: Prisma.ApprovalSettingUncheckedCreateNestedManyWithoutCompanyInput
   Opportunity?: Prisma.OpportunityUncheckedCreateNestedManyWithoutCompanyInput
@@ -1214,6 +1280,7 @@ export type CompanyUpdateWithoutInvoicesInput = {
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isDefault?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  banks?: Prisma.CompanyUpdatebanksInput | runtime.InputJsonValue[]
   Nkp?: Prisma.NkpUpdateManyWithoutCompanyNestedInput
   ApprovalSetting?: Prisma.ApprovalSettingUpdateManyWithoutCompanyNestedInput
   Opportunity?: Prisma.OpportunityUpdateManyWithoutCompanyNestedInput
@@ -1233,6 +1300,7 @@ export type CompanyUncheckedUpdateWithoutInvoicesInput = {
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isDefault?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  banks?: Prisma.CompanyUpdatebanksInput | runtime.InputJsonValue[]
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutCompanyNestedInput
   ApprovalSetting?: Prisma.ApprovalSettingUncheckedUpdateManyWithoutCompanyNestedInput
   Opportunity?: Prisma.OpportunityUncheckedUpdateManyWithoutCompanyNestedInput
@@ -1251,6 +1319,7 @@ export type CompanyCreateWithoutNkpInput = {
   address?: string | null
   phone?: string | null
   isDefault?: boolean
+  banks?: Prisma.CompanyCreatebanksInput | runtime.InputJsonValue[]
   ApprovalSetting?: Prisma.ApprovalSettingCreateNestedManyWithoutCompanyInput
   Opportunity?: Prisma.OpportunityCreateNestedManyWithoutCompanyInput
   Lead?: Prisma.LeadCreateNestedManyWithoutCompanyInput
@@ -1270,6 +1339,7 @@ export type CompanyUncheckedCreateWithoutNkpInput = {
   address?: string | null
   phone?: string | null
   isDefault?: boolean
+  banks?: Prisma.CompanyCreatebanksInput | runtime.InputJsonValue[]
   ApprovalSetting?: Prisma.ApprovalSettingUncheckedCreateNestedManyWithoutCompanyInput
   Opportunity?: Prisma.OpportunityUncheckedCreateNestedManyWithoutCompanyInput
   Lead?: Prisma.LeadUncheckedCreateNestedManyWithoutCompanyInput
@@ -1304,6 +1374,7 @@ export type CompanyUpdateWithoutNkpInput = {
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isDefault?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  banks?: Prisma.CompanyUpdatebanksInput | runtime.InputJsonValue[]
   ApprovalSetting?: Prisma.ApprovalSettingUpdateManyWithoutCompanyNestedInput
   Opportunity?: Prisma.OpportunityUpdateManyWithoutCompanyNestedInput
   Lead?: Prisma.LeadUpdateManyWithoutCompanyNestedInput
@@ -1323,6 +1394,7 @@ export type CompanyUncheckedUpdateWithoutNkpInput = {
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isDefault?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  banks?: Prisma.CompanyUpdatebanksInput | runtime.InputJsonValue[]
   ApprovalSetting?: Prisma.ApprovalSettingUncheckedUpdateManyWithoutCompanyNestedInput
   Opportunity?: Prisma.OpportunityUncheckedUpdateManyWithoutCompanyNestedInput
   Lead?: Prisma.LeadUncheckedUpdateManyWithoutCompanyNestedInput
@@ -1341,6 +1413,7 @@ export type CompanyCreateWithoutPurchaseOrdersInput = {
   address?: string | null
   phone?: string | null
   isDefault?: boolean
+  banks?: Prisma.CompanyCreatebanksInput | runtime.InputJsonValue[]
   Nkp?: Prisma.NkpCreateNestedManyWithoutCompanyInput
   ApprovalSetting?: Prisma.ApprovalSettingCreateNestedManyWithoutCompanyInput
   Opportunity?: Prisma.OpportunityCreateNestedManyWithoutCompanyInput
@@ -1360,6 +1433,7 @@ export type CompanyUncheckedCreateWithoutPurchaseOrdersInput = {
   address?: string | null
   phone?: string | null
   isDefault?: boolean
+  banks?: Prisma.CompanyCreatebanksInput | runtime.InputJsonValue[]
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutCompanyInput
   ApprovalSetting?: Prisma.ApprovalSettingUncheckedCreateNestedManyWithoutCompanyInput
   Opportunity?: Prisma.OpportunityUncheckedCreateNestedManyWithoutCompanyInput
@@ -1394,6 +1468,7 @@ export type CompanyUpdateWithoutPurchaseOrdersInput = {
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isDefault?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  banks?: Prisma.CompanyUpdatebanksInput | runtime.InputJsonValue[]
   Nkp?: Prisma.NkpUpdateManyWithoutCompanyNestedInput
   ApprovalSetting?: Prisma.ApprovalSettingUpdateManyWithoutCompanyNestedInput
   Opportunity?: Prisma.OpportunityUpdateManyWithoutCompanyNestedInput
@@ -1413,6 +1488,7 @@ export type CompanyUncheckedUpdateWithoutPurchaseOrdersInput = {
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isDefault?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  banks?: Prisma.CompanyUpdatebanksInput | runtime.InputJsonValue[]
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutCompanyNestedInput
   ApprovalSetting?: Prisma.ApprovalSettingUncheckedUpdateManyWithoutCompanyNestedInput
   Opportunity?: Prisma.OpportunityUncheckedUpdateManyWithoutCompanyNestedInput
@@ -1431,6 +1507,7 @@ export type CompanyCreateWithoutQuotationsInput = {
   address?: string | null
   phone?: string | null
   isDefault?: boolean
+  banks?: Prisma.CompanyCreatebanksInput | runtime.InputJsonValue[]
   Nkp?: Prisma.NkpCreateNestedManyWithoutCompanyInput
   ApprovalSetting?: Prisma.ApprovalSettingCreateNestedManyWithoutCompanyInput
   Opportunity?: Prisma.OpportunityCreateNestedManyWithoutCompanyInput
@@ -1450,6 +1527,7 @@ export type CompanyUncheckedCreateWithoutQuotationsInput = {
   address?: string | null
   phone?: string | null
   isDefault?: boolean
+  banks?: Prisma.CompanyCreatebanksInput | runtime.InputJsonValue[]
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutCompanyInput
   ApprovalSetting?: Prisma.ApprovalSettingUncheckedCreateNestedManyWithoutCompanyInput
   Opportunity?: Prisma.OpportunityUncheckedCreateNestedManyWithoutCompanyInput
@@ -1484,6 +1562,7 @@ export type CompanyUpdateWithoutQuotationsInput = {
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isDefault?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  banks?: Prisma.CompanyUpdatebanksInput | runtime.InputJsonValue[]
   Nkp?: Prisma.NkpUpdateManyWithoutCompanyNestedInput
   ApprovalSetting?: Prisma.ApprovalSettingUpdateManyWithoutCompanyNestedInput
   Opportunity?: Prisma.OpportunityUpdateManyWithoutCompanyNestedInput
@@ -1503,6 +1582,7 @@ export type CompanyUncheckedUpdateWithoutQuotationsInput = {
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isDefault?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  banks?: Prisma.CompanyUpdatebanksInput | runtime.InputJsonValue[]
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutCompanyNestedInput
   ApprovalSetting?: Prisma.ApprovalSettingUncheckedUpdateManyWithoutCompanyNestedInput
   Opportunity?: Prisma.OpportunityUncheckedUpdateManyWithoutCompanyNestedInput
@@ -1521,6 +1601,7 @@ export type CompanyCreateWithoutSalesOrdersInput = {
   address?: string | null
   phone?: string | null
   isDefault?: boolean
+  banks?: Prisma.CompanyCreatebanksInput | runtime.InputJsonValue[]
   Nkp?: Prisma.NkpCreateNestedManyWithoutCompanyInput
   ApprovalSetting?: Prisma.ApprovalSettingCreateNestedManyWithoutCompanyInput
   Opportunity?: Prisma.OpportunityCreateNestedManyWithoutCompanyInput
@@ -1540,6 +1621,7 @@ export type CompanyUncheckedCreateWithoutSalesOrdersInput = {
   address?: string | null
   phone?: string | null
   isDefault?: boolean
+  banks?: Prisma.CompanyCreatebanksInput | runtime.InputJsonValue[]
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutCompanyInput
   ApprovalSetting?: Prisma.ApprovalSettingUncheckedCreateNestedManyWithoutCompanyInput
   Opportunity?: Prisma.OpportunityUncheckedCreateNestedManyWithoutCompanyInput
@@ -1574,6 +1656,7 @@ export type CompanyUpdateWithoutSalesOrdersInput = {
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isDefault?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  banks?: Prisma.CompanyUpdatebanksInput | runtime.InputJsonValue[]
   Nkp?: Prisma.NkpUpdateManyWithoutCompanyNestedInput
   ApprovalSetting?: Prisma.ApprovalSettingUpdateManyWithoutCompanyNestedInput
   Opportunity?: Prisma.OpportunityUpdateManyWithoutCompanyNestedInput
@@ -1593,6 +1676,7 @@ export type CompanyUncheckedUpdateWithoutSalesOrdersInput = {
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isDefault?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  banks?: Prisma.CompanyUpdatebanksInput | runtime.InputJsonValue[]
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutCompanyNestedInput
   ApprovalSetting?: Prisma.ApprovalSettingUncheckedUpdateManyWithoutCompanyNestedInput
   Opportunity?: Prisma.OpportunityUncheckedUpdateManyWithoutCompanyNestedInput
@@ -1733,6 +1817,7 @@ export type CompanySelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   address?: boolean
   phone?: boolean
   isDefault?: boolean
+  banks?: boolean
   Nkp?: boolean | Prisma.Company$NkpArgs<ExtArgs>
   ApprovalSetting?: boolean | Prisma.Company$ApprovalSettingArgs<ExtArgs>
   Opportunity?: boolean | Prisma.Company$OpportunityArgs<ExtArgs>
@@ -1754,6 +1839,7 @@ export type CompanySelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   address?: boolean
   phone?: boolean
   isDefault?: boolean
+  banks?: boolean
 }, ExtArgs["result"]["company"]>
 
 export type CompanySelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1763,6 +1849,7 @@ export type CompanySelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   address?: boolean
   phone?: boolean
   isDefault?: boolean
+  banks?: boolean
 }, ExtArgs["result"]["company"]>
 
 export type CompanySelectScalar = {
@@ -1772,9 +1859,10 @@ export type CompanySelectScalar = {
   address?: boolean
   phone?: boolean
   isDefault?: boolean
+  banks?: boolean
 }
 
-export type CompanyOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "code" | "name" | "address" | "phone" | "isDefault", ExtArgs["result"]["company"]>
+export type CompanyOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "code" | "name" | "address" | "phone" | "isDefault" | "banks", ExtArgs["result"]["company"]>
 export type CompanyInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   Nkp?: boolean | Prisma.Company$NkpArgs<ExtArgs>
   ApprovalSetting?: boolean | Prisma.Company$ApprovalSettingArgs<ExtArgs>
@@ -1814,6 +1902,7 @@ export type $CompanyPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     address: string | null
     phone: string | null
     isDefault: boolean
+    banks: runtime.JsonValue[]
   }, ExtArgs["result"]["company"]>
   composites: {}
 }
@@ -2254,6 +2343,7 @@ export interface CompanyFieldRefs {
   readonly address: Prisma.FieldRef<"Company", 'String'>
   readonly phone: Prisma.FieldRef<"Company", 'String'>
   readonly isDefault: Prisma.FieldRef<"Company", 'Boolean'>
+  readonly banks: Prisma.FieldRef<"Company", 'Json[]'>
 }
     
 

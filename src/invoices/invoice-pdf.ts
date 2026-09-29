@@ -367,7 +367,7 @@ export function generateInvoicePdf(invoice: any): Promise<Buffer> {
     drawCommentRow('Name', 'PT. RUBARTA PRIMA ABADI', summaryY + 36);
     drawCommentRow(
       'Bank',
-      'UOB - KCP KELAPA GADING BOULEVARD RAYA',
+      'MANDIRI - KCP KELAPA GADING BOULEVARD RAYA',
       summaryY + 48,
     );
     drawCommentRow('A/C No', '5953006953', summaryY + 60, true);

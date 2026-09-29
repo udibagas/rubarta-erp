@@ -76,6 +76,12 @@ export class CreateMaterialDto {
   @IsOptional()
   @IsInt()
   @Min(0)
+  moq?: number;
+
+  @ApiProperty({ required: false, example: 10, default: 0 })
+  @IsOptional()
+  @IsInt()
+  @Min(0)
   minStock?: number;
 
   @ApiProperty({ required: false, example: 100, default: 0 })

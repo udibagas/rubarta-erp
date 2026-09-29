@@ -527,6 +527,7 @@ export const MaterialScalarFieldEnum = {
   sellingCurrency: 'sellingCurrency',
   purchasePrice: 'purchasePrice',
   sellingPrice: 'sellingPrice',
+  moq: 'moq',
   minStock: 'minStock',
   currentStock: 'currentStock',
   isActive: 'isActive',
@@ -790,7 +791,8 @@ export const CompanyScalarFieldEnum = {
   name: 'name',
   address: 'address',
   phone: 'phone',
-  isDefault: 'isDefault'
+  isDefault: 'isDefault',
+  banks: 'banks'
 } as const
 
 export type CompanyScalarFieldEnum = (typeof CompanyScalarFieldEnum)[keyof typeof CompanyScalarFieldEnum]

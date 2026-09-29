@@ -199,6 +199,7 @@ export class MaterialsService {
       { header: 'Selling Currency', key: 'sellingCurrency', width: 15 },
       { header: 'Purchase Price', key: 'purchasePrice', width: 15 },
       { header: 'Selling Price', key: 'sellingPrice', width: 15 },
+      { header: 'MOQ', key: 'moq', width: 10 },
       { header: 'Min Stock', key: 'minStock', width: 10 },
       { header: 'Current Stock', key: 'currentStock', width: 12 },
       { header: 'Supplier Name', key: 'supplierName', width: 25 },
@@ -228,6 +229,7 @@ export class MaterialsService {
         sellingCurrency: material.sellingCurrency,
         purchasePrice: material.purchasePrice,
         sellingPrice: material.sellingPrice,
+        moq: material.moq,
         minStock: material.minStock,
         currentStock: material.currentStock,
         supplierName: material.Supplier?.name,
@@ -239,7 +241,7 @@ export class MaterialsService {
     // Auto-filter
     worksheet.autoFilter = {
       from: 'A1',
-      to: `P1`,
+      to: `Q1`,
     };
 
     const buffer = await workbook.xlsx.writeBuffer();
@@ -294,11 +296,14 @@ export class MaterialsService {
           sellingPrice: row.getCell(11).value
             ? parseFloat(row.getCell(11).value.toString())
             : null,
-          minStock: row.getCell(12).value
+          moq: row.getCell(12).value
             ? parseInt(row.getCell(12).value.toString())
             : 0,
-          currentStock: row.getCell(13).value
+          minStock: row.getCell(13).value
             ? parseInt(row.getCell(13).value.toString())
+            : 0,
+          currentStock: row.getCell(14).value
+            ? parseInt(row.getCell(14).value.toString())
             : 0,
           leadTime: row.getCell(15).value
             ? parseInt(row.getCell(15).value.toString())
@@ -308,8 +313,8 @@ export class MaterialsService {
             : true,
         };
 
-        // Handle supplier by name (if provided in column 14)
-        const supplierName = row.getCell(14).value?.toString();
+        // Handle supplier by name (if provided in column 16)
+        const supplierName = row.getCell(16).value?.toString();
         if (supplierName) {
           // Store supplier name temporarily, will be resolved later
           material.supplierName = supplierName;
@@ -425,6 +430,7 @@ export class MaterialsService {
       { header: 'Selling Currency', key: 'sellingCurrency', width: 15 },
       { header: 'Purchase Price', key: 'purchasePrice', width: 15 },
       { header: 'Selling Price', key: 'sellingPrice', width: 15 },
+      { header: 'MOQ', key: 'moq', width: 10 },
       { header: 'Min Stock', key: 'minStock', width: 10 },
       { header: 'Current Stock', key: 'currentStock', width: 12 },
       { header: 'Supplier Name', key: 'supplierName', width: 25 },
@@ -454,6 +460,7 @@ export class MaterialsService {
       sellingCurrency: 'USD',
       purchasePrice: 100,
       sellingPrice: 150,
+      moq: 10,
       minStock: 10,
       currentStock: 100,
       supplierName: 'Sample Supplier',

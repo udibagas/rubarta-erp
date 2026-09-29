@@ -15,12 +15,15 @@ datasource db {
 }
 
 model Company {
-  id              Int               @id @default(autoincrement())
-  code            String            @unique @db.VarChar(10)
-  name            String            @db.VarChar(50)
-  address         String?           @db.Text
-  phone           String?           @db.VarChar(20)
-  isDefault       Boolean           @default(false)
+  id        Int     @id @default(autoincrement())
+  code      String  @unique @db.VarChar(10)
+  name      String  @db.VarChar(50)
+  address   String? @db.Text
+  phone     String? @db.VarChar(20)
+  isDefault Boolean @default(false)
+  banks     Json[]
+
+  // Relations to other models
   Nkp             Nkp[]
   ApprovalSetting ApprovalSetting[]
   Opportunity     Opportunity[]

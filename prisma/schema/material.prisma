@@ -11,6 +11,7 @@ model Material {
   sellingCurrency  String?   @db.Char(3) // ISO 4217 currency code
   purchasePrice    Float?
   sellingPrice     Float?
+  moq              Int?      @default(0) // Minimum order quantity
   minStock         Int?      @default(0)
   currentStock     Int?      @default(0)
   isActive         Boolean   @default(true)

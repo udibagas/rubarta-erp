@@ -3873,6 +3873,7 @@ export const MaterialScalarFieldEnum = {
   sellingCurrency: 'sellingCurrency',
   purchasePrice: 'purchasePrice',
   sellingPrice: 'sellingPrice',
+  moq: 'moq',
   minStock: 'minStock',
   currentStock: 'currentStock',
   isActive: 'isActive',
@@ -4136,7 +4137,8 @@ export const CompanyScalarFieldEnum = {
   name: 'name',
   address: 'address',
   phone: 'phone',
-  isDefault: 'isDefault'
+  isDefault: 'isDefault',
+  banks: 'banks'
 } as const
 
 export type CompanyScalarFieldEnum = (typeof CompanyScalarFieldEnum)[keyof typeof CompanyScalarFieldEnum]
@@ -4631,6 +4633,13 @@ export type EnumSalesOrderStatusFieldRefInput<$PrismaModel> = FieldRefInputType<
  * Reference to a field of type 'SalesOrderStatus[]'
  */
 export type ListEnumSalesOrderStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SalesOrderStatus[]'>
+    
+
+
+/**
+ * Reference to a field of type 'Json[]'
+ */
+export type ListJsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json[]'>
     
 
 

@@ -31,6 +31,7 @@ export type MaterialAvgAggregateOutputType = {
   weight: number | null
   purchasePrice: number | null
   sellingPrice: number | null
+  moq: number | null
   minStock: number | null
   currentStock: number | null
   supplierId: number | null
@@ -42,6 +43,7 @@ export type MaterialSumAggregateOutputType = {
   weight: number | null
   purchasePrice: number | null
   sellingPrice: number | null
+  moq: number | null
   minStock: number | null
   currentStock: number | null
   supplierId: number | null
@@ -61,6 +63,7 @@ export type MaterialMinAggregateOutputType = {
   sellingCurrency: string | null
   purchasePrice: number | null
   sellingPrice: number | null
+  moq: number | null
   minStock: number | null
   currentStock: number | null
   isActive: boolean | null
@@ -84,6 +87,7 @@ export type MaterialMaxAggregateOutputType = {
   sellingCurrency: string | null
   purchasePrice: number | null
   sellingPrice: number | null
+  moq: number | null
   minStock: number | null
   currentStock: number | null
   isActive: boolean | null
@@ -107,6 +111,7 @@ export type MaterialCountAggregateOutputType = {
   sellingCurrency: number
   purchasePrice: number
   sellingPrice: number
+  moq: number
   minStock: number
   currentStock: number
   isActive: number
@@ -124,6 +129,7 @@ export type MaterialAvgAggregateInputType = {
   weight?: true
   purchasePrice?: true
   sellingPrice?: true
+  moq?: true
   minStock?: true
   currentStock?: true
   supplierId?: true
@@ -135,6 +141,7 @@ export type MaterialSumAggregateInputType = {
   weight?: true
   purchasePrice?: true
   sellingPrice?: true
+  moq?: true
   minStock?: true
   currentStock?: true
   supplierId?: true
@@ -154,6 +161,7 @@ export type MaterialMinAggregateInputType = {
   sellingCurrency?: true
   purchasePrice?: true
   sellingPrice?: true
+  moq?: true
   minStock?: true
   currentStock?: true
   isActive?: true
@@ -177,6 +185,7 @@ export type MaterialMaxAggregateInputType = {
   sellingCurrency?: true
   purchasePrice?: true
   sellingPrice?: true
+  moq?: true
   minStock?: true
   currentStock?: true
   isActive?: true
@@ -200,6 +209,7 @@ export type MaterialCountAggregateInputType = {
   sellingCurrency?: true
   purchasePrice?: true
   sellingPrice?: true
+  moq?: true
   minStock?: true
   currentStock?: true
   isActive?: true
@@ -310,6 +320,7 @@ export type MaterialGroupByOutputType = {
   sellingCurrency: string | null
   purchasePrice: number | null
   sellingPrice: number | null
+  moq: number | null
   minStock: number | null
   currentStock: number | null
   isActive: boolean
@@ -356,6 +367,7 @@ export type MaterialWhereInput = {
   sellingCurrency?: Prisma.StringNullableFilter<"Material"> | string | null
   purchasePrice?: Prisma.FloatNullableFilter<"Material"> | number | null
   sellingPrice?: Prisma.FloatNullableFilter<"Material"> | number | null
+  moq?: Prisma.IntNullableFilter<"Material"> | number | null
   minStock?: Prisma.IntNullableFilter<"Material"> | number | null
   currentStock?: Prisma.IntNullableFilter<"Material"> | number | null
   isActive?: Prisma.BoolFilter<"Material"> | boolean
@@ -380,6 +392,7 @@ export type MaterialOrderByWithRelationInput = {
   sellingCurrency?: Prisma.SortOrderInput | Prisma.SortOrder
   purchasePrice?: Prisma.SortOrderInput | Prisma.SortOrder
   sellingPrice?: Prisma.SortOrderInput | Prisma.SortOrder
+  moq?: Prisma.SortOrderInput | Prisma.SortOrder
   minStock?: Prisma.SortOrderInput | Prisma.SortOrder
   currentStock?: Prisma.SortOrderInput | Prisma.SortOrder
   isActive?: Prisma.SortOrder
@@ -407,6 +420,7 @@ export type MaterialWhereUniqueInput = Prisma.AtLeast<{
   sellingCurrency?: Prisma.StringNullableFilter<"Material"> | string | null
   purchasePrice?: Prisma.FloatNullableFilter<"Material"> | number | null
   sellingPrice?: Prisma.FloatNullableFilter<"Material"> | number | null
+  moq?: Prisma.IntNullableFilter<"Material"> | number | null
   minStock?: Prisma.IntNullableFilter<"Material"> | number | null
   currentStock?: Prisma.IntNullableFilter<"Material"> | number | null
   isActive?: Prisma.BoolFilter<"Material"> | boolean
@@ -431,6 +445,7 @@ export type MaterialOrderByWithAggregationInput = {
   sellingCurrency?: Prisma.SortOrderInput | Prisma.SortOrder
   purchasePrice?: Prisma.SortOrderInput | Prisma.SortOrder
   sellingPrice?: Prisma.SortOrderInput | Prisma.SortOrder
+  moq?: Prisma.SortOrderInput | Prisma.SortOrder
   minStock?: Prisma.SortOrderInput | Prisma.SortOrder
   currentStock?: Prisma.SortOrderInput | Prisma.SortOrder
   isActive?: Prisma.SortOrder
@@ -462,6 +477,7 @@ export type MaterialScalarWhereWithAggregatesInput = {
   sellingCurrency?: Prisma.StringNullableWithAggregatesFilter<"Material"> | string | null
   purchasePrice?: Prisma.FloatNullableWithAggregatesFilter<"Material"> | number | null
   sellingPrice?: Prisma.FloatNullableWithAggregatesFilter<"Material"> | number | null
+  moq?: Prisma.IntNullableWithAggregatesFilter<"Material"> | number | null
   minStock?: Prisma.IntNullableWithAggregatesFilter<"Material"> | number | null
   currentStock?: Prisma.IntNullableWithAggregatesFilter<"Material"> | number | null
   isActive?: Prisma.BoolWithAggregatesFilter<"Material"> | boolean
@@ -484,6 +500,7 @@ export type MaterialCreateInput = {
   sellingCurrency?: string | null
   purchasePrice?: number | null
   sellingPrice?: number | null
+  moq?: number | null
   minStock?: number | null
   currentStock?: number | null
   isActive?: boolean
@@ -507,6 +524,7 @@ export type MaterialUncheckedCreateInput = {
   sellingCurrency?: string | null
   purchasePrice?: number | null
   sellingPrice?: number | null
+  moq?: number | null
   minStock?: number | null
   currentStock?: number | null
   isActive?: boolean
@@ -529,6 +547,7 @@ export type MaterialUpdateInput = {
   sellingCurrency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   purchasePrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   sellingPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  moq?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   minStock?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   currentStock?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -552,6 +571,7 @@ export type MaterialUncheckedUpdateInput = {
   sellingCurrency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   purchasePrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   sellingPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  moq?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   minStock?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   currentStock?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -575,6 +595,7 @@ export type MaterialCreateManyInput = {
   sellingCurrency?: string | null
   purchasePrice?: number | null
   sellingPrice?: number | null
+  moq?: number | null
   minStock?: number | null
   currentStock?: number | null
   isActive?: boolean
@@ -597,6 +618,7 @@ export type MaterialUpdateManyMutationInput = {
   sellingCurrency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   purchasePrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   sellingPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  moq?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   minStock?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   currentStock?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -619,6 +641,7 @@ export type MaterialUncheckedUpdateManyInput = {
   sellingCurrency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   purchasePrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   sellingPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  moq?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   minStock?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   currentStock?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -652,6 +675,7 @@ export type MaterialCountOrderByAggregateInput = {
   sellingCurrency?: Prisma.SortOrder
   purchasePrice?: Prisma.SortOrder
   sellingPrice?: Prisma.SortOrder
+  moq?: Prisma.SortOrder
   minStock?: Prisma.SortOrder
   currentStock?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
@@ -667,6 +691,7 @@ export type MaterialAvgOrderByAggregateInput = {
   weight?: Prisma.SortOrder
   purchasePrice?: Prisma.SortOrder
   sellingPrice?: Prisma.SortOrder
+  moq?: Prisma.SortOrder
   minStock?: Prisma.SortOrder
   currentStock?: Prisma.SortOrder
   supplierId?: Prisma.SortOrder
@@ -686,6 +711,7 @@ export type MaterialMaxOrderByAggregateInput = {
   sellingCurrency?: Prisma.SortOrder
   purchasePrice?: Prisma.SortOrder
   sellingPrice?: Prisma.SortOrder
+  moq?: Prisma.SortOrder
   minStock?: Prisma.SortOrder
   currentStock?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
@@ -709,6 +735,7 @@ export type MaterialMinOrderByAggregateInput = {
   sellingCurrency?: Prisma.SortOrder
   purchasePrice?: Prisma.SortOrder
   sellingPrice?: Prisma.SortOrder
+  moq?: Prisma.SortOrder
   minStock?: Prisma.SortOrder
   currentStock?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
@@ -724,6 +751,7 @@ export type MaterialSumOrderByAggregateInput = {
   weight?: Prisma.SortOrder
   purchasePrice?: Prisma.SortOrder
   sellingPrice?: Prisma.SortOrder
+  moq?: Prisma.SortOrder
   minStock?: Prisma.SortOrder
   currentStock?: Prisma.SortOrder
   supplierId?: Prisma.SortOrder
@@ -784,6 +812,7 @@ export type MaterialCreateWithoutSupplierInput = {
   sellingCurrency?: string | null
   purchasePrice?: number | null
   sellingPrice?: number | null
+  moq?: number | null
   minStock?: number | null
   currentStock?: number | null
   isActive?: boolean
@@ -806,6 +835,7 @@ export type MaterialUncheckedCreateWithoutSupplierInput = {
   sellingCurrency?: string | null
   purchasePrice?: number | null
   sellingPrice?: number | null
+  moq?: number | null
   minStock?: number | null
   currentStock?: number | null
   isActive?: boolean
@@ -857,6 +887,7 @@ export type MaterialScalarWhereInput = {
   sellingCurrency?: Prisma.StringNullableFilter<"Material"> | string | null
   purchasePrice?: Prisma.FloatNullableFilter<"Material"> | number | null
   sellingPrice?: Prisma.FloatNullableFilter<"Material"> | number | null
+  moq?: Prisma.IntNullableFilter<"Material"> | number | null
   minStock?: Prisma.IntNullableFilter<"Material"> | number | null
   currentStock?: Prisma.IntNullableFilter<"Material"> | number | null
   isActive?: Prisma.BoolFilter<"Material"> | boolean
@@ -880,6 +911,7 @@ export type MaterialCreateManySupplierInput = {
   sellingCurrency?: string | null
   purchasePrice?: number | null
   sellingPrice?: number | null
+  moq?: number | null
   minStock?: number | null
   currentStock?: number | null
   isActive?: boolean
@@ -901,6 +933,7 @@ export type MaterialUpdateWithoutSupplierInput = {
   sellingCurrency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   purchasePrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   sellingPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  moq?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   minStock?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   currentStock?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -923,6 +956,7 @@ export type MaterialUncheckedUpdateWithoutSupplierInput = {
   sellingCurrency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   purchasePrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   sellingPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  moq?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   minStock?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   currentStock?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -945,6 +979,7 @@ export type MaterialUncheckedUpdateManyWithoutSupplierInput = {
   sellingCurrency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   purchasePrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   sellingPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  moq?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   minStock?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   currentStock?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -969,6 +1004,7 @@ export type MaterialSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   sellingCurrency?: boolean
   purchasePrice?: boolean
   sellingPrice?: boolean
+  moq?: boolean
   minStock?: boolean
   currentStock?: boolean
   isActive?: boolean
@@ -993,6 +1029,7 @@ export type MaterialSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
   sellingCurrency?: boolean
   purchasePrice?: boolean
   sellingPrice?: boolean
+  moq?: boolean
   minStock?: boolean
   currentStock?: boolean
   isActive?: boolean
@@ -1017,6 +1054,7 @@ export type MaterialSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
   sellingCurrency?: boolean
   purchasePrice?: boolean
   sellingPrice?: boolean
+  moq?: boolean
   minStock?: boolean
   currentStock?: boolean
   isActive?: boolean
@@ -1041,6 +1079,7 @@ export type MaterialSelectScalar = {
   sellingCurrency?: boolean
   purchasePrice?: boolean
   sellingPrice?: boolean
+  moq?: boolean
   minStock?: boolean
   currentStock?: boolean
   isActive?: boolean
@@ -1051,7 +1090,7 @@ export type MaterialSelectScalar = {
   updatedAt?: boolean
 }
 
-export type MaterialOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "partNumber" | "name" | "model" | "description" | "category" | "unit" | "weight" | "purchaseCurrency" | "sellingCurrency" | "purchasePrice" | "sellingPrice" | "minStock" | "currentStock" | "isActive" | "supplierId" | "leadTime" | "deletedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["material"]>
+export type MaterialOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "partNumber" | "name" | "model" | "description" | "category" | "unit" | "weight" | "purchaseCurrency" | "sellingCurrency" | "purchasePrice" | "sellingPrice" | "moq" | "minStock" | "currentStock" | "isActive" | "supplierId" | "leadTime" | "deletedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["material"]>
 export type MaterialInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   Supplier?: boolean | Prisma.Material$SupplierArgs<ExtArgs>
 }
@@ -1080,6 +1119,7 @@ export type $MaterialPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     sellingCurrency: string | null
     purchasePrice: number | null
     sellingPrice: number | null
+    moq: number | null
     minStock: number | null
     currentStock: number | null
     isActive: boolean
@@ -1524,6 +1564,7 @@ export interface MaterialFieldRefs {
   readonly sellingCurrency: Prisma.FieldRef<"Material", 'String'>
   readonly purchasePrice: Prisma.FieldRef<"Material", 'Float'>
   readonly sellingPrice: Prisma.FieldRef<"Material", 'Float'>
+  readonly moq: Prisma.FieldRef<"Material", 'Int'>
   readonly minStock: Prisma.FieldRef<"Material", 'Int'>
   readonly currentStock: Prisma.FieldRef<"Material", 'Int'>
   readonly isActive: Prisma.FieldRef<"Material", 'Boolean'>
