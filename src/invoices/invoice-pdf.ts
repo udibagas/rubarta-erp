@@ -17,7 +17,7 @@ const DEFAULT_COMPANY = {
 
 const DEFAULT_BANK = {
   name: 'BANK MANDIRI',
-  bankOffice: 'KCP Pulo Gadung',
+  branch: 'KCP Pulo Gadung',
   accountName: 'PT. RUBARTA PRIMA ABADI',
   accountNumber: '1660 0075 2317 8',
 };
@@ -74,10 +74,10 @@ export function generateInvoicePdf(invoice: any): Promise<Buffer> {
   };
 
   const BANK = {
-    name: invoice.bank?.name ?? DEFAULT_BANK.name,
-    bankOffice: invoice.bank?.bankOffice ?? DEFAULT_BANK.bankOffice,
-    accountName: invoice.bank?.accountName ?? DEFAULT_BANK.accountName,
-    accountNumber: invoice.bank?.accountNumber ?? DEFAULT_BANK.accountNumber,
+    name: invoice.bank?.name || DEFAULT_BANK.name,
+    branch: invoice.bank?.branch || DEFAULT_BANK.branch,
+    accountName: invoice.bank?.accountName || DEFAULT_BANK.accountName,
+    accountNumber: invoice.bank?.accountNumber || DEFAULT_BANK.accountNumber,
   };
 
   return new Promise((resolve, reject) => {
@@ -379,7 +379,7 @@ export function generateInvoicePdf(invoice: any): Promise<Buffer> {
         { width: commentsTextWidth },
       );
     drawCommentRow('Name', BANK.accountName, summaryY + 36);
-    drawCommentRow('Bank', `${BANK.name} - ${BANK.bankOffice}`, summaryY + 48);
+    drawCommentRow('Bank', `${BANK.name} - ${BANK.branch}`, summaryY + 48);
     drawCommentRow('A/C No', BANK.accountNumber, summaryY + 60, true);
     doc.text('Please Send the transfer slip to :', commentX, summaryY + 84, {
       width: commentsTextWidth,
