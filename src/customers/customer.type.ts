@@ -1,5 +1,6 @@
 import { ObjectType, Field, Int, Float } from '@nestjs/graphql';
 import { ContactType } from '../contacts/contact.type';
+import { BankType } from '../companies/company.type';
 
 @ObjectType('Customer')
 export class CustomerType {
@@ -47,4 +48,7 @@ export class CustomerType {
 
   @Field(() => [ContactType])
   Contacts?: ContactType[];
+
+  @Field(() => BankType, { nullable: true })
+  preferredBank?: BankType;
 }
