@@ -88,6 +88,7 @@ export type CustomerCountAggregateOutputType = {
   accountManagerId: number
   isActive: number
   deletedAt: number
+  preferredBank: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -156,6 +157,7 @@ export type CustomerCountAggregateInputType = {
   accountManagerId?: true
   isActive?: true
   deletedAt?: true
+  preferredBank?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -261,6 +263,7 @@ export type CustomerGroupByOutputType = {
   accountManagerId: number | null
   isActive: boolean
   deletedAt: Date | null
+  preferredBank: runtime.JsonValue | null
   createdAt: Date
   updatedAt: Date | null
   _count: CustomerCountAggregateOutputType | null
@@ -302,6 +305,7 @@ export type CustomerWhereInput = {
   accountManagerId?: Prisma.IntNullableFilter<"Customer"> | number | null
   isActive?: Prisma.BoolFilter<"Customer"> | boolean
   deletedAt?: Prisma.DateTimeNullableFilter<"Customer"> | Date | string | null
+  preferredBank?: Prisma.JsonNullableFilter<"Customer">
   createdAt?: Prisma.DateTimeFilter<"Customer"> | Date | string
   updatedAt?: Prisma.DateTimeNullableFilter<"Customer"> | Date | string | null
   accountManager?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
@@ -332,6 +336,7 @@ export type CustomerOrderByWithRelationInput = {
   accountManagerId?: Prisma.SortOrderInput | Prisma.SortOrder
   isActive?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  preferredBank?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   accountManager?: Prisma.UserOrderByWithRelationInput
@@ -365,6 +370,7 @@ export type CustomerWhereUniqueInput = Prisma.AtLeast<{
   accountManagerId?: Prisma.IntNullableFilter<"Customer"> | number | null
   isActive?: Prisma.BoolFilter<"Customer"> | boolean
   deletedAt?: Prisma.DateTimeNullableFilter<"Customer"> | Date | string | null
+  preferredBank?: Prisma.JsonNullableFilter<"Customer">
   createdAt?: Prisma.DateTimeFilter<"Customer"> | Date | string
   updatedAt?: Prisma.DateTimeNullableFilter<"Customer"> | Date | string | null
   accountManager?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
@@ -395,6 +401,7 @@ export type CustomerOrderByWithAggregationInput = {
   accountManagerId?: Prisma.SortOrderInput | Prisma.SortOrder
   isActive?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  preferredBank?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.CustomerCountOrderByAggregateInput
@@ -421,6 +428,7 @@ export type CustomerScalarWhereWithAggregatesInput = {
   accountManagerId?: Prisma.IntNullableWithAggregatesFilter<"Customer"> | number | null
   isActive?: Prisma.BoolWithAggregatesFilter<"Customer"> | boolean
   deletedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Customer"> | Date | string | null
+  preferredBank?: Prisma.JsonNullableWithAggregatesFilter<"Customer">
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Customer"> | Date | string
   updatedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Customer"> | Date | string | null
 }
@@ -437,6 +445,7 @@ export type CustomerCreateInput = {
   tags?: Prisma.CustomerCreatetagsInput | string[]
   isActive?: boolean
   deletedAt?: Date | string | null
+  preferredBank?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string | null
   accountManager?: Prisma.UserCreateNestedOneWithoutCustomersInput
@@ -467,6 +476,7 @@ export type CustomerUncheckedCreateInput = {
   accountManagerId?: number | null
   isActive?: boolean
   deletedAt?: Date | string | null
+  preferredBank?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string | null
   Invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutCustomerInput
@@ -494,6 +504,7 @@ export type CustomerUpdateInput = {
   tags?: Prisma.CustomerUpdatetagsInput | string[]
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  preferredBank?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   accountManager?: Prisma.UserUpdateOneWithoutCustomersNestedInput
@@ -524,6 +535,7 @@ export type CustomerUncheckedUpdateInput = {
   accountManagerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  preferredBank?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutCustomerNestedInput
@@ -553,6 +565,7 @@ export type CustomerCreateManyInput = {
   accountManagerId?: number | null
   isActive?: boolean
   deletedAt?: Date | string | null
+  preferredBank?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string | null
 }
@@ -569,6 +582,7 @@ export type CustomerUpdateManyMutationInput = {
   tags?: Prisma.CustomerUpdatetagsInput | string[]
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  preferredBank?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
@@ -587,6 +601,7 @@ export type CustomerUncheckedUpdateManyInput = {
   accountManagerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  preferredBank?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
@@ -623,6 +638,7 @@ export type CustomerCountOrderByAggregateInput = {
   accountManagerId?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
+  preferredBank?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -906,6 +922,7 @@ export type CustomerCreateWithoutLeadsInput = {
   tags?: Prisma.CustomerCreatetagsInput | string[]
   isActive?: boolean
   deletedAt?: Date | string | null
+  preferredBank?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string | null
   accountManager?: Prisma.UserCreateNestedOneWithoutCustomersInput
@@ -935,6 +952,7 @@ export type CustomerUncheckedCreateWithoutLeadsInput = {
   accountManagerId?: number | null
   isActive?: boolean
   deletedAt?: Date | string | null
+  preferredBank?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string | null
   Invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutCustomerInput
@@ -977,6 +995,7 @@ export type CustomerUpdateWithoutLeadsInput = {
   tags?: Prisma.CustomerUpdatetagsInput | string[]
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  preferredBank?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   accountManager?: Prisma.UserUpdateOneWithoutCustomersNestedInput
@@ -1006,6 +1025,7 @@ export type CustomerUncheckedUpdateWithoutLeadsInput = {
   accountManagerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  preferredBank?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutCustomerNestedInput
@@ -1032,6 +1052,7 @@ export type CustomerCreateWithoutOpportunitiesInput = {
   tags?: Prisma.CustomerCreatetagsInput | string[]
   isActive?: boolean
   deletedAt?: Date | string | null
+  preferredBank?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string | null
   accountManager?: Prisma.UserCreateNestedOneWithoutCustomersInput
@@ -1061,6 +1082,7 @@ export type CustomerUncheckedCreateWithoutOpportunitiesInput = {
   accountManagerId?: number | null
   isActive?: boolean
   deletedAt?: Date | string | null
+  preferredBank?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string | null
   Invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutCustomerInput
@@ -1103,6 +1125,7 @@ export type CustomerUpdateWithoutOpportunitiesInput = {
   tags?: Prisma.CustomerUpdatetagsInput | string[]
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  preferredBank?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   accountManager?: Prisma.UserUpdateOneWithoutCustomersNestedInput
@@ -1132,6 +1155,7 @@ export type CustomerUncheckedUpdateWithoutOpportunitiesInput = {
   accountManagerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  preferredBank?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutCustomerNestedInput
@@ -1158,6 +1182,7 @@ export type CustomerCreateWithoutTasksInput = {
   tags?: Prisma.CustomerCreatetagsInput | string[]
   isActive?: boolean
   deletedAt?: Date | string | null
+  preferredBank?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string | null
   accountManager?: Prisma.UserCreateNestedOneWithoutCustomersInput
@@ -1187,6 +1212,7 @@ export type CustomerUncheckedCreateWithoutTasksInput = {
   accountManagerId?: number | null
   isActive?: boolean
   deletedAt?: Date | string | null
+  preferredBank?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string | null
   Invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutCustomerInput
@@ -1229,6 +1255,7 @@ export type CustomerUpdateWithoutTasksInput = {
   tags?: Prisma.CustomerUpdatetagsInput | string[]
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  preferredBank?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   accountManager?: Prisma.UserUpdateOneWithoutCustomersNestedInput
@@ -1258,6 +1285,7 @@ export type CustomerUncheckedUpdateWithoutTasksInput = {
   accountManagerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  preferredBank?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutCustomerNestedInput
@@ -1284,6 +1312,7 @@ export type CustomerCreateWithoutCustomerNotesInput = {
   tags?: Prisma.CustomerCreatetagsInput | string[]
   isActive?: boolean
   deletedAt?: Date | string | null
+  preferredBank?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string | null
   accountManager?: Prisma.UserCreateNestedOneWithoutCustomersInput
@@ -1313,6 +1342,7 @@ export type CustomerUncheckedCreateWithoutCustomerNotesInput = {
   accountManagerId?: number | null
   isActive?: boolean
   deletedAt?: Date | string | null
+  preferredBank?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string | null
   Invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutCustomerInput
@@ -1355,6 +1385,7 @@ export type CustomerUpdateWithoutCustomerNotesInput = {
   tags?: Prisma.CustomerUpdatetagsInput | string[]
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  preferredBank?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   accountManager?: Prisma.UserUpdateOneWithoutCustomersNestedInput
@@ -1384,6 +1415,7 @@ export type CustomerUncheckedUpdateWithoutCustomerNotesInput = {
   accountManagerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  preferredBank?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutCustomerNestedInput
@@ -1410,6 +1442,7 @@ export type CustomerCreateWithoutCustomerFilesInput = {
   tags?: Prisma.CustomerCreatetagsInput | string[]
   isActive?: boolean
   deletedAt?: Date | string | null
+  preferredBank?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string | null
   accountManager?: Prisma.UserCreateNestedOneWithoutCustomersInput
@@ -1439,6 +1472,7 @@ export type CustomerUncheckedCreateWithoutCustomerFilesInput = {
   accountManagerId?: number | null
   isActive?: boolean
   deletedAt?: Date | string | null
+  preferredBank?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string | null
   Invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutCustomerInput
@@ -1481,6 +1515,7 @@ export type CustomerUpdateWithoutCustomerFilesInput = {
   tags?: Prisma.CustomerUpdatetagsInput | string[]
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  preferredBank?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   accountManager?: Prisma.UserUpdateOneWithoutCustomersNestedInput
@@ -1510,6 +1545,7 @@ export type CustomerUncheckedUpdateWithoutCustomerFilesInput = {
   accountManagerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  preferredBank?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutCustomerNestedInput
@@ -1536,6 +1572,7 @@ export type CustomerCreateWithoutVisitPlansInput = {
   tags?: Prisma.CustomerCreatetagsInput | string[]
   isActive?: boolean
   deletedAt?: Date | string | null
+  preferredBank?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string | null
   accountManager?: Prisma.UserCreateNestedOneWithoutCustomersInput
@@ -1565,6 +1602,7 @@ export type CustomerUncheckedCreateWithoutVisitPlansInput = {
   accountManagerId?: number | null
   isActive?: boolean
   deletedAt?: Date | string | null
+  preferredBank?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string | null
   Invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutCustomerInput
@@ -1607,6 +1645,7 @@ export type CustomerUpdateWithoutVisitPlansInput = {
   tags?: Prisma.CustomerUpdatetagsInput | string[]
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  preferredBank?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   accountManager?: Prisma.UserUpdateOneWithoutCustomersNestedInput
@@ -1636,6 +1675,7 @@ export type CustomerUncheckedUpdateWithoutVisitPlansInput = {
   accountManagerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  preferredBank?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutCustomerNestedInput
@@ -1662,6 +1702,7 @@ export type CustomerCreateWithoutContactsInput = {
   tags?: Prisma.CustomerCreatetagsInput | string[]
   isActive?: boolean
   deletedAt?: Date | string | null
+  preferredBank?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string | null
   accountManager?: Prisma.UserCreateNestedOneWithoutCustomersInput
@@ -1691,6 +1732,7 @@ export type CustomerUncheckedCreateWithoutContactsInput = {
   accountManagerId?: number | null
   isActive?: boolean
   deletedAt?: Date | string | null
+  preferredBank?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string | null
   Invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutCustomerInput
@@ -1733,6 +1775,7 @@ export type CustomerUpdateWithoutContactsInput = {
   tags?: Prisma.CustomerUpdatetagsInput | string[]
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  preferredBank?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   accountManager?: Prisma.UserUpdateOneWithoutCustomersNestedInput
@@ -1762,6 +1805,7 @@ export type CustomerUncheckedUpdateWithoutContactsInput = {
   accountManagerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  preferredBank?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutCustomerNestedInput
@@ -1788,6 +1832,7 @@ export type CustomerCreateWithoutDeliveryOrdersInput = {
   tags?: Prisma.CustomerCreatetagsInput | string[]
   isActive?: boolean
   deletedAt?: Date | string | null
+  preferredBank?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string | null
   accountManager?: Prisma.UserCreateNestedOneWithoutCustomersInput
@@ -1817,6 +1862,7 @@ export type CustomerUncheckedCreateWithoutDeliveryOrdersInput = {
   accountManagerId?: number | null
   isActive?: boolean
   deletedAt?: Date | string | null
+  preferredBank?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string | null
   Invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutCustomerInput
@@ -1859,6 +1905,7 @@ export type CustomerUpdateWithoutDeliveryOrdersInput = {
   tags?: Prisma.CustomerUpdatetagsInput | string[]
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  preferredBank?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   accountManager?: Prisma.UserUpdateOneWithoutCustomersNestedInput
@@ -1888,6 +1935,7 @@ export type CustomerUncheckedUpdateWithoutDeliveryOrdersInput = {
   accountManagerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  preferredBank?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutCustomerNestedInput
@@ -1914,6 +1962,7 @@ export type CustomerCreateWithoutInvoicesInput = {
   tags?: Prisma.CustomerCreatetagsInput | string[]
   isActive?: boolean
   deletedAt?: Date | string | null
+  preferredBank?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string | null
   accountManager?: Prisma.UserCreateNestedOneWithoutCustomersInput
@@ -1943,6 +1992,7 @@ export type CustomerUncheckedCreateWithoutInvoicesInput = {
   accountManagerId?: number | null
   isActive?: boolean
   deletedAt?: Date | string | null
+  preferredBank?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string | null
   Contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutCustomerInput
@@ -1985,6 +2035,7 @@ export type CustomerUpdateWithoutInvoicesInput = {
   tags?: Prisma.CustomerUpdatetagsInput | string[]
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  preferredBank?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   accountManager?: Prisma.UserUpdateOneWithoutCustomersNestedInput
@@ -2014,6 +2065,7 @@ export type CustomerUncheckedUpdateWithoutInvoicesInput = {
   accountManagerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  preferredBank?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Contacts?: Prisma.ContactUncheckedUpdateManyWithoutCustomerNestedInput
@@ -2040,6 +2092,7 @@ export type CustomerCreateWithoutQuotationsInput = {
   tags?: Prisma.CustomerCreatetagsInput | string[]
   isActive?: boolean
   deletedAt?: Date | string | null
+  preferredBank?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string | null
   accountManager?: Prisma.UserCreateNestedOneWithoutCustomersInput
@@ -2069,6 +2122,7 @@ export type CustomerUncheckedCreateWithoutQuotationsInput = {
   accountManagerId?: number | null
   isActive?: boolean
   deletedAt?: Date | string | null
+  preferredBank?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string | null
   Invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutCustomerInput
@@ -2111,6 +2165,7 @@ export type CustomerUpdateWithoutQuotationsInput = {
   tags?: Prisma.CustomerUpdatetagsInput | string[]
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  preferredBank?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   accountManager?: Prisma.UserUpdateOneWithoutCustomersNestedInput
@@ -2140,6 +2195,7 @@ export type CustomerUncheckedUpdateWithoutQuotationsInput = {
   accountManagerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  preferredBank?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutCustomerNestedInput
@@ -2166,6 +2222,7 @@ export type CustomerCreateWithoutSalesOrdersInput = {
   tags?: Prisma.CustomerCreatetagsInput | string[]
   isActive?: boolean
   deletedAt?: Date | string | null
+  preferredBank?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string | null
   accountManager?: Prisma.UserCreateNestedOneWithoutCustomersInput
@@ -2195,6 +2252,7 @@ export type CustomerUncheckedCreateWithoutSalesOrdersInput = {
   accountManagerId?: number | null
   isActive?: boolean
   deletedAt?: Date | string | null
+  preferredBank?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string | null
   Invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutCustomerInput
@@ -2237,6 +2295,7 @@ export type CustomerUpdateWithoutSalesOrdersInput = {
   tags?: Prisma.CustomerUpdatetagsInput | string[]
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  preferredBank?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   accountManager?: Prisma.UserUpdateOneWithoutCustomersNestedInput
@@ -2266,6 +2325,7 @@ export type CustomerUncheckedUpdateWithoutSalesOrdersInput = {
   accountManagerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  preferredBank?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutCustomerNestedInput
@@ -2292,6 +2352,7 @@ export type CustomerCreateWithoutAccountManagerInput = {
   tags?: Prisma.CustomerCreatetagsInput | string[]
   isActive?: boolean
   deletedAt?: Date | string | null
+  preferredBank?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string | null
   Invoices?: Prisma.InvoiceCreateNestedManyWithoutCustomerInput
@@ -2320,6 +2381,7 @@ export type CustomerUncheckedCreateWithoutAccountManagerInput = {
   tags?: Prisma.CustomerCreatetagsInput | string[]
   isActive?: boolean
   deletedAt?: Date | string | null
+  preferredBank?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string | null
   Invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutCustomerInput
@@ -2378,6 +2440,7 @@ export type CustomerScalarWhereInput = {
   accountManagerId?: Prisma.IntNullableFilter<"Customer"> | number | null
   isActive?: Prisma.BoolFilter<"Customer"> | boolean
   deletedAt?: Prisma.DateTimeNullableFilter<"Customer"> | Date | string | null
+  preferredBank?: Prisma.JsonNullableFilter<"Customer">
   createdAt?: Prisma.DateTimeFilter<"Customer"> | Date | string
   updatedAt?: Prisma.DateTimeNullableFilter<"Customer"> | Date | string | null
 }
@@ -2395,6 +2458,7 @@ export type CustomerCreateManyAccountManagerInput = {
   tags?: Prisma.CustomerCreatetagsInput | string[]
   isActive?: boolean
   deletedAt?: Date | string | null
+  preferredBank?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string | null
 }
@@ -2411,6 +2475,7 @@ export type CustomerUpdateWithoutAccountManagerInput = {
   tags?: Prisma.CustomerUpdatetagsInput | string[]
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  preferredBank?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Invoices?: Prisma.InvoiceUpdateManyWithoutCustomerNestedInput
@@ -2439,6 +2504,7 @@ export type CustomerUncheckedUpdateWithoutAccountManagerInput = {
   tags?: Prisma.CustomerUpdatetagsInput | string[]
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  preferredBank?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutCustomerNestedInput
@@ -2467,6 +2533,7 @@ export type CustomerUncheckedUpdateManyWithoutAccountManagerInput = {
   tags?: Prisma.CustomerUpdatetagsInput | string[]
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  preferredBank?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
@@ -2606,6 +2673,7 @@ export type CustomerSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   accountManagerId?: boolean
   isActive?: boolean
   deletedAt?: boolean
+  preferredBank?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   accountManager?: boolean | Prisma.Customer$accountManagerArgs<ExtArgs>
@@ -2637,6 +2705,7 @@ export type CustomerSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
   accountManagerId?: boolean
   isActive?: boolean
   deletedAt?: boolean
+  preferredBank?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   accountManager?: boolean | Prisma.Customer$accountManagerArgs<ExtArgs>
@@ -2656,6 +2725,7 @@ export type CustomerSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
   accountManagerId?: boolean
   isActive?: boolean
   deletedAt?: boolean
+  preferredBank?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   accountManager?: boolean | Prisma.Customer$accountManagerArgs<ExtArgs>
@@ -2675,11 +2745,12 @@ export type CustomerSelectScalar = {
   accountManagerId?: boolean
   isActive?: boolean
   deletedAt?: boolean
+  preferredBank?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type CustomerOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "address" | "phone" | "email" | "website" | "industry" | "employeeCount" | "revenue" | "tags" | "accountManagerId" | "isActive" | "deletedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["customer"]>
+export type CustomerOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "address" | "phone" | "email" | "website" | "industry" | "employeeCount" | "revenue" | "tags" | "accountManagerId" | "isActive" | "deletedAt" | "preferredBank" | "createdAt" | "updatedAt", ExtArgs["result"]["customer"]>
 export type CustomerInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   accountManager?: boolean | Prisma.Customer$accountManagerArgs<ExtArgs>
   Invoices?: boolean | Prisma.Customer$InvoicesArgs<ExtArgs>
@@ -2732,6 +2803,7 @@ export type $CustomerPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     accountManagerId: number | null
     isActive: boolean
     deletedAt: Date | null
+    preferredBank: runtime.JsonValue | null
     createdAt: Date
     updatedAt: Date | null
   }, ExtArgs["result"]["customer"]>
@@ -3182,6 +3254,7 @@ export interface CustomerFieldRefs {
   readonly accountManagerId: Prisma.FieldRef<"Customer", 'Int'>
   readonly isActive: Prisma.FieldRef<"Customer", 'Boolean'>
   readonly deletedAt: Prisma.FieldRef<"Customer", 'DateTime'>
+  readonly preferredBank: Prisma.FieldRef<"Customer", 'Json'>
   readonly createdAt: Prisma.FieldRef<"Customer", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Customer", 'DateTime'>
 }

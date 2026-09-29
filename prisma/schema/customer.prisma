@@ -12,6 +12,7 @@ model Customer {
   accountManagerId Int?
   isActive         Boolean   @default(true)
   deletedAt        DateTime? @db.Timestamp()
+  preferredBank    Json?
 
   // Timestamps
   createdAt DateTime  @default(now())

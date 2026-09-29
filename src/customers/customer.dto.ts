@@ -10,7 +10,9 @@ import {
   MaxLength,
   IsUrl,
   IsNumberString,
+  IsObject,
 } from 'class-validator';
+import { JsonObject } from '@prisma/client/runtime/client';
 
 export class ContactDto {
   @ApiProperty({ example: 'John Doe' })
@@ -112,6 +114,11 @@ export class CreateCustomerDto {
   @IsOptional()
   @IsArray()
   Contacts?: ContactDto[];
+
+  @ApiProperty({ type: Object })
+  @IsOptional()
+  @IsObject()
+  preferredBank?: JsonObject;
 }
 
 export class UpdateCustomerDto extends PartialType(CreateCustomerDto) {}

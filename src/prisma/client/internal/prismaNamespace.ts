@@ -3712,6 +3712,7 @@ export const CustomerScalarFieldEnum = {
   accountManagerId: 'accountManagerId',
   isActive: 'isActive',
   deletedAt: 'deletedAt',
+  preferredBank: 'preferredBank',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
