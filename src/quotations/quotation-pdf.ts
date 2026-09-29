@@ -243,8 +243,14 @@ export function generateQuotationPdf(quotation: any): Promise<Buffer> {
       {
         property: 'name',
         label: 'DESCRIPTION',
-        width: contentWidth - 30 - 80 - 45 - 90 - 90,
+        width: contentWidth - 30 - 80 - 45 - 45 - 90 - 90,
         align: 'left' as const,
+      },
+      {
+        property: 'moq',
+        label: 'MOQ',
+        width: 45,
+        align: 'center' as const,
       },
       {
         property: 'quantity',
@@ -273,6 +279,7 @@ export function generateQuotationPdf(quotation: any): Promise<Buffer> {
           no: String(index + 1),
           partNumber: item.partNumber || '-',
           name: item.name,
+          moq: String(item.moq),
           quantity: String(item.quantity),
           unitPrice: formatAmount(item.unitPrice),
           totalPrice: formatAmount(item.totalPrice),
