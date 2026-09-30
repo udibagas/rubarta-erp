@@ -46,6 +46,16 @@ export class TasksController {
     return this.tasksService.summary(query);
   }
 
+  @Get('draft-documents')
+  @ApiOperation({
+    summary:
+      'Get all Draft documents (Nkp, Invoice, Sales Order, Quotation, Purchase Order, Delivery Order, Goods Receipt)',
+  })
+  @ApiOkResponse({ description: 'List of draft documents' })
+  draftDocuments() {
+    return this.tasksService.getDraftDocuments();
+  }
+
   @Get(':id')
   @ApiOperation({ summary: 'Get task by ID' })
   @ApiOkResponse({ description: 'Task details' })
