@@ -102,15 +102,131 @@ export class ApprovalService {
         items: { some: { userId, status: null } },
       },
       include: {
-        items: { include: { user: true }, orderBy: { order: 'asc' } },
+        items: {
+          include: {
+            user: { select: { id: true, name: true, email: true } },
+          },
+          orderBy: { order: 'asc' },
+        },
       },
       orderBy: { createdAt: 'desc' },
     });
 
-    return approvals.filter((approval) => {
+    const pendingApprovals = approvals.filter((approval) => {
       const currentItem = approval.items.find((item) => !item.status);
       return currentItem?.userId === userId;
     });
+
+    const documentNumbers = new Map<string, string | null>();
+    const approvalTypes = [
+      ...new Set(pendingApprovals.map((approval) => approval.approvalType)),
+    ];
+
+    await Promise.all(
+      approvalTypes.map(async (type) => {
+        const moduleIds = [
+          ...new Set(
+            pendingApprovals
+              .filter((approval) => approval.approvalType === type)
+              .map((approval) => approval.moduleId),
+          ),
+        ];
+
+        let documents: { id: number; number: string | null }[] = [];
+
+        switch (type) {
+          case ApprovalType.NKP:
+            documents = await this.prisma.nkp.findMany({
+              where: { id: { in: moduleIds } },
+              select: { id: true, number: true },
+            });
+            break;
+          case ApprovalType.QUOTATION:
+            documents = await this.prisma.quotation.findMany({
+              where: { id: { in: moduleIds } },
+              select: { id: true, number: true },
+            });
+            break;
+          case ApprovalType.SALES_ORDER:
+            documents = await this.prisma.salesOrder.findMany({
+              where: { id: { in: moduleIds } },
+              select: { id: true, number: true },
+            });
+            break;
+          case ApprovalType.PURCHASE_ORDER:
+            documents = await this.prisma.purchaseOrder.findMany({
+              where: { id: { in: moduleIds } },
+              select: { id: true, number: true },
+            });
+            break;
+          case ApprovalType.INVOICE:
+            documents = await this.prisma.invoice.findMany({
+              where: { id: { in: moduleIds } },
+              select: { id: true, number: true },
+            });
+            break;
+        }
+
+        for (const document of documents) {
+          documentNumbers.set(`${type}:${document.id}`, document.number);
+        }
+      }),
+    );
+
+    const genericPendingApprovals = pendingApprovals.map((approval) => ({
+      ...approval,
+      documentNumber:
+        documentNumbers.get(`${approval.approvalType}:${approval.moduleId}`) ??
+        null,
+    }));
+
+    const nkpApprovals =
+      !approvalType || approvalType === ApprovalType.NKP
+        ? await this.prisma.nkpApproval.findMany({
+            where: { userId, approvalStatus: null },
+            include: {
+              Nkp: {
+                select: {
+                  id: true,
+                  number: true,
+                  createdAt: true,
+                  updatedAt: true,
+                  NkpApproval: {
+                    orderBy: { level: 'asc' },
+                    include: {
+                      User: { select: { id: true, name: true, email: true } },
+                    },
+                  },
+                },
+              },
+            },
+            orderBy: { createdAt: 'desc' },
+          })
+        : [];
+
+    const nkpPendingApprovals = nkpApprovals.map(({ Nkp }) => ({
+      id: Nkp.id,
+      approvalType: ApprovalType.NKP,
+      moduleId: Nkp.id,
+      status: null,
+      createdAt: Nkp.createdAt,
+      updatedAt: Nkp.updatedAt,
+      documentNumber: Nkp.number,
+      items: Nkp.NkpApproval.map((item) => ({
+        id: item.id,
+        approvalId: Nkp.id,
+        order: item.level,
+        userId: item.userId,
+        status: item.approvalStatus,
+        remarks: item.note,
+        createdAt: item.createdAt,
+        updatedAt: item.updatedAt,
+        approvalActionType: item.approvalActionType,
+        user: item.User,
+      })),
+    }));
+
+    return [...genericPendingApprovals, ...nkpPendingApprovals];
   }
 
   async approve(
