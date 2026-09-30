@@ -223,7 +223,7 @@ export class TasksService {
         },
       }),
       this.prisma.salesOrder.findMany({
-        where: { status: 'Draft' },
+        where: { status: 'Draft', deletedAt: null },
         select: {
           id: true,
           date: true,
@@ -234,7 +234,7 @@ export class TasksService {
         },
       }),
       this.prisma.quotation.findMany({
-        where: { status: 'Draft' },
+        where: { status: 'Draft', deletedAt: null },
         select: {
           id: true,
           date: true,
@@ -245,7 +245,7 @@ export class TasksService {
         },
       }),
       this.prisma.purchaseOrder.findMany({
-        where: { status: 'Draft' },
+        where: { status: 'Draft', deletedAt: null },
         select: {
           id: true,
           date: true,
@@ -266,7 +266,7 @@ export class TasksService {
         },
       }),
       this.prisma.goodsReceipt.findMany({
-        where: { status: 'Draft' },
+        where: { status: 'Draft', deletedAt: null },
         select: {
           id: true,
           date: true,
