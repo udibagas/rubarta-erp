@@ -66,19 +66,6 @@ enum InteractionType {
   Other
 }
 
-enum VisitPlanStatus {
-  Planned
-  InProgress
-  Completed
-  Cancelled
-  Rescheduled
-}
-
-enum VisitType {
-  Online
-  Offline
-}
-
 model Lead {
   id Int @id @default(autoincrement())
 
@@ -265,47 +252,4 @@ model CustomerFile {
   @@index([customerId])
   @@index([deletedAt])
   @@map("CustomerFiles")
-}
-
-model VisitPlan {
-  id                Int             @id @default(autoincrement())
-  customerId        Int
-  userId            Int
-  companyId         Int
-  contactId         Int? // Optional reference to Contact
-  title             String          @db.VarChar(200)
-  purpose           String?         @db.Text
-  visitType         VisitType       @default(Offline)
-  meetingUrl        String?         @db.VarChar(500) // URL for online meetings
-  scheduledDate     DateTime
-  scheduledTime     String?         @db.VarChar(10) // e.g., "09:00"
-  estimatedDuration Int?            @db.Integer // Duration in minutes
-  status            VisitPlanStatus @default(Planned)
-  actualVisitDate   DateTime?       @db.Timestamp()
-  outcome           String?         @db.Text
-  cancelReason      String?         @db.Text
-  notes             String?         @db.Text
-  address           String?         @db.Text
-  contactPerson     String?         @db.VarChar(200) // Fallback if no contactId
-  contactPhone      String?         @db.VarChar(50) // Fallback if no contactId
-  deletedAt         DateTime?       @db.Timestamp()
-
-  // Timestamps
-  createdAt DateTime  @default(now())
-  updatedAt DateTime? @updatedAt
-
-  // Relationships
-  Customer Customer @relation(fields: [customerId], references: [id], onDelete: Cascade)
-  User     User     @relation(fields: [userId], references: [id])
-  Company  Company  @relation(fields: [companyId], references: [id])
-  Contact  Contact? @relation(fields: [contactId], references: [id])
-
-  @@index([customerId])
-  @@index([userId])
-  @@index([companyId])
-  @@index([contactId])
-  @@index([status])
-  @@index([scheduledDate])
-  @@index([deletedAt])
-  @@map("VisitPlans")
 }
