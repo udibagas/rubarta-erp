@@ -1,29 +1,15 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { CreateVisitPlanDto } from './dto/create-visit-plan.dto';
-import { UpdateVisitPlanDto } from './dto/update-visit-plan.dto';
+import {
+  CreateVisitPlanDto,
+  QueryVisitPlanDto,
+  UpdateVisitPlanDto,
+} from './visit-plan.dto';
 import { PrismaService } from '../prisma/prisma.service';
 import { Prisma, VisitPlanStatus, VisitType } from '../prisma/client/client';
 import dayjs from 'dayjs';
 import * as ExcelJS from 'exceljs';
 import PDFDocument from 'pdfkit';
 import { createPdfDocumentWithTables } from 'pdfkit-table';
-
-export interface VisitPlanQueryParams {
-  page?: number;
-  pageSize?: number;
-  keyword?: string;
-  companyId?: number | string | number[] | string[];
-  userId?: number | number[] | string | string[];
-  customerId?: number | string | number[] | string[];
-  status?: VisitPlanStatus | VisitPlanStatus[];
-  visitType?: VisitType | VisitType[];
-  startDate?: Date;
-  endDate?: Date;
-  year?: number;
-  month?: number;
-  sortBy?: string;
-  sortOrder?: 'asc' | 'desc';
-}
 
 @Injectable()
 export class VisitPlansService {
@@ -51,7 +37,7 @@ export class VisitPlansService {
     });
   }
 
-  private buildWhere(params: VisitPlanQueryParams): Prisma.VisitPlanWhereInput {
+  private buildWhere(params: QueryVisitPlanDto): Prisma.VisitPlanWhereInput {
     const where: Prisma.VisitPlanWhereInput = {
       deletedAt: null,
     };
@@ -171,7 +157,7 @@ export class VisitPlansService {
     return where;
   }
 
-  async findAll(params: VisitPlanQueryParams) {
+  async findAll(params: QueryVisitPlanDto) {
     const { page = 1, pageSize = 10 } = params;
     const where = this.buildWhere(params);
 
@@ -204,7 +190,7 @@ export class VisitPlansService {
     return { data, page, total };
   }
 
-  private async findAllForExport(params: VisitPlanQueryParams) {
+  private async findAllForExport(params: QueryVisitPlanDto) {
     const where = this.buildWhere(params);
 
     return this.prisma.visitPlan.findMany({
@@ -230,7 +216,7 @@ export class VisitPlansService {
     return visitPlan.address || '-';
   }
 
-  async exportToPdf(params: VisitPlanQueryParams): Promise<Buffer> {
+  async exportToPdf(params: QueryVisitPlanDto): Promise<Buffer> {
     const visitPlans = await this.findAllForExport(params);
     const PDFDocumentWithTables = createPdfDocumentWithTables(PDFDocument);
     const doc = new PDFDocumentWithTables({
@@ -295,7 +281,7 @@ export class VisitPlansService {
     });
   }
 
-  async exportToExcel(params: VisitPlanQueryParams): Promise<Buffer> {
+  async exportToExcel(params: QueryVisitPlanDto): Promise<Buffer> {
     const visitPlans = await this.findAllForExport(params);
     const workbook = new ExcelJS.Workbook();
     const worksheet = workbook.addWorksheet('Visit Plans');

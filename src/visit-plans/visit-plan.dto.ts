@@ -1,13 +1,19 @@
-import { VisitPlanStatus, VisitType } from '../../prisma/client/client';
+import { VisitPlanStatus, VisitType } from '../prisma/client/client';
+import { Type, Transform } from 'class-transformer';
 import {
+  IsDate,
   IsEnum,
+  IsIn,
   IsInt,
   IsNotEmpty,
   IsOptional,
   IsString,
   IsUrl,
+  Max,
+  Min,
   ValidateIf,
 } from 'class-validator';
+import { PartialType } from '@nestjs/mapped-types';
 
 export class CreateVisitPlanDto {
   userId: number;
@@ -82,4 +88,72 @@ export class CreateVisitPlanDto {
   @IsOptional()
   @IsString()
   contactPhone?: string;
+}
+
+export class UpdateVisitPlanDto extends PartialType(CreateVisitPlanDto) {}
+
+export class QueryVisitPlanDto {
+  @IsOptional()
+  @Type(() => Number)
+  @IsInt()
+  @Min(1)
+  page?: number;
+
+  @IsOptional()
+  @Type(() => Number)
+  @IsInt()
+  @Min(1)
+  pageSize?: number;
+
+  @IsOptional()
+  companyId?: number | string | number[] | string[];
+
+  @IsOptional()
+  customerId?: number | string | number[] | string[];
+
+  @IsOptional()
+  userId?: number | string | number[] | string[];
+
+  @IsOptional()
+  @IsEnum(VisitPlanStatus, { each: true })
+  status?: VisitPlanStatus | VisitPlanStatus[];
+
+  @IsOptional()
+  @IsEnum(VisitType, { each: true })
+  visitType?: VisitType | VisitType[];
+
+  @IsOptional()
+  @Transform(({ value }) => (value ? new Date(value) : undefined))
+  @IsDate()
+  startDate?: Date;
+
+  @IsOptional()
+  @Transform(({ value }) => (value ? new Date(value) : undefined))
+  @IsDate()
+  endDate?: Date;
+
+  @IsOptional()
+  @IsString()
+  keyword?: string;
+
+  @IsOptional()
+  @Type(() => Number)
+  @IsInt()
+  @Min(1)
+  year?: number;
+
+  @IsOptional()
+  @Type(() => Number)
+  @IsInt()
+  @Min(1)
+  @Max(12)
+  month?: number;
+
+  @IsOptional()
+  @IsString()
+  sortBy?: string;
+
+  @IsOptional()
+  @IsIn(['asc', 'desc'])
+  sortOrder?: 'asc' | 'desc';
 }
