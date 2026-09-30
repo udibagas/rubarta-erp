@@ -323,80 +323,134 @@ export class CrmDashboardService {
    * Get recent activities (leads, opportunities, quotations, orders, tasks, interactions)
    */
   async getRecentActivities(limit = 20): Promise<RecentActivityDto[]> {
-    const [leads, opportunities, quotations, orders, tasks, interactions] =
-      await Promise.all([
-        this.prisma.lead.findMany({
-          where: { deletedAt: null },
-          take: 10,
-          orderBy: { createdAt: 'desc' },
-          select: {
-            createdAt: true,
-            Customer: { select: { id: true, name: true } },
-            User: { select: { id: true, name: true } },
+    const [
+      leads,
+      opportunities,
+      quotations,
+      orders,
+      tasks,
+      interactions,
+      invoices,
+      purchaseOrders,
+      goodsReceipts,
+      deliveryOrders,
+    ] = await Promise.all([
+      this.prisma.lead.findMany({
+        where: { deletedAt: null },
+        take: 10,
+        orderBy: { createdAt: 'desc' },
+        select: {
+          createdAt: true,
+          Customer: { select: { id: true, name: true } },
+          User: { select: { id: true, name: true } },
+        },
+      }),
+      this.prisma.opportunity.findMany({
+        where: { deletedAt: null },
+        take: 10,
+        orderBy: { createdAt: 'desc' },
+        select: {
+          name: true,
+          createdAt: true,
+          Customer: { select: { id: true, name: true } },
+          User: { select: { id: true, name: true } },
+        },
+      }),
+      this.prisma.quotation.findMany({
+        where: { deletedAt: null },
+        take: 10,
+        orderBy: { createdAt: 'desc' },
+        select: {
+          number: true,
+          createdAt: true,
+          Customer: { select: { id: true, name: true } },
+          User: { select: { id: true, name: true } },
+        },
+      }),
+      this.prisma.salesOrder.findMany({
+        where: { deletedAt: null },
+        take: 10,
+        orderBy: { createdAt: 'desc' },
+        select: {
+          number: true,
+          createdAt: true,
+          Customer: { select: { id: true, name: true } },
+          User: { select: { id: true, name: true } },
+        },
+      }),
+      this.prisma.task.findMany({
+        where: { deletedAt: null },
+        take: 10,
+        orderBy: { createdAt: 'desc' },
+        select: {
+          title: true,
+          createdAt: true,
+          customerId: true,
+          Customer: { select: { id: true, name: true } },
+          User: { select: { id: true, name: true } },
+        },
+      }),
+      this.prisma.interaction.findMany({
+        where: { deletedAt: null },
+        take: 10,
+        orderBy: { date: 'desc' },
+        select: {
+          type: true,
+          subject: true,
+          date: true,
+          Lead: {
+            select: { Customer: { select: { id: true, name: true } } },
           },
-        }),
-        this.prisma.opportunity.findMany({
-          where: { deletedAt: null },
-          take: 10,
-          orderBy: { createdAt: 'desc' },
-          select: {
-            name: true,
-            createdAt: true,
-            Customer: { select: { id: true, name: true } },
-            User: { select: { id: true, name: true } },
+          Opportunity: {
+            select: { Customer: { select: { id: true, name: true } } },
           },
-        }),
-        this.prisma.quotation.findMany({
-          where: { deletedAt: null },
-          take: 10,
-          orderBy: { createdAt: 'desc' },
-          select: {
-            number: true,
-            createdAt: true,
-            Customer: { select: { id: true, name: true } },
-            User: { select: { id: true, name: true } },
-          },
-        }),
-        this.prisma.salesOrder.findMany({
-          where: { deletedAt: null },
-          take: 10,
-          orderBy: { createdAt: 'desc' },
-          select: {
-            number: true,
-            createdAt: true,
-            Customer: { select: { id: true, name: true } },
-          },
-        }),
-        this.prisma.task.findMany({
-          where: { deletedAt: null },
-          take: 10,
-          orderBy: { createdAt: 'desc' },
-          select: {
-            title: true,
-            createdAt: true,
-            customerId: true,
-            Customer: { select: { id: true, name: true } },
-            User: { select: { id: true, name: true } },
-          },
-        }),
-        this.prisma.interaction.findMany({
-          where: { deletedAt: null },
-          take: 10,
-          orderBy: { date: 'desc' },
-          select: {
-            type: true,
-            subject: true,
-            date: true,
-            Lead: {
-              select: { Customer: { select: { id: true, name: true } } },
-            },
-            Opportunity: {
-              select: { Customer: { select: { id: true, name: true } } },
-            },
-            User: { select: { id: true, name: true } },
-          },
-        }),
-      ]);
+          User: { select: { id: true, name: true } },
+        },
+      }),
+
+      this.prisma.invoice.findMany({
+        take: 10,
+        orderBy: { createdAt: 'desc' },
+        select: {
+          number: true,
+          createdAt: true,
+          Customer: { select: { id: true, name: true } },
+          User: { select: { id: true, name: true } },
+        },
+      }),
+      this.prisma.purchaseOrder.findMany({
+        where: { deletedAt: null },
+        take: 10,
+        orderBy: { createdAt: 'desc' },
+        select: {
+          number: true,
+          createdAt: true,
+          Supplier: { select: { id: true, name: true } },
+          User: { select: { id: true, name: true } },
+        },
+      }),
+      this.prisma.goodsReceipt.findMany({
+        where: { deletedAt: null },
+        take: 10,
+        orderBy: { createdAt: 'desc' },
+        select: {
+          number: true,
+          createdAt: true,
+          Supplier: { select: { id: true, name: true } },
+          User: { select: { id: true, name: true } },
+        },
+      }),
+      this.prisma.deliveryOrder.findMany({
+        take: 10,
+        orderBy: { createdAt: 'desc' },
+        select: {
+          number: true,
+          createdAt: true,
+          Customer: { select: { id: true, name: true } },
+          User: { select: { id: true, name: true } },
+        },
+      }),
+    ]);
 
     const activities: RecentActivityDto[] = [];
 
@@ -475,6 +529,54 @@ export class CrmDashboardService {
         userId: interaction.User.id,
         userName: interaction.User.name,
         date: interaction.date,
+      });
+    });
+
+    invoices.forEach((invoice) => {
+      activities.push({
+        type: 'Invoice',
+        description: `Invoice created: ${invoice.number}`,
+        customerId: invoice.Customer.id,
+        customerName: invoice.Customer.name,
+        userId: invoice.User.id,
+        userName: invoice.User.name,
+        date: invoice.createdAt,
+      });
+    });
+
+    purchaseOrders.forEach((purchaseOrder) => {
+      activities.push({
+        type: 'Purchase Order',
+        description: `Purchase order created: ${purchaseOrder.number}`,
+        customerId: purchaseOrder.Supplier?.id || null,
+        customerName: purchaseOrder.Supplier?.name || null,
+        userId: purchaseOrder.User.id,
+        userName: purchaseOrder.User.name,
+        date: purchaseOrder.createdAt,
+      });
+    });
+
+    goodsReceipts.forEach((goodsReceipt) => {
+      activities.push({
+        type: 'Goods Receipt',
+        description: `Goods receipt created: ${goodsReceipt.number}`,
+        customerId: goodsReceipt.Supplier.id,
+        customerName: goodsReceipt.Supplier.name,
+        userId: goodsReceipt.User.id,
+        userName: goodsReceipt.User.name,
+        date: goodsReceipt.createdAt,
+      });
+    });
+
+    deliveryOrders.forEach((deliveryOrder) => {
+      activities.push({
+        type: 'Delivery Order',
+        description: `Delivery order created: ${deliveryOrder.number}`,
+        customerId: deliveryOrder.Customer.id,
+        customerName: deliveryOrder.Customer.name,
+        userId: deliveryOrder.User.id,
+        userName: deliveryOrder.User.name,
+        date: deliveryOrder.createdAt,
       });
     });
 
