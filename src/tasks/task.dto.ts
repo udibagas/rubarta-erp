@@ -104,8 +104,8 @@ export class QueryTaskDto {
 
   @ApiProperty({ required: false, enum: TaskStatus })
   @IsOptional()
-  @IsEnum(TaskStatus)
-  status?: TaskStatus;
+  @IsEnum(TaskStatus, { each: true })
+  status?: TaskStatus | TaskStatus[];
 
   @ApiProperty({ required: false, enum: TaskPriority })
   @IsOptional()

@@ -34,7 +34,11 @@ export class TasksService {
     }
 
     if (query.status) {
-      where.status = query.status;
+      if (Array.isArray(query.status)) {
+        where.status = { in: query.status };
+      } else {
+        where.status = query.status;
+      }
     }
 
     if (query.priority) {
@@ -146,7 +150,11 @@ export class TasksService {
     }
 
     if (query.status) {
-      where.status = query.status;
+      if (Array.isArray(query.status)) {
+        where.status = { in: query.status };
+      } else {
+        where.status = query.status;
+      }
     }
 
     if (query.priority) {
