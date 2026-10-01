@@ -148,13 +148,10 @@ export class GoodsReceiptsController {
   @ApiOperation({ summary: 'Preview good receipt PDF' })
   async preview(@Param('id', ParseIntPipe) id: number, @Res() res: Response) {
     const goodsReceipt = await this.goodsReceiptsService.findOne(id);
-    const filename = [goodsReceipt.number ?? String(id)]
-      .filter(Boolean)
-      .join('-');
     const pdfBuffer = await this.goodsReceiptsService.preview(id);
     res.set({
       'Content-Type': 'application/pdf',
-      'Content-Disposition': `inline; filename="${filename}.pdf"`,
+      'Content-Disposition': `inline; filename="${goodsReceipt.number}.pdf"`,
       'Content-Length': pdfBuffer.length,
     });
     res.end(pdfBuffer);

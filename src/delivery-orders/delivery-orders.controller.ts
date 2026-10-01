@@ -98,9 +98,7 @@ export class DeliveryOrdersController {
     const filename = [
       deliveryOrder.number ?? String(id),
       deliveryOrder.referenceNumber,
-    ]
-      .filter(Boolean)
-      .join('-');
+    ].join('_');
     const pdfBuffer = await this.deliveryOrdersService.preview(id);
     res.set({
       'Content-Type': 'application/pdf',

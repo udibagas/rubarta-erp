@@ -11,7 +11,6 @@ import {
   Res,
   Req,
   StreamableFile,
-  ParseEnumPipe,
 } from '@nestjs/common';
 import {
   ApiBearerAuth,
@@ -160,9 +159,7 @@ export class PurchaseOrdersController {
     const filename = [
       purchaseOrder.number ?? String(id),
       purchaseOrder.referenceNumber,
-    ]
-      .filter(Boolean)
-      .join('-');
+    ].join('_');
     const pdfBuffer = await this.purchaseOrdersService.preview(id);
     res.set({
       'Content-Type': 'application/pdf',

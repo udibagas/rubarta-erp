@@ -213,9 +213,7 @@ export class SalesOrdersController {
     const filename = [
       salesOrder.number ?? String(id),
       salesOrder.referenceNumber,
-    ]
-      .filter(Boolean)
-      .join('-');
+    ].join('_');
     const pdfBuffer = await this.salesOrdersService.preview(id);
 
     res.set({
