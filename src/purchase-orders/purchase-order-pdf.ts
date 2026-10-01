@@ -229,7 +229,7 @@ export function generatePurchaseOrderPdf(order: any): Promise<Buffer> {
         .fontSize(8)
         .font('Helvetica')
         .text(
-          order.shippingAddress || '',
+          order.shippingAddress || order.Company?.address || '-',
           deliveryAddressX,
           132 + companyNameHeight + 2,
           {
