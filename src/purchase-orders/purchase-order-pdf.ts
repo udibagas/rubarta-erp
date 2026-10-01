@@ -206,7 +206,7 @@ export function generatePurchaseOrderPdf(order: any): Promise<Buffer> {
         });
 
       const deliveryAddressX = left + width / 3;
-      const companyName = order.Company?.name || '-';
+      const companyName = order.warehouse || order.Company?.name || '-';
       const deliveryColumnWidth = width / 3 - 30;
 
       doc
