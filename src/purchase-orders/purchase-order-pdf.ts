@@ -167,7 +167,7 @@ export function generatePurchaseOrderPdf(order: any): Promise<Buffer> {
             property: 'property',
             padding: [0, 0, 0, 5],
           },
-          { label: 'Value', width: 110, property: 'value' },
+          { label: 'Value', width: 120, property: 'value' },
         ],
         data: infoRows.map(([label, value]) => ({
           property: `bold:${label}`,
