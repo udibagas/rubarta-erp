@@ -47,6 +47,9 @@ export class MaterialsService {
         { partNumber: { contains: query.keyword, mode: 'insensitive' } },
         { name: { contains: query.keyword, mode: 'insensitive' } },
         { description: { contains: query.keyword, mode: 'insensitive' } },
+        {
+          Supplier: { name: { contains: query.keyword, mode: 'insensitive' } },
+        },
       ];
     }
 
