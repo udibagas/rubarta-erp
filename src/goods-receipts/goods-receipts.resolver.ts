@@ -23,8 +23,8 @@ export class GoodsReceiptsResolver {
     salesOrderId?: number,
     @Args('supplierId', { type: () => Int, nullable: true })
     supplierId?: number,
-    @Args('status', { type: () => GoodsReceiptStatus, nullable: true })
-    status?: GoodsReceiptStatus,
+    @Args('status', { type: () => [GoodsReceiptStatus], nullable: true })
+    status?: GoodsReceiptStatus[],
   ) {
     const where: Prisma.GoodsReceiptWhereInput = { deletedAt: null };
     if (keyword) {
@@ -41,7 +41,7 @@ export class GoodsReceiptsResolver {
     if (purchaseOrderId) where.purchaseOrderId = purchaseOrderId;
     if (salesOrderId) where.PurchaseOrder = { salesOrderId };
     if (supplierId) where.supplierId = supplierId;
-    if (status) where.status = status;
+    if (status) where.status = { in: status };
 
     return this.prisma.goodsReceipt.findMany({
       where,
