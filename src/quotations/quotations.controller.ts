@@ -105,10 +105,11 @@ export class QuotationsController {
   @ApiOperation({ summary: 'Preview quotation PDF' })
   @ApiOkResponse({ description: 'Quotation PDF' })
   async preview(@Param('id', ParseIntPipe) id: number, @Res() res: Response) {
+    const quotation = await this.quotationsService.findOne(id);
     const pdfBuffer = await this.quotationsService.preview(id);
     res.set({
       'Content-Type': 'application/pdf',
-      'Content-Disposition': `inline; filename="quotation-${id}.pdf"`,
+      'Content-Disposition': `inline; filename="${quotation.number}.pdf"`,
       'Content-Length': pdfBuffer.length,
     });
     res.end(pdfBuffer);

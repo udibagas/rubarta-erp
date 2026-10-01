@@ -85,10 +85,12 @@ export class InvoicesController {
 
   @Get(':id/preview')
   async preview(@Param('id', ParseIntPipe) id: number, @Res() res: Response) {
+    const invoice = await this.invoicesService.findOne(id);
+    const filename = `${invoice.number}-${invoice.referenceNumber}.pdf`;
     const pdfBuffer = await this.invoicesService.preview(id);
     res.set({
       'Content-Type': 'application/pdf',
-      'Content-Disposition': `inline; filename="invoice-${id}.pdf"`,
+      'Content-Disposition': `inline; filename="${filename}"`,
       'Content-Length': pdfBuffer.length,
     });
     res.end(pdfBuffer);

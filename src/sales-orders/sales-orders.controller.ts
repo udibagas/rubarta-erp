@@ -209,11 +209,18 @@ export class SalesOrdersController {
   @ApiOperation({ summary: 'Preview order PDF' })
   @ApiOkResponse({ description: 'Order PDF' })
   async preview(@Param('id', ParseIntPipe) id: number, @Res() res: Response) {
+    const salesOrder = await this.salesOrdersService.findOne(id);
+    const filename = [
+      salesOrder.number ?? String(id),
+      salesOrder.referenceNumber,
+    ]
+      .filter(Boolean)
+      .join('-');
     const pdfBuffer = await this.salesOrdersService.preview(id);
 
     res.set({
       'Content-Type': 'application/pdf',
-      'Content-Disposition': `inline; filename="sales-order-${id}.pdf"`,
+      'Content-Disposition': `inline; filename="${filename}.pdf"`,
       'Content-Length': pdfBuffer.length,
     });
 

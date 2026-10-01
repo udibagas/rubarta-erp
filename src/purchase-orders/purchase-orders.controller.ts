@@ -156,10 +156,17 @@ export class PurchaseOrdersController {
   @Get(':id/preview')
   @ApiOperation({ summary: 'Preview purchase order PDF' })
   async preview(@Param('id', ParseIntPipe) id: number, @Res() res: Response) {
+    const purchaseOrder = await this.purchaseOrdersService.findOne(id);
+    const filename = [
+      purchaseOrder.number ?? String(id),
+      purchaseOrder.referenceNumber,
+    ]
+      .filter(Boolean)
+      .join('-');
     const pdfBuffer = await this.purchaseOrdersService.preview(id);
     res.set({
       'Content-Type': 'application/pdf',
-      'Content-Disposition': `inline; filename="purchase-order-${id}.pdf"`,
+      'Content-Disposition': `inline; filename="${filename}.pdf"`,
       'Content-Length': pdfBuffer.length,
     });
     res.end(pdfBuffer);

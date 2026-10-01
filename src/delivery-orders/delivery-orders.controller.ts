@@ -94,10 +94,17 @@ export class DeliveryOrdersController {
   @Get(':id/preview')
   @ApiOperation({ summary: 'Preview delivery order PDF' })
   async preview(@Param('id', ParseIntPipe) id: number, @Res() res: Response) {
+    const deliveryOrder = await this.deliveryOrdersService.findOne(id);
+    const filename = [
+      deliveryOrder.number ?? String(id),
+      deliveryOrder.referenceNumber,
+    ]
+      .filter(Boolean)
+      .join('-');
     const pdfBuffer = await this.deliveryOrdersService.preview(id);
     res.set({
       'Content-Type': 'application/pdf',
-      'Content-Disposition': `inline; filename="delivery-order-${id}.pdf"`,
+      'Content-Disposition': `inline; filename="${filename}.pdf"`,
       'Content-Length': pdfBuffer.length,
     });
     res.end(pdfBuffer);
