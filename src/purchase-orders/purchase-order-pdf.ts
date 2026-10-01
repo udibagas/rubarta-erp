@@ -293,7 +293,6 @@ export function generatePurchaseOrderPdf(order: any): Promise<Buffer> {
       { y: contentTop, x: left, absolutePosition: true },
     );
 
-    doc.moveDown();
     const discountPct =
       order.discount && order.totalAmount
         ? Math.round((order.discount / order.totalAmount) * 100)
