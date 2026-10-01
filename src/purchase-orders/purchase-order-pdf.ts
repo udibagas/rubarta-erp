@@ -218,7 +218,7 @@ export function generatePurchaseOrderPdf(order: any): Promise<Buffer> {
         .fillColor('#000000')
         .fontSize(9)
         .font('Helvetica-Bold')
-        .text(companyName, deliveryAddressX, 132, {
+        .text(companyName.toUpperCase(), deliveryAddressX, 132, {
           width: deliveryColumnWidth,
         });
       const companyNameHeight = doc.heightOfString(companyName, {
