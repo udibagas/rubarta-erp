@@ -207,10 +207,15 @@ export function generatePurchaseOrderPdf(order: any): Promise<Buffer> {
         .text('Delivery Address', deliveryAddressX, 120);
       doc
         .fillColor('#000000')
+        .fontSize(9)
+        .font('Helvetica-Bold')
+        .text(order.Company?.name || '-', deliveryAddressX, 132);
+      doc
+        .fillColor('#000000')
         .fontSize(8)
         .font('Helvetica')
-        .text(order.shippingAddress || '', deliveryAddressX, 132, {
-          width: width / 3,
+        .text(order.shippingAddress || '', deliveryAddressX, 144, {
+          width: width / 3 - 30,
         });
 
       drawWatermark();
