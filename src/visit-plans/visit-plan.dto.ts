@@ -1,6 +1,7 @@
 import { VisitPlanStatus, VisitType } from '../prisma/client/client';
 import { Type, Transform } from 'class-transformer';
 import {
+  IsBoolean,
   IsDate,
   IsEnum,
   IsIn,
@@ -156,4 +157,8 @@ export class QueryVisitPlanDto {
   @IsOptional()
   @IsIn(['asc', 'desc'])
   sortOrder?: 'asc' | 'desc';
+
+  @IsOptional()
+  @IsIn(['true', 'false'])
+  upcoming?: string;
 }

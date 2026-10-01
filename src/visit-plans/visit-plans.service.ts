@@ -52,6 +52,7 @@ export class VisitPlansService {
       year,
       month,
       keyword,
+      upcoming,
     } = params;
 
     if (companyId) {
@@ -152,6 +153,16 @@ export class VisitPlansService {
           },
         },
       ];
+    }
+
+    if (upcoming == 'true') {
+      const now = new Date();
+      where.scheduledDate = {
+        gte: now,
+      };
+      where.scheduledTime = {
+        gte: now.toTimeString().split(' ')[0],
+      };
     }
 
     return where;
