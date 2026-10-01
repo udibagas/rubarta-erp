@@ -186,19 +186,28 @@ export function generatePurchaseOrderPdf(order: any): Promise<Buffer> {
         .fontSize(9)
         .font('Helvetica-Bold')
         .text('VENDOR', left, 120);
+      const supplierName = order.Supplier?.name || '-';
+      const vendorWidth = width / 3 - 10;
       doc
         .fillColor('#000000')
         .fontSize(9)
         .font('Helvetica-Bold')
-        .text(order.Supplier?.name || '-', left, 132);
+        .text(supplierName, left, 132, {
+          width: vendorWidth,
+        });
+      const supplierNameHeight = doc.heightOfString(supplierName, {
+        width: vendorWidth,
+      });
       doc
         .font('Helvetica')
         .fontSize(8)
-        .text(order.supplierAddress || '', left, 143, {
-          width: width / 3,
+        .text(order.supplierAddress || '', left, 132 + supplierNameHeight + 2, {
+          width: vendorWidth,
         });
 
       const deliveryAddressX = left + width / 3;
+      const companyName = order.Company?.name || '-';
+      const deliveryColumnWidth = width / 3 - 30;
 
       doc
         .fillColor(COLORS.navy)
@@ -209,14 +218,24 @@ export function generatePurchaseOrderPdf(order: any): Promise<Buffer> {
         .fillColor('#000000')
         .fontSize(9)
         .font('Helvetica-Bold')
-        .text(order.Company?.name || '-', deliveryAddressX, 132);
+        .text(companyName, deliveryAddressX, 132, {
+          width: deliveryColumnWidth,
+        });
+      const companyNameHeight = doc.heightOfString(companyName, {
+        width: deliveryColumnWidth,
+      });
       doc
         .fillColor('#000000')
         .fontSize(8)
         .font('Helvetica')
-        .text(order.shippingAddress || '', deliveryAddressX, 144, {
-          width: width / 3 - 30,
-        });
+        .text(
+          order.shippingAddress || '',
+          deliveryAddressX,
+          132 + companyNameHeight + 2,
+          {
+            width: deliveryColumnWidth,
+          },
+        );
 
       drawWatermark();
       doc.y = contentTop;
