@@ -312,13 +312,6 @@ export function generateQuotationPdf(quotation: any): Promise<Buffer> {
 
     totalsRows.push(['GRAND TOTAL', formatAmount(quotation.grandTotal)]);
 
-    doc
-      .lineWidth(0.5)
-      .strokeColor(COLORS.border)
-      .moveTo(right - 200, doc.y - 2)
-      .lineTo(right, doc.y - 2)
-      .stroke();
-
     doc.table(
       {
         headers: [
