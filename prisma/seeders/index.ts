@@ -13,3 +13,4 @@ export { seedTasks } from './010-tasks.seeder';
 export { seedInteractions } from './011-interactions.seeder';
 export { seedOrders } from './013-orders.seeder';
 export { seedVisitPlans } from './007-visit-plan.seeder';
+export { seedAccounting } from './015-accounting.seeder';

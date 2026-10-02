@@ -54,12 +54,15 @@ async function main() {
     users,
     companies,
   });
+  const accounting = await seeders.seedAccounting(prisma);
 
   // Summary
   console.log('\n' + '='.repeat(70));
   console.log('🎉 SEED COMPLETED SUCCESSFULLY!\n');
   console.log('📊 Summary:');
   console.log(`   - Users: ${users.length}`);
+  console.log(`   - Accounting accounts: ${accounting.accounts.length}`);
+  console.log(`   - Fiscal periods: ${accounting.periods.length}`);
   console.log(`   - Companies: ${companies.length}`);
   console.log(`   - Departments: ${departments.length}`);
   console.log(`   - Banks: ${banks.length}`);

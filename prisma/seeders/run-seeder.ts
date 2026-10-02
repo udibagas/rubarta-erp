@@ -26,6 +26,7 @@ const SEEDERS = {
   interactions: seeders.seedInteractions,
   orders: seeders.seedOrders,
   visitPlans: seeders.seedVisitPlans,
+  accounting: seeders.seedAccounting,
 };
 
 async function runSeeder(name: string) {
@@ -155,6 +156,10 @@ async function runSeeder(name: string) {
         });
         break;
       }
+
+      case 'accounting':
+        result = await seeders.seedAccounting(prisma);
+        break;
 
       default:
         throw new Error(`Unknown seeder: ${name}`);

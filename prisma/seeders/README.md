@@ -27,6 +27,7 @@ This will seed all data in the following order:
 13. Interactions
 14. Orders
 15. Visit Plans
+16. Accounting
 
 ## Running Individual Seeders
 
@@ -53,6 +54,7 @@ npm run seed:one <seeder-name>
 - **interactions** - Create interactions (requires users, opportunities, leads)
 - **orders** - Create orders (requires customers, materials)
 - **visitPlans** - Create visit plans (requires customers, contacts, users, companies)
+- **accounting** - Create the starter chart of accounts and current-year monthly fiscal periods
 
 ### Examples
 
@@ -65,6 +67,9 @@ npm run seed:one customers
 
 # Seed only visit plans
 npm run seed:one visitPlans
+
+# Seed accounting master data
+npm run seed:one accounting
 
 # List all available seeders
 npm run seed:one
@@ -95,6 +100,7 @@ tasks → users, opportunities, leads
 interactions → users, opportunities, leads
 orders → customers, materials
 visitPlans → customers, contacts, users, companies
+accounting (no dependencies)
 ```
 
 **Note**: When running individual seeders, make sure the required dependencies have been seeded first.
@@ -109,9 +115,7 @@ import { PrismaClient } from '../../src/prisma/client/client';
 
 export async function seedMyModel(
   prisma: PrismaClient,
-  data: {
-    /* dependencies */
-  },
+  data: {/* dependencies */},
 ) {
   console.log('\n📦 Creating my model...');
 

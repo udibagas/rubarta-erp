@@ -38,6 +38,15 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { ScheduleModule } from '@nestjs/schedule';
 import { SalesDashboardModule } from './sales-dashboard/sales-dashboard.module';
 import { DocumentsModule } from './documents/documents.module';
+import { AccountsModule } from './accounts/accounts.module';
+import { ExpensesModule } from './expenses/expenses.module';
+import { PaymentsModule } from './payments/payments.module';
+import { FiscalPeriodsModule } from './fiscal-periods/fiscal-periods.module';
+import { JournalEntriesModule } from './journal-entries/journal-entries.module';
+import { VendorBillsModule } from './vendor-bills/vendor-bills.module';
+import { CashBankModule } from './cash-bank/cash-bank.module';
+import { TaxRatesModule } from './tax-rates/tax-rates.module';
+import { AccountingReportsModule } from './accounting-reports/accounting-reports.module';
 
 @Module({
   imports: [
@@ -118,6 +127,15 @@ import { DocumentsModule } from './documents/documents.module';
     VisitPlansModule,
     SalesDashboardModule,
     DocumentsModule,
+    AccountsModule,
+    ExpensesModule,
+    PaymentsModule,
+    FiscalPeriodsModule,
+    JournalEntriesModule,
+    VendorBillsModule,
+    CashBankModule,
+    TaxRatesModule,
+    AccountingReportsModule,
   ],
   providers: [],
 })
