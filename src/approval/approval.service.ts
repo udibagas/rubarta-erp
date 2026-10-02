@@ -8,6 +8,7 @@ import { EventEmitter2 } from '@nestjs/event-emitter';
 import { PrismaService } from '../prisma/prisma.service';
 import { NotificationsService } from '../notifications/notifications.service';
 import { ApprovalStatus, ApprovalType } from '../prisma/client/client';
+import { Cron, CronExpression } from '@nestjs/schedule';
 
 @Injectable()
 export class ApprovalService {
@@ -385,6 +386,63 @@ export class ApprovalService {
         return `${baseUrl}/purchasing-logistics/purchase-orders/${moduleId}`;
       default:
         return null;
+    }
+  }
+
+  @Cron(CronExpression.EVERY_DAY_AT_8AM)
+  async notifyPendingApproval() {
+    const users = await this.prisma.user.findMany({
+      include: {
+        approvalItems: {
+          where: {
+            status: null,
+          },
+          include: {
+            approval: {
+              select: {
+                approvalType: true,
+                moduleId: true,
+              },
+            },
+          },
+        },
+      },
+    });
+
+    for (const user of users) {
+      for (const item of user.approvalItems) {
+        const { approvalType, moduleId } = item.approval;
+
+        let document: { number: string } = { number: '-' };
+        let documentType = '';
+
+        if (approvalType === ApprovalType.QUOTATION) {
+          documentType = 'Quotation';
+          document = await this.prisma.quotation.findUnique({
+            where: { id: moduleId },
+            select: { number: true },
+          });
+        }
+
+        if (approvalType === ApprovalType.PURCHASE_ORDER) {
+          documentType = 'Purchase Order';
+          document = await this.prisma.purchaseOrder.findUnique({
+            where: { id: moduleId },
+            select: { number: true },
+          });
+        }
+
+        console.log(
+          `Notifying user ${user.name} about pending approval for ${documentType} with document number ${document.number}`,
+        );
+
+        this.notification.notify({
+          userId: user.id,
+          title: `[Pengingat] Permintaan Persetujuan ${documentType} #${document.number}`,
+          message: `Anda memiliki permintaan persetujuan yang belum disetujui untuk ${documentType} dengan nomor dokumen ${document.number}`,
+          redirectUrl: this.getRedirectUrl(approvalType, moduleId),
+        });
+      }
     }
   }
 }
