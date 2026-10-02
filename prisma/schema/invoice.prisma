@@ -38,13 +38,13 @@ model Invoice {
   customerId      Int
   companyId       Int?
 
-  Customer      Customer      @relation(fields: [customerId], references: [id])
-  Company       Company?      @relation(fields: [companyId], references: [id])
-  Payments      Payment[]
-  SalesOrder    SalesOrder    @relation(fields: [salesOrderId], references: [id])
-  DeliveryOrder DeliveryOrder @relation(fields: [deliveryOrderId], references: [id])
-  User          User          @relation(fields: [userId], references: [id])
-  InvoiceItems  InvoiceItem[]
+  Customer           Customer            @relation(fields: [customerId], references: [id])
+  Company            Company?            @relation(fields: [companyId], references: [id])
+  PaymentAllocations PaymentAllocation[]
+  SalesOrder         SalesOrder          @relation(fields: [salesOrderId], references: [id])
+  DeliveryOrder      DeliveryOrder       @relation(fields: [deliveryOrderId], references: [id])
+  User               User                @relation(fields: [userId], references: [id])
+  InvoiceItems       InvoiceItem[]
 
   // Timestamps
   createdAt DateTime @default(now())

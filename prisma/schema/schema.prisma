@@ -76,26 +76,31 @@ model User {
   departmentId       Int?
   signatureSpeciment Json?        @db.JsonB
 
-  Notification        Notification[]
-  NkpApproval         NkpApproval[]
-  ApprovalSettingItem ApprovalSettingItem[]
-  Nkp                 Nkp[]                 @relation(name: "Nkp")
-  NkpRequest          Nkp[]                 @relation(name: "NkpRequest")
-  Tasks               Task[]
-  Interactions        Interaction[]
-  CustomerNotes       CustomerNote[]
-  Leads               Lead[]
-  Opportunities       Opportunity[]
-  Quotations          Quotation[]
-  Invoices            Invoice[]
-  Payments            Payment[]
-  VisitPlans          VisitPlan[]
-  Customers           Customer[]
-  approvalItems       ApprovalItem[]
-  salesOrders         SalesOrder[]
-  purchaseOrders      PurchaseOrder[]
-  goodsReceipts       GoodsReceipt[]
-  deliveryOrders      DeliveryOrder[]
+  Notification          Notification[]
+  NkpApproval           NkpApproval[]
+  ApprovalSettingItem   ApprovalSettingItem[]
+  Nkp                   Nkp[]                 @relation(name: "Nkp")
+  NkpRequest            Nkp[]                 @relation(name: "NkpRequest")
+  Tasks                 Task[]
+  Interactions          Interaction[]
+  CustomerNotes         CustomerNote[]
+  Leads                 Lead[]
+  Opportunities         Opportunity[]
+  Quotations            Quotation[]
+  Invoices              Invoice[]
+  accountingPayments    Payment[]
+  journalEntriesCreated JournalEntry[]        @relation("JournalCreatedBy")
+  journalEntriesPosted  JournalEntry[]        @relation("JournalPostedBy")
+  closedPeriods         FiscalPeriod[]        @relation("PeriodClosedBy")
+  vendorBillsCreated    VendorBill[]
+  bankTransactions      BankTransaction[]
+  VisitPlans            VisitPlan[]
+  Customers             Customer[]
+  approvalItems         ApprovalItem[]
+  salesOrders           SalesOrder[]
+  purchaseOrders        PurchaseOrder[]
+  goodsReceipts         GoodsReceipt[]
+  deliveryOrders        DeliveryOrder[]
 
   @@index([bankId, departmentId])
   @@map("Users")

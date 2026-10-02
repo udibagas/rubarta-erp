@@ -396,14 +396,6 @@ export type NullableEnumNkpTypeFieldUpdateOperationsInput = {
   set?: $Enums.NkpType | null
 }
 
-export type NullableIntFieldUpdateOperationsInput = {
-  set?: number | null
-  increment?: number
-  decrement?: number
-  multiply?: number
-  divide?: number
-}
-
 export type ApprovalSettingCreateNestedOneWithoutApprovalSettingItemInput = {
   create?: Prisma.XOR<Prisma.ApprovalSettingCreateWithoutApprovalSettingItemInput, Prisma.ApprovalSettingUncheckedCreateWithoutApprovalSettingItemInput>
   connectOrCreate?: Prisma.ApprovalSettingCreateOrConnectWithoutApprovalSettingItemInput

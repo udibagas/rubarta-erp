@@ -19,18 +19,19 @@ model Customer {
   updatedAt DateTime? @updatedAt
 
   // Relations
-  accountManager User?           @relation(fields: [accountManagerId], references: [id])
-  Invoices       Invoice[]
-  Contacts       Contact[]
-  Leads          Lead[]
-  Opportunities  Opportunity[]
-  SalesOrders    SalesOrder[]
-  DeliveryOrders DeliveryOrder[]
-  CustomerNotes  CustomerNote[]
-  CustomerFiles  CustomerFile[]
-  Quotations     Quotation[]
-  VisitPlans     VisitPlan[]
-  Tasks          Task[]
+  accountManager     User?           @relation(fields: [accountManagerId], references: [id])
+  Invoices           Invoice[]
+  accountingPayments Payment[]
+  Contacts           Contact[]
+  Leads              Lead[]
+  Opportunities      Opportunity[]
+  SalesOrders        SalesOrder[]
+  DeliveryOrders     DeliveryOrder[]
+  CustomerNotes      CustomerNote[]
+  CustomerFiles      CustomerFile[]
+  Quotations         Quotation[]
+  VisitPlans         VisitPlan[]
+  Tasks              Task[]
 
   @@index([email])
   @@index([isActive])

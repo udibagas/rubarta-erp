@@ -438,10 +438,6 @@ export type CustomerNoteOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
 }
 
-export type BoolFieldUpdateOperationsInput = {
-  set?: boolean
-}
-
 export type CustomerNoteCreateNestedManyWithoutCustomerInput = {
   create?: Prisma.XOR<Prisma.CustomerNoteCreateWithoutCustomerInput, Prisma.CustomerNoteUncheckedCreateWithoutCustomerInput> | Prisma.CustomerNoteCreateWithoutCustomerInput[] | Prisma.CustomerNoteUncheckedCreateWithoutCustomerInput[]
   connectOrCreate?: Prisma.CustomerNoteCreateOrConnectWithoutCustomerInput | Prisma.CustomerNoteCreateOrConnectWithoutCustomerInput[]

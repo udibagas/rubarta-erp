@@ -4,6 +4,302 @@ enum Currency {
   AUD
 }
 
+enum AccountType {
+  ASSET
+  LIABILITY
+  EQUITY
+  REVENUE
+  EXPENSE
+}
+
+enum JournalStatus {
+  DRAFT
+  POSTED
+  VOID
+}
+
+enum JournalSource {
+  MANUAL
+  SALES_INVOICE
+  VENDOR_BILL
+  RECEIPT
+  PAYMENT
+  BANK_TRANSACTION
+}
+
+enum SettlementStatus {
+  OPEN
+  PARTIAL
+  PAID
+  OVERDUE
+  VOID
+}
+
+enum PaymentDirection {
+  IN
+  OUT
+}
+
+enum PaymentMethod {
+  TRANSFER
+  CASH
+  CHEQUE
+  GIRO
+}
+
+enum AccountingPaymentStatus {
+  DRAFT
+  CONFIRMED
+  VOID
+}
+
+enum CashBankType {
+  CASH
+  BANK
+}
+
+enum TaxType {
+  OUTPUT
+  INPUT
+  WITHHOLDING
+}
+
+enum PeriodStatus {
+  OPEN
+  CLOSED
+}
+
+model Account {
+  id          Int         @id @default(autoincrement())
+  code        String      @unique
+  name        String
+  type        AccountType
+  parentId    Int?
+  parent      Account?    @relation("AccountTree", fields: [parentId], references: [id])
+  children    Account[]   @relation("AccountTree")
+  isActive    Boolean     @default(true)
+  isSystem    Boolean     @default(false)
+  isPostable  Boolean     @default(true)
+  description String?
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+
+  journalLines    JournalLine[]
+  cashBankAccount CashBankAccount?
+  taxRates        TaxRate[]
+  balances        AccountBalance[]
+}
+
+model AccountBalance {
+  id             Int          @id @default(autoincrement())
+  accountId      Int
+  account        Account      @relation(fields: [accountId], references: [id])
+  periodId       Int
+  period         FiscalPeriod @relation(fields: [periodId], references: [id])
+  openingBalance Decimal      @default(0) @db.Decimal(18, 2)
+  debitTotal     Decimal      @default(0) @db.Decimal(18, 2)
+  creditTotal    Decimal      @default(0) @db.Decimal(18, 2)
+  updatedAt      DateTime     @updatedAt
+
+  @@unique([accountId, periodId])
+}
+
+model FiscalPeriod {
+  id         Int          @id @default(autoincrement())
+  name       String       @unique
+  startDate  DateTime     @db.Date
+  endDate    DateTime     @db.Date
+  status     PeriodStatus @default(OPEN)
+  closedAt   DateTime?
+  closedById Int?
+  closedBy   User?        @relation("PeriodClosedBy", fields: [closedById], references: [id])
+  createdAt  DateTime     @default(now())
+  updatedAt  DateTime     @updatedAt
+
+  journalEntries JournalEntry[]
+  balances       AccountBalance[]
+
+  @@index([startDate, endDate])
+}
+
+model JournalEntry {
+  id           Int           @id @default(autoincrement())
+  number       String        @unique
+  date         DateTime      @db.Date
+  description  String
+  status       JournalStatus @default(DRAFT)
+  source       JournalSource @default(MANUAL)
+  sourceId     Int?
+  periodId     Int
+  period       FiscalPeriod  @relation(fields: [periodId], references: [id])
+  reversalOfId Int?          @unique
+  reversalOf   JournalEntry? @relation("JournalReversal", fields: [reversalOfId], references: [id])
+  reversedBy   JournalEntry? @relation("JournalReversal")
+  createdById  Int
+  createdBy    User          @relation("JournalCreatedBy", fields: [createdById], references: [id])
+  postedById   Int?
+  postedBy     User?         @relation("JournalPostedBy", fields: [postedById], references: [id])
+  postedAt     DateTime?
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+
+  lines           JournalLine[]
+  vendorBill      VendorBill?      @relation("VendorBillJournal")
+  payment         Payment?         @relation("PaymentJournal")
+  bankTransaction BankTransaction? @relation("BankTransactionJournal")
+
+  @@index([date])
+  @@index([status])
+  @@index([source, sourceId])
+  @@index([periodId])
+}
+
+model JournalLine {
+  id          Int          @id @default(autoincrement())
+  journalId   Int
+  journal     JournalEntry @relation(fields: [journalId], references: [id], onDelete: Cascade)
+  accountId   Int
+  account     Account      @relation(fields: [accountId], references: [id])
+  description String?
+  debit       Decimal      @default(0) @db.Decimal(18, 2)
+  credit      Decimal      @default(0) @db.Decimal(18, 2)
+  sortOrder   Int          @default(0)
+
+  @@index([journalId])
+  @@index([accountId])
+}
+
+model VendorBill {
+  id              Int              @id @default(autoincrement())
+  number          String           @unique
+  vendorRef       String?
+  supplierId      Int
+  supplier        Supplier         @relation(fields: [supplierId], references: [id])
+  purchaseOrderId Int?
+  purchaseOrder   PurchaseOrder?   @relation(fields: [purchaseOrderId], references: [id])
+  date            DateTime         @db.Date
+  dueDate         DateTime         @db.Date
+  currency        String           @default("IDR")
+  subtotal        Decimal          @db.Decimal(18, 2)
+  taxAmount       Decimal          @default(0) @db.Decimal(18, 2)
+  total           Decimal          @db.Decimal(18, 2)
+  paidAmount      Decimal          @default(0) @db.Decimal(18, 2)
+  status          SettlementStatus @default(OPEN)
+  notes           String?
+  journalId       Int?             @unique
+  journal         JournalEntry?    @relation("VendorBillJournal", fields: [journalId], references: [id])
+  createdById     Int
+  createdBy       User             @relation(fields: [createdById], references: [id])
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+
+  allocations PaymentAllocation[]
+
+  @@index([supplierId])
+  @@index([status, dueDate])
+}
+
+model Payment {
+  id                Int                     @id @default(autoincrement())
+  number            String                  @unique
+  direction         PaymentDirection
+  date              DateTime                @db.Date
+  method            PaymentMethod           @default(TRANSFER)
+  customerId        Int?
+  customer          Customer?               @relation(fields: [customerId], references: [id])
+  supplierId        Int?
+  supplier          Supplier?               @relation(fields: [supplierId], references: [id])
+  cashBankAccountId Int
+  cashBankAccount   CashBankAccount         @relation(fields: [cashBankAccountId], references: [id])
+  reference         String?
+  currency          String                  @default("IDR")
+  amount            Decimal                 @db.Decimal(18, 2)
+  status            AccountingPaymentStatus @default(DRAFT)
+  notes             String?
+  journalId         Int?                    @unique
+  journal           JournalEntry?           @relation("PaymentJournal", fields: [journalId], references: [id])
+  createdById       Int
+  createdBy         User                    @relation(fields: [createdById], references: [id])
+  createdAt         DateTime                @default(now())
+  updatedAt         DateTime                @updatedAt
+
+  allocations PaymentAllocation[]
+
+  @@index([direction, date])
+  @@index([customerId])
+  @@index([supplierId])
+  @@index([cashBankAccountId])
+}
+
+model PaymentAllocation {
+  id           Int         @id @default(autoincrement())
+  paymentId    Int
+  payment      Payment     @relation(fields: [paymentId], references: [id], onDelete: Cascade)
+  invoiceId    Int?
+  invoice      Invoice?    @relation(fields: [invoiceId], references: [id])
+  vendorBillId Int?
+  vendorBill   VendorBill? @relation(fields: [vendorBillId], references: [id])
+  amount       Decimal     @db.Decimal(18, 2)
+
+  @@index([paymentId])
+  @@index([invoiceId])
+  @@index([vendorBillId])
+}
+
+model CashBankAccount {
+  id             Int          @id @default(autoincrement())
+  name           String
+  type           CashBankType
+  accountId      Int          @unique
+  account        Account      @relation(fields: [accountId], references: [id])
+  bankName       String?
+  accountNumber  String?
+  accountHolder  String?
+  currency       String       @default("IDR")
+  openingBalance Decimal      @default(0) @db.Decimal(18, 2)
+  isActive       Boolean      @default(true)
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+
+  transactions BankTransaction[]
+  payments     Payment[]
+}
+
+model BankTransaction {
+  id                Int              @id @default(autoincrement())
+  cashBankAccountId Int
+  cashBankAccount   CashBankAccount  @relation(fields: [cashBankAccountId], references: [id])
+  date              DateTime         @db.Date
+  description       String
+  type              PaymentDirection
+  amount            Decimal          @db.Decimal(18, 2)
+  offsetAccountId   Int?
+  reconciled        Boolean          @default(false)
+  reconciledAt      DateTime?
+  journalId         Int?             @unique
+  journal           JournalEntry?    @relation("BankTransactionJournal", fields: [journalId], references: [id])
+  createdById       Int
+  createdBy         User             @relation(fields: [createdById], references: [id])
+  createdAt         DateTime         @default(now())
+  updatedAt         DateTime         @updatedAt
+
+  @@index([cashBankAccountId, date])
+  @@index([reconciled])
+}
+
+model TaxRate {
+  id        Int      @id @default(autoincrement())
+  code      String   @unique
+  name      String
+  rate      Decimal  @db.Decimal(5, 2)
+  type      TaxType
+  accountId Int
+  account   Account  @relation(fields: [accountId], references: [id])
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
 model Supplier {
   id             Int             @id @default(autoincrement())
   code           String?         @db.Char(6)
@@ -18,41 +314,11 @@ model Supplier {
   Nkp            Nkp[]
   Material       Material[]
   purchaseOrders PurchaseOrder[]
-  goodsReceipts   GoodsReceipt[]
+  goodsReceipts  GoodsReceipt[]
+  vendorBills    VendorBill[]
+  payments       Payment[]
 
   @@map("Suppliers")
-}
-
-model Account {
-  id      Int       @id @default(autoincrement())
-  code    String    @unique
-  name    String
-  type    String
-  balance Decimal
-  Expense Expense[]
-
-  @@map("Accounts")
-}
-
-model Payment {
-  id          Int      @id @default(autoincrement())
-  date        DateTime
-  amountPaid  Decimal
-  remarks     String?
-  attachments Json?    @db.JsonB // Attachments related to the payment
-
-  // Relationships
-  invoiceId Int
-  userId    Int
-
-  Invoice Invoice @relation(fields: [invoiceId], references: [id])
-  User    User    @relation(fields: [userId], references: [id])
-
-  // Timestamps
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  @@map("Payments")
 }
 
 model Expense {
@@ -61,5 +327,4 @@ model Expense {
   description String
   amount      Decimal
   accountId   Int
-  account     Account  @relation(fields: [accountId], references: [id])
 }

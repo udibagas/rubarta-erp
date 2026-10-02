@@ -390,10 +390,6 @@ export type NullableEnumApprovalStatusFieldUpdateOperationsInput = {
   set?: $Enums.ApprovalStatus | null
 }
 
-export type NullableDateTimeFieldUpdateOperationsInput = {
-  set?: Date | string | null
-}
-
 export type ApprovalCreateNestedOneWithoutItemsInput = {
   create?: Prisma.XOR<Prisma.ApprovalCreateWithoutItemsInput, Prisma.ApprovalUncheckedCreateWithoutItemsInput>
   connectOrCreate?: Prisma.ApprovalCreateOrConnectWithoutItemsInput

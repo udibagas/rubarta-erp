@@ -29,8 +29,8 @@ export * from "./enums"
  * const prisma = new PrismaClient({
  *   adapter: new PrismaPg({ connectionString: process.env.DATABASE_URL })
  * })
- * // Fetch zero or more Suppliers
- * const suppliers = await prisma.supplier.findMany()
+ * // Fetch zero or more Accounts
+ * const accounts = await prisma.account.findMany()
  * ```
  * 
  * Read more in our [docs](https://pris.ly/d/client).
@@ -40,20 +40,65 @@ export type PrismaClient<LogOpts extends Prisma.LogLevel = never, OmitOpts exten
 export { Prisma }
 
 /**
- * Model Supplier
- * 
- */
-export type Supplier = Prisma.SupplierModel
-/**
  * Model Account
  * 
  */
 export type Account = Prisma.AccountModel
 /**
+ * Model AccountBalance
+ * 
+ */
+export type AccountBalance = Prisma.AccountBalanceModel
+/**
+ * Model FiscalPeriod
+ * 
+ */
+export type FiscalPeriod = Prisma.FiscalPeriodModel
+/**
+ * Model JournalEntry
+ * 
+ */
+export type JournalEntry = Prisma.JournalEntryModel
+/**
+ * Model JournalLine
+ * 
+ */
+export type JournalLine = Prisma.JournalLineModel
+/**
+ * Model VendorBill
+ * 
+ */
+export type VendorBill = Prisma.VendorBillModel
+/**
  * Model Payment
  * 
  */
 export type Payment = Prisma.PaymentModel
+/**
+ * Model PaymentAllocation
+ * 
+ */
+export type PaymentAllocation = Prisma.PaymentAllocationModel
+/**
+ * Model CashBankAccount
+ * 
+ */
+export type CashBankAccount = Prisma.CashBankAccountModel
+/**
+ * Model BankTransaction
+ * 
+ */
+export type BankTransaction = Prisma.BankTransactionModel
+/**
+ * Model TaxRate
+ * 
+ */
+export type TaxRate = Prisma.TaxRateModel
+/**
+ * Model Supplier
+ * 
+ */
+export type Supplier = Prisma.SupplierModel
 /**
  * Model Expense
  * 

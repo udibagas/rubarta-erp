@@ -517,6 +517,7 @@ export type PurchaseOrderWhereInput = {
   Supplier?: Prisma.XOR<Prisma.SupplierNullableScalarRelationFilter, Prisma.SupplierWhereInput> | null
   Company?: Prisma.XOR<Prisma.CompanyScalarRelationFilter, Prisma.CompanyWhereInput>
   goodsReceipts?: Prisma.GoodsReceiptListRelationFilter
+  vendorBills?: Prisma.VendorBillListRelationFilter
   SalesOrder?: Prisma.XOR<Prisma.SalesOrderNullableScalarRelationFilter, Prisma.SalesOrderWhereInput> | null
   nkps?: Prisma.NkpListRelationFilter
 }
@@ -564,6 +565,7 @@ export type PurchaseOrderOrderByWithRelationInput = {
   Supplier?: Prisma.SupplierOrderByWithRelationInput
   Company?: Prisma.CompanyOrderByWithRelationInput
   goodsReceipts?: Prisma.GoodsReceiptOrderByRelationAggregateInput
+  vendorBills?: Prisma.VendorBillOrderByRelationAggregateInput
   SalesOrder?: Prisma.SalesOrderOrderByWithRelationInput
   nkps?: Prisma.NkpOrderByRelationAggregateInput
 }
@@ -614,6 +616,7 @@ export type PurchaseOrderWhereUniqueInput = Prisma.AtLeast<{
   Supplier?: Prisma.XOR<Prisma.SupplierNullableScalarRelationFilter, Prisma.SupplierWhereInput> | null
   Company?: Prisma.XOR<Prisma.CompanyScalarRelationFilter, Prisma.CompanyWhereInput>
   goodsReceipts?: Prisma.GoodsReceiptListRelationFilter
+  vendorBills?: Prisma.VendorBillListRelationFilter
   SalesOrder?: Prisma.XOR<Prisma.SalesOrderNullableScalarRelationFilter, Prisma.SalesOrderWhereInput> | null
   nkps?: Prisma.NkpListRelationFilter
 }, "id" | "number">
@@ -744,6 +747,7 @@ export type PurchaseOrderCreateInput = {
   Supplier?: Prisma.SupplierCreateNestedOneWithoutPurchaseOrdersInput
   Company: Prisma.CompanyCreateNestedOneWithoutPurchaseOrdersInput
   goodsReceipts?: Prisma.GoodsReceiptCreateNestedManyWithoutPurchaseOrderInput
+  vendorBills?: Prisma.VendorBillCreateNestedManyWithoutPurchaseOrderInput
   SalesOrder?: Prisma.SalesOrderCreateNestedOneWithoutPurchaseOrdersInput
   nkps?: Prisma.NkpCreateNestedManyWithoutPurchaseOrderInput
 }
@@ -788,6 +792,7 @@ export type PurchaseOrderUncheckedCreateInput = {
   companyId: number
   PurchaseOrderItems?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutPurchaseOrderInput
   goodsReceipts?: Prisma.GoodsReceiptUncheckedCreateNestedManyWithoutPurchaseOrderInput
+  vendorBills?: Prisma.VendorBillUncheckedCreateNestedManyWithoutPurchaseOrderInput
   nkps?: Prisma.NkpUncheckedCreateNestedManyWithoutPurchaseOrderInput
 }
 
@@ -829,6 +834,7 @@ export type PurchaseOrderUpdateInput = {
   Supplier?: Prisma.SupplierUpdateOneWithoutPurchaseOrdersNestedInput
   Company?: Prisma.CompanyUpdateOneRequiredWithoutPurchaseOrdersNestedInput
   goodsReceipts?: Prisma.GoodsReceiptUpdateManyWithoutPurchaseOrderNestedInput
+  vendorBills?: Prisma.VendorBillUpdateManyWithoutPurchaseOrderNestedInput
   SalesOrder?: Prisma.SalesOrderUpdateOneWithoutPurchaseOrdersNestedInput
   nkps?: Prisma.NkpUpdateManyWithoutPurchaseOrderNestedInput
 }
@@ -873,6 +879,7 @@ export type PurchaseOrderUncheckedUpdateInput = {
   companyId?: Prisma.IntFieldUpdateOperationsInput | number
   PurchaseOrderItems?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutPurchaseOrderNestedInput
   goodsReceipts?: Prisma.GoodsReceiptUncheckedUpdateManyWithoutPurchaseOrderNestedInput
+  vendorBills?: Prisma.VendorBillUncheckedUpdateManyWithoutPurchaseOrderNestedInput
   nkps?: Prisma.NkpUncheckedUpdateManyWithoutPurchaseOrderNestedInput
 }
 
@@ -991,6 +998,11 @@ export type PurchaseOrderUncheckedUpdateManyInput = {
   companyId?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
+export type PurchaseOrderNullableScalarRelationFilter = {
+  is?: Prisma.PurchaseOrderWhereInput | null
+  isNot?: Prisma.PurchaseOrderWhereInput | null
+}
+
 export type PurchaseOrderListRelationFilter = {
   every?: Prisma.PurchaseOrderWhereInput
   some?: Prisma.PurchaseOrderWhereInput
@@ -1004,11 +1016,6 @@ export type PurchaseOrderOrderByRelationAggregateInput = {
 export type PurchaseOrderScalarRelationFilter = {
   is?: Prisma.PurchaseOrderWhereInput
   isNot?: Prisma.PurchaseOrderWhereInput
-}
-
-export type PurchaseOrderNullableScalarRelationFilter = {
-  is?: Prisma.PurchaseOrderWhereInput | null
-  isNot?: Prisma.PurchaseOrderWhereInput | null
 }
 
 export type PurchaseOrderCountOrderByAggregateInput = {
@@ -1157,6 +1164,22 @@ export type PurchaseOrderSumOrderByAggregateInput = {
   supplierId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   companyId?: Prisma.SortOrder
+}
+
+export type PurchaseOrderCreateNestedOneWithoutVendorBillsInput = {
+  create?: Prisma.XOR<Prisma.PurchaseOrderCreateWithoutVendorBillsInput, Prisma.PurchaseOrderUncheckedCreateWithoutVendorBillsInput>
+  connectOrCreate?: Prisma.PurchaseOrderCreateOrConnectWithoutVendorBillsInput
+  connect?: Prisma.PurchaseOrderWhereUniqueInput
+}
+
+export type PurchaseOrderUpdateOneWithoutVendorBillsNestedInput = {
+  create?: Prisma.XOR<Prisma.PurchaseOrderCreateWithoutVendorBillsInput, Prisma.PurchaseOrderUncheckedCreateWithoutVendorBillsInput>
+  connectOrCreate?: Prisma.PurchaseOrderCreateOrConnectWithoutVendorBillsInput
+  upsert?: Prisma.PurchaseOrderUpsertWithoutVendorBillsInput
+  disconnect?: Prisma.PurchaseOrderWhereInput | boolean
+  delete?: Prisma.PurchaseOrderWhereInput | boolean
+  connect?: Prisma.PurchaseOrderWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.PurchaseOrderUpdateToOneWithWhereWithoutVendorBillsInput, Prisma.PurchaseOrderUpdateWithoutVendorBillsInput>, Prisma.PurchaseOrderUncheckedUpdateWithoutVendorBillsInput>
 }
 
 export type PurchaseOrderCreateNestedManyWithoutSupplierInput = {
@@ -1379,6 +1402,192 @@ export type PurchaseOrderUncheckedUpdateManyWithoutUserNestedInput = {
   deleteMany?: Prisma.PurchaseOrderScalarWhereInput | Prisma.PurchaseOrderScalarWhereInput[]
 }
 
+export type PurchaseOrderCreateWithoutVendorBillsInput = {
+  number: string
+  orderType?: string | null
+  date: Date | string
+  referenceNumber: string
+  title: string
+  description?: string | null
+  status?: $Enums.PurchaseOrderStatus
+  paymentAmount?: number
+  paymentStatus?: $Enums.PaymentStatus
+  currency?: $Enums.Currency
+  currencyRate?: number
+  totalAmount: number
+  discount?: number
+  vatAmount?: number
+  grandTotal: number
+  deliveryMethod?: string | null
+  destination?: string | null
+  warehouse?: string | null
+  packingCondition?: string | null
+  shippingAddress?: string | null
+  deliveryDate?: Date | string | null
+  termOfDelivery?: string | null
+  partialShipment?: boolean | null
+  paymentMethod?: string | null
+  termOfPayment?: string | null
+  supplierAddress?: string | null
+  billingAddress?: string | null
+  termsAndConditions?: string | null
+  notes?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string | null
+  deletedAt?: Date | string | null
+  User: Prisma.UserCreateNestedOneWithoutPurchaseOrdersInput
+  PurchaseOrderItems?: Prisma.PurchaseOrderItemCreateNestedManyWithoutPurchaseOrderInput
+  Supplier?: Prisma.SupplierCreateNestedOneWithoutPurchaseOrdersInput
+  Company: Prisma.CompanyCreateNestedOneWithoutPurchaseOrdersInput
+  goodsReceipts?: Prisma.GoodsReceiptCreateNestedManyWithoutPurchaseOrderInput
+  SalesOrder?: Prisma.SalesOrderCreateNestedOneWithoutPurchaseOrdersInput
+  nkps?: Prisma.NkpCreateNestedManyWithoutPurchaseOrderInput
+}
+
+export type PurchaseOrderUncheckedCreateWithoutVendorBillsInput = {
+  id?: number
+  number: string
+  orderType?: string | null
+  date: Date | string
+  referenceNumber: string
+  title: string
+  description?: string | null
+  status?: $Enums.PurchaseOrderStatus
+  paymentAmount?: number
+  paymentStatus?: $Enums.PaymentStatus
+  currency?: $Enums.Currency
+  currencyRate?: number
+  totalAmount: number
+  discount?: number
+  vatAmount?: number
+  grandTotal: number
+  deliveryMethod?: string | null
+  destination?: string | null
+  warehouse?: string | null
+  packingCondition?: string | null
+  shippingAddress?: string | null
+  deliveryDate?: Date | string | null
+  termOfDelivery?: string | null
+  partialShipment?: boolean | null
+  paymentMethod?: string | null
+  termOfPayment?: string | null
+  supplierAddress?: string | null
+  billingAddress?: string | null
+  termsAndConditions?: string | null
+  notes?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string | null
+  deletedAt?: Date | string | null
+  salesOrderId?: number | null
+  supplierId?: number | null
+  userId: number
+  companyId: number
+  PurchaseOrderItems?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutPurchaseOrderInput
+  goodsReceipts?: Prisma.GoodsReceiptUncheckedCreateNestedManyWithoutPurchaseOrderInput
+  nkps?: Prisma.NkpUncheckedCreateNestedManyWithoutPurchaseOrderInput
+}
+
+export type PurchaseOrderCreateOrConnectWithoutVendorBillsInput = {
+  where: Prisma.PurchaseOrderWhereUniqueInput
+  create: Prisma.XOR<Prisma.PurchaseOrderCreateWithoutVendorBillsInput, Prisma.PurchaseOrderUncheckedCreateWithoutVendorBillsInput>
+}
+
+export type PurchaseOrderUpsertWithoutVendorBillsInput = {
+  update: Prisma.XOR<Prisma.PurchaseOrderUpdateWithoutVendorBillsInput, Prisma.PurchaseOrderUncheckedUpdateWithoutVendorBillsInput>
+  create: Prisma.XOR<Prisma.PurchaseOrderCreateWithoutVendorBillsInput, Prisma.PurchaseOrderUncheckedCreateWithoutVendorBillsInput>
+  where?: Prisma.PurchaseOrderWhereInput
+}
+
+export type PurchaseOrderUpdateToOneWithWhereWithoutVendorBillsInput = {
+  where?: Prisma.PurchaseOrderWhereInput
+  data: Prisma.XOR<Prisma.PurchaseOrderUpdateWithoutVendorBillsInput, Prisma.PurchaseOrderUncheckedUpdateWithoutVendorBillsInput>
+}
+
+export type PurchaseOrderUpdateWithoutVendorBillsInput = {
+  number?: Prisma.StringFieldUpdateOperationsInput | string
+  orderType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  referenceNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumPurchaseOrderStatusFieldUpdateOperationsInput | $Enums.PurchaseOrderStatus
+  paymentAmount?: Prisma.FloatFieldUpdateOperationsInput | number
+  paymentStatus?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+  currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
+  currencyRate?: Prisma.FloatFieldUpdateOperationsInput | number
+  totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
+  discount?: Prisma.FloatFieldUpdateOperationsInput | number
+  vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
+  grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
+  deliveryMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  destination?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  warehouse?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  packingCondition?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shippingAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  termOfDelivery?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  partialShipment?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  termOfPayment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  supplierAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  termsAndConditions?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  User?: Prisma.UserUpdateOneRequiredWithoutPurchaseOrdersNestedInput
+  PurchaseOrderItems?: Prisma.PurchaseOrderItemUpdateManyWithoutPurchaseOrderNestedInput
+  Supplier?: Prisma.SupplierUpdateOneWithoutPurchaseOrdersNestedInput
+  Company?: Prisma.CompanyUpdateOneRequiredWithoutPurchaseOrdersNestedInput
+  goodsReceipts?: Prisma.GoodsReceiptUpdateManyWithoutPurchaseOrderNestedInput
+  SalesOrder?: Prisma.SalesOrderUpdateOneWithoutPurchaseOrdersNestedInput
+  nkps?: Prisma.NkpUpdateManyWithoutPurchaseOrderNestedInput
+}
+
+export type PurchaseOrderUncheckedUpdateWithoutVendorBillsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  number?: Prisma.StringFieldUpdateOperationsInput | string
+  orderType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  referenceNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumPurchaseOrderStatusFieldUpdateOperationsInput | $Enums.PurchaseOrderStatus
+  paymentAmount?: Prisma.FloatFieldUpdateOperationsInput | number
+  paymentStatus?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+  currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
+  currencyRate?: Prisma.FloatFieldUpdateOperationsInput | number
+  totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
+  discount?: Prisma.FloatFieldUpdateOperationsInput | number
+  vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
+  grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
+  deliveryMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  destination?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  warehouse?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  packingCondition?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shippingAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  termOfDelivery?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  partialShipment?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  termOfPayment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  supplierAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  billingAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  termsAndConditions?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  salesOrderId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  supplierId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  userId?: Prisma.IntFieldUpdateOperationsInput | number
+  companyId?: Prisma.IntFieldUpdateOperationsInput | number
+  PurchaseOrderItems?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutPurchaseOrderNestedInput
+  goodsReceipts?: Prisma.GoodsReceiptUncheckedUpdateManyWithoutPurchaseOrderNestedInput
+  nkps?: Prisma.NkpUncheckedUpdateManyWithoutPurchaseOrderNestedInput
+}
+
 export type PurchaseOrderCreateWithoutSupplierInput = {
   number: string
   orderType?: string | null
@@ -1416,6 +1625,7 @@ export type PurchaseOrderCreateWithoutSupplierInput = {
   PurchaseOrderItems?: Prisma.PurchaseOrderItemCreateNestedManyWithoutPurchaseOrderInput
   Company: Prisma.CompanyCreateNestedOneWithoutPurchaseOrdersInput
   goodsReceipts?: Prisma.GoodsReceiptCreateNestedManyWithoutPurchaseOrderInput
+  vendorBills?: Prisma.VendorBillCreateNestedManyWithoutPurchaseOrderInput
   SalesOrder?: Prisma.SalesOrderCreateNestedOneWithoutPurchaseOrdersInput
   nkps?: Prisma.NkpCreateNestedManyWithoutPurchaseOrderInput
 }
@@ -1459,6 +1669,7 @@ export type PurchaseOrderUncheckedCreateWithoutSupplierInput = {
   companyId: number
   PurchaseOrderItems?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutPurchaseOrderInput
   goodsReceipts?: Prisma.GoodsReceiptUncheckedCreateNestedManyWithoutPurchaseOrderInput
+  vendorBills?: Prisma.VendorBillUncheckedCreateNestedManyWithoutPurchaseOrderInput
   nkps?: Prisma.NkpUncheckedCreateNestedManyWithoutPurchaseOrderInput
 }
 
@@ -1568,6 +1779,7 @@ export type PurchaseOrderCreateWithoutGoodsReceiptsInput = {
   PurchaseOrderItems?: Prisma.PurchaseOrderItemCreateNestedManyWithoutPurchaseOrderInput
   Supplier?: Prisma.SupplierCreateNestedOneWithoutPurchaseOrdersInput
   Company: Prisma.CompanyCreateNestedOneWithoutPurchaseOrdersInput
+  vendorBills?: Prisma.VendorBillCreateNestedManyWithoutPurchaseOrderInput
   SalesOrder?: Prisma.SalesOrderCreateNestedOneWithoutPurchaseOrdersInput
   nkps?: Prisma.NkpCreateNestedManyWithoutPurchaseOrderInput
 }
@@ -1611,6 +1823,7 @@ export type PurchaseOrderUncheckedCreateWithoutGoodsReceiptsInput = {
   userId: number
   companyId: number
   PurchaseOrderItems?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutPurchaseOrderInput
+  vendorBills?: Prisma.VendorBillUncheckedCreateNestedManyWithoutPurchaseOrderInput
   nkps?: Prisma.NkpUncheckedCreateNestedManyWithoutPurchaseOrderInput
 }
 
@@ -1667,6 +1880,7 @@ export type PurchaseOrderUpdateWithoutGoodsReceiptsInput = {
   PurchaseOrderItems?: Prisma.PurchaseOrderItemUpdateManyWithoutPurchaseOrderNestedInput
   Supplier?: Prisma.SupplierUpdateOneWithoutPurchaseOrdersNestedInput
   Company?: Prisma.CompanyUpdateOneRequiredWithoutPurchaseOrdersNestedInput
+  vendorBills?: Prisma.VendorBillUpdateManyWithoutPurchaseOrderNestedInput
   SalesOrder?: Prisma.SalesOrderUpdateOneWithoutPurchaseOrdersNestedInput
   nkps?: Prisma.NkpUpdateManyWithoutPurchaseOrderNestedInput
 }
@@ -1710,6 +1924,7 @@ export type PurchaseOrderUncheckedUpdateWithoutGoodsReceiptsInput = {
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   companyId?: Prisma.IntFieldUpdateOperationsInput | number
   PurchaseOrderItems?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutPurchaseOrderNestedInput
+  vendorBills?: Prisma.VendorBillUncheckedUpdateManyWithoutPurchaseOrderNestedInput
   nkps?: Prisma.NkpUncheckedUpdateManyWithoutPurchaseOrderNestedInput
 }
 
@@ -1751,6 +1966,7 @@ export type PurchaseOrderCreateWithoutNkpsInput = {
   Supplier?: Prisma.SupplierCreateNestedOneWithoutPurchaseOrdersInput
   Company: Prisma.CompanyCreateNestedOneWithoutPurchaseOrdersInput
   goodsReceipts?: Prisma.GoodsReceiptCreateNestedManyWithoutPurchaseOrderInput
+  vendorBills?: Prisma.VendorBillCreateNestedManyWithoutPurchaseOrderInput
   SalesOrder?: Prisma.SalesOrderCreateNestedOneWithoutPurchaseOrdersInput
 }
 
@@ -1794,6 +2010,7 @@ export type PurchaseOrderUncheckedCreateWithoutNkpsInput = {
   companyId: number
   PurchaseOrderItems?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutPurchaseOrderInput
   goodsReceipts?: Prisma.GoodsReceiptUncheckedCreateNestedManyWithoutPurchaseOrderInput
+  vendorBills?: Prisma.VendorBillUncheckedCreateNestedManyWithoutPurchaseOrderInput
 }
 
 export type PurchaseOrderCreateOrConnectWithoutNkpsInput = {
@@ -1850,6 +2067,7 @@ export type PurchaseOrderUpdateWithoutNkpsInput = {
   Supplier?: Prisma.SupplierUpdateOneWithoutPurchaseOrdersNestedInput
   Company?: Prisma.CompanyUpdateOneRequiredWithoutPurchaseOrdersNestedInput
   goodsReceipts?: Prisma.GoodsReceiptUpdateManyWithoutPurchaseOrderNestedInput
+  vendorBills?: Prisma.VendorBillUpdateManyWithoutPurchaseOrderNestedInput
   SalesOrder?: Prisma.SalesOrderUpdateOneWithoutPurchaseOrdersNestedInput
 }
 
@@ -1893,6 +2111,7 @@ export type PurchaseOrderUncheckedUpdateWithoutNkpsInput = {
   companyId?: Prisma.IntFieldUpdateOperationsInput | number
   PurchaseOrderItems?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutPurchaseOrderNestedInput
   goodsReceipts?: Prisma.GoodsReceiptUncheckedUpdateManyWithoutPurchaseOrderNestedInput
+  vendorBills?: Prisma.VendorBillUncheckedUpdateManyWithoutPurchaseOrderNestedInput
 }
 
 export type PurchaseOrderCreateWithoutPurchaseOrderItemsInput = {
@@ -1932,6 +2151,7 @@ export type PurchaseOrderCreateWithoutPurchaseOrderItemsInput = {
   Supplier?: Prisma.SupplierCreateNestedOneWithoutPurchaseOrdersInput
   Company: Prisma.CompanyCreateNestedOneWithoutPurchaseOrdersInput
   goodsReceipts?: Prisma.GoodsReceiptCreateNestedManyWithoutPurchaseOrderInput
+  vendorBills?: Prisma.VendorBillCreateNestedManyWithoutPurchaseOrderInput
   SalesOrder?: Prisma.SalesOrderCreateNestedOneWithoutPurchaseOrdersInput
   nkps?: Prisma.NkpCreateNestedManyWithoutPurchaseOrderInput
 }
@@ -1975,6 +2195,7 @@ export type PurchaseOrderUncheckedCreateWithoutPurchaseOrderItemsInput = {
   userId: number
   companyId: number
   goodsReceipts?: Prisma.GoodsReceiptUncheckedCreateNestedManyWithoutPurchaseOrderInput
+  vendorBills?: Prisma.VendorBillUncheckedCreateNestedManyWithoutPurchaseOrderInput
   nkps?: Prisma.NkpUncheckedCreateNestedManyWithoutPurchaseOrderInput
 }
 
@@ -2031,6 +2252,7 @@ export type PurchaseOrderUpdateWithoutPurchaseOrderItemsInput = {
   Supplier?: Prisma.SupplierUpdateOneWithoutPurchaseOrdersNestedInput
   Company?: Prisma.CompanyUpdateOneRequiredWithoutPurchaseOrdersNestedInput
   goodsReceipts?: Prisma.GoodsReceiptUpdateManyWithoutPurchaseOrderNestedInput
+  vendorBills?: Prisma.VendorBillUpdateManyWithoutPurchaseOrderNestedInput
   SalesOrder?: Prisma.SalesOrderUpdateOneWithoutPurchaseOrdersNestedInput
   nkps?: Prisma.NkpUpdateManyWithoutPurchaseOrderNestedInput
 }
@@ -2074,6 +2296,7 @@ export type PurchaseOrderUncheckedUpdateWithoutPurchaseOrderItemsInput = {
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   companyId?: Prisma.IntFieldUpdateOperationsInput | number
   goodsReceipts?: Prisma.GoodsReceiptUncheckedUpdateManyWithoutPurchaseOrderNestedInput
+  vendorBills?: Prisma.VendorBillUncheckedUpdateManyWithoutPurchaseOrderNestedInput
   nkps?: Prisma.NkpUncheckedUpdateManyWithoutPurchaseOrderNestedInput
 }
 
@@ -2115,6 +2338,7 @@ export type PurchaseOrderCreateWithoutSalesOrderInput = {
   Supplier?: Prisma.SupplierCreateNestedOneWithoutPurchaseOrdersInput
   Company: Prisma.CompanyCreateNestedOneWithoutPurchaseOrdersInput
   goodsReceipts?: Prisma.GoodsReceiptCreateNestedManyWithoutPurchaseOrderInput
+  vendorBills?: Prisma.VendorBillCreateNestedManyWithoutPurchaseOrderInput
   nkps?: Prisma.NkpCreateNestedManyWithoutPurchaseOrderInput
 }
 
@@ -2157,6 +2381,7 @@ export type PurchaseOrderUncheckedCreateWithoutSalesOrderInput = {
   companyId: number
   PurchaseOrderItems?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutPurchaseOrderInput
   goodsReceipts?: Prisma.GoodsReceiptUncheckedCreateNestedManyWithoutPurchaseOrderInput
+  vendorBills?: Prisma.VendorBillUncheckedCreateNestedManyWithoutPurchaseOrderInput
   nkps?: Prisma.NkpUncheckedCreateNestedManyWithoutPurchaseOrderInput
 }
 
@@ -2223,6 +2448,7 @@ export type PurchaseOrderCreateWithoutCompanyInput = {
   PurchaseOrderItems?: Prisma.PurchaseOrderItemCreateNestedManyWithoutPurchaseOrderInput
   Supplier?: Prisma.SupplierCreateNestedOneWithoutPurchaseOrdersInput
   goodsReceipts?: Prisma.GoodsReceiptCreateNestedManyWithoutPurchaseOrderInput
+  vendorBills?: Prisma.VendorBillCreateNestedManyWithoutPurchaseOrderInput
   SalesOrder?: Prisma.SalesOrderCreateNestedOneWithoutPurchaseOrdersInput
   nkps?: Prisma.NkpCreateNestedManyWithoutPurchaseOrderInput
 }
@@ -2266,6 +2492,7 @@ export type PurchaseOrderUncheckedCreateWithoutCompanyInput = {
   userId: number
   PurchaseOrderItems?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutPurchaseOrderInput
   goodsReceipts?: Prisma.GoodsReceiptUncheckedCreateNestedManyWithoutPurchaseOrderInput
+  vendorBills?: Prisma.VendorBillUncheckedCreateNestedManyWithoutPurchaseOrderInput
   nkps?: Prisma.NkpUncheckedCreateNestedManyWithoutPurchaseOrderInput
 }
 
@@ -2332,6 +2559,7 @@ export type PurchaseOrderCreateWithoutUserInput = {
   Supplier?: Prisma.SupplierCreateNestedOneWithoutPurchaseOrdersInput
   Company: Prisma.CompanyCreateNestedOneWithoutPurchaseOrdersInput
   goodsReceipts?: Prisma.GoodsReceiptCreateNestedManyWithoutPurchaseOrderInput
+  vendorBills?: Prisma.VendorBillCreateNestedManyWithoutPurchaseOrderInput
   SalesOrder?: Prisma.SalesOrderCreateNestedOneWithoutPurchaseOrdersInput
   nkps?: Prisma.NkpCreateNestedManyWithoutPurchaseOrderInput
 }
@@ -2375,6 +2603,7 @@ export type PurchaseOrderUncheckedCreateWithoutUserInput = {
   companyId: number
   PurchaseOrderItems?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutPurchaseOrderInput
   goodsReceipts?: Prisma.GoodsReceiptUncheckedCreateNestedManyWithoutPurchaseOrderInput
+  vendorBills?: Prisma.VendorBillUncheckedCreateNestedManyWithoutPurchaseOrderInput
   nkps?: Prisma.NkpUncheckedCreateNestedManyWithoutPurchaseOrderInput
 }
 
@@ -2480,6 +2709,7 @@ export type PurchaseOrderUpdateWithoutSupplierInput = {
   PurchaseOrderItems?: Prisma.PurchaseOrderItemUpdateManyWithoutPurchaseOrderNestedInput
   Company?: Prisma.CompanyUpdateOneRequiredWithoutPurchaseOrdersNestedInput
   goodsReceipts?: Prisma.GoodsReceiptUpdateManyWithoutPurchaseOrderNestedInput
+  vendorBills?: Prisma.VendorBillUpdateManyWithoutPurchaseOrderNestedInput
   SalesOrder?: Prisma.SalesOrderUpdateOneWithoutPurchaseOrdersNestedInput
   nkps?: Prisma.NkpUpdateManyWithoutPurchaseOrderNestedInput
 }
@@ -2523,6 +2753,7 @@ export type PurchaseOrderUncheckedUpdateWithoutSupplierInput = {
   companyId?: Prisma.IntFieldUpdateOperationsInput | number
   PurchaseOrderItems?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutPurchaseOrderNestedInput
   goodsReceipts?: Prisma.GoodsReceiptUncheckedUpdateManyWithoutPurchaseOrderNestedInput
+  vendorBills?: Prisma.VendorBillUncheckedUpdateManyWithoutPurchaseOrderNestedInput
   nkps?: Prisma.NkpUncheckedUpdateManyWithoutPurchaseOrderNestedInput
 }
 
@@ -2642,6 +2873,7 @@ export type PurchaseOrderUpdateWithoutSalesOrderInput = {
   Supplier?: Prisma.SupplierUpdateOneWithoutPurchaseOrdersNestedInput
   Company?: Prisma.CompanyUpdateOneRequiredWithoutPurchaseOrdersNestedInput
   goodsReceipts?: Prisma.GoodsReceiptUpdateManyWithoutPurchaseOrderNestedInput
+  vendorBills?: Prisma.VendorBillUpdateManyWithoutPurchaseOrderNestedInput
   nkps?: Prisma.NkpUpdateManyWithoutPurchaseOrderNestedInput
 }
 
@@ -2684,6 +2916,7 @@ export type PurchaseOrderUncheckedUpdateWithoutSalesOrderInput = {
   companyId?: Prisma.IntFieldUpdateOperationsInput | number
   PurchaseOrderItems?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutPurchaseOrderNestedInput
   goodsReceipts?: Prisma.GoodsReceiptUncheckedUpdateManyWithoutPurchaseOrderNestedInput
+  vendorBills?: Prisma.VendorBillUncheckedUpdateManyWithoutPurchaseOrderNestedInput
   nkps?: Prisma.NkpUncheckedUpdateManyWithoutPurchaseOrderNestedInput
 }
 
@@ -2802,6 +3035,7 @@ export type PurchaseOrderUpdateWithoutCompanyInput = {
   PurchaseOrderItems?: Prisma.PurchaseOrderItemUpdateManyWithoutPurchaseOrderNestedInput
   Supplier?: Prisma.SupplierUpdateOneWithoutPurchaseOrdersNestedInput
   goodsReceipts?: Prisma.GoodsReceiptUpdateManyWithoutPurchaseOrderNestedInput
+  vendorBills?: Prisma.VendorBillUpdateManyWithoutPurchaseOrderNestedInput
   SalesOrder?: Prisma.SalesOrderUpdateOneWithoutPurchaseOrdersNestedInput
   nkps?: Prisma.NkpUpdateManyWithoutPurchaseOrderNestedInput
 }
@@ -2845,6 +3079,7 @@ export type PurchaseOrderUncheckedUpdateWithoutCompanyInput = {
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   PurchaseOrderItems?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutPurchaseOrderNestedInput
   goodsReceipts?: Prisma.GoodsReceiptUncheckedUpdateManyWithoutPurchaseOrderNestedInput
+  vendorBills?: Prisma.VendorBillUncheckedUpdateManyWithoutPurchaseOrderNestedInput
   nkps?: Prisma.NkpUncheckedUpdateManyWithoutPurchaseOrderNestedInput
 }
 
@@ -2963,6 +3198,7 @@ export type PurchaseOrderUpdateWithoutUserInput = {
   Supplier?: Prisma.SupplierUpdateOneWithoutPurchaseOrdersNestedInput
   Company?: Prisma.CompanyUpdateOneRequiredWithoutPurchaseOrdersNestedInput
   goodsReceipts?: Prisma.GoodsReceiptUpdateManyWithoutPurchaseOrderNestedInput
+  vendorBills?: Prisma.VendorBillUpdateManyWithoutPurchaseOrderNestedInput
   SalesOrder?: Prisma.SalesOrderUpdateOneWithoutPurchaseOrdersNestedInput
   nkps?: Prisma.NkpUpdateManyWithoutPurchaseOrderNestedInput
 }
@@ -3006,6 +3242,7 @@ export type PurchaseOrderUncheckedUpdateWithoutUserInput = {
   companyId?: Prisma.IntFieldUpdateOperationsInput | number
   PurchaseOrderItems?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutPurchaseOrderNestedInput
   goodsReceipts?: Prisma.GoodsReceiptUncheckedUpdateManyWithoutPurchaseOrderNestedInput
+  vendorBills?: Prisma.VendorBillUncheckedUpdateManyWithoutPurchaseOrderNestedInput
   nkps?: Prisma.NkpUncheckedUpdateManyWithoutPurchaseOrderNestedInput
 }
 
@@ -3056,12 +3293,14 @@ export type PurchaseOrderUncheckedUpdateManyWithoutUserInput = {
 export type PurchaseOrderCountOutputType = {
   PurchaseOrderItems: number
   goodsReceipts: number
+  vendorBills: number
   nkps: number
 }
 
 export type PurchaseOrderCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   PurchaseOrderItems?: boolean | PurchaseOrderCountOutputTypeCountPurchaseOrderItemsArgs
   goodsReceipts?: boolean | PurchaseOrderCountOutputTypeCountGoodsReceiptsArgs
+  vendorBills?: boolean | PurchaseOrderCountOutputTypeCountVendorBillsArgs
   nkps?: boolean | PurchaseOrderCountOutputTypeCountNkpsArgs
 }
 
@@ -3087,6 +3326,13 @@ export type PurchaseOrderCountOutputTypeCountPurchaseOrderItemsArgs<ExtArgs exte
  */
 export type PurchaseOrderCountOutputTypeCountGoodsReceiptsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.GoodsReceiptWhereInput
+}
+
+/**
+ * PurchaseOrderCountOutputType without action
+ */
+export type PurchaseOrderCountOutputTypeCountVendorBillsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.VendorBillWhereInput
 }
 
 /**
@@ -3140,6 +3386,7 @@ export type PurchaseOrderSelect<ExtArgs extends runtime.Types.Extensions.Interna
   Supplier?: boolean | Prisma.PurchaseOrder$SupplierArgs<ExtArgs>
   Company?: boolean | Prisma.CompanyDefaultArgs<ExtArgs>
   goodsReceipts?: boolean | Prisma.PurchaseOrder$goodsReceiptsArgs<ExtArgs>
+  vendorBills?: boolean | Prisma.PurchaseOrder$vendorBillsArgs<ExtArgs>
   SalesOrder?: boolean | Prisma.PurchaseOrder$SalesOrderArgs<ExtArgs>
   nkps?: boolean | Prisma.PurchaseOrder$nkpsArgs<ExtArgs>
   _count?: boolean | Prisma.PurchaseOrderCountOutputTypeDefaultArgs<ExtArgs>
@@ -3280,6 +3527,7 @@ export type PurchaseOrderInclude<ExtArgs extends runtime.Types.Extensions.Intern
   Supplier?: boolean | Prisma.PurchaseOrder$SupplierArgs<ExtArgs>
   Company?: boolean | Prisma.CompanyDefaultArgs<ExtArgs>
   goodsReceipts?: boolean | Prisma.PurchaseOrder$goodsReceiptsArgs<ExtArgs>
+  vendorBills?: boolean | Prisma.PurchaseOrder$vendorBillsArgs<ExtArgs>
   SalesOrder?: boolean | Prisma.PurchaseOrder$SalesOrderArgs<ExtArgs>
   nkps?: boolean | Prisma.PurchaseOrder$nkpsArgs<ExtArgs>
   _count?: boolean | Prisma.PurchaseOrderCountOutputTypeDefaultArgs<ExtArgs>
@@ -3305,6 +3553,7 @@ export type $PurchaseOrderPayload<ExtArgs extends runtime.Types.Extensions.Inter
     Supplier: Prisma.$SupplierPayload<ExtArgs> | null
     Company: Prisma.$CompanyPayload<ExtArgs>
     goodsReceipts: Prisma.$GoodsReceiptPayload<ExtArgs>[]
+    vendorBills: Prisma.$VendorBillPayload<ExtArgs>[]
     SalesOrder: Prisma.$SalesOrderPayload<ExtArgs> | null
     nkps: Prisma.$NkpPayload<ExtArgs>[]
   }
@@ -3745,6 +3994,7 @@ export interface Prisma__PurchaseOrderClient<T, Null = never, ExtArgs extends ru
   Supplier<T extends Prisma.PurchaseOrder$SupplierArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PurchaseOrder$SupplierArgs<ExtArgs>>): Prisma.Prisma__SupplierClient<runtime.Types.Result.GetResult<Prisma.$SupplierPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   Company<T extends Prisma.CompanyDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CompanyDefaultArgs<ExtArgs>>): Prisma.Prisma__CompanyClient<runtime.Types.Result.GetResult<Prisma.$CompanyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   goodsReceipts<T extends Prisma.PurchaseOrder$goodsReceiptsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PurchaseOrder$goodsReceiptsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$GoodsReceiptPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  vendorBills<T extends Prisma.PurchaseOrder$vendorBillsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PurchaseOrder$vendorBillsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$VendorBillPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   SalesOrder<T extends Prisma.PurchaseOrder$SalesOrderArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PurchaseOrder$SalesOrderArgs<ExtArgs>>): Prisma.Prisma__SalesOrderClient<runtime.Types.Result.GetResult<Prisma.$SalesOrderPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   nkps<T extends Prisma.PurchaseOrder$nkpsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PurchaseOrder$nkpsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NkpPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
@@ -4278,6 +4528,30 @@ export type PurchaseOrder$goodsReceiptsArgs<ExtArgs extends runtime.Types.Extens
   take?: number
   skip?: number
   distinct?: Prisma.GoodsReceiptScalarFieldEnum | Prisma.GoodsReceiptScalarFieldEnum[]
+}
+
+/**
+ * PurchaseOrder.vendorBills
+ */
+export type PurchaseOrder$vendorBillsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the VendorBill
+   */
+  select?: Prisma.VendorBillSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the VendorBill
+   */
+  omit?: Prisma.VendorBillOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.VendorBillInclude<ExtArgs> | null
+  where?: Prisma.VendorBillWhereInput
+  orderBy?: Prisma.VendorBillOrderByWithRelationInput | Prisma.VendorBillOrderByWithRelationInput[]
+  cursor?: Prisma.VendorBillWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.VendorBillScalarFieldEnum | Prisma.VendorBillScalarFieldEnum[]
 }
 
 /**

@@ -179,13 +179,6 @@ export class InvoicesService {
         },
         DeliveryOrder: { select: { id: true, number: true } },
         InvoiceItems: true,
-        Payments: {
-          select: {
-            id: true,
-            date: true,
-            amountPaid: true,
-          },
-        },
         _count: {
           select: { InvoiceItems: true },
         },

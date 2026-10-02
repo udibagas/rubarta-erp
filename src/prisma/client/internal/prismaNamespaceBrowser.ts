@@ -51,9 +51,18 @@ export const AnyNull = runtime.AnyNull
 
 
 export const ModelName = {
-  Supplier: 'Supplier',
   Account: 'Account',
+  AccountBalance: 'AccountBalance',
+  FiscalPeriod: 'FiscalPeriod',
+  JournalEntry: 'JournalEntry',
+  JournalLine: 'JournalLine',
+  VendorBill: 'VendorBill',
   Payment: 'Payment',
+  PaymentAllocation: 'PaymentAllocation',
+  CashBankAccount: 'CashBankAccount',
+  BankTransaction: 'BankTransaction',
+  TaxRate: 'TaxRate',
+  Supplier: 'Supplier',
   Expense: 'Expense',
   ApprovalSetting: 'ApprovalSetting',
   ApprovalSettingItem: 'ApprovalSettingItem',
@@ -109,6 +118,194 @@ export const TransactionIsolationLevel = runtime.makeStrictEnum({
 export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
 
 
+export const AccountScalarFieldEnum = {
+  id: 'id',
+  code: 'code',
+  name: 'name',
+  type: 'type',
+  parentId: 'parentId',
+  isActive: 'isActive',
+  isSystem: 'isSystem',
+  isPostable: 'isPostable',
+  description: 'description',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type AccountScalarFieldEnum = (typeof AccountScalarFieldEnum)[keyof typeof AccountScalarFieldEnum]
+
+
+export const AccountBalanceScalarFieldEnum = {
+  id: 'id',
+  accountId: 'accountId',
+  periodId: 'periodId',
+  openingBalance: 'openingBalance',
+  debitTotal: 'debitTotal',
+  creditTotal: 'creditTotal',
+  updatedAt: 'updatedAt'
+} as const
+
+export type AccountBalanceScalarFieldEnum = (typeof AccountBalanceScalarFieldEnum)[keyof typeof AccountBalanceScalarFieldEnum]
+
+
+export const FiscalPeriodScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  startDate: 'startDate',
+  endDate: 'endDate',
+  status: 'status',
+  closedAt: 'closedAt',
+  closedById: 'closedById',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type FiscalPeriodScalarFieldEnum = (typeof FiscalPeriodScalarFieldEnum)[keyof typeof FiscalPeriodScalarFieldEnum]
+
+
+export const JournalEntryScalarFieldEnum = {
+  id: 'id',
+  number: 'number',
+  date: 'date',
+  description: 'description',
+  status: 'status',
+  source: 'source',
+  sourceId: 'sourceId',
+  periodId: 'periodId',
+  reversalOfId: 'reversalOfId',
+  createdById: 'createdById',
+  postedById: 'postedById',
+  postedAt: 'postedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type JournalEntryScalarFieldEnum = (typeof JournalEntryScalarFieldEnum)[keyof typeof JournalEntryScalarFieldEnum]
+
+
+export const JournalLineScalarFieldEnum = {
+  id: 'id',
+  journalId: 'journalId',
+  accountId: 'accountId',
+  description: 'description',
+  debit: 'debit',
+  credit: 'credit',
+  sortOrder: 'sortOrder'
+} as const
+
+export type JournalLineScalarFieldEnum = (typeof JournalLineScalarFieldEnum)[keyof typeof JournalLineScalarFieldEnum]
+
+
+export const VendorBillScalarFieldEnum = {
+  id: 'id',
+  number: 'number',
+  vendorRef: 'vendorRef',
+  supplierId: 'supplierId',
+  purchaseOrderId: 'purchaseOrderId',
+  date: 'date',
+  dueDate: 'dueDate',
+  currency: 'currency',
+  subtotal: 'subtotal',
+  taxAmount: 'taxAmount',
+  total: 'total',
+  paidAmount: 'paidAmount',
+  status: 'status',
+  notes: 'notes',
+  journalId: 'journalId',
+  createdById: 'createdById',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type VendorBillScalarFieldEnum = (typeof VendorBillScalarFieldEnum)[keyof typeof VendorBillScalarFieldEnum]
+
+
+export const PaymentScalarFieldEnum = {
+  id: 'id',
+  number: 'number',
+  direction: 'direction',
+  date: 'date',
+  method: 'method',
+  customerId: 'customerId',
+  supplierId: 'supplierId',
+  cashBankAccountId: 'cashBankAccountId',
+  reference: 'reference',
+  currency: 'currency',
+  amount: 'amount',
+  status: 'status',
+  notes: 'notes',
+  journalId: 'journalId',
+  createdById: 'createdById',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type PaymentScalarFieldEnum = (typeof PaymentScalarFieldEnum)[keyof typeof PaymentScalarFieldEnum]
+
+
+export const PaymentAllocationScalarFieldEnum = {
+  id: 'id',
+  paymentId: 'paymentId',
+  invoiceId: 'invoiceId',
+  vendorBillId: 'vendorBillId',
+  amount: 'amount'
+} as const
+
+export type PaymentAllocationScalarFieldEnum = (typeof PaymentAllocationScalarFieldEnum)[keyof typeof PaymentAllocationScalarFieldEnum]
+
+
+export const CashBankAccountScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  type: 'type',
+  accountId: 'accountId',
+  bankName: 'bankName',
+  accountNumber: 'accountNumber',
+  accountHolder: 'accountHolder',
+  currency: 'currency',
+  openingBalance: 'openingBalance',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CashBankAccountScalarFieldEnum = (typeof CashBankAccountScalarFieldEnum)[keyof typeof CashBankAccountScalarFieldEnum]
+
+
+export const BankTransactionScalarFieldEnum = {
+  id: 'id',
+  cashBankAccountId: 'cashBankAccountId',
+  date: 'date',
+  description: 'description',
+  type: 'type',
+  amount: 'amount',
+  offsetAccountId: 'offsetAccountId',
+  reconciled: 'reconciled',
+  reconciledAt: 'reconciledAt',
+  journalId: 'journalId',
+  createdById: 'createdById',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type BankTransactionScalarFieldEnum = (typeof BankTransactionScalarFieldEnum)[keyof typeof BankTransactionScalarFieldEnum]
+
+
+export const TaxRateScalarFieldEnum = {
+  id: 'id',
+  code: 'code',
+  name: 'name',
+  rate: 'rate',
+  type: 'type',
+  accountId: 'accountId',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type TaxRateScalarFieldEnum = (typeof TaxRateScalarFieldEnum)[keyof typeof TaxRateScalarFieldEnum]
+
+
 export const SupplierScalarFieldEnum = {
   id: 'id',
   code: 'code',
@@ -122,32 +319,6 @@ export const SupplierScalarFieldEnum = {
 } as const
 
 export type SupplierScalarFieldEnum = (typeof SupplierScalarFieldEnum)[keyof typeof SupplierScalarFieldEnum]
-
-
-export const AccountScalarFieldEnum = {
-  id: 'id',
-  code: 'code',
-  name: 'name',
-  type: 'type',
-  balance: 'balance'
-} as const
-
-export type AccountScalarFieldEnum = (typeof AccountScalarFieldEnum)[keyof typeof AccountScalarFieldEnum]
-
-
-export const PaymentScalarFieldEnum = {
-  id: 'id',
-  date: 'date',
-  amountPaid: 'amountPaid',
-  remarks: 'remarks',
-  attachments: 'attachments',
-  invoiceId: 'invoiceId',
-  userId: 'userId',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-} as const
-
-export type PaymentScalarFieldEnum = (typeof PaymentScalarFieldEnum)[keyof typeof PaymentScalarFieldEnum]
 
 
 export const ExpenseScalarFieldEnum = {

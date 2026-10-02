@@ -18,6 +18,101 @@ export const Currency = {
 export type Currency = (typeof Currency)[keyof typeof Currency]
 
 
+export const AccountType = {
+  ASSET: 'ASSET',
+  LIABILITY: 'LIABILITY',
+  EQUITY: 'EQUITY',
+  REVENUE: 'REVENUE',
+  EXPENSE: 'EXPENSE'
+} as const
+
+export type AccountType = (typeof AccountType)[keyof typeof AccountType]
+
+
+export const JournalStatus = {
+  DRAFT: 'DRAFT',
+  POSTED: 'POSTED',
+  VOID: 'VOID'
+} as const
+
+export type JournalStatus = (typeof JournalStatus)[keyof typeof JournalStatus]
+
+
+export const JournalSource = {
+  MANUAL: 'MANUAL',
+  SALES_INVOICE: 'SALES_INVOICE',
+  VENDOR_BILL: 'VENDOR_BILL',
+  RECEIPT: 'RECEIPT',
+  PAYMENT: 'PAYMENT',
+  BANK_TRANSACTION: 'BANK_TRANSACTION'
+} as const
+
+export type JournalSource = (typeof JournalSource)[keyof typeof JournalSource]
+
+
+export const SettlementStatus = {
+  OPEN: 'OPEN',
+  PARTIAL: 'PARTIAL',
+  PAID: 'PAID',
+  OVERDUE: 'OVERDUE',
+  VOID: 'VOID'
+} as const
+
+export type SettlementStatus = (typeof SettlementStatus)[keyof typeof SettlementStatus]
+
+
+export const PaymentDirection = {
+  IN: 'IN',
+  OUT: 'OUT'
+} as const
+
+export type PaymentDirection = (typeof PaymentDirection)[keyof typeof PaymentDirection]
+
+
+export const PaymentMethod = {
+  TRANSFER: 'TRANSFER',
+  CASH: 'CASH',
+  CHEQUE: 'CHEQUE',
+  GIRO: 'GIRO'
+} as const
+
+export type PaymentMethod = (typeof PaymentMethod)[keyof typeof PaymentMethod]
+
+
+export const AccountingPaymentStatus = {
+  DRAFT: 'DRAFT',
+  CONFIRMED: 'CONFIRMED',
+  VOID: 'VOID'
+} as const
+
+export type AccountingPaymentStatus = (typeof AccountingPaymentStatus)[keyof typeof AccountingPaymentStatus]
+
+
+export const CashBankType = {
+  CASH: 'CASH',
+  BANK: 'BANK'
+} as const
+
+export type CashBankType = (typeof CashBankType)[keyof typeof CashBankType]
+
+
+export const TaxType = {
+  OUTPUT: 'OUTPUT',
+  INPUT: 'INPUT',
+  WITHHOLDING: 'WITHHOLDING'
+} as const
+
+export type TaxType = (typeof TaxType)[keyof typeof TaxType]
+
+
+export const PeriodStatus = {
+  OPEN: 'OPEN',
+  CLOSED: 'CLOSED'
+} as const
+
+export type PeriodStatus = (typeof PeriodStatus)[keyof typeof PeriodStatus]
+
+
 export const ApprovalType = {
   NKP: 'NKP',
   QUOTATION: 'QUOTATION',

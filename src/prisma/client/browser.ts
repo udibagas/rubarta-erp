@@ -18,20 +18,65 @@ export { Prisma }
 export * as $Enums from './enums'
 export * from './enums';
 /**
- * Model Supplier
- * 
- */
-export type Supplier = Prisma.SupplierModel
-/**
  * Model Account
  * 
  */
 export type Account = Prisma.AccountModel
 /**
+ * Model AccountBalance
+ * 
+ */
+export type AccountBalance = Prisma.AccountBalanceModel
+/**
+ * Model FiscalPeriod
+ * 
+ */
+export type FiscalPeriod = Prisma.FiscalPeriodModel
+/**
+ * Model JournalEntry
+ * 
+ */
+export type JournalEntry = Prisma.JournalEntryModel
+/**
+ * Model JournalLine
+ * 
+ */
+export type JournalLine = Prisma.JournalLineModel
+/**
+ * Model VendorBill
+ * 
+ */
+export type VendorBill = Prisma.VendorBillModel
+/**
  * Model Payment
  * 
  */
 export type Payment = Prisma.PaymentModel
+/**
+ * Model PaymentAllocation
+ * 
+ */
+export type PaymentAllocation = Prisma.PaymentAllocationModel
+/**
+ * Model CashBankAccount
+ * 
+ */
+export type CashBankAccount = Prisma.CashBankAccountModel
+/**
+ * Model BankTransaction
+ * 
+ */
+export type BankTransaction = Prisma.BankTransactionModel
+/**
+ * Model TaxRate
+ * 
+ */
+export type TaxRate = Prisma.TaxRateModel
+/**
+ * Model Supplier
+ * 
+ */
+export type Supplier = Prisma.SupplierModel
 /**
  * Model Expense
  * 

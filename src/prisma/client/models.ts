@@ -8,9 +8,18 @@
  *
  * 🟢 You can import this file directly.
  */
-export type * from './models/Supplier'
 export type * from './models/Account'
+export type * from './models/AccountBalance'
+export type * from './models/FiscalPeriod'
+export type * from './models/JournalEntry'
+export type * from './models/JournalLine'
+export type * from './models/VendorBill'
 export type * from './models/Payment'
+export type * from './models/PaymentAllocation'
+export type * from './models/CashBankAccount'
+export type * from './models/BankTransaction'
+export type * from './models/TaxRate'
+export type * from './models/Supplier'
 export type * from './models/Expense'
 export type * from './models/ApprovalSetting'
 export type * from './models/ApprovalSettingItem'

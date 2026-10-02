@@ -310,6 +310,7 @@ export type CustomerWhereInput = {
   updatedAt?: Prisma.DateTimeNullableFilter<"Customer"> | Date | string | null
   accountManager?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   Invoices?: Prisma.InvoiceListRelationFilter
+  accountingPayments?: Prisma.PaymentListRelationFilter
   Contacts?: Prisma.ContactListRelationFilter
   Leads?: Prisma.LeadListRelationFilter
   Opportunities?: Prisma.OpportunityListRelationFilter
@@ -341,6 +342,7 @@ export type CustomerOrderByWithRelationInput = {
   updatedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   accountManager?: Prisma.UserOrderByWithRelationInput
   Invoices?: Prisma.InvoiceOrderByRelationAggregateInput
+  accountingPayments?: Prisma.PaymentOrderByRelationAggregateInput
   Contacts?: Prisma.ContactOrderByRelationAggregateInput
   Leads?: Prisma.LeadOrderByRelationAggregateInput
   Opportunities?: Prisma.OpportunityOrderByRelationAggregateInput
@@ -375,6 +377,7 @@ export type CustomerWhereUniqueInput = Prisma.AtLeast<{
   updatedAt?: Prisma.DateTimeNullableFilter<"Customer"> | Date | string | null
   accountManager?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   Invoices?: Prisma.InvoiceListRelationFilter
+  accountingPayments?: Prisma.PaymentListRelationFilter
   Contacts?: Prisma.ContactListRelationFilter
   Leads?: Prisma.LeadListRelationFilter
   Opportunities?: Prisma.OpportunityListRelationFilter
@@ -450,6 +453,7 @@ export type CustomerCreateInput = {
   updatedAt?: Date | string | null
   accountManager?: Prisma.UserCreateNestedOneWithoutCustomersInput
   Invoices?: Prisma.InvoiceCreateNestedManyWithoutCustomerInput
+  accountingPayments?: Prisma.PaymentCreateNestedManyWithoutCustomerInput
   Contacts?: Prisma.ContactCreateNestedManyWithoutCustomerInput
   Leads?: Prisma.LeadCreateNestedManyWithoutCustomerInput
   Opportunities?: Prisma.OpportunityCreateNestedManyWithoutCustomerInput
@@ -480,6 +484,7 @@ export type CustomerUncheckedCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string | null
   Invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutCustomerInput
+  accountingPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCustomerInput
   Contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutCustomerInput
   Leads?: Prisma.LeadUncheckedCreateNestedManyWithoutCustomerInput
   Opportunities?: Prisma.OpportunityUncheckedCreateNestedManyWithoutCustomerInput
@@ -509,6 +514,7 @@ export type CustomerUpdateInput = {
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   accountManager?: Prisma.UserUpdateOneWithoutCustomersNestedInput
   Invoices?: Prisma.InvoiceUpdateManyWithoutCustomerNestedInput
+  accountingPayments?: Prisma.PaymentUpdateManyWithoutCustomerNestedInput
   Contacts?: Prisma.ContactUpdateManyWithoutCustomerNestedInput
   Leads?: Prisma.LeadUpdateManyWithoutCustomerNestedInput
   Opportunities?: Prisma.OpportunityUpdateManyWithoutCustomerNestedInput
@@ -539,6 +545,7 @@ export type CustomerUncheckedUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutCustomerNestedInput
+  accountingPayments?: Prisma.PaymentUncheckedUpdateManyWithoutCustomerNestedInput
   Contacts?: Prisma.ContactUncheckedUpdateManyWithoutCustomerNestedInput
   Leads?: Prisma.LeadUncheckedUpdateManyWithoutCustomerNestedInput
   Opportunities?: Prisma.OpportunityUncheckedUpdateManyWithoutCustomerNestedInput
@@ -699,6 +706,22 @@ export type CustomerListRelationFilter = {
 
 export type CustomerOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
+}
+
+export type CustomerCreateNestedOneWithoutAccountingPaymentsInput = {
+  create?: Prisma.XOR<Prisma.CustomerCreateWithoutAccountingPaymentsInput, Prisma.CustomerUncheckedCreateWithoutAccountingPaymentsInput>
+  connectOrCreate?: Prisma.CustomerCreateOrConnectWithoutAccountingPaymentsInput
+  connect?: Prisma.CustomerWhereUniqueInput
+}
+
+export type CustomerUpdateOneWithoutAccountingPaymentsNestedInput = {
+  create?: Prisma.XOR<Prisma.CustomerCreateWithoutAccountingPaymentsInput, Prisma.CustomerUncheckedCreateWithoutAccountingPaymentsInput>
+  connectOrCreate?: Prisma.CustomerCreateOrConnectWithoutAccountingPaymentsInput
+  upsert?: Prisma.CustomerUpsertWithoutAccountingPaymentsInput
+  disconnect?: Prisma.CustomerWhereInput | boolean
+  delete?: Prisma.CustomerWhereInput | boolean
+  connect?: Prisma.CustomerWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CustomerUpdateToOneWithWhereWithoutAccountingPaymentsInput, Prisma.CustomerUpdateWithoutAccountingPaymentsInput>, Prisma.CustomerUncheckedUpdateWithoutAccountingPaymentsInput>
 }
 
 export type CustomerCreateNestedOneWithoutLeadsInput = {
@@ -910,6 +933,140 @@ export type CustomerUpdateOneRequiredWithoutVisitPlansNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.CustomerUpdateToOneWithWhereWithoutVisitPlansInput, Prisma.CustomerUpdateWithoutVisitPlansInput>, Prisma.CustomerUncheckedUpdateWithoutVisitPlansInput>
 }
 
+export type CustomerCreateWithoutAccountingPaymentsInput = {
+  name: string
+  address: string
+  phone: string
+  email: string
+  website?: string | null
+  industry?: string | null
+  employeeCount?: number | null
+  revenue?: number | null
+  tags?: Prisma.CustomerCreatetagsInput | string[]
+  isActive?: boolean
+  deletedAt?: Date | string | null
+  preferredBank?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  createdAt?: Date | string
+  updatedAt?: Date | string | null
+  accountManager?: Prisma.UserCreateNestedOneWithoutCustomersInput
+  Invoices?: Prisma.InvoiceCreateNestedManyWithoutCustomerInput
+  Contacts?: Prisma.ContactCreateNestedManyWithoutCustomerInput
+  Leads?: Prisma.LeadCreateNestedManyWithoutCustomerInput
+  Opportunities?: Prisma.OpportunityCreateNestedManyWithoutCustomerInput
+  SalesOrders?: Prisma.SalesOrderCreateNestedManyWithoutCustomerInput
+  DeliveryOrders?: Prisma.DeliveryOrderCreateNestedManyWithoutCustomerInput
+  CustomerNotes?: Prisma.CustomerNoteCreateNestedManyWithoutCustomerInput
+  CustomerFiles?: Prisma.CustomerFileCreateNestedManyWithoutCustomerInput
+  Quotations?: Prisma.QuotationCreateNestedManyWithoutCustomerInput
+  VisitPlans?: Prisma.VisitPlanCreateNestedManyWithoutCustomerInput
+  Tasks?: Prisma.TaskCreateNestedManyWithoutCustomerInput
+}
+
+export type CustomerUncheckedCreateWithoutAccountingPaymentsInput = {
+  id?: number
+  name: string
+  address: string
+  phone: string
+  email: string
+  website?: string | null
+  industry?: string | null
+  employeeCount?: number | null
+  revenue?: number | null
+  tags?: Prisma.CustomerCreatetagsInput | string[]
+  accountManagerId?: number | null
+  isActive?: boolean
+  deletedAt?: Date | string | null
+  preferredBank?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  createdAt?: Date | string
+  updatedAt?: Date | string | null
+  Invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutCustomerInput
+  Contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutCustomerInput
+  Leads?: Prisma.LeadUncheckedCreateNestedManyWithoutCustomerInput
+  Opportunities?: Prisma.OpportunityUncheckedCreateNestedManyWithoutCustomerInput
+  SalesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutCustomerInput
+  DeliveryOrders?: Prisma.DeliveryOrderUncheckedCreateNestedManyWithoutCustomerInput
+  CustomerNotes?: Prisma.CustomerNoteUncheckedCreateNestedManyWithoutCustomerInput
+  CustomerFiles?: Prisma.CustomerFileUncheckedCreateNestedManyWithoutCustomerInput
+  Quotations?: Prisma.QuotationUncheckedCreateNestedManyWithoutCustomerInput
+  VisitPlans?: Prisma.VisitPlanUncheckedCreateNestedManyWithoutCustomerInput
+  Tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutCustomerInput
+}
+
+export type CustomerCreateOrConnectWithoutAccountingPaymentsInput = {
+  where: Prisma.CustomerWhereUniqueInput
+  create: Prisma.XOR<Prisma.CustomerCreateWithoutAccountingPaymentsInput, Prisma.CustomerUncheckedCreateWithoutAccountingPaymentsInput>
+}
+
+export type CustomerUpsertWithoutAccountingPaymentsInput = {
+  update: Prisma.XOR<Prisma.CustomerUpdateWithoutAccountingPaymentsInput, Prisma.CustomerUncheckedUpdateWithoutAccountingPaymentsInput>
+  create: Prisma.XOR<Prisma.CustomerCreateWithoutAccountingPaymentsInput, Prisma.CustomerUncheckedCreateWithoutAccountingPaymentsInput>
+  where?: Prisma.CustomerWhereInput
+}
+
+export type CustomerUpdateToOneWithWhereWithoutAccountingPaymentsInput = {
+  where?: Prisma.CustomerWhereInput
+  data: Prisma.XOR<Prisma.CustomerUpdateWithoutAccountingPaymentsInput, Prisma.CustomerUncheckedUpdateWithoutAccountingPaymentsInput>
+}
+
+export type CustomerUpdateWithoutAccountingPaymentsInput = {
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  industry?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  employeeCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  revenue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  tags?: Prisma.CustomerUpdatetagsInput | string[]
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  preferredBank?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  accountManager?: Prisma.UserUpdateOneWithoutCustomersNestedInput
+  Invoices?: Prisma.InvoiceUpdateManyWithoutCustomerNestedInput
+  Contacts?: Prisma.ContactUpdateManyWithoutCustomerNestedInput
+  Leads?: Prisma.LeadUpdateManyWithoutCustomerNestedInput
+  Opportunities?: Prisma.OpportunityUpdateManyWithoutCustomerNestedInput
+  SalesOrders?: Prisma.SalesOrderUpdateManyWithoutCustomerNestedInput
+  DeliveryOrders?: Prisma.DeliveryOrderUpdateManyWithoutCustomerNestedInput
+  CustomerNotes?: Prisma.CustomerNoteUpdateManyWithoutCustomerNestedInput
+  CustomerFiles?: Prisma.CustomerFileUpdateManyWithoutCustomerNestedInput
+  Quotations?: Prisma.QuotationUpdateManyWithoutCustomerNestedInput
+  VisitPlans?: Prisma.VisitPlanUpdateManyWithoutCustomerNestedInput
+  Tasks?: Prisma.TaskUpdateManyWithoutCustomerNestedInput
+}
+
+export type CustomerUncheckedUpdateWithoutAccountingPaymentsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  industry?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  employeeCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  revenue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  tags?: Prisma.CustomerUpdatetagsInput | string[]
+  accountManagerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  preferredBank?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  Invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutCustomerNestedInput
+  Contacts?: Prisma.ContactUncheckedUpdateManyWithoutCustomerNestedInput
+  Leads?: Prisma.LeadUncheckedUpdateManyWithoutCustomerNestedInput
+  Opportunities?: Prisma.OpportunityUncheckedUpdateManyWithoutCustomerNestedInput
+  SalesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutCustomerNestedInput
+  DeliveryOrders?: Prisma.DeliveryOrderUncheckedUpdateManyWithoutCustomerNestedInput
+  CustomerNotes?: Prisma.CustomerNoteUncheckedUpdateManyWithoutCustomerNestedInput
+  CustomerFiles?: Prisma.CustomerFileUncheckedUpdateManyWithoutCustomerNestedInput
+  Quotations?: Prisma.QuotationUncheckedUpdateManyWithoutCustomerNestedInput
+  VisitPlans?: Prisma.VisitPlanUncheckedUpdateManyWithoutCustomerNestedInput
+  Tasks?: Prisma.TaskUncheckedUpdateManyWithoutCustomerNestedInput
+}
+
 export type CustomerCreateWithoutLeadsInput = {
   name: string
   address: string
@@ -927,6 +1084,7 @@ export type CustomerCreateWithoutLeadsInput = {
   updatedAt?: Date | string | null
   accountManager?: Prisma.UserCreateNestedOneWithoutCustomersInput
   Invoices?: Prisma.InvoiceCreateNestedManyWithoutCustomerInput
+  accountingPayments?: Prisma.PaymentCreateNestedManyWithoutCustomerInput
   Contacts?: Prisma.ContactCreateNestedManyWithoutCustomerInput
   Opportunities?: Prisma.OpportunityCreateNestedManyWithoutCustomerInput
   SalesOrders?: Prisma.SalesOrderCreateNestedManyWithoutCustomerInput
@@ -956,6 +1114,7 @@ export type CustomerUncheckedCreateWithoutLeadsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string | null
   Invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutCustomerInput
+  accountingPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCustomerInput
   Contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutCustomerInput
   Opportunities?: Prisma.OpportunityUncheckedCreateNestedManyWithoutCustomerInput
   SalesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutCustomerInput
@@ -1000,6 +1159,7 @@ export type CustomerUpdateWithoutLeadsInput = {
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   accountManager?: Prisma.UserUpdateOneWithoutCustomersNestedInput
   Invoices?: Prisma.InvoiceUpdateManyWithoutCustomerNestedInput
+  accountingPayments?: Prisma.PaymentUpdateManyWithoutCustomerNestedInput
   Contacts?: Prisma.ContactUpdateManyWithoutCustomerNestedInput
   Opportunities?: Prisma.OpportunityUpdateManyWithoutCustomerNestedInput
   SalesOrders?: Prisma.SalesOrderUpdateManyWithoutCustomerNestedInput
@@ -1029,6 +1189,7 @@ export type CustomerUncheckedUpdateWithoutLeadsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutCustomerNestedInput
+  accountingPayments?: Prisma.PaymentUncheckedUpdateManyWithoutCustomerNestedInput
   Contacts?: Prisma.ContactUncheckedUpdateManyWithoutCustomerNestedInput
   Opportunities?: Prisma.OpportunityUncheckedUpdateManyWithoutCustomerNestedInput
   SalesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutCustomerNestedInput
@@ -1057,6 +1218,7 @@ export type CustomerCreateWithoutOpportunitiesInput = {
   updatedAt?: Date | string | null
   accountManager?: Prisma.UserCreateNestedOneWithoutCustomersInput
   Invoices?: Prisma.InvoiceCreateNestedManyWithoutCustomerInput
+  accountingPayments?: Prisma.PaymentCreateNestedManyWithoutCustomerInput
   Contacts?: Prisma.ContactCreateNestedManyWithoutCustomerInput
   Leads?: Prisma.LeadCreateNestedManyWithoutCustomerInput
   SalesOrders?: Prisma.SalesOrderCreateNestedManyWithoutCustomerInput
@@ -1086,6 +1248,7 @@ export type CustomerUncheckedCreateWithoutOpportunitiesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string | null
   Invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutCustomerInput
+  accountingPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCustomerInput
   Contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutCustomerInput
   Leads?: Prisma.LeadUncheckedCreateNestedManyWithoutCustomerInput
   SalesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutCustomerInput
@@ -1130,6 +1293,7 @@ export type CustomerUpdateWithoutOpportunitiesInput = {
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   accountManager?: Prisma.UserUpdateOneWithoutCustomersNestedInput
   Invoices?: Prisma.InvoiceUpdateManyWithoutCustomerNestedInput
+  accountingPayments?: Prisma.PaymentUpdateManyWithoutCustomerNestedInput
   Contacts?: Prisma.ContactUpdateManyWithoutCustomerNestedInput
   Leads?: Prisma.LeadUpdateManyWithoutCustomerNestedInput
   SalesOrders?: Prisma.SalesOrderUpdateManyWithoutCustomerNestedInput
@@ -1159,6 +1323,7 @@ export type CustomerUncheckedUpdateWithoutOpportunitiesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutCustomerNestedInput
+  accountingPayments?: Prisma.PaymentUncheckedUpdateManyWithoutCustomerNestedInput
   Contacts?: Prisma.ContactUncheckedUpdateManyWithoutCustomerNestedInput
   Leads?: Prisma.LeadUncheckedUpdateManyWithoutCustomerNestedInput
   SalesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutCustomerNestedInput
@@ -1187,6 +1352,7 @@ export type CustomerCreateWithoutTasksInput = {
   updatedAt?: Date | string | null
   accountManager?: Prisma.UserCreateNestedOneWithoutCustomersInput
   Invoices?: Prisma.InvoiceCreateNestedManyWithoutCustomerInput
+  accountingPayments?: Prisma.PaymentCreateNestedManyWithoutCustomerInput
   Contacts?: Prisma.ContactCreateNestedManyWithoutCustomerInput
   Leads?: Prisma.LeadCreateNestedManyWithoutCustomerInput
   Opportunities?: Prisma.OpportunityCreateNestedManyWithoutCustomerInput
@@ -1216,6 +1382,7 @@ export type CustomerUncheckedCreateWithoutTasksInput = {
   createdAt?: Date | string
   updatedAt?: Date | string | null
   Invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutCustomerInput
+  accountingPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCustomerInput
   Contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutCustomerInput
   Leads?: Prisma.LeadUncheckedCreateNestedManyWithoutCustomerInput
   Opportunities?: Prisma.OpportunityUncheckedCreateNestedManyWithoutCustomerInput
@@ -1260,6 +1427,7 @@ export type CustomerUpdateWithoutTasksInput = {
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   accountManager?: Prisma.UserUpdateOneWithoutCustomersNestedInput
   Invoices?: Prisma.InvoiceUpdateManyWithoutCustomerNestedInput
+  accountingPayments?: Prisma.PaymentUpdateManyWithoutCustomerNestedInput
   Contacts?: Prisma.ContactUpdateManyWithoutCustomerNestedInput
   Leads?: Prisma.LeadUpdateManyWithoutCustomerNestedInput
   Opportunities?: Prisma.OpportunityUpdateManyWithoutCustomerNestedInput
@@ -1289,6 +1457,7 @@ export type CustomerUncheckedUpdateWithoutTasksInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutCustomerNestedInput
+  accountingPayments?: Prisma.PaymentUncheckedUpdateManyWithoutCustomerNestedInput
   Contacts?: Prisma.ContactUncheckedUpdateManyWithoutCustomerNestedInput
   Leads?: Prisma.LeadUncheckedUpdateManyWithoutCustomerNestedInput
   Opportunities?: Prisma.OpportunityUncheckedUpdateManyWithoutCustomerNestedInput
@@ -1317,6 +1486,7 @@ export type CustomerCreateWithoutCustomerNotesInput = {
   updatedAt?: Date | string | null
   accountManager?: Prisma.UserCreateNestedOneWithoutCustomersInput
   Invoices?: Prisma.InvoiceCreateNestedManyWithoutCustomerInput
+  accountingPayments?: Prisma.PaymentCreateNestedManyWithoutCustomerInput
   Contacts?: Prisma.ContactCreateNestedManyWithoutCustomerInput
   Leads?: Prisma.LeadCreateNestedManyWithoutCustomerInput
   Opportunities?: Prisma.OpportunityCreateNestedManyWithoutCustomerInput
@@ -1346,6 +1516,7 @@ export type CustomerUncheckedCreateWithoutCustomerNotesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string | null
   Invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutCustomerInput
+  accountingPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCustomerInput
   Contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutCustomerInput
   Leads?: Prisma.LeadUncheckedCreateNestedManyWithoutCustomerInput
   Opportunities?: Prisma.OpportunityUncheckedCreateNestedManyWithoutCustomerInput
@@ -1390,6 +1561,7 @@ export type CustomerUpdateWithoutCustomerNotesInput = {
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   accountManager?: Prisma.UserUpdateOneWithoutCustomersNestedInput
   Invoices?: Prisma.InvoiceUpdateManyWithoutCustomerNestedInput
+  accountingPayments?: Prisma.PaymentUpdateManyWithoutCustomerNestedInput
   Contacts?: Prisma.ContactUpdateManyWithoutCustomerNestedInput
   Leads?: Prisma.LeadUpdateManyWithoutCustomerNestedInput
   Opportunities?: Prisma.OpportunityUpdateManyWithoutCustomerNestedInput
@@ -1419,6 +1591,7 @@ export type CustomerUncheckedUpdateWithoutCustomerNotesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutCustomerNestedInput
+  accountingPayments?: Prisma.PaymentUncheckedUpdateManyWithoutCustomerNestedInput
   Contacts?: Prisma.ContactUncheckedUpdateManyWithoutCustomerNestedInput
   Leads?: Prisma.LeadUncheckedUpdateManyWithoutCustomerNestedInput
   Opportunities?: Prisma.OpportunityUncheckedUpdateManyWithoutCustomerNestedInput
@@ -1447,6 +1620,7 @@ export type CustomerCreateWithoutCustomerFilesInput = {
   updatedAt?: Date | string | null
   accountManager?: Prisma.UserCreateNestedOneWithoutCustomersInput
   Invoices?: Prisma.InvoiceCreateNestedManyWithoutCustomerInput
+  accountingPayments?: Prisma.PaymentCreateNestedManyWithoutCustomerInput
   Contacts?: Prisma.ContactCreateNestedManyWithoutCustomerInput
   Leads?: Prisma.LeadCreateNestedManyWithoutCustomerInput
   Opportunities?: Prisma.OpportunityCreateNestedManyWithoutCustomerInput
@@ -1476,6 +1650,7 @@ export type CustomerUncheckedCreateWithoutCustomerFilesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string | null
   Invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutCustomerInput
+  accountingPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCustomerInput
   Contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutCustomerInput
   Leads?: Prisma.LeadUncheckedCreateNestedManyWithoutCustomerInput
   Opportunities?: Prisma.OpportunityUncheckedCreateNestedManyWithoutCustomerInput
@@ -1520,6 +1695,7 @@ export type CustomerUpdateWithoutCustomerFilesInput = {
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   accountManager?: Prisma.UserUpdateOneWithoutCustomersNestedInput
   Invoices?: Prisma.InvoiceUpdateManyWithoutCustomerNestedInput
+  accountingPayments?: Prisma.PaymentUpdateManyWithoutCustomerNestedInput
   Contacts?: Prisma.ContactUpdateManyWithoutCustomerNestedInput
   Leads?: Prisma.LeadUpdateManyWithoutCustomerNestedInput
   Opportunities?: Prisma.OpportunityUpdateManyWithoutCustomerNestedInput
@@ -1549,6 +1725,7 @@ export type CustomerUncheckedUpdateWithoutCustomerFilesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutCustomerNestedInput
+  accountingPayments?: Prisma.PaymentUncheckedUpdateManyWithoutCustomerNestedInput
   Contacts?: Prisma.ContactUncheckedUpdateManyWithoutCustomerNestedInput
   Leads?: Prisma.LeadUncheckedUpdateManyWithoutCustomerNestedInput
   Opportunities?: Prisma.OpportunityUncheckedUpdateManyWithoutCustomerNestedInput
@@ -1577,6 +1754,7 @@ export type CustomerCreateWithoutContactsInput = {
   updatedAt?: Date | string | null
   accountManager?: Prisma.UserCreateNestedOneWithoutCustomersInput
   Invoices?: Prisma.InvoiceCreateNestedManyWithoutCustomerInput
+  accountingPayments?: Prisma.PaymentCreateNestedManyWithoutCustomerInput
   Leads?: Prisma.LeadCreateNestedManyWithoutCustomerInput
   Opportunities?: Prisma.OpportunityCreateNestedManyWithoutCustomerInput
   SalesOrders?: Prisma.SalesOrderCreateNestedManyWithoutCustomerInput
@@ -1606,6 +1784,7 @@ export type CustomerUncheckedCreateWithoutContactsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string | null
   Invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutCustomerInput
+  accountingPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCustomerInput
   Leads?: Prisma.LeadUncheckedCreateNestedManyWithoutCustomerInput
   Opportunities?: Prisma.OpportunityUncheckedCreateNestedManyWithoutCustomerInput
   SalesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutCustomerInput
@@ -1650,6 +1829,7 @@ export type CustomerUpdateWithoutContactsInput = {
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   accountManager?: Prisma.UserUpdateOneWithoutCustomersNestedInput
   Invoices?: Prisma.InvoiceUpdateManyWithoutCustomerNestedInput
+  accountingPayments?: Prisma.PaymentUpdateManyWithoutCustomerNestedInput
   Leads?: Prisma.LeadUpdateManyWithoutCustomerNestedInput
   Opportunities?: Prisma.OpportunityUpdateManyWithoutCustomerNestedInput
   SalesOrders?: Prisma.SalesOrderUpdateManyWithoutCustomerNestedInput
@@ -1679,6 +1859,7 @@ export type CustomerUncheckedUpdateWithoutContactsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutCustomerNestedInput
+  accountingPayments?: Prisma.PaymentUncheckedUpdateManyWithoutCustomerNestedInput
   Leads?: Prisma.LeadUncheckedUpdateManyWithoutCustomerNestedInput
   Opportunities?: Prisma.OpportunityUncheckedUpdateManyWithoutCustomerNestedInput
   SalesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutCustomerNestedInput
@@ -1707,6 +1888,7 @@ export type CustomerCreateWithoutDeliveryOrdersInput = {
   updatedAt?: Date | string | null
   accountManager?: Prisma.UserCreateNestedOneWithoutCustomersInput
   Invoices?: Prisma.InvoiceCreateNestedManyWithoutCustomerInput
+  accountingPayments?: Prisma.PaymentCreateNestedManyWithoutCustomerInput
   Contacts?: Prisma.ContactCreateNestedManyWithoutCustomerInput
   Leads?: Prisma.LeadCreateNestedManyWithoutCustomerInput
   Opportunities?: Prisma.OpportunityCreateNestedManyWithoutCustomerInput
@@ -1736,6 +1918,7 @@ export type CustomerUncheckedCreateWithoutDeliveryOrdersInput = {
   createdAt?: Date | string
   updatedAt?: Date | string | null
   Invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutCustomerInput
+  accountingPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCustomerInput
   Contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutCustomerInput
   Leads?: Prisma.LeadUncheckedCreateNestedManyWithoutCustomerInput
   Opportunities?: Prisma.OpportunityUncheckedCreateNestedManyWithoutCustomerInput
@@ -1780,6 +1963,7 @@ export type CustomerUpdateWithoutDeliveryOrdersInput = {
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   accountManager?: Prisma.UserUpdateOneWithoutCustomersNestedInput
   Invoices?: Prisma.InvoiceUpdateManyWithoutCustomerNestedInput
+  accountingPayments?: Prisma.PaymentUpdateManyWithoutCustomerNestedInput
   Contacts?: Prisma.ContactUpdateManyWithoutCustomerNestedInput
   Leads?: Prisma.LeadUpdateManyWithoutCustomerNestedInput
   Opportunities?: Prisma.OpportunityUpdateManyWithoutCustomerNestedInput
@@ -1809,6 +1993,7 @@ export type CustomerUncheckedUpdateWithoutDeliveryOrdersInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutCustomerNestedInput
+  accountingPayments?: Prisma.PaymentUncheckedUpdateManyWithoutCustomerNestedInput
   Contacts?: Prisma.ContactUncheckedUpdateManyWithoutCustomerNestedInput
   Leads?: Prisma.LeadUncheckedUpdateManyWithoutCustomerNestedInput
   Opportunities?: Prisma.OpportunityUncheckedUpdateManyWithoutCustomerNestedInput
@@ -1836,6 +2021,7 @@ export type CustomerCreateWithoutInvoicesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string | null
   accountManager?: Prisma.UserCreateNestedOneWithoutCustomersInput
+  accountingPayments?: Prisma.PaymentCreateNestedManyWithoutCustomerInput
   Contacts?: Prisma.ContactCreateNestedManyWithoutCustomerInput
   Leads?: Prisma.LeadCreateNestedManyWithoutCustomerInput
   Opportunities?: Prisma.OpportunityCreateNestedManyWithoutCustomerInput
@@ -1865,6 +2051,7 @@ export type CustomerUncheckedCreateWithoutInvoicesInput = {
   preferredBank?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string | null
+  accountingPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCustomerInput
   Contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutCustomerInput
   Leads?: Prisma.LeadUncheckedCreateNestedManyWithoutCustomerInput
   Opportunities?: Prisma.OpportunityUncheckedCreateNestedManyWithoutCustomerInput
@@ -1909,6 +2096,7 @@ export type CustomerUpdateWithoutInvoicesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   accountManager?: Prisma.UserUpdateOneWithoutCustomersNestedInput
+  accountingPayments?: Prisma.PaymentUpdateManyWithoutCustomerNestedInput
   Contacts?: Prisma.ContactUpdateManyWithoutCustomerNestedInput
   Leads?: Prisma.LeadUpdateManyWithoutCustomerNestedInput
   Opportunities?: Prisma.OpportunityUpdateManyWithoutCustomerNestedInput
@@ -1938,6 +2126,7 @@ export type CustomerUncheckedUpdateWithoutInvoicesInput = {
   preferredBank?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  accountingPayments?: Prisma.PaymentUncheckedUpdateManyWithoutCustomerNestedInput
   Contacts?: Prisma.ContactUncheckedUpdateManyWithoutCustomerNestedInput
   Leads?: Prisma.LeadUncheckedUpdateManyWithoutCustomerNestedInput
   Opportunities?: Prisma.OpportunityUncheckedUpdateManyWithoutCustomerNestedInput
@@ -1967,6 +2156,7 @@ export type CustomerCreateWithoutQuotationsInput = {
   updatedAt?: Date | string | null
   accountManager?: Prisma.UserCreateNestedOneWithoutCustomersInput
   Invoices?: Prisma.InvoiceCreateNestedManyWithoutCustomerInput
+  accountingPayments?: Prisma.PaymentCreateNestedManyWithoutCustomerInput
   Contacts?: Prisma.ContactCreateNestedManyWithoutCustomerInput
   Leads?: Prisma.LeadCreateNestedManyWithoutCustomerInput
   Opportunities?: Prisma.OpportunityCreateNestedManyWithoutCustomerInput
@@ -1996,6 +2186,7 @@ export type CustomerUncheckedCreateWithoutQuotationsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string | null
   Invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutCustomerInput
+  accountingPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCustomerInput
   Contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutCustomerInput
   Leads?: Prisma.LeadUncheckedCreateNestedManyWithoutCustomerInput
   Opportunities?: Prisma.OpportunityUncheckedCreateNestedManyWithoutCustomerInput
@@ -2040,6 +2231,7 @@ export type CustomerUpdateWithoutQuotationsInput = {
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   accountManager?: Prisma.UserUpdateOneWithoutCustomersNestedInput
   Invoices?: Prisma.InvoiceUpdateManyWithoutCustomerNestedInput
+  accountingPayments?: Prisma.PaymentUpdateManyWithoutCustomerNestedInput
   Contacts?: Prisma.ContactUpdateManyWithoutCustomerNestedInput
   Leads?: Prisma.LeadUpdateManyWithoutCustomerNestedInput
   Opportunities?: Prisma.OpportunityUpdateManyWithoutCustomerNestedInput
@@ -2069,6 +2261,7 @@ export type CustomerUncheckedUpdateWithoutQuotationsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutCustomerNestedInput
+  accountingPayments?: Prisma.PaymentUncheckedUpdateManyWithoutCustomerNestedInput
   Contacts?: Prisma.ContactUncheckedUpdateManyWithoutCustomerNestedInput
   Leads?: Prisma.LeadUncheckedUpdateManyWithoutCustomerNestedInput
   Opportunities?: Prisma.OpportunityUncheckedUpdateManyWithoutCustomerNestedInput
@@ -2097,6 +2290,7 @@ export type CustomerCreateWithoutSalesOrdersInput = {
   updatedAt?: Date | string | null
   accountManager?: Prisma.UserCreateNestedOneWithoutCustomersInput
   Invoices?: Prisma.InvoiceCreateNestedManyWithoutCustomerInput
+  accountingPayments?: Prisma.PaymentCreateNestedManyWithoutCustomerInput
   Contacts?: Prisma.ContactCreateNestedManyWithoutCustomerInput
   Leads?: Prisma.LeadCreateNestedManyWithoutCustomerInput
   Opportunities?: Prisma.OpportunityCreateNestedManyWithoutCustomerInput
@@ -2126,6 +2320,7 @@ export type CustomerUncheckedCreateWithoutSalesOrdersInput = {
   createdAt?: Date | string
   updatedAt?: Date | string | null
   Invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutCustomerInput
+  accountingPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCustomerInput
   Contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutCustomerInput
   Leads?: Prisma.LeadUncheckedCreateNestedManyWithoutCustomerInput
   Opportunities?: Prisma.OpportunityUncheckedCreateNestedManyWithoutCustomerInput
@@ -2170,6 +2365,7 @@ export type CustomerUpdateWithoutSalesOrdersInput = {
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   accountManager?: Prisma.UserUpdateOneWithoutCustomersNestedInput
   Invoices?: Prisma.InvoiceUpdateManyWithoutCustomerNestedInput
+  accountingPayments?: Prisma.PaymentUpdateManyWithoutCustomerNestedInput
   Contacts?: Prisma.ContactUpdateManyWithoutCustomerNestedInput
   Leads?: Prisma.LeadUpdateManyWithoutCustomerNestedInput
   Opportunities?: Prisma.OpportunityUpdateManyWithoutCustomerNestedInput
@@ -2199,6 +2395,7 @@ export type CustomerUncheckedUpdateWithoutSalesOrdersInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutCustomerNestedInput
+  accountingPayments?: Prisma.PaymentUncheckedUpdateManyWithoutCustomerNestedInput
   Contacts?: Prisma.ContactUncheckedUpdateManyWithoutCustomerNestedInput
   Leads?: Prisma.LeadUncheckedUpdateManyWithoutCustomerNestedInput
   Opportunities?: Prisma.OpportunityUncheckedUpdateManyWithoutCustomerNestedInput
@@ -2226,6 +2423,7 @@ export type CustomerCreateWithoutAccountManagerInput = {
   createdAt?: Date | string
   updatedAt?: Date | string | null
   Invoices?: Prisma.InvoiceCreateNestedManyWithoutCustomerInput
+  accountingPayments?: Prisma.PaymentCreateNestedManyWithoutCustomerInput
   Contacts?: Prisma.ContactCreateNestedManyWithoutCustomerInput
   Leads?: Prisma.LeadCreateNestedManyWithoutCustomerInput
   Opportunities?: Prisma.OpportunityCreateNestedManyWithoutCustomerInput
@@ -2255,6 +2453,7 @@ export type CustomerUncheckedCreateWithoutAccountManagerInput = {
   createdAt?: Date | string
   updatedAt?: Date | string | null
   Invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutCustomerInput
+  accountingPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCustomerInput
   Contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutCustomerInput
   Leads?: Prisma.LeadUncheckedCreateNestedManyWithoutCustomerInput
   Opportunities?: Prisma.OpportunityUncheckedCreateNestedManyWithoutCustomerInput
@@ -2332,6 +2531,7 @@ export type CustomerCreateWithoutVisitPlansInput = {
   updatedAt?: Date | string | null
   accountManager?: Prisma.UserCreateNestedOneWithoutCustomersInput
   Invoices?: Prisma.InvoiceCreateNestedManyWithoutCustomerInput
+  accountingPayments?: Prisma.PaymentCreateNestedManyWithoutCustomerInput
   Contacts?: Prisma.ContactCreateNestedManyWithoutCustomerInput
   Leads?: Prisma.LeadCreateNestedManyWithoutCustomerInput
   Opportunities?: Prisma.OpportunityCreateNestedManyWithoutCustomerInput
@@ -2361,6 +2561,7 @@ export type CustomerUncheckedCreateWithoutVisitPlansInput = {
   createdAt?: Date | string
   updatedAt?: Date | string | null
   Invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutCustomerInput
+  accountingPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCustomerInput
   Contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutCustomerInput
   Leads?: Prisma.LeadUncheckedCreateNestedManyWithoutCustomerInput
   Opportunities?: Prisma.OpportunityUncheckedCreateNestedManyWithoutCustomerInput
@@ -2405,6 +2606,7 @@ export type CustomerUpdateWithoutVisitPlansInput = {
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   accountManager?: Prisma.UserUpdateOneWithoutCustomersNestedInput
   Invoices?: Prisma.InvoiceUpdateManyWithoutCustomerNestedInput
+  accountingPayments?: Prisma.PaymentUpdateManyWithoutCustomerNestedInput
   Contacts?: Prisma.ContactUpdateManyWithoutCustomerNestedInput
   Leads?: Prisma.LeadUpdateManyWithoutCustomerNestedInput
   Opportunities?: Prisma.OpportunityUpdateManyWithoutCustomerNestedInput
@@ -2434,6 +2636,7 @@ export type CustomerUncheckedUpdateWithoutVisitPlansInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutCustomerNestedInput
+  accountingPayments?: Prisma.PaymentUncheckedUpdateManyWithoutCustomerNestedInput
   Contacts?: Prisma.ContactUncheckedUpdateManyWithoutCustomerNestedInput
   Leads?: Prisma.LeadUncheckedUpdateManyWithoutCustomerNestedInput
   Opportunities?: Prisma.OpportunityUncheckedUpdateManyWithoutCustomerNestedInput
@@ -2479,6 +2682,7 @@ export type CustomerUpdateWithoutAccountManagerInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Invoices?: Prisma.InvoiceUpdateManyWithoutCustomerNestedInput
+  accountingPayments?: Prisma.PaymentUpdateManyWithoutCustomerNestedInput
   Contacts?: Prisma.ContactUpdateManyWithoutCustomerNestedInput
   Leads?: Prisma.LeadUpdateManyWithoutCustomerNestedInput
   Opportunities?: Prisma.OpportunityUpdateManyWithoutCustomerNestedInput
@@ -2508,6 +2712,7 @@ export type CustomerUncheckedUpdateWithoutAccountManagerInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutCustomerNestedInput
+  accountingPayments?: Prisma.PaymentUncheckedUpdateManyWithoutCustomerNestedInput
   Contacts?: Prisma.ContactUncheckedUpdateManyWithoutCustomerNestedInput
   Leads?: Prisma.LeadUncheckedUpdateManyWithoutCustomerNestedInput
   Opportunities?: Prisma.OpportunityUncheckedUpdateManyWithoutCustomerNestedInput
@@ -2545,6 +2750,7 @@ export type CustomerUncheckedUpdateManyWithoutAccountManagerInput = {
 
 export type CustomerCountOutputType = {
   Invoices: number
+  accountingPayments: number
   Contacts: number
   Leads: number
   Opportunities: number
@@ -2559,6 +2765,7 @@ export type CustomerCountOutputType = {
 
 export type CustomerCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   Invoices?: boolean | CustomerCountOutputTypeCountInvoicesArgs
+  accountingPayments?: boolean | CustomerCountOutputTypeCountAccountingPaymentsArgs
   Contacts?: boolean | CustomerCountOutputTypeCountContactsArgs
   Leads?: boolean | CustomerCountOutputTypeCountLeadsArgs
   Opportunities?: boolean | CustomerCountOutputTypeCountOpportunitiesArgs
@@ -2586,6 +2793,13 @@ export type CustomerCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Ext
  */
 export type CustomerCountOutputTypeCountInvoicesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.InvoiceWhereInput
+}
+
+/**
+ * CustomerCountOutputType without action
+ */
+export type CustomerCountOutputTypeCountAccountingPaymentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PaymentWhereInput
 }
 
 /**
@@ -2678,6 +2892,7 @@ export type CustomerSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   updatedAt?: boolean
   accountManager?: boolean | Prisma.Customer$accountManagerArgs<ExtArgs>
   Invoices?: boolean | Prisma.Customer$InvoicesArgs<ExtArgs>
+  accountingPayments?: boolean | Prisma.Customer$accountingPaymentsArgs<ExtArgs>
   Contacts?: boolean | Prisma.Customer$ContactsArgs<ExtArgs>
   Leads?: boolean | Prisma.Customer$LeadsArgs<ExtArgs>
   Opportunities?: boolean | Prisma.Customer$OpportunitiesArgs<ExtArgs>
@@ -2754,6 +2969,7 @@ export type CustomerOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs =
 export type CustomerInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   accountManager?: boolean | Prisma.Customer$accountManagerArgs<ExtArgs>
   Invoices?: boolean | Prisma.Customer$InvoicesArgs<ExtArgs>
+  accountingPayments?: boolean | Prisma.Customer$accountingPaymentsArgs<ExtArgs>
   Contacts?: boolean | Prisma.Customer$ContactsArgs<ExtArgs>
   Leads?: boolean | Prisma.Customer$LeadsArgs<ExtArgs>
   Opportunities?: boolean | Prisma.Customer$OpportunitiesArgs<ExtArgs>
@@ -2778,6 +2994,7 @@ export type $CustomerPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
   objects: {
     accountManager: Prisma.$UserPayload<ExtArgs> | null
     Invoices: Prisma.$InvoicePayload<ExtArgs>[]
+    accountingPayments: Prisma.$PaymentPayload<ExtArgs>[]
     Contacts: Prisma.$ContactPayload<ExtArgs>[]
     Leads: Prisma.$LeadPayload<ExtArgs>[]
     Opportunities: Prisma.$OpportunityPayload<ExtArgs>[]
@@ -3202,6 +3419,7 @@ export interface Prisma__CustomerClient<T, Null = never, ExtArgs extends runtime
   readonly [Symbol.toStringTag]: "PrismaPromise"
   accountManager<T extends Prisma.Customer$accountManagerArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Customer$accountManagerArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   Invoices<T extends Prisma.Customer$InvoicesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Customer$InvoicesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InvoicePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  accountingPayments<T extends Prisma.Customer$accountingPaymentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Customer$accountingPaymentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PaymentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   Contacts<T extends Prisma.Customer$ContactsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Customer$ContactsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ContactPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   Leads<T extends Prisma.Customer$LeadsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Customer$LeadsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   Opportunities<T extends Prisma.Customer$OpportunitiesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Customer$OpportunitiesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OpportunityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -3698,6 +3916,30 @@ export type Customer$InvoicesArgs<ExtArgs extends runtime.Types.Extensions.Inter
   take?: number
   skip?: number
   distinct?: Prisma.InvoiceScalarFieldEnum | Prisma.InvoiceScalarFieldEnum[]
+}
+
+/**
+ * Customer.accountingPayments
+ */
+export type Customer$accountingPaymentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Payment
+   */
+  select?: Prisma.PaymentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Payment
+   */
+  omit?: Prisma.PaymentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PaymentInclude<ExtArgs> | null
+  where?: Prisma.PaymentWhereInput
+  orderBy?: Prisma.PaymentOrderByWithRelationInput | Prisma.PaymentOrderByWithRelationInput[]
+  cursor?: Prisma.PaymentWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PaymentScalarFieldEnum | Prisma.PaymentScalarFieldEnum[]
 }
 
 /**
