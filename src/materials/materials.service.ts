@@ -45,6 +45,12 @@ export class MaterialsService {
     if (query.keyword) {
       where.OR = [
         { partNumber: { contains: query.keyword, mode: 'insensitive' } },
+        {
+          interchangePartNumber: {
+            contains: query.keyword,
+            mode: 'insensitive',
+          },
+        },
         { name: { contains: query.keyword, mode: 'insensitive' } },
         { description: { contains: query.keyword, mode: 'insensitive' } },
         {
