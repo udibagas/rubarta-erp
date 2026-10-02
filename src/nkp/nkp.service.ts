@@ -20,6 +20,7 @@ import PDFDocument from 'pdfkit';
 import { createPdfDocumentWithTables } from 'pdfkit-table';
 import { formatDateNumeric } from '../helpers/date';
 import { toDecimal } from '../helpers/number';
+import { Cron, CronExpression } from '@nestjs/schedule';
 
 @Injectable()
 export class NkpService {
@@ -772,5 +773,40 @@ export class NkpService {
       message: `Anda mendapatkan permintaan ${action} untuk Nota Kuasa Pembayaran dengan nomor ${data.number}.`,
       redirectUrl: `https://erp.rubarta.co.id/nkp?number=${data.number}`,
     });
+  }
+
+  @Cron(CronExpression.EVERY_DAY_AT_9AM)
+  async notifyPendingApproval() {
+    const pendingApprovals = await this.prisma.nkpApproval.findMany({
+      where: {
+        approvalStatus: null,
+      },
+      include: {
+        Nkp: {
+          select: {
+            number: true,
+          },
+        },
+        User: {
+          select: {
+            id: true,
+            name: true,
+          },
+        },
+      },
+    });
+
+    for (const approval of pendingApprovals) {
+      console.log(
+        `Notifying user ${approval.User.name} about pending approval for NKP with document number ${approval.Nkp.number}`,
+      );
+
+      this.notification.notify({
+        userId: approval.userId,
+        title: `[Pengingat] Permintaan Persetujuan NKP #${approval.Nkp.number}`,
+        message: `Anda memiliki permintaan persetujuan yang belum disetujui untuk NKP dengan nomor ${approval.Nkp.number}`,
+        redirectUrl: `https://erp.rubarta.co.id/nkp?number=${approval.Nkp.number}`,
+      });
+    }
   }
 }

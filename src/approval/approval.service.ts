@@ -389,60 +389,60 @@ export class ApprovalService {
     }
   }
 
-  @Cron(CronExpression.EVERY_DAY_AT_8AM)
+  @Cron(CronExpression.EVERY_DAY_AT_9AM)
   async notifyPendingApproval() {
-    const users = await this.prisma.user.findMany({
+    const approvalItems = await this.prisma.approvalItem.findMany({
+      where: {
+        status: null,
+      },
       include: {
-        approvalItems: {
-          where: {
-            status: null,
+        approval: {
+          select: {
+            approvalType: true,
+            moduleId: true,
           },
-          include: {
-            approval: {
-              select: {
-                approvalType: true,
-                moduleId: true,
-              },
-            },
+        },
+        user: {
+          select: {
+            id: true,
+            name: true,
           },
         },
       },
     });
 
-    for (const user of users) {
-      for (const item of user.approvalItems) {
-        const { approvalType, moduleId } = item.approval;
+    for (const item of approvalItems) {
+      const { approvalType, moduleId } = item.approval;
 
-        let document: { number: string } = { number: '-' };
-        let documentType = '';
+      let document: { number: string } = { number: '-' };
+      let documentType = '';
 
-        if (approvalType === ApprovalType.QUOTATION) {
-          documentType = 'Quotation';
-          document = await this.prisma.quotation.findUnique({
-            where: { id: moduleId },
-            select: { number: true },
-          });
-        }
-
-        if (approvalType === ApprovalType.PURCHASE_ORDER) {
-          documentType = 'Purchase Order';
-          document = await this.prisma.purchaseOrder.findUnique({
-            where: { id: moduleId },
-            select: { number: true },
-          });
-        }
-
-        console.log(
-          `Notifying user ${user.name} about pending approval for ${documentType} with document number ${document.number}`,
-        );
-
-        this.notification.notify({
-          userId: user.id,
-          title: `[Pengingat] Permintaan Persetujuan ${documentType} #${document.number}`,
-          message: `Anda memiliki permintaan persetujuan yang belum disetujui untuk ${documentType} dengan nomor dokumen ${document.number}`,
-          redirectUrl: this.getRedirectUrl(approvalType, moduleId),
+      if (approvalType === ApprovalType.QUOTATION) {
+        documentType = 'Quotation';
+        document = await this.prisma.quotation.findUnique({
+          where: { id: moduleId },
+          select: { number: true },
         });
       }
+
+      if (approvalType === ApprovalType.PURCHASE_ORDER) {
+        documentType = 'Purchase Order';
+        document = await this.prisma.purchaseOrder.findUnique({
+          where: { id: moduleId },
+          select: { number: true },
+        });
+      }
+
+      console.log(
+        `Notifying user ${item.user.name} about pending approval for ${documentType} with document number ${document.number}`,
+      );
+
+      this.notification.notify({
+        userId: item.user.id,
+        title: `[Pengingat] Permintaan Persetujuan ${documentType} #${document.number}`,
+        message: `Anda memiliki permintaan persetujuan yang belum disetujui untuk ${documentType} dengan nomor dokumen ${document.number}`,
+        redirectUrl: this.getRedirectUrl(approvalType, moduleId),
+      });
     }
   }
 }
