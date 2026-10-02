@@ -559,22 +559,6 @@ export type ContactUpdateOneWithoutInteractionsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ContactUpdateToOneWithWhereWithoutInteractionsInput, Prisma.ContactUpdateWithoutInteractionsInput>, Prisma.ContactUncheckedUpdateWithoutInteractionsInput>
 }
 
-export type ContactCreateNestedOneWithoutVisitPlansInput = {
-  create?: Prisma.XOR<Prisma.ContactCreateWithoutVisitPlansInput, Prisma.ContactUncheckedCreateWithoutVisitPlansInput>
-  connectOrCreate?: Prisma.ContactCreateOrConnectWithoutVisitPlansInput
-  connect?: Prisma.ContactWhereUniqueInput
-}
-
-export type ContactUpdateOneWithoutVisitPlansNestedInput = {
-  create?: Prisma.XOR<Prisma.ContactCreateWithoutVisitPlansInput, Prisma.ContactUncheckedCreateWithoutVisitPlansInput>
-  connectOrCreate?: Prisma.ContactCreateOrConnectWithoutVisitPlansInput
-  upsert?: Prisma.ContactUpsertWithoutVisitPlansInput
-  disconnect?: Prisma.ContactWhereInput | boolean
-  delete?: Prisma.ContactWhereInput | boolean
-  connect?: Prisma.ContactWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.ContactUpdateToOneWithWhereWithoutVisitPlansInput, Prisma.ContactUpdateWithoutVisitPlansInput>, Prisma.ContactUncheckedUpdateWithoutVisitPlansInput>
-}
-
 export type ContactCreateNestedManyWithoutCustomerInput = {
   create?: Prisma.XOR<Prisma.ContactCreateWithoutCustomerInput, Prisma.ContactUncheckedCreateWithoutCustomerInput> | Prisma.ContactCreateWithoutCustomerInput[] | Prisma.ContactUncheckedCreateWithoutCustomerInput[]
   connectOrCreate?: Prisma.ContactCreateOrConnectWithoutCustomerInput | Prisma.ContactCreateOrConnectWithoutCustomerInput[]
@@ -615,6 +599,22 @@ export type ContactUncheckedUpdateManyWithoutCustomerNestedInput = {
   update?: Prisma.ContactUpdateWithWhereUniqueWithoutCustomerInput | Prisma.ContactUpdateWithWhereUniqueWithoutCustomerInput[]
   updateMany?: Prisma.ContactUpdateManyWithWhereWithoutCustomerInput | Prisma.ContactUpdateManyWithWhereWithoutCustomerInput[]
   deleteMany?: Prisma.ContactScalarWhereInput | Prisma.ContactScalarWhereInput[]
+}
+
+export type ContactCreateNestedOneWithoutVisitPlansInput = {
+  create?: Prisma.XOR<Prisma.ContactCreateWithoutVisitPlansInput, Prisma.ContactUncheckedCreateWithoutVisitPlansInput>
+  connectOrCreate?: Prisma.ContactCreateOrConnectWithoutVisitPlansInput
+  connect?: Prisma.ContactWhereUniqueInput
+}
+
+export type ContactUpdateOneWithoutVisitPlansNestedInput = {
+  create?: Prisma.XOR<Prisma.ContactCreateWithoutVisitPlansInput, Prisma.ContactUncheckedCreateWithoutVisitPlansInput>
+  connectOrCreate?: Prisma.ContactCreateOrConnectWithoutVisitPlansInput
+  upsert?: Prisma.ContactUpsertWithoutVisitPlansInput
+  disconnect?: Prisma.ContactWhereInput | boolean
+  delete?: Prisma.ContactWhereInput | boolean
+  connect?: Prisma.ContactWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ContactUpdateToOneWithWhereWithoutVisitPlansInput, Prisma.ContactUpdateWithoutVisitPlansInput>, Prisma.ContactUncheckedUpdateWithoutVisitPlansInput>
 }
 
 export type ContactCreateWithoutInteractionsInput = {
@@ -695,6 +695,81 @@ export type ContactUncheckedUpdateWithoutInteractionsInput = {
   VisitPlans?: Prisma.VisitPlanUncheckedUpdateManyWithoutContactNestedInput
 }
 
+export type ContactCreateWithoutCustomerInput = {
+  name: string
+  email?: string | null
+  phone: string
+  position?: string | null
+  notes?: string | null
+  isPrimary?: boolean
+  isActive?: boolean
+  deletedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string | null
+  Interactions?: Prisma.InteractionCreateNestedManyWithoutContactInput
+  VisitPlans?: Prisma.VisitPlanCreateNestedManyWithoutContactInput
+}
+
+export type ContactUncheckedCreateWithoutCustomerInput = {
+  id?: number
+  name: string
+  email?: string | null
+  phone: string
+  position?: string | null
+  notes?: string | null
+  isPrimary?: boolean
+  isActive?: boolean
+  deletedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string | null
+  Interactions?: Prisma.InteractionUncheckedCreateNestedManyWithoutContactInput
+  VisitPlans?: Prisma.VisitPlanUncheckedCreateNestedManyWithoutContactInput
+}
+
+export type ContactCreateOrConnectWithoutCustomerInput = {
+  where: Prisma.ContactWhereUniqueInput
+  create: Prisma.XOR<Prisma.ContactCreateWithoutCustomerInput, Prisma.ContactUncheckedCreateWithoutCustomerInput>
+}
+
+export type ContactCreateManyCustomerInputEnvelope = {
+  data: Prisma.ContactCreateManyCustomerInput | Prisma.ContactCreateManyCustomerInput[]
+  skipDuplicates?: boolean
+}
+
+export type ContactUpsertWithWhereUniqueWithoutCustomerInput = {
+  where: Prisma.ContactWhereUniqueInput
+  update: Prisma.XOR<Prisma.ContactUpdateWithoutCustomerInput, Prisma.ContactUncheckedUpdateWithoutCustomerInput>
+  create: Prisma.XOR<Prisma.ContactCreateWithoutCustomerInput, Prisma.ContactUncheckedCreateWithoutCustomerInput>
+}
+
+export type ContactUpdateWithWhereUniqueWithoutCustomerInput = {
+  where: Prisma.ContactWhereUniqueInput
+  data: Prisma.XOR<Prisma.ContactUpdateWithoutCustomerInput, Prisma.ContactUncheckedUpdateWithoutCustomerInput>
+}
+
+export type ContactUpdateManyWithWhereWithoutCustomerInput = {
+  where: Prisma.ContactScalarWhereInput
+  data: Prisma.XOR<Prisma.ContactUpdateManyMutationInput, Prisma.ContactUncheckedUpdateManyWithoutCustomerInput>
+}
+
+export type ContactScalarWhereInput = {
+  AND?: Prisma.ContactScalarWhereInput | Prisma.ContactScalarWhereInput[]
+  OR?: Prisma.ContactScalarWhereInput[]
+  NOT?: Prisma.ContactScalarWhereInput | Prisma.ContactScalarWhereInput[]
+  id?: Prisma.IntFilter<"Contact"> | number
+  customerId?: Prisma.IntFilter<"Contact"> | number
+  name?: Prisma.StringFilter<"Contact"> | string
+  email?: Prisma.StringNullableFilter<"Contact"> | string | null
+  phone?: Prisma.StringFilter<"Contact"> | string
+  position?: Prisma.StringNullableFilter<"Contact"> | string | null
+  notes?: Prisma.StringNullableFilter<"Contact"> | string | null
+  isPrimary?: Prisma.BoolFilter<"Contact"> | boolean
+  isActive?: Prisma.BoolFilter<"Contact"> | boolean
+  deletedAt?: Prisma.DateTimeNullableFilter<"Contact"> | Date | string | null
+  createdAt?: Prisma.DateTimeFilter<"Contact"> | Date | string
+  updatedAt?: Prisma.DateTimeNullableFilter<"Contact"> | Date | string | null
+}
+
 export type ContactCreateWithoutVisitPlansInput = {
   name: string
   email?: string | null
@@ -771,81 +846,6 @@ export type ContactUncheckedUpdateWithoutVisitPlansInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Interactions?: Prisma.InteractionUncheckedUpdateManyWithoutContactNestedInput
-}
-
-export type ContactCreateWithoutCustomerInput = {
-  name: string
-  email?: string | null
-  phone: string
-  position?: string | null
-  notes?: string | null
-  isPrimary?: boolean
-  isActive?: boolean
-  deletedAt?: Date | string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string | null
-  Interactions?: Prisma.InteractionCreateNestedManyWithoutContactInput
-  VisitPlans?: Prisma.VisitPlanCreateNestedManyWithoutContactInput
-}
-
-export type ContactUncheckedCreateWithoutCustomerInput = {
-  id?: number
-  name: string
-  email?: string | null
-  phone: string
-  position?: string | null
-  notes?: string | null
-  isPrimary?: boolean
-  isActive?: boolean
-  deletedAt?: Date | string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string | null
-  Interactions?: Prisma.InteractionUncheckedCreateNestedManyWithoutContactInput
-  VisitPlans?: Prisma.VisitPlanUncheckedCreateNestedManyWithoutContactInput
-}
-
-export type ContactCreateOrConnectWithoutCustomerInput = {
-  where: Prisma.ContactWhereUniqueInput
-  create: Prisma.XOR<Prisma.ContactCreateWithoutCustomerInput, Prisma.ContactUncheckedCreateWithoutCustomerInput>
-}
-
-export type ContactCreateManyCustomerInputEnvelope = {
-  data: Prisma.ContactCreateManyCustomerInput | Prisma.ContactCreateManyCustomerInput[]
-  skipDuplicates?: boolean
-}
-
-export type ContactUpsertWithWhereUniqueWithoutCustomerInput = {
-  where: Prisma.ContactWhereUniqueInput
-  update: Prisma.XOR<Prisma.ContactUpdateWithoutCustomerInput, Prisma.ContactUncheckedUpdateWithoutCustomerInput>
-  create: Prisma.XOR<Prisma.ContactCreateWithoutCustomerInput, Prisma.ContactUncheckedCreateWithoutCustomerInput>
-}
-
-export type ContactUpdateWithWhereUniqueWithoutCustomerInput = {
-  where: Prisma.ContactWhereUniqueInput
-  data: Prisma.XOR<Prisma.ContactUpdateWithoutCustomerInput, Prisma.ContactUncheckedUpdateWithoutCustomerInput>
-}
-
-export type ContactUpdateManyWithWhereWithoutCustomerInput = {
-  where: Prisma.ContactScalarWhereInput
-  data: Prisma.XOR<Prisma.ContactUpdateManyMutationInput, Prisma.ContactUncheckedUpdateManyWithoutCustomerInput>
-}
-
-export type ContactScalarWhereInput = {
-  AND?: Prisma.ContactScalarWhereInput | Prisma.ContactScalarWhereInput[]
-  OR?: Prisma.ContactScalarWhereInput[]
-  NOT?: Prisma.ContactScalarWhereInput | Prisma.ContactScalarWhereInput[]
-  id?: Prisma.IntFilter<"Contact"> | number
-  customerId?: Prisma.IntFilter<"Contact"> | number
-  name?: Prisma.StringFilter<"Contact"> | string
-  email?: Prisma.StringNullableFilter<"Contact"> | string | null
-  phone?: Prisma.StringFilter<"Contact"> | string
-  position?: Prisma.StringNullableFilter<"Contact"> | string | null
-  notes?: Prisma.StringNullableFilter<"Contact"> | string | null
-  isPrimary?: Prisma.BoolFilter<"Contact"> | boolean
-  isActive?: Prisma.BoolFilter<"Contact"> | boolean
-  deletedAt?: Prisma.DateTimeNullableFilter<"Contact"> | Date | string | null
-  createdAt?: Prisma.DateTimeFilter<"Contact"> | Date | string
-  updatedAt?: Prisma.DateTimeNullableFilter<"Contact"> | Date | string | null
 }
 
 export type ContactCreateManyCustomerInput = {

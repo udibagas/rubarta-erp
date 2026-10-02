@@ -8,6 +8,9 @@ export class MaterialType {
   @Field()
   partNumber: string;
 
+  @Field({ nullable: true })
+  interchangePartNumber?: string;
+
   @Field()
   name: string;
 

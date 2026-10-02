@@ -684,6 +684,16 @@ export type VisitPlanUncheckedUpdateManyInput = {
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
+export type VisitPlanListRelationFilter = {
+  every?: Prisma.VisitPlanWhereInput
+  some?: Prisma.VisitPlanWhereInput
+  none?: Prisma.VisitPlanWhereInput
+}
+
+export type VisitPlanOrderByRelationAggregateInput = {
+  _count?: Prisma.SortOrder
+}
+
 export type VisitPlanCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   customerId?: Prisma.SortOrder
@@ -778,24 +788,6 @@ export type VisitPlanSumOrderByAggregateInput = {
   companyId?: Prisma.SortOrder
   contactId?: Prisma.SortOrder
   estimatedDuration?: Prisma.SortOrder
-}
-
-export type VisitPlanListRelationFilter = {
-  every?: Prisma.VisitPlanWhereInput
-  some?: Prisma.VisitPlanWhereInput
-  none?: Prisma.VisitPlanWhereInput
-}
-
-export type VisitPlanOrderByRelationAggregateInput = {
-  _count?: Prisma.SortOrder
-}
-
-export type EnumVisitTypeFieldUpdateOperationsInput = {
-  set?: $Enums.VisitType
-}
-
-export type EnumVisitPlanStatusFieldUpdateOperationsInput = {
-  set?: $Enums.VisitPlanStatus
 }
 
 export type VisitPlanCreateNestedManyWithoutCustomerInput = {
@@ -964,6 +956,14 @@ export type VisitPlanUncheckedUpdateManyWithoutUserNestedInput = {
   update?: Prisma.VisitPlanUpdateWithWhereUniqueWithoutUserInput | Prisma.VisitPlanUpdateWithWhereUniqueWithoutUserInput[]
   updateMany?: Prisma.VisitPlanUpdateManyWithWhereWithoutUserInput | Prisma.VisitPlanUpdateManyWithWhereWithoutUserInput[]
   deleteMany?: Prisma.VisitPlanScalarWhereInput | Prisma.VisitPlanScalarWhereInput[]
+}
+
+export type EnumVisitTypeFieldUpdateOperationsInput = {
+  set?: $Enums.VisitType
+}
+
+export type EnumVisitPlanStatusFieldUpdateOperationsInput = {
+  set?: $Enums.VisitPlanStatus
 }
 
 export type VisitPlanCreateWithoutCustomerInput = {

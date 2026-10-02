@@ -530,20 +530,6 @@ export type CompanyUpdateOneRequiredWithoutOpportunityNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.CompanyUpdateToOneWithWhereWithoutOpportunityInput, Prisma.CompanyUpdateWithoutOpportunityInput>, Prisma.CompanyUncheckedUpdateWithoutOpportunityInput>
 }
 
-export type CompanyCreateNestedOneWithoutVisitPlansInput = {
-  create?: Prisma.XOR<Prisma.CompanyCreateWithoutVisitPlansInput, Prisma.CompanyUncheckedCreateWithoutVisitPlansInput>
-  connectOrCreate?: Prisma.CompanyCreateOrConnectWithoutVisitPlansInput
-  connect?: Prisma.CompanyWhereUniqueInput
-}
-
-export type CompanyUpdateOneRequiredWithoutVisitPlansNestedInput = {
-  create?: Prisma.XOR<Prisma.CompanyCreateWithoutVisitPlansInput, Prisma.CompanyUncheckedCreateWithoutVisitPlansInput>
-  connectOrCreate?: Prisma.CompanyCreateOrConnectWithoutVisitPlansInput
-  upsert?: Prisma.CompanyUpsertWithoutVisitPlansInput
-  connect?: Prisma.CompanyWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.CompanyUpdateToOneWithWhereWithoutVisitPlansInput, Prisma.CompanyUpdateWithoutVisitPlansInput>, Prisma.CompanyUncheckedUpdateWithoutVisitPlansInput>
-}
-
 export type CompanyCreateNestedOneWithoutDeliveryOrdersInput = {
   create?: Prisma.XOR<Prisma.CompanyCreateWithoutDeliveryOrdersInput, Prisma.CompanyUncheckedCreateWithoutDeliveryOrdersInput>
   connectOrCreate?: Prisma.CompanyCreateOrConnectWithoutDeliveryOrdersInput
@@ -653,6 +639,20 @@ export type CompanyCreatebanksInput = {
 export type CompanyUpdatebanksInput = {
   set?: runtime.InputJsonValue[]
   push?: runtime.InputJsonValue | runtime.InputJsonValue[]
+}
+
+export type CompanyCreateNestedOneWithoutVisitPlansInput = {
+  create?: Prisma.XOR<Prisma.CompanyCreateWithoutVisitPlansInput, Prisma.CompanyUncheckedCreateWithoutVisitPlansInput>
+  connectOrCreate?: Prisma.CompanyCreateOrConnectWithoutVisitPlansInput
+  connect?: Prisma.CompanyWhereUniqueInput
+}
+
+export type CompanyUpdateOneRequiredWithoutVisitPlansNestedInput = {
+  create?: Prisma.XOR<Prisma.CompanyCreateWithoutVisitPlansInput, Prisma.CompanyUncheckedCreateWithoutVisitPlansInput>
+  connectOrCreate?: Prisma.CompanyCreateOrConnectWithoutVisitPlansInput
+  upsert?: Prisma.CompanyUpsertWithoutVisitPlansInput
+  connect?: Prisma.CompanyWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CompanyUpdateToOneWithWhereWithoutVisitPlansInput, Prisma.CompanyUpdateWithoutVisitPlansInput>, Prisma.CompanyUncheckedUpdateWithoutVisitPlansInput>
 }
 
 export type CompanyCreateWithoutApprovalSettingInput = {
@@ -929,100 +929,6 @@ export type CompanyUncheckedUpdateWithoutOpportunityInput = {
   ApprovalSetting?: Prisma.ApprovalSettingUncheckedUpdateManyWithoutCompanyNestedInput
   Lead?: Prisma.LeadUncheckedUpdateManyWithoutCompanyNestedInput
   VisitPlans?: Prisma.VisitPlanUncheckedUpdateManyWithoutCompanyNestedInput
-  quotations?: Prisma.QuotationUncheckedUpdateManyWithoutCompanyNestedInput
-  purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutCompanyNestedInput
-  salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutCompanyNestedInput
-  goodsReceipts?: Prisma.GoodsReceiptUncheckedUpdateManyWithoutCompanyNestedInput
-  deliveryOrders?: Prisma.DeliveryOrderUncheckedUpdateManyWithoutCompanyNestedInput
-  invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutCompanyNestedInput
-}
-
-export type CompanyCreateWithoutVisitPlansInput = {
-  code: string
-  name: string
-  address?: string | null
-  phone?: string | null
-  isDefault?: boolean
-  banks?: Prisma.CompanyCreatebanksInput | runtime.InputJsonValue[]
-  Nkp?: Prisma.NkpCreateNestedManyWithoutCompanyInput
-  ApprovalSetting?: Prisma.ApprovalSettingCreateNestedManyWithoutCompanyInput
-  Opportunity?: Prisma.OpportunityCreateNestedManyWithoutCompanyInput
-  Lead?: Prisma.LeadCreateNestedManyWithoutCompanyInput
-  quotations?: Prisma.QuotationCreateNestedManyWithoutCompanyInput
-  purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutCompanyInput
-  salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutCompanyInput
-  goodsReceipts?: Prisma.GoodsReceiptCreateNestedManyWithoutCompanyInput
-  deliveryOrders?: Prisma.DeliveryOrderCreateNestedManyWithoutCompanyInput
-  invoices?: Prisma.InvoiceCreateNestedManyWithoutCompanyInput
-}
-
-export type CompanyUncheckedCreateWithoutVisitPlansInput = {
-  id?: number
-  code: string
-  name: string
-  address?: string | null
-  phone?: string | null
-  isDefault?: boolean
-  banks?: Prisma.CompanyCreatebanksInput | runtime.InputJsonValue[]
-  Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutCompanyInput
-  ApprovalSetting?: Prisma.ApprovalSettingUncheckedCreateNestedManyWithoutCompanyInput
-  Opportunity?: Prisma.OpportunityUncheckedCreateNestedManyWithoutCompanyInput
-  Lead?: Prisma.LeadUncheckedCreateNestedManyWithoutCompanyInput
-  quotations?: Prisma.QuotationUncheckedCreateNestedManyWithoutCompanyInput
-  purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutCompanyInput
-  salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutCompanyInput
-  goodsReceipts?: Prisma.GoodsReceiptUncheckedCreateNestedManyWithoutCompanyInput
-  deliveryOrders?: Prisma.DeliveryOrderUncheckedCreateNestedManyWithoutCompanyInput
-  invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutCompanyInput
-}
-
-export type CompanyCreateOrConnectWithoutVisitPlansInput = {
-  where: Prisma.CompanyWhereUniqueInput
-  create: Prisma.XOR<Prisma.CompanyCreateWithoutVisitPlansInput, Prisma.CompanyUncheckedCreateWithoutVisitPlansInput>
-}
-
-export type CompanyUpsertWithoutVisitPlansInput = {
-  update: Prisma.XOR<Prisma.CompanyUpdateWithoutVisitPlansInput, Prisma.CompanyUncheckedUpdateWithoutVisitPlansInput>
-  create: Prisma.XOR<Prisma.CompanyCreateWithoutVisitPlansInput, Prisma.CompanyUncheckedCreateWithoutVisitPlansInput>
-  where?: Prisma.CompanyWhereInput
-}
-
-export type CompanyUpdateToOneWithWhereWithoutVisitPlansInput = {
-  where?: Prisma.CompanyWhereInput
-  data: Prisma.XOR<Prisma.CompanyUpdateWithoutVisitPlansInput, Prisma.CompanyUncheckedUpdateWithoutVisitPlansInput>
-}
-
-export type CompanyUpdateWithoutVisitPlansInput = {
-  code?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isDefault?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  banks?: Prisma.CompanyUpdatebanksInput | runtime.InputJsonValue[]
-  Nkp?: Prisma.NkpUpdateManyWithoutCompanyNestedInput
-  ApprovalSetting?: Prisma.ApprovalSettingUpdateManyWithoutCompanyNestedInput
-  Opportunity?: Prisma.OpportunityUpdateManyWithoutCompanyNestedInput
-  Lead?: Prisma.LeadUpdateManyWithoutCompanyNestedInput
-  quotations?: Prisma.QuotationUpdateManyWithoutCompanyNestedInput
-  purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutCompanyNestedInput
-  salesOrders?: Prisma.SalesOrderUpdateManyWithoutCompanyNestedInput
-  goodsReceipts?: Prisma.GoodsReceiptUpdateManyWithoutCompanyNestedInput
-  deliveryOrders?: Prisma.DeliveryOrderUpdateManyWithoutCompanyNestedInput
-  invoices?: Prisma.InvoiceUpdateManyWithoutCompanyNestedInput
-}
-
-export type CompanyUncheckedUpdateWithoutVisitPlansInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  code?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isDefault?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  banks?: Prisma.CompanyUpdatebanksInput | runtime.InputJsonValue[]
-  Nkp?: Prisma.NkpUncheckedUpdateManyWithoutCompanyNestedInput
-  ApprovalSetting?: Prisma.ApprovalSettingUncheckedUpdateManyWithoutCompanyNestedInput
-  Opportunity?: Prisma.OpportunityUncheckedUpdateManyWithoutCompanyNestedInput
-  Lead?: Prisma.LeadUncheckedUpdateManyWithoutCompanyNestedInput
   quotations?: Prisma.QuotationUncheckedUpdateManyWithoutCompanyNestedInput
   purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutCompanyNestedInput
   salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutCompanyNestedInput
@@ -1684,6 +1590,100 @@ export type CompanyUncheckedUpdateWithoutSalesOrdersInput = {
   VisitPlans?: Prisma.VisitPlanUncheckedUpdateManyWithoutCompanyNestedInput
   quotations?: Prisma.QuotationUncheckedUpdateManyWithoutCompanyNestedInput
   purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutCompanyNestedInput
+  goodsReceipts?: Prisma.GoodsReceiptUncheckedUpdateManyWithoutCompanyNestedInput
+  deliveryOrders?: Prisma.DeliveryOrderUncheckedUpdateManyWithoutCompanyNestedInput
+  invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutCompanyNestedInput
+}
+
+export type CompanyCreateWithoutVisitPlansInput = {
+  code: string
+  name: string
+  address?: string | null
+  phone?: string | null
+  isDefault?: boolean
+  banks?: Prisma.CompanyCreatebanksInput | runtime.InputJsonValue[]
+  Nkp?: Prisma.NkpCreateNestedManyWithoutCompanyInput
+  ApprovalSetting?: Prisma.ApprovalSettingCreateNestedManyWithoutCompanyInput
+  Opportunity?: Prisma.OpportunityCreateNestedManyWithoutCompanyInput
+  Lead?: Prisma.LeadCreateNestedManyWithoutCompanyInput
+  quotations?: Prisma.QuotationCreateNestedManyWithoutCompanyInput
+  purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutCompanyInput
+  salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutCompanyInput
+  goodsReceipts?: Prisma.GoodsReceiptCreateNestedManyWithoutCompanyInput
+  deliveryOrders?: Prisma.DeliveryOrderCreateNestedManyWithoutCompanyInput
+  invoices?: Prisma.InvoiceCreateNestedManyWithoutCompanyInput
+}
+
+export type CompanyUncheckedCreateWithoutVisitPlansInput = {
+  id?: number
+  code: string
+  name: string
+  address?: string | null
+  phone?: string | null
+  isDefault?: boolean
+  banks?: Prisma.CompanyCreatebanksInput | runtime.InputJsonValue[]
+  Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutCompanyInput
+  ApprovalSetting?: Prisma.ApprovalSettingUncheckedCreateNestedManyWithoutCompanyInput
+  Opportunity?: Prisma.OpportunityUncheckedCreateNestedManyWithoutCompanyInput
+  Lead?: Prisma.LeadUncheckedCreateNestedManyWithoutCompanyInput
+  quotations?: Prisma.QuotationUncheckedCreateNestedManyWithoutCompanyInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutCompanyInput
+  salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutCompanyInput
+  goodsReceipts?: Prisma.GoodsReceiptUncheckedCreateNestedManyWithoutCompanyInput
+  deliveryOrders?: Prisma.DeliveryOrderUncheckedCreateNestedManyWithoutCompanyInput
+  invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutCompanyInput
+}
+
+export type CompanyCreateOrConnectWithoutVisitPlansInput = {
+  where: Prisma.CompanyWhereUniqueInput
+  create: Prisma.XOR<Prisma.CompanyCreateWithoutVisitPlansInput, Prisma.CompanyUncheckedCreateWithoutVisitPlansInput>
+}
+
+export type CompanyUpsertWithoutVisitPlansInput = {
+  update: Prisma.XOR<Prisma.CompanyUpdateWithoutVisitPlansInput, Prisma.CompanyUncheckedUpdateWithoutVisitPlansInput>
+  create: Prisma.XOR<Prisma.CompanyCreateWithoutVisitPlansInput, Prisma.CompanyUncheckedCreateWithoutVisitPlansInput>
+  where?: Prisma.CompanyWhereInput
+}
+
+export type CompanyUpdateToOneWithWhereWithoutVisitPlansInput = {
+  where?: Prisma.CompanyWhereInput
+  data: Prisma.XOR<Prisma.CompanyUpdateWithoutVisitPlansInput, Prisma.CompanyUncheckedUpdateWithoutVisitPlansInput>
+}
+
+export type CompanyUpdateWithoutVisitPlansInput = {
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isDefault?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  banks?: Prisma.CompanyUpdatebanksInput | runtime.InputJsonValue[]
+  Nkp?: Prisma.NkpUpdateManyWithoutCompanyNestedInput
+  ApprovalSetting?: Prisma.ApprovalSettingUpdateManyWithoutCompanyNestedInput
+  Opportunity?: Prisma.OpportunityUpdateManyWithoutCompanyNestedInput
+  Lead?: Prisma.LeadUpdateManyWithoutCompanyNestedInput
+  quotations?: Prisma.QuotationUpdateManyWithoutCompanyNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutCompanyNestedInput
+  salesOrders?: Prisma.SalesOrderUpdateManyWithoutCompanyNestedInput
+  goodsReceipts?: Prisma.GoodsReceiptUpdateManyWithoutCompanyNestedInput
+  deliveryOrders?: Prisma.DeliveryOrderUpdateManyWithoutCompanyNestedInput
+  invoices?: Prisma.InvoiceUpdateManyWithoutCompanyNestedInput
+}
+
+export type CompanyUncheckedUpdateWithoutVisitPlansInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isDefault?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  banks?: Prisma.CompanyUpdatebanksInput | runtime.InputJsonValue[]
+  Nkp?: Prisma.NkpUncheckedUpdateManyWithoutCompanyNestedInput
+  ApprovalSetting?: Prisma.ApprovalSettingUncheckedUpdateManyWithoutCompanyNestedInput
+  Opportunity?: Prisma.OpportunityUncheckedUpdateManyWithoutCompanyNestedInput
+  Lead?: Prisma.LeadUncheckedUpdateManyWithoutCompanyNestedInput
+  quotations?: Prisma.QuotationUncheckedUpdateManyWithoutCompanyNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutCompanyNestedInput
+  salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutCompanyNestedInput
   goodsReceipts?: Prisma.GoodsReceiptUncheckedUpdateManyWithoutCompanyNestedInput
   deliveryOrders?: Prisma.DeliveryOrderUncheckedUpdateManyWithoutCompanyNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutCompanyNestedInput

@@ -9,7 +9,7 @@ import {
   CreateMaterialDto,
   UpdateMaterialDto,
   QueryMaterialDto,
-} from './dto/material.dto';
+} from './material.dto';
 import { Prisma } from '../prisma/client/client';
 import * as ExcelJS from 'exceljs';
 

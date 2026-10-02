@@ -127,25 +127,6 @@ export const InteractionType = {
 export type InteractionType = (typeof InteractionType)[keyof typeof InteractionType]
 
 
-export const VisitPlanStatus = {
-  Planned: 'Planned',
-  InProgress: 'InProgress',
-  Completed: 'Completed',
-  Cancelled: 'Cancelled',
-  Rescheduled: 'Rescheduled'
-} as const
-
-export type VisitPlanStatus = (typeof VisitPlanStatus)[keyof typeof VisitPlanStatus]
-
-
-export const VisitType = {
-  Online: 'Online',
-  Offline: 'Offline'
-} as const
-
-export type VisitType = (typeof VisitType)[keyof typeof VisitType]
-
-
 export const DeliveryOrderStatus = {
   Draft: 'Draft',
   Confirmed: 'Confirmed'
@@ -264,3 +245,22 @@ export const PaymentType = {
 } as const
 
 export type PaymentType = (typeof PaymentType)[keyof typeof PaymentType]
+
+
+export const VisitPlanStatus = {
+  Planned: 'Planned',
+  InProgress: 'InProgress',
+  Completed: 'Completed',
+  Cancelled: 'Cancelled',
+  Rescheduled: 'Rescheduled'
+} as const
+
+export type VisitPlanStatus = (typeof VisitPlanStatus)[keyof typeof VisitPlanStatus]
+
+
+export const VisitType = {
+  Online: 'Online',
+  Offline: 'Offline'
+} as const
+
+export type VisitType = (typeof VisitType)[keyof typeof VisitType]

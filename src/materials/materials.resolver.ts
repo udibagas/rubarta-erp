@@ -1,6 +1,6 @@
 import { Resolver, Query, Args, Int } from '@nestjs/graphql';
 import { MaterialsService } from './materials.service';
-import { MaterialType } from './dto/material.type';
+import { MaterialType } from './material.type';
 
 @Resolver(() => MaterialType)
 export class MaterialsResolver {

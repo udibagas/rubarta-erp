@@ -110,11 +110,6 @@ export type CustomerNote = Prisma.CustomerNoteModel
  */
 export type CustomerFile = Prisma.CustomerFileModel
 /**
- * Model VisitPlan
- * 
- */
-export type VisitPlan = Prisma.VisitPlanModel
-/**
  * Model Customer
  * 
  */
@@ -239,3 +234,8 @@ export type UserBalance = Prisma.UserBalanceModel
  * 
  */
 export type Notification = Prisma.NotificationModel
+/**
+ * Model VisitPlan
+ * 
+ */
+export type VisitPlan = Prisma.VisitPlanModel

@@ -65,7 +65,6 @@ export const ModelName = {
   Interaction: 'Interaction',
   CustomerNote: 'CustomerNote',
   CustomerFile: 'CustomerFile',
-  VisitPlan: 'VisitPlan',
   Customer: 'Customer',
   Contact: 'Contact',
   DeliveryOrder: 'DeliveryOrder',
@@ -90,7 +89,8 @@ export const ModelName = {
   Bank: 'Bank',
   User: 'User',
   UserBalance: 'UserBalance',
-  Notification: 'Notification'
+  Notification: 'Notification',
+  VisitPlan: 'VisitPlan'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -323,35 +323,6 @@ export const CustomerFileScalarFieldEnum = {
 export type CustomerFileScalarFieldEnum = (typeof CustomerFileScalarFieldEnum)[keyof typeof CustomerFileScalarFieldEnum]
 
 
-export const VisitPlanScalarFieldEnum = {
-  id: 'id',
-  customerId: 'customerId',
-  userId: 'userId',
-  companyId: 'companyId',
-  contactId: 'contactId',
-  title: 'title',
-  purpose: 'purpose',
-  visitType: 'visitType',
-  meetingUrl: 'meetingUrl',
-  scheduledDate: 'scheduledDate',
-  scheduledTime: 'scheduledTime',
-  estimatedDuration: 'estimatedDuration',
-  status: 'status',
-  actualVisitDate: 'actualVisitDate',
-  outcome: 'outcome',
-  cancelReason: 'cancelReason',
-  notes: 'notes',
-  address: 'address',
-  contactPerson: 'contactPerson',
-  contactPhone: 'contactPhone',
-  deletedAt: 'deletedAt',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-} as const
-
-export type VisitPlanScalarFieldEnum = (typeof VisitPlanScalarFieldEnum)[keyof typeof VisitPlanScalarFieldEnum]
-
-
 export const CustomerScalarFieldEnum = {
   id: 'id',
   name: 'name',
@@ -519,6 +490,7 @@ export type InvoiceItemScalarFieldEnum = (typeof InvoiceItemScalarFieldEnum)[key
 export const MaterialScalarFieldEnum = {
   id: 'id',
   partNumber: 'partNumber',
+  interchangePartNumber: 'interchangePartNumber',
   name: 'name',
   model: 'model',
   description: 'description',
@@ -858,6 +830,35 @@ export const NotificationScalarFieldEnum = {
 } as const
 
 export type NotificationScalarFieldEnum = (typeof NotificationScalarFieldEnum)[keyof typeof NotificationScalarFieldEnum]
+
+
+export const VisitPlanScalarFieldEnum = {
+  id: 'id',
+  customerId: 'customerId',
+  userId: 'userId',
+  companyId: 'companyId',
+  contactId: 'contactId',
+  title: 'title',
+  purpose: 'purpose',
+  visitType: 'visitType',
+  meetingUrl: 'meetingUrl',
+  scheduledDate: 'scheduledDate',
+  scheduledTime: 'scheduledTime',
+  estimatedDuration: 'estimatedDuration',
+  status: 'status',
+  actualVisitDate: 'actualVisitDate',
+  outcome: 'outcome',
+  cancelReason: 'cancelReason',
+  notes: 'notes',
+  address: 'address',
+  contactPerson: 'contactPerson',
+  contactPhone: 'contactPhone',
+  deletedAt: 'deletedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type VisitPlanScalarFieldEnum = (typeof VisitPlanScalarFieldEnum)[keyof typeof VisitPlanScalarFieldEnum]
 
 
 export const SortOrder = {

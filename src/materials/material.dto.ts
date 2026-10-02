@@ -1,4 +1,5 @@
 import { ApiProperty, PartialType } from '@nestjs/swagger';
+import { Transform, Type } from 'class-transformer';
 import {
   IsString,
   IsInt,
@@ -14,6 +15,12 @@ export class CreateMaterialDto {
   @IsString()
   @MaxLength(100)
   partNumber: string;
+
+  @ApiProperty({ required: false, example: 'PART-002' })
+  @IsOptional()
+  @IsString()
+  @MaxLength(100)
+  interchangePartNumber?: string;
 
   @ApiProperty({ example: 'Steel Plate' })
   @IsString()
@@ -122,27 +129,36 @@ export class QueryMaterialDto {
 
   @ApiProperty({ required: false })
   @IsOptional()
+  @Type(() => Number)
   @IsInt()
   supplierId?: number;
 
   @ApiProperty({ required: false })
   @IsOptional()
+  @Transform(({ value }) =>
+    value === 'true' ? true : value === 'false' ? false : value,
+  )
   @IsBoolean()
   isActive?: boolean;
 
   @ApiProperty({ required: false, description: 'Show only low stock items' })
   @IsOptional()
+  @Transform(({ value }) =>
+    value === 'true' ? true : value === 'false' ? false : value,
+  )
   @IsBoolean()
   lowStock?: boolean;
 
   @ApiProperty({ required: false, minimum: 1, default: 1 })
   @IsOptional()
+  @Type(() => Number)
   @IsInt()
   @Min(1)
   page?: number;
 
   @ApiProperty({ required: false, minimum: 1, default: 10 })
   @IsOptional()
+  @Type(() => Number)
   @IsInt()
   @Min(1)
   pageSize?: number;

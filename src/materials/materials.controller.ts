@@ -29,7 +29,11 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { Response } from 'express';
 import * as multer from 'multer';
 import { MaterialsService } from './materials.service';
-import { CreateMaterialDto, UpdateMaterialDto } from './dto/material.dto';
+import {
+  CreateMaterialDto,
+  QueryMaterialDto,
+  UpdateMaterialDto,
+} from './material.dto';
 
 @ApiTags('Materials')
 @ApiBearerAuth()
@@ -47,27 +51,8 @@ export class MaterialsController {
   @Get()
   @ApiOperation({ summary: 'Get all materials' })
   @ApiOkResponse({ description: 'List of materials' })
-  findAll(
-    @Query('keyword') keyword?: string,
-    @Query('category') category?: string,
-    @Query('supplierId', new ParseIntPipe({ optional: true }))
-    supplierId?: number,
-    @Query('isActive', new ParseBoolPipe({ optional: true }))
-    isActive?: boolean,
-    @Query('lowStock', new ParseBoolPipe({ optional: true }))
-    lowStock?: boolean,
-    @Query('page', new ParseIntPipe({ optional: true })) page?: number,
-    @Query('pageSize', new ParseIntPipe({ optional: true })) pageSize?: number,
-  ) {
-    return this.materialsService.findAll({
-      keyword,
-      category,
-      supplierId,
-      isActive,
-      lowStock,
-      page,
-      pageSize,
-    });
+  findAll(@Query() query: QueryMaterialDto) {
+    return this.materialsService.findAll(query);
   }
 
   @Get('part-number/:partNumber')
