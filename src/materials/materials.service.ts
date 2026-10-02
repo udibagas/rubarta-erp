@@ -198,6 +198,11 @@ export class MaterialsService {
     // Define columns
     worksheet.columns = [
       { header: 'Part Number', key: 'partNumber', width: 15 },
+      {
+        header: 'Interchange Part Number',
+        key: 'interchangePartNumber',
+        width: 15,
+      },
       { header: 'Name', key: 'name', width: 30 },
       { header: 'Model', key: 'model', width: 15 },
       { header: 'Description', key: 'description', width: 40 },
@@ -228,6 +233,7 @@ export class MaterialsService {
     materials.forEach((material) => {
       worksheet.addRow({
         partNumber: material.partNumber,
+        interchangePartNumber: material.interchangePartNumber,
         name: material.name,
         model: material.model,
         description: material.description,
@@ -277,8 +283,8 @@ export class MaterialsService {
 
       try {
         const partNumber = row.getCell(1).value?.toString();
-        const name = row.getCell(2).value?.toString();
-        const unit = row.getCell(6).value?.toString();
+        const name = row.getCell(3).value?.toString();
+        const unit = row.getCell(7).value?.toString();
 
         if (!partNumber || !name || !unit) {
           errors.push(
@@ -289,41 +295,42 @@ export class MaterialsService {
 
         const material: any = {
           partNumber,
+          interchangePartNumber: row.getCell(2).value?.toString() || null,
           name,
-          model: row.getCell(3).value?.toString() || null,
-          description: row.getCell(4).value?.toString() || null,
-          category: row.getCell(5).value?.toString() || null,
+          model: row.getCell(4).value?.toString() || null,
+          description: row.getCell(5).value?.toString() || null,
+          category: row.getCell(6).value?.toString() || null,
           unit,
-          weight: row.getCell(7).value
-            ? parseFloat(row.getCell(7).value.toString())
+          weight: row.getCell(8).value
+            ? parseFloat(row.getCell(8).value.toString())
             : null,
-          purchaseCurrency: row.getCell(8).value?.toString() || null,
-          sellingCurrency: row.getCell(9).value?.toString() || null,
-          purchasePrice: row.getCell(10).value
-            ? parseFloat(row.getCell(10).value.toString())
-            : null,
-          sellingPrice: row.getCell(11).value
+          purchaseCurrency: row.getCell(9).value?.toString() || null,
+          sellingCurrency: row.getCell(10).value?.toString() || null,
+          purchasePrice: row.getCell(11).value
             ? parseFloat(row.getCell(11).value.toString())
             : null,
-          moq: row.getCell(12).value
-            ? parseInt(row.getCell(12).value.toString())
-            : 0,
-          minStock: row.getCell(13).value
+          sellingPrice: row.getCell(12).value
+            ? parseFloat(row.getCell(12).value.toString())
+            : null,
+          moq: row.getCell(13).value
             ? parseInt(row.getCell(13).value.toString())
             : 0,
-          currentStock: row.getCell(14).value
+          minStock: row.getCell(14).value
             ? parseInt(row.getCell(14).value.toString())
             : 0,
-          leadTime: row.getCell(15).value
+          currentStock: row.getCell(15).value
             ? parseInt(row.getCell(15).value.toString())
+            : 0,
+          leadTime: row.getCell(16).value
+            ? parseInt(row.getCell(16).value.toString())
             : null,
-          isActive: row.getCell(16).value
-            ? row.getCell(16).value.toString().toLowerCase() === 'true'
+          isActive: row.getCell(17).value
+            ? row.getCell(17).value.toString().toLowerCase() === 'true'
             : true,
         };
 
-        // Handle supplier by name (if provided in column 16)
-        const supplierName = row.getCell(16).value?.toString();
+        // Handle supplier by name (if provided in column 17)
+        const supplierName = row.getCell(18).value?.toString();
         if (supplierName) {
           // Store supplier name temporarily, will be resolved later
           material.supplierName = supplierName;
