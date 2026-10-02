@@ -3,6 +3,7 @@ import { MailerService } from '@nestjs-modules/mailer';
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { Prisma } from '../prisma/client/client';
+import { Cron, CronExpression } from '@nestjs/schedule';
 
 @Injectable()
 export class NotificationsService {
@@ -106,5 +107,95 @@ export class NotificationsService {
   async notify(notificationDto: NotificationDto) {
     await this.create(notificationDto);
     this.send(notificationDto);
+  }
+
+  @Cron(CronExpression.EVERY_DAY_AT_9AM)
+  async notifyDraftDocuments() {
+    interface DraftDocument {
+      id: number;
+      number: string;
+      User: { id: number; name: string };
+    }
+
+    const draftQuotations: DraftDocument[] =
+      await this.prisma.quotation.findMany({
+        where: { status: 'Draft' },
+        select: {
+          id: true,
+          number: true,
+          User: { select: { id: true, name: true } },
+        },
+      });
+
+    const draftPurchaseOrders: DraftDocument[] =
+      await this.prisma.purchaseOrder.findMany({
+        where: { status: 'Draft' },
+        select: {
+          id: true,
+          number: true,
+          User: { select: { id: true, name: true } },
+        },
+      });
+
+    const draftSalesOrders: DraftDocument[] =
+      await this.prisma.salesOrder.findMany({
+        where: { status: 'Draft' },
+        select: {
+          id: true,
+          number: true,
+          User: { select: { id: true, name: true } },
+        },
+      });
+
+    const draftInvoices: DraftDocument[] = await this.prisma.invoice.findMany({
+      where: { status: 'Draft' },
+      select: {
+        id: true,
+        number: true,
+        User: { select: { id: true, name: true } },
+      },
+    });
+
+    const draftGoodsReceipts: DraftDocument[] =
+      await this.prisma.goodsReceipt.findMany({
+        where: { status: 'Draft' },
+        select: {
+          id: true,
+          number: true,
+          User: { select: { id: true, name: true } },
+        },
+      });
+
+    const draftDeliveryOrders: DraftDocument[] =
+      await this.prisma.deliveryOrder.findMany({
+        where: { status: 'Draft' },
+        select: {
+          id: true,
+          number: true,
+          User: { select: { id: true, name: true } },
+        },
+      });
+
+    const allDraftDocuments = [
+      ...draftQuotations,
+      ...draftPurchaseOrders,
+      ...draftSalesOrders,
+      ...draftInvoices,
+      ...draftGoodsReceipts,
+      ...draftDeliveryOrders,
+    ];
+
+    for (const doc of allDraftDocuments) {
+      console.log(
+        `Notifying user ${doc.User.name} about draft document #${doc.number}`,
+      );
+
+      this.notify({
+        title: `[Pengingat] Dokumen belum diselesaikan: #${doc.number}`,
+        message: `Dokumen dengan nomor #${doc.number} belum diselesaikan. Silakan tinjau dan selesaikan segera.`,
+        redirectUrl: `https://erp.rubarta.co.id`,
+        userId: doc.User.id,
+      });
+    }
   }
 }
