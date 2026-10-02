@@ -37,6 +37,7 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { ScheduleModule } from '@nestjs/schedule';
 import { SalesDashboardModule } from './sales-dashboard/sales-dashboard.module';
+import { DocumentsModule } from './documents/documents.module';
 
 @Module({
   imports: [
@@ -116,8 +117,8 @@ import { SalesDashboardModule } from './sales-dashboard/sales-dashboard.module';
     CrmDashboardModule,
     VisitPlansModule,
     SalesDashboardModule,
+    DocumentsModule,
   ],
-  controllers: [],
   providers: [],
 })
 export class AppModule {}
