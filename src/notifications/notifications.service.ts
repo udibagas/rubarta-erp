@@ -1,10 +1,9 @@
-import { NotificationDto } from './notification.dto';
+import { NotificationDto, DraftDocument } from './notification.dto';
 import { MailerService } from '@nestjs-modules/mailer';
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { Prisma } from '../prisma/client/client';
 import { Cron, CronExpression } from '@nestjs/schedule';
-
 @Injectable()
 export class NotificationsService {
   constructor(
@@ -111,15 +110,9 @@ export class NotificationsService {
 
   @Cron(CronExpression.EVERY_DAY_AT_9AM)
   async notifyDraftDocuments() {
-    interface DraftDocument {
-      id: number;
-      number: string;
-      User: { id: number; name: string };
-    }
-
     const draftQuotations: DraftDocument[] =
       await this.prisma.quotation.findMany({
-        where: { status: 'Draft' },
+        where: { status: 'Draft', deletedAt: null },
         select: {
           id: true,
           number: true,
@@ -129,7 +122,7 @@ export class NotificationsService {
 
     const draftPurchaseOrders: DraftDocument[] =
       await this.prisma.purchaseOrder.findMany({
-        where: { status: 'Draft' },
+        where: { status: 'Draft', deletedAt: null },
         select: {
           id: true,
           number: true,
@@ -139,7 +132,7 @@ export class NotificationsService {
 
     const draftSalesOrders: DraftDocument[] =
       await this.prisma.salesOrder.findMany({
-        where: { status: 'Draft' },
+        where: { status: 'Draft', deletedAt: null },
         select: {
           id: true,
           number: true,
@@ -158,7 +151,7 @@ export class NotificationsService {
 
     const draftGoodsReceipts: DraftDocument[] =
       await this.prisma.goodsReceipt.findMany({
-        where: { status: 'Draft' },
+        where: { status: 'Draft', deletedAt: null },
         select: {
           id: true,
           number: true,

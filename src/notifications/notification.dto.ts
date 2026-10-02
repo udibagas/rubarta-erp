@@ -7,3 +7,9 @@ export class NotificationDto {
 
   redirectUrl?: string;
 }
+
+export interface DraftDocument {
+  id: number;
+  number: string;
+  User: { id: number; name: string };
+}
