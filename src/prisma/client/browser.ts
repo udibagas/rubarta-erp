@@ -198,6 +198,11 @@ export type NkpApproval = Prisma.NkpApprovalModel
  */
 export type NkpAttachment = Prisma.NkpAttachmentModel
 /**
+ * Model Notification
+ * 
+ */
+export type Notification = Prisma.NotificationModel
+/**
  * Model PurchaseOrder
  * 
  */
@@ -252,11 +257,6 @@ export type User = Prisma.UserModel
  * 
  */
 export type UserBalance = Prisma.UserBalanceModel
-/**
- * Model Notification
- * 
- */
-export type Notification = Prisma.NotificationModel
 /**
  * Model VisitPlan
  * 

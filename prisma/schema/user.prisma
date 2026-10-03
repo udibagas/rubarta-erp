@@ -1,0 +1,68 @@
+model User {
+  id                 Int          @id @default(autoincrement())
+  name               String       @db.VarChar(50)
+  code               String?      @db.Char(4)
+  email              String       @unique @db.VarChar(50)
+  password           String       @db.VarChar(100)
+  roles              Role[]       @default([USER])
+  active             Boolean      @default(true)
+  Balance            UserBalance?
+  Bank               Bank?        @relation(fields: [bankId], references: [id])
+  bankId             Int?
+  bankAccount        String?      @db.VarChar(30)
+  currency           Currency     @default(IDR)
+  Department         Department?  @relation(fields: [departmentId], references: [id])
+  departmentId       Int?
+  signatureSpeciment Json?        @db.JsonB
+
+  Notification          Notification[]
+  NkpApproval           NkpApproval[]
+  ApprovalSettingItem   ApprovalSettingItem[]
+  Nkp                   Nkp[]                 @relation(name: "Nkp")
+  NkpRequest            Nkp[]                 @relation(name: "NkpRequest")
+  Tasks                 Task[]
+  Interactions          Interaction[]
+  CustomerNotes         CustomerNote[]
+  Leads                 Lead[]
+  Opportunities         Opportunity[]
+  Quotations            Quotation[]
+  Invoices              Invoice[]
+  accountingPayments    Payment[]
+  journalEntriesCreated JournalEntry[]        @relation("JournalCreatedBy")
+  journalEntriesPosted  JournalEntry[]        @relation("JournalPostedBy")
+  closedPeriods         FiscalPeriod[]        @relation("PeriodClosedBy")
+  vendorBillsCreated    VendorBill[]
+  bankTransactions      BankTransaction[]
+  VisitPlans            VisitPlan[]
+  Customers             Customer[]
+  approvalItems         ApprovalItem[]
+  salesOrders           SalesOrder[]
+  purchaseOrders        PurchaseOrder[]
+  goodsReceipts         GoodsReceipt[]
+  deliveryOrders        DeliveryOrder[]
+
+  @@index([bankId, departmentId])
+  @@map("Users")
+}
+
+model UserBalance {
+  id          Int       @id @default(autoincrement())
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  userId      Int       @unique
+  balance     Float     @default(0) @db.DoublePrecision
+  description String?   @db.VarChar()
+  updatedAt   DateTime? @updatedAt // kirim notifikasi apabila ada balance > 0 belum dilaporkan >= 7 hari
+
+  @@index([userId])
+  @@map("UserBalances")
+}
+
+enum Role {
+  USER
+  CASHIER
+  FINANCE
+  ACCOUNTING
+  STAFF
+  ADMIN
+  SALES_REP
+}

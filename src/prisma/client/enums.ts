@@ -133,6 +133,15 @@ export const ApprovalActionType = {
 export type ApprovalActionType = (typeof ApprovalActionType)[keyof typeof ApprovalActionType]
 
 
+export const ApprovalStatus = {
+  APPROVED: 'APPROVED',
+  PARTIALLY_APPROVED: 'PARTIALLY_APPROVED',
+  REJECTED: 'REJECTED'
+} as const
+
+export type ApprovalStatus = (typeof ApprovalStatus)[keyof typeof ApprovalStatus]
+
+
 export const LeadStatus = {
   New: 'New',
   Contacted: 'Contacted',
@@ -293,18 +302,6 @@ export const SalesOrderStatus = {
 export type SalesOrderStatus = (typeof SalesOrderStatus)[keyof typeof SalesOrderStatus]
 
 
-export const Role = {
-  USER: 'USER',
-  CASHIER: 'CASHIER',
-  FINANCE: 'FINANCE',
-  ACCOUNTING: 'ACCOUNTING',
-  ADMIN: 'ADMIN',
-  SALES_REP: 'SALES_REP'
-} as const
-
-export type Role = (typeof Role)[keyof typeof Role]
-
-
 export const PaymentStatus = {
   DRAFT: 'DRAFT',
   SUBMITTED: 'SUBMITTED',
@@ -322,15 +319,6 @@ export const PaymentStatus = {
 export type PaymentStatus = (typeof PaymentStatus)[keyof typeof PaymentStatus]
 
 
-export const ApprovalStatus = {
-  APPROVED: 'APPROVED',
-  PARTIALLY_APPROVED: 'PARTIALLY_APPROVED',
-  REJECTED: 'REJECTED'
-} as const
-
-export type ApprovalStatus = (typeof ApprovalStatus)[keyof typeof ApprovalStatus]
-
-
 export const PaymentType = {
   EMPLOYEE: 'EMPLOYEE',
   VENDOR: 'VENDOR',
@@ -340,6 +328,19 @@ export const PaymentType = {
 } as const
 
 export type PaymentType = (typeof PaymentType)[keyof typeof PaymentType]
+
+
+export const Role = {
+  USER: 'USER',
+  CASHIER: 'CASHIER',
+  FINANCE: 'FINANCE',
+  ACCOUNTING: 'ACCOUNTING',
+  STAFF: 'STAFF',
+  ADMIN: 'ADMIN',
+  SALES_REP: 'SALES_REP'
+} as const
+
+export type Role = (typeof Role)[keyof typeof Role]
 
 
 export const VisitPlanStatus = {

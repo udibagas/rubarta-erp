@@ -21,6 +21,7 @@ import { createPdfDocumentWithTables } from 'pdfkit-table';
 import { formatDateNumeric } from '../helpers/date';
 import { toDecimal } from '../helpers/number';
 import { Cron, CronExpression } from '@nestjs/schedule';
+import { NkpPolicy } from './nkp.policy';
 
 @Injectable()
 export class NkpService {
@@ -28,9 +29,11 @@ export class NkpService {
     private prisma: PrismaService,
     private eventEmitter: EventEmitter2,
     private notification: NotificationsService,
+    private policy: NkpPolicy,
   ) {}
 
   async create(dto: NkpDto & { requesterId: number }) {
+    this.policy.create();
     const { NkpItem: items, NkpAttachment: attachments, ...data } = dto;
     let number = 'DRAFT';
 
@@ -359,10 +362,16 @@ export class NkpService {
     });
   }
 
-  async update(id: number, dto: NkpDto) {
-    const existingData = await this.findOne(id);
-    if (existingData.status !== PaymentStatus.DRAFT)
-      throw new ForbiddenException();
+  async update(id: number, dto: NkpDto, user: User) {
+    const nkp = await this.findOne(id);
+    if (nkp.status !== PaymentStatus.DRAFT) throw new ForbiddenException();
+
+    if (nkp.requesterId !== user.id) {
+      throw new ForbiddenException({
+        statusCode: 403,
+        message: 'You are not allowed to perform this action',
+      });
+    }
 
     let number = 'DRAFT';
     if (dto.status == PaymentStatus.SUBMITTED) {
@@ -425,7 +434,7 @@ export class NkpService {
     return savedData;
   }
 
-  async remove(id: number) {
+  async remove(id: number, user: User) {
     const data = await this.findOne(id);
     if (!['DRAFT', 'SUBMITTED'].includes(data.status))
       throw new ForbiddenException();
@@ -434,7 +443,7 @@ export class NkpService {
     });
   }
 
-  async removeItem(id: number, itemId: number) {
+  async removeItem(id: number, itemId: number, user: User) {
     const data = await this.findOne(id);
     if (!['DRAFT', 'SUBMITTED'].includes(data.status))
       throw new ForbiddenException();

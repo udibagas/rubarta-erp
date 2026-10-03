@@ -35,31 +35,6 @@ export class NkpController {
 
   @Post()
   @ApiOperation({ summary: 'Create new NKP' })
-  @ApiOkResponse({
-    description: 'Created payment authorizaton include the items',
-    example: {
-      id: 1,
-      companyId: 1,
-      employeeId: 1,
-      bankId: 1,
-      bankAccount: '2411191***',
-      grossAmount: 2000000,
-      deduction: 100000,
-      netAmount: 1900000,
-      amount: 2000000,
-      cashAdvance: 0,
-      description: 'Cash Advance for Bagas for 3 days',
-      parentId: 1,
-      status: 'SUBMITTED',
-      items: [
-        {
-          date: '2024-01-02',
-          description: 'BBM Pertalite 10 Liter',
-          amount: 100000,
-        },
-      ],
-    },
-  })
   create(@Body() data: NkpDto, @Auth() user: User) {
     return this.nkpService.create({
       ...data,
@@ -126,8 +101,12 @@ export class NkpController {
 
   @Patch(':id')
   @ApiOperation({ summary: 'Update NKP by id' })
-  update(@Param('id', ParseIntPipe) id: number, @Body() data: NkpDto) {
-    return this.nkpService.update(id, data);
+  update(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() data: NkpDto,
+    @Auth() user: User,
+  ) {
+    return this.nkpService.update(id, data, user);
   }
 
   @Post('submit/:id')
@@ -139,8 +118,8 @@ export class NkpController {
 
   @Delete(':id')
   @ApiOperation({ summary: 'Delete NKP by id' })
-  remove(@Param('id', ParseIntPipe) id: number) {
-    return this.nkpService.remove(id);
+  remove(@Param('id', ParseIntPipe) id: number, @Auth() user: User) {
+    return this.nkpService.remove(id, user);
   }
 
   @Delete(':id/:itemId')
@@ -148,8 +127,9 @@ export class NkpController {
   removeItem(
     @Param('id', ParseIntPipe) id: number,
     @Param('itemId', ParseIntPipe) itemId: number,
+    @Auth() user: User,
   ) {
-    return this.nkpService.removeItem(id, itemId);
+    return this.nkpService.removeItem(id, itemId, user);
   }
 
   @Post('approve/:id')

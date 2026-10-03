@@ -358,16 +358,6 @@ export type NotificationUncheckedUpdateManyInput = {
   readAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
-export type NotificationListRelationFilter = {
-  every?: Prisma.NotificationWhereInput
-  some?: Prisma.NotificationWhereInput
-  none?: Prisma.NotificationWhereInput
-}
-
-export type NotificationOrderByRelationAggregateInput = {
-  _count?: Prisma.SortOrder
-}
-
 export type NotificationCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   date?: Prisma.SortOrder
@@ -406,6 +396,16 @@ export type NotificationMinOrderByAggregateInput = {
 export type NotificationSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+}
+
+export type NotificationListRelationFilter = {
+  every?: Prisma.NotificationWhereInput
+  some?: Prisma.NotificationWhereInput
+  none?: Prisma.NotificationWhereInput
+}
+
+export type NotificationOrderByRelationAggregateInput = {
+  _count?: Prisma.SortOrder
 }
 
 export type NotificationCreateNestedManyWithoutUserInput = {

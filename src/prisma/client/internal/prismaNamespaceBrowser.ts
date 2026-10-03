@@ -87,6 +87,7 @@ export const ModelName = {
   NkpItem: 'NkpItem',
   NkpApproval: 'NkpApproval',
   NkpAttachment: 'NkpAttachment',
+  Notification: 'Notification',
   PurchaseOrder: 'PurchaseOrder',
   PurchaseOrderItem: 'PurchaseOrderItem',
   Quotation: 'Quotation',
@@ -98,7 +99,6 @@ export const ModelName = {
   Bank: 'Bank',
   User: 'User',
   UserBalance: 'UserBalance',
-  Notification: 'Notification',
   VisitPlan: 'VisitPlan'
 } as const
 
@@ -762,6 +762,19 @@ export const NkpAttachmentScalarFieldEnum = {
 export type NkpAttachmentScalarFieldEnum = (typeof NkpAttachmentScalarFieldEnum)[keyof typeof NkpAttachmentScalarFieldEnum]
 
 
+export const NotificationScalarFieldEnum = {
+  id: 'id',
+  date: 'date',
+  userId: 'userId',
+  title: 'title',
+  message: 'message',
+  redirectUrl: 'redirectUrl',
+  readAt: 'readAt'
+} as const
+
+export type NotificationScalarFieldEnum = (typeof NotificationScalarFieldEnum)[keyof typeof NotificationScalarFieldEnum]
+
+
 export const PurchaseOrderScalarFieldEnum = {
   id: 'id',
   number: 'number',
@@ -988,19 +1001,6 @@ export const UserBalanceScalarFieldEnum = {
 } as const
 
 export type UserBalanceScalarFieldEnum = (typeof UserBalanceScalarFieldEnum)[keyof typeof UserBalanceScalarFieldEnum]
-
-
-export const NotificationScalarFieldEnum = {
-  id: 'id',
-  date: 'date',
-  userId: 'userId',
-  title: 'title',
-  message: 'message',
-  redirectUrl: 'redirectUrl',
-  readAt: 'readAt'
-} as const
-
-export type NotificationScalarFieldEnum = (typeof NotificationScalarFieldEnum)[keyof typeof NotificationScalarFieldEnum]
 
 
 export const VisitPlanScalarFieldEnum = {

@@ -433,6 +433,7 @@ export const ModelName = {
   NkpItem: 'NkpItem',
   NkpApproval: 'NkpApproval',
   NkpAttachment: 'NkpAttachment',
+  Notification: 'Notification',
   PurchaseOrder: 'PurchaseOrder',
   PurchaseOrderItem: 'PurchaseOrderItem',
   Quotation: 'Quotation',
@@ -444,7 +445,6 @@ export const ModelName = {
   Bank: 'Bank',
   User: 'User',
   UserBalance: 'UserBalance',
-  Notification: 'Notification',
   VisitPlan: 'VisitPlan'
 } as const
 
@@ -461,7 +461,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "account" | "accountBalance" | "fiscalPeriod" | "journalEntry" | "journalLine" | "vendorBill" | "payment" | "paymentAllocation" | "cashBankAccount" | "bankTransaction" | "taxRate" | "supplier" | "expense" | "approvalSetting" | "approvalSettingItem" | "approval" | "approvalItem" | "lead" | "opportunity" | "task" | "interaction" | "customerNote" | "customerFile" | "customer" | "contact" | "deliveryOrder" | "deliveryOrderItem" | "goodsReceipt" | "goodsReceiptItem" | "invoice" | "invoiceItem" | "material" | "nkp" | "nkpItem" | "nkpApproval" | "nkpAttachment" | "purchaseOrder" | "purchaseOrderItem" | "quotation" | "quotationItem" | "salesOrder" | "salesOrderItem" | "company" | "department" | "bank" | "user" | "userBalance" | "notification" | "visitPlan"
+    modelProps: "account" | "accountBalance" | "fiscalPeriod" | "journalEntry" | "journalLine" | "vendorBill" | "payment" | "paymentAllocation" | "cashBankAccount" | "bankTransaction" | "taxRate" | "supplier" | "expense" | "approvalSetting" | "approvalSettingItem" | "approval" | "approvalItem" | "lead" | "opportunity" | "task" | "interaction" | "customerNote" | "customerFile" | "customer" | "contact" | "deliveryOrder" | "deliveryOrderItem" | "goodsReceipt" | "goodsReceiptItem" | "invoice" | "invoiceItem" | "material" | "nkp" | "nkpItem" | "nkpApproval" | "nkpAttachment" | "notification" | "purchaseOrder" | "purchaseOrderItem" | "quotation" | "quotationItem" | "salesOrder" | "salesOrderItem" | "company" | "department" | "bank" | "user" | "userBalance" | "visitPlan"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -3129,6 +3129,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    Notification: {
+      payload: Prisma.$NotificationPayload<ExtArgs>
+      fields: Prisma.NotificationFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.NotificationFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NotificationPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.NotificationFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NotificationPayload>
+        }
+        findFirst: {
+          args: Prisma.NotificationFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NotificationPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.NotificationFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NotificationPayload>
+        }
+        findMany: {
+          args: Prisma.NotificationFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NotificationPayload>[]
+        }
+        create: {
+          args: Prisma.NotificationCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NotificationPayload>
+        }
+        createMany: {
+          args: Prisma.NotificationCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.NotificationCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NotificationPayload>[]
+        }
+        delete: {
+          args: Prisma.NotificationDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NotificationPayload>
+        }
+        update: {
+          args: Prisma.NotificationUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NotificationPayload>
+        }
+        deleteMany: {
+          args: Prisma.NotificationDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.NotificationUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.NotificationUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NotificationPayload>[]
+        }
+        upsert: {
+          args: Prisma.NotificationUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NotificationPayload>
+        }
+        aggregate: {
+          args: Prisma.NotificationAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateNotification>
+        }
+        groupBy: {
+          args: Prisma.NotificationGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.NotificationGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.NotificationCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.NotificationCountAggregateOutputType> | number
+        }
+      }
+    }
     PurchaseOrder: {
       payload: Prisma.$PurchaseOrderPayload<ExtArgs>
       fields: Prisma.PurchaseOrderFieldRefs
@@ -3943,80 +4017,6 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
-    Notification: {
-      payload: Prisma.$NotificationPayload<ExtArgs>
-      fields: Prisma.NotificationFieldRefs
-      operations: {
-        findUnique: {
-          args: Prisma.NotificationFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$NotificationPayload> | null
-        }
-        findUniqueOrThrow: {
-          args: Prisma.NotificationFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$NotificationPayload>
-        }
-        findFirst: {
-          args: Prisma.NotificationFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$NotificationPayload> | null
-        }
-        findFirstOrThrow: {
-          args: Prisma.NotificationFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$NotificationPayload>
-        }
-        findMany: {
-          args: Prisma.NotificationFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$NotificationPayload>[]
-        }
-        create: {
-          args: Prisma.NotificationCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$NotificationPayload>
-        }
-        createMany: {
-          args: Prisma.NotificationCreateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        createManyAndReturn: {
-          args: Prisma.NotificationCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$NotificationPayload>[]
-        }
-        delete: {
-          args: Prisma.NotificationDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$NotificationPayload>
-        }
-        update: {
-          args: Prisma.NotificationUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$NotificationPayload>
-        }
-        deleteMany: {
-          args: Prisma.NotificationDeleteManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateMany: {
-          args: Prisma.NotificationUpdateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateManyAndReturn: {
-          args: Prisma.NotificationUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$NotificationPayload>[]
-        }
-        upsert: {
-          args: Prisma.NotificationUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$NotificationPayload>
-        }
-        aggregate: {
-          args: Prisma.NotificationAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateNotification>
-        }
-        groupBy: {
-          args: Prisma.NotificationGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.NotificationGroupByOutputType>[]
-        }
-        count: {
-          args: Prisma.NotificationCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.NotificationCountAggregateOutputType> | number
-        }
-      }
-    }
     VisitPlan: {
       payload: Prisma.$VisitPlanPayload<ExtArgs>
       fields: Prisma.VisitPlanFieldRefs
@@ -4774,6 +4774,19 @@ export const NkpAttachmentScalarFieldEnum = {
 export type NkpAttachmentScalarFieldEnum = (typeof NkpAttachmentScalarFieldEnum)[keyof typeof NkpAttachmentScalarFieldEnum]
 
 
+export const NotificationScalarFieldEnum = {
+  id: 'id',
+  date: 'date',
+  userId: 'userId',
+  title: 'title',
+  message: 'message',
+  redirectUrl: 'redirectUrl',
+  readAt: 'readAt'
+} as const
+
+export type NotificationScalarFieldEnum = (typeof NotificationScalarFieldEnum)[keyof typeof NotificationScalarFieldEnum]
+
+
 export const PurchaseOrderScalarFieldEnum = {
   id: 'id',
   number: 'number',
@@ -5000,19 +5013,6 @@ export const UserBalanceScalarFieldEnum = {
 } as const
 
 export type UserBalanceScalarFieldEnum = (typeof UserBalanceScalarFieldEnum)[keyof typeof UserBalanceScalarFieldEnum]
-
-
-export const NotificationScalarFieldEnum = {
-  id: 'id',
-  date: 'date',
-  userId: 'userId',
-  title: 'title',
-  message: 'message',
-  redirectUrl: 'redirectUrl',
-  readAt: 'readAt'
-} as const
-
-export type NotificationScalarFieldEnum = (typeof NotificationScalarFieldEnum)[keyof typeof NotificationScalarFieldEnum]
 
 
 export const VisitPlanScalarFieldEnum = {
@@ -5823,6 +5823,7 @@ export type GlobalOmitConfig = {
   nkpItem?: Prisma.NkpItemOmit
   nkpApproval?: Prisma.NkpApprovalOmit
   nkpAttachment?: Prisma.NkpAttachmentOmit
+  notification?: Prisma.NotificationOmit
   purchaseOrder?: Prisma.PurchaseOrderOmit
   purchaseOrderItem?: Prisma.PurchaseOrderItemOmit
   quotation?: Prisma.QuotationOmit
@@ -5834,7 +5835,6 @@ export type GlobalOmitConfig = {
   bank?: Prisma.BankOmit
   user?: Prisma.UserOmit
   userBalance?: Prisma.UserBalanceOmit
-  notification?: Prisma.NotificationOmit
   visitPlan?: Prisma.VisitPlanOmit
 }
 

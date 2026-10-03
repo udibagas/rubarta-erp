@@ -26,3 +26,9 @@ model ApprovalItem {
 
   @@index([approvalId, userId])
 }
+
+enum ApprovalStatus {
+  APPROVED
+  PARTIALLY_APPROVED
+  REJECTED
+}
