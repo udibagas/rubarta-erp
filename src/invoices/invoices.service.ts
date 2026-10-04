@@ -3,6 +3,7 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
+import { InvoicesPolicy } from './invoices.policy';
 import {
   CreateInvoiceDto,
   UpdateInvoiceDto,
@@ -11,7 +12,7 @@ import {
   InvoiceStatusUpdateDto,
 } from './invoice.dto';
 import { PrismaService } from '../prisma/prisma.service';
-import { InvoiceStatus, Prisma } from '../prisma/client/client';
+import { InvoiceStatus, Prisma, User } from '../prisma/client/client';
 import { generateInvoicePdf } from './invoice-pdf';
 import dayjs from 'dayjs';
 import { Cron, CronExpression } from '@nestjs/schedule';
@@ -26,9 +27,11 @@ export class InvoicesService {
   constructor(
     private readonly prisma: PrismaService,
     private readonly mailerService: MailerService,
+    private readonly policy: InvoicesPolicy,
   ) {}
 
-  async create(data: CreateInvoiceDto & { userId: number }) {
+  async create(data: CreateInvoiceDto & { userId: number }, user: User) {
+    this.policy.can('create', null, user);
     const { items, attachments, ...invoiceFields } = data;
 
     const doExists = await this.prisma.invoice.findUnique({
@@ -73,7 +76,8 @@ export class InvoicesService {
     });
   }
 
-  async findAll(query: QueryInvoiceDto) {
+  async findAll(query: QueryInvoiceDto, user: User) {
+    this.policy.can('viewAny', null, user);
     const {
       page,
       pageSize,
@@ -113,6 +117,8 @@ export class InvoicesService {
             contains: keyword,
             mode: 'insensitive',
           },
+        },
+        {
           referenceNumber: {
             contains: keyword,
             mode: 'insensitive',
@@ -150,6 +156,8 @@ export class InvoicesService {
       query.page && query.pageSize
         ? (parseInt(query.page) - 1) * parseInt(query.pageSize)
         : undefined;
+
+    console.dir(where, { depth: null });
 
     const data = await this.prisma.invoice.findMany({
       where,
@@ -193,8 +201,8 @@ export class InvoicesService {
     return data;
   }
 
-  async findOne(id: number) {
-    const invoice = await this.prisma.invoice.findUnique({
+  async findOne(id: number, user: User) {
+    const invoice = await this.prisma.invoice.findUniqueOrThrow({
       where: { id },
       include: {
         Customer: true,
@@ -222,19 +230,22 @@ export class InvoicesService {
       },
     });
 
-    if (!invoice) {
-      throw new NotFoundException(`Invoice with ID ${id} not found`);
-    }
-
+    this.policy.can('view', invoice, user);
     return invoice;
   }
 
-  async update(id: number, data: UpdateInvoiceDto) {
-    const invoice = await this.findOne(id);
+  async update(id: number, data: UpdateInvoiceDto, user: User) {
+    const invoice = await this.prisma.invoice.findUniqueOrThrow({
+      where: { id },
+      include: {
+        InvoiceItems: true,
+      },
+    });
 
+    this.policy.can('update', invoice, user);
     const { items, ...invoiceData } = data;
-
     const { attachments, ...invoiceFields } = invoiceData;
+
     const updateData: Prisma.InvoiceUpdateInput = {
       ...invoiceFields,
       ...(attachments === undefined
@@ -287,27 +298,19 @@ export class InvoicesService {
     });
   }
 
-  async remove(id: number) {
-    const invoice = await this.findOne(id); // Verify invoice exists
-
-    if (invoice.status !== InvoiceStatus.Draft) {
-      throw new BadRequestException(
-        `Cannot delete an invoice that is not in draft status`,
-      );
-    }
-
-    // Delete invoice items first (cascade should handle this, but being explicit)
-    await this.prisma.invoiceItem.deleteMany({
-      where: { invoiceId: id },
+  async remove(id: number, user: User) {
+    const invoice = await this.prisma.invoice.findUniqueOrThrow({
+      where: { id },
     });
 
+    this.policy.can('delete', invoice, user);
     return this.prisma.invoice.delete({
       where: { id },
     });
   }
 
-  async updateStatus(id: number, data: InvoiceStatusUpdateDto) {
-    await this.findOne(id); // Verify invoice exists
+  async updateStatus(id: number, data: InvoiceStatusUpdateDto, user: User) {
+    await this.findOne(id, user);
 
     return this.prisma.invoice.update({
       where: { id },
@@ -315,13 +318,13 @@ export class InvoicesService {
     });
   }
 
-  async preview(id: number): Promise<Buffer> {
-    const invoice = await this.findOne(id);
+  async preview(id: number, user: User): Promise<Buffer> {
+    const invoice = await this.findOne(id, user);
     return generateInvoicePdf(invoice);
   }
 
-  async exportToPdf(query: QueryInvoiceDto): Promise<Buffer> {
-    const invoices = (await this.findAll(query)) as any[];
+  async exportToPdf(query: QueryInvoiceDto, user: User): Promise<Buffer> {
+    const invoices = (await this.findAll(query, user)) as any[];
     const PDFDocumentWithTables = createPdfDocumentWithTables(PDFDocument);
     const doc = new PDFDocumentWithTables({
       size: 'A4',
@@ -394,8 +397,8 @@ export class InvoicesService {
     });
   }
 
-  async exportToExcel(query: QueryInvoiceDto): Promise<Buffer> {
-    const invoices = (await this.findAll(query)) as any[];
+  async exportToExcel(query: QueryInvoiceDto, user: User): Promise<Buffer> {
+    const invoices = (await this.findAll(query, user)) as any[];
     const workbook = new ExcelJS.Workbook();
     const worksheet = workbook.addWorksheet('Invoices');
 
@@ -432,9 +435,9 @@ export class InvoicesService {
     return Buffer.from(buffer);
   }
 
-  async send(id: number, dto: SendInvoiceEmailDto) {
+  async send(id: number, dto: SendInvoiceEmailDto, user: User) {
     const { to, cc, subject, body } = dto;
-    const invoice = await this.findOne(id);
+    const invoice = await this.findOne(id, user);
     const pdfBuffer = await generateInvoicePdf(invoice);
 
     const invoiceAttachments = Array.isArray(invoice.attachments)
@@ -502,7 +505,12 @@ export class InvoicesService {
     });
   }
 
-  async getTotalAmount(customerId?: number, status?: InvoiceStatus) {
+  async getTotalAmount(
+    customerId?: number,
+    status?: InvoiceStatus,
+    user?: User,
+  ) {
+    this.policy.can('viewAny', null, user);
     const where: Prisma.InvoiceWhereInput = {};
 
     if (customerId) {

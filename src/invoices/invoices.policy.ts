@@ -1,7 +1,8 @@
 import { ForbiddenException } from '@nestjs/common';
 import { Invoice, User } from '../prisma/client/client';
+import { BasePolicy } from '../policy/base.policy';
 
-export class InvoicesPolicy {
+export class InvoicesPolicy extends BasePolicy {
   viewAny(user: User) {
     if (user.roles.includes('ADMIN')) return true;
     if (user.roles.includes('SALES_REP')) return true;
