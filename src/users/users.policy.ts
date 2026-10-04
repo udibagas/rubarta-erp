@@ -1,3 +1,3 @@
-import { AllowAllPolicy } from '../policy/allow-all.policy';
+import { BasePolicy } from '../policy/base.policy';
 
-export class UsersPolicy extends AllowAllPolicy {}
+export class UsersPolicy extends BasePolicy {}

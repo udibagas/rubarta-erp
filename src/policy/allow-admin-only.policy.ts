@@ -1,6 +1,8 @@
 import { User } from '../prisma/client/client';
 import { ForbiddenException } from '@nestjs/common';
-export class AllowAdminOnlyPolicy {
+import { BasePolicy } from './base.policy';
+
+export class AllowAdminOnlyPolicy extends BasePolicy {
   viewAny(user: User) {
     if (user.roles.includes('ADMIN')) return true;
     throw new ForbiddenException();

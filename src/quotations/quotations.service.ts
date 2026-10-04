@@ -1,8 +1,4 @@
-import {
-  BadRequestException,
-  Injectable,
-  NotFoundException,
-} from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { ApprovalService } from '../approval/approval.service';
 import { PrismaService } from '../prisma/prisma.service';
 import { QuotationsPolicy } from './quotations.policy';
@@ -12,7 +8,12 @@ import {
   QueryQuotationDto,
   SendQuotationEmailDto,
 } from './quotation.dto';
-import { ApprovalType, Prisma, QuotationStatus } from '../prisma/client/client';
+import {
+  ApprovalType,
+  Prisma,
+  QuotationStatus,
+  User,
+} from '../prisma/client/client';
 import dayjs from 'dayjs';
 import { MailerService } from '@nestjs-modules/mailer';
 import * as ExcelJS from 'exceljs';
@@ -31,7 +32,8 @@ export class QuotationsService {
     private readonly policy: QuotationsPolicy,
   ) {}
 
-  async create(data: CreateQuotationDto & { userId: number }) {
+  async create(data: CreateQuotationDto & { userId: number }, user: User) {
+    this.policy.can('create', null, user);
     const { items, ...quotationData } = data;
     const number = await this.generateNumber();
 
@@ -61,7 +63,8 @@ export class QuotationsService {
     });
   }
 
-  async findAll(query: QueryQuotationDto) {
+  async findAll(query: QueryQuotationDto, user: User) {
+    this.policy.can('viewAny', null, user);
     const where: Prisma.QuotationWhereInput = {
       deletedAt: null,
     };
@@ -103,6 +106,11 @@ export class QuotationsService {
         ? (parseInt(query.page) - 1) * parseInt(query.pageSize)
         : undefined;
 
+    // Only show quotations for the sales rep themselves
+    if (user.roles.includes('SALES_REP')) {
+      where.userId = user.id;
+    }
+
     const quotations = await this.prisma.quotation.findMany({
       where,
       orderBy: { createdAt: 'desc' },
@@ -126,31 +134,28 @@ export class QuotationsService {
     return quotations;
   }
 
-  async findOne(id: number) {
-    const quotation = await this.prisma.quotation.findFirst({
+  async findOne(id: number, user: User) {
+    const quotation = await this.prisma.quotation.findUniqueOrThrow({
       where: { id, deletedAt: null },
       include: {
-        QuotationItems: {
-          orderBy: { sortOrder: 'asc' },
-        },
-        Customer: true,
-        User: { select: { id: true, name: true, email: true } },
-        Opportunity: true,
-        Company: {
-          select: { id: true, name: true, address: true },
-        },
+        QuotationItems: { orderBy: { sortOrder: 'asc' } },
+        Customer: { select: { name: true } },
+        User: { select: { name: true, email: true } },
+        Company: { select: { name: true, address: true } },
       },
     });
 
-    if (!quotation) {
-      throw new NotFoundException(`Quotation with ID ${id} not found`);
-    }
-
+    this.policy.can('view', quotation, user);
     return quotation;
   }
 
-  async update(id: number, data: UpdateQuotationDto) {
-    await this.findOne(id); // Verify exists
+  async update(id: number, data: UpdateQuotationDto, user: User) {
+    const quotation = await this.prisma.quotation.findUniqueOrThrow({
+      where: { id, deletedAt: null },
+    });
+
+    this.policy.can('update', quotation, user);
+
     const { items, ...quotationData } = data;
 
     // If items are provided, recalculate totals
@@ -192,8 +197,12 @@ export class QuotationsService {
     });
   }
 
-  async remove(id: number) {
-    const quotation = await this.findOne(id); // Verify exists
+  async remove(id: number, user: User) {
+    const quotation = await this.prisma.quotation.findUniqueOrThrow({
+      where: { id, deletedAt: null },
+    });
+
+    this.policy.can('delete', quotation, user);
 
     if (quotation.status !== QuotationStatus.Draft) {
       throw new BadRequestException(
@@ -208,8 +217,12 @@ export class QuotationsService {
     });
   }
 
-  async submit(id: number) {
-    await this.findOne(id);
+  async submit(id: number, user: User) {
+    const quotation = await this.prisma.quotation.findUniqueOrThrow({
+      where: { id, deletedAt: null },
+    });
+
+    this.policy.can('submit', quotation, user);
 
     const updatedQuotation = await this.prisma.quotation.update({
       where: { id },
@@ -227,9 +240,9 @@ export class QuotationsService {
     return updatedQuotation;
   }
 
-  async send(id: number, dto: SendQuotationEmailDto) {
+  async send(id: number, dto: SendQuotationEmailDto, user: User) {
     const { to, cc, subject, body } = dto;
-    const quotation = await this.findOne(id);
+    const quotation = await this.findOne(id, user);
     const pdfBuffer = await generateQuotationPdf(quotation);
 
     await this.mailerService.sendMail({
@@ -259,13 +272,13 @@ export class QuotationsService {
     });
   }
 
-  async preview(id: number): Promise<Buffer> {
-    const quotation = await this.findOne(id);
+  async preview(id: number, user: User): Promise<Buffer> {
+    const quotation = await this.findOne(id, user);
     return generateQuotationPdf(quotation);
   }
 
-  async exportToPdf(query: QueryQuotationDto): Promise<Buffer> {
-    const quotations = (await this.findAll(query)) as any[];
+  async exportToPdf(query: QueryQuotationDto, user: User): Promise<Buffer> {
+    const quotations = (await this.findAll(query, user)) as any[];
     const PDFDocumentWithTables = createPdfDocumentWithTables(PDFDocument);
     const doc = new PDFDocumentWithTables({
       size: 'A4',
@@ -340,8 +353,8 @@ export class QuotationsService {
     });
   }
 
-  async exportToExcel(query: QueryQuotationDto): Promise<Buffer> {
-    const quotations = (await this.findAll(query)) as any[];
+  async exportToExcel(query: QueryQuotationDto, user: User): Promise<Buffer> {
+    const quotations = (await this.findAll(query, user)) as any[];
     const workbook = new ExcelJS.Workbook();
     const worksheet = workbook.addWorksheet('Quotations');
 

@@ -1,15 +1,11 @@
 import { Resolver, Query, Args, Int } from '@nestjs/graphql';
-import { QuotationsService } from './quotations.service';
 import { QuotationType } from './quotation.type';
 import { Prisma, QuotationStatus } from '../prisma/client/client';
 import { PrismaService } from '../prisma/prisma.service';
 
 @Resolver(() => QuotationType)
 export class QuotationsResolver {
-  constructor(
-    private readonly quotationsService: QuotationsService,
-    private readonly prisma: PrismaService,
-  ) {}
+  constructor(private readonly prisma: PrismaService) {}
 
   @Query(() => [QuotationType], {
     name: 'quotations',
@@ -56,20 +52,11 @@ export class QuotationsResolver {
       include: {
         Customer: { select: { id: true, name: true } },
         User: { select: { id: true, name: true } },
-        Opportunity: { select: { id: true, name: true } },
+        QuotationItems: true,
         _count: {
           select: { QuotationItems: true },
         },
-        QuotationItems: true,
       },
     });
-  }
-
-  @Query(() => QuotationType, {
-    name: 'quotation',
-    description: 'Get quotation by ID',
-  })
-  async findOne(@Args('id', { type: () => Int }) id: number) {
-    return this.quotationsService.findOne(id);
   }
 }

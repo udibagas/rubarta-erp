@@ -44,18 +44,21 @@ export class QuotationsController {
     @Auth() user: User,
     @Req() req: Request,
   ) {
-    return this.quotationsService.create({
-      ...dto,
-      companyId: dto.companyId ?? Number(req.cookies.companyId),
-      userId: user.id,
-    });
+    return this.quotationsService.create(
+      {
+        ...dto,
+        companyId: dto.companyId ?? Number(req.cookies.companyId),
+        userId: user.id,
+      },
+      user,
+    );
   }
 
   @Get()
   @ApiOperation({ summary: 'Get all quotations' })
   @ApiOkResponse({ description: 'List of quotations' })
-  findAll(@Query() query: QueryQuotationDto) {
-    return this.quotationsService.findAll(query);
+  findAll(@Query() query: QueryQuotationDto, @Auth() user: User) {
+    return this.quotationsService.findAll(query, user);
   }
 
   @Get('export/pdf')
@@ -64,8 +67,9 @@ export class QuotationsController {
   async exportPdf(
     @Res({ passthrough: true }) res: Response,
     @Query() query: QueryQuotationDto,
+    @Auth() user: User,
   ) {
-    const buffer = await this.quotationsService.exportToPdf(query);
+    const buffer = await this.quotationsService.exportToPdf(query, user);
 
     res.set({
       'Content-Type': 'application/pdf',
@@ -82,8 +86,9 @@ export class QuotationsController {
   async exportExcel(
     @Res({ passthrough: true }) res: Response,
     @Query() query: QueryQuotationDto,
+    @Auth() user: User,
   ) {
-    const buffer = await this.quotationsService.exportToExcel(query);
+    const buffer = await this.quotationsService.exportToExcel(query, user);
 
     res.set({
       'Content-Type':
@@ -97,16 +102,20 @@ export class QuotationsController {
   @Get(':id')
   @ApiOperation({ summary: 'Get quotation by ID' })
   @ApiOkResponse({ description: 'Quotation details' })
-  findOne(@Param('id', ParseIntPipe) id: number) {
-    return this.quotationsService.findOne(id);
+  findOne(@Param('id', ParseIntPipe) id: number, @Auth() user: User) {
+    return this.quotationsService.findOne(id, user);
   }
 
   @Get(':id/preview')
   @ApiOperation({ summary: 'Preview quotation PDF' })
   @ApiOkResponse({ description: 'Quotation PDF' })
-  async preview(@Param('id', ParseIntPipe) id: number, @Res() res: Response) {
-    const quotation = await this.quotationsService.findOne(id);
-    const pdfBuffer = await this.quotationsService.preview(id);
+  async preview(
+    @Param('id', ParseIntPipe) id: number,
+    @Res() res: Response,
+    @Auth() user: User,
+  ) {
+    const quotation = await this.quotationsService.findOne(id, user);
+    const pdfBuffer = await this.quotationsService.preview(id, user);
     res.set({
       'Content-Type': 'application/pdf',
       'Content-Disposition': `inline; filename="${quotation.number}.pdf"`,
@@ -121,15 +130,16 @@ export class QuotationsController {
   update(
     @Param('id', ParseIntPipe) id: number,
     @Body() updateQuotationDto: UpdateQuotationDto,
+    @Auth() user: User,
   ) {
-    return this.quotationsService.update(id, updateQuotationDto);
+    return this.quotationsService.update(id, updateQuotationDto, user);
   }
 
   @Post(':id/submit')
   @ApiOperation({ summary: 'Submit quotation' })
   @ApiOkResponse({ description: 'Quotation submitted' })
-  submit(@Param('id', ParseIntPipe) id: number) {
-    return this.quotationsService.submit(id);
+  submit(@Param('id', ParseIntPipe) id: number, @Auth() user: User) {
+    return this.quotationsService.submit(id, user);
   }
 
   @Post(':id/send')
@@ -140,14 +150,15 @@ export class QuotationsController {
   send(
     @Param('id', ParseIntPipe) id: number,
     @Body() sendQuotationEmailDto: SendQuotationEmailDto,
+    @Auth() user: User,
   ) {
-    return this.quotationsService.send(id, sendQuotationEmailDto);
+    return this.quotationsService.send(id, sendQuotationEmailDto, user);
   }
 
   @Delete(':id')
   @ApiOperation({ summary: 'Delete quotation (soft delete)' })
   @ApiOkResponse({ description: 'Quotation deleted' })
-  remove(@Param('id', ParseIntPipe) id: number) {
-    return this.quotationsService.remove(id);
+  remove(@Param('id', ParseIntPipe) id: number, @Auth() user: User) {
+    return this.quotationsService.remove(id, user);
   }
 }

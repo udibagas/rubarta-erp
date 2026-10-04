@@ -24,6 +24,14 @@ export class PrismaClientExceptionFilter
         break;
       }
 
+      case 'P2025': {
+        response.status(HttpStatus.NOT_FOUND).json({
+          statusCode: HttpStatus.NOT_FOUND,
+          message: 'Resource not found',
+        });
+        break;
+      }
+
       case 'P2002': {
         const statusCode = HttpStatus.BAD_REQUEST;
         const target = exception.meta?.target;
