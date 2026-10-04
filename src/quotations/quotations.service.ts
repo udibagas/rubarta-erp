@@ -5,6 +5,7 @@ import {
 } from '@nestjs/common';
 import { ApprovalService } from '../approval/approval.service';
 import { PrismaService } from '../prisma/prisma.service';
+import { QuotationsPolicy } from './quotations.policy';
 import {
   CreateQuotationDto,
   UpdateQuotationDto,
@@ -27,6 +28,7 @@ export class QuotationsService {
     private readonly prisma: PrismaService,
     private readonly mailerService: MailerService,
     private readonly approvalService: ApprovalService,
+    private readonly policy: QuotationsPolicy,
   ) {}
 
   async create(data: CreateQuotationDto & { userId: number }) {
