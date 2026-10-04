@@ -54,18 +54,21 @@ export class SalesOrdersController {
     @Auth() user: User,
     @Req() req: Request,
   ) {
-    return this.salesOrdersService.create({
-      ...dto,
-      companyId: dto.companyId ?? Number(req.cookies.companyId),
-      userId: user.id,
-    });
+    return this.salesOrdersService.create(
+      {
+        ...dto,
+        companyId: dto.companyId ?? Number(req.cookies.companyId),
+        userId: user.id,
+      },
+      user,
+    );
   }
 
   @Get()
   @ApiOperation({ summary: 'Get all orders' })
   @ApiOkResponse({ description: 'List of orders' })
-  findAll(@Query() query: QuerySalesOrderDto) {
-    return this.salesOrdersService.findAll(query);
+  findAll(@Query() query: QuerySalesOrderDto, @Auth() user: User) {
+    return this.salesOrdersService.findAll(query, user);
   }
 
   @Post('parse-po')
@@ -109,8 +112,9 @@ export class SalesOrdersController {
   async exportPdf(
     @Res({ passthrough: true }) res: Response,
     @Query() query: QuerySalesOrderDto,
+    @Auth() user: User,
   ) {
-    const buffer = await this.salesOrdersService.exportToPdf(query);
+    const buffer = await this.salesOrdersService.exportToPdf(query, user);
 
     // res.set({
     //   'Content-Type': 'application/pdf',
@@ -134,8 +138,9 @@ export class SalesOrdersController {
   async exportExcel(
     @Res({ passthrough: true }) res: Response,
     @Query() query: QuerySalesOrderDto,
+    @Auth() user: User,
   ) {
-    const buffer = await this.salesOrdersService.exportToExcel(query);
+    const buffer = await this.salesOrdersService.exportToExcel(query, user);
 
     res.set({
       'Content-Type':
@@ -201,20 +206,24 @@ export class SalesOrdersController {
   @Get(':id')
   @ApiOperation({ summary: 'Get order by ID' })
   @ApiOkResponse({ description: 'Order details' })
-  findOne(@Param('id', ParseIntPipe) id: number) {
-    return this.salesOrdersService.findOne(id);
+  findOne(@Param('id', ParseIntPipe) id: number, @Auth() user: User) {
+    return this.salesOrdersService.findOne(id, user);
   }
 
   @Get(':id/preview')
   @ApiOperation({ summary: 'Preview order PDF' })
   @ApiOkResponse({ description: 'Order PDF' })
-  async preview(@Param('id', ParseIntPipe) id: number, @Res() res: Response) {
-    const salesOrder = await this.salesOrdersService.findOne(id);
+  async preview(
+    @Param('id', ParseIntPipe) id: number,
+    @Res() res: Response,
+    @Auth() user: User,
+  ) {
+    const salesOrder = await this.salesOrdersService.findOne(id, user);
     const filename = [
       salesOrder.number ?? String(id),
       salesOrder.referenceNumber,
     ].join('_');
-    const pdfBuffer = await this.salesOrdersService.preview(id);
+    const pdfBuffer = await this.salesOrdersService.preview(id, user);
 
     res.set({
       'Content-Type': 'application/pdf',
@@ -233,8 +242,9 @@ export class SalesOrdersController {
   send(
     @Param('id', ParseIntPipe) id: number,
     @Body() sendSalesOrderEmailDto: SendSalesOrderEmailDto,
+    @Auth() user: User,
   ) {
-    return this.salesOrdersService.send(id, sendSalesOrderEmailDto);
+    return this.salesOrdersService.send(id, sendSalesOrderEmailDto, user);
   }
 
   @Patch(':id')
@@ -243,14 +253,15 @@ export class SalesOrdersController {
   update(
     @Param('id', ParseIntPipe) id: number,
     @Body() updateOrderDto: UpdateSalesOrderDto,
+    @Auth() user: User,
   ) {
-    return this.salesOrdersService.update(id, updateOrderDto);
+    return this.salesOrdersService.update(id, updateOrderDto, user);
   }
 
   @Delete(':id')
   @ApiOperation({ summary: 'Delete order (soft delete)' })
   @ApiOkResponse({ description: 'Order deleted' })
-  remove(@Param('id', ParseIntPipe) id: number) {
-    return this.salesOrdersService.remove(id);
+  remove(@Param('id', ParseIntPipe) id: number, @Auth() user: User) {
+    return this.salesOrdersService.remove(id, user);
   }
 }

@@ -3,6 +3,7 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
+import { SalesOrdersPolicy } from './sales-orders.policy';
 import { PrismaService } from '../prisma/prisma.service';
 import {
   CreateSalesOrderDto,
@@ -10,7 +11,7 @@ import {
   QuerySalesOrderDto,
   SendSalesOrderEmailDto,
 } from './sales-order.dto';
-import { Prisma, SalesOrderStatus } from '../prisma/client/client';
+import { Prisma, SalesOrderStatus, User } from '../prisma/client/client';
 import { parsePurchaseOrderItems } from './parser';
 import { generateOrderPdf } from './sales-order-pdf';
 import dayjs from 'dayjs';
@@ -24,9 +25,11 @@ export class SalesOrdersService {
   constructor(
     private readonly prisma: PrismaService,
     private readonly mailerService: MailerService,
+    private readonly policy: SalesOrdersPolicy,
   ) {}
 
-  async create(data: CreateSalesOrderDto & { userId: number }) {
+  async create(data: CreateSalesOrderDto & { userId: number }, user: User) {
+    this.policy.can('create', null, user);
     const { items, ...salesOrderData } = data;
     const number = await this.generateNumber();
 
@@ -56,7 +59,8 @@ export class SalesOrdersService {
     });
   }
 
-  async findAll(query: QuerySalesOrderDto) {
+  async findAll(query: QuerySalesOrderDto, user: User) {
+    this.policy.can('viewAny', null, user);
     const where: Prisma.SalesOrderWhereInput = {
       deletedAt: null,
     };
@@ -132,8 +136,8 @@ export class SalesOrdersService {
     return data;
   }
 
-  async findOne(id: number) {
-    const salesOrder = await this.prisma.salesOrder.findFirst({
+  async findOne(id: number, user: User) {
+    const salesOrder = await this.prisma.salesOrder.findUniqueOrThrow({
       where: { id, deletedAt: null },
       include: {
         Customer: true,
@@ -165,10 +169,7 @@ export class SalesOrdersService {
       },
     });
 
-    if (!salesOrder) {
-      throw new NotFoundException(`Order with ID ${id} not found`);
-    }
-
+    this.policy.can('view', salesOrder, user);
     return salesOrder;
   }
 
@@ -401,8 +402,12 @@ export class SalesOrdersService {
     ];
   }
 
-  async update(id: number, data: UpdateSalesOrderDto) {
-    await this.findOne(id); // Verify exists
+  async update(id: number, data: UpdateSalesOrderDto, user: User) {
+    const salesOrder = await this.prisma.salesOrder.findUniqueOrThrow({
+      where: { id, deletedAt: null },
+    });
+
+    this.policy.can('update', salesOrder, user);
     const { items, ...salesOrderData } = data;
 
     // If items are provided, recalculate totals
@@ -444,15 +449,12 @@ export class SalesOrdersService {
     });
   }
 
-  async remove(id: number) {
-    const salesOrder = await this.findOne(id); // Verify exists
+  async remove(id: number, user: User) {
+    const salesOrder = await this.prisma.salesOrder.findUniqueOrThrow({
+      where: { id, deletedAt: null },
+    });
 
-    // Soft delete
-    if (salesOrder.status !== SalesOrderStatus.Draft) {
-      throw new BadRequestException(
-        `Cannot delete a sales order that is not in draft status`,
-      );
-    }
+    this.policy.can('delete', salesOrder, user);
 
     return this.prisma.salesOrder.update({
       where: { id },
@@ -464,13 +466,13 @@ export class SalesOrdersService {
     return parsePurchaseOrderItems(pdfBuffer);
   }
 
-  async preview(id: number): Promise<Buffer> {
-    const salesOrder = await this.findOne(id);
+  async preview(id: number, user: User): Promise<Buffer> {
+    const salesOrder = await this.findOne(id, user);
     return generateOrderPdf(salesOrder);
   }
 
-  async exportToPdf(query: QuerySalesOrderDto): Promise<Buffer> {
-    const salesOrders = (await this.findAll(query)) as any[];
+  async exportToPdf(query: QuerySalesOrderDto, user: User): Promise<Buffer> {
+    const salesOrders = (await this.findAll(query, user)) as any[];
     const PDFDocumentWithTables = createPdfDocumentWithTables(PDFDocument);
     const doc = new PDFDocumentWithTables({
       size: 'A4',
@@ -547,8 +549,8 @@ export class SalesOrdersService {
     });
   }
 
-  async exportToExcel(query: QuerySalesOrderDto): Promise<Buffer> {
-    const salesOrders = (await this.findAll(query)) as any[];
+  async exportToExcel(query: QuerySalesOrderDto, user: User): Promise<Buffer> {
+    const salesOrders = (await this.findAll(query, user)) as any[];
     const workbook = new ExcelJS.Workbook();
     const worksheet = workbook.addWorksheet('SalesOrders');
 
@@ -585,9 +587,9 @@ export class SalesOrdersService {
     return Buffer.from(buffer);
   }
 
-  async send(id: number, dto: SendSalesOrderEmailDto) {
+  async send(id: number, dto: SendSalesOrderEmailDto, user: User) {
     const { to, cc, subject, body } = dto;
-    const salesOrder = await this.findOne(id);
+    const salesOrder = await this.findOne(id, user);
     const pdfBuffer = await generateOrderPdf(salesOrder);
 
     await this.mailerService.sendMail({
