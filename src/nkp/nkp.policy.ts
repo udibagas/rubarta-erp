@@ -3,11 +3,11 @@ import { Nkp, User } from '../prisma/client/client';
 import { BasePolicy } from '../policy/base.policy';
 
 export class NkpPolicy extends BasePolicy {
-  protected viewAny(user?: User) {
+  protected viewAny(user: User) {
     return true;
   }
 
-  protected create(user?: User) {
+  protected create(user: User) {
     return true;
   }
 

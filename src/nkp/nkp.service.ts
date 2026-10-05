@@ -32,8 +32,8 @@ export class NkpService {
     private policy: NkpPolicy,
   ) {}
 
-  async create(dto: NkpDto & { requesterId: number }, user: User) {
-    // this.policy.can('create', null, user);
+  async create(dto: NkpDto, user: User) {
+    this.policy.can('create', null, user);
     const { NkpItem: items, NkpAttachment: attachments, ...data } = dto;
     let number = 'DRAFT';
 
@@ -51,7 +51,7 @@ export class NkpService {
       include: { Requester: true },
       data: {
         ...data,
-        requesterId: dto.requesterId,
+        requesterId: user.id,
         number,
         NkpItem: {
           create: items.map((i) => ({
@@ -70,8 +70,8 @@ export class NkpService {
     return savedData;
   }
 
-  async findAll(params: QueryNkpDto & { user?: User }) {
-    // this.policy.can('viewAny', null, params.user);
+  async findAll(params: QueryNkpDto, user?: User) {
+    this.policy.can('viewAny', null, user);
     const {
       page,
       pageSize,
@@ -100,11 +100,8 @@ export class NkpService {
     }
 
     // jika bukan admin, maka hanya bisa melihat data yang dia buat atau data yang dia sebagai employee
-    if (params.user && !params.user.roles.some((role) => role === Role.ADMIN)) {
-      where.OR = [
-        { requesterId: params.user.id },
-        { employeeId: params.user.id },
-      ];
+    if (user && !user.roles.some((role) => role === Role.ADMIN)) {
+      where.OR = [{ requesterId: user.id }, { employeeId: user.id }];
     }
 
     if (
@@ -182,15 +179,16 @@ export class NkpService {
     return { data, page, total };
   }
 
-  async exportReportToPdf(
-    params: QueryNkpDto & { user?: User },
-  ): Promise<Buffer> {
-    const result = await this.findAll({
-      ...params,
-      orderBy: 'number',
-      orderDirection: 'asc',
-      action: 'download',
-    });
+  async exportReportToPdf(params: QueryNkpDto, user: User): Promise<Buffer> {
+    const result = await this.findAll(
+      {
+        ...params,
+        orderBy: 'number',
+        orderDirection: 'asc',
+        action: 'download',
+      },
+      user,
+    );
     const company = await this.prisma.company.findUniqueOrThrow({
       where: { id: Number(params.companyId) },
     });
@@ -281,15 +279,16 @@ export class NkpService {
     });
   }
 
-  async exportReportToExcel(
-    params: QueryNkpDto & { user?: User },
-  ): Promise<Buffer> {
-    const result = await this.findAll({
-      ...params,
-      orderBy: 'number',
-      orderDirection: 'asc',
-      action: 'download',
-    });
+  async exportReportToExcel(params: QueryNkpDto, user: User): Promise<Buffer> {
+    const result = await this.findAll(
+      {
+        ...params,
+        orderBy: 'number',
+        orderDirection: 'asc',
+        action: 'download',
+      },
+      user,
+    );
     const workbook = new ExcelJS.Workbook();
     const worksheet = workbook.addWorksheet('NKP Report');
 
@@ -380,7 +379,7 @@ export class NkpService {
       where: { id },
     });
 
-    // this.policy.can('update', nkp, user);
+    this.policy.can('update', nkp, user);
 
     let number = 'DRAFT';
     if (dto.status == PaymentStatus.SUBMITTED) {
@@ -426,7 +425,7 @@ export class NkpService {
       where: { id },
     });
 
-    // this.policy.can('update', nkp, user);
+    this.policy.can('update', nkp, user);
     const { companyId, paymentType, nkpType, parentId } = nkp;
     const number = await this.generateNumber({
       companyId,
@@ -448,11 +447,12 @@ export class NkpService {
   }
 
   async remove(id: number, user: User) {
-    const data = await this.prisma.nkp.findUniqueOrThrow({
+    const nkp = await this.prisma.nkp.findUniqueOrThrow({
       where: { id },
     });
 
-    // this.policy.can('delete', data, user);
+    this.policy.can('delete', nkp, user);
+
     return this.prisma.nkp.delete({
       where: { id },
     });

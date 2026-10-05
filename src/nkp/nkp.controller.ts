@@ -31,19 +31,13 @@ export class NkpController {
   @Post()
   @ApiOperation({ summary: 'Create new NKP' })
   create(@Body() data: NkpDto, @Auth() user: User) {
-    return this.nkpService.create(
-      {
-        ...data,
-        requesterId: user.id,
-      },
-      user,
-    );
+    return this.nkpService.create(data, user);
   }
 
   @Get()
   @ApiOperation({ summary: 'Get all NKP' })
   async findAll(@Auth() user: User, @Query() query: QueryNkpDto) {
-    return this.nkpService.findAll({ ...query, user });
+    return this.nkpService.findAll(query, user);
   }
 
   @Get('download/pdf')
@@ -53,7 +47,7 @@ export class NkpController {
     @Auth() user: User,
     @Query() query: QueryNkpDto,
   ) {
-    const buffer = await this.nkpService.exportReportToPdf({ ...query, user });
+    const buffer = await this.nkpService.exportReportToPdf(query, user);
     const filename = `NKP_Report_${formatDateNumeric(new Date())}.pdf`;
 
     res.setHeader('Content-Type', 'application/pdf');
@@ -68,10 +62,7 @@ export class NkpController {
     @Auth() user: User,
     @Query() query: QueryNkpDto,
   ) {
-    const buffer = await this.nkpService.exportReportToExcel({
-      ...query,
-      user,
-    });
+    const buffer = await this.nkpService.exportReportToExcel(query, user);
     const filename = `NKP_Report_${formatDateNumeric(new Date())}.xlsx`;
 
     res.setHeader(
