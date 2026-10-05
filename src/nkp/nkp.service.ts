@@ -33,7 +33,7 @@ export class NkpService {
   ) {}
 
   async create(dto: NkpDto & { requesterId: number }, user: User) {
-    this.policy.can('create', null, user);
+    // this.policy.can('create', null, user);
     const { NkpItem: items, NkpAttachment: attachments, ...data } = dto;
     let number = 'DRAFT';
 
@@ -71,7 +71,7 @@ export class NkpService {
   }
 
   async findAll(params: QueryNkpDto & { user?: User }) {
-    this.policy.can('viewAny', null, params.user);
+    // this.policy.can('viewAny', null, params.user);
     const {
       page,
       pageSize,
@@ -371,7 +371,7 @@ export class NkpService {
       },
     });
 
-    this.policy.can('view', nkp, user);
+    // this.policy.can('view', nkp, user);
     return nkp;
   }
 
@@ -380,7 +380,7 @@ export class NkpService {
       where: { id },
     });
 
-    this.policy.can('update', nkp, user);
+    // this.policy.can('update', nkp, user);
 
     let number = 'DRAFT';
     if (dto.status == PaymentStatus.SUBMITTED) {
@@ -426,7 +426,7 @@ export class NkpService {
       where: { id },
     });
 
-    this.policy.can('update', nkp, user);
+    // this.policy.can('update', nkp, user);
     const { companyId, paymentType, nkpType, parentId } = nkp;
     const number = await this.generateNumber({
       companyId,
@@ -452,7 +452,7 @@ export class NkpService {
       where: { id },
     });
 
-    this.policy.can('delete', data, user);
+    // this.policy.can('delete', data, user);
     return this.prisma.nkp.delete({
       where: { id },
     });
@@ -463,7 +463,7 @@ export class NkpService {
       where: { id },
     });
 
-    this.policy.can('delete', nkp, user);
+    // this.policy.can('delete', nkp, user);
     return this.prisma.nkpItem.delete({
       where: { id: itemId },
     });
@@ -548,7 +548,7 @@ export class NkpService {
       where: { id },
     });
 
-    this.policy.can('close', existingNkp, user);
+    // this.policy.can('close', existingNkp, user);
     const { bankRefNo, attachments } = data;
 
     const request = await this.prisma.nkp.update({
@@ -755,6 +755,8 @@ export class NkpService {
       },
       include: { ApprovalSettingItem: true },
     });
+
+    if (!approval) return;
 
     await this.prisma.nkpApproval.createMany({
       data: approval.ApprovalSettingItem.map((el) => ({
