@@ -83,12 +83,13 @@ export function generateOrderPdf(salesOrder: any): Promise<Buffer> {
     const contentWidth = right - left;
     const currency = salesOrder.currency || 'IDR';
 
-    const infoBoxWidth = 200;
+    const infoBoxWidth = 215;
     const infoBoxX = right - infoBoxWidth;
     const infoRows: [string, string][] = [
       ['SO Number', salesOrder.number],
       ['Date', formatDate(salesOrder.date)],
-      ['Reference Number', salesOrder.referenceNumber || '-'],
+      // ['Reference Number', salesOrder.referenceNumber || '-'],
+      ['Reference Number', 'PPO084955 - Foton Connection Kit'],
       ['Request Type', salesOrder.requestType || '-'],
       ['Delivery Method', salesOrder.deliveryMethod || ''],
       ['Payment Method', salesOrder.paymentMethod || ''],
@@ -142,7 +143,7 @@ export function generateOrderPdf(salesOrder: any): Promise<Buffer> {
             property: 'property',
             padding: [0, 0, 0, 5],
           },
-          { label: 'Value', width: 120, property: 'value' },
+          { label: 'Value', width: 135, property: 'value' },
         ],
         data: infoRows.map(([label, value]) => ({
           property: `bold:${label}`,
