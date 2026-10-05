@@ -69,6 +69,7 @@ export type PurchaseOrderMinAggregateOutputType = {
   currencyRate: number | null
   totalAmount: number | null
   discount: number | null
+  applyVat: boolean | null
   vatAmount: number | null
   grandTotal: number | null
   deliveryMethod: string | null
@@ -109,6 +110,7 @@ export type PurchaseOrderMaxAggregateOutputType = {
   currencyRate: number | null
   totalAmount: number | null
   discount: number | null
+  applyVat: boolean | null
   vatAmount: number | null
   grandTotal: number | null
   deliveryMethod: string | null
@@ -149,6 +151,7 @@ export type PurchaseOrderCountAggregateOutputType = {
   currencyRate: number
   totalAmount: number
   discount: number
+  applyVat: number
   vatAmount: number
   grandTotal: number
   deliveryMethod: number
@@ -219,6 +222,7 @@ export type PurchaseOrderMinAggregateInputType = {
   currencyRate?: true
   totalAmount?: true
   discount?: true
+  applyVat?: true
   vatAmount?: true
   grandTotal?: true
   deliveryMethod?: true
@@ -259,6 +263,7 @@ export type PurchaseOrderMaxAggregateInputType = {
   currencyRate?: true
   totalAmount?: true
   discount?: true
+  applyVat?: true
   vatAmount?: true
   grandTotal?: true
   deliveryMethod?: true
@@ -299,6 +304,7 @@ export type PurchaseOrderCountAggregateInputType = {
   currencyRate?: true
   totalAmount?: true
   discount?: true
+  applyVat?: true
   vatAmount?: true
   grandTotal?: true
   deliveryMethod?: true
@@ -426,6 +432,7 @@ export type PurchaseOrderGroupByOutputType = {
   currencyRate: number
   totalAmount: number
   discount: number
+  applyVat: boolean
   vatAmount: number
   grandTotal: number
   deliveryMethod: string | null
@@ -489,6 +496,7 @@ export type PurchaseOrderWhereInput = {
   currencyRate?: Prisma.FloatFilter<"PurchaseOrder"> | number
   totalAmount?: Prisma.FloatFilter<"PurchaseOrder"> | number
   discount?: Prisma.FloatFilter<"PurchaseOrder"> | number
+  applyVat?: Prisma.BoolFilter<"PurchaseOrder"> | boolean
   vatAmount?: Prisma.FloatFilter<"PurchaseOrder"> | number
   grandTotal?: Prisma.FloatFilter<"PurchaseOrder"> | number
   deliveryMethod?: Prisma.StringNullableFilter<"PurchaseOrder"> | string | null
@@ -537,6 +545,7 @@ export type PurchaseOrderOrderByWithRelationInput = {
   currencyRate?: Prisma.SortOrder
   totalAmount?: Prisma.SortOrder
   discount?: Prisma.SortOrder
+  applyVat?: Prisma.SortOrder
   vatAmount?: Prisma.SortOrder
   grandTotal?: Prisma.SortOrder
   deliveryMethod?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -588,6 +597,7 @@ export type PurchaseOrderWhereUniqueInput = Prisma.AtLeast<{
   currencyRate?: Prisma.FloatFilter<"PurchaseOrder"> | number
   totalAmount?: Prisma.FloatFilter<"PurchaseOrder"> | number
   discount?: Prisma.FloatFilter<"PurchaseOrder"> | number
+  applyVat?: Prisma.BoolFilter<"PurchaseOrder"> | boolean
   vatAmount?: Prisma.FloatFilter<"PurchaseOrder"> | number
   grandTotal?: Prisma.FloatFilter<"PurchaseOrder"> | number
   deliveryMethod?: Prisma.StringNullableFilter<"PurchaseOrder"> | string | null
@@ -636,6 +646,7 @@ export type PurchaseOrderOrderByWithAggregationInput = {
   currencyRate?: Prisma.SortOrder
   totalAmount?: Prisma.SortOrder
   discount?: Prisma.SortOrder
+  applyVat?: Prisma.SortOrder
   vatAmount?: Prisma.SortOrder
   grandTotal?: Prisma.SortOrder
   deliveryMethod?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -684,6 +695,7 @@ export type PurchaseOrderScalarWhereWithAggregatesInput = {
   currencyRate?: Prisma.FloatWithAggregatesFilter<"PurchaseOrder"> | number
   totalAmount?: Prisma.FloatWithAggregatesFilter<"PurchaseOrder"> | number
   discount?: Prisma.FloatWithAggregatesFilter<"PurchaseOrder"> | number
+  applyVat?: Prisma.BoolWithAggregatesFilter<"PurchaseOrder"> | boolean
   vatAmount?: Prisma.FloatWithAggregatesFilter<"PurchaseOrder"> | number
   grandTotal?: Prisma.FloatWithAggregatesFilter<"PurchaseOrder"> | number
   deliveryMethod?: Prisma.StringNullableWithAggregatesFilter<"PurchaseOrder"> | string | null
@@ -723,6 +735,7 @@ export type PurchaseOrderCreateInput = {
   currencyRate?: number
   totalAmount: number
   discount?: number
+  applyVat?: boolean
   vatAmount?: number
   grandTotal: number
   deliveryMethod?: string | null
@@ -767,6 +780,7 @@ export type PurchaseOrderUncheckedCreateInput = {
   currencyRate?: number
   totalAmount: number
   discount?: number
+  applyVat?: boolean
   vatAmount?: number
   grandTotal: number
   deliveryMethod?: string | null
@@ -810,6 +824,7 @@ export type PurchaseOrderUpdateInput = {
   currencyRate?: Prisma.FloatFieldUpdateOperationsInput | number
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   discount?: Prisma.FloatFieldUpdateOperationsInput | number
+  applyVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
   deliveryMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -854,6 +869,7 @@ export type PurchaseOrderUncheckedUpdateInput = {
   currencyRate?: Prisma.FloatFieldUpdateOperationsInput | number
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   discount?: Prisma.FloatFieldUpdateOperationsInput | number
+  applyVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
   deliveryMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -898,6 +914,7 @@ export type PurchaseOrderCreateManyInput = {
   currencyRate?: number
   totalAmount: number
   discount?: number
+  applyVat?: boolean
   vatAmount?: number
   grandTotal: number
   deliveryMethod?: string | null
@@ -937,6 +954,7 @@ export type PurchaseOrderUpdateManyMutationInput = {
   currencyRate?: Prisma.FloatFieldUpdateOperationsInput | number
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   discount?: Prisma.FloatFieldUpdateOperationsInput | number
+  applyVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
   deliveryMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -973,6 +991,7 @@ export type PurchaseOrderUncheckedUpdateManyInput = {
   currencyRate?: Prisma.FloatFieldUpdateOperationsInput | number
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   discount?: Prisma.FloatFieldUpdateOperationsInput | number
+  applyVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
   deliveryMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1033,6 +1052,7 @@ export type PurchaseOrderCountOrderByAggregateInput = {
   currencyRate?: Prisma.SortOrder
   totalAmount?: Prisma.SortOrder
   discount?: Prisma.SortOrder
+  applyVat?: Prisma.SortOrder
   vatAmount?: Prisma.SortOrder
   grandTotal?: Prisma.SortOrder
   deliveryMethod?: Prisma.SortOrder
@@ -1087,6 +1107,7 @@ export type PurchaseOrderMaxOrderByAggregateInput = {
   currencyRate?: Prisma.SortOrder
   totalAmount?: Prisma.SortOrder
   discount?: Prisma.SortOrder
+  applyVat?: Prisma.SortOrder
   vatAmount?: Prisma.SortOrder
   grandTotal?: Prisma.SortOrder
   deliveryMethod?: Prisma.SortOrder
@@ -1127,6 +1148,7 @@ export type PurchaseOrderMinOrderByAggregateInput = {
   currencyRate?: Prisma.SortOrder
   totalAmount?: Prisma.SortOrder
   discount?: Prisma.SortOrder
+  applyVat?: Prisma.SortOrder
   vatAmount?: Prisma.SortOrder
   grandTotal?: Prisma.SortOrder
   deliveryMethod?: Prisma.SortOrder
@@ -1416,6 +1438,7 @@ export type PurchaseOrderCreateWithoutVendorBillsInput = {
   currencyRate?: number
   totalAmount: number
   discount?: number
+  applyVat?: boolean
   vatAmount?: number
   grandTotal: number
   deliveryMethod?: string | null
@@ -1459,6 +1482,7 @@ export type PurchaseOrderUncheckedCreateWithoutVendorBillsInput = {
   currencyRate?: number
   totalAmount: number
   discount?: number
+  applyVat?: boolean
   vatAmount?: number
   grandTotal: number
   deliveryMethod?: string | null
@@ -1517,6 +1541,7 @@ export type PurchaseOrderUpdateWithoutVendorBillsInput = {
   currencyRate?: Prisma.FloatFieldUpdateOperationsInput | number
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   discount?: Prisma.FloatFieldUpdateOperationsInput | number
+  applyVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
   deliveryMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1560,6 +1585,7 @@ export type PurchaseOrderUncheckedUpdateWithoutVendorBillsInput = {
   currencyRate?: Prisma.FloatFieldUpdateOperationsInput | number
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   discount?: Prisma.FloatFieldUpdateOperationsInput | number
+  applyVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
   deliveryMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1602,6 +1628,7 @@ export type PurchaseOrderCreateWithoutSupplierInput = {
   currencyRate?: number
   totalAmount: number
   discount?: number
+  applyVat?: boolean
   vatAmount?: number
   grandTotal: number
   deliveryMethod?: string | null
@@ -1645,6 +1672,7 @@ export type PurchaseOrderUncheckedCreateWithoutSupplierInput = {
   currencyRate?: number
   totalAmount: number
   discount?: number
+  applyVat?: boolean
   vatAmount?: number
   grandTotal: number
   deliveryMethod?: string | null
@@ -1717,6 +1745,7 @@ export type PurchaseOrderScalarWhereInput = {
   currencyRate?: Prisma.FloatFilter<"PurchaseOrder"> | number
   totalAmount?: Prisma.FloatFilter<"PurchaseOrder"> | number
   discount?: Prisma.FloatFilter<"PurchaseOrder"> | number
+  applyVat?: Prisma.BoolFilter<"PurchaseOrder"> | boolean
   vatAmount?: Prisma.FloatFilter<"PurchaseOrder"> | number
   grandTotal?: Prisma.FloatFilter<"PurchaseOrder"> | number
   deliveryMethod?: Prisma.StringNullableFilter<"PurchaseOrder"> | string | null
@@ -1756,6 +1785,7 @@ export type PurchaseOrderCreateWithoutGoodsReceiptsInput = {
   currencyRate?: number
   totalAmount: number
   discount?: number
+  applyVat?: boolean
   vatAmount?: number
   grandTotal: number
   deliveryMethod?: string | null
@@ -1799,6 +1829,7 @@ export type PurchaseOrderUncheckedCreateWithoutGoodsReceiptsInput = {
   currencyRate?: number
   totalAmount: number
   discount?: number
+  applyVat?: boolean
   vatAmount?: number
   grandTotal: number
   deliveryMethod?: string | null
@@ -1857,6 +1888,7 @@ export type PurchaseOrderUpdateWithoutGoodsReceiptsInput = {
   currencyRate?: Prisma.FloatFieldUpdateOperationsInput | number
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   discount?: Prisma.FloatFieldUpdateOperationsInput | number
+  applyVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
   deliveryMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1900,6 +1932,7 @@ export type PurchaseOrderUncheckedUpdateWithoutGoodsReceiptsInput = {
   currencyRate?: Prisma.FloatFieldUpdateOperationsInput | number
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   discount?: Prisma.FloatFieldUpdateOperationsInput | number
+  applyVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
   deliveryMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1942,6 +1975,7 @@ export type PurchaseOrderCreateWithoutNkpsInput = {
   currencyRate?: number
   totalAmount: number
   discount?: number
+  applyVat?: boolean
   vatAmount?: number
   grandTotal: number
   deliveryMethod?: string | null
@@ -1985,6 +2019,7 @@ export type PurchaseOrderUncheckedCreateWithoutNkpsInput = {
   currencyRate?: number
   totalAmount: number
   discount?: number
+  applyVat?: boolean
   vatAmount?: number
   grandTotal: number
   deliveryMethod?: string | null
@@ -2043,6 +2078,7 @@ export type PurchaseOrderUpdateWithoutNkpsInput = {
   currencyRate?: Prisma.FloatFieldUpdateOperationsInput | number
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   discount?: Prisma.FloatFieldUpdateOperationsInput | number
+  applyVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
   deliveryMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2086,6 +2122,7 @@ export type PurchaseOrderUncheckedUpdateWithoutNkpsInput = {
   currencyRate?: Prisma.FloatFieldUpdateOperationsInput | number
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   discount?: Prisma.FloatFieldUpdateOperationsInput | number
+  applyVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
   deliveryMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2128,6 +2165,7 @@ export type PurchaseOrderCreateWithoutPurchaseOrderItemsInput = {
   currencyRate?: number
   totalAmount: number
   discount?: number
+  applyVat?: boolean
   vatAmount?: number
   grandTotal: number
   deliveryMethod?: string | null
@@ -2171,6 +2209,7 @@ export type PurchaseOrderUncheckedCreateWithoutPurchaseOrderItemsInput = {
   currencyRate?: number
   totalAmount: number
   discount?: number
+  applyVat?: boolean
   vatAmount?: number
   grandTotal: number
   deliveryMethod?: string | null
@@ -2229,6 +2268,7 @@ export type PurchaseOrderUpdateWithoutPurchaseOrderItemsInput = {
   currencyRate?: Prisma.FloatFieldUpdateOperationsInput | number
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   discount?: Prisma.FloatFieldUpdateOperationsInput | number
+  applyVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
   deliveryMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2272,6 +2312,7 @@ export type PurchaseOrderUncheckedUpdateWithoutPurchaseOrderItemsInput = {
   currencyRate?: Prisma.FloatFieldUpdateOperationsInput | number
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   discount?: Prisma.FloatFieldUpdateOperationsInput | number
+  applyVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
   deliveryMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2314,6 +2355,7 @@ export type PurchaseOrderCreateWithoutSalesOrderInput = {
   currencyRate?: number
   totalAmount: number
   discount?: number
+  applyVat?: boolean
   vatAmount?: number
   grandTotal: number
   deliveryMethod?: string | null
@@ -2357,6 +2399,7 @@ export type PurchaseOrderUncheckedCreateWithoutSalesOrderInput = {
   currencyRate?: number
   totalAmount: number
   discount?: number
+  applyVat?: boolean
   vatAmount?: number
   grandTotal: number
   deliveryMethod?: string | null
@@ -2425,6 +2468,7 @@ export type PurchaseOrderCreateWithoutCompanyInput = {
   currencyRate?: number
   totalAmount: number
   discount?: number
+  applyVat?: boolean
   vatAmount?: number
   grandTotal: number
   deliveryMethod?: string | null
@@ -2468,6 +2512,7 @@ export type PurchaseOrderUncheckedCreateWithoutCompanyInput = {
   currencyRate?: number
   totalAmount: number
   discount?: number
+  applyVat?: boolean
   vatAmount?: number
   grandTotal: number
   deliveryMethod?: string | null
@@ -2536,6 +2581,7 @@ export type PurchaseOrderCreateWithoutUserInput = {
   currencyRate?: number
   totalAmount: number
   discount?: number
+  applyVat?: boolean
   vatAmount?: number
   grandTotal: number
   deliveryMethod?: string | null
@@ -2579,6 +2625,7 @@ export type PurchaseOrderUncheckedCreateWithoutUserInput = {
   currencyRate?: number
   totalAmount: number
   discount?: number
+  applyVat?: boolean
   vatAmount?: number
   grandTotal: number
   deliveryMethod?: string | null
@@ -2648,6 +2695,7 @@ export type PurchaseOrderCreateManySupplierInput = {
   currencyRate?: number
   totalAmount: number
   discount?: number
+  applyVat?: boolean
   vatAmount?: number
   grandTotal: number
   deliveryMethod?: string | null
@@ -2686,6 +2734,7 @@ export type PurchaseOrderUpdateWithoutSupplierInput = {
   currencyRate?: Prisma.FloatFieldUpdateOperationsInput | number
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   discount?: Prisma.FloatFieldUpdateOperationsInput | number
+  applyVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
   deliveryMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2729,6 +2778,7 @@ export type PurchaseOrderUncheckedUpdateWithoutSupplierInput = {
   currencyRate?: Prisma.FloatFieldUpdateOperationsInput | number
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   discount?: Prisma.FloatFieldUpdateOperationsInput | number
+  applyVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
   deliveryMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2772,6 +2822,7 @@ export type PurchaseOrderUncheckedUpdateManyWithoutSupplierInput = {
   currencyRate?: Prisma.FloatFieldUpdateOperationsInput | number
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   discount?: Prisma.FloatFieldUpdateOperationsInput | number
+  applyVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
   deliveryMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2811,6 +2862,7 @@ export type PurchaseOrderCreateManySalesOrderInput = {
   currencyRate?: number
   totalAmount: number
   discount?: number
+  applyVat?: boolean
   vatAmount?: number
   grandTotal: number
   deliveryMethod?: string | null
@@ -2849,6 +2901,7 @@ export type PurchaseOrderUpdateWithoutSalesOrderInput = {
   currencyRate?: Prisma.FloatFieldUpdateOperationsInput | number
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   discount?: Prisma.FloatFieldUpdateOperationsInput | number
+  applyVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
   deliveryMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2892,6 +2945,7 @@ export type PurchaseOrderUncheckedUpdateWithoutSalesOrderInput = {
   currencyRate?: Prisma.FloatFieldUpdateOperationsInput | number
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   discount?: Prisma.FloatFieldUpdateOperationsInput | number
+  applyVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
   deliveryMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2935,6 +2989,7 @@ export type PurchaseOrderUncheckedUpdateManyWithoutSalesOrderInput = {
   currencyRate?: Prisma.FloatFieldUpdateOperationsInput | number
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   discount?: Prisma.FloatFieldUpdateOperationsInput | number
+  applyVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
   deliveryMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2974,6 +3029,7 @@ export type PurchaseOrderCreateManyCompanyInput = {
   currencyRate?: number
   totalAmount: number
   discount?: number
+  applyVat?: boolean
   vatAmount?: number
   grandTotal: number
   deliveryMethod?: string | null
@@ -3012,6 +3068,7 @@ export type PurchaseOrderUpdateWithoutCompanyInput = {
   currencyRate?: Prisma.FloatFieldUpdateOperationsInput | number
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   discount?: Prisma.FloatFieldUpdateOperationsInput | number
+  applyVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
   deliveryMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3055,6 +3112,7 @@ export type PurchaseOrderUncheckedUpdateWithoutCompanyInput = {
   currencyRate?: Prisma.FloatFieldUpdateOperationsInput | number
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   discount?: Prisma.FloatFieldUpdateOperationsInput | number
+  applyVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
   deliveryMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3098,6 +3156,7 @@ export type PurchaseOrderUncheckedUpdateManyWithoutCompanyInput = {
   currencyRate?: Prisma.FloatFieldUpdateOperationsInput | number
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   discount?: Prisma.FloatFieldUpdateOperationsInput | number
+  applyVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
   deliveryMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3137,6 +3196,7 @@ export type PurchaseOrderCreateManyUserInput = {
   currencyRate?: number
   totalAmount: number
   discount?: number
+  applyVat?: boolean
   vatAmount?: number
   grandTotal: number
   deliveryMethod?: string | null
@@ -3175,6 +3235,7 @@ export type PurchaseOrderUpdateWithoutUserInput = {
   currencyRate?: Prisma.FloatFieldUpdateOperationsInput | number
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   discount?: Prisma.FloatFieldUpdateOperationsInput | number
+  applyVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
   deliveryMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3218,6 +3279,7 @@ export type PurchaseOrderUncheckedUpdateWithoutUserInput = {
   currencyRate?: Prisma.FloatFieldUpdateOperationsInput | number
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   discount?: Prisma.FloatFieldUpdateOperationsInput | number
+  applyVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
   deliveryMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3261,6 +3323,7 @@ export type PurchaseOrderUncheckedUpdateManyWithoutUserInput = {
   currencyRate?: Prisma.FloatFieldUpdateOperationsInput | number
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   discount?: Prisma.FloatFieldUpdateOperationsInput | number
+  applyVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
   deliveryMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3358,6 +3421,7 @@ export type PurchaseOrderSelect<ExtArgs extends runtime.Types.Extensions.Interna
   currencyRate?: boolean
   totalAmount?: boolean
   discount?: boolean
+  applyVat?: boolean
   vatAmount?: boolean
   grandTotal?: boolean
   deliveryMethod?: boolean
@@ -3407,6 +3471,7 @@ export type PurchaseOrderSelectCreateManyAndReturn<ExtArgs extends runtime.Types
   currencyRate?: boolean
   totalAmount?: boolean
   discount?: boolean
+  applyVat?: boolean
   vatAmount?: boolean
   grandTotal?: boolean
   deliveryMethod?: boolean
@@ -3451,6 +3516,7 @@ export type PurchaseOrderSelectUpdateManyAndReturn<ExtArgs extends runtime.Types
   currencyRate?: boolean
   totalAmount?: boolean
   discount?: boolean
+  applyVat?: boolean
   vatAmount?: boolean
   grandTotal?: boolean
   deliveryMethod?: boolean
@@ -3495,6 +3561,7 @@ export type PurchaseOrderSelectScalar = {
   currencyRate?: boolean
   totalAmount?: boolean
   discount?: boolean
+  applyVat?: boolean
   vatAmount?: boolean
   grandTotal?: boolean
   deliveryMethod?: boolean
@@ -3520,7 +3587,7 @@ export type PurchaseOrderSelectScalar = {
   companyId?: boolean
 }
 
-export type PurchaseOrderOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "number" | "orderType" | "date" | "referenceNumber" | "title" | "description" | "status" | "paymentAmount" | "paymentStatus" | "currency" | "currencyRate" | "totalAmount" | "discount" | "vatAmount" | "grandTotal" | "deliveryMethod" | "destination" | "warehouse" | "packingCondition" | "shippingAddress" | "deliveryDate" | "termOfDelivery" | "partialShipment" | "paymentMethod" | "termOfPayment" | "supplierAddress" | "billingAddress" | "termsAndConditions" | "notes" | "createdAt" | "updatedAt" | "deletedAt" | "salesOrderId" | "supplierId" | "userId" | "companyId", ExtArgs["result"]["purchaseOrder"]>
+export type PurchaseOrderOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "number" | "orderType" | "date" | "referenceNumber" | "title" | "description" | "status" | "paymentAmount" | "paymentStatus" | "currency" | "currencyRate" | "totalAmount" | "discount" | "applyVat" | "vatAmount" | "grandTotal" | "deliveryMethod" | "destination" | "warehouse" | "packingCondition" | "shippingAddress" | "deliveryDate" | "termOfDelivery" | "partialShipment" | "paymentMethod" | "termOfPayment" | "supplierAddress" | "billingAddress" | "termsAndConditions" | "notes" | "createdAt" | "updatedAt" | "deletedAt" | "salesOrderId" | "supplierId" | "userId" | "companyId", ExtArgs["result"]["purchaseOrder"]>
 export type PurchaseOrderInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   PurchaseOrderItems?: boolean | Prisma.PurchaseOrder$PurchaseOrderItemsArgs<ExtArgs>
@@ -3572,6 +3639,7 @@ export type $PurchaseOrderPayload<ExtArgs extends runtime.Types.Extensions.Inter
     currencyRate: number
     totalAmount: number
     discount: number
+    applyVat: boolean
     vatAmount: number
     grandTotal: number
     deliveryMethod: string | null
@@ -4040,6 +4108,7 @@ export interface PurchaseOrderFieldRefs {
   readonly currencyRate: Prisma.FieldRef<"PurchaseOrder", 'Float'>
   readonly totalAmount: Prisma.FieldRef<"PurchaseOrder", 'Float'>
   readonly discount: Prisma.FieldRef<"PurchaseOrder", 'Float'>
+  readonly applyVat: Prisma.FieldRef<"PurchaseOrder", 'Boolean'>
   readonly vatAmount: Prisma.FieldRef<"PurchaseOrder", 'Float'>
   readonly grandTotal: Prisma.FieldRef<"PurchaseOrder", 'Float'>
   readonly deliveryMethod: Prisma.FieldRef<"PurchaseOrder", 'String'>

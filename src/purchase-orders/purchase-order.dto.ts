@@ -86,6 +86,11 @@ export class CreatePurchaseOrderDto {
   @IsEnum(Currency)
   currency?: Currency;
 
+  @ApiProperty({ required: false, example: true })
+  @IsOptional()
+  @IsBoolean()
+  applyVat?: boolean;
+
   @ApiProperty({ required: false, example: 1 })
   @IsOptional()
   @IsNumber()

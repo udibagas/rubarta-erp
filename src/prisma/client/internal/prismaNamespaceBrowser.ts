@@ -790,6 +790,7 @@ export const PurchaseOrderScalarFieldEnum = {
   currencyRate: 'currencyRate',
   totalAmount: 'totalAmount',
   discount: 'discount',
+  applyVat: 'applyVat',
   vatAmount: 'vatAmount',
   grandTotal: 'grandTotal',
   deliveryMethod: 'deliveryMethod',

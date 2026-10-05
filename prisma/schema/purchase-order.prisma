@@ -15,6 +15,7 @@ model PurchaseOrder {
   currencyRate Float    @default(1) // Exchange rate for the currency
   totalAmount  Float
   discount     Float    @default(0)
+  applyVat     Boolean  @default(true)
   vatAmount    Float    @default(0)
   grandTotal   Float
 
