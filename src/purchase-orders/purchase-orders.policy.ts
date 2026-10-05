@@ -23,7 +23,13 @@ export class PurchaseOrdersPolicy extends BasePolicy {
   }
 
   update(model: PurchaseOrder, user: User) {
-    return this.authorizeDraftMutation(model, user);
+    const allowedStatus = ['Draft', 'Confirmed', 'Sent'];
+    if (!allowedStatus.includes(model.status)) throw new ForbiddenException();
+    if (user.roles.includes('ADMIN')) return true;
+    if (user.roles.includes('SALES_REP') && model.userId === user.id) {
+      return true;
+    }
+    throw new ForbiddenException();
   }
 
   updateStatus(model: PurchaseOrder, user: User) {
