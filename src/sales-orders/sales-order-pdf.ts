@@ -88,8 +88,7 @@ export function generateOrderPdf(salesOrder: any): Promise<Buffer> {
     const infoRows: [string, string][] = [
       ['SO Number', salesOrder.number],
       ['Date', formatDate(salesOrder.date)],
-      // ['Reference Number', salesOrder.referenceNumber || '-'],
-      ['Reference Number', 'PPO084955 - Foton Connection Kit'],
+      ['Reference Number', salesOrder.referenceNumber || '-'],
       ['Request Type', salesOrder.requestType || '-'],
       ['Delivery Method', salesOrder.deliveryMethod || ''],
       ['Payment Method', salesOrder.paymentMethod || ''],
