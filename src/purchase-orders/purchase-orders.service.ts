@@ -36,6 +36,7 @@ export class PurchaseOrdersService {
   ) {}
 
   async create(data: CreatePurchaseOrderDto & { userId: number }, user: User) {
+    this.policy.can('create', null, user);
     const { items, ...purchaseOrderData } = data;
     const number = await this.generateNumber();
     const totalAmount = items.reduce(
@@ -63,6 +64,7 @@ export class PurchaseOrdersService {
   }
 
   async findAll(query: QueryPurchaseOrderDto, user: User) {
+    this.policy.can('viewAny', null, user);
     const where: Prisma.PurchaseOrderWhereInput = { deletedAt: null };
 
     if (query.keyword) {
@@ -127,7 +129,7 @@ export class PurchaseOrdersService {
   }
 
   async findOne(id: number, user: User) {
-    const order = await this.prisma.purchaseOrder.findFirst({
+    const order = await this.prisma.purchaseOrder.findUniqueOrThrow({
       where: { id, deletedAt: null },
       include: {
         PurchaseOrderItems: { orderBy: { sortOrder: 'asc' } },
@@ -136,13 +138,18 @@ export class PurchaseOrdersService {
         User: { select: { id: true, name: true, email: true } },
       },
     });
-    if (!order)
-      throw new NotFoundException(`Purchase order with ID ${id} not found`);
+
+    this.policy.can('view', order, user);
     return order;
   }
 
   async update(id: number, data: UpdatePurchaseOrderDto, user: User) {
-    await this.findOne(id, user);
+    const order = await this.prisma.purchaseOrder.findUniqueOrThrow({
+      where: { id, deletedAt: null },
+    });
+
+    this.policy.can('update', order, user);
+
     const { items, ...purchaseOrderData } = data;
     if (items) {
       const totalAmount = items.reduce(
@@ -178,13 +185,11 @@ export class PurchaseOrdersService {
   }
 
   async remove(id: number, user: User) {
-    const order = await this.findOne(id, user);
+    const order = await this.prisma.purchaseOrder.findUniqueOrThrow({
+      where: { id, deletedAt: null },
+    });
 
-    if (order.status !== PurchaseOrderStatus.Draft) {
-      throw new BadRequestException(
-        `Cannot delete a purchase order that is not in draft status`,
-      );
-    }
+    this.policy.can('delete', order, user);
 
     return this.prisma.purchaseOrder.update({
       where: { id },
@@ -193,22 +198,36 @@ export class PurchaseOrdersService {
   }
 
   async submit(id: number, user: User) {
-    await this.findOne(id, user);
-    const order = await this.prisma.purchaseOrder.update({
+    const order = await this.prisma.purchaseOrder.findUniqueOrThrow({
+      where: { id, deletedAt: null },
+    });
+
+    this.policy.can('submit', order, user);
+
+    const updatedOrder = await this.prisma.purchaseOrder.update({
       where: { id },
       data: { status: PurchaseOrderStatus.Pending },
     });
+
     await this.approvalService.requestApproval(
       ApprovalType.PURCHASE_ORDER,
       id,
-      order.companyId,
+      updatedOrder.companyId,
     );
-    return order;
+
+    return updatedOrder;
   }
 
   async send(id: number, dto: SendPurchaseOrderEmailDto, user: User) {
+    const order = await this.prisma.purchaseOrder.findUniqueOrThrow({
+      where: { id, deletedAt: null },
+      include: {
+        User: { select: { email: true } },
+      },
+    });
+
+    this.policy.can('send', order, user);
     const { to, cc, subject, body } = dto;
-    const order = await this.findOne(id, user);
     const pdfBuffer = await generatePurchaseOrderPdf(order);
 
     await this.mailerService.sendMail({
@@ -236,7 +255,8 @@ export class PurchaseOrdersService {
   }
 
   async preview(id: number, user: User) {
-    return generatePurchaseOrderPdf(await this.findOne(id, user));
+    const order = await this.findOne(id, user);
+    return generatePurchaseOrderPdf(order);
   }
 
   getOutstandingOrders(groupBy: string = 'supplier', supplierId?: number) {

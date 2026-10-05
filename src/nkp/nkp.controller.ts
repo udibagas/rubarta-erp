@@ -13,15 +13,10 @@ import {
   Res,
 } from '@nestjs/common';
 import { NkpService } from './nkp.service';
-import {
-  ApiBearerAuth,
-  ApiOkResponse,
-  ApiOperation,
-  ApiTags,
-} from '@nestjs/swagger';
+import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { CloseNkpDto, NkpDto, QueryNkpDto } from './nkp.dto';
 import { Auth } from '../auth/auth.decorator';
-import { Role, User } from '../prisma/client/client';
+import { User } from '../prisma/client/client';
 import { formatDate, formatDateNumeric } from '../helpers/date';
 import { Response } from 'express';
 import { generateNkpPdf } from './nkp-pdf';
@@ -36,18 +31,18 @@ export class NkpController {
   @Post()
   @ApiOperation({ summary: 'Create new NKP' })
   create(@Body() data: NkpDto, @Auth() user: User) {
-    return this.nkpService.create({
-      ...data,
-      requesterId: user.id,
-    });
+    return this.nkpService.create(
+      {
+        ...data,
+        requesterId: user.id,
+      },
+      user,
+    );
   }
 
   @Get()
   @ApiOperation({ summary: 'Get all NKP' })
-  async findAll(
-    @Auth() user: User & { Role: Role },
-    @Query() query: QueryNkpDto,
-  ) {
+  async findAll(@Auth() user: User, @Query() query: QueryNkpDto) {
     return this.nkpService.findAll({ ...query, user });
   }
 
@@ -55,7 +50,7 @@ export class NkpController {
   @ApiOperation({ summary: 'Download NKP report as PDF' })
   async downloadPdf(
     @Res() res: Response,
-    @Auth() user: User & { Role: Role },
+    @Auth() user: User,
     @Query() query: QueryNkpDto,
   ) {
     const buffer = await this.nkpService.exportReportToPdf({ ...query, user });
@@ -70,7 +65,7 @@ export class NkpController {
   @ApiOperation({ summary: 'Download NKP report as Excel' })
   async downloadExcel(
     @Res() res: Response,
-    @Auth() user: User & { Role: Role },
+    @Auth() user: User,
     @Query() query: QueryNkpDto,
   ) {
     const buffer = await this.nkpService.exportReportToExcel({
@@ -89,14 +84,14 @@ export class NkpController {
 
   @Get('get-by-number')
   @ApiOperation({ summary: 'Get NKP by number' })
-  findOneByNumber(@Query('number') number: string) {
-    return this.nkpService.findOne(number);
+  findOneByNumber(@Query('number') number: string, @Auth() user: User) {
+    return this.nkpService.findOne(number, user);
   }
 
   @Get(':id')
   @ApiOperation({ summary: 'Get NKP by id' })
-  findOne(@Param('id', ParseIntPipe) id: number) {
-    return this.nkpService.findOne(id);
+  findOne(@Param('id', ParseIntPipe) id: number, @Auth() user: User) {
+    return this.nkpService.findOne(id, user);
   }
 
   @Patch(':id')
@@ -113,7 +108,7 @@ export class NkpController {
   @ApiOperation({ summary: 'Submit data' })
   @HttpCode(HttpStatus.OK)
   submit(@Param('id', ParseIntPipe) id: number, @Auth() user: User) {
-    return this.nkpService.submit(id, user.id);
+    return this.nkpService.submit(id, user);
   }
 
   @Delete(':id')
@@ -160,8 +155,12 @@ export class NkpController {
   }
 
   @Get('/print/:id')
-  async print(@Param('id', ParseIntPipe) id: number, @Res() res: Response) {
-    const data = await this.nkpService.findOne(id);
+  async print(
+    @Param('id', ParseIntPipe) id: number,
+    @Auth() user: User,
+    @Res() res: Response,
+  ) {
+    const data = await this.nkpService.findOne(id, user);
     // const buffer = await generateNkpPdf(data);
     // const filename = `${data.number || 'NKP'}.pdf`;
 

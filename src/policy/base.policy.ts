@@ -27,26 +27,23 @@ export class BasePolicy {
   }
 
   can(
-    action: 'create' | 'viewAny' | 'view' | 'update' | 'delete' | 'submit',
+    action:
+      'create' | 'viewAny' | 'view' | 'update' | 'delete' | 'submit' | string,
     model: unknown,
     user: User,
   ) {
-    switch (action) {
-      case 'create':
-        return this.create(user);
-      case 'viewAny':
-        return this.viewAny(user);
-      case 'view':
-        return this.view(model, user);
-      case 'update':
-        return this.update(model, user);
-      case 'delete':
-        return this.delete(model, user);
-      case 'submit':
-        return this.submit(model, user);
+    if (action === 'create') return this.create(user);
+    if (action === 'viewAny') return this.viewAny(user);
+    if (action === 'view') return this.view(model, user);
+    if (action === 'update') return this.update(model, user);
+    if (action === 'delete') return this.delete(model, user);
+    if (action === 'submit') return this.submit(model, user);
 
-      default:
+    return (
+      this[action]?.(model, user) ??
+      (() => {
         throw new ForbiddenException();
-    }
+      })()
+    );
   }
 }

@@ -1,4 +1,4 @@
-import { ForbiddenException, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { CloseNkpDto, NkpDto, QueryNkpDto } from './nkp.dto';
 import { PrismaService } from '../prisma/prisma.service';
 import {
@@ -32,8 +32,8 @@ export class NkpService {
     private policy: NkpPolicy,
   ) {}
 
-  async create(dto: NkpDto & { requesterId: number }) {
-    this.policy.create();
+  async create(dto: NkpDto & { requesterId: number }, user: User) {
+    this.policy.can('create', null, user);
     const { NkpItem: items, NkpAttachment: attachments, ...data } = dto;
     let number = 'DRAFT';
 
@@ -71,6 +71,7 @@ export class NkpService {
   }
 
   async findAll(params: QueryNkpDto & { user?: User }) {
+    this.policy.can('viewAny', null, params.user);
     const {
       page,
       pageSize,
@@ -335,12 +336,12 @@ export class NkpService {
     return Buffer.from(await workbook.xlsx.writeBuffer());
   }
 
-  findOne(id: any) {
+  async findOne(id: any, user?: User) {
     const where: Prisma.NkpWhereInput = {};
     if (typeof id == 'number') where.id = id;
     if (typeof id == 'string') where.number = id;
 
-    return this.prisma.nkp.findFirstOrThrow({
+    const nkp = await this.prisma.nkp.findFirstOrThrow({
       where,
       include: {
         NkpItem: true,
@@ -369,18 +370,17 @@ export class NkpService {
         },
       },
     });
+
+    this.policy.can('view', nkp, user);
+    return nkp;
   }
 
   async update(id: number, dto: NkpDto, user: User) {
-    const nkp = await this.findOne(id);
-    if (nkp.status !== PaymentStatus.DRAFT) throw new ForbiddenException();
+    const nkp = await this.prisma.nkp.findUniqueOrThrow({
+      where: { id },
+    });
 
-    if (nkp.requesterId !== user.id) {
-      throw new ForbiddenException({
-        statusCode: 403,
-        message: 'You are not allowed to perform this action',
-      });
-    }
+    this.policy.can('update', nkp, user);
 
     let number = 'DRAFT';
     if (dto.status == PaymentStatus.SUBMITTED) {
@@ -421,9 +421,13 @@ export class NkpService {
     return savedData;
   }
 
-  async submit(id: number, requesterId: number) {
-    const data = await this.findOne(id);
-    const { companyId, paymentType, nkpType, parentId } = data;
+  async submit(id: number, user: User) {
+    const nkp = await this.prisma.nkp.findUniqueOrThrow({
+      where: { id },
+    });
+
+    this.policy.can('update', nkp, user);
+    const { companyId, paymentType, nkpType, parentId } = nkp;
     const number = await this.generateNumber({
       companyId,
       paymentType,
@@ -432,7 +436,7 @@ export class NkpService {
     });
 
     const savedData = await this.prisma.nkp.update({
-      where: { id, requesterId },
+      where: { id, requesterId: user.id },
       data: {
         number,
         status: PaymentStatus.SUBMITTED,
@@ -444,18 +448,22 @@ export class NkpService {
   }
 
   async remove(id: number, user: User) {
-    const data = await this.findOne(id);
-    if (!['DRAFT', 'SUBMITTED'].includes(data.status))
-      throw new ForbiddenException();
+    const data = await this.prisma.nkp.findUniqueOrThrow({
+      where: { id },
+    });
+
+    this.policy.can('delete', data, user);
     return this.prisma.nkp.delete({
       where: { id },
     });
   }
 
   async removeItem(id: number, itemId: number, user: User) {
-    const data = await this.findOne(id);
-    if (!['DRAFT', 'SUBMITTED'].includes(data.status))
-      throw new ForbiddenException();
+    const nkp = await this.prisma.nkp.findUniqueOrThrow({
+      where: { id },
+    });
+
+    this.policy.can('delete', nkp, user);
     return this.prisma.nkpItem.delete({
       where: { id: itemId },
     });
@@ -536,10 +544,11 @@ export class NkpService {
   }
 
   async close(id: number, data: CloseNkpDto, user: User) {
-    if (!user.roles.includes('ADMIN')) {
-      throw new ForbiddenException('Anda tidak boleh melakukan aksi ini');
-    }
+    const existingNkp = await this.prisma.nkp.findUniqueOrThrow({
+      where: { id },
+    });
 
+    this.policy.can('close', existingNkp, user);
     const { bankRefNo, attachments } = data;
 
     const request = await this.prisma.nkp.update({
