@@ -43,7 +43,7 @@ export class PurchaseOrdersService {
       (sum, item) => sum + item.quantity * item.unitPrice,
       0,
     );
-    const vatAmount = totalAmount * 0.11;
+    const vatAmount = purchaseOrderData.applyVat ? totalAmount * 0.11 : 0;
     const discount = purchaseOrderData.discount || 0;
 
     return this.prisma.purchaseOrder.create({
@@ -156,7 +156,7 @@ export class PurchaseOrdersService {
         (sum, item) => sum + item.quantity * item.unitPrice,
         0,
       );
-      const vatAmount = totalAmount * 0.11;
+      const vatAmount = purchaseOrderData.applyVat ? totalAmount * 0.11 : 0;
       const discount = purchaseOrderData.discount || 0;
       await this.prisma.purchaseOrderItem.deleteMany({
         where: { purchaseOrderId: id },
