@@ -1,15 +1,11 @@
 import { Resolver, Query, Args, Int } from '@nestjs/graphql';
-import { PurchaseOrdersService } from './purchase-orders.service';
 import { PurchaseOrderType } from './purchase-order.type';
 import { Prisma, PurchaseOrderStatus } from '../prisma/client/client';
 import { PrismaService } from '../prisma/prisma.service';
 
 @Resolver(() => PurchaseOrderType)
 export class PurchaseOrdersResolver {
-  constructor(
-    private readonly purchaseOrdersService: PurchaseOrdersService,
-    private readonly prisma: PrismaService,
-  ) {}
+  constructor(private readonly prisma: PrismaService) {}
 
   @Query(() => [PurchaseOrderType], {
     name: 'purchaseOrders',
@@ -47,13 +43,5 @@ export class PurchaseOrdersResolver {
         _count: { select: { PurchaseOrderItems: true } },
       },
     });
-  }
-
-  @Query(() => PurchaseOrderType, {
-    name: 'purchaseOrder',
-    description: 'Get purchase order by ID',
-  })
-  async findOne(@Args('id', { type: () => Int }) id: number) {
-    return this.purchaseOrdersService.findOne(id);
   }
 }

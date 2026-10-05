@@ -177,7 +177,6 @@ export class NkpService {
     }
 
     const data = await this.prisma.nkp.findMany(options);
-
     const total = await this.prisma.nkp.count({ where });
     return { data, page, total };
   }
@@ -185,7 +184,12 @@ export class NkpService {
   async exportReportToPdf(
     params: QueryNkpDto & { user?: User },
   ): Promise<Buffer> {
-    const result = await this.findAll({ ...params, action: 'download' });
+    const result = await this.findAll({
+      ...params,
+      orderBy: 'number',
+      orderDirection: 'asc',
+      action: 'download',
+    });
     const company = await this.prisma.company.findUniqueOrThrow({
       where: { id: Number(params.companyId) },
     });
@@ -279,7 +283,12 @@ export class NkpService {
   async exportReportToExcel(
     params: QueryNkpDto & { user?: User },
   ): Promise<Buffer> {
-    const result = await this.findAll({ ...params, action: 'download' });
+    const result = await this.findAll({
+      ...params,
+      orderBy: 'number',
+      orderDirection: 'asc',
+      action: 'download',
+    });
     const workbook = new ExcelJS.Workbook();
     const worksheet = workbook.addWorksheet('NKP Report');
 

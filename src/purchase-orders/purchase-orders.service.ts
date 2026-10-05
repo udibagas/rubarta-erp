@@ -3,6 +3,7 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
+import { User } from '../prisma/client/client';
 import { MailerService } from '@nestjs-modules/mailer';
 import { ApprovalService } from '../approval/approval.service';
 import { PrismaService } from '../prisma/prisma.service';
@@ -23,6 +24,7 @@ import { OnEvent } from '@nestjs/event-emitter';
 import * as ExcelJS from 'exceljs';
 import PDFDocument from 'pdfkit';
 import { createPdfDocumentWithTables } from 'pdfkit-table';
+import { PurchaseOrdersPolicy } from './purchase-orders.policy';
 
 @Injectable()
 export class PurchaseOrdersService {
@@ -30,9 +32,10 @@ export class PurchaseOrdersService {
     private readonly prisma: PrismaService,
     private readonly mailerService: MailerService,
     private readonly approvalService: ApprovalService,
+    private readonly policy: PurchaseOrdersPolicy,
   ) {}
 
-  async create(data: CreatePurchaseOrderDto & { userId: number }) {
+  async create(data: CreatePurchaseOrderDto & { userId: number }, user: User) {
     const { items, ...purchaseOrderData } = data;
     const number = await this.generateNumber();
     const totalAmount = items.reduce(
@@ -59,7 +62,7 @@ export class PurchaseOrdersService {
     });
   }
 
-  async findAll(query: QueryPurchaseOrderDto) {
+  async findAll(query: QueryPurchaseOrderDto, user: User) {
     const where: Prisma.PurchaseOrderWhereInput = { deletedAt: null };
 
     if (query.keyword) {
@@ -123,7 +126,7 @@ export class PurchaseOrdersService {
     return data;
   }
 
-  async findOne(id: number) {
+  async findOne(id: number, user: User) {
     const order = await this.prisma.purchaseOrder.findFirst({
       where: { id, deletedAt: null },
       include: {
@@ -138,8 +141,8 @@ export class PurchaseOrdersService {
     return order;
   }
 
-  async update(id: number, data: UpdatePurchaseOrderDto) {
-    await this.findOne(id);
+  async update(id: number, data: UpdatePurchaseOrderDto, user: User) {
+    await this.findOne(id, user);
     const { items, ...purchaseOrderData } = data;
     if (items) {
       const totalAmount = items.reduce(
@@ -174,8 +177,8 @@ export class PurchaseOrdersService {
     });
   }
 
-  async remove(id: number) {
-    const order = await this.findOne(id);
+  async remove(id: number, user: User) {
+    const order = await this.findOne(id, user);
 
     if (order.status !== PurchaseOrderStatus.Draft) {
       throw new BadRequestException(
@@ -189,8 +192,8 @@ export class PurchaseOrdersService {
     });
   }
 
-  async submit(id: number) {
-    await this.findOne(id);
+  async submit(id: number, user: User) {
+    await this.findOne(id, user);
     const order = await this.prisma.purchaseOrder.update({
       where: { id },
       data: { status: PurchaseOrderStatus.Pending },
@@ -203,9 +206,9 @@ export class PurchaseOrdersService {
     return order;
   }
 
-  async send(id: number, dto: SendPurchaseOrderEmailDto) {
+  async send(id: number, dto: SendPurchaseOrderEmailDto, user: User) {
     const { to, cc, subject, body } = dto;
-    const order = await this.findOne(id);
+    const order = await this.findOne(id, user);
     const pdfBuffer = await generatePurchaseOrderPdf(order);
 
     await this.mailerService.sendMail({
@@ -232,8 +235,8 @@ export class PurchaseOrdersService {
     });
   }
 
-  async preview(id: number) {
-    return generatePurchaseOrderPdf(await this.findOne(id));
+  async preview(id: number, user: User) {
+    return generatePurchaseOrderPdf(await this.findOne(id, user));
   }
 
   getOutstandingOrders(groupBy: string = 'supplier', supplierId?: number) {
@@ -465,8 +468,8 @@ export class PurchaseOrdersService {
     ];
   }
 
-  async exportToPdf(query: QueryPurchaseOrderDto): Promise<Buffer> {
-    const purchaseOrders = (await this.findAll(query)) as any[];
+  async exportToPdf(query: QueryPurchaseOrderDto, user: User): Promise<Buffer> {
+    const purchaseOrders = (await this.findAll(query, user)) as any[];
     const PDFDocumentWithTables = createPdfDocumentWithTables(PDFDocument);
     const doc = new PDFDocumentWithTables({
       size: 'A4',
@@ -539,8 +542,11 @@ export class PurchaseOrdersService {
     });
   }
 
-  async exportToExcel(query: QueryPurchaseOrderDto): Promise<Buffer> {
-    const purchaseOrders = (await this.findAll(query)) as any[];
+  async exportToExcel(
+    query: QueryPurchaseOrderDto,
+    user: User,
+  ): Promise<Buffer> {
+    const purchaseOrders = (await this.findAll(query, user)) as any[];
     const workbook = new ExcelJS.Workbook();
     const worksheet = workbook.addWorksheet('PurchaseOrders');
 
