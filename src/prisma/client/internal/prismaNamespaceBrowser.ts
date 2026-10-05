@@ -899,6 +899,7 @@ export const SalesOrderScalarFieldEnum = {
   description: 'description',
   totalAmount: 'totalAmount',
   discount: 'discount',
+  applyVat: 'applyVat',
   vatAmount: 'vatAmount',
   grandTotal: 'grandTotal',
   status: 'status',

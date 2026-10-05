@@ -12,6 +12,7 @@ import {
   Min,
   IsEmail,
   IsNumberString,
+  IsBoolean,
 } from 'class-validator';
 import { Type } from 'class-transformer';
 import { Currency, SalesOrderStatus } from '../prisma/client/client';
@@ -79,6 +80,11 @@ export class CreateSalesOrderDto {
   @IsOptional()
   @IsString({ message: 'Description must be a string' })
   description?: string;
+
+  @ApiProperty({ required: false, example: true, default: true })
+  @IsOptional()
+  @IsBoolean({ message: 'Apply VAT must be a boolean' })
+  applyVat?: boolean;
 
   @ApiProperty({ required: false, example: 0, default: 0 })
   @IsOptional()

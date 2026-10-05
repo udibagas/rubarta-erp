@@ -38,7 +38,7 @@ export class SalesOrdersService {
       0,
     );
 
-    const vatAmount = totalAmount * 0.11;
+    const vatAmount = salesOrderData.applyVat ? totalAmount * 0.11 : 0;
     const discount = salesOrderData.discount || 0;
     const grandTotal = totalAmount + vatAmount - discount;
 
@@ -417,7 +417,7 @@ export class SalesOrdersService {
         0,
       );
 
-      const vatAmount = totalAmount * 0.11;
+      const vatAmount = salesOrderData.applyVat ? totalAmount * 0.11 : 0;
       const discount = salesOrderData.discount || 0;
       const grandTotal = totalAmount + vatAmount - discount;
 

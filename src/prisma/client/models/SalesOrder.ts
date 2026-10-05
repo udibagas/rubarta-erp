@@ -59,6 +59,7 @@ export type SalesOrderMinAggregateOutputType = {
   description: string | null
   totalAmount: number | null
   discount: number | null
+  applyVat: boolean | null
   vatAmount: number | null
   grandTotal: number | null
   status: $Enums.SalesOrderStatus | null
@@ -95,6 +96,7 @@ export type SalesOrderMaxAggregateOutputType = {
   description: string | null
   totalAmount: number | null
   discount: number | null
+  applyVat: boolean | null
   vatAmount: number | null
   grandTotal: number | null
   status: $Enums.SalesOrderStatus | null
@@ -131,6 +133,7 @@ export type SalesOrderCountAggregateOutputType = {
   description: number
   totalAmount: number
   discount: number
+  applyVat: number
   vatAmount: number
   grandTotal: number
   status: number
@@ -193,6 +196,7 @@ export type SalesOrderMinAggregateInputType = {
   description?: true
   totalAmount?: true
   discount?: true
+  applyVat?: true
   vatAmount?: true
   grandTotal?: true
   status?: true
@@ -229,6 +233,7 @@ export type SalesOrderMaxAggregateInputType = {
   description?: true
   totalAmount?: true
   discount?: true
+  applyVat?: true
   vatAmount?: true
   grandTotal?: true
   status?: true
@@ -265,6 +270,7 @@ export type SalesOrderCountAggregateInputType = {
   description?: true
   totalAmount?: true
   discount?: true
+  applyVat?: true
   vatAmount?: true
   grandTotal?: true
   status?: true
@@ -388,6 +394,7 @@ export type SalesOrderGroupByOutputType = {
   description: string | null
   totalAmount: number
   discount: number
+  applyVat: boolean
   vatAmount: number
   grandTotal: number
   status: $Enums.SalesOrderStatus
@@ -447,6 +454,7 @@ export type SalesOrderWhereInput = {
   description?: Prisma.StringNullableFilter<"SalesOrder"> | string | null
   totalAmount?: Prisma.FloatFilter<"SalesOrder"> | number
   discount?: Prisma.FloatFilter<"SalesOrder"> | number
+  applyVat?: Prisma.BoolFilter<"SalesOrder"> | boolean
   vatAmount?: Prisma.FloatFilter<"SalesOrder"> | number
   grandTotal?: Prisma.FloatFilter<"SalesOrder"> | number
   status?: Prisma.EnumSalesOrderStatusFilter<"SalesOrder"> | $Enums.SalesOrderStatus
@@ -491,6 +499,7 @@ export type SalesOrderOrderByWithRelationInput = {
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   totalAmount?: Prisma.SortOrder
   discount?: Prisma.SortOrder
+  applyVat?: Prisma.SortOrder
   vatAmount?: Prisma.SortOrder
   grandTotal?: Prisma.SortOrder
   status?: Prisma.SortOrder
@@ -538,6 +547,7 @@ export type SalesOrderWhereUniqueInput = Prisma.AtLeast<{
   description?: Prisma.StringNullableFilter<"SalesOrder"> | string | null
   totalAmount?: Prisma.FloatFilter<"SalesOrder"> | number
   discount?: Prisma.FloatFilter<"SalesOrder"> | number
+  applyVat?: Prisma.BoolFilter<"SalesOrder"> | boolean
   vatAmount?: Prisma.FloatFilter<"SalesOrder"> | number
   grandTotal?: Prisma.FloatFilter<"SalesOrder"> | number
   status?: Prisma.EnumSalesOrderStatusFilter<"SalesOrder"> | $Enums.SalesOrderStatus
@@ -582,6 +592,7 @@ export type SalesOrderOrderByWithAggregationInput = {
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   totalAmount?: Prisma.SortOrder
   discount?: Prisma.SortOrder
+  applyVat?: Prisma.SortOrder
   vatAmount?: Prisma.SortOrder
   grandTotal?: Prisma.SortOrder
   status?: Prisma.SortOrder
@@ -626,6 +637,7 @@ export type SalesOrderScalarWhereWithAggregatesInput = {
   description?: Prisma.StringNullableWithAggregatesFilter<"SalesOrder"> | string | null
   totalAmount?: Prisma.FloatWithAggregatesFilter<"SalesOrder"> | number
   discount?: Prisma.FloatWithAggregatesFilter<"SalesOrder"> | number
+  applyVat?: Prisma.BoolWithAggregatesFilter<"SalesOrder"> | boolean
   vatAmount?: Prisma.FloatWithAggregatesFilter<"SalesOrder"> | number
   grandTotal?: Prisma.FloatWithAggregatesFilter<"SalesOrder"> | number
   status?: Prisma.EnumSalesOrderStatusWithAggregatesFilter<"SalesOrder"> | $Enums.SalesOrderStatus
@@ -661,6 +673,7 @@ export type SalesOrderCreateInput = {
   description?: string | null
   totalAmount: number
   discount?: number
+  applyVat?: boolean
   vatAmount?: number
   grandTotal: number
   status?: $Enums.SalesOrderStatus
@@ -701,6 +714,7 @@ export type SalesOrderUncheckedCreateInput = {
   description?: string | null
   totalAmount: number
   discount?: number
+  applyVat?: boolean
   vatAmount?: number
   grandTotal: number
   status?: $Enums.SalesOrderStatus
@@ -740,6 +754,7 @@ export type SalesOrderUpdateInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   discount?: Prisma.FloatFieldUpdateOperationsInput | number
+  applyVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
   status?: Prisma.EnumSalesOrderStatusFieldUpdateOperationsInput | $Enums.SalesOrderStatus
@@ -780,6 +795,7 @@ export type SalesOrderUncheckedUpdateInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   discount?: Prisma.FloatFieldUpdateOperationsInput | number
+  applyVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
   status?: Prisma.EnumSalesOrderStatusFieldUpdateOperationsInput | $Enums.SalesOrderStatus
@@ -820,6 +836,7 @@ export type SalesOrderCreateManyInput = {
   description?: string | null
   totalAmount: number
   discount?: number
+  applyVat?: boolean
   vatAmount?: number
   grandTotal: number
   status?: $Enums.SalesOrderStatus
@@ -855,6 +872,7 @@ export type SalesOrderUpdateManyMutationInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   discount?: Prisma.FloatFieldUpdateOperationsInput | number
+  applyVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
   status?: Prisma.EnumSalesOrderStatusFieldUpdateOperationsInput | $Enums.SalesOrderStatus
@@ -887,6 +905,7 @@ export type SalesOrderUncheckedUpdateManyInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   discount?: Prisma.FloatFieldUpdateOperationsInput | number
+  applyVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
   status?: Prisma.EnumSalesOrderStatusFieldUpdateOperationsInput | $Enums.SalesOrderStatus
@@ -943,6 +962,7 @@ export type SalesOrderCountOrderByAggregateInput = {
   description?: Prisma.SortOrder
   totalAmount?: Prisma.SortOrder
   discount?: Prisma.SortOrder
+  applyVat?: Prisma.SortOrder
   vatAmount?: Prisma.SortOrder
   grandTotal?: Prisma.SortOrder
   status?: Prisma.SortOrder
@@ -991,6 +1011,7 @@ export type SalesOrderMaxOrderByAggregateInput = {
   description?: Prisma.SortOrder
   totalAmount?: Prisma.SortOrder
   discount?: Prisma.SortOrder
+  applyVat?: Prisma.SortOrder
   vatAmount?: Prisma.SortOrder
   grandTotal?: Prisma.SortOrder
   status?: Prisma.SortOrder
@@ -1027,6 +1048,7 @@ export type SalesOrderMinOrderByAggregateInput = {
   description?: Prisma.SortOrder
   totalAmount?: Prisma.SortOrder
   discount?: Prisma.SortOrder
+  applyVat?: Prisma.SortOrder
   vatAmount?: Prisma.SortOrder
   grandTotal?: Prisma.SortOrder
   status?: Prisma.SortOrder
@@ -1304,6 +1326,7 @@ export type SalesOrderCreateWithoutCustomerInput = {
   description?: string | null
   totalAmount: number
   discount?: number
+  applyVat?: boolean
   vatAmount?: number
   grandTotal: number
   status?: $Enums.SalesOrderStatus
@@ -1343,6 +1366,7 @@ export type SalesOrderUncheckedCreateWithoutCustomerInput = {
   description?: string | null
   totalAmount: number
   discount?: number
+  applyVat?: boolean
   vatAmount?: number
   grandTotal: number
   status?: $Enums.SalesOrderStatus
@@ -1411,6 +1435,7 @@ export type SalesOrderScalarWhereInput = {
   description?: Prisma.StringNullableFilter<"SalesOrder"> | string | null
   totalAmount?: Prisma.FloatFilter<"SalesOrder"> | number
   discount?: Prisma.FloatFilter<"SalesOrder"> | number
+  applyVat?: Prisma.BoolFilter<"SalesOrder"> | boolean
   vatAmount?: Prisma.FloatFilter<"SalesOrder"> | number
   grandTotal?: Prisma.FloatFilter<"SalesOrder"> | number
   status?: Prisma.EnumSalesOrderStatusFilter<"SalesOrder"> | $Enums.SalesOrderStatus
@@ -1446,6 +1471,7 @@ export type SalesOrderCreateWithoutDeliveryOrdersInput = {
   description?: string | null
   totalAmount: number
   discount?: number
+  applyVat?: boolean
   vatAmount?: number
   grandTotal: number
   status?: $Enums.SalesOrderStatus
@@ -1485,6 +1511,7 @@ export type SalesOrderUncheckedCreateWithoutDeliveryOrdersInput = {
   description?: string | null
   totalAmount: number
   discount?: number
+  applyVat?: boolean
   vatAmount?: number
   grandTotal: number
   status?: $Enums.SalesOrderStatus
@@ -1539,6 +1566,7 @@ export type SalesOrderUpdateWithoutDeliveryOrdersInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   discount?: Prisma.FloatFieldUpdateOperationsInput | number
+  applyVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
   status?: Prisma.EnumSalesOrderStatusFieldUpdateOperationsInput | $Enums.SalesOrderStatus
@@ -1578,6 +1606,7 @@ export type SalesOrderUncheckedUpdateWithoutDeliveryOrdersInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   discount?: Prisma.FloatFieldUpdateOperationsInput | number
+  applyVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
   status?: Prisma.EnumSalesOrderStatusFieldUpdateOperationsInput | $Enums.SalesOrderStatus
@@ -1616,6 +1645,7 @@ export type SalesOrderCreateWithoutInvoicesInput = {
   description?: string | null
   totalAmount: number
   discount?: number
+  applyVat?: boolean
   vatAmount?: number
   grandTotal: number
   status?: $Enums.SalesOrderStatus
@@ -1655,6 +1685,7 @@ export type SalesOrderUncheckedCreateWithoutInvoicesInput = {
   description?: string | null
   totalAmount: number
   discount?: number
+  applyVat?: boolean
   vatAmount?: number
   grandTotal: number
   status?: $Enums.SalesOrderStatus
@@ -1709,6 +1740,7 @@ export type SalesOrderUpdateWithoutInvoicesInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   discount?: Prisma.FloatFieldUpdateOperationsInput | number
+  applyVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
   status?: Prisma.EnumSalesOrderStatusFieldUpdateOperationsInput | $Enums.SalesOrderStatus
@@ -1748,6 +1780,7 @@ export type SalesOrderUncheckedUpdateWithoutInvoicesInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   discount?: Prisma.FloatFieldUpdateOperationsInput | number
+  applyVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
   status?: Prisma.EnumSalesOrderStatusFieldUpdateOperationsInput | $Enums.SalesOrderStatus
@@ -1786,6 +1819,7 @@ export type SalesOrderCreateWithoutPurchaseOrdersInput = {
   description?: string | null
   totalAmount: number
   discount?: number
+  applyVat?: boolean
   vatAmount?: number
   grandTotal: number
   status?: $Enums.SalesOrderStatus
@@ -1825,6 +1859,7 @@ export type SalesOrderUncheckedCreateWithoutPurchaseOrdersInput = {
   description?: string | null
   totalAmount: number
   discount?: number
+  applyVat?: boolean
   vatAmount?: number
   grandTotal: number
   status?: $Enums.SalesOrderStatus
@@ -1879,6 +1914,7 @@ export type SalesOrderUpdateWithoutPurchaseOrdersInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   discount?: Prisma.FloatFieldUpdateOperationsInput | number
+  applyVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
   status?: Prisma.EnumSalesOrderStatusFieldUpdateOperationsInput | $Enums.SalesOrderStatus
@@ -1918,6 +1954,7 @@ export type SalesOrderUncheckedUpdateWithoutPurchaseOrdersInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   discount?: Prisma.FloatFieldUpdateOperationsInput | number
+  applyVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
   status?: Prisma.EnumSalesOrderStatusFieldUpdateOperationsInput | $Enums.SalesOrderStatus
@@ -1956,6 +1993,7 @@ export type SalesOrderCreateWithoutQuotationInput = {
   description?: string | null
   totalAmount: number
   discount?: number
+  applyVat?: boolean
   vatAmount?: number
   grandTotal: number
   status?: $Enums.SalesOrderStatus
@@ -1995,6 +2033,7 @@ export type SalesOrderUncheckedCreateWithoutQuotationInput = {
   description?: string | null
   totalAmount: number
   discount?: number
+  applyVat?: boolean
   vatAmount?: number
   grandTotal: number
   status?: $Enums.SalesOrderStatus
@@ -2059,6 +2098,7 @@ export type SalesOrderCreateWithoutSalesOrderItemsInput = {
   description?: string | null
   totalAmount: number
   discount?: number
+  applyVat?: boolean
   vatAmount?: number
   grandTotal: number
   status?: $Enums.SalesOrderStatus
@@ -2098,6 +2138,7 @@ export type SalesOrderUncheckedCreateWithoutSalesOrderItemsInput = {
   description?: string | null
   totalAmount: number
   discount?: number
+  applyVat?: boolean
   vatAmount?: number
   grandTotal: number
   status?: $Enums.SalesOrderStatus
@@ -2152,6 +2193,7 @@ export type SalesOrderUpdateWithoutSalesOrderItemsInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   discount?: Prisma.FloatFieldUpdateOperationsInput | number
+  applyVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
   status?: Prisma.EnumSalesOrderStatusFieldUpdateOperationsInput | $Enums.SalesOrderStatus
@@ -2191,6 +2233,7 @@ export type SalesOrderUncheckedUpdateWithoutSalesOrderItemsInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   discount?: Prisma.FloatFieldUpdateOperationsInput | number
+  applyVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
   status?: Prisma.EnumSalesOrderStatusFieldUpdateOperationsInput | $Enums.SalesOrderStatus
@@ -2229,6 +2272,7 @@ export type SalesOrderCreateWithoutCompanyInput = {
   description?: string | null
   totalAmount: number
   discount?: number
+  applyVat?: boolean
   vatAmount?: number
   grandTotal: number
   status?: $Enums.SalesOrderStatus
@@ -2268,6 +2312,7 @@ export type SalesOrderUncheckedCreateWithoutCompanyInput = {
   description?: string | null
   totalAmount: number
   discount?: number
+  applyVat?: boolean
   vatAmount?: number
   grandTotal: number
   status?: $Enums.SalesOrderStatus
@@ -2332,6 +2377,7 @@ export type SalesOrderCreateWithoutUserInput = {
   description?: string | null
   totalAmount: number
   discount?: number
+  applyVat?: boolean
   vatAmount?: number
   grandTotal: number
   status?: $Enums.SalesOrderStatus
@@ -2371,6 +2417,7 @@ export type SalesOrderUncheckedCreateWithoutUserInput = {
   description?: string | null
   totalAmount: number
   discount?: number
+  applyVat?: boolean
   vatAmount?: number
   grandTotal: number
   status?: $Enums.SalesOrderStatus
@@ -2436,6 +2483,7 @@ export type SalesOrderCreateManyCustomerInput = {
   description?: string | null
   totalAmount: number
   discount?: number
+  applyVat?: boolean
   vatAmount?: number
   grandTotal: number
   status?: $Enums.SalesOrderStatus
@@ -2470,6 +2518,7 @@ export type SalesOrderUpdateWithoutCustomerInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   discount?: Prisma.FloatFieldUpdateOperationsInput | number
+  applyVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
   status?: Prisma.EnumSalesOrderStatusFieldUpdateOperationsInput | $Enums.SalesOrderStatus
@@ -2509,6 +2558,7 @@ export type SalesOrderUncheckedUpdateWithoutCustomerInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   discount?: Prisma.FloatFieldUpdateOperationsInput | number
+  applyVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
   status?: Prisma.EnumSalesOrderStatusFieldUpdateOperationsInput | $Enums.SalesOrderStatus
@@ -2548,6 +2598,7 @@ export type SalesOrderUncheckedUpdateManyWithoutCustomerInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   discount?: Prisma.FloatFieldUpdateOperationsInput | number
+  applyVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
   status?: Prisma.EnumSalesOrderStatusFieldUpdateOperationsInput | $Enums.SalesOrderStatus
@@ -2583,6 +2634,7 @@ export type SalesOrderCreateManyQuotationInput = {
   description?: string | null
   totalAmount: number
   discount?: number
+  applyVat?: boolean
   vatAmount?: number
   grandTotal: number
   status?: $Enums.SalesOrderStatus
@@ -2617,6 +2669,7 @@ export type SalesOrderUpdateWithoutQuotationInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   discount?: Prisma.FloatFieldUpdateOperationsInput | number
+  applyVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
   status?: Prisma.EnumSalesOrderStatusFieldUpdateOperationsInput | $Enums.SalesOrderStatus
@@ -2656,6 +2709,7 @@ export type SalesOrderUncheckedUpdateWithoutQuotationInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   discount?: Prisma.FloatFieldUpdateOperationsInput | number
+  applyVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
   status?: Prisma.EnumSalesOrderStatusFieldUpdateOperationsInput | $Enums.SalesOrderStatus
@@ -2695,6 +2749,7 @@ export type SalesOrderUncheckedUpdateManyWithoutQuotationInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   discount?: Prisma.FloatFieldUpdateOperationsInput | number
+  applyVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
   status?: Prisma.EnumSalesOrderStatusFieldUpdateOperationsInput | $Enums.SalesOrderStatus
@@ -2730,6 +2785,7 @@ export type SalesOrderCreateManyCompanyInput = {
   description?: string | null
   totalAmount: number
   discount?: number
+  applyVat?: boolean
   vatAmount?: number
   grandTotal: number
   status?: $Enums.SalesOrderStatus
@@ -2764,6 +2820,7 @@ export type SalesOrderUpdateWithoutCompanyInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   discount?: Prisma.FloatFieldUpdateOperationsInput | number
+  applyVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
   status?: Prisma.EnumSalesOrderStatusFieldUpdateOperationsInput | $Enums.SalesOrderStatus
@@ -2803,6 +2860,7 @@ export type SalesOrderUncheckedUpdateWithoutCompanyInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   discount?: Prisma.FloatFieldUpdateOperationsInput | number
+  applyVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
   status?: Prisma.EnumSalesOrderStatusFieldUpdateOperationsInput | $Enums.SalesOrderStatus
@@ -2842,6 +2900,7 @@ export type SalesOrderUncheckedUpdateManyWithoutCompanyInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   discount?: Prisma.FloatFieldUpdateOperationsInput | number
+  applyVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
   status?: Prisma.EnumSalesOrderStatusFieldUpdateOperationsInput | $Enums.SalesOrderStatus
@@ -2877,6 +2936,7 @@ export type SalesOrderCreateManyUserInput = {
   description?: string | null
   totalAmount: number
   discount?: number
+  applyVat?: boolean
   vatAmount?: number
   grandTotal: number
   status?: $Enums.SalesOrderStatus
@@ -2911,6 +2971,7 @@ export type SalesOrderUpdateWithoutUserInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   discount?: Prisma.FloatFieldUpdateOperationsInput | number
+  applyVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
   status?: Prisma.EnumSalesOrderStatusFieldUpdateOperationsInput | $Enums.SalesOrderStatus
@@ -2950,6 +3011,7 @@ export type SalesOrderUncheckedUpdateWithoutUserInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   discount?: Prisma.FloatFieldUpdateOperationsInput | number
+  applyVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
   status?: Prisma.EnumSalesOrderStatusFieldUpdateOperationsInput | $Enums.SalesOrderStatus
@@ -2989,6 +3051,7 @@ export type SalesOrderUncheckedUpdateManyWithoutUserInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   discount?: Prisma.FloatFieldUpdateOperationsInput | number
+  applyVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
   status?: Prisma.EnumSalesOrderStatusFieldUpdateOperationsInput | $Enums.SalesOrderStatus
@@ -3082,6 +3145,7 @@ export type SalesOrderSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   description?: boolean
   totalAmount?: boolean
   discount?: boolean
+  applyVat?: boolean
   vatAmount?: boolean
   grandTotal?: boolean
   status?: boolean
@@ -3127,6 +3191,7 @@ export type SalesOrderSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ex
   description?: boolean
   totalAmount?: boolean
   discount?: boolean
+  applyVat?: boolean
   vatAmount?: boolean
   grandTotal?: boolean
   status?: boolean
@@ -3167,6 +3232,7 @@ export type SalesOrderSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ex
   description?: boolean
   totalAmount?: boolean
   discount?: boolean
+  applyVat?: boolean
   vatAmount?: boolean
   grandTotal?: boolean
   status?: boolean
@@ -3207,6 +3273,7 @@ export type SalesOrderSelectScalar = {
   description?: boolean
   totalAmount?: boolean
   discount?: boolean
+  applyVat?: boolean
   vatAmount?: boolean
   grandTotal?: boolean
   status?: boolean
@@ -3234,7 +3301,7 @@ export type SalesOrderSelectScalar = {
   companyId?: boolean
 }
 
-export type SalesOrderOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "number" | "referenceNumber" | "date" | "title" | "description" | "totalAmount" | "discount" | "vatAmount" | "grandTotal" | "status" | "currency" | "shippingAddress" | "billingAddress" | "termOfPayment" | "deliveryDate" | "deliveryMethod" | "termsAndConditions" | "termOfDelivery" | "paymentMethod" | "requestType" | "notes" | "deletedAt" | "customerAddress" | "contactPerson" | "contactPhone" | "contactEmail" | "createdAt" | "updatedAt" | "quotationId" | "customerId" | "userId" | "companyId", ExtArgs["result"]["salesOrder"]>
+export type SalesOrderOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "number" | "referenceNumber" | "date" | "title" | "description" | "totalAmount" | "discount" | "applyVat" | "vatAmount" | "grandTotal" | "status" | "currency" | "shippingAddress" | "billingAddress" | "termOfPayment" | "deliveryDate" | "deliveryMethod" | "termsAndConditions" | "termOfDelivery" | "paymentMethod" | "requestType" | "notes" | "deletedAt" | "customerAddress" | "contactPerson" | "contactPhone" | "contactEmail" | "createdAt" | "updatedAt" | "quotationId" | "customerId" | "userId" | "companyId", ExtArgs["result"]["salesOrder"]>
 export type SalesOrderInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   Customer?: boolean | Prisma.CustomerDefaultArgs<ExtArgs>
   User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -3280,6 +3347,7 @@ export type $SalesOrderPayload<ExtArgs extends runtime.Types.Extensions.Internal
     description: string | null
     totalAmount: number
     discount: number
+    applyVat: boolean
     vatAmount: number
     grandTotal: number
     status: $Enums.SalesOrderStatus
@@ -3744,6 +3812,7 @@ export interface SalesOrderFieldRefs {
   readonly description: Prisma.FieldRef<"SalesOrder", 'String'>
   readonly totalAmount: Prisma.FieldRef<"SalesOrder", 'Float'>
   readonly discount: Prisma.FieldRef<"SalesOrder", 'Float'>
+  readonly applyVat: Prisma.FieldRef<"SalesOrder", 'Boolean'>
   readonly vatAmount: Prisma.FieldRef<"SalesOrder", 'Float'>
   readonly grandTotal: Prisma.FieldRef<"SalesOrder", 'Float'>
   readonly status: Prisma.FieldRef<"SalesOrder", 'SalesOrderStatus'>
