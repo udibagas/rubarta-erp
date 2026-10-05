@@ -81,7 +81,7 @@ export function generatePurchaseOrderPdf(order: any): Promise<Buffer> {
     const left = doc.page.margins.left;
     const right = doc.page.width - doc.page.margins.right;
     const width = right - left;
-    const infoBoxWidth = 200;
+    const infoBoxWidth = 215;
     const infoBoxX = right - infoBoxWidth;
     const contentTop = 220;
     const infoRows: [string, string][] = [
@@ -167,7 +167,7 @@ export function generatePurchaseOrderPdf(order: any): Promise<Buffer> {
             property: 'property',
             padding: [0, 0, 0, 5],
           },
-          { label: 'Value', width: 120, property: 'value' },
+          { label: 'Value', width: 135, property: 'value' },
         ],
         data: infoRows.map(([label, value]) => ({
           property: `bold:${label}`,
