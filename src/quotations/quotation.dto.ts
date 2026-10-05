@@ -12,6 +12,7 @@ import {
   Min,
   IsEmail,
   IsNumberString,
+  IsBoolean,
 } from 'class-validator';
 import { Type } from 'class-transformer';
 import { QuotationStatus, Currency } from '../prisma/client/client';
@@ -101,6 +102,11 @@ export class CreateQuotationDto {
   @ApiProperty({ example: '2025-06-25' })
   @IsDateString()
   validUntil: string;
+
+  @ApiProperty({ required: false, example: true, default: true })
+  @IsOptional()
+  @IsBoolean()
+  applyVat?: boolean;
 
   @ApiProperty({ required: false, example: 0, default: 0 })
   @IsOptional()

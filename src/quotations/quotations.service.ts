@@ -42,7 +42,7 @@ export class QuotationsService {
       0,
     );
 
-    const vatAmount = totalAmount * 0.11;
+    const vatAmount = quotationData.applyVat ? totalAmount * 0.11 : 0;
     const discount = quotationData.discount || 0;
     const grandTotal = totalAmount + vatAmount - discount;
 
@@ -165,7 +165,7 @@ export class QuotationsService {
         0,
       );
 
-      const vatAmount = totalAmount * 0.11;
+      const vatAmount = quotationData.applyVat ? totalAmount * 0.11 : 0;
       const discount = quotationData.discount || 0;
       const grandTotal = totalAmount + vatAmount - discount;
 

@@ -60,6 +60,7 @@ export type QuotationMinAggregateOutputType = {
   description: string | null
   totalAmount: number | null
   discount: number | null
+  applyVat: boolean | null
   vatAmount: number | null
   grandTotal: number | null
   status: $Enums.QuotationStatus | null
@@ -95,6 +96,7 @@ export type QuotationMaxAggregateOutputType = {
   description: string | null
   totalAmount: number | null
   discount: number | null
+  applyVat: boolean | null
   vatAmount: number | null
   grandTotal: number | null
   status: $Enums.QuotationStatus | null
@@ -130,6 +132,7 @@ export type QuotationCountAggregateOutputType = {
   description: number
   totalAmount: number
   discount: number
+  applyVat: number
   vatAmount: number
   grandTotal: number
   status: number
@@ -194,6 +197,7 @@ export type QuotationMinAggregateInputType = {
   description?: true
   totalAmount?: true
   discount?: true
+  applyVat?: true
   vatAmount?: true
   grandTotal?: true
   status?: true
@@ -229,6 +233,7 @@ export type QuotationMaxAggregateInputType = {
   description?: true
   totalAmount?: true
   discount?: true
+  applyVat?: true
   vatAmount?: true
   grandTotal?: true
   status?: true
@@ -264,6 +269,7 @@ export type QuotationCountAggregateInputType = {
   description?: true
   totalAmount?: true
   discount?: true
+  applyVat?: true
   vatAmount?: true
   grandTotal?: true
   status?: true
@@ -387,6 +393,7 @@ export type QuotationGroupByOutputType = {
   description: string | null
   totalAmount: number
   discount: number
+  applyVat: boolean
   vatAmount: number
   grandTotal: number
   status: $Enums.QuotationStatus
@@ -446,6 +453,7 @@ export type QuotationWhereInput = {
   description?: Prisma.StringNullableFilter<"Quotation"> | string | null
   totalAmount?: Prisma.FloatFilter<"Quotation"> | number
   discount?: Prisma.FloatFilter<"Quotation"> | number
+  applyVat?: Prisma.BoolFilter<"Quotation"> | boolean
   vatAmount?: Prisma.FloatFilter<"Quotation"> | number
   grandTotal?: Prisma.FloatFilter<"Quotation"> | number
   status?: Prisma.EnumQuotationStatusFilter<"Quotation"> | $Enums.QuotationStatus
@@ -488,6 +496,7 @@ export type QuotationOrderByWithRelationInput = {
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   totalAmount?: Prisma.SortOrder
   discount?: Prisma.SortOrder
+  applyVat?: Prisma.SortOrder
   vatAmount?: Prisma.SortOrder
   grandTotal?: Prisma.SortOrder
   status?: Prisma.SortOrder
@@ -533,6 +542,7 @@ export type QuotationWhereUniqueInput = Prisma.AtLeast<{
   description?: Prisma.StringNullableFilter<"Quotation"> | string | null
   totalAmount?: Prisma.FloatFilter<"Quotation"> | number
   discount?: Prisma.FloatFilter<"Quotation"> | number
+  applyVat?: Prisma.BoolFilter<"Quotation"> | boolean
   vatAmount?: Prisma.FloatFilter<"Quotation"> | number
   grandTotal?: Prisma.FloatFilter<"Quotation"> | number
   status?: Prisma.EnumQuotationStatusFilter<"Quotation"> | $Enums.QuotationStatus
@@ -575,6 +585,7 @@ export type QuotationOrderByWithAggregationInput = {
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   totalAmount?: Prisma.SortOrder
   discount?: Prisma.SortOrder
+  applyVat?: Prisma.SortOrder
   vatAmount?: Prisma.SortOrder
   grandTotal?: Prisma.SortOrder
   status?: Prisma.SortOrder
@@ -619,6 +630,7 @@ export type QuotationScalarWhereWithAggregatesInput = {
   description?: Prisma.StringNullableWithAggregatesFilter<"Quotation"> | string | null
   totalAmount?: Prisma.FloatWithAggregatesFilter<"Quotation"> | number
   discount?: Prisma.FloatWithAggregatesFilter<"Quotation"> | number
+  applyVat?: Prisma.BoolWithAggregatesFilter<"Quotation"> | boolean
   vatAmount?: Prisma.FloatWithAggregatesFilter<"Quotation"> | number
   grandTotal?: Prisma.FloatWithAggregatesFilter<"Quotation"> | number
   status?: Prisma.EnumQuotationStatusWithAggregatesFilter<"Quotation"> | $Enums.QuotationStatus
@@ -654,6 +666,7 @@ export type QuotationCreateInput = {
   description?: string | null
   totalAmount: number
   discount?: number
+  applyVat?: boolean
   vatAmount?: number
   grandTotal: number
   status?: $Enums.QuotationStatus
@@ -692,6 +705,7 @@ export type QuotationUncheckedCreateInput = {
   description?: string | null
   totalAmount: number
   discount?: number
+  applyVat?: boolean
   vatAmount?: number
   grandTotal: number
   status?: $Enums.QuotationStatus
@@ -729,6 +743,7 @@ export type QuotationUpdateInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   discount?: Prisma.FloatFieldUpdateOperationsInput | number
+  applyVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
   status?: Prisma.EnumQuotationStatusFieldUpdateOperationsInput | $Enums.QuotationStatus
@@ -767,6 +782,7 @@ export type QuotationUncheckedUpdateInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   discount?: Prisma.FloatFieldUpdateOperationsInput | number
+  applyVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
   status?: Prisma.EnumQuotationStatusFieldUpdateOperationsInput | $Enums.QuotationStatus
@@ -805,6 +821,7 @@ export type QuotationCreateManyInput = {
   description?: string | null
   totalAmount: number
   discount?: number
+  applyVat?: boolean
   vatAmount?: number
   grandTotal: number
   status?: $Enums.QuotationStatus
@@ -840,6 +857,7 @@ export type QuotationUpdateManyMutationInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   discount?: Prisma.FloatFieldUpdateOperationsInput | number
+  applyVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
   status?: Prisma.EnumQuotationStatusFieldUpdateOperationsInput | $Enums.QuotationStatus
@@ -872,6 +890,7 @@ export type QuotationUncheckedUpdateManyInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   discount?: Prisma.FloatFieldUpdateOperationsInput | number
+  applyVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
   status?: Prisma.EnumQuotationStatusFieldUpdateOperationsInput | $Enums.QuotationStatus
@@ -918,6 +937,7 @@ export type QuotationCountOrderByAggregateInput = {
   description?: Prisma.SortOrder
   totalAmount?: Prisma.SortOrder
   discount?: Prisma.SortOrder
+  applyVat?: Prisma.SortOrder
   vatAmount?: Prisma.SortOrder
   grandTotal?: Prisma.SortOrder
   status?: Prisma.SortOrder
@@ -967,6 +987,7 @@ export type QuotationMaxOrderByAggregateInput = {
   description?: Prisma.SortOrder
   totalAmount?: Prisma.SortOrder
   discount?: Prisma.SortOrder
+  applyVat?: Prisma.SortOrder
   vatAmount?: Prisma.SortOrder
   grandTotal?: Prisma.SortOrder
   status?: Prisma.SortOrder
@@ -1002,6 +1023,7 @@ export type QuotationMinOrderByAggregateInput = {
   description?: Prisma.SortOrder
   totalAmount?: Prisma.SortOrder
   discount?: Prisma.SortOrder
+  applyVat?: Prisma.SortOrder
   vatAmount?: Prisma.SortOrder
   grandTotal?: Prisma.SortOrder
   status?: Prisma.SortOrder
@@ -1261,6 +1283,7 @@ export type QuotationCreateWithoutOpportunityInput = {
   description?: string | null
   totalAmount: number
   discount?: number
+  applyVat?: boolean
   vatAmount?: number
   grandTotal: number
   status?: $Enums.QuotationStatus
@@ -1298,6 +1321,7 @@ export type QuotationUncheckedCreateWithoutOpportunityInput = {
   description?: string | null
   totalAmount: number
   discount?: number
+  applyVat?: boolean
   vatAmount?: number
   grandTotal: number
   status?: $Enums.QuotationStatus
@@ -1364,6 +1388,7 @@ export type QuotationScalarWhereInput = {
   description?: Prisma.StringNullableFilter<"Quotation"> | string | null
   totalAmount?: Prisma.FloatFilter<"Quotation"> | number
   discount?: Prisma.FloatFilter<"Quotation"> | number
+  applyVat?: Prisma.BoolFilter<"Quotation"> | boolean
   vatAmount?: Prisma.FloatFilter<"Quotation"> | number
   grandTotal?: Prisma.FloatFilter<"Quotation"> | number
   status?: Prisma.EnumQuotationStatusFilter<"Quotation"> | $Enums.QuotationStatus
@@ -1399,6 +1424,7 @@ export type QuotationCreateWithoutCustomerInput = {
   description?: string | null
   totalAmount: number
   discount?: number
+  applyVat?: boolean
   vatAmount?: number
   grandTotal: number
   status?: $Enums.QuotationStatus
@@ -1436,6 +1462,7 @@ export type QuotationUncheckedCreateWithoutCustomerInput = {
   description?: string | null
   totalAmount: number
   discount?: number
+  applyVat?: boolean
   vatAmount?: number
   grandTotal: number
   status?: $Enums.QuotationStatus
@@ -1498,6 +1525,7 @@ export type QuotationCreateWithoutQuotationItemsInput = {
   description?: string | null
   totalAmount: number
   discount?: number
+  applyVat?: boolean
   vatAmount?: number
   grandTotal: number
   status?: $Enums.QuotationStatus
@@ -1535,6 +1563,7 @@ export type QuotationUncheckedCreateWithoutQuotationItemsInput = {
   description?: string | null
   totalAmount: number
   discount?: number
+  applyVat?: boolean
   vatAmount?: number
   grandTotal: number
   status?: $Enums.QuotationStatus
@@ -1587,6 +1616,7 @@ export type QuotationUpdateWithoutQuotationItemsInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   discount?: Prisma.FloatFieldUpdateOperationsInput | number
+  applyVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
   status?: Prisma.EnumQuotationStatusFieldUpdateOperationsInput | $Enums.QuotationStatus
@@ -1624,6 +1654,7 @@ export type QuotationUncheckedUpdateWithoutQuotationItemsInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   discount?: Prisma.FloatFieldUpdateOperationsInput | number
+  applyVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
   status?: Prisma.EnumQuotationStatusFieldUpdateOperationsInput | $Enums.QuotationStatus
@@ -1660,6 +1691,7 @@ export type QuotationCreateWithoutSalesOrdersInput = {
   description?: string | null
   totalAmount: number
   discount?: number
+  applyVat?: boolean
   vatAmount?: number
   grandTotal: number
   status?: $Enums.QuotationStatus
@@ -1697,6 +1729,7 @@ export type QuotationUncheckedCreateWithoutSalesOrdersInput = {
   description?: string | null
   totalAmount: number
   discount?: number
+  applyVat?: boolean
   vatAmount?: number
   grandTotal: number
   status?: $Enums.QuotationStatus
@@ -1749,6 +1782,7 @@ export type QuotationUpdateWithoutSalesOrdersInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   discount?: Prisma.FloatFieldUpdateOperationsInput | number
+  applyVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
   status?: Prisma.EnumQuotationStatusFieldUpdateOperationsInput | $Enums.QuotationStatus
@@ -1786,6 +1820,7 @@ export type QuotationUncheckedUpdateWithoutSalesOrdersInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   discount?: Prisma.FloatFieldUpdateOperationsInput | number
+  applyVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
   status?: Prisma.EnumQuotationStatusFieldUpdateOperationsInput | $Enums.QuotationStatus
@@ -1822,6 +1857,7 @@ export type QuotationCreateWithoutCompanyInput = {
   description?: string | null
   totalAmount: number
   discount?: number
+  applyVat?: boolean
   vatAmount?: number
   grandTotal: number
   status?: $Enums.QuotationStatus
@@ -1859,6 +1895,7 @@ export type QuotationUncheckedCreateWithoutCompanyInput = {
   description?: string | null
   totalAmount: number
   discount?: number
+  applyVat?: boolean
   vatAmount?: number
   grandTotal: number
   status?: $Enums.QuotationStatus
@@ -1921,6 +1958,7 @@ export type QuotationCreateWithoutUserInput = {
   description?: string | null
   totalAmount: number
   discount?: number
+  applyVat?: boolean
   vatAmount?: number
   grandTotal: number
   status?: $Enums.QuotationStatus
@@ -1958,6 +1996,7 @@ export type QuotationUncheckedCreateWithoutUserInput = {
   description?: string | null
   totalAmount: number
   discount?: number
+  applyVat?: boolean
   vatAmount?: number
   grandTotal: number
   status?: $Enums.QuotationStatus
@@ -2021,6 +2060,7 @@ export type QuotationCreateManyOpportunityInput = {
   description?: string | null
   totalAmount: number
   discount?: number
+  applyVat?: boolean
   vatAmount?: number
   grandTotal: number
   status?: $Enums.QuotationStatus
@@ -2055,6 +2095,7 @@ export type QuotationUpdateWithoutOpportunityInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   discount?: Prisma.FloatFieldUpdateOperationsInput | number
+  applyVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
   status?: Prisma.EnumQuotationStatusFieldUpdateOperationsInput | $Enums.QuotationStatus
@@ -2092,6 +2133,7 @@ export type QuotationUncheckedUpdateWithoutOpportunityInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   discount?: Prisma.FloatFieldUpdateOperationsInput | number
+  applyVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
   status?: Prisma.EnumQuotationStatusFieldUpdateOperationsInput | $Enums.QuotationStatus
@@ -2129,6 +2171,7 @@ export type QuotationUncheckedUpdateManyWithoutOpportunityInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   discount?: Prisma.FloatFieldUpdateOperationsInput | number
+  applyVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
   status?: Prisma.EnumQuotationStatusFieldUpdateOperationsInput | $Enums.QuotationStatus
@@ -2164,6 +2207,7 @@ export type QuotationCreateManyCustomerInput = {
   description?: string | null
   totalAmount: number
   discount?: number
+  applyVat?: boolean
   vatAmount?: number
   grandTotal: number
   status?: $Enums.QuotationStatus
@@ -2198,6 +2242,7 @@ export type QuotationUpdateWithoutCustomerInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   discount?: Prisma.FloatFieldUpdateOperationsInput | number
+  applyVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
   status?: Prisma.EnumQuotationStatusFieldUpdateOperationsInput | $Enums.QuotationStatus
@@ -2235,6 +2280,7 @@ export type QuotationUncheckedUpdateWithoutCustomerInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   discount?: Prisma.FloatFieldUpdateOperationsInput | number
+  applyVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
   status?: Prisma.EnumQuotationStatusFieldUpdateOperationsInput | $Enums.QuotationStatus
@@ -2272,6 +2318,7 @@ export type QuotationUncheckedUpdateManyWithoutCustomerInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   discount?: Prisma.FloatFieldUpdateOperationsInput | number
+  applyVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
   status?: Prisma.EnumQuotationStatusFieldUpdateOperationsInput | $Enums.QuotationStatus
@@ -2307,6 +2354,7 @@ export type QuotationCreateManyCompanyInput = {
   description?: string | null
   totalAmount: number
   discount?: number
+  applyVat?: boolean
   vatAmount?: number
   grandTotal: number
   status?: $Enums.QuotationStatus
@@ -2341,6 +2389,7 @@ export type QuotationUpdateWithoutCompanyInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   discount?: Prisma.FloatFieldUpdateOperationsInput | number
+  applyVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
   status?: Prisma.EnumQuotationStatusFieldUpdateOperationsInput | $Enums.QuotationStatus
@@ -2378,6 +2427,7 @@ export type QuotationUncheckedUpdateWithoutCompanyInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   discount?: Prisma.FloatFieldUpdateOperationsInput | number
+  applyVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
   status?: Prisma.EnumQuotationStatusFieldUpdateOperationsInput | $Enums.QuotationStatus
@@ -2415,6 +2465,7 @@ export type QuotationUncheckedUpdateManyWithoutCompanyInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   discount?: Prisma.FloatFieldUpdateOperationsInput | number
+  applyVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
   status?: Prisma.EnumQuotationStatusFieldUpdateOperationsInput | $Enums.QuotationStatus
@@ -2450,6 +2501,7 @@ export type QuotationCreateManyUserInput = {
   description?: string | null
   totalAmount: number
   discount?: number
+  applyVat?: boolean
   vatAmount?: number
   grandTotal: number
   status?: $Enums.QuotationStatus
@@ -2484,6 +2536,7 @@ export type QuotationUpdateWithoutUserInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   discount?: Prisma.FloatFieldUpdateOperationsInput | number
+  applyVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
   status?: Prisma.EnumQuotationStatusFieldUpdateOperationsInput | $Enums.QuotationStatus
@@ -2521,6 +2574,7 @@ export type QuotationUncheckedUpdateWithoutUserInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   discount?: Prisma.FloatFieldUpdateOperationsInput | number
+  applyVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
   status?: Prisma.EnumQuotationStatusFieldUpdateOperationsInput | $Enums.QuotationStatus
@@ -2558,6 +2612,7 @@ export type QuotationUncheckedUpdateManyWithoutUserInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   discount?: Prisma.FloatFieldUpdateOperationsInput | number
+  applyVat?: Prisma.BoolFieldUpdateOperationsInput | boolean
   vatAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
   status?: Prisma.EnumQuotationStatusFieldUpdateOperationsInput | $Enums.QuotationStatus
@@ -2633,6 +2688,7 @@ export type QuotationSelect<ExtArgs extends runtime.Types.Extensions.InternalArg
   description?: boolean
   totalAmount?: boolean
   discount?: boolean
+  applyVat?: boolean
   vatAmount?: boolean
   grandTotal?: boolean
   status?: boolean
@@ -2676,6 +2732,7 @@ export type QuotationSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ext
   description?: boolean
   totalAmount?: boolean
   discount?: boolean
+  applyVat?: boolean
   vatAmount?: boolean
   grandTotal?: boolean
   status?: boolean
@@ -2716,6 +2773,7 @@ export type QuotationSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ext
   description?: boolean
   totalAmount?: boolean
   discount?: boolean
+  applyVat?: boolean
   vatAmount?: boolean
   grandTotal?: boolean
   status?: boolean
@@ -2756,6 +2814,7 @@ export type QuotationSelectScalar = {
   description?: boolean
   totalAmount?: boolean
   discount?: boolean
+  applyVat?: boolean
   vatAmount?: boolean
   grandTotal?: boolean
   status?: boolean
@@ -2784,7 +2843,7 @@ export type QuotationSelectScalar = {
   companyId?: boolean
 }
 
-export type QuotationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "number" | "date" | "title" | "description" | "totalAmount" | "discount" | "vatAmount" | "grandTotal" | "status" | "currency" | "validity" | "validUntil" | "sentDate" | "acceptedDate" | "deletedAt" | "notes" | "attachments" | "termOfPayment" | "termsAndConditions" | "termOfDelivery" | "paymentMethod" | "requestType" | "customerAddress" | "contactPerson" | "contactPhone" | "contactEmail" | "createdAt" | "updatedAt" | "customerId" | "userId" | "opportunityId" | "companyId", ExtArgs["result"]["quotation"]>
+export type QuotationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "number" | "date" | "title" | "description" | "totalAmount" | "discount" | "applyVat" | "vatAmount" | "grandTotal" | "status" | "currency" | "validity" | "validUntil" | "sentDate" | "acceptedDate" | "deletedAt" | "notes" | "attachments" | "termOfPayment" | "termsAndConditions" | "termOfDelivery" | "paymentMethod" | "requestType" | "customerAddress" | "contactPerson" | "contactPhone" | "contactEmail" | "createdAt" | "updatedAt" | "customerId" | "userId" | "opportunityId" | "companyId", ExtArgs["result"]["quotation"]>
 export type QuotationInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   Opportunity?: boolean | Prisma.Quotation$OpportunityArgs<ExtArgs>
   Customer?: boolean | Prisma.CustomerDefaultArgs<ExtArgs>
@@ -2825,6 +2884,7 @@ export type $QuotationPayload<ExtArgs extends runtime.Types.Extensions.InternalA
     description: string | null
     totalAmount: number
     discount: number
+    applyVat: boolean
     vatAmount: number
     grandTotal: number
     status: $Enums.QuotationStatus
@@ -3287,6 +3347,7 @@ export interface QuotationFieldRefs {
   readonly description: Prisma.FieldRef<"Quotation", 'String'>
   readonly totalAmount: Prisma.FieldRef<"Quotation", 'Float'>
   readonly discount: Prisma.FieldRef<"Quotation", 'Float'>
+  readonly applyVat: Prisma.FieldRef<"Quotation", 'Boolean'>
   readonly vatAmount: Prisma.FieldRef<"Quotation", 'Float'>
   readonly grandTotal: Prisma.FieldRef<"Quotation", 'Float'>
   readonly status: Prisma.FieldRef<"Quotation", 'QuotationStatus'>

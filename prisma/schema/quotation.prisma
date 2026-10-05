@@ -6,6 +6,7 @@ model Quotation {
   description        String?         @db.Text
   totalAmount        Float
   discount           Float           @default(0)
+  applyVat           Boolean         @default(true)
   vatAmount          Float           @default(0)
   grandTotal         Float
   status             QuotationStatus @default(Draft)
