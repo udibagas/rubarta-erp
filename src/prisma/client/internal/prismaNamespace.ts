@@ -4699,6 +4699,7 @@ export const NkpScalarFieldEnum = {
   purchaseOrderId: 'purchaseOrderId',
   goodsReceiptId: 'goodsReceiptId',
   bankAccount: 'bankAccount',
+  bankAccountHolder: 'bankAccountHolder',
   currency: 'currency',
   bankRefNo: 'bankRefNo',
   grandTotal: 'grandTotal',

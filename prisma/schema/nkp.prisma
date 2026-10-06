@@ -25,9 +25,10 @@ model Nkp {
   GoodsReceipt  GoodsReceipt?  @relation(fields: [goodsReceiptId], references: [id])
 
   // bank related
-  bankAccount String   @db.VarChar(30)
-  currency    Currency @default(IDR)
-  bankRefNo   String?  @db.VarChar(100)
+  bankAccount       String   @db.VarChar(30)
+  bankAccountHolder String?  @db.VarChar(100)
+  currency          Currency @default(IDR)
+  bankRefNo         String?  @db.VarChar(100)
 
   // amount related
   grandTotal         Float  @db.DoublePrecision

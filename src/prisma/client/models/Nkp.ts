@@ -84,6 +84,7 @@ export type NkpMinAggregateOutputType = {
   purchaseOrderId: number | null
   goodsReceiptId: number | null
   bankAccount: string | null
+  bankAccountHolder: string | null
   currency: $Enums.Currency | null
   bankRefNo: string | null
   grandTotal: number | null
@@ -117,6 +118,7 @@ export type NkpMaxAggregateOutputType = {
   purchaseOrderId: number | null
   goodsReceiptId: number | null
   bankAccount: string | null
+  bankAccountHolder: string | null
   currency: $Enums.Currency | null
   bankRefNo: string | null
   grandTotal: number | null
@@ -150,6 +152,7 @@ export type NkpCountAggregateOutputType = {
   purchaseOrderId: number
   goodsReceiptId: number
   bankAccount: number
+  bankAccountHolder: number
   currency: number
   bankRefNo: number
   grandTotal: number
@@ -227,6 +230,7 @@ export type NkpMinAggregateInputType = {
   purchaseOrderId?: true
   goodsReceiptId?: true
   bankAccount?: true
+  bankAccountHolder?: true
   currency?: true
   bankRefNo?: true
   grandTotal?: true
@@ -260,6 +264,7 @@ export type NkpMaxAggregateInputType = {
   purchaseOrderId?: true
   goodsReceiptId?: true
   bankAccount?: true
+  bankAccountHolder?: true
   currency?: true
   bankRefNo?: true
   grandTotal?: true
@@ -293,6 +298,7 @@ export type NkpCountAggregateInputType = {
   purchaseOrderId?: true
   goodsReceiptId?: true
   bankAccount?: true
+  bankAccountHolder?: true
   currency?: true
   bankRefNo?: true
   grandTotal?: true
@@ -413,6 +419,7 @@ export type NkpGroupByOutputType = {
   purchaseOrderId: number | null
   goodsReceiptId: number | null
   bankAccount: string
+  bankAccountHolder: string | null
   currency: $Enums.Currency
   bankRefNo: string | null
   grandTotal: number
@@ -469,6 +476,7 @@ export type NkpWhereInput = {
   purchaseOrderId?: Prisma.IntNullableFilter<"Nkp"> | number | null
   goodsReceiptId?: Prisma.IntNullableFilter<"Nkp"> | number | null
   bankAccount?: Prisma.StringFilter<"Nkp"> | string
+  bankAccountHolder?: Prisma.StringNullableFilter<"Nkp"> | string | null
   currency?: Prisma.EnumCurrencyFilter<"Nkp"> | $Enums.Currency
   bankRefNo?: Prisma.StringNullableFilter<"Nkp"> | string | null
   grandTotal?: Prisma.FloatFilter<"Nkp"> | number
@@ -514,6 +522,7 @@ export type NkpOrderByWithRelationInput = {
   purchaseOrderId?: Prisma.SortOrderInput | Prisma.SortOrder
   goodsReceiptId?: Prisma.SortOrderInput | Prisma.SortOrder
   bankAccount?: Prisma.SortOrder
+  bankAccountHolder?: Prisma.SortOrderInput | Prisma.SortOrder
   currency?: Prisma.SortOrder
   bankRefNo?: Prisma.SortOrderInput | Prisma.SortOrder
   grandTotal?: Prisma.SortOrder
@@ -563,6 +572,7 @@ export type NkpWhereUniqueInput = Prisma.AtLeast<{
   purchaseOrderId?: Prisma.IntNullableFilter<"Nkp"> | number | null
   goodsReceiptId?: Prisma.IntNullableFilter<"Nkp"> | number | null
   bankAccount?: Prisma.StringFilter<"Nkp"> | string
+  bankAccountHolder?: Prisma.StringNullableFilter<"Nkp"> | string | null
   currency?: Prisma.EnumCurrencyFilter<"Nkp"> | $Enums.Currency
   bankRefNo?: Prisma.StringNullableFilter<"Nkp"> | string | null
   grandTotal?: Prisma.FloatFilter<"Nkp"> | number
@@ -607,6 +617,7 @@ export type NkpOrderByWithAggregationInput = {
   purchaseOrderId?: Prisma.SortOrderInput | Prisma.SortOrder
   goodsReceiptId?: Prisma.SortOrderInput | Prisma.SortOrder
   bankAccount?: Prisma.SortOrder
+  bankAccountHolder?: Prisma.SortOrderInput | Prisma.SortOrder
   currency?: Prisma.SortOrder
   bankRefNo?: Prisma.SortOrderInput | Prisma.SortOrder
   grandTotal?: Prisma.SortOrder
@@ -648,6 +659,7 @@ export type NkpScalarWhereWithAggregatesInput = {
   purchaseOrderId?: Prisma.IntNullableWithAggregatesFilter<"Nkp"> | number | null
   goodsReceiptId?: Prisma.IntNullableWithAggregatesFilter<"Nkp"> | number | null
   bankAccount?: Prisma.StringWithAggregatesFilter<"Nkp"> | string
+  bankAccountHolder?: Prisma.StringNullableWithAggregatesFilter<"Nkp"> | string | null
   currency?: Prisma.EnumCurrencyWithAggregatesFilter<"Nkp"> | $Enums.Currency
   bankRefNo?: Prisma.StringNullableWithAggregatesFilter<"Nkp"> | string | null
   grandTotal?: Prisma.FloatWithAggregatesFilter<"Nkp"> | number
@@ -674,6 +686,7 @@ export type NkpCreateInput = {
   nkpType: $Enums.NkpType
   invoiceNumber?: string | null
   bankAccount: string
+  bankAccountHolder?: string | null
   currency?: $Enums.Currency
   bankRefNo?: string | null
   grandTotal: number
@@ -717,6 +730,7 @@ export type NkpUncheckedCreateInput = {
   purchaseOrderId?: number | null
   goodsReceiptId?: number | null
   bankAccount: string
+  bankAccountHolder?: string | null
   currency?: $Enums.Currency
   bankRefNo?: string | null
   grandTotal: number
@@ -747,6 +761,7 @@ export type NkpUpdateInput = {
   nkpType?: Prisma.EnumNkpTypeFieldUpdateOperationsInput | $Enums.NkpType
   invoiceNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bankAccount?: Prisma.StringFieldUpdateOperationsInput | string
+  bankAccountHolder?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   bankRefNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -790,6 +805,7 @@ export type NkpUncheckedUpdateInput = {
   purchaseOrderId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   goodsReceiptId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   bankAccount?: Prisma.StringFieldUpdateOperationsInput | string
+  bankAccountHolder?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   bankRefNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -827,6 +843,7 @@ export type NkpCreateManyInput = {
   purchaseOrderId?: number | null
   goodsReceiptId?: number | null
   bankAccount: string
+  bankAccountHolder?: string | null
   currency?: $Enums.Currency
   bankRefNo?: string | null
   grandTotal: number
@@ -853,6 +870,7 @@ export type NkpUpdateManyMutationInput = {
   nkpType?: Prisma.EnumNkpTypeFieldUpdateOperationsInput | $Enums.NkpType
   invoiceNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bankAccount?: Prisma.StringFieldUpdateOperationsInput | string
+  bankAccountHolder?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   bankRefNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -884,6 +902,7 @@ export type NkpUncheckedUpdateManyInput = {
   purchaseOrderId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   goodsReceiptId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   bankAccount?: Prisma.StringFieldUpdateOperationsInput | string
+  bankAccountHolder?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   bankRefNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -932,6 +951,7 @@ export type NkpCountOrderByAggregateInput = {
   purchaseOrderId?: Prisma.SortOrder
   goodsReceiptId?: Prisma.SortOrder
   bankAccount?: Prisma.SortOrder
+  bankAccountHolder?: Prisma.SortOrder
   currency?: Prisma.SortOrder
   bankRefNo?: Prisma.SortOrder
   grandTotal?: Prisma.SortOrder
@@ -986,6 +1006,7 @@ export type NkpMaxOrderByAggregateInput = {
   purchaseOrderId?: Prisma.SortOrder
   goodsReceiptId?: Prisma.SortOrder
   bankAccount?: Prisma.SortOrder
+  bankAccountHolder?: Prisma.SortOrder
   currency?: Prisma.SortOrder
   bankRefNo?: Prisma.SortOrder
   grandTotal?: Prisma.SortOrder
@@ -1019,6 +1040,7 @@ export type NkpMinOrderByAggregateInput = {
   purchaseOrderId?: Prisma.SortOrder
   goodsReceiptId?: Prisma.SortOrder
   bankAccount?: Prisma.SortOrder
+  bankAccountHolder?: Prisma.SortOrder
   currency?: Prisma.SortOrder
   bankRefNo?: Prisma.SortOrder
   grandTotal?: Prisma.SortOrder
@@ -1465,6 +1487,7 @@ export type NkpCreateWithoutGoodsReceiptInput = {
   nkpType: $Enums.NkpType
   invoiceNumber?: string | null
   bankAccount: string
+  bankAccountHolder?: string | null
   currency?: $Enums.Currency
   bankRefNo?: string | null
   grandTotal: number
@@ -1506,6 +1529,7 @@ export type NkpUncheckedCreateWithoutGoodsReceiptInput = {
   bankId: number
   purchaseOrderId?: number | null
   bankAccount: string
+  bankAccountHolder?: string | null
   currency?: $Enums.Currency
   bankRefNo?: string | null
   grandTotal: number
@@ -1572,6 +1596,7 @@ export type NkpScalarWhereInput = {
   purchaseOrderId?: Prisma.IntNullableFilter<"Nkp"> | number | null
   goodsReceiptId?: Prisma.IntNullableFilter<"Nkp"> | number | null
   bankAccount?: Prisma.StringFilter<"Nkp"> | string
+  bankAccountHolder?: Prisma.StringNullableFilter<"Nkp"> | string | null
   currency?: Prisma.EnumCurrencyFilter<"Nkp"> | $Enums.Currency
   bankRefNo?: Prisma.StringNullableFilter<"Nkp"> | string | null
   grandTotal?: Prisma.FloatFilter<"Nkp"> | number
@@ -1598,6 +1623,7 @@ export type NkpCreateWithoutChildInput = {
   nkpType: $Enums.NkpType
   invoiceNumber?: string | null
   bankAccount: string
+  bankAccountHolder?: string | null
   currency?: $Enums.Currency
   bankRefNo?: string | null
   grandTotal: number
@@ -1640,6 +1666,7 @@ export type NkpUncheckedCreateWithoutChildInput = {
   purchaseOrderId?: number | null
   goodsReceiptId?: number | null
   bankAccount: string
+  bankAccountHolder?: string | null
   currency?: $Enums.Currency
   bankRefNo?: string | null
   grandTotal: number
@@ -1674,6 +1701,7 @@ export type NkpCreateWithoutParentInput = {
   nkpType: $Enums.NkpType
   invoiceNumber?: string | null
   bankAccount: string
+  bankAccountHolder?: string | null
   currency?: $Enums.Currency
   bankRefNo?: string | null
   grandTotal: number
@@ -1716,6 +1744,7 @@ export type NkpUncheckedCreateWithoutParentInput = {
   purchaseOrderId?: number | null
   goodsReceiptId?: number | null
   bankAccount: string
+  bankAccountHolder?: string | null
   currency?: $Enums.Currency
   bankRefNo?: string | null
   grandTotal: number
@@ -1761,6 +1790,7 @@ export type NkpUpdateWithoutChildInput = {
   nkpType?: Prisma.EnumNkpTypeFieldUpdateOperationsInput | $Enums.NkpType
   invoiceNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bankAccount?: Prisma.StringFieldUpdateOperationsInput | string
+  bankAccountHolder?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   bankRefNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -1803,6 +1833,7 @@ export type NkpUncheckedUpdateWithoutChildInput = {
   purchaseOrderId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   goodsReceiptId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   bankAccount?: Prisma.StringFieldUpdateOperationsInput | string
+  bankAccountHolder?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   bankRefNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -1843,6 +1874,7 @@ export type NkpUpdateWithoutParentInput = {
   nkpType?: Prisma.EnumNkpTypeFieldUpdateOperationsInput | $Enums.NkpType
   invoiceNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bankAccount?: Prisma.StringFieldUpdateOperationsInput | string
+  bankAccountHolder?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   bankRefNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -1885,6 +1917,7 @@ export type NkpUncheckedUpdateWithoutParentInput = {
   purchaseOrderId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   goodsReceiptId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   bankAccount?: Prisma.StringFieldUpdateOperationsInput | string
+  bankAccountHolder?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   bankRefNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -1914,6 +1947,7 @@ export type NkpCreateWithoutNkpItemInput = {
   nkpType: $Enums.NkpType
   invoiceNumber?: string | null
   bankAccount: string
+  bankAccountHolder?: string | null
   currency?: $Enums.Currency
   bankRefNo?: string | null
   grandTotal: number
@@ -1956,6 +1990,7 @@ export type NkpUncheckedCreateWithoutNkpItemInput = {
   purchaseOrderId?: number | null
   goodsReceiptId?: number | null
   bankAccount: string
+  bankAccountHolder?: string | null
   currency?: $Enums.Currency
   bankRefNo?: string | null
   grandTotal: number
@@ -2001,6 +2036,7 @@ export type NkpUpdateWithoutNkpItemInput = {
   nkpType?: Prisma.EnumNkpTypeFieldUpdateOperationsInput | $Enums.NkpType
   invoiceNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bankAccount?: Prisma.StringFieldUpdateOperationsInput | string
+  bankAccountHolder?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   bankRefNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -2043,6 +2079,7 @@ export type NkpUncheckedUpdateWithoutNkpItemInput = {
   purchaseOrderId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   goodsReceiptId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   bankAccount?: Prisma.StringFieldUpdateOperationsInput | string
+  bankAccountHolder?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   bankRefNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -2072,6 +2109,7 @@ export type NkpCreateWithoutNkpApprovalInput = {
   nkpType: $Enums.NkpType
   invoiceNumber?: string | null
   bankAccount: string
+  bankAccountHolder?: string | null
   currency?: $Enums.Currency
   bankRefNo?: string | null
   grandTotal: number
@@ -2114,6 +2152,7 @@ export type NkpUncheckedCreateWithoutNkpApprovalInput = {
   purchaseOrderId?: number | null
   goodsReceiptId?: number | null
   bankAccount: string
+  bankAccountHolder?: string | null
   currency?: $Enums.Currency
   bankRefNo?: string | null
   grandTotal: number
@@ -2159,6 +2198,7 @@ export type NkpUpdateWithoutNkpApprovalInput = {
   nkpType?: Prisma.EnumNkpTypeFieldUpdateOperationsInput | $Enums.NkpType
   invoiceNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bankAccount?: Prisma.StringFieldUpdateOperationsInput | string
+  bankAccountHolder?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   bankRefNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -2201,6 +2241,7 @@ export type NkpUncheckedUpdateWithoutNkpApprovalInput = {
   purchaseOrderId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   goodsReceiptId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   bankAccount?: Prisma.StringFieldUpdateOperationsInput | string
+  bankAccountHolder?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   bankRefNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -2230,6 +2271,7 @@ export type NkpCreateWithoutNkpAttachmentInput = {
   nkpType: $Enums.NkpType
   invoiceNumber?: string | null
   bankAccount: string
+  bankAccountHolder?: string | null
   currency?: $Enums.Currency
   bankRefNo?: string | null
   grandTotal: number
@@ -2272,6 +2314,7 @@ export type NkpUncheckedCreateWithoutNkpAttachmentInput = {
   purchaseOrderId?: number | null
   goodsReceiptId?: number | null
   bankAccount: string
+  bankAccountHolder?: string | null
   currency?: $Enums.Currency
   bankRefNo?: string | null
   grandTotal: number
@@ -2317,6 +2360,7 @@ export type NkpUpdateWithoutNkpAttachmentInput = {
   nkpType?: Prisma.EnumNkpTypeFieldUpdateOperationsInput | $Enums.NkpType
   invoiceNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bankAccount?: Prisma.StringFieldUpdateOperationsInput | string
+  bankAccountHolder?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   bankRefNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -2359,6 +2403,7 @@ export type NkpUncheckedUpdateWithoutNkpAttachmentInput = {
   purchaseOrderId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   goodsReceiptId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   bankAccount?: Prisma.StringFieldUpdateOperationsInput | string
+  bankAccountHolder?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   bankRefNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -2388,6 +2433,7 @@ export type NkpCreateWithoutPurchaseOrderInput = {
   nkpType: $Enums.NkpType
   invoiceNumber?: string | null
   bankAccount: string
+  bankAccountHolder?: string | null
   currency?: $Enums.Currency
   bankRefNo?: string | null
   grandTotal: number
@@ -2429,6 +2475,7 @@ export type NkpUncheckedCreateWithoutPurchaseOrderInput = {
   bankId: number
   goodsReceiptId?: number | null
   bankAccount: string
+  bankAccountHolder?: string | null
   currency?: $Enums.Currency
   bankRefNo?: string | null
   grandTotal: number
@@ -2485,6 +2532,7 @@ export type NkpCreateWithoutCompanyInput = {
   nkpType: $Enums.NkpType
   invoiceNumber?: string | null
   bankAccount: string
+  bankAccountHolder?: string | null
   currency?: $Enums.Currency
   bankRefNo?: string | null
   grandTotal: number
@@ -2527,6 +2575,7 @@ export type NkpUncheckedCreateWithoutCompanyInput = {
   purchaseOrderId?: number | null
   goodsReceiptId?: number | null
   bankAccount: string
+  bankAccountHolder?: string | null
   currency?: $Enums.Currency
   bankRefNo?: string | null
   grandTotal: number
@@ -2582,6 +2631,7 @@ export type NkpCreateWithoutBankInput = {
   nkpType: $Enums.NkpType
   invoiceNumber?: string | null
   bankAccount: string
+  bankAccountHolder?: string | null
   currency?: $Enums.Currency
   bankRefNo?: string | null
   grandTotal: number
@@ -2623,6 +2673,7 @@ export type NkpUncheckedCreateWithoutBankInput = {
   purchaseOrderId?: number | null
   goodsReceiptId?: number | null
   bankAccount: string
+  bankAccountHolder?: string | null
   currency?: $Enums.Currency
   bankRefNo?: string | null
   grandTotal: number
@@ -2679,6 +2730,7 @@ export type NkpCreateWithoutSupplierInput = {
   nkpType: $Enums.NkpType
   invoiceNumber?: string | null
   bankAccount: string
+  bankAccountHolder?: string | null
   currency?: $Enums.Currency
   bankRefNo?: string | null
   grandTotal: number
@@ -2720,6 +2772,7 @@ export type NkpUncheckedCreateWithoutSupplierInput = {
   purchaseOrderId?: number | null
   goodsReceiptId?: number | null
   bankAccount: string
+  bankAccountHolder?: string | null
   currency?: $Enums.Currency
   bankRefNo?: string | null
   grandTotal: number
@@ -2776,6 +2829,7 @@ export type NkpCreateWithoutEmployeeInput = {
   nkpType: $Enums.NkpType
   invoiceNumber?: string | null
   bankAccount: string
+  bankAccountHolder?: string | null
   currency?: $Enums.Currency
   bankRefNo?: string | null
   grandTotal: number
@@ -2817,6 +2871,7 @@ export type NkpUncheckedCreateWithoutEmployeeInput = {
   purchaseOrderId?: number | null
   goodsReceiptId?: number | null
   bankAccount: string
+  bankAccountHolder?: string | null
   currency?: $Enums.Currency
   bankRefNo?: string | null
   grandTotal: number
@@ -2857,6 +2912,7 @@ export type NkpCreateWithoutRequesterInput = {
   nkpType: $Enums.NkpType
   invoiceNumber?: string | null
   bankAccount: string
+  bankAccountHolder?: string | null
   currency?: $Enums.Currency
   bankRefNo?: string | null
   grandTotal: number
@@ -2898,6 +2954,7 @@ export type NkpUncheckedCreateWithoutRequesterInput = {
   purchaseOrderId?: number | null
   goodsReceiptId?: number | null
   bankAccount: string
+  bankAccountHolder?: string | null
   currency?: $Enums.Currency
   bankRefNo?: string | null
   grandTotal: number
@@ -2976,6 +3033,7 @@ export type NkpCreateManyGoodsReceiptInput = {
   bankId: number
   purchaseOrderId?: number | null
   bankAccount: string
+  bankAccountHolder?: string | null
   currency?: $Enums.Currency
   bankRefNo?: string | null
   grandTotal: number
@@ -3002,6 +3060,7 @@ export type NkpUpdateWithoutGoodsReceiptInput = {
   nkpType?: Prisma.EnumNkpTypeFieldUpdateOperationsInput | $Enums.NkpType
   invoiceNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bankAccount?: Prisma.StringFieldUpdateOperationsInput | string
+  bankAccountHolder?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   bankRefNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -3043,6 +3102,7 @@ export type NkpUncheckedUpdateWithoutGoodsReceiptInput = {
   bankId?: Prisma.IntFieldUpdateOperationsInput | number
   purchaseOrderId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   bankAccount?: Prisma.StringFieldUpdateOperationsInput | string
+  bankAccountHolder?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   bankRefNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -3079,6 +3139,7 @@ export type NkpUncheckedUpdateManyWithoutGoodsReceiptInput = {
   bankId?: Prisma.IntFieldUpdateOperationsInput | number
   purchaseOrderId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   bankAccount?: Prisma.StringFieldUpdateOperationsInput | string
+  bankAccountHolder?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   bankRefNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -3111,6 +3172,7 @@ export type NkpCreateManyPurchaseOrderInput = {
   bankId: number
   goodsReceiptId?: number | null
   bankAccount: string
+  bankAccountHolder?: string | null
   currency?: $Enums.Currency
   bankRefNo?: string | null
   grandTotal: number
@@ -3137,6 +3199,7 @@ export type NkpUpdateWithoutPurchaseOrderInput = {
   nkpType?: Prisma.EnumNkpTypeFieldUpdateOperationsInput | $Enums.NkpType
   invoiceNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bankAccount?: Prisma.StringFieldUpdateOperationsInput | string
+  bankAccountHolder?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   bankRefNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -3178,6 +3241,7 @@ export type NkpUncheckedUpdateWithoutPurchaseOrderInput = {
   bankId?: Prisma.IntFieldUpdateOperationsInput | number
   goodsReceiptId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   bankAccount?: Prisma.StringFieldUpdateOperationsInput | string
+  bankAccountHolder?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   bankRefNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -3214,6 +3278,7 @@ export type NkpUncheckedUpdateManyWithoutPurchaseOrderInput = {
   bankId?: Prisma.IntFieldUpdateOperationsInput | number
   goodsReceiptId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   bankAccount?: Prisma.StringFieldUpdateOperationsInput | string
+  bankAccountHolder?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   bankRefNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -3247,6 +3312,7 @@ export type NkpCreateManyCompanyInput = {
   purchaseOrderId?: number | null
   goodsReceiptId?: number | null
   bankAccount: string
+  bankAccountHolder?: string | null
   currency?: $Enums.Currency
   bankRefNo?: string | null
   grandTotal: number
@@ -3272,6 +3338,7 @@ export type NkpUpdateWithoutCompanyInput = {
   nkpType?: Prisma.EnumNkpTypeFieldUpdateOperationsInput | $Enums.NkpType
   invoiceNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bankAccount?: Prisma.StringFieldUpdateOperationsInput | string
+  bankAccountHolder?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   bankRefNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -3314,6 +3381,7 @@ export type NkpUncheckedUpdateWithoutCompanyInput = {
   purchaseOrderId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   goodsReceiptId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   bankAccount?: Prisma.StringFieldUpdateOperationsInput | string
+  bankAccountHolder?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   bankRefNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -3350,6 +3418,7 @@ export type NkpUncheckedUpdateManyWithoutCompanyInput = {
   purchaseOrderId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   goodsReceiptId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   bankAccount?: Prisma.StringFieldUpdateOperationsInput | string
+  bankAccountHolder?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   bankRefNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -3381,6 +3450,7 @@ export type NkpCreateManyBankInput = {
   purchaseOrderId?: number | null
   goodsReceiptId?: number | null
   bankAccount: string
+  bankAccountHolder?: string | null
   currency?: $Enums.Currency
   bankRefNo?: string | null
   grandTotal: number
@@ -3407,6 +3477,7 @@ export type NkpUpdateWithoutBankInput = {
   nkpType?: Prisma.EnumNkpTypeFieldUpdateOperationsInput | $Enums.NkpType
   invoiceNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bankAccount?: Prisma.StringFieldUpdateOperationsInput | string
+  bankAccountHolder?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   bankRefNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -3448,6 +3519,7 @@ export type NkpUncheckedUpdateWithoutBankInput = {
   purchaseOrderId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   goodsReceiptId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   bankAccount?: Prisma.StringFieldUpdateOperationsInput | string
+  bankAccountHolder?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   bankRefNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -3484,6 +3556,7 @@ export type NkpUncheckedUpdateManyWithoutBankInput = {
   purchaseOrderId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   goodsReceiptId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   bankAccount?: Prisma.StringFieldUpdateOperationsInput | string
+  bankAccountHolder?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   bankRefNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -3516,6 +3589,7 @@ export type NkpCreateManySupplierInput = {
   purchaseOrderId?: number | null
   goodsReceiptId?: number | null
   bankAccount: string
+  bankAccountHolder?: string | null
   currency?: $Enums.Currency
   bankRefNo?: string | null
   grandTotal: number
@@ -3542,6 +3616,7 @@ export type NkpUpdateWithoutSupplierInput = {
   nkpType?: Prisma.EnumNkpTypeFieldUpdateOperationsInput | $Enums.NkpType
   invoiceNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bankAccount?: Prisma.StringFieldUpdateOperationsInput | string
+  bankAccountHolder?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   bankRefNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -3583,6 +3658,7 @@ export type NkpUncheckedUpdateWithoutSupplierInput = {
   purchaseOrderId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   goodsReceiptId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   bankAccount?: Prisma.StringFieldUpdateOperationsInput | string
+  bankAccountHolder?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   bankRefNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -3619,6 +3695,7 @@ export type NkpUncheckedUpdateManyWithoutSupplierInput = {
   purchaseOrderId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   goodsReceiptId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   bankAccount?: Prisma.StringFieldUpdateOperationsInput | string
+  bankAccountHolder?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   bankRefNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -3651,6 +3728,7 @@ export type NkpCreateManyEmployeeInput = {
   purchaseOrderId?: number | null
   goodsReceiptId?: number | null
   bankAccount: string
+  bankAccountHolder?: string | null
   currency?: $Enums.Currency
   bankRefNo?: string | null
   grandTotal: number
@@ -3683,6 +3761,7 @@ export type NkpCreateManyRequesterInput = {
   purchaseOrderId?: number | null
   goodsReceiptId?: number | null
   bankAccount: string
+  bankAccountHolder?: string | null
   currency?: $Enums.Currency
   bankRefNo?: string | null
   grandTotal: number
@@ -3709,6 +3788,7 @@ export type NkpUpdateWithoutEmployeeInput = {
   nkpType?: Prisma.EnumNkpTypeFieldUpdateOperationsInput | $Enums.NkpType
   invoiceNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bankAccount?: Prisma.StringFieldUpdateOperationsInput | string
+  bankAccountHolder?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   bankRefNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -3750,6 +3830,7 @@ export type NkpUncheckedUpdateWithoutEmployeeInput = {
   purchaseOrderId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   goodsReceiptId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   bankAccount?: Prisma.StringFieldUpdateOperationsInput | string
+  bankAccountHolder?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   bankRefNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -3786,6 +3867,7 @@ export type NkpUncheckedUpdateManyWithoutEmployeeInput = {
   purchaseOrderId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   goodsReceiptId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   bankAccount?: Prisma.StringFieldUpdateOperationsInput | string
+  bankAccountHolder?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   bankRefNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -3812,6 +3894,7 @@ export type NkpUpdateWithoutRequesterInput = {
   nkpType?: Prisma.EnumNkpTypeFieldUpdateOperationsInput | $Enums.NkpType
   invoiceNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bankAccount?: Prisma.StringFieldUpdateOperationsInput | string
+  bankAccountHolder?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   bankRefNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -3853,6 +3936,7 @@ export type NkpUncheckedUpdateWithoutRequesterInput = {
   purchaseOrderId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   goodsReceiptId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   bankAccount?: Prisma.StringFieldUpdateOperationsInput | string
+  bankAccountHolder?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   bankRefNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -3889,6 +3973,7 @@ export type NkpUncheckedUpdateManyWithoutRequesterInput = {
   purchaseOrderId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   goodsReceiptId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   bankAccount?: Prisma.StringFieldUpdateOperationsInput | string
+  bankAccountHolder?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   bankRefNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -3971,6 +4056,7 @@ export type NkpSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = ru
   purchaseOrderId?: boolean
   goodsReceiptId?: boolean
   bankAccount?: boolean
+  bankAccountHolder?: boolean
   currency?: boolean
   bankRefNo?: boolean
   grandTotal?: boolean
@@ -4017,6 +4103,7 @@ export type NkpSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extension
   purchaseOrderId?: boolean
   goodsReceiptId?: boolean
   bankAccount?: boolean
+  bankAccountHolder?: boolean
   currency?: boolean
   bankRefNo?: boolean
   grandTotal?: boolean
@@ -4058,6 +4145,7 @@ export type NkpSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extension
   purchaseOrderId?: boolean
   goodsReceiptId?: boolean
   bankAccount?: boolean
+  bankAccountHolder?: boolean
   currency?: boolean
   bankRefNo?: boolean
   grandTotal?: boolean
@@ -4099,6 +4187,7 @@ export type NkpSelectScalar = {
   purchaseOrderId?: boolean
   goodsReceiptId?: boolean
   bankAccount?: boolean
+  bankAccountHolder?: boolean
   currency?: boolean
   bankRefNo?: boolean
   grandTotal?: boolean
@@ -4116,7 +4205,7 @@ export type NkpSelectScalar = {
   sourceBankId?: boolean
 }
 
-export type NkpOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "date" | "number" | "description" | "status" | "paymentType" | "nkpType" | "invoiceNumber" | "employeeId" | "requesterId" | "supplierId" | "bankId" | "purchaseOrderId" | "goodsReceiptId" | "bankAccount" | "currency" | "bankRefNo" | "grandTotal" | "deduction" | "tax" | "downPayment" | "cashAdvanceBalance" | "netAmount" | "finalPayment" | "totalAmount" | "createdAt" | "updatedAt" | "companyId" | "parentId" | "sourceBankId", ExtArgs["result"]["nkp"]>
+export type NkpOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "date" | "number" | "description" | "status" | "paymentType" | "nkpType" | "invoiceNumber" | "employeeId" | "requesterId" | "supplierId" | "bankId" | "purchaseOrderId" | "goodsReceiptId" | "bankAccount" | "bankAccountHolder" | "currency" | "bankRefNo" | "grandTotal" | "deduction" | "tax" | "downPayment" | "cashAdvanceBalance" | "netAmount" | "finalPayment" | "totalAmount" | "createdAt" | "updatedAt" | "companyId" | "parentId" | "sourceBankId", ExtArgs["result"]["nkp"]>
 export type NkpInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   Employee?: boolean | Prisma.Nkp$EmployeeArgs<ExtArgs>
   Requester?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -4185,6 +4274,7 @@ export type $NkpPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
     purchaseOrderId: number | null
     goodsReceiptId: number | null
     bankAccount: string
+    bankAccountHolder: string | null
     currency: $Enums.Currency
     bankRefNo: string | null
     grandTotal: number
@@ -4650,6 +4740,7 @@ export interface NkpFieldRefs {
   readonly purchaseOrderId: Prisma.FieldRef<"Nkp", 'Int'>
   readonly goodsReceiptId: Prisma.FieldRef<"Nkp", 'Int'>
   readonly bankAccount: Prisma.FieldRef<"Nkp", 'String'>
+  readonly bankAccountHolder: Prisma.FieldRef<"Nkp", 'String'>
   readonly currency: Prisma.FieldRef<"Nkp", 'Currency'>
   readonly bankRefNo: Prisma.FieldRef<"Nkp", 'String'>
   readonly grandTotal: Prisma.FieldRef<"Nkp", 'Float'>
