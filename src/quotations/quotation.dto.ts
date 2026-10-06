@@ -7,14 +7,14 @@ import {
   IsEnum,
   IsArray,
   ValidateNested,
-  IsDateString,
   MaxLength,
   Min,
   IsEmail,
   IsNumberString,
   IsBoolean,
+  IsDate,
 } from 'class-validator';
-import { Type } from 'class-transformer';
+import { Transform, Type } from 'class-transformer';
 import { QuotationStatus, Currency } from '../prisma/client/client';
 
 export class QuotationItemDto {
@@ -66,8 +66,9 @@ export class CreateQuotationDto {
   companyId?: number;
 
   @ApiProperty({ example: '2025-06-25' })
-  @IsDateString()
-  date: string;
+  @IsDate({ message: 'Invalid date' })
+  @Transform(({ value }) => (value ? new Date(value) : undefined))
+  date: Date;
 
   @ApiProperty({ example: 'Quotation for Office Equipment' })
   @IsString()
@@ -100,8 +101,9 @@ export class CreateQuotationDto {
   validity?: number;
 
   @ApiProperty({ example: '2025-06-25' })
-  @IsDateString()
-  validUntil: string;
+  @IsDate({ message: 'Invalid date' })
+  @Transform(({ value }) => (value ? new Date(value) : undefined))
+  validUntil: Date;
 
   @ApiProperty({ required: false, example: true, default: true })
   @IsOptional()

@@ -1,8 +1,8 @@
-import { Type } from 'class-transformer';
+import { Transform, Type } from 'class-transformer';
 import {
   ArrayMinSize,
   IsArray,
-  IsDateString,
+  IsDate,
   IsEnum,
   IsInt,
   IsNumber,
@@ -41,8 +41,9 @@ export class CreatePaymentDto {
   @IsEnum(PaymentDirection)
   direction: PaymentDirection;
 
-  @IsDateString()
-  date: string;
+  @IsDate({ message: 'Invalid date' })
+  @Transform(({ value }) => (value ? new Date(value) : undefined))
+  date: Date;
 
   @IsOptional()
   @IsEnum(PaymentMethod)

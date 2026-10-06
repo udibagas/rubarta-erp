@@ -1,6 +1,6 @@
-import { Type } from 'class-transformer';
+import { Transform, Type } from 'class-transformer';
 import {
-  IsDateString,
+  IsDate,
   IsNumber,
   IsOptional,
   IsString,
@@ -29,11 +29,13 @@ export class CreateVendorBillDto {
   @Min(1)
   purchaseOrderId?: number;
 
-  @IsDateString()
-  date: string;
+  @IsDate({ message: 'Invalid date' })
+  @Transform(({ value }) => (value ? new Date(value) : undefined))
+  date: Date;
 
-  @IsDateString()
-  dueDate: string;
+  @IsDate({ message: 'Invalid date' })
+  @Transform(({ value }) => (value ? new Date(value) : undefined))
+  dueDate: Date;
 
   @IsOptional()
   @IsString()

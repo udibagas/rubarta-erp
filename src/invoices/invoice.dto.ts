@@ -3,7 +3,6 @@ import {
   IsNotEmpty,
   IsInt,
   IsEnum,
-  IsDateString,
   IsNumber,
   IsOptional,
   IsArray,
@@ -15,8 +14,9 @@ import {
   IsEmail,
   MaxLength,
   IsBoolean,
+  IsDate,
 } from 'class-validator';
-import { Type } from 'class-transformer';
+import { Transform, Type } from 'class-transformer';
 import { ApiProperty, PartialType } from '@nestjs/swagger';
 import { JsonArray, JsonObject } from '@prisma/client/runtime/client';
 
@@ -44,11 +44,13 @@ export class CreateInvoiceDto {
   @IsInt({ message: 'Invalid company' })
   companyId?: number;
 
-  @IsDateString()
-  date: string;
+  @IsDate({ message: 'Invalid date' })
+  @Transform(({ value }) => (value ? new Date(value) : undefined))
+  date: Date;
 
-  @IsDateString()
-  dueDate: string;
+  @IsDate({ message: 'Invalid date' })
+  @Transform(({ value }) => (value ? new Date(value) : undefined))
+  dueDate: Date;
 
   @IsOptional()
   @IsString()
@@ -139,8 +141,9 @@ export class InvoiceStatusUpdateDto {
   receiptNumber?: string;
 
   @IsOptional()
-  @IsDateString()
-  receiptDate?: string;
+  @IsDate({ message: 'Invalid date' })
+  @Transform(({ value }) => (value ? new Date(value) : undefined))
+  receiptDate?: Date;
 
   @IsOptional()
   @IsObject({ each: true })

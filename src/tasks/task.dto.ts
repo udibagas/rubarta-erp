@@ -4,12 +4,12 @@ import {
   IsInt,
   IsOptional,
   IsEnum,
-  IsDateString,
+  IsDate,
   MaxLength,
-  IsBoolean,
   IsArray,
   IsNumberString,
 } from 'class-validator';
+import { Transform } from 'class-transformer';
 import { TaskStatus, TaskPriority } from '../prisma/client/client';
 
 export class CreateTaskDto {
@@ -45,9 +45,10 @@ export class CreateTaskDto {
   @IsString()
   description?: string;
 
-  @ApiProperty({ example: '2025-06-01T10:00:00Z' })
-  @IsDateString()
-  dueDate: string;
+  @ApiProperty({ example: '2025-06-01' })
+  @IsDate({ message: 'Invalid date' })
+  @Transform(({ value }) => (value ? new Date(value) : undefined))
+  dueDate: Date;
 
   @ApiProperty({
     enum: TaskPriority,

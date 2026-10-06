@@ -1,7 +1,6 @@
 import { ApiProperty, PartialType } from '@nestjs/swagger';
 import {
   IsArray,
-  IsDateString,
   IsEmail,
   IsEnum,
   IsInt,
@@ -13,8 +12,9 @@ import {
   Min,
   ValidateNested,
   IsNumberString,
+  IsDate,
 } from 'class-validator';
-import { Type } from 'class-transformer';
+import { Transform, Type } from 'class-transformer';
 import {
   Currency,
   PaymentStatus,
@@ -63,9 +63,10 @@ export class CreatePurchaseOrderDto {
   @IsString()
   orderType?: string;
 
-  @ApiProperty({ example: '2026-09-12T10:00:00Z' })
-  @IsDateString()
-  date: string;
+  @ApiProperty({ example: '2026-09-12' })
+  @IsDate({ message: 'Invalid date' })
+  @Transform(({ value }) => (value ? new Date(value) : undefined))
+  date: Date;
 
   @ApiProperty({ example: 'PO-REF-001' })
   @IsString()
@@ -130,8 +131,9 @@ export class CreatePurchaseOrderDto {
 
   @ApiProperty({ required: false })
   @IsOptional()
-  @IsDateString()
-  deliveryDate?: string;
+  @IsDate({ message: 'Invalid date' })
+  @Transform(({ value }) => (value ? new Date(value) : undefined))
+  deliveryDate?: Date;
 
   @ApiProperty({ required: false })
   @IsOptional()

@@ -1,8 +1,7 @@
-import { Type } from 'class-transformer';
+import { Transform, Type } from 'class-transformer';
 import { PartialType } from '@nestjs/swagger';
 import {
   IsBoolean,
-  IsDateString,
   IsEnum,
   IsNumber,
   IsOptional,
@@ -10,6 +9,7 @@ import {
   IsInt,
   Min,
   MinLength,
+  IsDate,
 } from 'class-validator';
 import { CashBankType, PaymentDirection } from '../prisma/client/client';
 
@@ -58,8 +58,9 @@ export class CreateBankTransactionDto {
   @Min(1)
   cashBankAccountId: number;
 
-  @IsDateString()
-  date: string;
+  @IsDate({ message: 'Invalid date' })
+  @Transform(({ value }) => (value ? new Date(value) : undefined))
+  date: Date;
 
   @IsString()
   @MinLength(1)

@@ -4,10 +4,9 @@ import {
   IsInt,
   IsOptional,
   IsEnum,
-  IsDateString,
   MaxLength,
   Min,
-  IsBoolean,
+  IsDate,
 } from 'class-validator';
 import { Transform, Type } from 'class-transformer';
 import { InteractionType } from '../prisma/client/client';
@@ -36,9 +35,10 @@ export class CreateInteractionDto {
   @IsEnum(InteractionType, { message: 'Invalid Interaction Type' })
   type: InteractionType;
 
-  @ApiProperty({ example: '2025-05-25T10:00:00Z' })
-  @IsDateString()
-  date: string;
+  @ApiProperty({ example: '2025-05-25' })
+  @IsDate({ message: 'Invalid date' })
+  @Transform(({ value }) => (value ? new Date(value) : undefined))
+  date: Date;
 
   @ApiProperty({ required: false, example: 60 })
   @IsOptional()

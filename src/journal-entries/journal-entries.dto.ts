@@ -1,8 +1,8 @@
-import { Type } from 'class-transformer';
+import { Transform, Type } from 'class-transformer';
 import {
   ArrayMinSize,
   IsArray,
-  IsDateString,
+  IsDate,
   IsEnum,
   IsInt,
   IsNumber,
@@ -45,8 +45,9 @@ export class CreateJournalEntryDto {
   @MinLength(1)
   number: string;
 
-  @IsDateString()
-  date: string;
+  @IsDate({ message: 'Invalid date' })
+  @Transform(({ value }) => (value ? new Date(value) : undefined))
+  date: Date;
 
   @IsString()
   @MinLength(1)
@@ -78,8 +79,9 @@ export class ReverseJournalEntryDto {
   @MinLength(1)
   number: string;
 
-  @IsDateString()
-  date: string;
+  @IsDate({ message: 'Invalid date' })
+  @Transform(({ value }) => (value ? new Date(value) : undefined))
+  date: Date;
 
   @Type(() => Number)
   @IsInt()

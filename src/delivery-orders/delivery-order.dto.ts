@@ -1,7 +1,7 @@
 import { ApiProperty, PartialType } from '@nestjs/swagger';
 import {
   IsArray,
-  IsDateString,
+  IsDate,
   IsEnum,
   IsInt,
   IsNotEmpty,
@@ -13,7 +13,7 @@ import {
   Min,
   ValidateNested,
 } from 'class-validator';
-import { Type } from 'class-transformer';
+import { Transform, Type } from 'class-transformer';
 import { JsonArray } from '@prisma/client/runtime/client';
 import { DeliveryOrderStatus } from '../prisma/client/client';
 
@@ -54,9 +54,10 @@ export class CreateDeliveryOrderDto {
   @IsInt({ message: 'Invalid company' })
   companyId: number;
 
-  @ApiProperty({ example: '2026-09-12T10:00:00Z' })
-  @IsDateString()
-  date: string;
+  @ApiProperty({ example: '2026-09-12' })
+  @IsDate({ message: 'Invalid date' })
+  @Transform(({ value }) => (value ? new Date(value) : undefined))
+  date: Date;
 
   @ApiProperty({ example: 1 })
   @IsInt({ message: 'Invalid SO number' })
