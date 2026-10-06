@@ -548,7 +548,7 @@ export class NkpService {
       where: { id },
     });
 
-    // this.policy.can('close', existingNkp, user);
+    this.policy.can('close', existingNkp, user);
     const { bankRefNo, attachments } = data;
 
     const request = await this.prisma.nkp.update({
