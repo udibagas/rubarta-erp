@@ -65,7 +65,19 @@ async function bootstrap() {
   app.use(
     helmet({
       crossOriginResourcePolicy: false, // biar bisa dapetin static content
-      contentSecurityPolicy: false,
+      contentSecurityPolicy: {
+        useDefaults: false,
+        directives: {
+          defaultSrc: ["'self'"],
+          frameAncestors: [
+            "'self'",
+            'http://localhost:4000',
+            'https://erp.rubarta.co.id',
+            'https://nkp.rubarta.co.id',
+          ],
+        },
+      },
+      // xFrameOptions: false, // allow embedding from the FE via iframe
     }),
   );
 
