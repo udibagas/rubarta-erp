@@ -3,6 +3,7 @@ import * as path from 'path';
 import PDFDocument from 'pdfkit';
 import { PDFDocument as PdfLibDocument, StandardFonts, rgb } from 'pdf-lib';
 import { createPdfDocumentWithTables } from 'pdfkit-table';
+import dayjs from 'dayjs';
 
 const LOGO_PATH = path.join(process.cwd(), 'logo.png');
 
@@ -24,8 +25,7 @@ const COLORS = {
 
 function formatDate(value?: Date | string | null) {
   if (!value) return '-';
-  const date = new Date(value);
-  return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
+  return dayjs(value).format('DD-MM-YYYY');
 }
 
 async function addPageNumbers(pdfBuffer: Buffer): Promise<Buffer> {
@@ -75,7 +75,7 @@ export function generateDeliveryOrderPdf(deliveryOrder: any): Promise<Buffer> {
     const left = doc.page.margins.left;
     const right = doc.page.width - doc.page.margins.right;
     const width = right - left;
-    const infoBoxWidth = 200;
+    const infoBoxWidth = 215;
     const infoBoxX = right - infoBoxWidth;
     const contentTop = 220;
     const infoRows: [string, string][] = [
@@ -135,7 +135,7 @@ export function generateDeliveryOrderPdf(deliveryOrder: any): Promise<Buffer> {
             property: 'property',
             padding: [0, 0, 0, 5],
           },
-          { label: 'Value', width: 120, property: 'value' },
+          { label: 'Value', width: 135, property: 'value' },
         ],
         data: infoRows.map(([label, value]) => ({
           property: `bold:${label}`,
