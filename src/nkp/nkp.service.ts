@@ -370,7 +370,7 @@ export class NkpService {
       },
     });
 
-    // this.policy.can('view', nkp, user);
+    this.policy.can('view', nkp, user);
     return nkp;
   }
 
