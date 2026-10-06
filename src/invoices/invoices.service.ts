@@ -55,8 +55,6 @@ export class InvoicesService {
         ? {}
         : { attachments: attachments as Prisma.InputJsonValue }),
       number,
-      date: new Date(invoiceFields.date),
-      dueDate: new Date(invoiceFields.dueDate),
       ...totals,
       status: InvoiceStatus.Draft,
       InvoiceItems: {
@@ -248,14 +246,6 @@ export class InvoicesService {
         ? {}
         : { attachments: attachments as Prisma.InputJsonValue }),
     };
-
-    if (invoiceData.date) {
-      updateData.date = new Date(invoiceData.date);
-    }
-
-    if (invoiceData.dueDate) {
-      updateData.dueDate = new Date(invoiceData.dueDate);
-    }
 
     if (
       invoice.status !== InvoiceStatus.Paid &&
