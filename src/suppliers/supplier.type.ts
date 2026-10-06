@@ -32,6 +32,9 @@ export class SupplierType {
   @Field()
   bankAccount: string;
 
+  @Field({ nullable: true })
+  bankAccountHolder?: string;
+
   @Field(() => Currency)
   currency: Currency;
 }
