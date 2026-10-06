@@ -463,7 +463,7 @@ export class NkpService {
       where: { id },
     });
 
-    // this.policy.can('delete', nkp, user);
+    this.policy.can('delete', nkp, user);
     return this.prisma.nkpItem.delete({
       where: { id: itemId },
     });
