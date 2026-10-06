@@ -95,11 +95,6 @@ export type BankTransaction = Prisma.BankTransactionModel
  */
 export type TaxRate = Prisma.TaxRateModel
 /**
- * Model Supplier
- * 
- */
-export type Supplier = Prisma.SupplierModel
-/**
  * Model Expense
  * 
  */
@@ -269,6 +264,11 @@ export type Department = Prisma.DepartmentModel
  * 
  */
 export type Bank = Prisma.BankModel
+/**
+ * Model Supplier
+ * 
+ */
+export type Supplier = Prisma.SupplierModel
 /**
  * Model User
  * 

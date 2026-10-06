@@ -1062,48 +1062,6 @@ export type NkpScalarRelationFilter = {
   isNot?: Prisma.NkpWhereInput
 }
 
-export type NkpCreateNestedManyWithoutSupplierInput = {
-  create?: Prisma.XOR<Prisma.NkpCreateWithoutSupplierInput, Prisma.NkpUncheckedCreateWithoutSupplierInput> | Prisma.NkpCreateWithoutSupplierInput[] | Prisma.NkpUncheckedCreateWithoutSupplierInput[]
-  connectOrCreate?: Prisma.NkpCreateOrConnectWithoutSupplierInput | Prisma.NkpCreateOrConnectWithoutSupplierInput[]
-  createMany?: Prisma.NkpCreateManySupplierInputEnvelope
-  connect?: Prisma.NkpWhereUniqueInput | Prisma.NkpWhereUniqueInput[]
-}
-
-export type NkpUncheckedCreateNestedManyWithoutSupplierInput = {
-  create?: Prisma.XOR<Prisma.NkpCreateWithoutSupplierInput, Prisma.NkpUncheckedCreateWithoutSupplierInput> | Prisma.NkpCreateWithoutSupplierInput[] | Prisma.NkpUncheckedCreateWithoutSupplierInput[]
-  connectOrCreate?: Prisma.NkpCreateOrConnectWithoutSupplierInput | Prisma.NkpCreateOrConnectWithoutSupplierInput[]
-  createMany?: Prisma.NkpCreateManySupplierInputEnvelope
-  connect?: Prisma.NkpWhereUniqueInput | Prisma.NkpWhereUniqueInput[]
-}
-
-export type NkpUpdateManyWithoutSupplierNestedInput = {
-  create?: Prisma.XOR<Prisma.NkpCreateWithoutSupplierInput, Prisma.NkpUncheckedCreateWithoutSupplierInput> | Prisma.NkpCreateWithoutSupplierInput[] | Prisma.NkpUncheckedCreateWithoutSupplierInput[]
-  connectOrCreate?: Prisma.NkpCreateOrConnectWithoutSupplierInput | Prisma.NkpCreateOrConnectWithoutSupplierInput[]
-  upsert?: Prisma.NkpUpsertWithWhereUniqueWithoutSupplierInput | Prisma.NkpUpsertWithWhereUniqueWithoutSupplierInput[]
-  createMany?: Prisma.NkpCreateManySupplierInputEnvelope
-  set?: Prisma.NkpWhereUniqueInput | Prisma.NkpWhereUniqueInput[]
-  disconnect?: Prisma.NkpWhereUniqueInput | Prisma.NkpWhereUniqueInput[]
-  delete?: Prisma.NkpWhereUniqueInput | Prisma.NkpWhereUniqueInput[]
-  connect?: Prisma.NkpWhereUniqueInput | Prisma.NkpWhereUniqueInput[]
-  update?: Prisma.NkpUpdateWithWhereUniqueWithoutSupplierInput | Prisma.NkpUpdateWithWhereUniqueWithoutSupplierInput[]
-  updateMany?: Prisma.NkpUpdateManyWithWhereWithoutSupplierInput | Prisma.NkpUpdateManyWithWhereWithoutSupplierInput[]
-  deleteMany?: Prisma.NkpScalarWhereInput | Prisma.NkpScalarWhereInput[]
-}
-
-export type NkpUncheckedUpdateManyWithoutSupplierNestedInput = {
-  create?: Prisma.XOR<Prisma.NkpCreateWithoutSupplierInput, Prisma.NkpUncheckedCreateWithoutSupplierInput> | Prisma.NkpCreateWithoutSupplierInput[] | Prisma.NkpUncheckedCreateWithoutSupplierInput[]
-  connectOrCreate?: Prisma.NkpCreateOrConnectWithoutSupplierInput | Prisma.NkpCreateOrConnectWithoutSupplierInput[]
-  upsert?: Prisma.NkpUpsertWithWhereUniqueWithoutSupplierInput | Prisma.NkpUpsertWithWhereUniqueWithoutSupplierInput[]
-  createMany?: Prisma.NkpCreateManySupplierInputEnvelope
-  set?: Prisma.NkpWhereUniqueInput | Prisma.NkpWhereUniqueInput[]
-  disconnect?: Prisma.NkpWhereUniqueInput | Prisma.NkpWhereUniqueInput[]
-  delete?: Prisma.NkpWhereUniqueInput | Prisma.NkpWhereUniqueInput[]
-  connect?: Prisma.NkpWhereUniqueInput | Prisma.NkpWhereUniqueInput[]
-  update?: Prisma.NkpUpdateWithWhereUniqueWithoutSupplierInput | Prisma.NkpUpdateWithWhereUniqueWithoutSupplierInput[]
-  updateMany?: Prisma.NkpUpdateManyWithWhereWithoutSupplierInput | Prisma.NkpUpdateManyWithWhereWithoutSupplierInput[]
-  deleteMany?: Prisma.NkpScalarWhereInput | Prisma.NkpScalarWhereInput[]
-}
-
 export type NkpCreateNestedManyWithoutGoodsReceiptInput = {
   create?: Prisma.XOR<Prisma.NkpCreateWithoutGoodsReceiptInput, Prisma.NkpUncheckedCreateWithoutGoodsReceiptInput> | Prisma.NkpCreateWithoutGoodsReceiptInput[] | Prisma.NkpUncheckedCreateWithoutGoodsReceiptInput[]
   connectOrCreate?: Prisma.NkpCreateOrConnectWithoutGoodsReceiptInput | Prisma.NkpCreateOrConnectWithoutGoodsReceiptInput[]
@@ -1372,6 +1330,48 @@ export type NkpUncheckedUpdateManyWithoutBankNestedInput = {
   deleteMany?: Prisma.NkpScalarWhereInput | Prisma.NkpScalarWhereInput[]
 }
 
+export type NkpCreateNestedManyWithoutSupplierInput = {
+  create?: Prisma.XOR<Prisma.NkpCreateWithoutSupplierInput, Prisma.NkpUncheckedCreateWithoutSupplierInput> | Prisma.NkpCreateWithoutSupplierInput[] | Prisma.NkpUncheckedCreateWithoutSupplierInput[]
+  connectOrCreate?: Prisma.NkpCreateOrConnectWithoutSupplierInput | Prisma.NkpCreateOrConnectWithoutSupplierInput[]
+  createMany?: Prisma.NkpCreateManySupplierInputEnvelope
+  connect?: Prisma.NkpWhereUniqueInput | Prisma.NkpWhereUniqueInput[]
+}
+
+export type NkpUncheckedCreateNestedManyWithoutSupplierInput = {
+  create?: Prisma.XOR<Prisma.NkpCreateWithoutSupplierInput, Prisma.NkpUncheckedCreateWithoutSupplierInput> | Prisma.NkpCreateWithoutSupplierInput[] | Prisma.NkpUncheckedCreateWithoutSupplierInput[]
+  connectOrCreate?: Prisma.NkpCreateOrConnectWithoutSupplierInput | Prisma.NkpCreateOrConnectWithoutSupplierInput[]
+  createMany?: Prisma.NkpCreateManySupplierInputEnvelope
+  connect?: Prisma.NkpWhereUniqueInput | Prisma.NkpWhereUniqueInput[]
+}
+
+export type NkpUpdateManyWithoutSupplierNestedInput = {
+  create?: Prisma.XOR<Prisma.NkpCreateWithoutSupplierInput, Prisma.NkpUncheckedCreateWithoutSupplierInput> | Prisma.NkpCreateWithoutSupplierInput[] | Prisma.NkpUncheckedCreateWithoutSupplierInput[]
+  connectOrCreate?: Prisma.NkpCreateOrConnectWithoutSupplierInput | Prisma.NkpCreateOrConnectWithoutSupplierInput[]
+  upsert?: Prisma.NkpUpsertWithWhereUniqueWithoutSupplierInput | Prisma.NkpUpsertWithWhereUniqueWithoutSupplierInput[]
+  createMany?: Prisma.NkpCreateManySupplierInputEnvelope
+  set?: Prisma.NkpWhereUniqueInput | Prisma.NkpWhereUniqueInput[]
+  disconnect?: Prisma.NkpWhereUniqueInput | Prisma.NkpWhereUniqueInput[]
+  delete?: Prisma.NkpWhereUniqueInput | Prisma.NkpWhereUniqueInput[]
+  connect?: Prisma.NkpWhereUniqueInput | Prisma.NkpWhereUniqueInput[]
+  update?: Prisma.NkpUpdateWithWhereUniqueWithoutSupplierInput | Prisma.NkpUpdateWithWhereUniqueWithoutSupplierInput[]
+  updateMany?: Prisma.NkpUpdateManyWithWhereWithoutSupplierInput | Prisma.NkpUpdateManyWithWhereWithoutSupplierInput[]
+  deleteMany?: Prisma.NkpScalarWhereInput | Prisma.NkpScalarWhereInput[]
+}
+
+export type NkpUncheckedUpdateManyWithoutSupplierNestedInput = {
+  create?: Prisma.XOR<Prisma.NkpCreateWithoutSupplierInput, Prisma.NkpUncheckedCreateWithoutSupplierInput> | Prisma.NkpCreateWithoutSupplierInput[] | Prisma.NkpUncheckedCreateWithoutSupplierInput[]
+  connectOrCreate?: Prisma.NkpCreateOrConnectWithoutSupplierInput | Prisma.NkpCreateOrConnectWithoutSupplierInput[]
+  upsert?: Prisma.NkpUpsertWithWhereUniqueWithoutSupplierInput | Prisma.NkpUpsertWithWhereUniqueWithoutSupplierInput[]
+  createMany?: Prisma.NkpCreateManySupplierInputEnvelope
+  set?: Prisma.NkpWhereUniqueInput | Prisma.NkpWhereUniqueInput[]
+  disconnect?: Prisma.NkpWhereUniqueInput | Prisma.NkpWhereUniqueInput[]
+  delete?: Prisma.NkpWhereUniqueInput | Prisma.NkpWhereUniqueInput[]
+  connect?: Prisma.NkpWhereUniqueInput | Prisma.NkpWhereUniqueInput[]
+  update?: Prisma.NkpUpdateWithWhereUniqueWithoutSupplierInput | Prisma.NkpUpdateWithWhereUniqueWithoutSupplierInput[]
+  updateMany?: Prisma.NkpUpdateManyWithWhereWithoutSupplierInput | Prisma.NkpUpdateManyWithWhereWithoutSupplierInput[]
+  deleteMany?: Prisma.NkpScalarWhereInput | Prisma.NkpScalarWhereInput[]
+}
+
 export type NkpCreateNestedManyWithoutEmployeeInput = {
   create?: Prisma.XOR<Prisma.NkpCreateWithoutEmployeeInput, Prisma.NkpUncheckedCreateWithoutEmployeeInput> | Prisma.NkpCreateWithoutEmployeeInput[] | Prisma.NkpUncheckedCreateWithoutEmployeeInput[]
   connectOrCreate?: Prisma.NkpCreateOrConnectWithoutEmployeeInput | Prisma.NkpCreateOrConnectWithoutEmployeeInput[]
@@ -1454,139 +1454,6 @@ export type NkpUncheckedUpdateManyWithoutRequesterNestedInput = {
   update?: Prisma.NkpUpdateWithWhereUniqueWithoutRequesterInput | Prisma.NkpUpdateWithWhereUniqueWithoutRequesterInput[]
   updateMany?: Prisma.NkpUpdateManyWithWhereWithoutRequesterInput | Prisma.NkpUpdateManyWithWhereWithoutRequesterInput[]
   deleteMany?: Prisma.NkpScalarWhereInput | Prisma.NkpScalarWhereInput[]
-}
-
-export type NkpCreateWithoutSupplierInput = {
-  date?: Date | string
-  number?: string | null
-  description: string
-  status?: $Enums.PaymentStatus
-  paymentType?: $Enums.PaymentType
-  nkpType: $Enums.NkpType
-  invoiceNumber?: string | null
-  bankAccount: string
-  currency?: $Enums.Currency
-  bankRefNo?: string | null
-  grandTotal: number
-  deduction?: number
-  tax?: number
-  downPayment?: number
-  cashAdvanceBalance?: number
-  netAmount: number
-  finalPayment?: number | null
-  totalAmount?: number | null
-  createdAt?: Date | string
-  updatedAt?: Date | string | null
-  sourceBankId?: number | null
-  Employee?: Prisma.UserCreateNestedOneWithoutNkpInput
-  Requester: Prisma.UserCreateNestedOneWithoutNkpRequestInput
-  Bank: Prisma.BankCreateNestedOneWithoutNkpInput
-  PurchaseOrder?: Prisma.PurchaseOrderCreateNestedOneWithoutNkpsInput
-  GoodsReceipt?: Prisma.GoodsReceiptCreateNestedOneWithoutNkpsInput
-  NkpItem?: Prisma.NkpItemCreateNestedManyWithoutNkpInput
-  NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutNkpInput
-  Company: Prisma.CompanyCreateNestedOneWithoutNkpInput
-  NkpAttachment?: Prisma.NkpAttachmentCreateNestedManyWithoutNkpInput
-  Parent?: Prisma.NkpCreateNestedOneWithoutChildInput
-  Child?: Prisma.NkpCreateNestedOneWithoutParentInput
-}
-
-export type NkpUncheckedCreateWithoutSupplierInput = {
-  id?: number
-  date?: Date | string
-  number?: string | null
-  description: string
-  status?: $Enums.PaymentStatus
-  paymentType?: $Enums.PaymentType
-  nkpType: $Enums.NkpType
-  invoiceNumber?: string | null
-  employeeId?: number | null
-  requesterId: number
-  bankId: number
-  purchaseOrderId?: number | null
-  goodsReceiptId?: number | null
-  bankAccount: string
-  currency?: $Enums.Currency
-  bankRefNo?: string | null
-  grandTotal: number
-  deduction?: number
-  tax?: number
-  downPayment?: number
-  cashAdvanceBalance?: number
-  netAmount: number
-  finalPayment?: number | null
-  totalAmount?: number | null
-  createdAt?: Date | string
-  updatedAt?: Date | string | null
-  companyId: number
-  parentId?: number | null
-  sourceBankId?: number | null
-  NkpItem?: Prisma.NkpItemUncheckedCreateNestedManyWithoutNkpInput
-  NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutNkpInput
-  NkpAttachment?: Prisma.NkpAttachmentUncheckedCreateNestedManyWithoutNkpInput
-  Child?: Prisma.NkpUncheckedCreateNestedOneWithoutParentInput
-}
-
-export type NkpCreateOrConnectWithoutSupplierInput = {
-  where: Prisma.NkpWhereUniqueInput
-  create: Prisma.XOR<Prisma.NkpCreateWithoutSupplierInput, Prisma.NkpUncheckedCreateWithoutSupplierInput>
-}
-
-export type NkpCreateManySupplierInputEnvelope = {
-  data: Prisma.NkpCreateManySupplierInput | Prisma.NkpCreateManySupplierInput[]
-  skipDuplicates?: boolean
-}
-
-export type NkpUpsertWithWhereUniqueWithoutSupplierInput = {
-  where: Prisma.NkpWhereUniqueInput
-  update: Prisma.XOR<Prisma.NkpUpdateWithoutSupplierInput, Prisma.NkpUncheckedUpdateWithoutSupplierInput>
-  create: Prisma.XOR<Prisma.NkpCreateWithoutSupplierInput, Prisma.NkpUncheckedCreateWithoutSupplierInput>
-}
-
-export type NkpUpdateWithWhereUniqueWithoutSupplierInput = {
-  where: Prisma.NkpWhereUniqueInput
-  data: Prisma.XOR<Prisma.NkpUpdateWithoutSupplierInput, Prisma.NkpUncheckedUpdateWithoutSupplierInput>
-}
-
-export type NkpUpdateManyWithWhereWithoutSupplierInput = {
-  where: Prisma.NkpScalarWhereInput
-  data: Prisma.XOR<Prisma.NkpUpdateManyMutationInput, Prisma.NkpUncheckedUpdateManyWithoutSupplierInput>
-}
-
-export type NkpScalarWhereInput = {
-  AND?: Prisma.NkpScalarWhereInput | Prisma.NkpScalarWhereInput[]
-  OR?: Prisma.NkpScalarWhereInput[]
-  NOT?: Prisma.NkpScalarWhereInput | Prisma.NkpScalarWhereInput[]
-  id?: Prisma.IntFilter<"Nkp"> | number
-  date?: Prisma.DateTimeFilter<"Nkp"> | Date | string
-  number?: Prisma.StringNullableFilter<"Nkp"> | string | null
-  description?: Prisma.StringFilter<"Nkp"> | string
-  status?: Prisma.EnumPaymentStatusFilter<"Nkp"> | $Enums.PaymentStatus
-  paymentType?: Prisma.EnumPaymentTypeFilter<"Nkp"> | $Enums.PaymentType
-  nkpType?: Prisma.EnumNkpTypeFilter<"Nkp"> | $Enums.NkpType
-  invoiceNumber?: Prisma.StringNullableFilter<"Nkp"> | string | null
-  employeeId?: Prisma.IntNullableFilter<"Nkp"> | number | null
-  requesterId?: Prisma.IntFilter<"Nkp"> | number
-  supplierId?: Prisma.IntNullableFilter<"Nkp"> | number | null
-  bankId?: Prisma.IntFilter<"Nkp"> | number
-  purchaseOrderId?: Prisma.IntNullableFilter<"Nkp"> | number | null
-  goodsReceiptId?: Prisma.IntNullableFilter<"Nkp"> | number | null
-  bankAccount?: Prisma.StringFilter<"Nkp"> | string
-  currency?: Prisma.EnumCurrencyFilter<"Nkp"> | $Enums.Currency
-  bankRefNo?: Prisma.StringNullableFilter<"Nkp"> | string | null
-  grandTotal?: Prisma.FloatFilter<"Nkp"> | number
-  deduction?: Prisma.FloatFilter<"Nkp"> | number
-  tax?: Prisma.FloatFilter<"Nkp"> | number
-  downPayment?: Prisma.FloatFilter<"Nkp"> | number
-  cashAdvanceBalance?: Prisma.FloatFilter<"Nkp"> | number
-  netAmount?: Prisma.FloatFilter<"Nkp"> | number
-  finalPayment?: Prisma.FloatNullableFilter<"Nkp"> | number | null
-  totalAmount?: Prisma.FloatNullableFilter<"Nkp"> | number | null
-  createdAt?: Prisma.DateTimeFilter<"Nkp"> | Date | string
-  updatedAt?: Prisma.DateTimeNullableFilter<"Nkp"> | Date | string | null
-  companyId?: Prisma.IntFilter<"Nkp"> | number
-  parentId?: Prisma.IntNullableFilter<"Nkp"> | number | null
-  sourceBankId?: Prisma.IntNullableFilter<"Nkp"> | number | null
 }
 
 export type NkpCreateWithoutGoodsReceiptInput = {
@@ -1684,6 +1551,42 @@ export type NkpUpdateWithWhereUniqueWithoutGoodsReceiptInput = {
 export type NkpUpdateManyWithWhereWithoutGoodsReceiptInput = {
   where: Prisma.NkpScalarWhereInput
   data: Prisma.XOR<Prisma.NkpUpdateManyMutationInput, Prisma.NkpUncheckedUpdateManyWithoutGoodsReceiptInput>
+}
+
+export type NkpScalarWhereInput = {
+  AND?: Prisma.NkpScalarWhereInput | Prisma.NkpScalarWhereInput[]
+  OR?: Prisma.NkpScalarWhereInput[]
+  NOT?: Prisma.NkpScalarWhereInput | Prisma.NkpScalarWhereInput[]
+  id?: Prisma.IntFilter<"Nkp"> | number
+  date?: Prisma.DateTimeFilter<"Nkp"> | Date | string
+  number?: Prisma.StringNullableFilter<"Nkp"> | string | null
+  description?: Prisma.StringFilter<"Nkp"> | string
+  status?: Prisma.EnumPaymentStatusFilter<"Nkp"> | $Enums.PaymentStatus
+  paymentType?: Prisma.EnumPaymentTypeFilter<"Nkp"> | $Enums.PaymentType
+  nkpType?: Prisma.EnumNkpTypeFilter<"Nkp"> | $Enums.NkpType
+  invoiceNumber?: Prisma.StringNullableFilter<"Nkp"> | string | null
+  employeeId?: Prisma.IntNullableFilter<"Nkp"> | number | null
+  requesterId?: Prisma.IntFilter<"Nkp"> | number
+  supplierId?: Prisma.IntNullableFilter<"Nkp"> | number | null
+  bankId?: Prisma.IntFilter<"Nkp"> | number
+  purchaseOrderId?: Prisma.IntNullableFilter<"Nkp"> | number | null
+  goodsReceiptId?: Prisma.IntNullableFilter<"Nkp"> | number | null
+  bankAccount?: Prisma.StringFilter<"Nkp"> | string
+  currency?: Prisma.EnumCurrencyFilter<"Nkp"> | $Enums.Currency
+  bankRefNo?: Prisma.StringNullableFilter<"Nkp"> | string | null
+  grandTotal?: Prisma.FloatFilter<"Nkp"> | number
+  deduction?: Prisma.FloatFilter<"Nkp"> | number
+  tax?: Prisma.FloatFilter<"Nkp"> | number
+  downPayment?: Prisma.FloatFilter<"Nkp"> | number
+  cashAdvanceBalance?: Prisma.FloatFilter<"Nkp"> | number
+  netAmount?: Prisma.FloatFilter<"Nkp"> | number
+  finalPayment?: Prisma.FloatNullableFilter<"Nkp"> | number | null
+  totalAmount?: Prisma.FloatNullableFilter<"Nkp"> | number | null
+  createdAt?: Prisma.DateTimeFilter<"Nkp"> | Date | string
+  updatedAt?: Prisma.DateTimeNullableFilter<"Nkp"> | Date | string | null
+  companyId?: Prisma.IntFilter<"Nkp"> | number
+  parentId?: Prisma.IntNullableFilter<"Nkp"> | number | null
+  sourceBankId?: Prisma.IntNullableFilter<"Nkp"> | number | null
 }
 
 export type NkpCreateWithoutChildInput = {
@@ -2767,6 +2670,103 @@ export type NkpUpdateManyWithWhereWithoutBankInput = {
   data: Prisma.XOR<Prisma.NkpUpdateManyMutationInput, Prisma.NkpUncheckedUpdateManyWithoutBankInput>
 }
 
+export type NkpCreateWithoutSupplierInput = {
+  date?: Date | string
+  number?: string | null
+  description: string
+  status?: $Enums.PaymentStatus
+  paymentType?: $Enums.PaymentType
+  nkpType: $Enums.NkpType
+  invoiceNumber?: string | null
+  bankAccount: string
+  currency?: $Enums.Currency
+  bankRefNo?: string | null
+  grandTotal: number
+  deduction?: number
+  tax?: number
+  downPayment?: number
+  cashAdvanceBalance?: number
+  netAmount: number
+  finalPayment?: number | null
+  totalAmount?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string | null
+  sourceBankId?: number | null
+  Employee?: Prisma.UserCreateNestedOneWithoutNkpInput
+  Requester: Prisma.UserCreateNestedOneWithoutNkpRequestInput
+  Bank: Prisma.BankCreateNestedOneWithoutNkpInput
+  PurchaseOrder?: Prisma.PurchaseOrderCreateNestedOneWithoutNkpsInput
+  GoodsReceipt?: Prisma.GoodsReceiptCreateNestedOneWithoutNkpsInput
+  NkpItem?: Prisma.NkpItemCreateNestedManyWithoutNkpInput
+  NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutNkpInput
+  Company: Prisma.CompanyCreateNestedOneWithoutNkpInput
+  NkpAttachment?: Prisma.NkpAttachmentCreateNestedManyWithoutNkpInput
+  Parent?: Prisma.NkpCreateNestedOneWithoutChildInput
+  Child?: Prisma.NkpCreateNestedOneWithoutParentInput
+}
+
+export type NkpUncheckedCreateWithoutSupplierInput = {
+  id?: number
+  date?: Date | string
+  number?: string | null
+  description: string
+  status?: $Enums.PaymentStatus
+  paymentType?: $Enums.PaymentType
+  nkpType: $Enums.NkpType
+  invoiceNumber?: string | null
+  employeeId?: number | null
+  requesterId: number
+  bankId: number
+  purchaseOrderId?: number | null
+  goodsReceiptId?: number | null
+  bankAccount: string
+  currency?: $Enums.Currency
+  bankRefNo?: string | null
+  grandTotal: number
+  deduction?: number
+  tax?: number
+  downPayment?: number
+  cashAdvanceBalance?: number
+  netAmount: number
+  finalPayment?: number | null
+  totalAmount?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string | null
+  companyId: number
+  parentId?: number | null
+  sourceBankId?: number | null
+  NkpItem?: Prisma.NkpItemUncheckedCreateNestedManyWithoutNkpInput
+  NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutNkpInput
+  NkpAttachment?: Prisma.NkpAttachmentUncheckedCreateNestedManyWithoutNkpInput
+  Child?: Prisma.NkpUncheckedCreateNestedOneWithoutParentInput
+}
+
+export type NkpCreateOrConnectWithoutSupplierInput = {
+  where: Prisma.NkpWhereUniqueInput
+  create: Prisma.XOR<Prisma.NkpCreateWithoutSupplierInput, Prisma.NkpUncheckedCreateWithoutSupplierInput>
+}
+
+export type NkpCreateManySupplierInputEnvelope = {
+  data: Prisma.NkpCreateManySupplierInput | Prisma.NkpCreateManySupplierInput[]
+  skipDuplicates?: boolean
+}
+
+export type NkpUpsertWithWhereUniqueWithoutSupplierInput = {
+  where: Prisma.NkpWhereUniqueInput
+  update: Prisma.XOR<Prisma.NkpUpdateWithoutSupplierInput, Prisma.NkpUncheckedUpdateWithoutSupplierInput>
+  create: Prisma.XOR<Prisma.NkpCreateWithoutSupplierInput, Prisma.NkpUncheckedCreateWithoutSupplierInput>
+}
+
+export type NkpUpdateWithWhereUniqueWithoutSupplierInput = {
+  where: Prisma.NkpWhereUniqueInput
+  data: Prisma.XOR<Prisma.NkpUpdateWithoutSupplierInput, Prisma.NkpUncheckedUpdateWithoutSupplierInput>
+}
+
+export type NkpUpdateManyWithWhereWithoutSupplierInput = {
+  where: Prisma.NkpScalarWhereInput
+  data: Prisma.XOR<Prisma.NkpUpdateManyMutationInput, Prisma.NkpUncheckedUpdateManyWithoutSupplierInput>
+}
+
 export type NkpCreateWithoutEmployeeInput = {
   date?: Date | string
   number?: string | null
@@ -2959,141 +2959,6 @@ export type NkpUpdateWithWhereUniqueWithoutRequesterInput = {
 export type NkpUpdateManyWithWhereWithoutRequesterInput = {
   where: Prisma.NkpScalarWhereInput
   data: Prisma.XOR<Prisma.NkpUpdateManyMutationInput, Prisma.NkpUncheckedUpdateManyWithoutRequesterInput>
-}
-
-export type NkpCreateManySupplierInput = {
-  id?: number
-  date?: Date | string
-  number?: string | null
-  description: string
-  status?: $Enums.PaymentStatus
-  paymentType?: $Enums.PaymentType
-  nkpType: $Enums.NkpType
-  invoiceNumber?: string | null
-  employeeId?: number | null
-  requesterId: number
-  bankId: number
-  purchaseOrderId?: number | null
-  goodsReceiptId?: number | null
-  bankAccount: string
-  currency?: $Enums.Currency
-  bankRefNo?: string | null
-  grandTotal: number
-  deduction?: number
-  tax?: number
-  downPayment?: number
-  cashAdvanceBalance?: number
-  netAmount: number
-  finalPayment?: number | null
-  totalAmount?: number | null
-  createdAt?: Date | string
-  updatedAt?: Date | string | null
-  companyId: number
-  parentId?: number | null
-  sourceBankId?: number | null
-}
-
-export type NkpUpdateWithoutSupplierInput = {
-  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  description?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
-  paymentType?: Prisma.EnumPaymentTypeFieldUpdateOperationsInput | $Enums.PaymentType
-  nkpType?: Prisma.EnumNkpTypeFieldUpdateOperationsInput | $Enums.NkpType
-  invoiceNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  bankAccount?: Prisma.StringFieldUpdateOperationsInput | string
-  currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
-  bankRefNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
-  deduction?: Prisma.FloatFieldUpdateOperationsInput | number
-  tax?: Prisma.FloatFieldUpdateOperationsInput | number
-  downPayment?: Prisma.FloatFieldUpdateOperationsInput | number
-  cashAdvanceBalance?: Prisma.FloatFieldUpdateOperationsInput | number
-  netAmount?: Prisma.FloatFieldUpdateOperationsInput | number
-  finalPayment?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  totalAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  sourceBankId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  Employee?: Prisma.UserUpdateOneWithoutNkpNestedInput
-  Requester?: Prisma.UserUpdateOneRequiredWithoutNkpRequestNestedInput
-  Bank?: Prisma.BankUpdateOneRequiredWithoutNkpNestedInput
-  PurchaseOrder?: Prisma.PurchaseOrderUpdateOneWithoutNkpsNestedInput
-  GoodsReceipt?: Prisma.GoodsReceiptUpdateOneWithoutNkpsNestedInput
-  NkpItem?: Prisma.NkpItemUpdateManyWithoutNkpNestedInput
-  NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutNkpNestedInput
-  Company?: Prisma.CompanyUpdateOneRequiredWithoutNkpNestedInput
-  NkpAttachment?: Prisma.NkpAttachmentUpdateManyWithoutNkpNestedInput
-  Parent?: Prisma.NkpUpdateOneWithoutChildNestedInput
-  Child?: Prisma.NkpUpdateOneWithoutParentNestedInput
-}
-
-export type NkpUncheckedUpdateWithoutSupplierInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  description?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
-  paymentType?: Prisma.EnumPaymentTypeFieldUpdateOperationsInput | $Enums.PaymentType
-  nkpType?: Prisma.EnumNkpTypeFieldUpdateOperationsInput | $Enums.NkpType
-  invoiceNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  employeeId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  requesterId?: Prisma.IntFieldUpdateOperationsInput | number
-  bankId?: Prisma.IntFieldUpdateOperationsInput | number
-  purchaseOrderId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  goodsReceiptId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  bankAccount?: Prisma.StringFieldUpdateOperationsInput | string
-  currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
-  bankRefNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
-  deduction?: Prisma.FloatFieldUpdateOperationsInput | number
-  tax?: Prisma.FloatFieldUpdateOperationsInput | number
-  downPayment?: Prisma.FloatFieldUpdateOperationsInput | number
-  cashAdvanceBalance?: Prisma.FloatFieldUpdateOperationsInput | number
-  netAmount?: Prisma.FloatFieldUpdateOperationsInput | number
-  finalPayment?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  totalAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  companyId?: Prisma.IntFieldUpdateOperationsInput | number
-  parentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  sourceBankId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  NkpItem?: Prisma.NkpItemUncheckedUpdateManyWithoutNkpNestedInput
-  NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutNkpNestedInput
-  NkpAttachment?: Prisma.NkpAttachmentUncheckedUpdateManyWithoutNkpNestedInput
-  Child?: Prisma.NkpUncheckedUpdateOneWithoutParentNestedInput
-}
-
-export type NkpUncheckedUpdateManyWithoutSupplierInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  description?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
-  paymentType?: Prisma.EnumPaymentTypeFieldUpdateOperationsInput | $Enums.PaymentType
-  nkpType?: Prisma.EnumNkpTypeFieldUpdateOperationsInput | $Enums.NkpType
-  invoiceNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  employeeId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  requesterId?: Prisma.IntFieldUpdateOperationsInput | number
-  bankId?: Prisma.IntFieldUpdateOperationsInput | number
-  purchaseOrderId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  goodsReceiptId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  bankAccount?: Prisma.StringFieldUpdateOperationsInput | string
-  currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
-  bankRefNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
-  deduction?: Prisma.FloatFieldUpdateOperationsInput | number
-  tax?: Prisma.FloatFieldUpdateOperationsInput | number
-  downPayment?: Prisma.FloatFieldUpdateOperationsInput | number
-  cashAdvanceBalance?: Prisma.FloatFieldUpdateOperationsInput | number
-  netAmount?: Prisma.FloatFieldUpdateOperationsInput | number
-  finalPayment?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  totalAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  companyId?: Prisma.IntFieldUpdateOperationsInput | number
-  parentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  sourceBankId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type NkpCreateManyGoodsReceiptInput = {
@@ -3616,6 +3481,141 @@ export type NkpUncheckedUpdateManyWithoutBankInput = {
   employeeId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   requesterId?: Prisma.IntFieldUpdateOperationsInput | number
   supplierId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  purchaseOrderId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  goodsReceiptId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  bankAccount?: Prisma.StringFieldUpdateOperationsInput | string
+  currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
+  bankRefNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
+  deduction?: Prisma.FloatFieldUpdateOperationsInput | number
+  tax?: Prisma.FloatFieldUpdateOperationsInput | number
+  downPayment?: Prisma.FloatFieldUpdateOperationsInput | number
+  cashAdvanceBalance?: Prisma.FloatFieldUpdateOperationsInput | number
+  netAmount?: Prisma.FloatFieldUpdateOperationsInput | number
+  finalPayment?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  totalAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyId?: Prisma.IntFieldUpdateOperationsInput | number
+  parentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sourceBankId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+}
+
+export type NkpCreateManySupplierInput = {
+  id?: number
+  date?: Date | string
+  number?: string | null
+  description: string
+  status?: $Enums.PaymentStatus
+  paymentType?: $Enums.PaymentType
+  nkpType: $Enums.NkpType
+  invoiceNumber?: string | null
+  employeeId?: number | null
+  requesterId: number
+  bankId: number
+  purchaseOrderId?: number | null
+  goodsReceiptId?: number | null
+  bankAccount: string
+  currency?: $Enums.Currency
+  bankRefNo?: string | null
+  grandTotal: number
+  deduction?: number
+  tax?: number
+  downPayment?: number
+  cashAdvanceBalance?: number
+  netAmount: number
+  finalPayment?: number | null
+  totalAmount?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string | null
+  companyId: number
+  parentId?: number | null
+  sourceBankId?: number | null
+}
+
+export type NkpUpdateWithoutSupplierInput = {
+  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+  paymentType?: Prisma.EnumPaymentTypeFieldUpdateOperationsInput | $Enums.PaymentType
+  nkpType?: Prisma.EnumNkpTypeFieldUpdateOperationsInput | $Enums.NkpType
+  invoiceNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankAccount?: Prisma.StringFieldUpdateOperationsInput | string
+  currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
+  bankRefNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
+  deduction?: Prisma.FloatFieldUpdateOperationsInput | number
+  tax?: Prisma.FloatFieldUpdateOperationsInput | number
+  downPayment?: Prisma.FloatFieldUpdateOperationsInput | number
+  cashAdvanceBalance?: Prisma.FloatFieldUpdateOperationsInput | number
+  netAmount?: Prisma.FloatFieldUpdateOperationsInput | number
+  finalPayment?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  totalAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  sourceBankId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  Employee?: Prisma.UserUpdateOneWithoutNkpNestedInput
+  Requester?: Prisma.UserUpdateOneRequiredWithoutNkpRequestNestedInput
+  Bank?: Prisma.BankUpdateOneRequiredWithoutNkpNestedInput
+  PurchaseOrder?: Prisma.PurchaseOrderUpdateOneWithoutNkpsNestedInput
+  GoodsReceipt?: Prisma.GoodsReceiptUpdateOneWithoutNkpsNestedInput
+  NkpItem?: Prisma.NkpItemUpdateManyWithoutNkpNestedInput
+  NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutNkpNestedInput
+  Company?: Prisma.CompanyUpdateOneRequiredWithoutNkpNestedInput
+  NkpAttachment?: Prisma.NkpAttachmentUpdateManyWithoutNkpNestedInput
+  Parent?: Prisma.NkpUpdateOneWithoutChildNestedInput
+  Child?: Prisma.NkpUpdateOneWithoutParentNestedInput
+}
+
+export type NkpUncheckedUpdateWithoutSupplierInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+  paymentType?: Prisma.EnumPaymentTypeFieldUpdateOperationsInput | $Enums.PaymentType
+  nkpType?: Prisma.EnumNkpTypeFieldUpdateOperationsInput | $Enums.NkpType
+  invoiceNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  employeeId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  requesterId?: Prisma.IntFieldUpdateOperationsInput | number
+  bankId?: Prisma.IntFieldUpdateOperationsInput | number
+  purchaseOrderId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  goodsReceiptId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  bankAccount?: Prisma.StringFieldUpdateOperationsInput | string
+  currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
+  bankRefNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  grandTotal?: Prisma.FloatFieldUpdateOperationsInput | number
+  deduction?: Prisma.FloatFieldUpdateOperationsInput | number
+  tax?: Prisma.FloatFieldUpdateOperationsInput | number
+  downPayment?: Prisma.FloatFieldUpdateOperationsInput | number
+  cashAdvanceBalance?: Prisma.FloatFieldUpdateOperationsInput | number
+  netAmount?: Prisma.FloatFieldUpdateOperationsInput | number
+  finalPayment?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  totalAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyId?: Prisma.IntFieldUpdateOperationsInput | number
+  parentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sourceBankId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  NkpItem?: Prisma.NkpItemUncheckedUpdateManyWithoutNkpNestedInput
+  NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutNkpNestedInput
+  NkpAttachment?: Prisma.NkpAttachmentUncheckedUpdateManyWithoutNkpNestedInput
+  Child?: Prisma.NkpUncheckedUpdateOneWithoutParentNestedInput
+}
+
+export type NkpUncheckedUpdateManyWithoutSupplierInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+  paymentType?: Prisma.EnumPaymentTypeFieldUpdateOperationsInput | $Enums.PaymentType
+  nkpType?: Prisma.EnumNkpTypeFieldUpdateOperationsInput | $Enums.NkpType
+  invoiceNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  employeeId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  requesterId?: Prisma.IntFieldUpdateOperationsInput | number
+  bankId?: Prisma.IntFieldUpdateOperationsInput | number
   purchaseOrderId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   goodsReceiptId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   bankAccount?: Prisma.StringFieldUpdateOperationsInput | string

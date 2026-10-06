@@ -33,11 +33,15 @@ export class CreateSupplierDto {
   @IsString({ message: 'Bank Account is required' })
   bankAccount: string;
 
+  @IsOptional()
+  @IsString({ message: 'Bank Account Holder is required' })
+  bankAccountHolder?: string;
+
   @IsEnum(Currency, { message: 'Invalid currency' })
   currency: Currency;
 }
 
-export class UpdateSupplierDto extends PartialType(CreateSupplierDto) { }
+export class UpdateSupplierDto extends PartialType(CreateSupplierDto) {}
 
 export class QuerySupplierDto {
   @IsOptional()

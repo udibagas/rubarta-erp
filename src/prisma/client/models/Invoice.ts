@@ -1114,6 +1114,10 @@ export type EnumInvoiceStatusFieldUpdateOperationsInput = {
   set?: $Enums.InvoiceStatus
 }
 
+export type EnumCurrencyFieldUpdateOperationsInput = {
+  set?: $Enums.Currency
+}
+
 export type InvoiceCreateNestedOneWithoutInvoiceItemsInput = {
   create?: Prisma.XOR<Prisma.InvoiceCreateWithoutInvoiceItemsInput, Prisma.InvoiceUncheckedCreateWithoutInvoiceItemsInput>
   connectOrCreate?: Prisma.InvoiceCreateOrConnectWithoutInvoiceItemsInput

@@ -62,7 +62,6 @@ export const ModelName = {
   CashBankAccount: 'CashBankAccount',
   BankTransaction: 'BankTransaction',
   TaxRate: 'TaxRate',
-  Supplier: 'Supplier',
   Expense: 'Expense',
   ApprovalSetting: 'ApprovalSetting',
   ApprovalSettingItem: 'ApprovalSettingItem',
@@ -97,6 +96,7 @@ export const ModelName = {
   Company: 'Company',
   Department: 'Department',
   Bank: 'Bank',
+  Supplier: 'Supplier',
   User: 'User',
   UserBalance: 'UserBalance',
   VisitPlan: 'VisitPlan'
@@ -304,21 +304,6 @@ export const TaxRateScalarFieldEnum = {
 } as const
 
 export type TaxRateScalarFieldEnum = (typeof TaxRateScalarFieldEnum)[keyof typeof TaxRateScalarFieldEnum]
-
-
-export const SupplierScalarFieldEnum = {
-  id: 'id',
-  code: 'code',
-  name: 'name',
-  address: 'address',
-  phone: 'phone',
-  email: 'email',
-  bankAccount: 'bankAccount',
-  currency: 'currency',
-  bankId: 'bankId'
-} as const
-
-export type SupplierScalarFieldEnum = (typeof SupplierScalarFieldEnum)[keyof typeof SupplierScalarFieldEnum]
 
 
 export const ExpenseScalarFieldEnum = {
@@ -976,6 +961,22 @@ export const BankScalarFieldEnum = {
 } as const
 
 export type BankScalarFieldEnum = (typeof BankScalarFieldEnum)[keyof typeof BankScalarFieldEnum]
+
+
+export const SupplierScalarFieldEnum = {
+  id: 'id',
+  code: 'code',
+  name: 'name',
+  address: 'address',
+  phone: 'phone',
+  email: 'email',
+  bankAccount: 'bankAccount',
+  bankAccountHolder: 'bankAccountHolder',
+  currency: 'currency',
+  bankId: 'bankId'
+} as const
+
+export type SupplierScalarFieldEnum = (typeof SupplierScalarFieldEnum)[keyof typeof SupplierScalarFieldEnum]
 
 
 export const UserScalarFieldEnum = {

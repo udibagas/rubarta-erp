@@ -671,16 +671,6 @@ export type MaterialUncheckedUpdateManyInput = {
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
-export type MaterialListRelationFilter = {
-  every?: Prisma.MaterialWhereInput
-  some?: Prisma.MaterialWhereInput
-  none?: Prisma.MaterialWhereInput
-}
-
-export type MaterialOrderByRelationAggregateInput = {
-  _count?: Prisma.SortOrder
-}
-
 export type MaterialCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   partNumber?: Prisma.SortOrder
@@ -778,6 +768,16 @@ export type MaterialSumOrderByAggregateInput = {
   currentStock?: Prisma.SortOrder
   supplierId?: Prisma.SortOrder
   leadTime?: Prisma.SortOrder
+}
+
+export type MaterialListRelationFilter = {
+  every?: Prisma.MaterialWhereInput
+  some?: Prisma.MaterialWhereInput
+  none?: Prisma.MaterialWhereInput
+}
+
+export type MaterialOrderByRelationAggregateInput = {
+  _count?: Prisma.SortOrder
 }
 
 export type MaterialCreateNestedManyWithoutSupplierInput = {

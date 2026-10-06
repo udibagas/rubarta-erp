@@ -564,16 +564,6 @@ export type GoodsReceiptUncheckedUpdateManyInput = {
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
-export type GoodsReceiptListRelationFilter = {
-  every?: Prisma.GoodsReceiptWhereInput
-  some?: Prisma.GoodsReceiptWhereInput
-  none?: Prisma.GoodsReceiptWhereInput
-}
-
-export type GoodsReceiptOrderByRelationAggregateInput = {
-  _count?: Prisma.SortOrder
-}
-
 export type GoodsReceiptScalarRelationFilter = {
   is?: Prisma.GoodsReceiptWhereInput
   isNot?: Prisma.GoodsReceiptWhereInput
@@ -655,46 +645,14 @@ export type GoodsReceiptNullableScalarRelationFilter = {
   isNot?: Prisma.GoodsReceiptWhereInput | null
 }
 
-export type GoodsReceiptCreateNestedManyWithoutSupplierInput = {
-  create?: Prisma.XOR<Prisma.GoodsReceiptCreateWithoutSupplierInput, Prisma.GoodsReceiptUncheckedCreateWithoutSupplierInput> | Prisma.GoodsReceiptCreateWithoutSupplierInput[] | Prisma.GoodsReceiptUncheckedCreateWithoutSupplierInput[]
-  connectOrCreate?: Prisma.GoodsReceiptCreateOrConnectWithoutSupplierInput | Prisma.GoodsReceiptCreateOrConnectWithoutSupplierInput[]
-  createMany?: Prisma.GoodsReceiptCreateManySupplierInputEnvelope
-  connect?: Prisma.GoodsReceiptWhereUniqueInput | Prisma.GoodsReceiptWhereUniqueInput[]
+export type GoodsReceiptListRelationFilter = {
+  every?: Prisma.GoodsReceiptWhereInput
+  some?: Prisma.GoodsReceiptWhereInput
+  none?: Prisma.GoodsReceiptWhereInput
 }
 
-export type GoodsReceiptUncheckedCreateNestedManyWithoutSupplierInput = {
-  create?: Prisma.XOR<Prisma.GoodsReceiptCreateWithoutSupplierInput, Prisma.GoodsReceiptUncheckedCreateWithoutSupplierInput> | Prisma.GoodsReceiptCreateWithoutSupplierInput[] | Prisma.GoodsReceiptUncheckedCreateWithoutSupplierInput[]
-  connectOrCreate?: Prisma.GoodsReceiptCreateOrConnectWithoutSupplierInput | Prisma.GoodsReceiptCreateOrConnectWithoutSupplierInput[]
-  createMany?: Prisma.GoodsReceiptCreateManySupplierInputEnvelope
-  connect?: Prisma.GoodsReceiptWhereUniqueInput | Prisma.GoodsReceiptWhereUniqueInput[]
-}
-
-export type GoodsReceiptUpdateManyWithoutSupplierNestedInput = {
-  create?: Prisma.XOR<Prisma.GoodsReceiptCreateWithoutSupplierInput, Prisma.GoodsReceiptUncheckedCreateWithoutSupplierInput> | Prisma.GoodsReceiptCreateWithoutSupplierInput[] | Prisma.GoodsReceiptUncheckedCreateWithoutSupplierInput[]
-  connectOrCreate?: Prisma.GoodsReceiptCreateOrConnectWithoutSupplierInput | Prisma.GoodsReceiptCreateOrConnectWithoutSupplierInput[]
-  upsert?: Prisma.GoodsReceiptUpsertWithWhereUniqueWithoutSupplierInput | Prisma.GoodsReceiptUpsertWithWhereUniqueWithoutSupplierInput[]
-  createMany?: Prisma.GoodsReceiptCreateManySupplierInputEnvelope
-  set?: Prisma.GoodsReceiptWhereUniqueInput | Prisma.GoodsReceiptWhereUniqueInput[]
-  disconnect?: Prisma.GoodsReceiptWhereUniqueInput | Prisma.GoodsReceiptWhereUniqueInput[]
-  delete?: Prisma.GoodsReceiptWhereUniqueInput | Prisma.GoodsReceiptWhereUniqueInput[]
-  connect?: Prisma.GoodsReceiptWhereUniqueInput | Prisma.GoodsReceiptWhereUniqueInput[]
-  update?: Prisma.GoodsReceiptUpdateWithWhereUniqueWithoutSupplierInput | Prisma.GoodsReceiptUpdateWithWhereUniqueWithoutSupplierInput[]
-  updateMany?: Prisma.GoodsReceiptUpdateManyWithWhereWithoutSupplierInput | Prisma.GoodsReceiptUpdateManyWithWhereWithoutSupplierInput[]
-  deleteMany?: Prisma.GoodsReceiptScalarWhereInput | Prisma.GoodsReceiptScalarWhereInput[]
-}
-
-export type GoodsReceiptUncheckedUpdateManyWithoutSupplierNestedInput = {
-  create?: Prisma.XOR<Prisma.GoodsReceiptCreateWithoutSupplierInput, Prisma.GoodsReceiptUncheckedCreateWithoutSupplierInput> | Prisma.GoodsReceiptCreateWithoutSupplierInput[] | Prisma.GoodsReceiptUncheckedCreateWithoutSupplierInput[]
-  connectOrCreate?: Prisma.GoodsReceiptCreateOrConnectWithoutSupplierInput | Prisma.GoodsReceiptCreateOrConnectWithoutSupplierInput[]
-  upsert?: Prisma.GoodsReceiptUpsertWithWhereUniqueWithoutSupplierInput | Prisma.GoodsReceiptUpsertWithWhereUniqueWithoutSupplierInput[]
-  createMany?: Prisma.GoodsReceiptCreateManySupplierInputEnvelope
-  set?: Prisma.GoodsReceiptWhereUniqueInput | Prisma.GoodsReceiptWhereUniqueInput[]
-  disconnect?: Prisma.GoodsReceiptWhereUniqueInput | Prisma.GoodsReceiptWhereUniqueInput[]
-  delete?: Prisma.GoodsReceiptWhereUniqueInput | Prisma.GoodsReceiptWhereUniqueInput[]
-  connect?: Prisma.GoodsReceiptWhereUniqueInput | Prisma.GoodsReceiptWhereUniqueInput[]
-  update?: Prisma.GoodsReceiptUpdateWithWhereUniqueWithoutSupplierInput | Prisma.GoodsReceiptUpdateWithWhereUniqueWithoutSupplierInput[]
-  updateMany?: Prisma.GoodsReceiptUpdateManyWithWhereWithoutSupplierInput | Prisma.GoodsReceiptUpdateManyWithWhereWithoutSupplierInput[]
-  deleteMany?: Prisma.GoodsReceiptScalarWhereInput | Prisma.GoodsReceiptScalarWhereInput[]
+export type GoodsReceiptOrderByRelationAggregateInput = {
+  _count?: Prisma.SortOrder
 }
 
 export type GoodsReceiptCreateNestedOneWithoutDeliveryOrderInput = {
@@ -833,6 +791,48 @@ export type GoodsReceiptUncheckedUpdateManyWithoutCompanyNestedInput = {
   deleteMany?: Prisma.GoodsReceiptScalarWhereInput | Prisma.GoodsReceiptScalarWhereInput[]
 }
 
+export type GoodsReceiptCreateNestedManyWithoutSupplierInput = {
+  create?: Prisma.XOR<Prisma.GoodsReceiptCreateWithoutSupplierInput, Prisma.GoodsReceiptUncheckedCreateWithoutSupplierInput> | Prisma.GoodsReceiptCreateWithoutSupplierInput[] | Prisma.GoodsReceiptUncheckedCreateWithoutSupplierInput[]
+  connectOrCreate?: Prisma.GoodsReceiptCreateOrConnectWithoutSupplierInput | Prisma.GoodsReceiptCreateOrConnectWithoutSupplierInput[]
+  createMany?: Prisma.GoodsReceiptCreateManySupplierInputEnvelope
+  connect?: Prisma.GoodsReceiptWhereUniqueInput | Prisma.GoodsReceiptWhereUniqueInput[]
+}
+
+export type GoodsReceiptUncheckedCreateNestedManyWithoutSupplierInput = {
+  create?: Prisma.XOR<Prisma.GoodsReceiptCreateWithoutSupplierInput, Prisma.GoodsReceiptUncheckedCreateWithoutSupplierInput> | Prisma.GoodsReceiptCreateWithoutSupplierInput[] | Prisma.GoodsReceiptUncheckedCreateWithoutSupplierInput[]
+  connectOrCreate?: Prisma.GoodsReceiptCreateOrConnectWithoutSupplierInput | Prisma.GoodsReceiptCreateOrConnectWithoutSupplierInput[]
+  createMany?: Prisma.GoodsReceiptCreateManySupplierInputEnvelope
+  connect?: Prisma.GoodsReceiptWhereUniqueInput | Prisma.GoodsReceiptWhereUniqueInput[]
+}
+
+export type GoodsReceiptUpdateManyWithoutSupplierNestedInput = {
+  create?: Prisma.XOR<Prisma.GoodsReceiptCreateWithoutSupplierInput, Prisma.GoodsReceiptUncheckedCreateWithoutSupplierInput> | Prisma.GoodsReceiptCreateWithoutSupplierInput[] | Prisma.GoodsReceiptUncheckedCreateWithoutSupplierInput[]
+  connectOrCreate?: Prisma.GoodsReceiptCreateOrConnectWithoutSupplierInput | Prisma.GoodsReceiptCreateOrConnectWithoutSupplierInput[]
+  upsert?: Prisma.GoodsReceiptUpsertWithWhereUniqueWithoutSupplierInput | Prisma.GoodsReceiptUpsertWithWhereUniqueWithoutSupplierInput[]
+  createMany?: Prisma.GoodsReceiptCreateManySupplierInputEnvelope
+  set?: Prisma.GoodsReceiptWhereUniqueInput | Prisma.GoodsReceiptWhereUniqueInput[]
+  disconnect?: Prisma.GoodsReceiptWhereUniqueInput | Prisma.GoodsReceiptWhereUniqueInput[]
+  delete?: Prisma.GoodsReceiptWhereUniqueInput | Prisma.GoodsReceiptWhereUniqueInput[]
+  connect?: Prisma.GoodsReceiptWhereUniqueInput | Prisma.GoodsReceiptWhereUniqueInput[]
+  update?: Prisma.GoodsReceiptUpdateWithWhereUniqueWithoutSupplierInput | Prisma.GoodsReceiptUpdateWithWhereUniqueWithoutSupplierInput[]
+  updateMany?: Prisma.GoodsReceiptUpdateManyWithWhereWithoutSupplierInput | Prisma.GoodsReceiptUpdateManyWithWhereWithoutSupplierInput[]
+  deleteMany?: Prisma.GoodsReceiptScalarWhereInput | Prisma.GoodsReceiptScalarWhereInput[]
+}
+
+export type GoodsReceiptUncheckedUpdateManyWithoutSupplierNestedInput = {
+  create?: Prisma.XOR<Prisma.GoodsReceiptCreateWithoutSupplierInput, Prisma.GoodsReceiptUncheckedCreateWithoutSupplierInput> | Prisma.GoodsReceiptCreateWithoutSupplierInput[] | Prisma.GoodsReceiptUncheckedCreateWithoutSupplierInput[]
+  connectOrCreate?: Prisma.GoodsReceiptCreateOrConnectWithoutSupplierInput | Prisma.GoodsReceiptCreateOrConnectWithoutSupplierInput[]
+  upsert?: Prisma.GoodsReceiptUpsertWithWhereUniqueWithoutSupplierInput | Prisma.GoodsReceiptUpsertWithWhereUniqueWithoutSupplierInput[]
+  createMany?: Prisma.GoodsReceiptCreateManySupplierInputEnvelope
+  set?: Prisma.GoodsReceiptWhereUniqueInput | Prisma.GoodsReceiptWhereUniqueInput[]
+  disconnect?: Prisma.GoodsReceiptWhereUniqueInput | Prisma.GoodsReceiptWhereUniqueInput[]
+  delete?: Prisma.GoodsReceiptWhereUniqueInput | Prisma.GoodsReceiptWhereUniqueInput[]
+  connect?: Prisma.GoodsReceiptWhereUniqueInput | Prisma.GoodsReceiptWhereUniqueInput[]
+  update?: Prisma.GoodsReceiptUpdateWithWhereUniqueWithoutSupplierInput | Prisma.GoodsReceiptUpdateWithWhereUniqueWithoutSupplierInput[]
+  updateMany?: Prisma.GoodsReceiptUpdateManyWithWhereWithoutSupplierInput | Prisma.GoodsReceiptUpdateManyWithWhereWithoutSupplierInput[]
+  deleteMany?: Prisma.GoodsReceiptScalarWhereInput | Prisma.GoodsReceiptScalarWhereInput[]
+}
+
 export type GoodsReceiptCreateNestedManyWithoutUserInput = {
   create?: Prisma.XOR<Prisma.GoodsReceiptCreateWithoutUserInput, Prisma.GoodsReceiptUncheckedCreateWithoutUserInput> | Prisma.GoodsReceiptCreateWithoutUserInput[] | Prisma.GoodsReceiptUncheckedCreateWithoutUserInput[]
   connectOrCreate?: Prisma.GoodsReceiptCreateOrConnectWithoutUserInput | Prisma.GoodsReceiptCreateOrConnectWithoutUserInput[]
@@ -873,95 +873,6 @@ export type GoodsReceiptUncheckedUpdateManyWithoutUserNestedInput = {
   update?: Prisma.GoodsReceiptUpdateWithWhereUniqueWithoutUserInput | Prisma.GoodsReceiptUpdateWithWhereUniqueWithoutUserInput[]
   updateMany?: Prisma.GoodsReceiptUpdateManyWithWhereWithoutUserInput | Prisma.GoodsReceiptUpdateManyWithWhereWithoutUserInput[]
   deleteMany?: Prisma.GoodsReceiptScalarWhereInput | Prisma.GoodsReceiptScalarWhereInput[]
-}
-
-export type GoodsReceiptCreateWithoutSupplierInput = {
-  number: string
-  date: Date | string
-  sender: string
-  recipient: string
-  status?: $Enums.GoodsReceiptStatus
-  paymentStatus?: $Enums.PaymentStatus
-  supportingDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  notes?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  deletedAt?: Date | string | null
-  PurchaseOrder: Prisma.PurchaseOrderCreateNestedOneWithoutGoodsReceiptsInput
-  Company: Prisma.CompanyCreateNestedOneWithoutGoodsReceiptsInput
-  User: Prisma.UserCreateNestedOneWithoutGoodsReceiptsInput
-  GoodsReceiptItems?: Prisma.GoodsReceiptItemCreateNestedManyWithoutGoodsReceiptInput
-  deliveryOrder?: Prisma.DeliveryOrderCreateNestedOneWithoutGoodsReceiptInput
-  nkps?: Prisma.NkpCreateNestedManyWithoutGoodsReceiptInput
-}
-
-export type GoodsReceiptUncheckedCreateWithoutSupplierInput = {
-  id?: number
-  number: string
-  date: Date | string
-  sender: string
-  recipient: string
-  status?: $Enums.GoodsReceiptStatus
-  paymentStatus?: $Enums.PaymentStatus
-  supportingDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  notes?: string | null
-  purchaseOrderId: number
-  companyId: number
-  userId: number
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  deletedAt?: Date | string | null
-  GoodsReceiptItems?: Prisma.GoodsReceiptItemUncheckedCreateNestedManyWithoutGoodsReceiptInput
-  deliveryOrder?: Prisma.DeliveryOrderUncheckedCreateNestedOneWithoutGoodsReceiptInput
-  nkps?: Prisma.NkpUncheckedCreateNestedManyWithoutGoodsReceiptInput
-}
-
-export type GoodsReceiptCreateOrConnectWithoutSupplierInput = {
-  where: Prisma.GoodsReceiptWhereUniqueInput
-  create: Prisma.XOR<Prisma.GoodsReceiptCreateWithoutSupplierInput, Prisma.GoodsReceiptUncheckedCreateWithoutSupplierInput>
-}
-
-export type GoodsReceiptCreateManySupplierInputEnvelope = {
-  data: Prisma.GoodsReceiptCreateManySupplierInput | Prisma.GoodsReceiptCreateManySupplierInput[]
-  skipDuplicates?: boolean
-}
-
-export type GoodsReceiptUpsertWithWhereUniqueWithoutSupplierInput = {
-  where: Prisma.GoodsReceiptWhereUniqueInput
-  update: Prisma.XOR<Prisma.GoodsReceiptUpdateWithoutSupplierInput, Prisma.GoodsReceiptUncheckedUpdateWithoutSupplierInput>
-  create: Prisma.XOR<Prisma.GoodsReceiptCreateWithoutSupplierInput, Prisma.GoodsReceiptUncheckedCreateWithoutSupplierInput>
-}
-
-export type GoodsReceiptUpdateWithWhereUniqueWithoutSupplierInput = {
-  where: Prisma.GoodsReceiptWhereUniqueInput
-  data: Prisma.XOR<Prisma.GoodsReceiptUpdateWithoutSupplierInput, Prisma.GoodsReceiptUncheckedUpdateWithoutSupplierInput>
-}
-
-export type GoodsReceiptUpdateManyWithWhereWithoutSupplierInput = {
-  where: Prisma.GoodsReceiptScalarWhereInput
-  data: Prisma.XOR<Prisma.GoodsReceiptUpdateManyMutationInput, Prisma.GoodsReceiptUncheckedUpdateManyWithoutSupplierInput>
-}
-
-export type GoodsReceiptScalarWhereInput = {
-  AND?: Prisma.GoodsReceiptScalarWhereInput | Prisma.GoodsReceiptScalarWhereInput[]
-  OR?: Prisma.GoodsReceiptScalarWhereInput[]
-  NOT?: Prisma.GoodsReceiptScalarWhereInput | Prisma.GoodsReceiptScalarWhereInput[]
-  id?: Prisma.IntFilter<"GoodsReceipt"> | number
-  number?: Prisma.StringFilter<"GoodsReceipt"> | string
-  date?: Prisma.DateTimeFilter<"GoodsReceipt"> | Date | string
-  sender?: Prisma.StringFilter<"GoodsReceipt"> | string
-  recipient?: Prisma.StringFilter<"GoodsReceipt"> | string
-  status?: Prisma.EnumGoodsReceiptStatusFilter<"GoodsReceipt"> | $Enums.GoodsReceiptStatus
-  paymentStatus?: Prisma.EnumPaymentStatusFilter<"GoodsReceipt"> | $Enums.PaymentStatus
-  supportingDocument?: Prisma.JsonNullableFilter<"GoodsReceipt">
-  notes?: Prisma.StringNullableFilter<"GoodsReceipt"> | string | null
-  purchaseOrderId?: Prisma.IntFilter<"GoodsReceipt"> | number
-  supplierId?: Prisma.IntFilter<"GoodsReceipt"> | number
-  companyId?: Prisma.IntFilter<"GoodsReceipt"> | number
-  userId?: Prisma.IntFilter<"GoodsReceipt"> | number
-  createdAt?: Prisma.DateTimeFilter<"GoodsReceipt"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"GoodsReceipt"> | Date | string
-  deletedAt?: Prisma.DateTimeNullableFilter<"GoodsReceipt"> | Date | string | null
 }
 
 export type GoodsReceiptCreateWithoutDeliveryOrderInput = {
@@ -1325,6 +1236,28 @@ export type GoodsReceiptUpdateManyWithWhereWithoutPurchaseOrderInput = {
   data: Prisma.XOR<Prisma.GoodsReceiptUpdateManyMutationInput, Prisma.GoodsReceiptUncheckedUpdateManyWithoutPurchaseOrderInput>
 }
 
+export type GoodsReceiptScalarWhereInput = {
+  AND?: Prisma.GoodsReceiptScalarWhereInput | Prisma.GoodsReceiptScalarWhereInput[]
+  OR?: Prisma.GoodsReceiptScalarWhereInput[]
+  NOT?: Prisma.GoodsReceiptScalarWhereInput | Prisma.GoodsReceiptScalarWhereInput[]
+  id?: Prisma.IntFilter<"GoodsReceipt"> | number
+  number?: Prisma.StringFilter<"GoodsReceipt"> | string
+  date?: Prisma.DateTimeFilter<"GoodsReceipt"> | Date | string
+  sender?: Prisma.StringFilter<"GoodsReceipt"> | string
+  recipient?: Prisma.StringFilter<"GoodsReceipt"> | string
+  status?: Prisma.EnumGoodsReceiptStatusFilter<"GoodsReceipt"> | $Enums.GoodsReceiptStatus
+  paymentStatus?: Prisma.EnumPaymentStatusFilter<"GoodsReceipt"> | $Enums.PaymentStatus
+  supportingDocument?: Prisma.JsonNullableFilter<"GoodsReceipt">
+  notes?: Prisma.StringNullableFilter<"GoodsReceipt"> | string | null
+  purchaseOrderId?: Prisma.IntFilter<"GoodsReceipt"> | number
+  supplierId?: Prisma.IntFilter<"GoodsReceipt"> | number
+  companyId?: Prisma.IntFilter<"GoodsReceipt"> | number
+  userId?: Prisma.IntFilter<"GoodsReceipt"> | number
+  createdAt?: Prisma.DateTimeFilter<"GoodsReceipt"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"GoodsReceipt"> | Date | string
+  deletedAt?: Prisma.DateTimeNullableFilter<"GoodsReceipt"> | Date | string | null
+}
+
 export type GoodsReceiptCreateWithoutCompanyInput = {
   number: string
   date: Date | string
@@ -1392,6 +1325,73 @@ export type GoodsReceiptUpdateManyWithWhereWithoutCompanyInput = {
   data: Prisma.XOR<Prisma.GoodsReceiptUpdateManyMutationInput, Prisma.GoodsReceiptUncheckedUpdateManyWithoutCompanyInput>
 }
 
+export type GoodsReceiptCreateWithoutSupplierInput = {
+  number: string
+  date: Date | string
+  sender: string
+  recipient: string
+  status?: $Enums.GoodsReceiptStatus
+  paymentStatus?: $Enums.PaymentStatus
+  supportingDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  notes?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  PurchaseOrder: Prisma.PurchaseOrderCreateNestedOneWithoutGoodsReceiptsInput
+  Company: Prisma.CompanyCreateNestedOneWithoutGoodsReceiptsInput
+  User: Prisma.UserCreateNestedOneWithoutGoodsReceiptsInput
+  GoodsReceiptItems?: Prisma.GoodsReceiptItemCreateNestedManyWithoutGoodsReceiptInput
+  deliveryOrder?: Prisma.DeliveryOrderCreateNestedOneWithoutGoodsReceiptInput
+  nkps?: Prisma.NkpCreateNestedManyWithoutGoodsReceiptInput
+}
+
+export type GoodsReceiptUncheckedCreateWithoutSupplierInput = {
+  id?: number
+  number: string
+  date: Date | string
+  sender: string
+  recipient: string
+  status?: $Enums.GoodsReceiptStatus
+  paymentStatus?: $Enums.PaymentStatus
+  supportingDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  notes?: string | null
+  purchaseOrderId: number
+  companyId: number
+  userId: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  GoodsReceiptItems?: Prisma.GoodsReceiptItemUncheckedCreateNestedManyWithoutGoodsReceiptInput
+  deliveryOrder?: Prisma.DeliveryOrderUncheckedCreateNestedOneWithoutGoodsReceiptInput
+  nkps?: Prisma.NkpUncheckedCreateNestedManyWithoutGoodsReceiptInput
+}
+
+export type GoodsReceiptCreateOrConnectWithoutSupplierInput = {
+  where: Prisma.GoodsReceiptWhereUniqueInput
+  create: Prisma.XOR<Prisma.GoodsReceiptCreateWithoutSupplierInput, Prisma.GoodsReceiptUncheckedCreateWithoutSupplierInput>
+}
+
+export type GoodsReceiptCreateManySupplierInputEnvelope = {
+  data: Prisma.GoodsReceiptCreateManySupplierInput | Prisma.GoodsReceiptCreateManySupplierInput[]
+  skipDuplicates?: boolean
+}
+
+export type GoodsReceiptUpsertWithWhereUniqueWithoutSupplierInput = {
+  where: Prisma.GoodsReceiptWhereUniqueInput
+  update: Prisma.XOR<Prisma.GoodsReceiptUpdateWithoutSupplierInput, Prisma.GoodsReceiptUncheckedUpdateWithoutSupplierInput>
+  create: Prisma.XOR<Prisma.GoodsReceiptCreateWithoutSupplierInput, Prisma.GoodsReceiptUncheckedCreateWithoutSupplierInput>
+}
+
+export type GoodsReceiptUpdateWithWhereUniqueWithoutSupplierInput = {
+  where: Prisma.GoodsReceiptWhereUniqueInput
+  data: Prisma.XOR<Prisma.GoodsReceiptUpdateWithoutSupplierInput, Prisma.GoodsReceiptUncheckedUpdateWithoutSupplierInput>
+}
+
+export type GoodsReceiptUpdateManyWithWhereWithoutSupplierInput = {
+  where: Prisma.GoodsReceiptScalarWhereInput
+  data: Prisma.XOR<Prisma.GoodsReceiptUpdateManyMutationInput, Prisma.GoodsReceiptUncheckedUpdateManyWithoutSupplierInput>
+}
+
 export type GoodsReceiptCreateWithoutUserInput = {
   number: string
   date: Date | string
@@ -1457,83 +1457,6 @@ export type GoodsReceiptUpdateWithWhereUniqueWithoutUserInput = {
 export type GoodsReceiptUpdateManyWithWhereWithoutUserInput = {
   where: Prisma.GoodsReceiptScalarWhereInput
   data: Prisma.XOR<Prisma.GoodsReceiptUpdateManyMutationInput, Prisma.GoodsReceiptUncheckedUpdateManyWithoutUserInput>
-}
-
-export type GoodsReceiptCreateManySupplierInput = {
-  id?: number
-  number: string
-  date: Date | string
-  sender: string
-  recipient: string
-  status?: $Enums.GoodsReceiptStatus
-  paymentStatus?: $Enums.PaymentStatus
-  supportingDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  notes?: string | null
-  purchaseOrderId: number
-  companyId: number
-  userId: number
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  deletedAt?: Date | string | null
-}
-
-export type GoodsReceiptUpdateWithoutSupplierInput = {
-  number?: Prisma.StringFieldUpdateOperationsInput | string
-  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  sender?: Prisma.StringFieldUpdateOperationsInput | string
-  recipient?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumGoodsReceiptStatusFieldUpdateOperationsInput | $Enums.GoodsReceiptStatus
-  paymentStatus?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
-  supportingDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  PurchaseOrder?: Prisma.PurchaseOrderUpdateOneRequiredWithoutGoodsReceiptsNestedInput
-  Company?: Prisma.CompanyUpdateOneRequiredWithoutGoodsReceiptsNestedInput
-  User?: Prisma.UserUpdateOneRequiredWithoutGoodsReceiptsNestedInput
-  GoodsReceiptItems?: Prisma.GoodsReceiptItemUpdateManyWithoutGoodsReceiptNestedInput
-  deliveryOrder?: Prisma.DeliveryOrderUpdateOneWithoutGoodsReceiptNestedInput
-  nkps?: Prisma.NkpUpdateManyWithoutGoodsReceiptNestedInput
-}
-
-export type GoodsReceiptUncheckedUpdateWithoutSupplierInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  number?: Prisma.StringFieldUpdateOperationsInput | string
-  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  sender?: Prisma.StringFieldUpdateOperationsInput | string
-  recipient?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumGoodsReceiptStatusFieldUpdateOperationsInput | $Enums.GoodsReceiptStatus
-  paymentStatus?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
-  supportingDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  purchaseOrderId?: Prisma.IntFieldUpdateOperationsInput | number
-  companyId?: Prisma.IntFieldUpdateOperationsInput | number
-  userId?: Prisma.IntFieldUpdateOperationsInput | number
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  GoodsReceiptItems?: Prisma.GoodsReceiptItemUncheckedUpdateManyWithoutGoodsReceiptNestedInput
-  deliveryOrder?: Prisma.DeliveryOrderUncheckedUpdateOneWithoutGoodsReceiptNestedInput
-  nkps?: Prisma.NkpUncheckedUpdateManyWithoutGoodsReceiptNestedInput
-}
-
-export type GoodsReceiptUncheckedUpdateManyWithoutSupplierInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  number?: Prisma.StringFieldUpdateOperationsInput | string
-  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  sender?: Prisma.StringFieldUpdateOperationsInput | string
-  recipient?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumGoodsReceiptStatusFieldUpdateOperationsInput | $Enums.GoodsReceiptStatus
-  paymentStatus?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
-  supportingDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  purchaseOrderId?: Prisma.IntFieldUpdateOperationsInput | number
-  companyId?: Prisma.IntFieldUpdateOperationsInput | number
-  userId?: Prisma.IntFieldUpdateOperationsInput | number
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type GoodsReceiptCreateManyPurchaseOrderInput = {
@@ -1684,6 +1607,83 @@ export type GoodsReceiptUncheckedUpdateManyWithoutCompanyInput = {
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   purchaseOrderId?: Prisma.IntFieldUpdateOperationsInput | number
   supplierId?: Prisma.IntFieldUpdateOperationsInput | number
+  userId?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+}
+
+export type GoodsReceiptCreateManySupplierInput = {
+  id?: number
+  number: string
+  date: Date | string
+  sender: string
+  recipient: string
+  status?: $Enums.GoodsReceiptStatus
+  paymentStatus?: $Enums.PaymentStatus
+  supportingDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  notes?: string | null
+  purchaseOrderId: number
+  companyId: number
+  userId: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+}
+
+export type GoodsReceiptUpdateWithoutSupplierInput = {
+  number?: Prisma.StringFieldUpdateOperationsInput | string
+  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sender?: Prisma.StringFieldUpdateOperationsInput | string
+  recipient?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumGoodsReceiptStatusFieldUpdateOperationsInput | $Enums.GoodsReceiptStatus
+  paymentStatus?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+  supportingDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  PurchaseOrder?: Prisma.PurchaseOrderUpdateOneRequiredWithoutGoodsReceiptsNestedInput
+  Company?: Prisma.CompanyUpdateOneRequiredWithoutGoodsReceiptsNestedInput
+  User?: Prisma.UserUpdateOneRequiredWithoutGoodsReceiptsNestedInput
+  GoodsReceiptItems?: Prisma.GoodsReceiptItemUpdateManyWithoutGoodsReceiptNestedInput
+  deliveryOrder?: Prisma.DeliveryOrderUpdateOneWithoutGoodsReceiptNestedInput
+  nkps?: Prisma.NkpUpdateManyWithoutGoodsReceiptNestedInput
+}
+
+export type GoodsReceiptUncheckedUpdateWithoutSupplierInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  number?: Prisma.StringFieldUpdateOperationsInput | string
+  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sender?: Prisma.StringFieldUpdateOperationsInput | string
+  recipient?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumGoodsReceiptStatusFieldUpdateOperationsInput | $Enums.GoodsReceiptStatus
+  paymentStatus?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+  supportingDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  purchaseOrderId?: Prisma.IntFieldUpdateOperationsInput | number
+  companyId?: Prisma.IntFieldUpdateOperationsInput | number
+  userId?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  GoodsReceiptItems?: Prisma.GoodsReceiptItemUncheckedUpdateManyWithoutGoodsReceiptNestedInput
+  deliveryOrder?: Prisma.DeliveryOrderUncheckedUpdateOneWithoutGoodsReceiptNestedInput
+  nkps?: Prisma.NkpUncheckedUpdateManyWithoutGoodsReceiptNestedInput
+}
+
+export type GoodsReceiptUncheckedUpdateManyWithoutSupplierInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  number?: Prisma.StringFieldUpdateOperationsInput | string
+  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sender?: Prisma.StringFieldUpdateOperationsInput | string
+  recipient?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumGoodsReceiptStatusFieldUpdateOperationsInput | $Enums.GoodsReceiptStatus
+  paymentStatus?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+  supportingDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  purchaseOrderId?: Prisma.IntFieldUpdateOperationsInput | number
+  companyId?: Prisma.IntFieldUpdateOperationsInput | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string

@@ -333,20 +333,6 @@ export type BankNullableScalarRelationFilter = {
   isNot?: Prisma.BankWhereInput | null
 }
 
-export type BankCreateNestedOneWithoutSupplierInput = {
-  create?: Prisma.XOR<Prisma.BankCreateWithoutSupplierInput, Prisma.BankUncheckedCreateWithoutSupplierInput>
-  connectOrCreate?: Prisma.BankCreateOrConnectWithoutSupplierInput
-  connect?: Prisma.BankWhereUniqueInput
-}
-
-export type BankUpdateOneRequiredWithoutSupplierNestedInput = {
-  create?: Prisma.XOR<Prisma.BankCreateWithoutSupplierInput, Prisma.BankUncheckedCreateWithoutSupplierInput>
-  connectOrCreate?: Prisma.BankCreateOrConnectWithoutSupplierInput
-  upsert?: Prisma.BankUpsertWithoutSupplierInput
-  connect?: Prisma.BankWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.BankUpdateToOneWithWhereWithoutSupplierInput, Prisma.BankUpdateWithoutSupplierInput>, Prisma.BankUncheckedUpdateWithoutSupplierInput>
-}
-
 export type BankCreateNestedOneWithoutNkpInput = {
   create?: Prisma.XOR<Prisma.BankCreateWithoutNkpInput, Prisma.BankUncheckedCreateWithoutNkpInput>
   connectOrCreate?: Prisma.BankCreateOrConnectWithoutNkpInput
@@ -359,6 +345,20 @@ export type BankUpdateOneRequiredWithoutNkpNestedInput = {
   upsert?: Prisma.BankUpsertWithoutNkpInput
   connect?: Prisma.BankWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.BankUpdateToOneWithWhereWithoutNkpInput, Prisma.BankUpdateWithoutNkpInput>, Prisma.BankUncheckedUpdateWithoutNkpInput>
+}
+
+export type BankCreateNestedOneWithoutSupplierInput = {
+  create?: Prisma.XOR<Prisma.BankCreateWithoutSupplierInput, Prisma.BankUncheckedCreateWithoutSupplierInput>
+  connectOrCreate?: Prisma.BankCreateOrConnectWithoutSupplierInput
+  connect?: Prisma.BankWhereUniqueInput
+}
+
+export type BankUpdateOneRequiredWithoutSupplierNestedInput = {
+  create?: Prisma.XOR<Prisma.BankCreateWithoutSupplierInput, Prisma.BankUncheckedCreateWithoutSupplierInput>
+  connectOrCreate?: Prisma.BankCreateOrConnectWithoutSupplierInput
+  upsert?: Prisma.BankUpsertWithoutSupplierInput
+  connect?: Prisma.BankWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.BankUpdateToOneWithWhereWithoutSupplierInput, Prisma.BankUpdateWithoutSupplierInput>, Prisma.BankUncheckedUpdateWithoutSupplierInput>
 }
 
 export type BankCreateNestedOneWithoutUserInput = {
@@ -375,52 +375,6 @@ export type BankUpdateOneWithoutUserNestedInput = {
   delete?: Prisma.BankWhereInput | boolean
   connect?: Prisma.BankWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.BankUpdateToOneWithWhereWithoutUserInput, Prisma.BankUpdateWithoutUserInput>, Prisma.BankUncheckedUpdateWithoutUserInput>
-}
-
-export type BankCreateWithoutSupplierInput = {
-  code: string
-  name: string
-  User?: Prisma.UserCreateNestedManyWithoutBankInput
-  Nkp?: Prisma.NkpCreateNestedManyWithoutBankInput
-}
-
-export type BankUncheckedCreateWithoutSupplierInput = {
-  id?: number
-  code: string
-  name: string
-  User?: Prisma.UserUncheckedCreateNestedManyWithoutBankInput
-  Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutBankInput
-}
-
-export type BankCreateOrConnectWithoutSupplierInput = {
-  where: Prisma.BankWhereUniqueInput
-  create: Prisma.XOR<Prisma.BankCreateWithoutSupplierInput, Prisma.BankUncheckedCreateWithoutSupplierInput>
-}
-
-export type BankUpsertWithoutSupplierInput = {
-  update: Prisma.XOR<Prisma.BankUpdateWithoutSupplierInput, Prisma.BankUncheckedUpdateWithoutSupplierInput>
-  create: Prisma.XOR<Prisma.BankCreateWithoutSupplierInput, Prisma.BankUncheckedCreateWithoutSupplierInput>
-  where?: Prisma.BankWhereInput
-}
-
-export type BankUpdateToOneWithWhereWithoutSupplierInput = {
-  where?: Prisma.BankWhereInput
-  data: Prisma.XOR<Prisma.BankUpdateWithoutSupplierInput, Prisma.BankUncheckedUpdateWithoutSupplierInput>
-}
-
-export type BankUpdateWithoutSupplierInput = {
-  code?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  User?: Prisma.UserUpdateManyWithoutBankNestedInput
-  Nkp?: Prisma.NkpUpdateManyWithoutBankNestedInput
-}
-
-export type BankUncheckedUpdateWithoutSupplierInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  code?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  User?: Prisma.UserUncheckedUpdateManyWithoutBankNestedInput
-  Nkp?: Prisma.NkpUncheckedUpdateManyWithoutBankNestedInput
 }
 
 export type BankCreateWithoutNkpInput = {
@@ -467,6 +421,52 @@ export type BankUncheckedUpdateWithoutNkpInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   User?: Prisma.UserUncheckedUpdateManyWithoutBankNestedInput
   Supplier?: Prisma.SupplierUncheckedUpdateManyWithoutBankNestedInput
+}
+
+export type BankCreateWithoutSupplierInput = {
+  code: string
+  name: string
+  User?: Prisma.UserCreateNestedManyWithoutBankInput
+  Nkp?: Prisma.NkpCreateNestedManyWithoutBankInput
+}
+
+export type BankUncheckedCreateWithoutSupplierInput = {
+  id?: number
+  code: string
+  name: string
+  User?: Prisma.UserUncheckedCreateNestedManyWithoutBankInput
+  Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutBankInput
+}
+
+export type BankCreateOrConnectWithoutSupplierInput = {
+  where: Prisma.BankWhereUniqueInput
+  create: Prisma.XOR<Prisma.BankCreateWithoutSupplierInput, Prisma.BankUncheckedCreateWithoutSupplierInput>
+}
+
+export type BankUpsertWithoutSupplierInput = {
+  update: Prisma.XOR<Prisma.BankUpdateWithoutSupplierInput, Prisma.BankUncheckedUpdateWithoutSupplierInput>
+  create: Prisma.XOR<Prisma.BankCreateWithoutSupplierInput, Prisma.BankUncheckedCreateWithoutSupplierInput>
+  where?: Prisma.BankWhereInput
+}
+
+export type BankUpdateToOneWithWhereWithoutSupplierInput = {
+  where?: Prisma.BankWhereInput
+  data: Prisma.XOR<Prisma.BankUpdateWithoutSupplierInput, Prisma.BankUncheckedUpdateWithoutSupplierInput>
+}
+
+export type BankUpdateWithoutSupplierInput = {
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  User?: Prisma.UserUpdateManyWithoutBankNestedInput
+  Nkp?: Prisma.NkpUpdateManyWithoutBankNestedInput
+}
+
+export type BankUncheckedUpdateWithoutSupplierInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  User?: Prisma.UserUncheckedUpdateManyWithoutBankNestedInput
+  Nkp?: Prisma.NkpUncheckedUpdateManyWithoutBankNestedInput
 }
 
 export type BankCreateWithoutUserInput = {

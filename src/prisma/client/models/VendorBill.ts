@@ -762,48 +762,6 @@ export type VendorBillUpdateOneWithoutAllocationsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.VendorBillUpdateToOneWithWhereWithoutAllocationsInput, Prisma.VendorBillUpdateWithoutAllocationsInput>, Prisma.VendorBillUncheckedUpdateWithoutAllocationsInput>
 }
 
-export type VendorBillCreateNestedManyWithoutSupplierInput = {
-  create?: Prisma.XOR<Prisma.VendorBillCreateWithoutSupplierInput, Prisma.VendorBillUncheckedCreateWithoutSupplierInput> | Prisma.VendorBillCreateWithoutSupplierInput[] | Prisma.VendorBillUncheckedCreateWithoutSupplierInput[]
-  connectOrCreate?: Prisma.VendorBillCreateOrConnectWithoutSupplierInput | Prisma.VendorBillCreateOrConnectWithoutSupplierInput[]
-  createMany?: Prisma.VendorBillCreateManySupplierInputEnvelope
-  connect?: Prisma.VendorBillWhereUniqueInput | Prisma.VendorBillWhereUniqueInput[]
-}
-
-export type VendorBillUncheckedCreateNestedManyWithoutSupplierInput = {
-  create?: Prisma.XOR<Prisma.VendorBillCreateWithoutSupplierInput, Prisma.VendorBillUncheckedCreateWithoutSupplierInput> | Prisma.VendorBillCreateWithoutSupplierInput[] | Prisma.VendorBillUncheckedCreateWithoutSupplierInput[]
-  connectOrCreate?: Prisma.VendorBillCreateOrConnectWithoutSupplierInput | Prisma.VendorBillCreateOrConnectWithoutSupplierInput[]
-  createMany?: Prisma.VendorBillCreateManySupplierInputEnvelope
-  connect?: Prisma.VendorBillWhereUniqueInput | Prisma.VendorBillWhereUniqueInput[]
-}
-
-export type VendorBillUpdateManyWithoutSupplierNestedInput = {
-  create?: Prisma.XOR<Prisma.VendorBillCreateWithoutSupplierInput, Prisma.VendorBillUncheckedCreateWithoutSupplierInput> | Prisma.VendorBillCreateWithoutSupplierInput[] | Prisma.VendorBillUncheckedCreateWithoutSupplierInput[]
-  connectOrCreate?: Prisma.VendorBillCreateOrConnectWithoutSupplierInput | Prisma.VendorBillCreateOrConnectWithoutSupplierInput[]
-  upsert?: Prisma.VendorBillUpsertWithWhereUniqueWithoutSupplierInput | Prisma.VendorBillUpsertWithWhereUniqueWithoutSupplierInput[]
-  createMany?: Prisma.VendorBillCreateManySupplierInputEnvelope
-  set?: Prisma.VendorBillWhereUniqueInput | Prisma.VendorBillWhereUniqueInput[]
-  disconnect?: Prisma.VendorBillWhereUniqueInput | Prisma.VendorBillWhereUniqueInput[]
-  delete?: Prisma.VendorBillWhereUniqueInput | Prisma.VendorBillWhereUniqueInput[]
-  connect?: Prisma.VendorBillWhereUniqueInput | Prisma.VendorBillWhereUniqueInput[]
-  update?: Prisma.VendorBillUpdateWithWhereUniqueWithoutSupplierInput | Prisma.VendorBillUpdateWithWhereUniqueWithoutSupplierInput[]
-  updateMany?: Prisma.VendorBillUpdateManyWithWhereWithoutSupplierInput | Prisma.VendorBillUpdateManyWithWhereWithoutSupplierInput[]
-  deleteMany?: Prisma.VendorBillScalarWhereInput | Prisma.VendorBillScalarWhereInput[]
-}
-
-export type VendorBillUncheckedUpdateManyWithoutSupplierNestedInput = {
-  create?: Prisma.XOR<Prisma.VendorBillCreateWithoutSupplierInput, Prisma.VendorBillUncheckedCreateWithoutSupplierInput> | Prisma.VendorBillCreateWithoutSupplierInput[] | Prisma.VendorBillUncheckedCreateWithoutSupplierInput[]
-  connectOrCreate?: Prisma.VendorBillCreateOrConnectWithoutSupplierInput | Prisma.VendorBillCreateOrConnectWithoutSupplierInput[]
-  upsert?: Prisma.VendorBillUpsertWithWhereUniqueWithoutSupplierInput | Prisma.VendorBillUpsertWithWhereUniqueWithoutSupplierInput[]
-  createMany?: Prisma.VendorBillCreateManySupplierInputEnvelope
-  set?: Prisma.VendorBillWhereUniqueInput | Prisma.VendorBillWhereUniqueInput[]
-  disconnect?: Prisma.VendorBillWhereUniqueInput | Prisma.VendorBillWhereUniqueInput[]
-  delete?: Prisma.VendorBillWhereUniqueInput | Prisma.VendorBillWhereUniqueInput[]
-  connect?: Prisma.VendorBillWhereUniqueInput | Prisma.VendorBillWhereUniqueInput[]
-  update?: Prisma.VendorBillUpdateWithWhereUniqueWithoutSupplierInput | Prisma.VendorBillUpdateWithWhereUniqueWithoutSupplierInput[]
-  updateMany?: Prisma.VendorBillUpdateManyWithWhereWithoutSupplierInput | Prisma.VendorBillUpdateManyWithWhereWithoutSupplierInput[]
-  deleteMany?: Prisma.VendorBillScalarWhereInput | Prisma.VendorBillScalarWhereInput[]
-}
-
 export type VendorBillCreateNestedManyWithoutPurchaseOrderInput = {
   create?: Prisma.XOR<Prisma.VendorBillCreateWithoutPurchaseOrderInput, Prisma.VendorBillUncheckedCreateWithoutPurchaseOrderInput> | Prisma.VendorBillCreateWithoutPurchaseOrderInput[] | Prisma.VendorBillUncheckedCreateWithoutPurchaseOrderInput[]
   connectOrCreate?: Prisma.VendorBillCreateOrConnectWithoutPurchaseOrderInput | Prisma.VendorBillCreateOrConnectWithoutPurchaseOrderInput[]
@@ -843,6 +801,48 @@ export type VendorBillUncheckedUpdateManyWithoutPurchaseOrderNestedInput = {
   connect?: Prisma.VendorBillWhereUniqueInput | Prisma.VendorBillWhereUniqueInput[]
   update?: Prisma.VendorBillUpdateWithWhereUniqueWithoutPurchaseOrderInput | Prisma.VendorBillUpdateWithWhereUniqueWithoutPurchaseOrderInput[]
   updateMany?: Prisma.VendorBillUpdateManyWithWhereWithoutPurchaseOrderInput | Prisma.VendorBillUpdateManyWithWhereWithoutPurchaseOrderInput[]
+  deleteMany?: Prisma.VendorBillScalarWhereInput | Prisma.VendorBillScalarWhereInput[]
+}
+
+export type VendorBillCreateNestedManyWithoutSupplierInput = {
+  create?: Prisma.XOR<Prisma.VendorBillCreateWithoutSupplierInput, Prisma.VendorBillUncheckedCreateWithoutSupplierInput> | Prisma.VendorBillCreateWithoutSupplierInput[] | Prisma.VendorBillUncheckedCreateWithoutSupplierInput[]
+  connectOrCreate?: Prisma.VendorBillCreateOrConnectWithoutSupplierInput | Prisma.VendorBillCreateOrConnectWithoutSupplierInput[]
+  createMany?: Prisma.VendorBillCreateManySupplierInputEnvelope
+  connect?: Prisma.VendorBillWhereUniqueInput | Prisma.VendorBillWhereUniqueInput[]
+}
+
+export type VendorBillUncheckedCreateNestedManyWithoutSupplierInput = {
+  create?: Prisma.XOR<Prisma.VendorBillCreateWithoutSupplierInput, Prisma.VendorBillUncheckedCreateWithoutSupplierInput> | Prisma.VendorBillCreateWithoutSupplierInput[] | Prisma.VendorBillUncheckedCreateWithoutSupplierInput[]
+  connectOrCreate?: Prisma.VendorBillCreateOrConnectWithoutSupplierInput | Prisma.VendorBillCreateOrConnectWithoutSupplierInput[]
+  createMany?: Prisma.VendorBillCreateManySupplierInputEnvelope
+  connect?: Prisma.VendorBillWhereUniqueInput | Prisma.VendorBillWhereUniqueInput[]
+}
+
+export type VendorBillUpdateManyWithoutSupplierNestedInput = {
+  create?: Prisma.XOR<Prisma.VendorBillCreateWithoutSupplierInput, Prisma.VendorBillUncheckedCreateWithoutSupplierInput> | Prisma.VendorBillCreateWithoutSupplierInput[] | Prisma.VendorBillUncheckedCreateWithoutSupplierInput[]
+  connectOrCreate?: Prisma.VendorBillCreateOrConnectWithoutSupplierInput | Prisma.VendorBillCreateOrConnectWithoutSupplierInput[]
+  upsert?: Prisma.VendorBillUpsertWithWhereUniqueWithoutSupplierInput | Prisma.VendorBillUpsertWithWhereUniqueWithoutSupplierInput[]
+  createMany?: Prisma.VendorBillCreateManySupplierInputEnvelope
+  set?: Prisma.VendorBillWhereUniqueInput | Prisma.VendorBillWhereUniqueInput[]
+  disconnect?: Prisma.VendorBillWhereUniqueInput | Prisma.VendorBillWhereUniqueInput[]
+  delete?: Prisma.VendorBillWhereUniqueInput | Prisma.VendorBillWhereUniqueInput[]
+  connect?: Prisma.VendorBillWhereUniqueInput | Prisma.VendorBillWhereUniqueInput[]
+  update?: Prisma.VendorBillUpdateWithWhereUniqueWithoutSupplierInput | Prisma.VendorBillUpdateWithWhereUniqueWithoutSupplierInput[]
+  updateMany?: Prisma.VendorBillUpdateManyWithWhereWithoutSupplierInput | Prisma.VendorBillUpdateManyWithWhereWithoutSupplierInput[]
+  deleteMany?: Prisma.VendorBillScalarWhereInput | Prisma.VendorBillScalarWhereInput[]
+}
+
+export type VendorBillUncheckedUpdateManyWithoutSupplierNestedInput = {
+  create?: Prisma.XOR<Prisma.VendorBillCreateWithoutSupplierInput, Prisma.VendorBillUncheckedCreateWithoutSupplierInput> | Prisma.VendorBillCreateWithoutSupplierInput[] | Prisma.VendorBillUncheckedCreateWithoutSupplierInput[]
+  connectOrCreate?: Prisma.VendorBillCreateOrConnectWithoutSupplierInput | Prisma.VendorBillCreateOrConnectWithoutSupplierInput[]
+  upsert?: Prisma.VendorBillUpsertWithWhereUniqueWithoutSupplierInput | Prisma.VendorBillUpsertWithWhereUniqueWithoutSupplierInput[]
+  createMany?: Prisma.VendorBillCreateManySupplierInputEnvelope
+  set?: Prisma.VendorBillWhereUniqueInput | Prisma.VendorBillWhereUniqueInput[]
+  disconnect?: Prisma.VendorBillWhereUniqueInput | Prisma.VendorBillWhereUniqueInput[]
+  delete?: Prisma.VendorBillWhereUniqueInput | Prisma.VendorBillWhereUniqueInput[]
+  connect?: Prisma.VendorBillWhereUniqueInput | Prisma.VendorBillWhereUniqueInput[]
+  update?: Prisma.VendorBillUpdateWithWhereUniqueWithoutSupplierInput | Prisma.VendorBillUpdateWithWhereUniqueWithoutSupplierInput[]
+  updateMany?: Prisma.VendorBillUpdateManyWithWhereWithoutSupplierInput | Prisma.VendorBillUpdateManyWithWhereWithoutSupplierInput[]
   deleteMany?: Prisma.VendorBillScalarWhereInput | Prisma.VendorBillScalarWhereInput[]
 }
 
@@ -1084,97 +1084,6 @@ export type VendorBillUncheckedUpdateWithoutAllocationsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type VendorBillCreateWithoutSupplierInput = {
-  number: string
-  vendorRef?: string | null
-  date: Date | string
-  dueDate: Date | string
-  currency?: string
-  subtotal: runtime.Decimal | runtime.DecimalJsLike | number | string
-  taxAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  total: runtime.Decimal | runtime.DecimalJsLike | number | string
-  paidAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  status?: $Enums.SettlementStatus
-  notes?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  purchaseOrder?: Prisma.PurchaseOrderCreateNestedOneWithoutVendorBillsInput
-  journal?: Prisma.JournalEntryCreateNestedOneWithoutVendorBillInput
-  createdBy: Prisma.UserCreateNestedOneWithoutVendorBillsCreatedInput
-  allocations?: Prisma.PaymentAllocationCreateNestedManyWithoutVendorBillInput
-}
-
-export type VendorBillUncheckedCreateWithoutSupplierInput = {
-  id?: number
-  number: string
-  vendorRef?: string | null
-  purchaseOrderId?: number | null
-  date: Date | string
-  dueDate: Date | string
-  currency?: string
-  subtotal: runtime.Decimal | runtime.DecimalJsLike | number | string
-  taxAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  total: runtime.Decimal | runtime.DecimalJsLike | number | string
-  paidAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  status?: $Enums.SettlementStatus
-  notes?: string | null
-  journalId?: number | null
-  createdById: number
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  allocations?: Prisma.PaymentAllocationUncheckedCreateNestedManyWithoutVendorBillInput
-}
-
-export type VendorBillCreateOrConnectWithoutSupplierInput = {
-  where: Prisma.VendorBillWhereUniqueInput
-  create: Prisma.XOR<Prisma.VendorBillCreateWithoutSupplierInput, Prisma.VendorBillUncheckedCreateWithoutSupplierInput>
-}
-
-export type VendorBillCreateManySupplierInputEnvelope = {
-  data: Prisma.VendorBillCreateManySupplierInput | Prisma.VendorBillCreateManySupplierInput[]
-  skipDuplicates?: boolean
-}
-
-export type VendorBillUpsertWithWhereUniqueWithoutSupplierInput = {
-  where: Prisma.VendorBillWhereUniqueInput
-  update: Prisma.XOR<Prisma.VendorBillUpdateWithoutSupplierInput, Prisma.VendorBillUncheckedUpdateWithoutSupplierInput>
-  create: Prisma.XOR<Prisma.VendorBillCreateWithoutSupplierInput, Prisma.VendorBillUncheckedCreateWithoutSupplierInput>
-}
-
-export type VendorBillUpdateWithWhereUniqueWithoutSupplierInput = {
-  where: Prisma.VendorBillWhereUniqueInput
-  data: Prisma.XOR<Prisma.VendorBillUpdateWithoutSupplierInput, Prisma.VendorBillUncheckedUpdateWithoutSupplierInput>
-}
-
-export type VendorBillUpdateManyWithWhereWithoutSupplierInput = {
-  where: Prisma.VendorBillScalarWhereInput
-  data: Prisma.XOR<Prisma.VendorBillUpdateManyMutationInput, Prisma.VendorBillUncheckedUpdateManyWithoutSupplierInput>
-}
-
-export type VendorBillScalarWhereInput = {
-  AND?: Prisma.VendorBillScalarWhereInput | Prisma.VendorBillScalarWhereInput[]
-  OR?: Prisma.VendorBillScalarWhereInput[]
-  NOT?: Prisma.VendorBillScalarWhereInput | Prisma.VendorBillScalarWhereInput[]
-  id?: Prisma.IntFilter<"VendorBill"> | number
-  number?: Prisma.StringFilter<"VendorBill"> | string
-  vendorRef?: Prisma.StringNullableFilter<"VendorBill"> | string | null
-  supplierId?: Prisma.IntFilter<"VendorBill"> | number
-  purchaseOrderId?: Prisma.IntNullableFilter<"VendorBill"> | number | null
-  date?: Prisma.DateTimeFilter<"VendorBill"> | Date | string
-  dueDate?: Prisma.DateTimeFilter<"VendorBill"> | Date | string
-  currency?: Prisma.StringFilter<"VendorBill"> | string
-  subtotal?: Prisma.DecimalFilter<"VendorBill"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  taxAmount?: Prisma.DecimalFilter<"VendorBill"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  total?: Prisma.DecimalFilter<"VendorBill"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  paidAmount?: Prisma.DecimalFilter<"VendorBill"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  status?: Prisma.EnumSettlementStatusFilter<"VendorBill"> | $Enums.SettlementStatus
-  notes?: Prisma.StringNullableFilter<"VendorBill"> | string | null
-  journalId?: Prisma.IntNullableFilter<"VendorBill"> | number | null
-  createdById?: Prisma.IntFilter<"VendorBill"> | number
-  createdAt?: Prisma.DateTimeFilter<"VendorBill"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"VendorBill"> | Date | string
-}
-
 export type VendorBillCreateWithoutPurchaseOrderInput = {
   number: string
   vendorRef?: string | null
@@ -1240,6 +1149,97 @@ export type VendorBillUpdateWithWhereUniqueWithoutPurchaseOrderInput = {
 export type VendorBillUpdateManyWithWhereWithoutPurchaseOrderInput = {
   where: Prisma.VendorBillScalarWhereInput
   data: Prisma.XOR<Prisma.VendorBillUpdateManyMutationInput, Prisma.VendorBillUncheckedUpdateManyWithoutPurchaseOrderInput>
+}
+
+export type VendorBillScalarWhereInput = {
+  AND?: Prisma.VendorBillScalarWhereInput | Prisma.VendorBillScalarWhereInput[]
+  OR?: Prisma.VendorBillScalarWhereInput[]
+  NOT?: Prisma.VendorBillScalarWhereInput | Prisma.VendorBillScalarWhereInput[]
+  id?: Prisma.IntFilter<"VendorBill"> | number
+  number?: Prisma.StringFilter<"VendorBill"> | string
+  vendorRef?: Prisma.StringNullableFilter<"VendorBill"> | string | null
+  supplierId?: Prisma.IntFilter<"VendorBill"> | number
+  purchaseOrderId?: Prisma.IntNullableFilter<"VendorBill"> | number | null
+  date?: Prisma.DateTimeFilter<"VendorBill"> | Date | string
+  dueDate?: Prisma.DateTimeFilter<"VendorBill"> | Date | string
+  currency?: Prisma.StringFilter<"VendorBill"> | string
+  subtotal?: Prisma.DecimalFilter<"VendorBill"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  taxAmount?: Prisma.DecimalFilter<"VendorBill"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  total?: Prisma.DecimalFilter<"VendorBill"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  paidAmount?: Prisma.DecimalFilter<"VendorBill"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  status?: Prisma.EnumSettlementStatusFilter<"VendorBill"> | $Enums.SettlementStatus
+  notes?: Prisma.StringNullableFilter<"VendorBill"> | string | null
+  journalId?: Prisma.IntNullableFilter<"VendorBill"> | number | null
+  createdById?: Prisma.IntFilter<"VendorBill"> | number
+  createdAt?: Prisma.DateTimeFilter<"VendorBill"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"VendorBill"> | Date | string
+}
+
+export type VendorBillCreateWithoutSupplierInput = {
+  number: string
+  vendorRef?: string | null
+  date: Date | string
+  dueDate: Date | string
+  currency?: string
+  subtotal: runtime.Decimal | runtime.DecimalJsLike | number | string
+  taxAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  total: runtime.Decimal | runtime.DecimalJsLike | number | string
+  paidAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  status?: $Enums.SettlementStatus
+  notes?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  purchaseOrder?: Prisma.PurchaseOrderCreateNestedOneWithoutVendorBillsInput
+  journal?: Prisma.JournalEntryCreateNestedOneWithoutVendorBillInput
+  createdBy: Prisma.UserCreateNestedOneWithoutVendorBillsCreatedInput
+  allocations?: Prisma.PaymentAllocationCreateNestedManyWithoutVendorBillInput
+}
+
+export type VendorBillUncheckedCreateWithoutSupplierInput = {
+  id?: number
+  number: string
+  vendorRef?: string | null
+  purchaseOrderId?: number | null
+  date: Date | string
+  dueDate: Date | string
+  currency?: string
+  subtotal: runtime.Decimal | runtime.DecimalJsLike | number | string
+  taxAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  total: runtime.Decimal | runtime.DecimalJsLike | number | string
+  paidAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  status?: $Enums.SettlementStatus
+  notes?: string | null
+  journalId?: number | null
+  createdById: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  allocations?: Prisma.PaymentAllocationUncheckedCreateNestedManyWithoutVendorBillInput
+}
+
+export type VendorBillCreateOrConnectWithoutSupplierInput = {
+  where: Prisma.VendorBillWhereUniqueInput
+  create: Prisma.XOR<Prisma.VendorBillCreateWithoutSupplierInput, Prisma.VendorBillUncheckedCreateWithoutSupplierInput>
+}
+
+export type VendorBillCreateManySupplierInputEnvelope = {
+  data: Prisma.VendorBillCreateManySupplierInput | Prisma.VendorBillCreateManySupplierInput[]
+  skipDuplicates?: boolean
+}
+
+export type VendorBillUpsertWithWhereUniqueWithoutSupplierInput = {
+  where: Prisma.VendorBillWhereUniqueInput
+  update: Prisma.XOR<Prisma.VendorBillUpdateWithoutSupplierInput, Prisma.VendorBillUncheckedUpdateWithoutSupplierInput>
+  create: Prisma.XOR<Prisma.VendorBillCreateWithoutSupplierInput, Prisma.VendorBillUncheckedCreateWithoutSupplierInput>
+}
+
+export type VendorBillUpdateWithWhereUniqueWithoutSupplierInput = {
+  where: Prisma.VendorBillWhereUniqueInput
+  data: Prisma.XOR<Prisma.VendorBillUpdateWithoutSupplierInput, Prisma.VendorBillUncheckedUpdateWithoutSupplierInput>
+}
+
+export type VendorBillUpdateManyWithWhereWithoutSupplierInput = {
+  where: Prisma.VendorBillScalarWhereInput
+  data: Prisma.XOR<Prisma.VendorBillUpdateManyMutationInput, Prisma.VendorBillUncheckedUpdateManyWithoutSupplierInput>
 }
 
 export type VendorBillCreateWithoutCreatedByInput = {
@@ -1309,87 +1309,6 @@ export type VendorBillUpdateManyWithWhereWithoutCreatedByInput = {
   data: Prisma.XOR<Prisma.VendorBillUpdateManyMutationInput, Prisma.VendorBillUncheckedUpdateManyWithoutCreatedByInput>
 }
 
-export type VendorBillCreateManySupplierInput = {
-  id?: number
-  number: string
-  vendorRef?: string | null
-  purchaseOrderId?: number | null
-  date: Date | string
-  dueDate: Date | string
-  currency?: string
-  subtotal: runtime.Decimal | runtime.DecimalJsLike | number | string
-  taxAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  total: runtime.Decimal | runtime.DecimalJsLike | number | string
-  paidAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  status?: $Enums.SettlementStatus
-  notes?: string | null
-  journalId?: number | null
-  createdById: number
-  createdAt?: Date | string
-  updatedAt?: Date | string
-}
-
-export type VendorBillUpdateWithoutSupplierInput = {
-  number?: Prisma.StringFieldUpdateOperationsInput | string
-  vendorRef?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  dueDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  currency?: Prisma.StringFieldUpdateOperationsInput | string
-  subtotal?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  taxAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  total?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  paidAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  status?: Prisma.EnumSettlementStatusFieldUpdateOperationsInput | $Enums.SettlementStatus
-  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  purchaseOrder?: Prisma.PurchaseOrderUpdateOneWithoutVendorBillsNestedInput
-  journal?: Prisma.JournalEntryUpdateOneWithoutVendorBillNestedInput
-  createdBy?: Prisma.UserUpdateOneRequiredWithoutVendorBillsCreatedNestedInput
-  allocations?: Prisma.PaymentAllocationUpdateManyWithoutVendorBillNestedInput
-}
-
-export type VendorBillUncheckedUpdateWithoutSupplierInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  number?: Prisma.StringFieldUpdateOperationsInput | string
-  vendorRef?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  purchaseOrderId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  dueDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  currency?: Prisma.StringFieldUpdateOperationsInput | string
-  subtotal?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  taxAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  total?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  paidAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  status?: Prisma.EnumSettlementStatusFieldUpdateOperationsInput | $Enums.SettlementStatus
-  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  journalId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  createdById?: Prisma.IntFieldUpdateOperationsInput | number
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  allocations?: Prisma.PaymentAllocationUncheckedUpdateManyWithoutVendorBillNestedInput
-}
-
-export type VendorBillUncheckedUpdateManyWithoutSupplierInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  number?: Prisma.StringFieldUpdateOperationsInput | string
-  vendorRef?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  purchaseOrderId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  dueDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  currency?: Prisma.StringFieldUpdateOperationsInput | string
-  subtotal?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  taxAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  total?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  paidAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  status?: Prisma.EnumSettlementStatusFieldUpdateOperationsInput | $Enums.SettlementStatus
-  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  journalId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  createdById?: Prisma.IntFieldUpdateOperationsInput | number
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
-
 export type VendorBillCreateManyPurchaseOrderInput = {
   id?: number
   number: string
@@ -1456,6 +1375,87 @@ export type VendorBillUncheckedUpdateManyWithoutPurchaseOrderInput = {
   number?: Prisma.StringFieldUpdateOperationsInput | string
   vendorRef?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   supplierId?: Prisma.IntFieldUpdateOperationsInput | number
+  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  dueDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  subtotal?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  taxAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  total?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  paidAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  status?: Prisma.EnumSettlementStatusFieldUpdateOperationsInput | $Enums.SettlementStatus
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  journalId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdById?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type VendorBillCreateManySupplierInput = {
+  id?: number
+  number: string
+  vendorRef?: string | null
+  purchaseOrderId?: number | null
+  date: Date | string
+  dueDate: Date | string
+  currency?: string
+  subtotal: runtime.Decimal | runtime.DecimalJsLike | number | string
+  taxAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  total: runtime.Decimal | runtime.DecimalJsLike | number | string
+  paidAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  status?: $Enums.SettlementStatus
+  notes?: string | null
+  journalId?: number | null
+  createdById: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type VendorBillUpdateWithoutSupplierInput = {
+  number?: Prisma.StringFieldUpdateOperationsInput | string
+  vendorRef?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  dueDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  subtotal?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  taxAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  total?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  paidAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  status?: Prisma.EnumSettlementStatusFieldUpdateOperationsInput | $Enums.SettlementStatus
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  purchaseOrder?: Prisma.PurchaseOrderUpdateOneWithoutVendorBillsNestedInput
+  journal?: Prisma.JournalEntryUpdateOneWithoutVendorBillNestedInput
+  createdBy?: Prisma.UserUpdateOneRequiredWithoutVendorBillsCreatedNestedInput
+  allocations?: Prisma.PaymentAllocationUpdateManyWithoutVendorBillNestedInput
+}
+
+export type VendorBillUncheckedUpdateWithoutSupplierInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  number?: Prisma.StringFieldUpdateOperationsInput | string
+  vendorRef?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  purchaseOrderId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  dueDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  subtotal?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  taxAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  total?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  paidAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  status?: Prisma.EnumSettlementStatusFieldUpdateOperationsInput | $Enums.SettlementStatus
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  journalId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdById?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  allocations?: Prisma.PaymentAllocationUncheckedUpdateManyWithoutVendorBillNestedInput
+}
+
+export type VendorBillUncheckedUpdateManyWithoutSupplierInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  number?: Prisma.StringFieldUpdateOperationsInput | string
+  vendorRef?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  purchaseOrderId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   dueDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   currency?: Prisma.StringFieldUpdateOperationsInput | string

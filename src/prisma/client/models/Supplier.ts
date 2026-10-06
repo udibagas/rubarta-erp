@@ -44,6 +44,7 @@ export type SupplierMinAggregateOutputType = {
   phone: string | null
   email: string | null
   bankAccount: string | null
+  bankAccountHolder: string | null
   currency: $Enums.Currency | null
   bankId: number | null
 }
@@ -56,6 +57,7 @@ export type SupplierMaxAggregateOutputType = {
   phone: string | null
   email: string | null
   bankAccount: string | null
+  bankAccountHolder: string | null
   currency: $Enums.Currency | null
   bankId: number | null
 }
@@ -68,6 +70,7 @@ export type SupplierCountAggregateOutputType = {
   phone: number
   email: number
   bankAccount: number
+  bankAccountHolder: number
   currency: number
   bankId: number
   _all: number
@@ -92,6 +95,7 @@ export type SupplierMinAggregateInputType = {
   phone?: true
   email?: true
   bankAccount?: true
+  bankAccountHolder?: true
   currency?: true
   bankId?: true
 }
@@ -104,6 +108,7 @@ export type SupplierMaxAggregateInputType = {
   phone?: true
   email?: true
   bankAccount?: true
+  bankAccountHolder?: true
   currency?: true
   bankId?: true
 }
@@ -116,6 +121,7 @@ export type SupplierCountAggregateInputType = {
   phone?: true
   email?: true
   bankAccount?: true
+  bankAccountHolder?: true
   currency?: true
   bankId?: true
   _all?: true
@@ -215,6 +221,7 @@ export type SupplierGroupByOutputType = {
   phone: string | null
   email: string | null
   bankAccount: string
+  bankAccountHolder: string | null
   currency: $Enums.Currency
   bankId: number
   _count: SupplierCountAggregateOutputType | null
@@ -250,6 +257,7 @@ export type SupplierWhereInput = {
   phone?: Prisma.StringNullableFilter<"Supplier"> | string | null
   email?: Prisma.StringNullableFilter<"Supplier"> | string | null
   bankAccount?: Prisma.StringFilter<"Supplier"> | string
+  bankAccountHolder?: Prisma.StringNullableFilter<"Supplier"> | string | null
   currency?: Prisma.EnumCurrencyFilter<"Supplier"> | $Enums.Currency
   bankId?: Prisma.IntFilter<"Supplier"> | number
   Bank?: Prisma.XOR<Prisma.BankScalarRelationFilter, Prisma.BankWhereInput>
@@ -269,6 +277,7 @@ export type SupplierOrderByWithRelationInput = {
   phone?: Prisma.SortOrderInput | Prisma.SortOrder
   email?: Prisma.SortOrderInput | Prisma.SortOrder
   bankAccount?: Prisma.SortOrder
+  bankAccountHolder?: Prisma.SortOrderInput | Prisma.SortOrder
   currency?: Prisma.SortOrder
   bankId?: Prisma.SortOrder
   Bank?: Prisma.BankOrderByWithRelationInput
@@ -291,6 +300,7 @@ export type SupplierWhereUniqueInput = Prisma.AtLeast<{
   phone?: Prisma.StringNullableFilter<"Supplier"> | string | null
   email?: Prisma.StringNullableFilter<"Supplier"> | string | null
   bankAccount?: Prisma.StringFilter<"Supplier"> | string
+  bankAccountHolder?: Prisma.StringNullableFilter<"Supplier"> | string | null
   currency?: Prisma.EnumCurrencyFilter<"Supplier"> | $Enums.Currency
   bankId?: Prisma.IntFilter<"Supplier"> | number
   Bank?: Prisma.XOR<Prisma.BankScalarRelationFilter, Prisma.BankWhereInput>
@@ -310,6 +320,7 @@ export type SupplierOrderByWithAggregationInput = {
   phone?: Prisma.SortOrderInput | Prisma.SortOrder
   email?: Prisma.SortOrderInput | Prisma.SortOrder
   bankAccount?: Prisma.SortOrder
+  bankAccountHolder?: Prisma.SortOrderInput | Prisma.SortOrder
   currency?: Prisma.SortOrder
   bankId?: Prisma.SortOrder
   _count?: Prisma.SupplierCountOrderByAggregateInput
@@ -330,6 +341,7 @@ export type SupplierScalarWhereWithAggregatesInput = {
   phone?: Prisma.StringNullableWithAggregatesFilter<"Supplier"> | string | null
   email?: Prisma.StringNullableWithAggregatesFilter<"Supplier"> | string | null
   bankAccount?: Prisma.StringWithAggregatesFilter<"Supplier"> | string
+  bankAccountHolder?: Prisma.StringNullableWithAggregatesFilter<"Supplier"> | string | null
   currency?: Prisma.EnumCurrencyWithAggregatesFilter<"Supplier"> | $Enums.Currency
   bankId?: Prisma.IntWithAggregatesFilter<"Supplier"> | number
 }
@@ -341,6 +353,7 @@ export type SupplierCreateInput = {
   phone?: string | null
   email?: string | null
   bankAccount: string
+  bankAccountHolder?: string | null
   currency: $Enums.Currency
   Bank: Prisma.BankCreateNestedOneWithoutSupplierInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutSupplierInput
@@ -359,6 +372,7 @@ export type SupplierUncheckedCreateInput = {
   phone?: string | null
   email?: string | null
   bankAccount: string
+  bankAccountHolder?: string | null
   currency: $Enums.Currency
   bankId: number
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutSupplierInput
@@ -376,6 +390,7 @@ export type SupplierUpdateInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bankAccount?: Prisma.StringFieldUpdateOperationsInput | string
+  bankAccountHolder?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   Bank?: Prisma.BankUpdateOneRequiredWithoutSupplierNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutSupplierNestedInput
@@ -394,6 +409,7 @@ export type SupplierUncheckedUpdateInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bankAccount?: Prisma.StringFieldUpdateOperationsInput | string
+  bankAccountHolder?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   bankId?: Prisma.IntFieldUpdateOperationsInput | number
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutSupplierNestedInput
@@ -412,6 +428,7 @@ export type SupplierCreateManyInput = {
   phone?: string | null
   email?: string | null
   bankAccount: string
+  bankAccountHolder?: string | null
   currency: $Enums.Currency
   bankId: number
 }
@@ -423,6 +440,7 @@ export type SupplierUpdateManyMutationInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bankAccount?: Prisma.StringFieldUpdateOperationsInput | string
+  bankAccountHolder?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
 }
 
@@ -434,6 +452,7 @@ export type SupplierUncheckedUpdateManyInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bankAccount?: Prisma.StringFieldUpdateOperationsInput | string
+  bankAccountHolder?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   bankId?: Prisma.IntFieldUpdateOperationsInput | number
 }
@@ -448,6 +467,16 @@ export type SupplierNullableScalarRelationFilter = {
   isNot?: Prisma.SupplierWhereInput | null
 }
 
+export type SupplierListRelationFilter = {
+  every?: Prisma.SupplierWhereInput
+  some?: Prisma.SupplierWhereInput
+  none?: Prisma.SupplierWhereInput
+}
+
+export type SupplierOrderByRelationAggregateInput = {
+  _count?: Prisma.SortOrder
+}
+
 export type SupplierCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   code?: Prisma.SortOrder
@@ -456,6 +485,7 @@ export type SupplierCountOrderByAggregateInput = {
   phone?: Prisma.SortOrder
   email?: Prisma.SortOrder
   bankAccount?: Prisma.SortOrder
+  bankAccountHolder?: Prisma.SortOrder
   currency?: Prisma.SortOrder
   bankId?: Prisma.SortOrder
 }
@@ -473,6 +503,7 @@ export type SupplierMaxOrderByAggregateInput = {
   phone?: Prisma.SortOrder
   email?: Prisma.SortOrder
   bankAccount?: Prisma.SortOrder
+  bankAccountHolder?: Prisma.SortOrder
   currency?: Prisma.SortOrder
   bankId?: Prisma.SortOrder
 }
@@ -485,6 +516,7 @@ export type SupplierMinOrderByAggregateInput = {
   phone?: Prisma.SortOrder
   email?: Prisma.SortOrder
   bankAccount?: Prisma.SortOrder
+  bankAccountHolder?: Prisma.SortOrder
   currency?: Prisma.SortOrder
   bankId?: Prisma.SortOrder
 }
@@ -492,16 +524,6 @@ export type SupplierMinOrderByAggregateInput = {
 export type SupplierSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
   bankId?: Prisma.SortOrder
-}
-
-export type SupplierListRelationFilter = {
-  every?: Prisma.SupplierWhereInput
-  some?: Prisma.SupplierWhereInput
-  none?: Prisma.SupplierWhereInput
-}
-
-export type SupplierOrderByRelationAggregateInput = {
-  _count?: Prisma.SortOrder
 }
 
 export type SupplierCreateNestedOneWithoutVendorBillsInput = {
@@ -532,10 +554,6 @@ export type SupplierUpdateOneWithoutPaymentsNestedInput = {
   delete?: Prisma.SupplierWhereInput | boolean
   connect?: Prisma.SupplierWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.SupplierUpdateToOneWithWhereWithoutPaymentsInput, Prisma.SupplierUpdateWithoutPaymentsInput>, Prisma.SupplierUncheckedUpdateWithoutPaymentsInput>
-}
-
-export type EnumCurrencyFieldUpdateOperationsInput = {
-  set?: $Enums.Currency
 }
 
 export type SupplierCreateNestedOneWithoutGoodsReceiptsInput = {
@@ -649,6 +667,7 @@ export type SupplierCreateWithoutVendorBillsInput = {
   phone?: string | null
   email?: string | null
   bankAccount: string
+  bankAccountHolder?: string | null
   currency: $Enums.Currency
   Bank: Prisma.BankCreateNestedOneWithoutSupplierInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutSupplierInput
@@ -666,6 +685,7 @@ export type SupplierUncheckedCreateWithoutVendorBillsInput = {
   phone?: string | null
   email?: string | null
   bankAccount: string
+  bankAccountHolder?: string | null
   currency: $Enums.Currency
   bankId: number
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutSupplierInput
@@ -698,6 +718,7 @@ export type SupplierUpdateWithoutVendorBillsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bankAccount?: Prisma.StringFieldUpdateOperationsInput | string
+  bankAccountHolder?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   Bank?: Prisma.BankUpdateOneRequiredWithoutSupplierNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutSupplierNestedInput
@@ -715,6 +736,7 @@ export type SupplierUncheckedUpdateWithoutVendorBillsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bankAccount?: Prisma.StringFieldUpdateOperationsInput | string
+  bankAccountHolder?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   bankId?: Prisma.IntFieldUpdateOperationsInput | number
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutSupplierNestedInput
@@ -731,6 +753,7 @@ export type SupplierCreateWithoutPaymentsInput = {
   phone?: string | null
   email?: string | null
   bankAccount: string
+  bankAccountHolder?: string | null
   currency: $Enums.Currency
   Bank: Prisma.BankCreateNestedOneWithoutSupplierInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutSupplierInput
@@ -748,6 +771,7 @@ export type SupplierUncheckedCreateWithoutPaymentsInput = {
   phone?: string | null
   email?: string | null
   bankAccount: string
+  bankAccountHolder?: string | null
   currency: $Enums.Currency
   bankId: number
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutSupplierInput
@@ -780,6 +804,7 @@ export type SupplierUpdateWithoutPaymentsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bankAccount?: Prisma.StringFieldUpdateOperationsInput | string
+  bankAccountHolder?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   Bank?: Prisma.BankUpdateOneRequiredWithoutSupplierNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutSupplierNestedInput
@@ -797,6 +822,7 @@ export type SupplierUncheckedUpdateWithoutPaymentsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bankAccount?: Prisma.StringFieldUpdateOperationsInput | string
+  bankAccountHolder?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   bankId?: Prisma.IntFieldUpdateOperationsInput | number
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutSupplierNestedInput
@@ -813,6 +839,7 @@ export type SupplierCreateWithoutGoodsReceiptsInput = {
   phone?: string | null
   email?: string | null
   bankAccount: string
+  bankAccountHolder?: string | null
   currency: $Enums.Currency
   Bank: Prisma.BankCreateNestedOneWithoutSupplierInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutSupplierInput
@@ -830,6 +857,7 @@ export type SupplierUncheckedCreateWithoutGoodsReceiptsInput = {
   phone?: string | null
   email?: string | null
   bankAccount: string
+  bankAccountHolder?: string | null
   currency: $Enums.Currency
   bankId: number
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutSupplierInput
@@ -862,6 +890,7 @@ export type SupplierUpdateWithoutGoodsReceiptsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bankAccount?: Prisma.StringFieldUpdateOperationsInput | string
+  bankAccountHolder?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   Bank?: Prisma.BankUpdateOneRequiredWithoutSupplierNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutSupplierNestedInput
@@ -879,6 +908,7 @@ export type SupplierUncheckedUpdateWithoutGoodsReceiptsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bankAccount?: Prisma.StringFieldUpdateOperationsInput | string
+  bankAccountHolder?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   bankId?: Prisma.IntFieldUpdateOperationsInput | number
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutSupplierNestedInput
@@ -895,6 +925,7 @@ export type SupplierCreateWithoutMaterialInput = {
   phone?: string | null
   email?: string | null
   bankAccount: string
+  bankAccountHolder?: string | null
   currency: $Enums.Currency
   Bank: Prisma.BankCreateNestedOneWithoutSupplierInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutSupplierInput
@@ -912,6 +943,7 @@ export type SupplierUncheckedCreateWithoutMaterialInput = {
   phone?: string | null
   email?: string | null
   bankAccount: string
+  bankAccountHolder?: string | null
   currency: $Enums.Currency
   bankId: number
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutSupplierInput
@@ -944,6 +976,7 @@ export type SupplierUpdateWithoutMaterialInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bankAccount?: Prisma.StringFieldUpdateOperationsInput | string
+  bankAccountHolder?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   Bank?: Prisma.BankUpdateOneRequiredWithoutSupplierNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutSupplierNestedInput
@@ -961,6 +994,7 @@ export type SupplierUncheckedUpdateWithoutMaterialInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bankAccount?: Prisma.StringFieldUpdateOperationsInput | string
+  bankAccountHolder?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   bankId?: Prisma.IntFieldUpdateOperationsInput | number
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutSupplierNestedInput
@@ -977,6 +1011,7 @@ export type SupplierCreateWithoutNkpInput = {
   phone?: string | null
   email?: string | null
   bankAccount: string
+  bankAccountHolder?: string | null
   currency: $Enums.Currency
   Bank: Prisma.BankCreateNestedOneWithoutSupplierInput
   Material?: Prisma.MaterialCreateNestedManyWithoutSupplierInput
@@ -994,6 +1029,7 @@ export type SupplierUncheckedCreateWithoutNkpInput = {
   phone?: string | null
   email?: string | null
   bankAccount: string
+  bankAccountHolder?: string | null
   currency: $Enums.Currency
   bankId: number
   Material?: Prisma.MaterialUncheckedCreateNestedManyWithoutSupplierInput
@@ -1026,6 +1062,7 @@ export type SupplierUpdateWithoutNkpInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bankAccount?: Prisma.StringFieldUpdateOperationsInput | string
+  bankAccountHolder?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   Bank?: Prisma.BankUpdateOneRequiredWithoutSupplierNestedInput
   Material?: Prisma.MaterialUpdateManyWithoutSupplierNestedInput
@@ -1043,6 +1080,7 @@ export type SupplierUncheckedUpdateWithoutNkpInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bankAccount?: Prisma.StringFieldUpdateOperationsInput | string
+  bankAccountHolder?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   bankId?: Prisma.IntFieldUpdateOperationsInput | number
   Material?: Prisma.MaterialUncheckedUpdateManyWithoutSupplierNestedInput
@@ -1059,6 +1097,7 @@ export type SupplierCreateWithoutPurchaseOrdersInput = {
   phone?: string | null
   email?: string | null
   bankAccount: string
+  bankAccountHolder?: string | null
   currency: $Enums.Currency
   Bank: Prisma.BankCreateNestedOneWithoutSupplierInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutSupplierInput
@@ -1076,6 +1115,7 @@ export type SupplierUncheckedCreateWithoutPurchaseOrdersInput = {
   phone?: string | null
   email?: string | null
   bankAccount: string
+  bankAccountHolder?: string | null
   currency: $Enums.Currency
   bankId: number
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutSupplierInput
@@ -1108,6 +1148,7 @@ export type SupplierUpdateWithoutPurchaseOrdersInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bankAccount?: Prisma.StringFieldUpdateOperationsInput | string
+  bankAccountHolder?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   Bank?: Prisma.BankUpdateOneRequiredWithoutSupplierNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutSupplierNestedInput
@@ -1125,6 +1166,7 @@ export type SupplierUncheckedUpdateWithoutPurchaseOrdersInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bankAccount?: Prisma.StringFieldUpdateOperationsInput | string
+  bankAccountHolder?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   bankId?: Prisma.IntFieldUpdateOperationsInput | number
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutSupplierNestedInput
@@ -1141,6 +1183,7 @@ export type SupplierCreateWithoutBankInput = {
   phone?: string | null
   email?: string | null
   bankAccount: string
+  bankAccountHolder?: string | null
   currency: $Enums.Currency
   Nkp?: Prisma.NkpCreateNestedManyWithoutSupplierInput
   Material?: Prisma.MaterialCreateNestedManyWithoutSupplierInput
@@ -1158,6 +1201,7 @@ export type SupplierUncheckedCreateWithoutBankInput = {
   phone?: string | null
   email?: string | null
   bankAccount: string
+  bankAccountHolder?: string | null
   currency: $Enums.Currency
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutSupplierInput
   Material?: Prisma.MaterialUncheckedCreateNestedManyWithoutSupplierInput
@@ -1204,6 +1248,7 @@ export type SupplierScalarWhereInput = {
   phone?: Prisma.StringNullableFilter<"Supplier"> | string | null
   email?: Prisma.StringNullableFilter<"Supplier"> | string | null
   bankAccount?: Prisma.StringFilter<"Supplier"> | string
+  bankAccountHolder?: Prisma.StringNullableFilter<"Supplier"> | string | null
   currency?: Prisma.EnumCurrencyFilter<"Supplier"> | $Enums.Currency
   bankId?: Prisma.IntFilter<"Supplier"> | number
 }
@@ -1216,6 +1261,7 @@ export type SupplierCreateManyBankInput = {
   phone?: string | null
   email?: string | null
   bankAccount: string
+  bankAccountHolder?: string | null
   currency: $Enums.Currency
 }
 
@@ -1226,6 +1272,7 @@ export type SupplierUpdateWithoutBankInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bankAccount?: Prisma.StringFieldUpdateOperationsInput | string
+  bankAccountHolder?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   Nkp?: Prisma.NkpUpdateManyWithoutSupplierNestedInput
   Material?: Prisma.MaterialUpdateManyWithoutSupplierNestedInput
@@ -1243,6 +1290,7 @@ export type SupplierUncheckedUpdateWithoutBankInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bankAccount?: Prisma.StringFieldUpdateOperationsInput | string
+  bankAccountHolder?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutSupplierNestedInput
   Material?: Prisma.MaterialUncheckedUpdateManyWithoutSupplierNestedInput
@@ -1260,6 +1308,7 @@ export type SupplierUncheckedUpdateManyWithoutBankInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bankAccount?: Prisma.StringFieldUpdateOperationsInput | string
+  bankAccountHolder?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
 }
 
@@ -1347,6 +1396,7 @@ export type SupplierSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   phone?: boolean
   email?: boolean
   bankAccount?: boolean
+  bankAccountHolder?: boolean
   currency?: boolean
   bankId?: boolean
   Bank?: boolean | Prisma.BankDefaultArgs<ExtArgs>
@@ -1367,6 +1417,7 @@ export type SupplierSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
   phone?: boolean
   email?: boolean
   bankAccount?: boolean
+  bankAccountHolder?: boolean
   currency?: boolean
   bankId?: boolean
   Bank?: boolean | Prisma.BankDefaultArgs<ExtArgs>
@@ -1380,6 +1431,7 @@ export type SupplierSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
   phone?: boolean
   email?: boolean
   bankAccount?: boolean
+  bankAccountHolder?: boolean
   currency?: boolean
   bankId?: boolean
   Bank?: boolean | Prisma.BankDefaultArgs<ExtArgs>
@@ -1393,11 +1445,12 @@ export type SupplierSelectScalar = {
   phone?: boolean
   email?: boolean
   bankAccount?: boolean
+  bankAccountHolder?: boolean
   currency?: boolean
   bankId?: boolean
 }
 
-export type SupplierOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "code" | "name" | "address" | "phone" | "email" | "bankAccount" | "currency" | "bankId", ExtArgs["result"]["supplier"]>
+export type SupplierOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "code" | "name" | "address" | "phone" | "email" | "bankAccount" | "bankAccountHolder" | "currency" | "bankId", ExtArgs["result"]["supplier"]>
 export type SupplierInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   Bank?: boolean | Prisma.BankDefaultArgs<ExtArgs>
   Nkp?: boolean | Prisma.Supplier$NkpArgs<ExtArgs>
@@ -1434,6 +1487,7 @@ export type $SupplierPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     phone: string | null
     email: string | null
     bankAccount: string
+    bankAccountHolder: string | null
     currency: $Enums.Currency
     bankId: number
   }, ExtArgs["result"]["supplier"]>
@@ -1873,6 +1927,7 @@ export interface SupplierFieldRefs {
   readonly phone: Prisma.FieldRef<"Supplier", 'String'>
   readonly email: Prisma.FieldRef<"Supplier", 'String'>
   readonly bankAccount: Prisma.FieldRef<"Supplier", 'String'>
+  readonly bankAccountHolder: Prisma.FieldRef<"Supplier", 'String'>
   readonly currency: Prisma.FieldRef<"Supplier", 'Currency'>
   readonly bankId: Prisma.FieldRef<"Supplier", 'Int'>
 }

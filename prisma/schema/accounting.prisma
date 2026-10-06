@@ -300,27 +300,6 @@ model TaxRate {
   updatedAt DateTime @updatedAt
 }
 
-model Supplier {
-  id             Int             @id @default(autoincrement())
-  code           String?         @db.Char(6)
-  name           String
-  address        String
-  phone          String?
-  email          String?
-  Bank           Bank            @relation(fields: [bankId], references: [id])
-  bankAccount    String
-  currency       Currency
-  bankId         Int
-  Nkp            Nkp[]
-  Material       Material[]
-  purchaseOrders PurchaseOrder[]
-  goodsReceipts  GoodsReceipt[]
-  vendorBills    VendorBill[]
-  payments       Payment[]
-
-  @@map("Suppliers")
-}
-
 model Expense {
   id          Int      @id @default(autoincrement())
   date        DateTime
