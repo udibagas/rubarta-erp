@@ -74,13 +74,13 @@ export type SalesOrderMinAggregateOutputType = {
   paymentMethod: string | null
   requestType: string | null
   notes: string | null
-  deletedAt: Date | null
   customerAddress: string | null
   contactPerson: string | null
   contactPhone: string | null
   contactEmail: string | null
   createdAt: Date | null
   updatedAt: Date | null
+  deletedAt: Date | null
   quotationId: number | null
   customerId: number | null
   userId: number | null
@@ -111,13 +111,13 @@ export type SalesOrderMaxAggregateOutputType = {
   paymentMethod: string | null
   requestType: string | null
   notes: string | null
-  deletedAt: Date | null
   customerAddress: string | null
   contactPerson: string | null
   contactPhone: string | null
   contactEmail: string | null
   createdAt: Date | null
   updatedAt: Date | null
+  deletedAt: Date | null
   quotationId: number | null
   customerId: number | null
   userId: number | null
@@ -148,13 +148,14 @@ export type SalesOrderCountAggregateOutputType = {
   paymentMethod: number
   requestType: number
   notes: number
-  deletedAt: number
+  attachments: number
   customerAddress: number
   contactPerson: number
   contactPhone: number
   contactEmail: number
   createdAt: number
   updatedAt: number
+  deletedAt: number
   quotationId: number
   customerId: number
   userId: number
@@ -211,13 +212,13 @@ export type SalesOrderMinAggregateInputType = {
   paymentMethod?: true
   requestType?: true
   notes?: true
-  deletedAt?: true
   customerAddress?: true
   contactPerson?: true
   contactPhone?: true
   contactEmail?: true
   createdAt?: true
   updatedAt?: true
+  deletedAt?: true
   quotationId?: true
   customerId?: true
   userId?: true
@@ -248,13 +249,13 @@ export type SalesOrderMaxAggregateInputType = {
   paymentMethod?: true
   requestType?: true
   notes?: true
-  deletedAt?: true
   customerAddress?: true
   contactPerson?: true
   contactPhone?: true
   contactEmail?: true
   createdAt?: true
   updatedAt?: true
+  deletedAt?: true
   quotationId?: true
   customerId?: true
   userId?: true
@@ -285,13 +286,14 @@ export type SalesOrderCountAggregateInputType = {
   paymentMethod?: true
   requestType?: true
   notes?: true
-  deletedAt?: true
+  attachments?: true
   customerAddress?: true
   contactPerson?: true
   contactPhone?: true
   contactEmail?: true
   createdAt?: true
   updatedAt?: true
+  deletedAt?: true
   quotationId?: true
   customerId?: true
   userId?: true
@@ -409,13 +411,14 @@ export type SalesOrderGroupByOutputType = {
   paymentMethod: string | null
   requestType: string | null
   notes: string | null
-  deletedAt: Date | null
+  attachments: runtime.JsonValue | null
   customerAddress: string | null
   contactPerson: string | null
   contactPhone: string | null
   contactEmail: string | null
   createdAt: Date
   updatedAt: Date | null
+  deletedAt: Date | null
   quotationId: number | null
   customerId: number
   userId: number
@@ -469,13 +472,14 @@ export type SalesOrderWhereInput = {
   paymentMethod?: Prisma.StringNullableFilter<"SalesOrder"> | string | null
   requestType?: Prisma.StringNullableFilter<"SalesOrder"> | string | null
   notes?: Prisma.StringNullableFilter<"SalesOrder"> | string | null
-  deletedAt?: Prisma.DateTimeNullableFilter<"SalesOrder"> | Date | string | null
+  attachments?: Prisma.JsonNullableFilter<"SalesOrder">
   customerAddress?: Prisma.StringNullableFilter<"SalesOrder"> | string | null
   contactPerson?: Prisma.StringNullableFilter<"SalesOrder"> | string | null
   contactPhone?: Prisma.StringNullableFilter<"SalesOrder"> | string | null
   contactEmail?: Prisma.StringNullableFilter<"SalesOrder"> | string | null
   createdAt?: Prisma.DateTimeFilter<"SalesOrder"> | Date | string
   updatedAt?: Prisma.DateTimeNullableFilter<"SalesOrder"> | Date | string | null
+  deletedAt?: Prisma.DateTimeNullableFilter<"SalesOrder"> | Date | string | null
   quotationId?: Prisma.IntNullableFilter<"SalesOrder"> | number | null
   customerId?: Prisma.IntFilter<"SalesOrder"> | number
   userId?: Prisma.IntFilter<"SalesOrder"> | number
@@ -514,13 +518,14 @@ export type SalesOrderOrderByWithRelationInput = {
   paymentMethod?: Prisma.SortOrderInput | Prisma.SortOrder
   requestType?: Prisma.SortOrderInput | Prisma.SortOrder
   notes?: Prisma.SortOrderInput | Prisma.SortOrder
-  deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  attachments?: Prisma.SortOrderInput | Prisma.SortOrder
   customerAddress?: Prisma.SortOrderInput | Prisma.SortOrder
   contactPerson?: Prisma.SortOrderInput | Prisma.SortOrder
   contactPhone?: Prisma.SortOrderInput | Prisma.SortOrder
   contactEmail?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   quotationId?: Prisma.SortOrderInput | Prisma.SortOrder
   customerId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
@@ -562,13 +567,14 @@ export type SalesOrderWhereUniqueInput = Prisma.AtLeast<{
   paymentMethod?: Prisma.StringNullableFilter<"SalesOrder"> | string | null
   requestType?: Prisma.StringNullableFilter<"SalesOrder"> | string | null
   notes?: Prisma.StringNullableFilter<"SalesOrder"> | string | null
-  deletedAt?: Prisma.DateTimeNullableFilter<"SalesOrder"> | Date | string | null
+  attachments?: Prisma.JsonNullableFilter<"SalesOrder">
   customerAddress?: Prisma.StringNullableFilter<"SalesOrder"> | string | null
   contactPerson?: Prisma.StringNullableFilter<"SalesOrder"> | string | null
   contactPhone?: Prisma.StringNullableFilter<"SalesOrder"> | string | null
   contactEmail?: Prisma.StringNullableFilter<"SalesOrder"> | string | null
   createdAt?: Prisma.DateTimeFilter<"SalesOrder"> | Date | string
   updatedAt?: Prisma.DateTimeNullableFilter<"SalesOrder"> | Date | string | null
+  deletedAt?: Prisma.DateTimeNullableFilter<"SalesOrder"> | Date | string | null
   quotationId?: Prisma.IntNullableFilter<"SalesOrder"> | number | null
   customerId?: Prisma.IntFilter<"SalesOrder"> | number
   userId?: Prisma.IntFilter<"SalesOrder"> | number
@@ -607,13 +613,14 @@ export type SalesOrderOrderByWithAggregationInput = {
   paymentMethod?: Prisma.SortOrderInput | Prisma.SortOrder
   requestType?: Prisma.SortOrderInput | Prisma.SortOrder
   notes?: Prisma.SortOrderInput | Prisma.SortOrder
-  deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  attachments?: Prisma.SortOrderInput | Prisma.SortOrder
   customerAddress?: Prisma.SortOrderInput | Prisma.SortOrder
   contactPerson?: Prisma.SortOrderInput | Prisma.SortOrder
   contactPhone?: Prisma.SortOrderInput | Prisma.SortOrder
   contactEmail?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   quotationId?: Prisma.SortOrderInput | Prisma.SortOrder
   customerId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
@@ -652,13 +659,14 @@ export type SalesOrderScalarWhereWithAggregatesInput = {
   paymentMethod?: Prisma.StringNullableWithAggregatesFilter<"SalesOrder"> | string | null
   requestType?: Prisma.StringNullableWithAggregatesFilter<"SalesOrder"> | string | null
   notes?: Prisma.StringNullableWithAggregatesFilter<"SalesOrder"> | string | null
-  deletedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"SalesOrder"> | Date | string | null
+  attachments?: Prisma.JsonNullableWithAggregatesFilter<"SalesOrder">
   customerAddress?: Prisma.StringNullableWithAggregatesFilter<"SalesOrder"> | string | null
   contactPerson?: Prisma.StringNullableWithAggregatesFilter<"SalesOrder"> | string | null
   contactPhone?: Prisma.StringNullableWithAggregatesFilter<"SalesOrder"> | string | null
   contactEmail?: Prisma.StringNullableWithAggregatesFilter<"SalesOrder"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"SalesOrder"> | Date | string
   updatedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"SalesOrder"> | Date | string | null
+  deletedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"SalesOrder"> | Date | string | null
   quotationId?: Prisma.IntNullableWithAggregatesFilter<"SalesOrder"> | number | null
   customerId?: Prisma.IntWithAggregatesFilter<"SalesOrder"> | number
   userId?: Prisma.IntWithAggregatesFilter<"SalesOrder"> | number
@@ -688,13 +696,14 @@ export type SalesOrderCreateInput = {
   paymentMethod?: string | null
   requestType?: string | null
   notes?: string | null
-  deletedAt?: Date | string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   customerAddress?: string | null
   contactPerson?: string | null
   contactPhone?: string | null
   contactEmail?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
+  deletedAt?: Date | string | null
   Customer: Prisma.CustomerCreateNestedOneWithoutSalesOrdersInput
   User: Prisma.UserCreateNestedOneWithoutSalesOrdersInput
   Invoices?: Prisma.InvoiceCreateNestedManyWithoutSalesOrderInput
@@ -729,13 +738,14 @@ export type SalesOrderUncheckedCreateInput = {
   paymentMethod?: string | null
   requestType?: string | null
   notes?: string | null
-  deletedAt?: Date | string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   customerAddress?: string | null
   contactPerson?: string | null
   contactPhone?: string | null
   contactEmail?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
+  deletedAt?: Date | string | null
   quotationId?: number | null
   customerId: number
   userId: number
@@ -769,13 +779,14 @@ export type SalesOrderUpdateInput = {
   paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   requestType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   customerAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPerson?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Customer?: Prisma.CustomerUpdateOneRequiredWithoutSalesOrdersNestedInput
   User?: Prisma.UserUpdateOneRequiredWithoutSalesOrdersNestedInput
   Invoices?: Prisma.InvoiceUpdateManyWithoutSalesOrderNestedInput
@@ -810,13 +821,14 @@ export type SalesOrderUncheckedUpdateInput = {
   paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   requestType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   customerAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPerson?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   quotationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   customerId?: Prisma.IntFieldUpdateOperationsInput | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
@@ -851,13 +863,14 @@ export type SalesOrderCreateManyInput = {
   paymentMethod?: string | null
   requestType?: string | null
   notes?: string | null
-  deletedAt?: Date | string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   customerAddress?: string | null
   contactPerson?: string | null
   contactPhone?: string | null
   contactEmail?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
+  deletedAt?: Date | string | null
   quotationId?: number | null
   customerId: number
   userId: number
@@ -887,13 +900,14 @@ export type SalesOrderUpdateManyMutationInput = {
   paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   requestType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   customerAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPerson?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type SalesOrderUncheckedUpdateManyInput = {
@@ -920,13 +934,14 @@ export type SalesOrderUncheckedUpdateManyInput = {
   paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   requestType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   customerAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPerson?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   quotationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   customerId?: Prisma.IntFieldUpdateOperationsInput | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
@@ -977,13 +992,14 @@ export type SalesOrderCountOrderByAggregateInput = {
   paymentMethod?: Prisma.SortOrder
   requestType?: Prisma.SortOrder
   notes?: Prisma.SortOrder
-  deletedAt?: Prisma.SortOrder
+  attachments?: Prisma.SortOrder
   customerAddress?: Prisma.SortOrder
   contactPerson?: Prisma.SortOrder
   contactPhone?: Prisma.SortOrder
   contactEmail?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrder
   quotationId?: Prisma.SortOrder
   customerId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
@@ -1026,13 +1042,13 @@ export type SalesOrderMaxOrderByAggregateInput = {
   paymentMethod?: Prisma.SortOrder
   requestType?: Prisma.SortOrder
   notes?: Prisma.SortOrder
-  deletedAt?: Prisma.SortOrder
   customerAddress?: Prisma.SortOrder
   contactPerson?: Prisma.SortOrder
   contactPhone?: Prisma.SortOrder
   contactEmail?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrder
   quotationId?: Prisma.SortOrder
   customerId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
@@ -1063,13 +1079,13 @@ export type SalesOrderMinOrderByAggregateInput = {
   paymentMethod?: Prisma.SortOrder
   requestType?: Prisma.SortOrder
   notes?: Prisma.SortOrder
-  deletedAt?: Prisma.SortOrder
   customerAddress?: Prisma.SortOrder
   contactPerson?: Prisma.SortOrder
   contactPhone?: Prisma.SortOrder
   contactEmail?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrder
   quotationId?: Prisma.SortOrder
   customerId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
@@ -1341,13 +1357,14 @@ export type SalesOrderCreateWithoutCustomerInput = {
   paymentMethod?: string | null
   requestType?: string | null
   notes?: string | null
-  deletedAt?: Date | string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   customerAddress?: string | null
   contactPerson?: string | null
   contactPhone?: string | null
   contactEmail?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
+  deletedAt?: Date | string | null
   User: Prisma.UserCreateNestedOneWithoutSalesOrdersInput
   Invoices?: Prisma.InvoiceCreateNestedManyWithoutSalesOrderInput
   SalesOrderItems?: Prisma.SalesOrderItemCreateNestedManyWithoutSalesOrderInput
@@ -1381,13 +1398,14 @@ export type SalesOrderUncheckedCreateWithoutCustomerInput = {
   paymentMethod?: string | null
   requestType?: string | null
   notes?: string | null
-  deletedAt?: Date | string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   customerAddress?: string | null
   contactPerson?: string | null
   contactPhone?: string | null
   contactEmail?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
+  deletedAt?: Date | string | null
   quotationId?: number | null
   userId: number
   companyId: number
@@ -1450,13 +1468,14 @@ export type SalesOrderScalarWhereInput = {
   paymentMethod?: Prisma.StringNullableFilter<"SalesOrder"> | string | null
   requestType?: Prisma.StringNullableFilter<"SalesOrder"> | string | null
   notes?: Prisma.StringNullableFilter<"SalesOrder"> | string | null
-  deletedAt?: Prisma.DateTimeNullableFilter<"SalesOrder"> | Date | string | null
+  attachments?: Prisma.JsonNullableFilter<"SalesOrder">
   customerAddress?: Prisma.StringNullableFilter<"SalesOrder"> | string | null
   contactPerson?: Prisma.StringNullableFilter<"SalesOrder"> | string | null
   contactPhone?: Prisma.StringNullableFilter<"SalesOrder"> | string | null
   contactEmail?: Prisma.StringNullableFilter<"SalesOrder"> | string | null
   createdAt?: Prisma.DateTimeFilter<"SalesOrder"> | Date | string
   updatedAt?: Prisma.DateTimeNullableFilter<"SalesOrder"> | Date | string | null
+  deletedAt?: Prisma.DateTimeNullableFilter<"SalesOrder"> | Date | string | null
   quotationId?: Prisma.IntNullableFilter<"SalesOrder"> | number | null
   customerId?: Prisma.IntFilter<"SalesOrder"> | number
   userId?: Prisma.IntFilter<"SalesOrder"> | number
@@ -1486,13 +1505,14 @@ export type SalesOrderCreateWithoutDeliveryOrdersInput = {
   paymentMethod?: string | null
   requestType?: string | null
   notes?: string | null
-  deletedAt?: Date | string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   customerAddress?: string | null
   contactPerson?: string | null
   contactPhone?: string | null
   contactEmail?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
+  deletedAt?: Date | string | null
   Customer: Prisma.CustomerCreateNestedOneWithoutSalesOrdersInput
   User: Prisma.UserCreateNestedOneWithoutSalesOrdersInput
   Invoices?: Prisma.InvoiceCreateNestedManyWithoutSalesOrderInput
@@ -1526,13 +1546,14 @@ export type SalesOrderUncheckedCreateWithoutDeliveryOrdersInput = {
   paymentMethod?: string | null
   requestType?: string | null
   notes?: string | null
-  deletedAt?: Date | string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   customerAddress?: string | null
   contactPerson?: string | null
   contactPhone?: string | null
   contactEmail?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
+  deletedAt?: Date | string | null
   quotationId?: number | null
   customerId: number
   userId: number
@@ -1581,13 +1602,14 @@ export type SalesOrderUpdateWithoutDeliveryOrdersInput = {
   paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   requestType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   customerAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPerson?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Customer?: Prisma.CustomerUpdateOneRequiredWithoutSalesOrdersNestedInput
   User?: Prisma.UserUpdateOneRequiredWithoutSalesOrdersNestedInput
   Invoices?: Prisma.InvoiceUpdateManyWithoutSalesOrderNestedInput
@@ -1621,13 +1643,14 @@ export type SalesOrderUncheckedUpdateWithoutDeliveryOrdersInput = {
   paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   requestType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   customerAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPerson?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   quotationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   customerId?: Prisma.IntFieldUpdateOperationsInput | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1660,13 +1683,14 @@ export type SalesOrderCreateWithoutInvoicesInput = {
   paymentMethod?: string | null
   requestType?: string | null
   notes?: string | null
-  deletedAt?: Date | string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   customerAddress?: string | null
   contactPerson?: string | null
   contactPhone?: string | null
   contactEmail?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
+  deletedAt?: Date | string | null
   Customer: Prisma.CustomerCreateNestedOneWithoutSalesOrdersInput
   User: Prisma.UserCreateNestedOneWithoutSalesOrdersInput
   SalesOrderItems?: Prisma.SalesOrderItemCreateNestedManyWithoutSalesOrderInput
@@ -1700,13 +1724,14 @@ export type SalesOrderUncheckedCreateWithoutInvoicesInput = {
   paymentMethod?: string | null
   requestType?: string | null
   notes?: string | null
-  deletedAt?: Date | string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   customerAddress?: string | null
   contactPerson?: string | null
   contactPhone?: string | null
   contactEmail?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
+  deletedAt?: Date | string | null
   quotationId?: number | null
   customerId: number
   userId: number
@@ -1755,13 +1780,14 @@ export type SalesOrderUpdateWithoutInvoicesInput = {
   paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   requestType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   customerAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPerson?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Customer?: Prisma.CustomerUpdateOneRequiredWithoutSalesOrdersNestedInput
   User?: Prisma.UserUpdateOneRequiredWithoutSalesOrdersNestedInput
   SalesOrderItems?: Prisma.SalesOrderItemUpdateManyWithoutSalesOrderNestedInput
@@ -1795,13 +1821,14 @@ export type SalesOrderUncheckedUpdateWithoutInvoicesInput = {
   paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   requestType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   customerAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPerson?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   quotationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   customerId?: Prisma.IntFieldUpdateOperationsInput | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1834,13 +1861,14 @@ export type SalesOrderCreateWithoutPurchaseOrdersInput = {
   paymentMethod?: string | null
   requestType?: string | null
   notes?: string | null
-  deletedAt?: Date | string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   customerAddress?: string | null
   contactPerson?: string | null
   contactPhone?: string | null
   contactEmail?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
+  deletedAt?: Date | string | null
   Customer: Prisma.CustomerCreateNestedOneWithoutSalesOrdersInput
   User: Prisma.UserCreateNestedOneWithoutSalesOrdersInput
   Invoices?: Prisma.InvoiceCreateNestedManyWithoutSalesOrderInput
@@ -1874,13 +1902,14 @@ export type SalesOrderUncheckedCreateWithoutPurchaseOrdersInput = {
   paymentMethod?: string | null
   requestType?: string | null
   notes?: string | null
-  deletedAt?: Date | string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   customerAddress?: string | null
   contactPerson?: string | null
   contactPhone?: string | null
   contactEmail?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
+  deletedAt?: Date | string | null
   quotationId?: number | null
   customerId: number
   userId: number
@@ -1929,13 +1958,14 @@ export type SalesOrderUpdateWithoutPurchaseOrdersInput = {
   paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   requestType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   customerAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPerson?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Customer?: Prisma.CustomerUpdateOneRequiredWithoutSalesOrdersNestedInput
   User?: Prisma.UserUpdateOneRequiredWithoutSalesOrdersNestedInput
   Invoices?: Prisma.InvoiceUpdateManyWithoutSalesOrderNestedInput
@@ -1969,13 +1999,14 @@ export type SalesOrderUncheckedUpdateWithoutPurchaseOrdersInput = {
   paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   requestType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   customerAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPerson?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   quotationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   customerId?: Prisma.IntFieldUpdateOperationsInput | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
@@ -2008,13 +2039,14 @@ export type SalesOrderCreateWithoutQuotationInput = {
   paymentMethod?: string | null
   requestType?: string | null
   notes?: string | null
-  deletedAt?: Date | string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   customerAddress?: string | null
   contactPerson?: string | null
   contactPhone?: string | null
   contactEmail?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
+  deletedAt?: Date | string | null
   Customer: Prisma.CustomerCreateNestedOneWithoutSalesOrdersInput
   User: Prisma.UserCreateNestedOneWithoutSalesOrdersInput
   Invoices?: Prisma.InvoiceCreateNestedManyWithoutSalesOrderInput
@@ -2048,13 +2080,14 @@ export type SalesOrderUncheckedCreateWithoutQuotationInput = {
   paymentMethod?: string | null
   requestType?: string | null
   notes?: string | null
-  deletedAt?: Date | string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   customerAddress?: string | null
   contactPerson?: string | null
   contactPhone?: string | null
   contactEmail?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
+  deletedAt?: Date | string | null
   customerId: number
   userId: number
   companyId: number
@@ -2113,13 +2146,14 @@ export type SalesOrderCreateWithoutSalesOrderItemsInput = {
   paymentMethod?: string | null
   requestType?: string | null
   notes?: string | null
-  deletedAt?: Date | string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   customerAddress?: string | null
   contactPerson?: string | null
   contactPhone?: string | null
   contactEmail?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
+  deletedAt?: Date | string | null
   Customer: Prisma.CustomerCreateNestedOneWithoutSalesOrdersInput
   User: Prisma.UserCreateNestedOneWithoutSalesOrdersInput
   Invoices?: Prisma.InvoiceCreateNestedManyWithoutSalesOrderInput
@@ -2153,13 +2187,14 @@ export type SalesOrderUncheckedCreateWithoutSalesOrderItemsInput = {
   paymentMethod?: string | null
   requestType?: string | null
   notes?: string | null
-  deletedAt?: Date | string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   customerAddress?: string | null
   contactPerson?: string | null
   contactPhone?: string | null
   contactEmail?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
+  deletedAt?: Date | string | null
   quotationId?: number | null
   customerId: number
   userId: number
@@ -2208,13 +2243,14 @@ export type SalesOrderUpdateWithoutSalesOrderItemsInput = {
   paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   requestType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   customerAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPerson?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Customer?: Prisma.CustomerUpdateOneRequiredWithoutSalesOrdersNestedInput
   User?: Prisma.UserUpdateOneRequiredWithoutSalesOrdersNestedInput
   Invoices?: Prisma.InvoiceUpdateManyWithoutSalesOrderNestedInput
@@ -2248,13 +2284,14 @@ export type SalesOrderUncheckedUpdateWithoutSalesOrderItemsInput = {
   paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   requestType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   customerAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPerson?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   quotationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   customerId?: Prisma.IntFieldUpdateOperationsInput | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
@@ -2287,13 +2324,14 @@ export type SalesOrderCreateWithoutCompanyInput = {
   paymentMethod?: string | null
   requestType?: string | null
   notes?: string | null
-  deletedAt?: Date | string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   customerAddress?: string | null
   contactPerson?: string | null
   contactPhone?: string | null
   contactEmail?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
+  deletedAt?: Date | string | null
   Customer: Prisma.CustomerCreateNestedOneWithoutSalesOrdersInput
   User: Prisma.UserCreateNestedOneWithoutSalesOrdersInput
   Invoices?: Prisma.InvoiceCreateNestedManyWithoutSalesOrderInput
@@ -2327,13 +2365,14 @@ export type SalesOrderUncheckedCreateWithoutCompanyInput = {
   paymentMethod?: string | null
   requestType?: string | null
   notes?: string | null
-  deletedAt?: Date | string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   customerAddress?: string | null
   contactPerson?: string | null
   contactPhone?: string | null
   contactEmail?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
+  deletedAt?: Date | string | null
   quotationId?: number | null
   customerId: number
   userId: number
@@ -2392,13 +2431,14 @@ export type SalesOrderCreateWithoutUserInput = {
   paymentMethod?: string | null
   requestType?: string | null
   notes?: string | null
-  deletedAt?: Date | string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   customerAddress?: string | null
   contactPerson?: string | null
   contactPhone?: string | null
   contactEmail?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
+  deletedAt?: Date | string | null
   Customer: Prisma.CustomerCreateNestedOneWithoutSalesOrdersInput
   Invoices?: Prisma.InvoiceCreateNestedManyWithoutSalesOrderInput
   SalesOrderItems?: Prisma.SalesOrderItemCreateNestedManyWithoutSalesOrderInput
@@ -2432,13 +2472,14 @@ export type SalesOrderUncheckedCreateWithoutUserInput = {
   paymentMethod?: string | null
   requestType?: string | null
   notes?: string | null
-  deletedAt?: Date | string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   customerAddress?: string | null
   contactPerson?: string | null
   contactPhone?: string | null
   contactEmail?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
+  deletedAt?: Date | string | null
   quotationId?: number | null
   customerId: number
   companyId: number
@@ -2498,13 +2539,14 @@ export type SalesOrderCreateManyCustomerInput = {
   paymentMethod?: string | null
   requestType?: string | null
   notes?: string | null
-  deletedAt?: Date | string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   customerAddress?: string | null
   contactPerson?: string | null
   contactPhone?: string | null
   contactEmail?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
+  deletedAt?: Date | string | null
   quotationId?: number | null
   userId: number
   companyId: number
@@ -2533,13 +2575,14 @@ export type SalesOrderUpdateWithoutCustomerInput = {
   paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   requestType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   customerAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPerson?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   User?: Prisma.UserUpdateOneRequiredWithoutSalesOrdersNestedInput
   Invoices?: Prisma.InvoiceUpdateManyWithoutSalesOrderNestedInput
   SalesOrderItems?: Prisma.SalesOrderItemUpdateManyWithoutSalesOrderNestedInput
@@ -2573,13 +2616,14 @@ export type SalesOrderUncheckedUpdateWithoutCustomerInput = {
   paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   requestType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   customerAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPerson?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   quotationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   companyId?: Prisma.IntFieldUpdateOperationsInput | number
@@ -2613,13 +2657,14 @@ export type SalesOrderUncheckedUpdateManyWithoutCustomerInput = {
   paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   requestType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   customerAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPerson?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   quotationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   companyId?: Prisma.IntFieldUpdateOperationsInput | number
@@ -2649,13 +2694,14 @@ export type SalesOrderCreateManyQuotationInput = {
   paymentMethod?: string | null
   requestType?: string | null
   notes?: string | null
-  deletedAt?: Date | string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   customerAddress?: string | null
   contactPerson?: string | null
   contactPhone?: string | null
   contactEmail?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
+  deletedAt?: Date | string | null
   customerId: number
   userId: number
   companyId: number
@@ -2684,13 +2730,14 @@ export type SalesOrderUpdateWithoutQuotationInput = {
   paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   requestType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   customerAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPerson?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Customer?: Prisma.CustomerUpdateOneRequiredWithoutSalesOrdersNestedInput
   User?: Prisma.UserUpdateOneRequiredWithoutSalesOrdersNestedInput
   Invoices?: Prisma.InvoiceUpdateManyWithoutSalesOrderNestedInput
@@ -2724,13 +2771,14 @@ export type SalesOrderUncheckedUpdateWithoutQuotationInput = {
   paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   requestType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   customerAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPerson?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   customerId?: Prisma.IntFieldUpdateOperationsInput | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   companyId?: Prisma.IntFieldUpdateOperationsInput | number
@@ -2764,13 +2812,14 @@ export type SalesOrderUncheckedUpdateManyWithoutQuotationInput = {
   paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   requestType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   customerAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPerson?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   customerId?: Prisma.IntFieldUpdateOperationsInput | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   companyId?: Prisma.IntFieldUpdateOperationsInput | number
@@ -2800,13 +2849,14 @@ export type SalesOrderCreateManyCompanyInput = {
   paymentMethod?: string | null
   requestType?: string | null
   notes?: string | null
-  deletedAt?: Date | string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   customerAddress?: string | null
   contactPerson?: string | null
   contactPhone?: string | null
   contactEmail?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
+  deletedAt?: Date | string | null
   quotationId?: number | null
   customerId: number
   userId: number
@@ -2835,13 +2885,14 @@ export type SalesOrderUpdateWithoutCompanyInput = {
   paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   requestType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   customerAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPerson?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Customer?: Prisma.CustomerUpdateOneRequiredWithoutSalesOrdersNestedInput
   User?: Prisma.UserUpdateOneRequiredWithoutSalesOrdersNestedInput
   Invoices?: Prisma.InvoiceUpdateManyWithoutSalesOrderNestedInput
@@ -2875,13 +2926,14 @@ export type SalesOrderUncheckedUpdateWithoutCompanyInput = {
   paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   requestType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   customerAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPerson?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   quotationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   customerId?: Prisma.IntFieldUpdateOperationsInput | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
@@ -2915,13 +2967,14 @@ export type SalesOrderUncheckedUpdateManyWithoutCompanyInput = {
   paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   requestType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   customerAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPerson?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   quotationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   customerId?: Prisma.IntFieldUpdateOperationsInput | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
@@ -2951,13 +3004,14 @@ export type SalesOrderCreateManyUserInput = {
   paymentMethod?: string | null
   requestType?: string | null
   notes?: string | null
-  deletedAt?: Date | string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   customerAddress?: string | null
   contactPerson?: string | null
   contactPhone?: string | null
   contactEmail?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
+  deletedAt?: Date | string | null
   quotationId?: number | null
   customerId: number
   companyId: number
@@ -2986,13 +3040,14 @@ export type SalesOrderUpdateWithoutUserInput = {
   paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   requestType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   customerAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPerson?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Customer?: Prisma.CustomerUpdateOneRequiredWithoutSalesOrdersNestedInput
   Invoices?: Prisma.InvoiceUpdateManyWithoutSalesOrderNestedInput
   SalesOrderItems?: Prisma.SalesOrderItemUpdateManyWithoutSalesOrderNestedInput
@@ -3026,13 +3081,14 @@ export type SalesOrderUncheckedUpdateWithoutUserInput = {
   paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   requestType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   customerAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPerson?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   quotationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   customerId?: Prisma.IntFieldUpdateOperationsInput | number
   companyId?: Prisma.IntFieldUpdateOperationsInput | number
@@ -3066,13 +3122,14 @@ export type SalesOrderUncheckedUpdateManyWithoutUserInput = {
   paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   requestType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   customerAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPerson?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   quotationId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   customerId?: Prisma.IntFieldUpdateOperationsInput | number
   companyId?: Prisma.IntFieldUpdateOperationsInput | number
@@ -3160,13 +3217,14 @@ export type SalesOrderSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   paymentMethod?: boolean
   requestType?: boolean
   notes?: boolean
-  deletedAt?: boolean
+  attachments?: boolean
   customerAddress?: boolean
   contactPerson?: boolean
   contactPhone?: boolean
   contactEmail?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  deletedAt?: boolean
   quotationId?: boolean
   customerId?: boolean
   userId?: boolean
@@ -3206,13 +3264,14 @@ export type SalesOrderSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ex
   paymentMethod?: boolean
   requestType?: boolean
   notes?: boolean
-  deletedAt?: boolean
+  attachments?: boolean
   customerAddress?: boolean
   contactPerson?: boolean
   contactPhone?: boolean
   contactEmail?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  deletedAt?: boolean
   quotationId?: boolean
   customerId?: boolean
   userId?: boolean
@@ -3247,13 +3306,14 @@ export type SalesOrderSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ex
   paymentMethod?: boolean
   requestType?: boolean
   notes?: boolean
-  deletedAt?: boolean
+  attachments?: boolean
   customerAddress?: boolean
   contactPerson?: boolean
   contactPhone?: boolean
   contactEmail?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  deletedAt?: boolean
   quotationId?: boolean
   customerId?: boolean
   userId?: boolean
@@ -3288,20 +3348,21 @@ export type SalesOrderSelectScalar = {
   paymentMethod?: boolean
   requestType?: boolean
   notes?: boolean
-  deletedAt?: boolean
+  attachments?: boolean
   customerAddress?: boolean
   contactPerson?: boolean
   contactPhone?: boolean
   contactEmail?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  deletedAt?: boolean
   quotationId?: boolean
   customerId?: boolean
   userId?: boolean
   companyId?: boolean
 }
 
-export type SalesOrderOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "number" | "referenceNumber" | "date" | "title" | "description" | "totalAmount" | "discount" | "applyVat" | "vatAmount" | "grandTotal" | "status" | "currency" | "shippingAddress" | "billingAddress" | "termOfPayment" | "deliveryDate" | "deliveryMethod" | "termsAndConditions" | "termOfDelivery" | "paymentMethod" | "requestType" | "notes" | "deletedAt" | "customerAddress" | "contactPerson" | "contactPhone" | "contactEmail" | "createdAt" | "updatedAt" | "quotationId" | "customerId" | "userId" | "companyId", ExtArgs["result"]["salesOrder"]>
+export type SalesOrderOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "number" | "referenceNumber" | "date" | "title" | "description" | "totalAmount" | "discount" | "applyVat" | "vatAmount" | "grandTotal" | "status" | "currency" | "shippingAddress" | "billingAddress" | "termOfPayment" | "deliveryDate" | "deliveryMethod" | "termsAndConditions" | "termOfDelivery" | "paymentMethod" | "requestType" | "notes" | "attachments" | "customerAddress" | "contactPerson" | "contactPhone" | "contactEmail" | "createdAt" | "updatedAt" | "deletedAt" | "quotationId" | "customerId" | "userId" | "companyId", ExtArgs["result"]["salesOrder"]>
 export type SalesOrderInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   Customer?: boolean | Prisma.CustomerDefaultArgs<ExtArgs>
   User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -3362,13 +3423,14 @@ export type $SalesOrderPayload<ExtArgs extends runtime.Types.Extensions.Internal
     paymentMethod: string | null
     requestType: string | null
     notes: string | null
-    deletedAt: Date | null
+    attachments: runtime.JsonValue | null
     customerAddress: string | null
     contactPerson: string | null
     contactPhone: string | null
     contactEmail: string | null
     createdAt: Date
     updatedAt: Date | null
+    deletedAt: Date | null
     quotationId: number | null
     customerId: number
     userId: number
@@ -3827,13 +3889,14 @@ export interface SalesOrderFieldRefs {
   readonly paymentMethod: Prisma.FieldRef<"SalesOrder", 'String'>
   readonly requestType: Prisma.FieldRef<"SalesOrder", 'String'>
   readonly notes: Prisma.FieldRef<"SalesOrder", 'String'>
-  readonly deletedAt: Prisma.FieldRef<"SalesOrder", 'DateTime'>
+  readonly attachments: Prisma.FieldRef<"SalesOrder", 'Json'>
   readonly customerAddress: Prisma.FieldRef<"SalesOrder", 'String'>
   readonly contactPerson: Prisma.FieldRef<"SalesOrder", 'String'>
   readonly contactPhone: Prisma.FieldRef<"SalesOrder", 'String'>
   readonly contactEmail: Prisma.FieldRef<"SalesOrder", 'String'>
   readonly createdAt: Prisma.FieldRef<"SalesOrder", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"SalesOrder", 'DateTime'>
+  readonly deletedAt: Prisma.FieldRef<"SalesOrder", 'DateTime'>
   readonly quotationId: Prisma.FieldRef<"SalesOrder", 'Int'>
   readonly customerId: Prisma.FieldRef<"SalesOrder", 'Int'>
   readonly userId: Prisma.FieldRef<"SalesOrder", 'Int'>

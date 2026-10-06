@@ -13,9 +13,12 @@ import {
   IsEmail,
   IsNumberString,
   IsBoolean,
+  IsObject,
+  IsDate,
 } from 'class-validator';
-import { Type } from 'class-transformer';
+import { Transform, Type } from 'class-transformer';
 import { Currency, SalesOrderStatus } from '../prisma/client/client';
+import { JsonArray } from '@prisma/client/runtime/client';
 
 export class SalesOrderItemDto {
   @ApiProperty({ example: 'PART-001' })
@@ -59,14 +62,10 @@ export class CreateSalesOrderDto {
   @IsInt({ message: 'Invalid company' })
   companyId: number;
 
-  @ApiProperty({ example: '2025-05-25T10:00:00Z' })
-  @IsDateString(
-    {},
-    {
-      message: 'Invalid date',
-    },
-  )
-  date: string;
+  @ApiProperty({ example: '2025-05-25' })
+  @IsDate({ message: 'Invalid date' })
+  @Transform(({ value }) => (value ? new Date(value) : undefined))
+  date: Date;
 
   @ApiProperty({ required: true, example: 'Order for office equipment' })
   @IsString({ message: 'Title is required and must be a string' })
@@ -145,11 +144,9 @@ export class CreateSalesOrderDto {
 
   @ApiProperty({ required: false, example: '2025-06-01T10:00:00Z' })
   @IsOptional()
-  @IsDateString(
-    {},
-    { message: 'Delivery date must be a valid ISO 8601 date string' },
-  )
-  deliveryDate?: string;
+  @IsDate({ message: 'Invalid date' })
+  @Transform(({ value }) => (value ? new Date(value) : undefined))
+  deliveryDate?: Date;
 
   @ApiProperty({ required: false, example: 'All Sea' })
   @IsOptional()
@@ -190,6 +187,11 @@ export class CreateSalesOrderDto {
   @ApiProperty({ required: true, example: 'john.doe@example.com' })
   @IsEmail({}, { message: 'Contact email must be a valid email address' })
   contactEmail: string;
+
+  @ApiProperty({ example: { files: [] }, type: Object })
+  @IsOptional()
+  @IsObject({ each: true })
+  attachments?: JsonArray;
 }
 
 export class UpdateSalesOrderDto extends PartialType(CreateSalesOrderDto) {}

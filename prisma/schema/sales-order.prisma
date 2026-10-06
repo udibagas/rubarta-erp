@@ -22,7 +22,7 @@ model SalesOrder {
   paymentMethod      String?          @db.VarChar(30) // e.g., "Bank Transfer", "Credit Card", "Cash"
   requestType        String?          @db.VarChar(30) // e.g., "Sales", "Customer Free Program", "Lending Of Goods", "Fee Service", "Warranty", "Others"
   notes              String?          @db.Text
-  deletedAt          DateTime?        @db.Timestamp()
+  attachments        Json?            @db.JsonB // Attachments related to the invoice
 
   // customer address
   customerAddress String? @db.Text
@@ -33,6 +33,7 @@ model SalesOrder {
   // Timestamps
   createdAt DateTime  @default(now())
   updatedAt DateTime? @updatedAt
+  deletedAt DateTime? @db.Timestamp()
 
   quotationId Int?
   customerId  Int
