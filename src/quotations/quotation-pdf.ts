@@ -3,6 +3,7 @@ import * as path from 'path';
 import pdfkit from 'pdfkit';
 import { PDFDocument, StandardFonts, rgb } from 'pdf-lib';
 import { createPdfDocumentWithTables } from 'pdfkit-table';
+import dayjs from 'dayjs';
 
 const LOGO_PATH = path.join(process.cwd(), 'logo.png');
 
@@ -23,10 +24,9 @@ const COLORS = {
   border: '#808181',
 };
 
-function formatDate(date?: Date | string | null): string {
-  if (!date) return '-';
-  const d = new Date(date);
-  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+function formatDate(value?: Date | string | null) {
+  if (!value) return '-';
+  return dayjs(value).format('DD-MM-YYYY');
 }
 
 function formatAmount(value: number): string {

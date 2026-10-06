@@ -3,6 +3,7 @@ import * as path from 'path';
 import PDFDocument from 'pdfkit';
 import { PDFDocument as PdfLibDocument, StandardFonts, rgb } from 'pdf-lib';
 import { createPdfDocumentWithTables } from 'pdfkit-table';
+import dayjs from 'dayjs';
 
 const LOGO_PATH = path.join(process.cwd(), 'logo.png');
 
@@ -24,8 +25,7 @@ const COLORS = {
 
 function formatDate(value?: Date | string | null) {
   if (!value) return '-';
-  const date = new Date(value);
-  return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
+  return dayjs(value).format('DD-MM-YYYY');
 }
 
 async function addPageNumbers(pdfBuffer: Buffer): Promise<Buffer> {
