@@ -1,8 +1,4 @@
-import {
-  BadRequestException,
-  Injectable,
-  NotFoundException,
-} from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { SalesOrdersPolicy } from './sales-orders.policy';
 import { PrismaService } from '../prisma/prisma.service';
 import {
@@ -19,6 +15,7 @@ import { MailerService } from '@nestjs-modules/mailer';
 import * as ExcelJS from 'exceljs';
 import PDFDocument from 'pdfkit';
 import { createPdfDocumentWithTables } from 'pdfkit-table';
+import * as fs from 'node:fs';
 
 @Injectable()
 export class SalesOrdersService {
@@ -592,6 +589,46 @@ export class SalesOrdersService {
     const salesOrder = await this.findOne(id, user);
     const pdfBuffer = await generateOrderPdf(salesOrder);
 
+    const soAttachments = Array.isArray(salesOrder.attachments)
+      ? salesOrder.attachments
+          .map((attachment: any) => {
+            if (!attachment || typeof attachment !== 'object') return null;
+
+            const filePath =
+              typeof attachment.filePath === 'string'
+                ? attachment.filePath
+                : null;
+            const fileName =
+              typeof attachment.fileName === 'string'
+                ? attachment.fileName
+                : filePath?.split('/').pop() || 'attachment';
+            const fileType =
+              typeof attachment.fileType === 'string'
+                ? attachment.fileType
+                : 'application/octet-stream';
+
+            if (!filePath) return null;
+
+            try {
+              return {
+                filename: fileName,
+                content: fs.readFileSync(filePath),
+                contentType: fileType,
+              };
+            } catch (error) {
+              console.warn(
+                `Skipping Sales Order attachment for ${salesOrder.id}: ${filePath}`,
+                error,
+              );
+              return null;
+            }
+          })
+          .filter(
+            (attachment): attachment is NonNullable<typeof attachment> =>
+              !!attachment,
+          )
+      : [];
+
     await this.mailerService.sendMail({
       subject,
       cc: [salesOrder.User.email, ...(cc || [])],
@@ -607,6 +644,7 @@ export class SalesOrdersService {
           content: pdfBuffer,
           contentType: 'application/pdf',
         },
+        ...soAttachments,
       ],
     });
 
