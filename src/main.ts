@@ -77,7 +77,6 @@ async function bootstrap() {
           ],
         },
       },
-      // xFrameOptions: false, // allow embedding from the FE via iframe
     }),
   );
 
