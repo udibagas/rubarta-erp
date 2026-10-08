@@ -5,10 +5,11 @@ import {
   PaymentStatus,
   PaymentType,
 } from '../prisma/client/client';
-import { Type } from 'class-transformer';
+import { Transform, Type } from 'class-transformer';
 import {
   ArrayNotEmpty,
   IsArray,
+  IsDate,
   IsEnum,
   IsNotEmpty,
   IsNumber,
@@ -20,10 +21,9 @@ import {
 } from 'class-validator';
 
 export class NkpItemDto {
-  @ApiProperty({
-    example: new Date(),
-  })
-  @IsNotEmpty()
+  @ApiProperty({ example: '2024-06-21' })
+  @IsDate({ message: 'Invalid date' })
+  @Transform(({ value }) => (value ? new Date(value) : undefined))
   date: Date;
 
   @ApiProperty({ example: 'BBM Pertalite 10 Liter' })

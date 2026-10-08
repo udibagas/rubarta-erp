@@ -35,30 +35,22 @@ export class NkpService {
   async create(dto: NkpDto, user: User) {
     this.policy.can('create', null, user);
     const { NkpItem: items, NkpAttachment: attachments, ...data } = dto;
-    let number = 'DRAFT';
+    const { companyId, paymentType, nkpType, parentId } = data;
 
-    if (data.status == PaymentStatus.SUBMITTED) {
-      const { companyId, paymentType, nkpType, parentId } = data;
-      number = await this.generateNumber({
-        companyId,
-        paymentType,
-        nkpType,
-        parentId,
-      });
-    }
+    let number = await this.generateNumber({
+      companyId,
+      paymentType,
+      nkpType,
+      parentId,
+    });
 
     const savedData = await this.prisma.nkp.create({
       include: { Requester: true },
       data: {
         ...data,
-        requesterId: user.id,
         number,
-        NkpItem: {
-          create: items.map((i) => ({
-            ...i,
-            date: new Date(i.date),
-          })),
-        },
+        requesterId: user.id,
+        NkpItem: { create: items },
         NkpAttachment: { create: attachments },
       },
     });
@@ -381,30 +373,12 @@ export class NkpService {
 
     this.policy.can('update', nkp, user);
 
-    let number = 'DRAFT';
-    if (dto.status == PaymentStatus.SUBMITTED) {
-      const { companyId, paymentType, nkpType, parentId } = dto;
-      number = await this.generateNumber({
-        companyId,
-        paymentType,
-        nkpType,
-        parentId,
-      });
-    }
-
     const { NkpItem: items, NkpAttachment: attachments, ...data } = dto;
     const savedData = await this.prisma.nkp.update({
       where: { id },
       data: {
         ...data,
-        number,
-        NkpItem: {
-          deleteMany: {},
-          create: items.map((i) => ({
-            ...i,
-            date: new Date(i.date),
-          })),
-        },
+        NkpItem: { deleteMany: {}, create: items },
         NkpAttachment: { deleteMany: {}, create: attachments },
       },
       include: {
@@ -715,7 +689,7 @@ export class NkpService {
         orderBy: { number: 'desc' },
         where: {
           companyId,
-          AND: [{ number: { endsWith: year } }, { number: { not: 'DRAFT' } }],
+          number: { endsWith: year },
         },
       });
 
