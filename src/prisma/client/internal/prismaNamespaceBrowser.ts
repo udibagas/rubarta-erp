@@ -567,6 +567,7 @@ export const GoodsReceiptScalarFieldEnum = {
   paymentStatus: 'paymentStatus',
   supportingDocument: 'supportingDocument',
   notes: 'notes',
+  vendorInvoiceNumber: 'vendorInvoiceNumber',
   purchaseOrderId: 'purchaseOrderId',
   supplierId: 'supplierId',
   companyId: 'companyId',

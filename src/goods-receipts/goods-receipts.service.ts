@@ -160,11 +160,37 @@ export class GoodsReceiptsService {
 
     if (query.keyword) {
       where.OR = [
-        { number: { contains: query.keyword, mode: 'insensitive' } },
-        { sender: { contains: query.keyword, mode: 'insensitive' } },
-        { recipient: { contains: query.keyword, mode: 'insensitive' } },
         {
-          Supplier: { name: { contains: query.keyword, mode: 'insensitive' } },
+          number: {
+            contains: query.keyword,
+            mode: 'insensitive',
+          },
+        },
+        {
+          sender: {
+            contains: query.keyword,
+            mode: 'insensitive',
+          },
+        },
+        {
+          recipient: {
+            contains: query.keyword,
+            mode: 'insensitive',
+          },
+        },
+        {
+          vendorInvoiceNumber: {
+            contains: query.keyword,
+            mode: 'insensitive',
+          },
+        },
+        {
+          Supplier: {
+            name: {
+              contains: query.keyword,
+              mode: 'insensitive',
+            },
+          },
         },
       ];
     }
@@ -191,10 +217,10 @@ export class GoodsReceiptsService {
         ? { in: query.paymentStatus }
         : query.paymentStatus;
 
-    const take = query.pageSize ? parseInt(query.pageSize, 10) : undefined;
+    const take = query.pageSize;
     const skip =
       query.page && query.pageSize
-        ? (parseInt(query.page, 10) - 1) * parseInt(query.pageSize, 10)
+        ? (query.page - 1) * query.pageSize
         : undefined;
 
     const data = await this.prisma.goodsReceipt.findMany({

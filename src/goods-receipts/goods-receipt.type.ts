@@ -56,6 +56,9 @@ export class GoodsReceiptType {
   @Field({ nullable: true })
   notes?: string;
 
+  @Field({ nullable: true })
+  vendorInvoiceNumber?: string;
+
   @Field(() => Int)
   purchaseOrderId: number;
 

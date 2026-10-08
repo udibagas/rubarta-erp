@@ -1,13 +1,14 @@
 model GoodsReceipt {
-  id                 Int                @id @default(autoincrement())
-  number             String             @unique
-  date               DateTime
-  sender             String
-  recipient          String
-  status             GoodsReceiptStatus @default(Draft)
-  paymentStatus      PaymentStatus      @default(UNPAID)
-  supportingDocument Json?
-  notes              String?            @db.Text
+  id                  Int                @id @default(autoincrement())
+  number              String             @unique
+  date                DateTime
+  sender              String
+  recipient           String
+  status              GoodsReceiptStatus @default(Draft)
+  paymentStatus       PaymentStatus      @default(UNPAID)
+  supportingDocument  Json?
+  notes               String?            @db.Text
+  vendorInvoiceNumber String?            @db.VarChar(100)
 
   purchaseOrderId Int
   supplierId      Int

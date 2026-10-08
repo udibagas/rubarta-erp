@@ -51,6 +51,7 @@ export type GoodsReceiptMinAggregateOutputType = {
   status: $Enums.GoodsReceiptStatus | null
   paymentStatus: $Enums.PaymentStatus | null
   notes: string | null
+  vendorInvoiceNumber: string | null
   purchaseOrderId: number | null
   supplierId: number | null
   companyId: number | null
@@ -69,6 +70,7 @@ export type GoodsReceiptMaxAggregateOutputType = {
   status: $Enums.GoodsReceiptStatus | null
   paymentStatus: $Enums.PaymentStatus | null
   notes: string | null
+  vendorInvoiceNumber: string | null
   purchaseOrderId: number | null
   supplierId: number | null
   companyId: number | null
@@ -88,6 +90,7 @@ export type GoodsReceiptCountAggregateOutputType = {
   paymentStatus: number
   supportingDocument: number
   notes: number
+  vendorInvoiceNumber: number
   purchaseOrderId: number
   supplierId: number
   companyId: number
@@ -124,6 +127,7 @@ export type GoodsReceiptMinAggregateInputType = {
   status?: true
   paymentStatus?: true
   notes?: true
+  vendorInvoiceNumber?: true
   purchaseOrderId?: true
   supplierId?: true
   companyId?: true
@@ -142,6 +146,7 @@ export type GoodsReceiptMaxAggregateInputType = {
   status?: true
   paymentStatus?: true
   notes?: true
+  vendorInvoiceNumber?: true
   purchaseOrderId?: true
   supplierId?: true
   companyId?: true
@@ -161,6 +166,7 @@ export type GoodsReceiptCountAggregateInputType = {
   paymentStatus?: true
   supportingDocument?: true
   notes?: true
+  vendorInvoiceNumber?: true
   purchaseOrderId?: true
   supplierId?: true
   companyId?: true
@@ -267,6 +273,7 @@ export type GoodsReceiptGroupByOutputType = {
   paymentStatus: $Enums.PaymentStatus
   supportingDocument: runtime.JsonValue | null
   notes: string | null
+  vendorInvoiceNumber: string | null
   purchaseOrderId: number
   supplierId: number
   companyId: number
@@ -309,6 +316,7 @@ export type GoodsReceiptWhereInput = {
   paymentStatus?: Prisma.EnumPaymentStatusFilter<"GoodsReceipt"> | $Enums.PaymentStatus
   supportingDocument?: Prisma.JsonNullableFilter<"GoodsReceipt">
   notes?: Prisma.StringNullableFilter<"GoodsReceipt"> | string | null
+  vendorInvoiceNumber?: Prisma.StringNullableFilter<"GoodsReceipt"> | string | null
   purchaseOrderId?: Prisma.IntFilter<"GoodsReceipt"> | number
   supplierId?: Prisma.IntFilter<"GoodsReceipt"> | number
   companyId?: Prisma.IntFilter<"GoodsReceipt"> | number
@@ -335,6 +343,7 @@ export type GoodsReceiptOrderByWithRelationInput = {
   paymentStatus?: Prisma.SortOrder
   supportingDocument?: Prisma.SortOrderInput | Prisma.SortOrder
   notes?: Prisma.SortOrderInput | Prisma.SortOrder
+  vendorInvoiceNumber?: Prisma.SortOrderInput | Prisma.SortOrder
   purchaseOrderId?: Prisma.SortOrder
   supplierId?: Prisma.SortOrder
   companyId?: Prisma.SortOrder
@@ -364,6 +373,7 @@ export type GoodsReceiptWhereUniqueInput = Prisma.AtLeast<{
   paymentStatus?: Prisma.EnumPaymentStatusFilter<"GoodsReceipt"> | $Enums.PaymentStatus
   supportingDocument?: Prisma.JsonNullableFilter<"GoodsReceipt">
   notes?: Prisma.StringNullableFilter<"GoodsReceipt"> | string | null
+  vendorInvoiceNumber?: Prisma.StringNullableFilter<"GoodsReceipt"> | string | null
   purchaseOrderId?: Prisma.IntFilter<"GoodsReceipt"> | number
   supplierId?: Prisma.IntFilter<"GoodsReceipt"> | number
   companyId?: Prisma.IntFilter<"GoodsReceipt"> | number
@@ -390,6 +400,7 @@ export type GoodsReceiptOrderByWithAggregationInput = {
   paymentStatus?: Prisma.SortOrder
   supportingDocument?: Prisma.SortOrderInput | Prisma.SortOrder
   notes?: Prisma.SortOrderInput | Prisma.SortOrder
+  vendorInvoiceNumber?: Prisma.SortOrderInput | Prisma.SortOrder
   purchaseOrderId?: Prisma.SortOrder
   supplierId?: Prisma.SortOrder
   companyId?: Prisma.SortOrder
@@ -417,6 +428,7 @@ export type GoodsReceiptScalarWhereWithAggregatesInput = {
   paymentStatus?: Prisma.EnumPaymentStatusWithAggregatesFilter<"GoodsReceipt"> | $Enums.PaymentStatus
   supportingDocument?: Prisma.JsonNullableWithAggregatesFilter<"GoodsReceipt">
   notes?: Prisma.StringNullableWithAggregatesFilter<"GoodsReceipt"> | string | null
+  vendorInvoiceNumber?: Prisma.StringNullableWithAggregatesFilter<"GoodsReceipt"> | string | null
   purchaseOrderId?: Prisma.IntWithAggregatesFilter<"GoodsReceipt"> | number
   supplierId?: Prisma.IntWithAggregatesFilter<"GoodsReceipt"> | number
   companyId?: Prisma.IntWithAggregatesFilter<"GoodsReceipt"> | number
@@ -435,6 +447,7 @@ export type GoodsReceiptCreateInput = {
   paymentStatus?: $Enums.PaymentStatus
   supportingDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   notes?: string | null
+  vendorInvoiceNumber?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -457,6 +470,7 @@ export type GoodsReceiptUncheckedCreateInput = {
   paymentStatus?: $Enums.PaymentStatus
   supportingDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   notes?: string | null
+  vendorInvoiceNumber?: string | null
   purchaseOrderId: number
   supplierId: number
   companyId: number
@@ -478,6 +492,7 @@ export type GoodsReceiptUpdateInput = {
   paymentStatus?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
   supportingDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vendorInvoiceNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -500,6 +515,7 @@ export type GoodsReceiptUncheckedUpdateInput = {
   paymentStatus?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
   supportingDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vendorInvoiceNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   purchaseOrderId?: Prisma.IntFieldUpdateOperationsInput | number
   supplierId?: Prisma.IntFieldUpdateOperationsInput | number
   companyId?: Prisma.IntFieldUpdateOperationsInput | number
@@ -522,6 +538,7 @@ export type GoodsReceiptCreateManyInput = {
   paymentStatus?: $Enums.PaymentStatus
   supportingDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   notes?: string | null
+  vendorInvoiceNumber?: string | null
   purchaseOrderId: number
   supplierId: number
   companyId: number
@@ -540,6 +557,7 @@ export type GoodsReceiptUpdateManyMutationInput = {
   paymentStatus?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
   supportingDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vendorInvoiceNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -555,6 +573,7 @@ export type GoodsReceiptUncheckedUpdateManyInput = {
   paymentStatus?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
   supportingDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vendorInvoiceNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   purchaseOrderId?: Prisma.IntFieldUpdateOperationsInput | number
   supplierId?: Prisma.IntFieldUpdateOperationsInput | number
   companyId?: Prisma.IntFieldUpdateOperationsInput | number
@@ -579,6 +598,7 @@ export type GoodsReceiptCountOrderByAggregateInput = {
   paymentStatus?: Prisma.SortOrder
   supportingDocument?: Prisma.SortOrder
   notes?: Prisma.SortOrder
+  vendorInvoiceNumber?: Prisma.SortOrder
   purchaseOrderId?: Prisma.SortOrder
   supplierId?: Prisma.SortOrder
   companyId?: Prisma.SortOrder
@@ -605,6 +625,7 @@ export type GoodsReceiptMaxOrderByAggregateInput = {
   status?: Prisma.SortOrder
   paymentStatus?: Prisma.SortOrder
   notes?: Prisma.SortOrder
+  vendorInvoiceNumber?: Prisma.SortOrder
   purchaseOrderId?: Prisma.SortOrder
   supplierId?: Prisma.SortOrder
   companyId?: Prisma.SortOrder
@@ -623,6 +644,7 @@ export type GoodsReceiptMinOrderByAggregateInput = {
   status?: Prisma.SortOrder
   paymentStatus?: Prisma.SortOrder
   notes?: Prisma.SortOrder
+  vendorInvoiceNumber?: Prisma.SortOrder
   purchaseOrderId?: Prisma.SortOrder
   supplierId?: Prisma.SortOrder
   companyId?: Prisma.SortOrder
@@ -884,6 +906,7 @@ export type GoodsReceiptCreateWithoutDeliveryOrderInput = {
   paymentStatus?: $Enums.PaymentStatus
   supportingDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   notes?: string | null
+  vendorInvoiceNumber?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -905,6 +928,7 @@ export type GoodsReceiptUncheckedCreateWithoutDeliveryOrderInput = {
   paymentStatus?: $Enums.PaymentStatus
   supportingDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   notes?: string | null
+  vendorInvoiceNumber?: string | null
   purchaseOrderId: number
   supplierId: number
   companyId: number
@@ -941,6 +965,7 @@ export type GoodsReceiptUpdateWithoutDeliveryOrderInput = {
   paymentStatus?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
   supportingDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vendorInvoiceNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -962,6 +987,7 @@ export type GoodsReceiptUncheckedUpdateWithoutDeliveryOrderInput = {
   paymentStatus?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
   supportingDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vendorInvoiceNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   purchaseOrderId?: Prisma.IntFieldUpdateOperationsInput | number
   supplierId?: Prisma.IntFieldUpdateOperationsInput | number
   companyId?: Prisma.IntFieldUpdateOperationsInput | number
@@ -982,6 +1008,7 @@ export type GoodsReceiptCreateWithoutGoodsReceiptItemsInput = {
   paymentStatus?: $Enums.PaymentStatus
   supportingDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   notes?: string | null
+  vendorInvoiceNumber?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -1003,6 +1030,7 @@ export type GoodsReceiptUncheckedCreateWithoutGoodsReceiptItemsInput = {
   paymentStatus?: $Enums.PaymentStatus
   supportingDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   notes?: string | null
+  vendorInvoiceNumber?: string | null
   purchaseOrderId: number
   supplierId: number
   companyId: number
@@ -1039,6 +1067,7 @@ export type GoodsReceiptUpdateWithoutGoodsReceiptItemsInput = {
   paymentStatus?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
   supportingDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vendorInvoiceNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1060,6 +1089,7 @@ export type GoodsReceiptUncheckedUpdateWithoutGoodsReceiptItemsInput = {
   paymentStatus?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
   supportingDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vendorInvoiceNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   purchaseOrderId?: Prisma.IntFieldUpdateOperationsInput | number
   supplierId?: Prisma.IntFieldUpdateOperationsInput | number
   companyId?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1080,6 +1110,7 @@ export type GoodsReceiptCreateWithoutNkpsInput = {
   paymentStatus?: $Enums.PaymentStatus
   supportingDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   notes?: string | null
+  vendorInvoiceNumber?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -1101,6 +1132,7 @@ export type GoodsReceiptUncheckedCreateWithoutNkpsInput = {
   paymentStatus?: $Enums.PaymentStatus
   supportingDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   notes?: string | null
+  vendorInvoiceNumber?: string | null
   purchaseOrderId: number
   supplierId: number
   companyId: number
@@ -1137,6 +1169,7 @@ export type GoodsReceiptUpdateWithoutNkpsInput = {
   paymentStatus?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
   supportingDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vendorInvoiceNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1158,6 +1191,7 @@ export type GoodsReceiptUncheckedUpdateWithoutNkpsInput = {
   paymentStatus?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
   supportingDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vendorInvoiceNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   purchaseOrderId?: Prisma.IntFieldUpdateOperationsInput | number
   supplierId?: Prisma.IntFieldUpdateOperationsInput | number
   companyId?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1178,6 +1212,7 @@ export type GoodsReceiptCreateWithoutPurchaseOrderInput = {
   paymentStatus?: $Enums.PaymentStatus
   supportingDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   notes?: string | null
+  vendorInvoiceNumber?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -1199,6 +1234,7 @@ export type GoodsReceiptUncheckedCreateWithoutPurchaseOrderInput = {
   paymentStatus?: $Enums.PaymentStatus
   supportingDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   notes?: string | null
+  vendorInvoiceNumber?: string | null
   supplierId: number
   companyId: number
   userId: number
@@ -1249,6 +1285,7 @@ export type GoodsReceiptScalarWhereInput = {
   paymentStatus?: Prisma.EnumPaymentStatusFilter<"GoodsReceipt"> | $Enums.PaymentStatus
   supportingDocument?: Prisma.JsonNullableFilter<"GoodsReceipt">
   notes?: Prisma.StringNullableFilter<"GoodsReceipt"> | string | null
+  vendorInvoiceNumber?: Prisma.StringNullableFilter<"GoodsReceipt"> | string | null
   purchaseOrderId?: Prisma.IntFilter<"GoodsReceipt"> | number
   supplierId?: Prisma.IntFilter<"GoodsReceipt"> | number
   companyId?: Prisma.IntFilter<"GoodsReceipt"> | number
@@ -1267,6 +1304,7 @@ export type GoodsReceiptCreateWithoutCompanyInput = {
   paymentStatus?: $Enums.PaymentStatus
   supportingDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   notes?: string | null
+  vendorInvoiceNumber?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -1288,6 +1326,7 @@ export type GoodsReceiptUncheckedCreateWithoutCompanyInput = {
   paymentStatus?: $Enums.PaymentStatus
   supportingDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   notes?: string | null
+  vendorInvoiceNumber?: string | null
   purchaseOrderId: number
   supplierId: number
   userId: number
@@ -1334,6 +1373,7 @@ export type GoodsReceiptCreateWithoutSupplierInput = {
   paymentStatus?: $Enums.PaymentStatus
   supportingDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   notes?: string | null
+  vendorInvoiceNumber?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -1355,6 +1395,7 @@ export type GoodsReceiptUncheckedCreateWithoutSupplierInput = {
   paymentStatus?: $Enums.PaymentStatus
   supportingDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   notes?: string | null
+  vendorInvoiceNumber?: string | null
   purchaseOrderId: number
   companyId: number
   userId: number
@@ -1401,6 +1442,7 @@ export type GoodsReceiptCreateWithoutUserInput = {
   paymentStatus?: $Enums.PaymentStatus
   supportingDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   notes?: string | null
+  vendorInvoiceNumber?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -1422,6 +1464,7 @@ export type GoodsReceiptUncheckedCreateWithoutUserInput = {
   paymentStatus?: $Enums.PaymentStatus
   supportingDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   notes?: string | null
+  vendorInvoiceNumber?: string | null
   purchaseOrderId: number
   supplierId: number
   companyId: number
@@ -1469,6 +1512,7 @@ export type GoodsReceiptCreateManyPurchaseOrderInput = {
   paymentStatus?: $Enums.PaymentStatus
   supportingDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   notes?: string | null
+  vendorInvoiceNumber?: string | null
   supplierId: number
   companyId: number
   userId: number
@@ -1486,6 +1530,7 @@ export type GoodsReceiptUpdateWithoutPurchaseOrderInput = {
   paymentStatus?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
   supportingDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vendorInvoiceNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1507,6 +1552,7 @@ export type GoodsReceiptUncheckedUpdateWithoutPurchaseOrderInput = {
   paymentStatus?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
   supportingDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vendorInvoiceNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   supplierId?: Prisma.IntFieldUpdateOperationsInput | number
   companyId?: Prisma.IntFieldUpdateOperationsInput | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1528,6 +1574,7 @@ export type GoodsReceiptUncheckedUpdateManyWithoutPurchaseOrderInput = {
   paymentStatus?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
   supportingDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vendorInvoiceNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   supplierId?: Prisma.IntFieldUpdateOperationsInput | number
   companyId?: Prisma.IntFieldUpdateOperationsInput | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1546,6 +1593,7 @@ export type GoodsReceiptCreateManyCompanyInput = {
   paymentStatus?: $Enums.PaymentStatus
   supportingDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   notes?: string | null
+  vendorInvoiceNumber?: string | null
   purchaseOrderId: number
   supplierId: number
   userId: number
@@ -1563,6 +1611,7 @@ export type GoodsReceiptUpdateWithoutCompanyInput = {
   paymentStatus?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
   supportingDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vendorInvoiceNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1584,6 +1633,7 @@ export type GoodsReceiptUncheckedUpdateWithoutCompanyInput = {
   paymentStatus?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
   supportingDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vendorInvoiceNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   purchaseOrderId?: Prisma.IntFieldUpdateOperationsInput | number
   supplierId?: Prisma.IntFieldUpdateOperationsInput | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1605,6 +1655,7 @@ export type GoodsReceiptUncheckedUpdateManyWithoutCompanyInput = {
   paymentStatus?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
   supportingDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vendorInvoiceNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   purchaseOrderId?: Prisma.IntFieldUpdateOperationsInput | number
   supplierId?: Prisma.IntFieldUpdateOperationsInput | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1623,6 +1674,7 @@ export type GoodsReceiptCreateManySupplierInput = {
   paymentStatus?: $Enums.PaymentStatus
   supportingDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   notes?: string | null
+  vendorInvoiceNumber?: string | null
   purchaseOrderId: number
   companyId: number
   userId: number
@@ -1640,6 +1692,7 @@ export type GoodsReceiptUpdateWithoutSupplierInput = {
   paymentStatus?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
   supportingDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vendorInvoiceNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1661,6 +1714,7 @@ export type GoodsReceiptUncheckedUpdateWithoutSupplierInput = {
   paymentStatus?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
   supportingDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vendorInvoiceNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   purchaseOrderId?: Prisma.IntFieldUpdateOperationsInput | number
   companyId?: Prisma.IntFieldUpdateOperationsInput | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1682,6 +1736,7 @@ export type GoodsReceiptUncheckedUpdateManyWithoutSupplierInput = {
   paymentStatus?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
   supportingDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vendorInvoiceNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   purchaseOrderId?: Prisma.IntFieldUpdateOperationsInput | number
   companyId?: Prisma.IntFieldUpdateOperationsInput | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1700,6 +1755,7 @@ export type GoodsReceiptCreateManyUserInput = {
   paymentStatus?: $Enums.PaymentStatus
   supportingDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   notes?: string | null
+  vendorInvoiceNumber?: string | null
   purchaseOrderId: number
   supplierId: number
   companyId: number
@@ -1717,6 +1773,7 @@ export type GoodsReceiptUpdateWithoutUserInput = {
   paymentStatus?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
   supportingDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vendorInvoiceNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1738,6 +1795,7 @@ export type GoodsReceiptUncheckedUpdateWithoutUserInput = {
   paymentStatus?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
   supportingDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vendorInvoiceNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   purchaseOrderId?: Prisma.IntFieldUpdateOperationsInput | number
   supplierId?: Prisma.IntFieldUpdateOperationsInput | number
   companyId?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1759,6 +1817,7 @@ export type GoodsReceiptUncheckedUpdateManyWithoutUserInput = {
   paymentStatus?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
   supportingDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vendorInvoiceNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   purchaseOrderId?: Prisma.IntFieldUpdateOperationsInput | number
   supplierId?: Prisma.IntFieldUpdateOperationsInput | number
   companyId?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1817,6 +1876,7 @@ export type GoodsReceiptSelect<ExtArgs extends runtime.Types.Extensions.Internal
   paymentStatus?: boolean
   supportingDocument?: boolean
   notes?: boolean
+  vendorInvoiceNumber?: boolean
   purchaseOrderId?: boolean
   supplierId?: boolean
   companyId?: boolean
@@ -1844,6 +1904,7 @@ export type GoodsReceiptSelectCreateManyAndReturn<ExtArgs extends runtime.Types.
   paymentStatus?: boolean
   supportingDocument?: boolean
   notes?: boolean
+  vendorInvoiceNumber?: boolean
   purchaseOrderId?: boolean
   supplierId?: boolean
   companyId?: boolean
@@ -1867,6 +1928,7 @@ export type GoodsReceiptSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.
   paymentStatus?: boolean
   supportingDocument?: boolean
   notes?: boolean
+  vendorInvoiceNumber?: boolean
   purchaseOrderId?: boolean
   supplierId?: boolean
   companyId?: boolean
@@ -1890,6 +1952,7 @@ export type GoodsReceiptSelectScalar = {
   paymentStatus?: boolean
   supportingDocument?: boolean
   notes?: boolean
+  vendorInvoiceNumber?: boolean
   purchaseOrderId?: boolean
   supplierId?: boolean
   companyId?: boolean
@@ -1899,7 +1962,7 @@ export type GoodsReceiptSelectScalar = {
   deletedAt?: boolean
 }
 
-export type GoodsReceiptOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "number" | "date" | "sender" | "recipient" | "status" | "paymentStatus" | "supportingDocument" | "notes" | "purchaseOrderId" | "supplierId" | "companyId" | "userId" | "createdAt" | "updatedAt" | "deletedAt", ExtArgs["result"]["goodsReceipt"]>
+export type GoodsReceiptOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "number" | "date" | "sender" | "recipient" | "status" | "paymentStatus" | "supportingDocument" | "notes" | "vendorInvoiceNumber" | "purchaseOrderId" | "supplierId" | "companyId" | "userId" | "createdAt" | "updatedAt" | "deletedAt", ExtArgs["result"]["goodsReceipt"]>
 export type GoodsReceiptInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   PurchaseOrder?: boolean | Prisma.PurchaseOrderDefaultArgs<ExtArgs>
   Supplier?: boolean | Prisma.SupplierDefaultArgs<ExtArgs>
@@ -1944,6 +2007,7 @@ export type $GoodsReceiptPayload<ExtArgs extends runtime.Types.Extensions.Intern
     paymentStatus: $Enums.PaymentStatus
     supportingDocument: runtime.JsonValue | null
     notes: string | null
+    vendorInvoiceNumber: string | null
     purchaseOrderId: number
     supplierId: number
     companyId: number
@@ -2390,6 +2454,7 @@ export interface GoodsReceiptFieldRefs {
   readonly paymentStatus: Prisma.FieldRef<"GoodsReceipt", 'PaymentStatus'>
   readonly supportingDocument: Prisma.FieldRef<"GoodsReceipt", 'Json'>
   readonly notes: Prisma.FieldRef<"GoodsReceipt", 'String'>
+  readonly vendorInvoiceNumber: Prisma.FieldRef<"GoodsReceipt", 'String'>
   readonly purchaseOrderId: Prisma.FieldRef<"GoodsReceipt", 'Int'>
   readonly supplierId: Prisma.FieldRef<"GoodsReceipt", 'Int'>
   readonly companyId: Prisma.FieldRef<"GoodsReceipt", 'Int'>

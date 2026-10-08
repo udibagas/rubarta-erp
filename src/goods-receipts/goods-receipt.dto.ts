@@ -5,7 +5,7 @@ import {
   IsEnum,
   IsInt,
   IsNotEmpty,
-  IsNumberString,
+  IsNumber,
   IsObject,
   IsOptional,
   IsString,
@@ -87,6 +87,14 @@ export class CreateGoodsReceiptDto {
   @IsString()
   notes?: string;
 
+  @ApiProperty({ example: 'INV-001', required: false })
+  @IsOptional()
+  @IsString({ message: 'Invalid vendor invoice number' })
+  @MaxLength(100, {
+    message: 'Vendor invoice number must be at most 100 characters',
+  })
+  vendorInvoiceNumber?: string;
+
   @ApiProperty({ example: 'Draft' })
   @IsString({ message: 'Invalid status' })
   @IsOptional()
@@ -104,13 +112,15 @@ export class UpdateGoodsReceiptDto extends PartialType(CreateGoodsReceiptDto) {}
 export class QueryGoodsReceiptDto {
   @ApiProperty({ required: false })
   @IsOptional()
-  @IsNumberString()
-  page?: string;
+  @IsNumber()
+  @Transform(({ value }) => (value ? Number(value) : undefined))
+  page?: number;
 
   @ApiProperty({ required: false })
   @IsOptional()
-  @IsNumberString()
-  pageSize?: string;
+  @IsNumber()
+  @Transform(({ value }) => (value ? Number(value) : undefined))
+  pageSize?: number;
 
   @ApiProperty({ required: false })
   @IsOptional()
@@ -119,13 +129,14 @@ export class QueryGoodsReceiptDto {
 
   @ApiProperty({ required: false })
   @IsOptional()
-  @IsNumberString()
-  purchaseOrderId?: string;
+  @Transform(({ value }) => (value ? Number(value) : undefined))
+  purchaseOrderId?: number;
 
   @ApiProperty({ required: false })
   @IsOptional()
-  @IsNumberString()
-  supplierId?: string;
+  @Transform(({ value }) => (value ? Number(value) : undefined))
+  @IsNumber()
+  supplierId?: number;
 
   @ApiProperty({
     required: false,
