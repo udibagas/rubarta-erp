@@ -348,6 +348,21 @@ export class NkpService {
         Employee: { select: { name: true } },
         Supplier: { select: { name: true } },
         Company: { select: { name: true } },
+        PurchaseOrder: {
+          select: {
+            id: true,
+            number: true,
+            referenceNumber: true,
+            grandTotal: true,
+          },
+        },
+        GoodsReceipt: {
+          select: {
+            id: true,
+            number: true,
+            vendorInvoiceNumber: true,
+          },
+        },
         Bank: { select: { code: true, name: true } },
         Child: { select: { id: true, number: true, finalPayment: true } },
         Parent: { select: { id: true, number: true, finalPayment: true } },
