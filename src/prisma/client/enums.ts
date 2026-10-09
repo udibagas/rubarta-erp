@@ -12,7 +12,10 @@
 export const Currency = {
   IDR: 'IDR',
   USD: 'USD',
-  AUD: 'AUD'
+  AUD: 'AUD',
+  SGD: 'SGD',
+  RMB: 'RMB',
+  EUR: 'EUR'
 } as const
 
 export type Currency = (typeof Currency)[keyof typeof Currency]

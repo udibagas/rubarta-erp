@@ -2,6 +2,9 @@ enum Currency {
   IDR
   USD
   AUD
+  SGD
+  RMB
+  EUR
 }
 
 enum AccountType {
