@@ -90,7 +90,8 @@ export class CreateGoodsReceiptDto {
   @ApiProperty({ example: 'INV-001', required: false })
   @IsString({ message: 'Invalid vendor invoice number' })
   @MaxLength(100, {
-    message: 'Vendor invoice number must be at most 100 characters',
+    message:
+      'Vendor invoice number is required and must be at most 100 characters',
   })
   vendorInvoiceNumber: string;
 
