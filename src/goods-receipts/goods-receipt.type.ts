@@ -1,4 +1,5 @@
 import { ObjectType, Field, Int, registerEnumType } from '@nestjs/graphql';
+import GraphQLJSON from 'graphql-type-json';
 import { GoodsReceiptStatus, PaymentStatus } from '../prisma/client/client';
 import { SupplierType } from '../suppliers/supplier.type';
 import { PurchaseOrderType } from '../purchase-orders/purchase-order.type';
@@ -69,6 +70,9 @@ export class GoodsReceiptType {
 
   @Field({ nullable: true })
   vendorInvoiceNumber?: string;
+
+  @Field(() => GraphQLJSON, { nullable: true })
+  supportingDocument?: unknown;
 
   @Field(() => Int)
   purchaseOrderId: number;
