@@ -197,6 +197,19 @@ export class QuotationsService {
     });
   }
 
+  async updateStatus(id: number, status: QuotationStatus, user: User) {
+    const quotation = await this.prisma.quotation.findUniqueOrThrow({
+      where: { id, deletedAt: null },
+    });
+
+    this.policy.can('updateStatus', quotation, user);
+
+    return this.prisma.quotation.update({
+      where: { id },
+      data: { status },
+    });
+  }
+
   async remove(id: number, user: User) {
     const quotation = await this.prisma.quotation.findUniqueOrThrow({
       where: { id, deletedAt: null },

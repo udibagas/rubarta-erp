@@ -28,7 +28,7 @@ import {
   SendQuotationEmailDto,
 } from './quotation.dto';
 import { Auth } from '../auth/auth.decorator';
-import { User } from '../prisma/client/client';
+import { QuotationStatus, User } from '../prisma/client/client';
 
 @ApiTags('Quotations')
 @ApiBearerAuth()
@@ -133,6 +133,17 @@ export class QuotationsController {
     @Auth() user: User,
   ) {
     return this.quotationsService.update(id, updateQuotationDto, user);
+  }
+
+  @Patch(':id/status')
+  @ApiOperation({ summary: 'Update quotation status' })
+  @ApiOkResponse({ description: 'Quotation status updated' })
+  updateStatus(
+    @Param('id', ParseIntPipe) id: number,
+    @Body('status') status: QuotationStatus,
+    @Auth() user: User,
+  ) {
+    return this.quotationsService.updateStatus(id, status, user);
   }
 
   @Post(':id/submit')

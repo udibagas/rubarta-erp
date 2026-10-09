@@ -26,6 +26,16 @@ export class QuotationsPolicy extends BasePolicy {
     return this.authorizeDraftMutation(model, user);
   }
 
+  protected updateStatus(model: Quotation, user: User) {
+    if (model.status === 'Draft') throw new ForbiddenException();
+    if (user.roles.includes('ADMIN')) return true;
+    if (user.roles.includes('SALES_REP') && model.userId === user.id) {
+      return true;
+    }
+
+    throw new ForbiddenException();
+  }
+
   protected delete(model: Quotation, user: User) {
     return this.authorizeDraftMutation(model, user);
   }
