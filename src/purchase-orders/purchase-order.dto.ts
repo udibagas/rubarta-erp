@@ -94,8 +94,9 @@ export class CreatePurchaseOrderDto {
 
   @ApiProperty({ required: false, example: 1 })
   @IsOptional()
-  @IsNumber()
+  @Transform(({ value }) => (value ? parseFloat(value) : 0))
   @Min(0)
+  @IsNumber()
   currencyRate?: number;
 
   @ApiProperty({ required: false, example: 0 })
