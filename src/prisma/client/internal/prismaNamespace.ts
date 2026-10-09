@@ -4693,6 +4693,7 @@ export const NkpScalarFieldEnum = {
   paymentType: 'paymentType',
   nkpType: 'nkpType',
   invoiceNumber: 'invoiceNumber',
+  referenceNumber: 'referenceNumber',
   employeeId: 'employeeId',
   requesterId: 'requesterId',
   supplierId: 'supplierId',

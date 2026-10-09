@@ -1,15 +1,15 @@
 import { Resolver, Query, Args, Int } from '@nestjs/graphql';
-import { GoodsReceiptsService } from './goods-receipts.service';
 import { GoodsReceiptType } from './goods-receipt.type';
-import { Prisma, GoodsReceiptStatus } from '../prisma/client/client';
+import {
+  Prisma,
+  GoodsReceiptStatus,
+  PaymentStatus,
+} from '../prisma/client/client';
 import { PrismaService } from '../prisma/prisma.service';
 
 @Resolver(() => GoodsReceiptType)
 export class GoodsReceiptsResolver {
-  constructor(
-    private readonly goodsReceiptsService: GoodsReceiptsService,
-    private readonly prisma: PrismaService,
-  ) {}
+  constructor(private readonly prisma: PrismaService) {}
 
   @Query(() => [GoodsReceiptType], {
     name: 'goodsReceipts',
@@ -25,6 +25,8 @@ export class GoodsReceiptsResolver {
     supplierId?: number,
     @Args('status', { type: () => [GoodsReceiptStatus], nullable: true })
     status?: GoodsReceiptStatus[],
+    @Args('paymentStatus', { type: () => [PaymentStatus], nullable: true })
+    paymentStatus?: PaymentStatus[],
   ) {
     const where: Prisma.GoodsReceiptWhereInput = { deletedAt: null };
     if (keyword) {
@@ -42,6 +44,7 @@ export class GoodsReceiptsResolver {
     if (salesOrderId) where.PurchaseOrder = { salesOrderId };
     if (supplierId) where.supplierId = supplierId;
     if (status) where.status = { in: status };
+    if (paymentStatus) where.paymentStatus = { in: paymentStatus };
 
     return this.prisma.goodsReceipt.findMany({
       where,
@@ -50,18 +53,18 @@ export class GoodsReceiptsResolver {
         GoodsReceiptItems: true,
         Supplier: { select: { id: true, name: true } },
         PurchaseOrder: {
-          select: { id: true, number: true, title: true, salesOrderId: true },
+          select: {
+            id: true,
+            number: true,
+            referenceNumber: true,
+            grandTotal: true,
+            title: true,
+            salesOrderId: true,
+            PurchaseOrderItems: true,
+          },
         },
         User: { select: { id: true, name: true } },
       },
     });
-  }
-
-  @Query(() => GoodsReceiptType, {
-    name: 'goodsReceipt',
-    description: 'Get goods receipt by ID',
-  })
-  async findOne(@Args('id', { type: () => Int }) id: number) {
-    return this.goodsReceiptsService.findOne(id);
   }
 }

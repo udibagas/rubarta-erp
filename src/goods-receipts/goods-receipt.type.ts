@@ -1,5 +1,5 @@
 import { ObjectType, Field, Int, registerEnumType } from '@nestjs/graphql';
-import { GoodsReceiptStatus } from '../prisma/client/client';
+import { GoodsReceiptStatus, PaymentStatus } from '../prisma/client/client';
 import { SupplierType } from '../suppliers/supplier.type';
 import { PurchaseOrderType } from '../purchase-orders/purchase-order.type';
 import { UserType } from '../users/user.type';
@@ -7,6 +7,11 @@ import { UserType } from '../users/user.type';
 registerEnumType(GoodsReceiptStatus, {
   name: 'GoodsReceiptStatus',
   description: 'Status of a goods receipt',
+});
+
+registerEnumType(PaymentStatus, {
+  name: 'PaymentStatus',
+  description: 'Status of a payment',
 });
 
 @ObjectType('GoodsReceiptItem')
@@ -41,6 +46,9 @@ export class GoodsReceiptType {
   @Field()
   number: string;
 
+  @Field({ nullable: true })
+  referenceNumber?: string;
+
   @Field()
   date: Date;
 
@@ -52,6 +60,9 @@ export class GoodsReceiptType {
 
   @Field(() => GoodsReceiptStatus)
   status: GoodsReceiptStatus;
+
+  @Field(() => PaymentStatus, { nullable: true })
+  paymentStatus?: PaymentStatus;
 
   @Field({ nullable: true })
   notes?: string;

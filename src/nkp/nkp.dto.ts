@@ -70,6 +70,11 @@ export class NkpDto {
   @IsOptional()
   invoiceNumber?: string;
 
+  @ApiProperty({ example: 'REF-12345', description: 'Reference Number' })
+  @IsOptional()
+  @MaxLength(100, { message: 'Max reference number is 100 characters' })
+  referenceNumber?: string;
+
   @ApiProperty({ example: 1, description: 'Employee ID' })
   @IsOptional()
   employeeId: number;
