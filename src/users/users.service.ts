@@ -19,7 +19,6 @@ export class UsersService {
   }
 
   async findAll(query: QueryUserDto) {
-    console.log(query);
     const where: Prisma.UserWhereInput = {};
 
     if (query.keyword) {
