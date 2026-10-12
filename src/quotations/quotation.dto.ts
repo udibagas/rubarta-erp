@@ -16,7 +16,6 @@ import {
 } from 'class-validator';
 import { Transform, Type } from 'class-transformer';
 import { QuotationStatus, Currency } from '../prisma/client/client';
-
 export class QuotationItemDto {
   @ApiProperty({ example: 'PART-001' })
   @IsString()
@@ -58,7 +57,6 @@ export class QuotationItemDto {
   @IsInt()
   sortOrder?: number;
 }
-
 export class CreateQuotationDto {
   @ApiProperty({ required: false, example: 1 })
   @IsOptional()
@@ -186,7 +184,6 @@ export class CreateQuotationDto {
 }
 
 export class UpdateQuotationDto extends PartialType(CreateQuotationDto) {}
-
 export class SendQuotationEmailDto {
   @ApiProperty({ example: 'Quotation QUO092026-1 for your review' })
   @IsString()
@@ -213,17 +210,18 @@ export class SendQuotationEmailDto {
   @IsEmail({}, { each: true })
   cc?: string[];
 }
-
 export class QueryQuotationDto {
   @ApiProperty({ required: false })
   @IsOptional()
-  @IsNumberString()
-  page?: string;
+  @Transform(({ value }) => (value ? Number(value) : undefined))
+  @IsNumber()
+  page?: number;
 
   @ApiProperty({ required: false })
   @IsOptional()
-  @IsNumberString()
-  pageSize?: string;
+  @Transform(({ value }) => (value ? Number(value) : undefined))
+  @IsNumber()
+  pageSize?: number;
 
   @ApiProperty({ required: false })
   @IsOptional()
@@ -232,12 +230,14 @@ export class QueryQuotationDto {
 
   @ApiProperty({ required: false })
   @IsOptional()
-  @IsNumberString()
-  customerId?: string;
+  @Transform(({ value }) => (value ? Number(value) : undefined))
+  @IsNumber()
+  customerId?: number;
 
   @ApiProperty({ required: false })
   @IsOptional()
-  @IsInt()
+  @Transform(({ value }) => (value ? Number(value) : undefined))
+  @IsNumber()
   opportunityId?: number;
 
   @ApiProperty({

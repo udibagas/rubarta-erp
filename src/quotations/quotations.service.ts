@@ -101,10 +101,9 @@ export class QuotationsService {
         : query.status;
     }
 
+    const take = query.pageSize;
     const skip =
-      query.page && query.pageSize
-        ? (parseInt(query.page) - 1) * parseInt(query.pageSize)
-        : undefined;
+      query.page && query.pageSize ? (query.page - 1) * take : undefined;
 
     // Only show quotations for the sales rep themselves
     if (user.roles.includes('SALES_REP')) {
@@ -115,7 +114,7 @@ export class QuotationsService {
       where,
       orderBy: { createdAt: 'desc' },
       skip,
-      take: query.pageSize ? parseInt(query.pageSize) : undefined,
+      take,
       include: {
         Customer: { select: { id: true, name: true } },
         User: { select: { id: true, name: true } },
