@@ -19,6 +19,7 @@ export class UsersService {
   }
 
   async findAll(query: QueryUserDto) {
+    console.log(query);
     const where: Prisma.UserWhereInput = {};
 
     if (query.keyword) {
@@ -33,9 +34,7 @@ export class UsersService {
     }
 
     const take = query.pageSize;
-    const skip = query?.page
-      ? (query.page - 1) * query.pageSize || 10
-      : undefined;
+    const skip = query.page ? (query.page - 1) * take : undefined;
 
     const data = await this.prisma.user.findMany({
       orderBy: { name: 'asc' },
