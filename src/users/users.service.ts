@@ -28,8 +28,14 @@ export class UsersService {
       ];
     }
 
-    const skip = query?.page ? (Number(query.page) - 1) * Number(query.pageSize || 10) : undefined;
-    const take = query?.pageSize ? Number(query.pageSize) : undefined; 
+    if (query.active !== undefined) {
+      where.active = query.active;
+    }
+
+    const take = query.pageSize;
+    const skip = query?.page
+      ? (query.page - 1) * query.pageSize || 10
+      : undefined;
 
     const data = await this.prisma.user.findMany({
       orderBy: { name: 'asc' },
@@ -45,7 +51,7 @@ export class UsersService {
 
     if (query.page && query.pageSize) {
       const total = await this.prisma.user.count({ where });
-      return { data, total, };
+      return { data, total };
     }
 
     return data;

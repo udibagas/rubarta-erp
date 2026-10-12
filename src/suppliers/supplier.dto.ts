@@ -6,8 +6,11 @@ import {
   IsNumberString,
   IsOptional,
   IsString,
+  IsBoolean,
 } from 'class-validator';
+import { ApiProperty } from '@nestjs/swagger';
 import { PartialType } from '@nestjs/mapped-types';
+import { Transform } from 'class-transformer';
 
 export class CreateSupplierDto {
   code: string;
@@ -39,20 +42,31 @@ export class CreateSupplierDto {
 
   @IsEnum(Currency, { message: 'Invalid currency' })
   currency: Currency;
+
+  @ApiProperty({ description: 'User status', example: true })
+  @IsBoolean({ message: 'Invalid status' })
+  @IsOptional()
+  active?: boolean;
 }
 
 export class UpdateSupplierDto extends PartialType(CreateSupplierDto) {}
 
 export class QuerySupplierDto {
   @IsOptional()
-  @IsNumberString()
-  page?: string;
+  @Transform(({ value }) => (value ? Number(value) : undefined))
+  @IsNumber()
+  page?: number;
 
   @IsOptional()
-  @IsNumberString()
-  pageSize?: string;
+  @Transform(({ value }) => (value ? Number(value) : undefined))
+  @IsNumber()
+  pageSize?: number;
 
   @IsOptional()
   @IsString()
   keyword?: string;
+
+  @IsOptional()
+  @IsBoolean()
+  active?: boolean;
 }

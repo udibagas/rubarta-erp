@@ -45,9 +45,9 @@ export type UserMinAggregateOutputType = {
   email: string | null
   password: string | null
   active: boolean | null
-  bankId: number | null
   bankAccount: string | null
   currency: $Enums.Currency | null
+  bankId: number | null
   departmentId: number | null
 }
 
@@ -58,9 +58,9 @@ export type UserMaxAggregateOutputType = {
   email: string | null
   password: string | null
   active: boolean | null
-  bankId: number | null
   bankAccount: string | null
   currency: $Enums.Currency | null
+  bankId: number | null
   departmentId: number | null
 }
 
@@ -70,13 +70,13 @@ export type UserCountAggregateOutputType = {
   code: number
   email: number
   password: number
-  roles: number
   active: number
-  bankId: number
   bankAccount: number
   currency: number
-  departmentId: number
   signatureSpeciment: number
+  bankId: number
+  departmentId: number
+  roles: number
   _all: number
 }
 
@@ -100,9 +100,9 @@ export type UserMinAggregateInputType = {
   email?: true
   password?: true
   active?: true
-  bankId?: true
   bankAccount?: true
   currency?: true
+  bankId?: true
   departmentId?: true
 }
 
@@ -113,9 +113,9 @@ export type UserMaxAggregateInputType = {
   email?: true
   password?: true
   active?: true
-  bankId?: true
   bankAccount?: true
   currency?: true
+  bankId?: true
   departmentId?: true
 }
 
@@ -125,13 +125,13 @@ export type UserCountAggregateInputType = {
   code?: true
   email?: true
   password?: true
-  roles?: true
   active?: true
-  bankId?: true
   bankAccount?: true
   currency?: true
-  departmentId?: true
   signatureSpeciment?: true
+  bankId?: true
+  departmentId?: true
+  roles?: true
   _all?: true
 }
 
@@ -227,13 +227,13 @@ export type UserGroupByOutputType = {
   code: string | null
   email: string
   password: string
-  roles: $Enums.Role[]
   active: boolean
-  bankId: number | null
   bankAccount: string | null
   currency: $Enums.Currency
-  departmentId: number | null
   signatureSpeciment: runtime.JsonValue | null
+  bankId: number | null
+  departmentId: number | null
+  roles: $Enums.Role[]
   _count: UserCountAggregateOutputType | null
   _avg: UserAvgAggregateOutputType | null
   _sum: UserSumAggregateOutputType | null
@@ -265,41 +265,41 @@ export type UserWhereInput = {
   code?: Prisma.StringNullableFilter<"User"> | string | null
   email?: Prisma.StringFilter<"User"> | string
   password?: Prisma.StringFilter<"User"> | string
-  roles?: Prisma.EnumRoleNullableListFilter<"User">
   active?: Prisma.BoolFilter<"User"> | boolean
-  bankId?: Prisma.IntNullableFilter<"User"> | number | null
   bankAccount?: Prisma.StringNullableFilter<"User"> | string | null
   currency?: Prisma.EnumCurrencyFilter<"User"> | $Enums.Currency
-  departmentId?: Prisma.IntNullableFilter<"User"> | number | null
   signatureSpeciment?: Prisma.JsonNullableFilter<"User">
-  Balance?: Prisma.XOR<Prisma.UserBalanceNullableScalarRelationFilter, Prisma.UserBalanceWhereInput> | null
+  bankId?: Prisma.IntNullableFilter<"User"> | number | null
+  departmentId?: Prisma.IntNullableFilter<"User"> | number | null
+  roles?: Prisma.EnumRoleNullableListFilter<"User">
   Bank?: Prisma.XOR<Prisma.BankNullableScalarRelationFilter, Prisma.BankWhereInput> | null
   Department?: Prisma.XOR<Prisma.DepartmentNullableScalarRelationFilter, Prisma.DepartmentWhereInput> | null
+  Balance?: Prisma.XOR<Prisma.UserBalanceNullableScalarRelationFilter, Prisma.UserBalanceWhereInput> | null
   Notification?: Prisma.NotificationListRelationFilter
   NkpApproval?: Prisma.NkpApprovalListRelationFilter
-  ApprovalSettingItem?: Prisma.ApprovalSettingItemListRelationFilter
   Nkp?: Prisma.NkpListRelationFilter
   NkpRequest?: Prisma.NkpListRelationFilter
-  Tasks?: Prisma.TaskListRelationFilter
-  Interactions?: Prisma.InteractionListRelationFilter
-  CustomerNotes?: Prisma.CustomerNoteListRelationFilter
   Leads?: Prisma.LeadListRelationFilter
   Opportunities?: Prisma.OpportunityListRelationFilter
+  Interactions?: Prisma.InteractionListRelationFilter
+  Tasks?: Prisma.TaskListRelationFilter
+  VisitPlans?: Prisma.VisitPlanListRelationFilter
+  CustomerNotes?: Prisma.CustomerNoteListRelationFilter
+  Customers?: Prisma.CustomerListRelationFilter
   Quotations?: Prisma.QuotationListRelationFilter
+  salesOrders?: Prisma.SalesOrderListRelationFilter
   Invoices?: Prisma.InvoiceListRelationFilter
+  purchaseOrders?: Prisma.PurchaseOrderListRelationFilter
+  goodsReceipts?: Prisma.GoodsReceiptListRelationFilter
+  deliveryOrders?: Prisma.DeliveryOrderListRelationFilter
   accountingPayments?: Prisma.PaymentListRelationFilter
   journalEntriesCreated?: Prisma.JournalEntryListRelationFilter
   journalEntriesPosted?: Prisma.JournalEntryListRelationFilter
   closedPeriods?: Prisma.FiscalPeriodListRelationFilter
   vendorBillsCreated?: Prisma.VendorBillListRelationFilter
   bankTransactions?: Prisma.BankTransactionListRelationFilter
-  VisitPlans?: Prisma.VisitPlanListRelationFilter
-  Customers?: Prisma.CustomerListRelationFilter
   approvalItems?: Prisma.ApprovalItemListRelationFilter
-  salesOrders?: Prisma.SalesOrderListRelationFilter
-  purchaseOrders?: Prisma.PurchaseOrderListRelationFilter
-  goodsReceipts?: Prisma.GoodsReceiptListRelationFilter
-  deliveryOrders?: Prisma.DeliveryOrderListRelationFilter
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -308,41 +308,41 @@ export type UserOrderByWithRelationInput = {
   code?: Prisma.SortOrderInput | Prisma.SortOrder
   email?: Prisma.SortOrder
   password?: Prisma.SortOrder
-  roles?: Prisma.SortOrder
   active?: Prisma.SortOrder
-  bankId?: Prisma.SortOrderInput | Prisma.SortOrder
   bankAccount?: Prisma.SortOrderInput | Prisma.SortOrder
   currency?: Prisma.SortOrder
-  departmentId?: Prisma.SortOrderInput | Prisma.SortOrder
   signatureSpeciment?: Prisma.SortOrderInput | Prisma.SortOrder
-  Balance?: Prisma.UserBalanceOrderByWithRelationInput
+  bankId?: Prisma.SortOrderInput | Prisma.SortOrder
+  departmentId?: Prisma.SortOrderInput | Prisma.SortOrder
+  roles?: Prisma.SortOrder
   Bank?: Prisma.BankOrderByWithRelationInput
   Department?: Prisma.DepartmentOrderByWithRelationInput
+  Balance?: Prisma.UserBalanceOrderByWithRelationInput
   Notification?: Prisma.NotificationOrderByRelationAggregateInput
   NkpApproval?: Prisma.NkpApprovalOrderByRelationAggregateInput
-  ApprovalSettingItem?: Prisma.ApprovalSettingItemOrderByRelationAggregateInput
   Nkp?: Prisma.NkpOrderByRelationAggregateInput
   NkpRequest?: Prisma.NkpOrderByRelationAggregateInput
-  Tasks?: Prisma.TaskOrderByRelationAggregateInput
-  Interactions?: Prisma.InteractionOrderByRelationAggregateInput
-  CustomerNotes?: Prisma.CustomerNoteOrderByRelationAggregateInput
   Leads?: Prisma.LeadOrderByRelationAggregateInput
   Opportunities?: Prisma.OpportunityOrderByRelationAggregateInput
+  Interactions?: Prisma.InteractionOrderByRelationAggregateInput
+  Tasks?: Prisma.TaskOrderByRelationAggregateInput
+  VisitPlans?: Prisma.VisitPlanOrderByRelationAggregateInput
+  CustomerNotes?: Prisma.CustomerNoteOrderByRelationAggregateInput
+  Customers?: Prisma.CustomerOrderByRelationAggregateInput
   Quotations?: Prisma.QuotationOrderByRelationAggregateInput
+  salesOrders?: Prisma.SalesOrderOrderByRelationAggregateInput
   Invoices?: Prisma.InvoiceOrderByRelationAggregateInput
+  purchaseOrders?: Prisma.PurchaseOrderOrderByRelationAggregateInput
+  goodsReceipts?: Prisma.GoodsReceiptOrderByRelationAggregateInput
+  deliveryOrders?: Prisma.DeliveryOrderOrderByRelationAggregateInput
   accountingPayments?: Prisma.PaymentOrderByRelationAggregateInput
   journalEntriesCreated?: Prisma.JournalEntryOrderByRelationAggregateInput
   journalEntriesPosted?: Prisma.JournalEntryOrderByRelationAggregateInput
   closedPeriods?: Prisma.FiscalPeriodOrderByRelationAggregateInput
   vendorBillsCreated?: Prisma.VendorBillOrderByRelationAggregateInput
   bankTransactions?: Prisma.BankTransactionOrderByRelationAggregateInput
-  VisitPlans?: Prisma.VisitPlanOrderByRelationAggregateInput
-  Customers?: Prisma.CustomerOrderByRelationAggregateInput
   approvalItems?: Prisma.ApprovalItemOrderByRelationAggregateInput
-  salesOrders?: Prisma.SalesOrderOrderByRelationAggregateInput
-  purchaseOrders?: Prisma.PurchaseOrderOrderByRelationAggregateInput
-  goodsReceipts?: Prisma.GoodsReceiptOrderByRelationAggregateInput
-  deliveryOrders?: Prisma.DeliveryOrderOrderByRelationAggregateInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -354,41 +354,41 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   name?: Prisma.StringFilter<"User"> | string
   code?: Prisma.StringNullableFilter<"User"> | string | null
   password?: Prisma.StringFilter<"User"> | string
-  roles?: Prisma.EnumRoleNullableListFilter<"User">
   active?: Prisma.BoolFilter<"User"> | boolean
-  bankId?: Prisma.IntNullableFilter<"User"> | number | null
   bankAccount?: Prisma.StringNullableFilter<"User"> | string | null
   currency?: Prisma.EnumCurrencyFilter<"User"> | $Enums.Currency
-  departmentId?: Prisma.IntNullableFilter<"User"> | number | null
   signatureSpeciment?: Prisma.JsonNullableFilter<"User">
-  Balance?: Prisma.XOR<Prisma.UserBalanceNullableScalarRelationFilter, Prisma.UserBalanceWhereInput> | null
+  bankId?: Prisma.IntNullableFilter<"User"> | number | null
+  departmentId?: Prisma.IntNullableFilter<"User"> | number | null
+  roles?: Prisma.EnumRoleNullableListFilter<"User">
   Bank?: Prisma.XOR<Prisma.BankNullableScalarRelationFilter, Prisma.BankWhereInput> | null
   Department?: Prisma.XOR<Prisma.DepartmentNullableScalarRelationFilter, Prisma.DepartmentWhereInput> | null
+  Balance?: Prisma.XOR<Prisma.UserBalanceNullableScalarRelationFilter, Prisma.UserBalanceWhereInput> | null
   Notification?: Prisma.NotificationListRelationFilter
   NkpApproval?: Prisma.NkpApprovalListRelationFilter
-  ApprovalSettingItem?: Prisma.ApprovalSettingItemListRelationFilter
   Nkp?: Prisma.NkpListRelationFilter
   NkpRequest?: Prisma.NkpListRelationFilter
-  Tasks?: Prisma.TaskListRelationFilter
-  Interactions?: Prisma.InteractionListRelationFilter
-  CustomerNotes?: Prisma.CustomerNoteListRelationFilter
   Leads?: Prisma.LeadListRelationFilter
   Opportunities?: Prisma.OpportunityListRelationFilter
+  Interactions?: Prisma.InteractionListRelationFilter
+  Tasks?: Prisma.TaskListRelationFilter
+  VisitPlans?: Prisma.VisitPlanListRelationFilter
+  CustomerNotes?: Prisma.CustomerNoteListRelationFilter
+  Customers?: Prisma.CustomerListRelationFilter
   Quotations?: Prisma.QuotationListRelationFilter
+  salesOrders?: Prisma.SalesOrderListRelationFilter
   Invoices?: Prisma.InvoiceListRelationFilter
+  purchaseOrders?: Prisma.PurchaseOrderListRelationFilter
+  goodsReceipts?: Prisma.GoodsReceiptListRelationFilter
+  deliveryOrders?: Prisma.DeliveryOrderListRelationFilter
   accountingPayments?: Prisma.PaymentListRelationFilter
   journalEntriesCreated?: Prisma.JournalEntryListRelationFilter
   journalEntriesPosted?: Prisma.JournalEntryListRelationFilter
   closedPeriods?: Prisma.FiscalPeriodListRelationFilter
   vendorBillsCreated?: Prisma.VendorBillListRelationFilter
   bankTransactions?: Prisma.BankTransactionListRelationFilter
-  VisitPlans?: Prisma.VisitPlanListRelationFilter
-  Customers?: Prisma.CustomerListRelationFilter
   approvalItems?: Prisma.ApprovalItemListRelationFilter
-  salesOrders?: Prisma.SalesOrderListRelationFilter
-  purchaseOrders?: Prisma.PurchaseOrderListRelationFilter
-  goodsReceipts?: Prisma.GoodsReceiptListRelationFilter
-  deliveryOrders?: Prisma.DeliveryOrderListRelationFilter
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemListRelationFilter
 }, "id" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -397,13 +397,13 @@ export type UserOrderByWithAggregationInput = {
   code?: Prisma.SortOrderInput | Prisma.SortOrder
   email?: Prisma.SortOrder
   password?: Prisma.SortOrder
-  roles?: Prisma.SortOrder
   active?: Prisma.SortOrder
-  bankId?: Prisma.SortOrderInput | Prisma.SortOrder
   bankAccount?: Prisma.SortOrderInput | Prisma.SortOrder
   currency?: Prisma.SortOrder
-  departmentId?: Prisma.SortOrderInput | Prisma.SortOrder
   signatureSpeciment?: Prisma.SortOrderInput | Prisma.SortOrder
+  bankId?: Prisma.SortOrderInput | Prisma.SortOrder
+  departmentId?: Prisma.SortOrderInput | Prisma.SortOrder
+  roles?: Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
   _avg?: Prisma.UserAvgOrderByAggregateInput
   _max?: Prisma.UserMaxOrderByAggregateInput
@@ -420,13 +420,13 @@ export type UserScalarWhereWithAggregatesInput = {
   code?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   email?: Prisma.StringWithAggregatesFilter<"User"> | string
   password?: Prisma.StringWithAggregatesFilter<"User"> | string
-  roles?: Prisma.EnumRoleNullableListFilter<"User">
   active?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
-  bankId?: Prisma.IntNullableWithAggregatesFilter<"User"> | number | null
   bankAccount?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   currency?: Prisma.EnumCurrencyWithAggregatesFilter<"User"> | $Enums.Currency
-  departmentId?: Prisma.IntNullableWithAggregatesFilter<"User"> | number | null
   signatureSpeciment?: Prisma.JsonNullableWithAggregatesFilter<"User">
+  bankId?: Prisma.IntNullableWithAggregatesFilter<"User"> | number | null
+  departmentId?: Prisma.IntNullableWithAggregatesFilter<"User"> | number | null
+  roles?: Prisma.EnumRoleNullableListFilter<"User">
 }
 
 export type UserCreateInput = {
@@ -434,39 +434,39 @@ export type UserCreateInput = {
   code?: string | null
   email: string
   password: string
-  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   active?: boolean
   bankAccount?: string | null
   currency?: $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
+  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   Bank?: Prisma.BankCreateNestedOneWithoutUserInput
   Department?: Prisma.DepartmentCreateNestedOneWithoutUserInput
+  Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
-  ApprovalSettingItem?: Prisma.ApprovalSettingItemCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpCreateNestedManyWithoutRequesterInput
-  Tasks?: Prisma.TaskCreateNestedManyWithoutUserInput
-  Interactions?: Prisma.InteractionCreateNestedManyWithoutUserInput
-  CustomerNotes?: Prisma.CustomerNoteCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadCreateNestedManyWithoutUserInput
   Opportunities?: Prisma.OpportunityCreateNestedManyWithoutUserInput
+  Interactions?: Prisma.InteractionCreateNestedManyWithoutUserInput
+  Tasks?: Prisma.TaskCreateNestedManyWithoutUserInput
+  VisitPlans?: Prisma.VisitPlanCreateNestedManyWithoutUserInput
+  CustomerNotes?: Prisma.CustomerNoteCreateNestedManyWithoutUserInput
+  Customers?: Prisma.CustomerCreateNestedManyWithoutAccountManagerInput
   Quotations?: Prisma.QuotationCreateNestedManyWithoutUserInput
+  salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutUserInput
   Invoices?: Prisma.InvoiceCreateNestedManyWithoutUserInput
+  purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutUserInput
+  goodsReceipts?: Prisma.GoodsReceiptCreateNestedManyWithoutUserInput
+  deliveryOrders?: Prisma.DeliveryOrderCreateNestedManyWithoutUserInput
   accountingPayments?: Prisma.PaymentCreateNestedManyWithoutCreatedByInput
   journalEntriesCreated?: Prisma.JournalEntryCreateNestedManyWithoutCreatedByInput
   journalEntriesPosted?: Prisma.JournalEntryCreateNestedManyWithoutPostedByInput
   closedPeriods?: Prisma.FiscalPeriodCreateNestedManyWithoutClosedByInput
   vendorBillsCreated?: Prisma.VendorBillCreateNestedManyWithoutCreatedByInput
   bankTransactions?: Prisma.BankTransactionCreateNestedManyWithoutCreatedByInput
-  VisitPlans?: Prisma.VisitPlanCreateNestedManyWithoutUserInput
-  Customers?: Prisma.CustomerCreateNestedManyWithoutAccountManagerInput
   approvalItems?: Prisma.ApprovalItemCreateNestedManyWithoutUserInput
-  salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutUserInput
-  purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutUserInput
-  goodsReceipts?: Prisma.GoodsReceiptCreateNestedManyWithoutUserInput
-  deliveryOrders?: Prisma.DeliveryOrderCreateNestedManyWithoutUserInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -475,39 +475,39 @@ export type UserUncheckedCreateInput = {
   code?: string | null
   email: string
   password: string
-  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   active?: boolean
-  bankId?: number | null
   bankAccount?: string | null
   currency?: $Enums.Currency
-  departmentId?: number | null
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  bankId?: number | null
+  departmentId?: number | null
+  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   Balance?: Prisma.UserBalanceUncheckedCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
-  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpUncheckedCreateNestedManyWithoutRequesterInput
-  Tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutUserInput
-  Interactions?: Prisma.InteractionUncheckedCreateNestedManyWithoutUserInput
-  CustomerNotes?: Prisma.CustomerNoteUncheckedCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
   Opportunities?: Prisma.OpportunityUncheckedCreateNestedManyWithoutUserInput
+  Interactions?: Prisma.InteractionUncheckedCreateNestedManyWithoutUserInput
+  Tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutUserInput
+  VisitPlans?: Prisma.VisitPlanUncheckedCreateNestedManyWithoutUserInput
+  CustomerNotes?: Prisma.CustomerNoteUncheckedCreateNestedManyWithoutUserInput
+  Customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutAccountManagerInput
   Quotations?: Prisma.QuotationUncheckedCreateNestedManyWithoutUserInput
+  salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutUserInput
   Invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutUserInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutUserInput
+  goodsReceipts?: Prisma.GoodsReceiptUncheckedCreateNestedManyWithoutUserInput
+  deliveryOrders?: Prisma.DeliveryOrderUncheckedCreateNestedManyWithoutUserInput
   accountingPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCreatedByInput
   journalEntriesCreated?: Prisma.JournalEntryUncheckedCreateNestedManyWithoutCreatedByInput
   journalEntriesPosted?: Prisma.JournalEntryUncheckedCreateNestedManyWithoutPostedByInput
   closedPeriods?: Prisma.FiscalPeriodUncheckedCreateNestedManyWithoutClosedByInput
   vendorBillsCreated?: Prisma.VendorBillUncheckedCreateNestedManyWithoutCreatedByInput
   bankTransactions?: Prisma.BankTransactionUncheckedCreateNestedManyWithoutCreatedByInput
-  VisitPlans?: Prisma.VisitPlanUncheckedCreateNestedManyWithoutUserInput
-  Customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutAccountManagerInput
   approvalItems?: Prisma.ApprovalItemUncheckedCreateNestedManyWithoutUserInput
-  salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutUserInput
-  purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutUserInput
-  goodsReceipts?: Prisma.GoodsReceiptUncheckedCreateNestedManyWithoutUserInput
-  deliveryOrders?: Prisma.DeliveryOrderUncheckedCreateNestedManyWithoutUserInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserUpdateInput = {
@@ -515,39 +515,39 @@ export type UserUpdateInput = {
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
-  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
+  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   Bank?: Prisma.BankUpdateOneWithoutUserNestedInput
   Department?: Prisma.DepartmentUpdateOneWithoutUserNestedInput
+  Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
-  ApprovalSettingItem?: Prisma.ApprovalSettingItemUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUpdateManyWithoutRequesterNestedInput
-  Tasks?: Prisma.TaskUpdateManyWithoutUserNestedInput
-  Interactions?: Prisma.InteractionUpdateManyWithoutUserNestedInput
-  CustomerNotes?: Prisma.CustomerNoteUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
   Opportunities?: Prisma.OpportunityUpdateManyWithoutUserNestedInput
+  Interactions?: Prisma.InteractionUpdateManyWithoutUserNestedInput
+  Tasks?: Prisma.TaskUpdateManyWithoutUserNestedInput
+  VisitPlans?: Prisma.VisitPlanUpdateManyWithoutUserNestedInput
+  CustomerNotes?: Prisma.CustomerNoteUpdateManyWithoutUserNestedInput
+  Customers?: Prisma.CustomerUpdateManyWithoutAccountManagerNestedInput
   Quotations?: Prisma.QuotationUpdateManyWithoutUserNestedInput
+  salesOrders?: Prisma.SalesOrderUpdateManyWithoutUserNestedInput
   Invoices?: Prisma.InvoiceUpdateManyWithoutUserNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutUserNestedInput
+  goodsReceipts?: Prisma.GoodsReceiptUpdateManyWithoutUserNestedInput
+  deliveryOrders?: Prisma.DeliveryOrderUpdateManyWithoutUserNestedInput
   accountingPayments?: Prisma.PaymentUpdateManyWithoutCreatedByNestedInput
   journalEntriesCreated?: Prisma.JournalEntryUpdateManyWithoutCreatedByNestedInput
   journalEntriesPosted?: Prisma.JournalEntryUpdateManyWithoutPostedByNestedInput
   closedPeriods?: Prisma.FiscalPeriodUpdateManyWithoutClosedByNestedInput
   vendorBillsCreated?: Prisma.VendorBillUpdateManyWithoutCreatedByNestedInput
   bankTransactions?: Prisma.BankTransactionUpdateManyWithoutCreatedByNestedInput
-  VisitPlans?: Prisma.VisitPlanUpdateManyWithoutUserNestedInput
-  Customers?: Prisma.CustomerUpdateManyWithoutAccountManagerNestedInput
   approvalItems?: Prisma.ApprovalItemUpdateManyWithoutUserNestedInput
-  salesOrders?: Prisma.SalesOrderUpdateManyWithoutUserNestedInput
-  purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutUserNestedInput
-  goodsReceipts?: Prisma.GoodsReceiptUpdateManyWithoutUserNestedInput
-  deliveryOrders?: Prisma.DeliveryOrderUpdateManyWithoutUserNestedInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -556,39 +556,39 @@ export type UserUncheckedUpdateInput = {
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
-  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  bankId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
-  departmentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  bankId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  departmentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   Balance?: Prisma.UserBalanceUncheckedUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
-  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUncheckedUpdateManyWithoutRequesterNestedInput
-  Tasks?: Prisma.TaskUncheckedUpdateManyWithoutUserNestedInput
-  Interactions?: Prisma.InteractionUncheckedUpdateManyWithoutUserNestedInput
-  CustomerNotes?: Prisma.CustomerNoteUncheckedUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
   Opportunities?: Prisma.OpportunityUncheckedUpdateManyWithoutUserNestedInput
+  Interactions?: Prisma.InteractionUncheckedUpdateManyWithoutUserNestedInput
+  Tasks?: Prisma.TaskUncheckedUpdateManyWithoutUserNestedInput
+  VisitPlans?: Prisma.VisitPlanUncheckedUpdateManyWithoutUserNestedInput
+  CustomerNotes?: Prisma.CustomerNoteUncheckedUpdateManyWithoutUserNestedInput
+  Customers?: Prisma.CustomerUncheckedUpdateManyWithoutAccountManagerNestedInput
   Quotations?: Prisma.QuotationUncheckedUpdateManyWithoutUserNestedInput
+  salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutUserNestedInput
   Invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutUserNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutUserNestedInput
+  goodsReceipts?: Prisma.GoodsReceiptUncheckedUpdateManyWithoutUserNestedInput
+  deliveryOrders?: Prisma.DeliveryOrderUncheckedUpdateManyWithoutUserNestedInput
   accountingPayments?: Prisma.PaymentUncheckedUpdateManyWithoutCreatedByNestedInput
   journalEntriesCreated?: Prisma.JournalEntryUncheckedUpdateManyWithoutCreatedByNestedInput
   journalEntriesPosted?: Prisma.JournalEntryUncheckedUpdateManyWithoutPostedByNestedInput
   closedPeriods?: Prisma.FiscalPeriodUncheckedUpdateManyWithoutClosedByNestedInput
   vendorBillsCreated?: Prisma.VendorBillUncheckedUpdateManyWithoutCreatedByNestedInput
   bankTransactions?: Prisma.BankTransactionUncheckedUpdateManyWithoutCreatedByNestedInput
-  VisitPlans?: Prisma.VisitPlanUncheckedUpdateManyWithoutUserNestedInput
-  Customers?: Prisma.CustomerUncheckedUpdateManyWithoutAccountManagerNestedInput
   approvalItems?: Prisma.ApprovalItemUncheckedUpdateManyWithoutUserNestedInput
-  salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutUserNestedInput
-  purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutUserNestedInput
-  goodsReceipts?: Prisma.GoodsReceiptUncheckedUpdateManyWithoutUserNestedInput
-  deliveryOrders?: Prisma.DeliveryOrderUncheckedUpdateManyWithoutUserNestedInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -597,13 +597,13 @@ export type UserCreateManyInput = {
   code?: string | null
   email: string
   password: string
-  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   active?: boolean
-  bankId?: number | null
   bankAccount?: string | null
   currency?: $Enums.Currency
-  departmentId?: number | null
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  bankId?: number | null
+  departmentId?: number | null
+  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
 }
 
 export type UserUpdateManyMutationInput = {
@@ -611,11 +611,11 @@ export type UserUpdateManyMutationInput = {
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
-  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
 }
 
 export type UserUncheckedUpdateManyInput = {
@@ -624,13 +624,13 @@ export type UserUncheckedUpdateManyInput = {
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
-  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  bankId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
-  departmentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  bankId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  departmentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
 }
 
 export type UserNullableScalarRelationFilter = {
@@ -667,13 +667,13 @@ export type UserCountOrderByAggregateInput = {
   code?: Prisma.SortOrder
   email?: Prisma.SortOrder
   password?: Prisma.SortOrder
-  roles?: Prisma.SortOrder
   active?: Prisma.SortOrder
-  bankId?: Prisma.SortOrder
   bankAccount?: Prisma.SortOrder
   currency?: Prisma.SortOrder
-  departmentId?: Prisma.SortOrder
   signatureSpeciment?: Prisma.SortOrder
+  bankId?: Prisma.SortOrder
+  departmentId?: Prisma.SortOrder
+  roles?: Prisma.SortOrder
 }
 
 export type UserAvgOrderByAggregateInput = {
@@ -689,9 +689,9 @@ export type UserMaxOrderByAggregateInput = {
   email?: Prisma.SortOrder
   password?: Prisma.SortOrder
   active?: Prisma.SortOrder
-  bankId?: Prisma.SortOrder
   bankAccount?: Prisma.SortOrder
   currency?: Prisma.SortOrder
+  bankId?: Prisma.SortOrder
   departmentId?: Prisma.SortOrder
 }
 
@@ -702,9 +702,9 @@ export type UserMinOrderByAggregateInput = {
   email?: Prisma.SortOrder
   password?: Prisma.SortOrder
   active?: Prisma.SortOrder
-  bankId?: Prisma.SortOrder
   bankAccount?: Prisma.SortOrder
   currency?: Prisma.SortOrder
+  bankId?: Prisma.SortOrder
   departmentId?: Prisma.SortOrder
 }
 
@@ -1184,38 +1184,38 @@ export type UserCreateWithoutClosedPeriodsInput = {
   code?: string | null
   email: string
   password: string
-  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   active?: boolean
   bankAccount?: string | null
   currency?: $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
+  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   Bank?: Prisma.BankCreateNestedOneWithoutUserInput
   Department?: Prisma.DepartmentCreateNestedOneWithoutUserInput
+  Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
-  ApprovalSettingItem?: Prisma.ApprovalSettingItemCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpCreateNestedManyWithoutRequesterInput
-  Tasks?: Prisma.TaskCreateNestedManyWithoutUserInput
-  Interactions?: Prisma.InteractionCreateNestedManyWithoutUserInput
-  CustomerNotes?: Prisma.CustomerNoteCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadCreateNestedManyWithoutUserInput
   Opportunities?: Prisma.OpportunityCreateNestedManyWithoutUserInput
+  Interactions?: Prisma.InteractionCreateNestedManyWithoutUserInput
+  Tasks?: Prisma.TaskCreateNestedManyWithoutUserInput
+  VisitPlans?: Prisma.VisitPlanCreateNestedManyWithoutUserInput
+  CustomerNotes?: Prisma.CustomerNoteCreateNestedManyWithoutUserInput
+  Customers?: Prisma.CustomerCreateNestedManyWithoutAccountManagerInput
   Quotations?: Prisma.QuotationCreateNestedManyWithoutUserInput
+  salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutUserInput
   Invoices?: Prisma.InvoiceCreateNestedManyWithoutUserInput
+  purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutUserInput
+  goodsReceipts?: Prisma.GoodsReceiptCreateNestedManyWithoutUserInput
+  deliveryOrders?: Prisma.DeliveryOrderCreateNestedManyWithoutUserInput
   accountingPayments?: Prisma.PaymentCreateNestedManyWithoutCreatedByInput
   journalEntriesCreated?: Prisma.JournalEntryCreateNestedManyWithoutCreatedByInput
   journalEntriesPosted?: Prisma.JournalEntryCreateNestedManyWithoutPostedByInput
   vendorBillsCreated?: Prisma.VendorBillCreateNestedManyWithoutCreatedByInput
   bankTransactions?: Prisma.BankTransactionCreateNestedManyWithoutCreatedByInput
-  VisitPlans?: Prisma.VisitPlanCreateNestedManyWithoutUserInput
-  Customers?: Prisma.CustomerCreateNestedManyWithoutAccountManagerInput
   approvalItems?: Prisma.ApprovalItemCreateNestedManyWithoutUserInput
-  salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutUserInput
-  purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutUserInput
-  goodsReceipts?: Prisma.GoodsReceiptCreateNestedManyWithoutUserInput
-  deliveryOrders?: Prisma.DeliveryOrderCreateNestedManyWithoutUserInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutClosedPeriodsInput = {
@@ -1224,38 +1224,38 @@ export type UserUncheckedCreateWithoutClosedPeriodsInput = {
   code?: string | null
   email: string
   password: string
-  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   active?: boolean
-  bankId?: number | null
   bankAccount?: string | null
   currency?: $Enums.Currency
-  departmentId?: number | null
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  bankId?: number | null
+  departmentId?: number | null
+  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   Balance?: Prisma.UserBalanceUncheckedCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
-  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpUncheckedCreateNestedManyWithoutRequesterInput
-  Tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutUserInput
-  Interactions?: Prisma.InteractionUncheckedCreateNestedManyWithoutUserInput
-  CustomerNotes?: Prisma.CustomerNoteUncheckedCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
   Opportunities?: Prisma.OpportunityUncheckedCreateNestedManyWithoutUserInput
+  Interactions?: Prisma.InteractionUncheckedCreateNestedManyWithoutUserInput
+  Tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutUserInput
+  VisitPlans?: Prisma.VisitPlanUncheckedCreateNestedManyWithoutUserInput
+  CustomerNotes?: Prisma.CustomerNoteUncheckedCreateNestedManyWithoutUserInput
+  Customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutAccountManagerInput
   Quotations?: Prisma.QuotationUncheckedCreateNestedManyWithoutUserInput
+  salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutUserInput
   Invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutUserInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutUserInput
+  goodsReceipts?: Prisma.GoodsReceiptUncheckedCreateNestedManyWithoutUserInput
+  deliveryOrders?: Prisma.DeliveryOrderUncheckedCreateNestedManyWithoutUserInput
   accountingPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCreatedByInput
   journalEntriesCreated?: Prisma.JournalEntryUncheckedCreateNestedManyWithoutCreatedByInput
   journalEntriesPosted?: Prisma.JournalEntryUncheckedCreateNestedManyWithoutPostedByInput
   vendorBillsCreated?: Prisma.VendorBillUncheckedCreateNestedManyWithoutCreatedByInput
   bankTransactions?: Prisma.BankTransactionUncheckedCreateNestedManyWithoutCreatedByInput
-  VisitPlans?: Prisma.VisitPlanUncheckedCreateNestedManyWithoutUserInput
-  Customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutAccountManagerInput
   approvalItems?: Prisma.ApprovalItemUncheckedCreateNestedManyWithoutUserInput
-  salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutUserInput
-  purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutUserInput
-  goodsReceipts?: Prisma.GoodsReceiptUncheckedCreateNestedManyWithoutUserInput
-  deliveryOrders?: Prisma.DeliveryOrderUncheckedCreateNestedManyWithoutUserInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutClosedPeriodsInput = {
@@ -1279,38 +1279,38 @@ export type UserUpdateWithoutClosedPeriodsInput = {
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
-  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
+  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   Bank?: Prisma.BankUpdateOneWithoutUserNestedInput
   Department?: Prisma.DepartmentUpdateOneWithoutUserNestedInput
+  Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
-  ApprovalSettingItem?: Prisma.ApprovalSettingItemUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUpdateManyWithoutRequesterNestedInput
-  Tasks?: Prisma.TaskUpdateManyWithoutUserNestedInput
-  Interactions?: Prisma.InteractionUpdateManyWithoutUserNestedInput
-  CustomerNotes?: Prisma.CustomerNoteUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
   Opportunities?: Prisma.OpportunityUpdateManyWithoutUserNestedInput
+  Interactions?: Prisma.InteractionUpdateManyWithoutUserNestedInput
+  Tasks?: Prisma.TaskUpdateManyWithoutUserNestedInput
+  VisitPlans?: Prisma.VisitPlanUpdateManyWithoutUserNestedInput
+  CustomerNotes?: Prisma.CustomerNoteUpdateManyWithoutUserNestedInput
+  Customers?: Prisma.CustomerUpdateManyWithoutAccountManagerNestedInput
   Quotations?: Prisma.QuotationUpdateManyWithoutUserNestedInput
+  salesOrders?: Prisma.SalesOrderUpdateManyWithoutUserNestedInput
   Invoices?: Prisma.InvoiceUpdateManyWithoutUserNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutUserNestedInput
+  goodsReceipts?: Prisma.GoodsReceiptUpdateManyWithoutUserNestedInput
+  deliveryOrders?: Prisma.DeliveryOrderUpdateManyWithoutUserNestedInput
   accountingPayments?: Prisma.PaymentUpdateManyWithoutCreatedByNestedInput
   journalEntriesCreated?: Prisma.JournalEntryUpdateManyWithoutCreatedByNestedInput
   journalEntriesPosted?: Prisma.JournalEntryUpdateManyWithoutPostedByNestedInput
   vendorBillsCreated?: Prisma.VendorBillUpdateManyWithoutCreatedByNestedInput
   bankTransactions?: Prisma.BankTransactionUpdateManyWithoutCreatedByNestedInput
-  VisitPlans?: Prisma.VisitPlanUpdateManyWithoutUserNestedInput
-  Customers?: Prisma.CustomerUpdateManyWithoutAccountManagerNestedInput
   approvalItems?: Prisma.ApprovalItemUpdateManyWithoutUserNestedInput
-  salesOrders?: Prisma.SalesOrderUpdateManyWithoutUserNestedInput
-  purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutUserNestedInput
-  goodsReceipts?: Prisma.GoodsReceiptUpdateManyWithoutUserNestedInput
-  deliveryOrders?: Prisma.DeliveryOrderUpdateManyWithoutUserNestedInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutClosedPeriodsInput = {
@@ -1319,38 +1319,38 @@ export type UserUncheckedUpdateWithoutClosedPeriodsInput = {
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
-  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  bankId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
-  departmentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  bankId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  departmentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   Balance?: Prisma.UserBalanceUncheckedUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
-  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUncheckedUpdateManyWithoutRequesterNestedInput
-  Tasks?: Prisma.TaskUncheckedUpdateManyWithoutUserNestedInput
-  Interactions?: Prisma.InteractionUncheckedUpdateManyWithoutUserNestedInput
-  CustomerNotes?: Prisma.CustomerNoteUncheckedUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
   Opportunities?: Prisma.OpportunityUncheckedUpdateManyWithoutUserNestedInput
+  Interactions?: Prisma.InteractionUncheckedUpdateManyWithoutUserNestedInput
+  Tasks?: Prisma.TaskUncheckedUpdateManyWithoutUserNestedInput
+  VisitPlans?: Prisma.VisitPlanUncheckedUpdateManyWithoutUserNestedInput
+  CustomerNotes?: Prisma.CustomerNoteUncheckedUpdateManyWithoutUserNestedInput
+  Customers?: Prisma.CustomerUncheckedUpdateManyWithoutAccountManagerNestedInput
   Quotations?: Prisma.QuotationUncheckedUpdateManyWithoutUserNestedInput
+  salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutUserNestedInput
   Invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutUserNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutUserNestedInput
+  goodsReceipts?: Prisma.GoodsReceiptUncheckedUpdateManyWithoutUserNestedInput
+  deliveryOrders?: Prisma.DeliveryOrderUncheckedUpdateManyWithoutUserNestedInput
   accountingPayments?: Prisma.PaymentUncheckedUpdateManyWithoutCreatedByNestedInput
   journalEntriesCreated?: Prisma.JournalEntryUncheckedUpdateManyWithoutCreatedByNestedInput
   journalEntriesPosted?: Prisma.JournalEntryUncheckedUpdateManyWithoutPostedByNestedInput
   vendorBillsCreated?: Prisma.VendorBillUncheckedUpdateManyWithoutCreatedByNestedInput
   bankTransactions?: Prisma.BankTransactionUncheckedUpdateManyWithoutCreatedByNestedInput
-  VisitPlans?: Prisma.VisitPlanUncheckedUpdateManyWithoutUserNestedInput
-  Customers?: Prisma.CustomerUncheckedUpdateManyWithoutAccountManagerNestedInput
   approvalItems?: Prisma.ApprovalItemUncheckedUpdateManyWithoutUserNestedInput
-  salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutUserNestedInput
-  purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutUserNestedInput
-  goodsReceipts?: Prisma.GoodsReceiptUncheckedUpdateManyWithoutUserNestedInput
-  deliveryOrders?: Prisma.DeliveryOrderUncheckedUpdateManyWithoutUserNestedInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutJournalEntriesCreatedInput = {
@@ -1358,38 +1358,38 @@ export type UserCreateWithoutJournalEntriesCreatedInput = {
   code?: string | null
   email: string
   password: string
-  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   active?: boolean
   bankAccount?: string | null
   currency?: $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
+  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   Bank?: Prisma.BankCreateNestedOneWithoutUserInput
   Department?: Prisma.DepartmentCreateNestedOneWithoutUserInput
+  Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
-  ApprovalSettingItem?: Prisma.ApprovalSettingItemCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpCreateNestedManyWithoutRequesterInput
-  Tasks?: Prisma.TaskCreateNestedManyWithoutUserInput
-  Interactions?: Prisma.InteractionCreateNestedManyWithoutUserInput
-  CustomerNotes?: Prisma.CustomerNoteCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadCreateNestedManyWithoutUserInput
   Opportunities?: Prisma.OpportunityCreateNestedManyWithoutUserInput
+  Interactions?: Prisma.InteractionCreateNestedManyWithoutUserInput
+  Tasks?: Prisma.TaskCreateNestedManyWithoutUserInput
+  VisitPlans?: Prisma.VisitPlanCreateNestedManyWithoutUserInput
+  CustomerNotes?: Prisma.CustomerNoteCreateNestedManyWithoutUserInput
+  Customers?: Prisma.CustomerCreateNestedManyWithoutAccountManagerInput
   Quotations?: Prisma.QuotationCreateNestedManyWithoutUserInput
+  salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutUserInput
   Invoices?: Prisma.InvoiceCreateNestedManyWithoutUserInput
+  purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutUserInput
+  goodsReceipts?: Prisma.GoodsReceiptCreateNestedManyWithoutUserInput
+  deliveryOrders?: Prisma.DeliveryOrderCreateNestedManyWithoutUserInput
   accountingPayments?: Prisma.PaymentCreateNestedManyWithoutCreatedByInput
   journalEntriesPosted?: Prisma.JournalEntryCreateNestedManyWithoutPostedByInput
   closedPeriods?: Prisma.FiscalPeriodCreateNestedManyWithoutClosedByInput
   vendorBillsCreated?: Prisma.VendorBillCreateNestedManyWithoutCreatedByInput
   bankTransactions?: Prisma.BankTransactionCreateNestedManyWithoutCreatedByInput
-  VisitPlans?: Prisma.VisitPlanCreateNestedManyWithoutUserInput
-  Customers?: Prisma.CustomerCreateNestedManyWithoutAccountManagerInput
   approvalItems?: Prisma.ApprovalItemCreateNestedManyWithoutUserInput
-  salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutUserInput
-  purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutUserInput
-  goodsReceipts?: Prisma.GoodsReceiptCreateNestedManyWithoutUserInput
-  deliveryOrders?: Prisma.DeliveryOrderCreateNestedManyWithoutUserInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutJournalEntriesCreatedInput = {
@@ -1398,38 +1398,38 @@ export type UserUncheckedCreateWithoutJournalEntriesCreatedInput = {
   code?: string | null
   email: string
   password: string
-  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   active?: boolean
-  bankId?: number | null
   bankAccount?: string | null
   currency?: $Enums.Currency
-  departmentId?: number | null
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  bankId?: number | null
+  departmentId?: number | null
+  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   Balance?: Prisma.UserBalanceUncheckedCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
-  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpUncheckedCreateNestedManyWithoutRequesterInput
-  Tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutUserInput
-  Interactions?: Prisma.InteractionUncheckedCreateNestedManyWithoutUserInput
-  CustomerNotes?: Prisma.CustomerNoteUncheckedCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
   Opportunities?: Prisma.OpportunityUncheckedCreateNestedManyWithoutUserInput
+  Interactions?: Prisma.InteractionUncheckedCreateNestedManyWithoutUserInput
+  Tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutUserInput
+  VisitPlans?: Prisma.VisitPlanUncheckedCreateNestedManyWithoutUserInput
+  CustomerNotes?: Prisma.CustomerNoteUncheckedCreateNestedManyWithoutUserInput
+  Customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutAccountManagerInput
   Quotations?: Prisma.QuotationUncheckedCreateNestedManyWithoutUserInput
+  salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutUserInput
   Invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutUserInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutUserInput
+  goodsReceipts?: Prisma.GoodsReceiptUncheckedCreateNestedManyWithoutUserInput
+  deliveryOrders?: Prisma.DeliveryOrderUncheckedCreateNestedManyWithoutUserInput
   accountingPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCreatedByInput
   journalEntriesPosted?: Prisma.JournalEntryUncheckedCreateNestedManyWithoutPostedByInput
   closedPeriods?: Prisma.FiscalPeriodUncheckedCreateNestedManyWithoutClosedByInput
   vendorBillsCreated?: Prisma.VendorBillUncheckedCreateNestedManyWithoutCreatedByInput
   bankTransactions?: Prisma.BankTransactionUncheckedCreateNestedManyWithoutCreatedByInput
-  VisitPlans?: Prisma.VisitPlanUncheckedCreateNestedManyWithoutUserInput
-  Customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutAccountManagerInput
   approvalItems?: Prisma.ApprovalItemUncheckedCreateNestedManyWithoutUserInput
-  salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutUserInput
-  purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutUserInput
-  goodsReceipts?: Prisma.GoodsReceiptUncheckedCreateNestedManyWithoutUserInput
-  deliveryOrders?: Prisma.DeliveryOrderUncheckedCreateNestedManyWithoutUserInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutJournalEntriesCreatedInput = {
@@ -1442,38 +1442,38 @@ export type UserCreateWithoutJournalEntriesPostedInput = {
   code?: string | null
   email: string
   password: string
-  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   active?: boolean
   bankAccount?: string | null
   currency?: $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
+  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   Bank?: Prisma.BankCreateNestedOneWithoutUserInput
   Department?: Prisma.DepartmentCreateNestedOneWithoutUserInput
+  Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
-  ApprovalSettingItem?: Prisma.ApprovalSettingItemCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpCreateNestedManyWithoutRequesterInput
-  Tasks?: Prisma.TaskCreateNestedManyWithoutUserInput
-  Interactions?: Prisma.InteractionCreateNestedManyWithoutUserInput
-  CustomerNotes?: Prisma.CustomerNoteCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadCreateNestedManyWithoutUserInput
   Opportunities?: Prisma.OpportunityCreateNestedManyWithoutUserInput
+  Interactions?: Prisma.InteractionCreateNestedManyWithoutUserInput
+  Tasks?: Prisma.TaskCreateNestedManyWithoutUserInput
+  VisitPlans?: Prisma.VisitPlanCreateNestedManyWithoutUserInput
+  CustomerNotes?: Prisma.CustomerNoteCreateNestedManyWithoutUserInput
+  Customers?: Prisma.CustomerCreateNestedManyWithoutAccountManagerInput
   Quotations?: Prisma.QuotationCreateNestedManyWithoutUserInput
+  salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutUserInput
   Invoices?: Prisma.InvoiceCreateNestedManyWithoutUserInput
+  purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutUserInput
+  goodsReceipts?: Prisma.GoodsReceiptCreateNestedManyWithoutUserInput
+  deliveryOrders?: Prisma.DeliveryOrderCreateNestedManyWithoutUserInput
   accountingPayments?: Prisma.PaymentCreateNestedManyWithoutCreatedByInput
   journalEntriesCreated?: Prisma.JournalEntryCreateNestedManyWithoutCreatedByInput
   closedPeriods?: Prisma.FiscalPeriodCreateNestedManyWithoutClosedByInput
   vendorBillsCreated?: Prisma.VendorBillCreateNestedManyWithoutCreatedByInput
   bankTransactions?: Prisma.BankTransactionCreateNestedManyWithoutCreatedByInput
-  VisitPlans?: Prisma.VisitPlanCreateNestedManyWithoutUserInput
-  Customers?: Prisma.CustomerCreateNestedManyWithoutAccountManagerInput
   approvalItems?: Prisma.ApprovalItemCreateNestedManyWithoutUserInput
-  salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutUserInput
-  purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutUserInput
-  goodsReceipts?: Prisma.GoodsReceiptCreateNestedManyWithoutUserInput
-  deliveryOrders?: Prisma.DeliveryOrderCreateNestedManyWithoutUserInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutJournalEntriesPostedInput = {
@@ -1482,38 +1482,38 @@ export type UserUncheckedCreateWithoutJournalEntriesPostedInput = {
   code?: string | null
   email: string
   password: string
-  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   active?: boolean
-  bankId?: number | null
   bankAccount?: string | null
   currency?: $Enums.Currency
-  departmentId?: number | null
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  bankId?: number | null
+  departmentId?: number | null
+  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   Balance?: Prisma.UserBalanceUncheckedCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
-  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpUncheckedCreateNestedManyWithoutRequesterInput
-  Tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutUserInput
-  Interactions?: Prisma.InteractionUncheckedCreateNestedManyWithoutUserInput
-  CustomerNotes?: Prisma.CustomerNoteUncheckedCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
   Opportunities?: Prisma.OpportunityUncheckedCreateNestedManyWithoutUserInput
+  Interactions?: Prisma.InteractionUncheckedCreateNestedManyWithoutUserInput
+  Tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutUserInput
+  VisitPlans?: Prisma.VisitPlanUncheckedCreateNestedManyWithoutUserInput
+  CustomerNotes?: Prisma.CustomerNoteUncheckedCreateNestedManyWithoutUserInput
+  Customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutAccountManagerInput
   Quotations?: Prisma.QuotationUncheckedCreateNestedManyWithoutUserInput
+  salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutUserInput
   Invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutUserInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutUserInput
+  goodsReceipts?: Prisma.GoodsReceiptUncheckedCreateNestedManyWithoutUserInput
+  deliveryOrders?: Prisma.DeliveryOrderUncheckedCreateNestedManyWithoutUserInput
   accountingPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCreatedByInput
   journalEntriesCreated?: Prisma.JournalEntryUncheckedCreateNestedManyWithoutCreatedByInput
   closedPeriods?: Prisma.FiscalPeriodUncheckedCreateNestedManyWithoutClosedByInput
   vendorBillsCreated?: Prisma.VendorBillUncheckedCreateNestedManyWithoutCreatedByInput
   bankTransactions?: Prisma.BankTransactionUncheckedCreateNestedManyWithoutCreatedByInput
-  VisitPlans?: Prisma.VisitPlanUncheckedCreateNestedManyWithoutUserInput
-  Customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutAccountManagerInput
   approvalItems?: Prisma.ApprovalItemUncheckedCreateNestedManyWithoutUserInput
-  salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutUserInput
-  purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutUserInput
-  goodsReceipts?: Prisma.GoodsReceiptUncheckedCreateNestedManyWithoutUserInput
-  deliveryOrders?: Prisma.DeliveryOrderUncheckedCreateNestedManyWithoutUserInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutJournalEntriesPostedInput = {
@@ -1537,38 +1537,38 @@ export type UserUpdateWithoutJournalEntriesCreatedInput = {
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
-  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
+  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   Bank?: Prisma.BankUpdateOneWithoutUserNestedInput
   Department?: Prisma.DepartmentUpdateOneWithoutUserNestedInput
+  Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
-  ApprovalSettingItem?: Prisma.ApprovalSettingItemUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUpdateManyWithoutRequesterNestedInput
-  Tasks?: Prisma.TaskUpdateManyWithoutUserNestedInput
-  Interactions?: Prisma.InteractionUpdateManyWithoutUserNestedInput
-  CustomerNotes?: Prisma.CustomerNoteUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
   Opportunities?: Prisma.OpportunityUpdateManyWithoutUserNestedInput
+  Interactions?: Prisma.InteractionUpdateManyWithoutUserNestedInput
+  Tasks?: Prisma.TaskUpdateManyWithoutUserNestedInput
+  VisitPlans?: Prisma.VisitPlanUpdateManyWithoutUserNestedInput
+  CustomerNotes?: Prisma.CustomerNoteUpdateManyWithoutUserNestedInput
+  Customers?: Prisma.CustomerUpdateManyWithoutAccountManagerNestedInput
   Quotations?: Prisma.QuotationUpdateManyWithoutUserNestedInput
+  salesOrders?: Prisma.SalesOrderUpdateManyWithoutUserNestedInput
   Invoices?: Prisma.InvoiceUpdateManyWithoutUserNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutUserNestedInput
+  goodsReceipts?: Prisma.GoodsReceiptUpdateManyWithoutUserNestedInput
+  deliveryOrders?: Prisma.DeliveryOrderUpdateManyWithoutUserNestedInput
   accountingPayments?: Prisma.PaymentUpdateManyWithoutCreatedByNestedInput
   journalEntriesPosted?: Prisma.JournalEntryUpdateManyWithoutPostedByNestedInput
   closedPeriods?: Prisma.FiscalPeriodUpdateManyWithoutClosedByNestedInput
   vendorBillsCreated?: Prisma.VendorBillUpdateManyWithoutCreatedByNestedInput
   bankTransactions?: Prisma.BankTransactionUpdateManyWithoutCreatedByNestedInput
-  VisitPlans?: Prisma.VisitPlanUpdateManyWithoutUserNestedInput
-  Customers?: Prisma.CustomerUpdateManyWithoutAccountManagerNestedInput
   approvalItems?: Prisma.ApprovalItemUpdateManyWithoutUserNestedInput
-  salesOrders?: Prisma.SalesOrderUpdateManyWithoutUserNestedInput
-  purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutUserNestedInput
-  goodsReceipts?: Prisma.GoodsReceiptUpdateManyWithoutUserNestedInput
-  deliveryOrders?: Prisma.DeliveryOrderUpdateManyWithoutUserNestedInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutJournalEntriesCreatedInput = {
@@ -1577,38 +1577,38 @@ export type UserUncheckedUpdateWithoutJournalEntriesCreatedInput = {
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
-  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  bankId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
-  departmentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  bankId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  departmentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   Balance?: Prisma.UserBalanceUncheckedUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
-  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUncheckedUpdateManyWithoutRequesterNestedInput
-  Tasks?: Prisma.TaskUncheckedUpdateManyWithoutUserNestedInput
-  Interactions?: Prisma.InteractionUncheckedUpdateManyWithoutUserNestedInput
-  CustomerNotes?: Prisma.CustomerNoteUncheckedUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
   Opportunities?: Prisma.OpportunityUncheckedUpdateManyWithoutUserNestedInput
+  Interactions?: Prisma.InteractionUncheckedUpdateManyWithoutUserNestedInput
+  Tasks?: Prisma.TaskUncheckedUpdateManyWithoutUserNestedInput
+  VisitPlans?: Prisma.VisitPlanUncheckedUpdateManyWithoutUserNestedInput
+  CustomerNotes?: Prisma.CustomerNoteUncheckedUpdateManyWithoutUserNestedInput
+  Customers?: Prisma.CustomerUncheckedUpdateManyWithoutAccountManagerNestedInput
   Quotations?: Prisma.QuotationUncheckedUpdateManyWithoutUserNestedInput
+  salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutUserNestedInput
   Invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutUserNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutUserNestedInput
+  goodsReceipts?: Prisma.GoodsReceiptUncheckedUpdateManyWithoutUserNestedInput
+  deliveryOrders?: Prisma.DeliveryOrderUncheckedUpdateManyWithoutUserNestedInput
   accountingPayments?: Prisma.PaymentUncheckedUpdateManyWithoutCreatedByNestedInput
   journalEntriesPosted?: Prisma.JournalEntryUncheckedUpdateManyWithoutPostedByNestedInput
   closedPeriods?: Prisma.FiscalPeriodUncheckedUpdateManyWithoutClosedByNestedInput
   vendorBillsCreated?: Prisma.VendorBillUncheckedUpdateManyWithoutCreatedByNestedInput
   bankTransactions?: Prisma.BankTransactionUncheckedUpdateManyWithoutCreatedByNestedInput
-  VisitPlans?: Prisma.VisitPlanUncheckedUpdateManyWithoutUserNestedInput
-  Customers?: Prisma.CustomerUncheckedUpdateManyWithoutAccountManagerNestedInput
   approvalItems?: Prisma.ApprovalItemUncheckedUpdateManyWithoutUserNestedInput
-  salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutUserNestedInput
-  purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutUserNestedInput
-  goodsReceipts?: Prisma.GoodsReceiptUncheckedUpdateManyWithoutUserNestedInput
-  deliveryOrders?: Prisma.DeliveryOrderUncheckedUpdateManyWithoutUserNestedInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserUpsertWithoutJournalEntriesPostedInput = {
@@ -1627,38 +1627,38 @@ export type UserUpdateWithoutJournalEntriesPostedInput = {
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
-  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
+  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   Bank?: Prisma.BankUpdateOneWithoutUserNestedInput
   Department?: Prisma.DepartmentUpdateOneWithoutUserNestedInput
+  Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
-  ApprovalSettingItem?: Prisma.ApprovalSettingItemUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUpdateManyWithoutRequesterNestedInput
-  Tasks?: Prisma.TaskUpdateManyWithoutUserNestedInput
-  Interactions?: Prisma.InteractionUpdateManyWithoutUserNestedInput
-  CustomerNotes?: Prisma.CustomerNoteUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
   Opportunities?: Prisma.OpportunityUpdateManyWithoutUserNestedInput
+  Interactions?: Prisma.InteractionUpdateManyWithoutUserNestedInput
+  Tasks?: Prisma.TaskUpdateManyWithoutUserNestedInput
+  VisitPlans?: Prisma.VisitPlanUpdateManyWithoutUserNestedInput
+  CustomerNotes?: Prisma.CustomerNoteUpdateManyWithoutUserNestedInput
+  Customers?: Prisma.CustomerUpdateManyWithoutAccountManagerNestedInput
   Quotations?: Prisma.QuotationUpdateManyWithoutUserNestedInput
+  salesOrders?: Prisma.SalesOrderUpdateManyWithoutUserNestedInput
   Invoices?: Prisma.InvoiceUpdateManyWithoutUserNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutUserNestedInput
+  goodsReceipts?: Prisma.GoodsReceiptUpdateManyWithoutUserNestedInput
+  deliveryOrders?: Prisma.DeliveryOrderUpdateManyWithoutUserNestedInput
   accountingPayments?: Prisma.PaymentUpdateManyWithoutCreatedByNestedInput
   journalEntriesCreated?: Prisma.JournalEntryUpdateManyWithoutCreatedByNestedInput
   closedPeriods?: Prisma.FiscalPeriodUpdateManyWithoutClosedByNestedInput
   vendorBillsCreated?: Prisma.VendorBillUpdateManyWithoutCreatedByNestedInput
   bankTransactions?: Prisma.BankTransactionUpdateManyWithoutCreatedByNestedInput
-  VisitPlans?: Prisma.VisitPlanUpdateManyWithoutUserNestedInput
-  Customers?: Prisma.CustomerUpdateManyWithoutAccountManagerNestedInput
   approvalItems?: Prisma.ApprovalItemUpdateManyWithoutUserNestedInput
-  salesOrders?: Prisma.SalesOrderUpdateManyWithoutUserNestedInput
-  purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutUserNestedInput
-  goodsReceipts?: Prisma.GoodsReceiptUpdateManyWithoutUserNestedInput
-  deliveryOrders?: Prisma.DeliveryOrderUpdateManyWithoutUserNestedInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutJournalEntriesPostedInput = {
@@ -1667,38 +1667,38 @@ export type UserUncheckedUpdateWithoutJournalEntriesPostedInput = {
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
-  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  bankId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
-  departmentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  bankId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  departmentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   Balance?: Prisma.UserBalanceUncheckedUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
-  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUncheckedUpdateManyWithoutRequesterNestedInput
-  Tasks?: Prisma.TaskUncheckedUpdateManyWithoutUserNestedInput
-  Interactions?: Prisma.InteractionUncheckedUpdateManyWithoutUserNestedInput
-  CustomerNotes?: Prisma.CustomerNoteUncheckedUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
   Opportunities?: Prisma.OpportunityUncheckedUpdateManyWithoutUserNestedInput
+  Interactions?: Prisma.InteractionUncheckedUpdateManyWithoutUserNestedInput
+  Tasks?: Prisma.TaskUncheckedUpdateManyWithoutUserNestedInput
+  VisitPlans?: Prisma.VisitPlanUncheckedUpdateManyWithoutUserNestedInput
+  CustomerNotes?: Prisma.CustomerNoteUncheckedUpdateManyWithoutUserNestedInput
+  Customers?: Prisma.CustomerUncheckedUpdateManyWithoutAccountManagerNestedInput
   Quotations?: Prisma.QuotationUncheckedUpdateManyWithoutUserNestedInput
+  salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutUserNestedInput
   Invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutUserNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutUserNestedInput
+  goodsReceipts?: Prisma.GoodsReceiptUncheckedUpdateManyWithoutUserNestedInput
+  deliveryOrders?: Prisma.DeliveryOrderUncheckedUpdateManyWithoutUserNestedInput
   accountingPayments?: Prisma.PaymentUncheckedUpdateManyWithoutCreatedByNestedInput
   journalEntriesCreated?: Prisma.JournalEntryUncheckedUpdateManyWithoutCreatedByNestedInput
   closedPeriods?: Prisma.FiscalPeriodUncheckedUpdateManyWithoutClosedByNestedInput
   vendorBillsCreated?: Prisma.VendorBillUncheckedUpdateManyWithoutCreatedByNestedInput
   bankTransactions?: Prisma.BankTransactionUncheckedUpdateManyWithoutCreatedByNestedInput
-  VisitPlans?: Prisma.VisitPlanUncheckedUpdateManyWithoutUserNestedInput
-  Customers?: Prisma.CustomerUncheckedUpdateManyWithoutAccountManagerNestedInput
   approvalItems?: Prisma.ApprovalItemUncheckedUpdateManyWithoutUserNestedInput
-  salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutUserNestedInput
-  purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutUserNestedInput
-  goodsReceipts?: Prisma.GoodsReceiptUncheckedUpdateManyWithoutUserNestedInput
-  deliveryOrders?: Prisma.DeliveryOrderUncheckedUpdateManyWithoutUserNestedInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutVendorBillsCreatedInput = {
@@ -1706,38 +1706,38 @@ export type UserCreateWithoutVendorBillsCreatedInput = {
   code?: string | null
   email: string
   password: string
-  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   active?: boolean
   bankAccount?: string | null
   currency?: $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
+  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   Bank?: Prisma.BankCreateNestedOneWithoutUserInput
   Department?: Prisma.DepartmentCreateNestedOneWithoutUserInput
+  Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
-  ApprovalSettingItem?: Prisma.ApprovalSettingItemCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpCreateNestedManyWithoutRequesterInput
-  Tasks?: Prisma.TaskCreateNestedManyWithoutUserInput
-  Interactions?: Prisma.InteractionCreateNestedManyWithoutUserInput
-  CustomerNotes?: Prisma.CustomerNoteCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadCreateNestedManyWithoutUserInput
   Opportunities?: Prisma.OpportunityCreateNestedManyWithoutUserInput
+  Interactions?: Prisma.InteractionCreateNestedManyWithoutUserInput
+  Tasks?: Prisma.TaskCreateNestedManyWithoutUserInput
+  VisitPlans?: Prisma.VisitPlanCreateNestedManyWithoutUserInput
+  CustomerNotes?: Prisma.CustomerNoteCreateNestedManyWithoutUserInput
+  Customers?: Prisma.CustomerCreateNestedManyWithoutAccountManagerInput
   Quotations?: Prisma.QuotationCreateNestedManyWithoutUserInput
+  salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutUserInput
   Invoices?: Prisma.InvoiceCreateNestedManyWithoutUserInput
+  purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutUserInput
+  goodsReceipts?: Prisma.GoodsReceiptCreateNestedManyWithoutUserInput
+  deliveryOrders?: Prisma.DeliveryOrderCreateNestedManyWithoutUserInput
   accountingPayments?: Prisma.PaymentCreateNestedManyWithoutCreatedByInput
   journalEntriesCreated?: Prisma.JournalEntryCreateNestedManyWithoutCreatedByInput
   journalEntriesPosted?: Prisma.JournalEntryCreateNestedManyWithoutPostedByInput
   closedPeriods?: Prisma.FiscalPeriodCreateNestedManyWithoutClosedByInput
   bankTransactions?: Prisma.BankTransactionCreateNestedManyWithoutCreatedByInput
-  VisitPlans?: Prisma.VisitPlanCreateNestedManyWithoutUserInput
-  Customers?: Prisma.CustomerCreateNestedManyWithoutAccountManagerInput
   approvalItems?: Prisma.ApprovalItemCreateNestedManyWithoutUserInput
-  salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutUserInput
-  purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutUserInput
-  goodsReceipts?: Prisma.GoodsReceiptCreateNestedManyWithoutUserInput
-  deliveryOrders?: Prisma.DeliveryOrderCreateNestedManyWithoutUserInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutVendorBillsCreatedInput = {
@@ -1746,38 +1746,38 @@ export type UserUncheckedCreateWithoutVendorBillsCreatedInput = {
   code?: string | null
   email: string
   password: string
-  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   active?: boolean
-  bankId?: number | null
   bankAccount?: string | null
   currency?: $Enums.Currency
-  departmentId?: number | null
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  bankId?: number | null
+  departmentId?: number | null
+  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   Balance?: Prisma.UserBalanceUncheckedCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
-  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpUncheckedCreateNestedManyWithoutRequesterInput
-  Tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutUserInput
-  Interactions?: Prisma.InteractionUncheckedCreateNestedManyWithoutUserInput
-  CustomerNotes?: Prisma.CustomerNoteUncheckedCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
   Opportunities?: Prisma.OpportunityUncheckedCreateNestedManyWithoutUserInput
+  Interactions?: Prisma.InteractionUncheckedCreateNestedManyWithoutUserInput
+  Tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutUserInput
+  VisitPlans?: Prisma.VisitPlanUncheckedCreateNestedManyWithoutUserInput
+  CustomerNotes?: Prisma.CustomerNoteUncheckedCreateNestedManyWithoutUserInput
+  Customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutAccountManagerInput
   Quotations?: Prisma.QuotationUncheckedCreateNestedManyWithoutUserInput
+  salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutUserInput
   Invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutUserInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutUserInput
+  goodsReceipts?: Prisma.GoodsReceiptUncheckedCreateNestedManyWithoutUserInput
+  deliveryOrders?: Prisma.DeliveryOrderUncheckedCreateNestedManyWithoutUserInput
   accountingPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCreatedByInput
   journalEntriesCreated?: Prisma.JournalEntryUncheckedCreateNestedManyWithoutCreatedByInput
   journalEntriesPosted?: Prisma.JournalEntryUncheckedCreateNestedManyWithoutPostedByInput
   closedPeriods?: Prisma.FiscalPeriodUncheckedCreateNestedManyWithoutClosedByInput
   bankTransactions?: Prisma.BankTransactionUncheckedCreateNestedManyWithoutCreatedByInput
-  VisitPlans?: Prisma.VisitPlanUncheckedCreateNestedManyWithoutUserInput
-  Customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutAccountManagerInput
   approvalItems?: Prisma.ApprovalItemUncheckedCreateNestedManyWithoutUserInput
-  salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutUserInput
-  purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutUserInput
-  goodsReceipts?: Prisma.GoodsReceiptUncheckedCreateNestedManyWithoutUserInput
-  deliveryOrders?: Prisma.DeliveryOrderUncheckedCreateNestedManyWithoutUserInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutVendorBillsCreatedInput = {
@@ -1801,38 +1801,38 @@ export type UserUpdateWithoutVendorBillsCreatedInput = {
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
-  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
+  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   Bank?: Prisma.BankUpdateOneWithoutUserNestedInput
   Department?: Prisma.DepartmentUpdateOneWithoutUserNestedInput
+  Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
-  ApprovalSettingItem?: Prisma.ApprovalSettingItemUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUpdateManyWithoutRequesterNestedInput
-  Tasks?: Prisma.TaskUpdateManyWithoutUserNestedInput
-  Interactions?: Prisma.InteractionUpdateManyWithoutUserNestedInput
-  CustomerNotes?: Prisma.CustomerNoteUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
   Opportunities?: Prisma.OpportunityUpdateManyWithoutUserNestedInput
+  Interactions?: Prisma.InteractionUpdateManyWithoutUserNestedInput
+  Tasks?: Prisma.TaskUpdateManyWithoutUserNestedInput
+  VisitPlans?: Prisma.VisitPlanUpdateManyWithoutUserNestedInput
+  CustomerNotes?: Prisma.CustomerNoteUpdateManyWithoutUserNestedInput
+  Customers?: Prisma.CustomerUpdateManyWithoutAccountManagerNestedInput
   Quotations?: Prisma.QuotationUpdateManyWithoutUserNestedInput
+  salesOrders?: Prisma.SalesOrderUpdateManyWithoutUserNestedInput
   Invoices?: Prisma.InvoiceUpdateManyWithoutUserNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutUserNestedInput
+  goodsReceipts?: Prisma.GoodsReceiptUpdateManyWithoutUserNestedInput
+  deliveryOrders?: Prisma.DeliveryOrderUpdateManyWithoutUserNestedInput
   accountingPayments?: Prisma.PaymentUpdateManyWithoutCreatedByNestedInput
   journalEntriesCreated?: Prisma.JournalEntryUpdateManyWithoutCreatedByNestedInput
   journalEntriesPosted?: Prisma.JournalEntryUpdateManyWithoutPostedByNestedInput
   closedPeriods?: Prisma.FiscalPeriodUpdateManyWithoutClosedByNestedInput
   bankTransactions?: Prisma.BankTransactionUpdateManyWithoutCreatedByNestedInput
-  VisitPlans?: Prisma.VisitPlanUpdateManyWithoutUserNestedInput
-  Customers?: Prisma.CustomerUpdateManyWithoutAccountManagerNestedInput
   approvalItems?: Prisma.ApprovalItemUpdateManyWithoutUserNestedInput
-  salesOrders?: Prisma.SalesOrderUpdateManyWithoutUserNestedInput
-  purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutUserNestedInput
-  goodsReceipts?: Prisma.GoodsReceiptUpdateManyWithoutUserNestedInput
-  deliveryOrders?: Prisma.DeliveryOrderUpdateManyWithoutUserNestedInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutVendorBillsCreatedInput = {
@@ -1841,38 +1841,38 @@ export type UserUncheckedUpdateWithoutVendorBillsCreatedInput = {
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
-  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  bankId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
-  departmentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  bankId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  departmentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   Balance?: Prisma.UserBalanceUncheckedUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
-  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUncheckedUpdateManyWithoutRequesterNestedInput
-  Tasks?: Prisma.TaskUncheckedUpdateManyWithoutUserNestedInput
-  Interactions?: Prisma.InteractionUncheckedUpdateManyWithoutUserNestedInput
-  CustomerNotes?: Prisma.CustomerNoteUncheckedUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
   Opportunities?: Prisma.OpportunityUncheckedUpdateManyWithoutUserNestedInput
+  Interactions?: Prisma.InteractionUncheckedUpdateManyWithoutUserNestedInput
+  Tasks?: Prisma.TaskUncheckedUpdateManyWithoutUserNestedInput
+  VisitPlans?: Prisma.VisitPlanUncheckedUpdateManyWithoutUserNestedInput
+  CustomerNotes?: Prisma.CustomerNoteUncheckedUpdateManyWithoutUserNestedInput
+  Customers?: Prisma.CustomerUncheckedUpdateManyWithoutAccountManagerNestedInput
   Quotations?: Prisma.QuotationUncheckedUpdateManyWithoutUserNestedInput
+  salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutUserNestedInput
   Invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutUserNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutUserNestedInput
+  goodsReceipts?: Prisma.GoodsReceiptUncheckedUpdateManyWithoutUserNestedInput
+  deliveryOrders?: Prisma.DeliveryOrderUncheckedUpdateManyWithoutUserNestedInput
   accountingPayments?: Prisma.PaymentUncheckedUpdateManyWithoutCreatedByNestedInput
   journalEntriesCreated?: Prisma.JournalEntryUncheckedUpdateManyWithoutCreatedByNestedInput
   journalEntriesPosted?: Prisma.JournalEntryUncheckedUpdateManyWithoutPostedByNestedInput
   closedPeriods?: Prisma.FiscalPeriodUncheckedUpdateManyWithoutClosedByNestedInput
   bankTransactions?: Prisma.BankTransactionUncheckedUpdateManyWithoutCreatedByNestedInput
-  VisitPlans?: Prisma.VisitPlanUncheckedUpdateManyWithoutUserNestedInput
-  Customers?: Prisma.CustomerUncheckedUpdateManyWithoutAccountManagerNestedInput
   approvalItems?: Prisma.ApprovalItemUncheckedUpdateManyWithoutUserNestedInput
-  salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutUserNestedInput
-  purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutUserNestedInput
-  goodsReceipts?: Prisma.GoodsReceiptUncheckedUpdateManyWithoutUserNestedInput
-  deliveryOrders?: Prisma.DeliveryOrderUncheckedUpdateManyWithoutUserNestedInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutAccountingPaymentsInput = {
@@ -1880,38 +1880,38 @@ export type UserCreateWithoutAccountingPaymentsInput = {
   code?: string | null
   email: string
   password: string
-  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   active?: boolean
   bankAccount?: string | null
   currency?: $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
+  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   Bank?: Prisma.BankCreateNestedOneWithoutUserInput
   Department?: Prisma.DepartmentCreateNestedOneWithoutUserInput
+  Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
-  ApprovalSettingItem?: Prisma.ApprovalSettingItemCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpCreateNestedManyWithoutRequesterInput
-  Tasks?: Prisma.TaskCreateNestedManyWithoutUserInput
-  Interactions?: Prisma.InteractionCreateNestedManyWithoutUserInput
-  CustomerNotes?: Prisma.CustomerNoteCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadCreateNestedManyWithoutUserInput
   Opportunities?: Prisma.OpportunityCreateNestedManyWithoutUserInput
+  Interactions?: Prisma.InteractionCreateNestedManyWithoutUserInput
+  Tasks?: Prisma.TaskCreateNestedManyWithoutUserInput
+  VisitPlans?: Prisma.VisitPlanCreateNestedManyWithoutUserInput
+  CustomerNotes?: Prisma.CustomerNoteCreateNestedManyWithoutUserInput
+  Customers?: Prisma.CustomerCreateNestedManyWithoutAccountManagerInput
   Quotations?: Prisma.QuotationCreateNestedManyWithoutUserInput
+  salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutUserInput
   Invoices?: Prisma.InvoiceCreateNestedManyWithoutUserInput
+  purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutUserInput
+  goodsReceipts?: Prisma.GoodsReceiptCreateNestedManyWithoutUserInput
+  deliveryOrders?: Prisma.DeliveryOrderCreateNestedManyWithoutUserInput
   journalEntriesCreated?: Prisma.JournalEntryCreateNestedManyWithoutCreatedByInput
   journalEntriesPosted?: Prisma.JournalEntryCreateNestedManyWithoutPostedByInput
   closedPeriods?: Prisma.FiscalPeriodCreateNestedManyWithoutClosedByInput
   vendorBillsCreated?: Prisma.VendorBillCreateNestedManyWithoutCreatedByInput
   bankTransactions?: Prisma.BankTransactionCreateNestedManyWithoutCreatedByInput
-  VisitPlans?: Prisma.VisitPlanCreateNestedManyWithoutUserInput
-  Customers?: Prisma.CustomerCreateNestedManyWithoutAccountManagerInput
   approvalItems?: Prisma.ApprovalItemCreateNestedManyWithoutUserInput
-  salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutUserInput
-  purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutUserInput
-  goodsReceipts?: Prisma.GoodsReceiptCreateNestedManyWithoutUserInput
-  deliveryOrders?: Prisma.DeliveryOrderCreateNestedManyWithoutUserInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutAccountingPaymentsInput = {
@@ -1920,38 +1920,38 @@ export type UserUncheckedCreateWithoutAccountingPaymentsInput = {
   code?: string | null
   email: string
   password: string
-  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   active?: boolean
-  bankId?: number | null
   bankAccount?: string | null
   currency?: $Enums.Currency
-  departmentId?: number | null
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  bankId?: number | null
+  departmentId?: number | null
+  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   Balance?: Prisma.UserBalanceUncheckedCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
-  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpUncheckedCreateNestedManyWithoutRequesterInput
-  Tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutUserInput
-  Interactions?: Prisma.InteractionUncheckedCreateNestedManyWithoutUserInput
-  CustomerNotes?: Prisma.CustomerNoteUncheckedCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
   Opportunities?: Prisma.OpportunityUncheckedCreateNestedManyWithoutUserInput
+  Interactions?: Prisma.InteractionUncheckedCreateNestedManyWithoutUserInput
+  Tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutUserInput
+  VisitPlans?: Prisma.VisitPlanUncheckedCreateNestedManyWithoutUserInput
+  CustomerNotes?: Prisma.CustomerNoteUncheckedCreateNestedManyWithoutUserInput
+  Customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutAccountManagerInput
   Quotations?: Prisma.QuotationUncheckedCreateNestedManyWithoutUserInput
+  salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutUserInput
   Invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutUserInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutUserInput
+  goodsReceipts?: Prisma.GoodsReceiptUncheckedCreateNestedManyWithoutUserInput
+  deliveryOrders?: Prisma.DeliveryOrderUncheckedCreateNestedManyWithoutUserInput
   journalEntriesCreated?: Prisma.JournalEntryUncheckedCreateNestedManyWithoutCreatedByInput
   journalEntriesPosted?: Prisma.JournalEntryUncheckedCreateNestedManyWithoutPostedByInput
   closedPeriods?: Prisma.FiscalPeriodUncheckedCreateNestedManyWithoutClosedByInput
   vendorBillsCreated?: Prisma.VendorBillUncheckedCreateNestedManyWithoutCreatedByInput
   bankTransactions?: Prisma.BankTransactionUncheckedCreateNestedManyWithoutCreatedByInput
-  VisitPlans?: Prisma.VisitPlanUncheckedCreateNestedManyWithoutUserInput
-  Customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutAccountManagerInput
   approvalItems?: Prisma.ApprovalItemUncheckedCreateNestedManyWithoutUserInput
-  salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutUserInput
-  purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutUserInput
-  goodsReceipts?: Prisma.GoodsReceiptUncheckedCreateNestedManyWithoutUserInput
-  deliveryOrders?: Prisma.DeliveryOrderUncheckedCreateNestedManyWithoutUserInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutAccountingPaymentsInput = {
@@ -1975,38 +1975,38 @@ export type UserUpdateWithoutAccountingPaymentsInput = {
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
-  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
+  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   Bank?: Prisma.BankUpdateOneWithoutUserNestedInput
   Department?: Prisma.DepartmentUpdateOneWithoutUserNestedInput
+  Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
-  ApprovalSettingItem?: Prisma.ApprovalSettingItemUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUpdateManyWithoutRequesterNestedInput
-  Tasks?: Prisma.TaskUpdateManyWithoutUserNestedInput
-  Interactions?: Prisma.InteractionUpdateManyWithoutUserNestedInput
-  CustomerNotes?: Prisma.CustomerNoteUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
   Opportunities?: Prisma.OpportunityUpdateManyWithoutUserNestedInput
+  Interactions?: Prisma.InteractionUpdateManyWithoutUserNestedInput
+  Tasks?: Prisma.TaskUpdateManyWithoutUserNestedInput
+  VisitPlans?: Prisma.VisitPlanUpdateManyWithoutUserNestedInput
+  CustomerNotes?: Prisma.CustomerNoteUpdateManyWithoutUserNestedInput
+  Customers?: Prisma.CustomerUpdateManyWithoutAccountManagerNestedInput
   Quotations?: Prisma.QuotationUpdateManyWithoutUserNestedInput
+  salesOrders?: Prisma.SalesOrderUpdateManyWithoutUserNestedInput
   Invoices?: Prisma.InvoiceUpdateManyWithoutUserNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutUserNestedInput
+  goodsReceipts?: Prisma.GoodsReceiptUpdateManyWithoutUserNestedInput
+  deliveryOrders?: Prisma.DeliveryOrderUpdateManyWithoutUserNestedInput
   journalEntriesCreated?: Prisma.JournalEntryUpdateManyWithoutCreatedByNestedInput
   journalEntriesPosted?: Prisma.JournalEntryUpdateManyWithoutPostedByNestedInput
   closedPeriods?: Prisma.FiscalPeriodUpdateManyWithoutClosedByNestedInput
   vendorBillsCreated?: Prisma.VendorBillUpdateManyWithoutCreatedByNestedInput
   bankTransactions?: Prisma.BankTransactionUpdateManyWithoutCreatedByNestedInput
-  VisitPlans?: Prisma.VisitPlanUpdateManyWithoutUserNestedInput
-  Customers?: Prisma.CustomerUpdateManyWithoutAccountManagerNestedInput
   approvalItems?: Prisma.ApprovalItemUpdateManyWithoutUserNestedInput
-  salesOrders?: Prisma.SalesOrderUpdateManyWithoutUserNestedInput
-  purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutUserNestedInput
-  goodsReceipts?: Prisma.GoodsReceiptUpdateManyWithoutUserNestedInput
-  deliveryOrders?: Prisma.DeliveryOrderUpdateManyWithoutUserNestedInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAccountingPaymentsInput = {
@@ -2015,38 +2015,38 @@ export type UserUncheckedUpdateWithoutAccountingPaymentsInput = {
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
-  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  bankId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
-  departmentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  bankId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  departmentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   Balance?: Prisma.UserBalanceUncheckedUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
-  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUncheckedUpdateManyWithoutRequesterNestedInput
-  Tasks?: Prisma.TaskUncheckedUpdateManyWithoutUserNestedInput
-  Interactions?: Prisma.InteractionUncheckedUpdateManyWithoutUserNestedInput
-  CustomerNotes?: Prisma.CustomerNoteUncheckedUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
   Opportunities?: Prisma.OpportunityUncheckedUpdateManyWithoutUserNestedInput
+  Interactions?: Prisma.InteractionUncheckedUpdateManyWithoutUserNestedInput
+  Tasks?: Prisma.TaskUncheckedUpdateManyWithoutUserNestedInput
+  VisitPlans?: Prisma.VisitPlanUncheckedUpdateManyWithoutUserNestedInput
+  CustomerNotes?: Prisma.CustomerNoteUncheckedUpdateManyWithoutUserNestedInput
+  Customers?: Prisma.CustomerUncheckedUpdateManyWithoutAccountManagerNestedInput
   Quotations?: Prisma.QuotationUncheckedUpdateManyWithoutUserNestedInput
+  salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutUserNestedInput
   Invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutUserNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutUserNestedInput
+  goodsReceipts?: Prisma.GoodsReceiptUncheckedUpdateManyWithoutUserNestedInput
+  deliveryOrders?: Prisma.DeliveryOrderUncheckedUpdateManyWithoutUserNestedInput
   journalEntriesCreated?: Prisma.JournalEntryUncheckedUpdateManyWithoutCreatedByNestedInput
   journalEntriesPosted?: Prisma.JournalEntryUncheckedUpdateManyWithoutPostedByNestedInput
   closedPeriods?: Prisma.FiscalPeriodUncheckedUpdateManyWithoutClosedByNestedInput
   vendorBillsCreated?: Prisma.VendorBillUncheckedUpdateManyWithoutCreatedByNestedInput
   bankTransactions?: Prisma.BankTransactionUncheckedUpdateManyWithoutCreatedByNestedInput
-  VisitPlans?: Prisma.VisitPlanUncheckedUpdateManyWithoutUserNestedInput
-  Customers?: Prisma.CustomerUncheckedUpdateManyWithoutAccountManagerNestedInput
   approvalItems?: Prisma.ApprovalItemUncheckedUpdateManyWithoutUserNestedInput
-  salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutUserNestedInput
-  purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutUserNestedInput
-  goodsReceipts?: Prisma.GoodsReceiptUncheckedUpdateManyWithoutUserNestedInput
-  deliveryOrders?: Prisma.DeliveryOrderUncheckedUpdateManyWithoutUserNestedInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutBankTransactionsInput = {
@@ -2054,38 +2054,38 @@ export type UserCreateWithoutBankTransactionsInput = {
   code?: string | null
   email: string
   password: string
-  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   active?: boolean
   bankAccount?: string | null
   currency?: $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
+  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   Bank?: Prisma.BankCreateNestedOneWithoutUserInput
   Department?: Prisma.DepartmentCreateNestedOneWithoutUserInput
+  Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
-  ApprovalSettingItem?: Prisma.ApprovalSettingItemCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpCreateNestedManyWithoutRequesterInput
-  Tasks?: Prisma.TaskCreateNestedManyWithoutUserInput
-  Interactions?: Prisma.InteractionCreateNestedManyWithoutUserInput
-  CustomerNotes?: Prisma.CustomerNoteCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadCreateNestedManyWithoutUserInput
   Opportunities?: Prisma.OpportunityCreateNestedManyWithoutUserInput
+  Interactions?: Prisma.InteractionCreateNestedManyWithoutUserInput
+  Tasks?: Prisma.TaskCreateNestedManyWithoutUserInput
+  VisitPlans?: Prisma.VisitPlanCreateNestedManyWithoutUserInput
+  CustomerNotes?: Prisma.CustomerNoteCreateNestedManyWithoutUserInput
+  Customers?: Prisma.CustomerCreateNestedManyWithoutAccountManagerInput
   Quotations?: Prisma.QuotationCreateNestedManyWithoutUserInput
+  salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutUserInput
   Invoices?: Prisma.InvoiceCreateNestedManyWithoutUserInput
+  purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutUserInput
+  goodsReceipts?: Prisma.GoodsReceiptCreateNestedManyWithoutUserInput
+  deliveryOrders?: Prisma.DeliveryOrderCreateNestedManyWithoutUserInput
   accountingPayments?: Prisma.PaymentCreateNestedManyWithoutCreatedByInput
   journalEntriesCreated?: Prisma.JournalEntryCreateNestedManyWithoutCreatedByInput
   journalEntriesPosted?: Prisma.JournalEntryCreateNestedManyWithoutPostedByInput
   closedPeriods?: Prisma.FiscalPeriodCreateNestedManyWithoutClosedByInput
   vendorBillsCreated?: Prisma.VendorBillCreateNestedManyWithoutCreatedByInput
-  VisitPlans?: Prisma.VisitPlanCreateNestedManyWithoutUserInput
-  Customers?: Prisma.CustomerCreateNestedManyWithoutAccountManagerInput
   approvalItems?: Prisma.ApprovalItemCreateNestedManyWithoutUserInput
-  salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutUserInput
-  purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutUserInput
-  goodsReceipts?: Prisma.GoodsReceiptCreateNestedManyWithoutUserInput
-  deliveryOrders?: Prisma.DeliveryOrderCreateNestedManyWithoutUserInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutBankTransactionsInput = {
@@ -2094,38 +2094,38 @@ export type UserUncheckedCreateWithoutBankTransactionsInput = {
   code?: string | null
   email: string
   password: string
-  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   active?: boolean
-  bankId?: number | null
   bankAccount?: string | null
   currency?: $Enums.Currency
-  departmentId?: number | null
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  bankId?: number | null
+  departmentId?: number | null
+  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   Balance?: Prisma.UserBalanceUncheckedCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
-  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpUncheckedCreateNestedManyWithoutRequesterInput
-  Tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutUserInput
-  Interactions?: Prisma.InteractionUncheckedCreateNestedManyWithoutUserInput
-  CustomerNotes?: Prisma.CustomerNoteUncheckedCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
   Opportunities?: Prisma.OpportunityUncheckedCreateNestedManyWithoutUserInput
+  Interactions?: Prisma.InteractionUncheckedCreateNestedManyWithoutUserInput
+  Tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutUserInput
+  VisitPlans?: Prisma.VisitPlanUncheckedCreateNestedManyWithoutUserInput
+  CustomerNotes?: Prisma.CustomerNoteUncheckedCreateNestedManyWithoutUserInput
+  Customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutAccountManagerInput
   Quotations?: Prisma.QuotationUncheckedCreateNestedManyWithoutUserInput
+  salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutUserInput
   Invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutUserInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutUserInput
+  goodsReceipts?: Prisma.GoodsReceiptUncheckedCreateNestedManyWithoutUserInput
+  deliveryOrders?: Prisma.DeliveryOrderUncheckedCreateNestedManyWithoutUserInput
   accountingPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCreatedByInput
   journalEntriesCreated?: Prisma.JournalEntryUncheckedCreateNestedManyWithoutCreatedByInput
   journalEntriesPosted?: Prisma.JournalEntryUncheckedCreateNestedManyWithoutPostedByInput
   closedPeriods?: Prisma.FiscalPeriodUncheckedCreateNestedManyWithoutClosedByInput
   vendorBillsCreated?: Prisma.VendorBillUncheckedCreateNestedManyWithoutCreatedByInput
-  VisitPlans?: Prisma.VisitPlanUncheckedCreateNestedManyWithoutUserInput
-  Customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutAccountManagerInput
   approvalItems?: Prisma.ApprovalItemUncheckedCreateNestedManyWithoutUserInput
-  salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutUserInput
-  purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutUserInput
-  goodsReceipts?: Prisma.GoodsReceiptUncheckedCreateNestedManyWithoutUserInput
-  deliveryOrders?: Prisma.DeliveryOrderUncheckedCreateNestedManyWithoutUserInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutBankTransactionsInput = {
@@ -2149,38 +2149,38 @@ export type UserUpdateWithoutBankTransactionsInput = {
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
-  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
+  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   Bank?: Prisma.BankUpdateOneWithoutUserNestedInput
   Department?: Prisma.DepartmentUpdateOneWithoutUserNestedInput
+  Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
-  ApprovalSettingItem?: Prisma.ApprovalSettingItemUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUpdateManyWithoutRequesterNestedInput
-  Tasks?: Prisma.TaskUpdateManyWithoutUserNestedInput
-  Interactions?: Prisma.InteractionUpdateManyWithoutUserNestedInput
-  CustomerNotes?: Prisma.CustomerNoteUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
   Opportunities?: Prisma.OpportunityUpdateManyWithoutUserNestedInput
+  Interactions?: Prisma.InteractionUpdateManyWithoutUserNestedInput
+  Tasks?: Prisma.TaskUpdateManyWithoutUserNestedInput
+  VisitPlans?: Prisma.VisitPlanUpdateManyWithoutUserNestedInput
+  CustomerNotes?: Prisma.CustomerNoteUpdateManyWithoutUserNestedInput
+  Customers?: Prisma.CustomerUpdateManyWithoutAccountManagerNestedInput
   Quotations?: Prisma.QuotationUpdateManyWithoutUserNestedInput
+  salesOrders?: Prisma.SalesOrderUpdateManyWithoutUserNestedInput
   Invoices?: Prisma.InvoiceUpdateManyWithoutUserNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutUserNestedInput
+  goodsReceipts?: Prisma.GoodsReceiptUpdateManyWithoutUserNestedInput
+  deliveryOrders?: Prisma.DeliveryOrderUpdateManyWithoutUserNestedInput
   accountingPayments?: Prisma.PaymentUpdateManyWithoutCreatedByNestedInput
   journalEntriesCreated?: Prisma.JournalEntryUpdateManyWithoutCreatedByNestedInput
   journalEntriesPosted?: Prisma.JournalEntryUpdateManyWithoutPostedByNestedInput
   closedPeriods?: Prisma.FiscalPeriodUpdateManyWithoutClosedByNestedInput
   vendorBillsCreated?: Prisma.VendorBillUpdateManyWithoutCreatedByNestedInput
-  VisitPlans?: Prisma.VisitPlanUpdateManyWithoutUserNestedInput
-  Customers?: Prisma.CustomerUpdateManyWithoutAccountManagerNestedInput
   approvalItems?: Prisma.ApprovalItemUpdateManyWithoutUserNestedInput
-  salesOrders?: Prisma.SalesOrderUpdateManyWithoutUserNestedInput
-  purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutUserNestedInput
-  goodsReceipts?: Prisma.GoodsReceiptUpdateManyWithoutUserNestedInput
-  deliveryOrders?: Prisma.DeliveryOrderUpdateManyWithoutUserNestedInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutBankTransactionsInput = {
@@ -2189,38 +2189,38 @@ export type UserUncheckedUpdateWithoutBankTransactionsInput = {
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
-  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  bankId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
-  departmentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  bankId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  departmentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   Balance?: Prisma.UserBalanceUncheckedUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
-  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUncheckedUpdateManyWithoutRequesterNestedInput
-  Tasks?: Prisma.TaskUncheckedUpdateManyWithoutUserNestedInput
-  Interactions?: Prisma.InteractionUncheckedUpdateManyWithoutUserNestedInput
-  CustomerNotes?: Prisma.CustomerNoteUncheckedUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
   Opportunities?: Prisma.OpportunityUncheckedUpdateManyWithoutUserNestedInput
+  Interactions?: Prisma.InteractionUncheckedUpdateManyWithoutUserNestedInput
+  Tasks?: Prisma.TaskUncheckedUpdateManyWithoutUserNestedInput
+  VisitPlans?: Prisma.VisitPlanUncheckedUpdateManyWithoutUserNestedInput
+  CustomerNotes?: Prisma.CustomerNoteUncheckedUpdateManyWithoutUserNestedInput
+  Customers?: Prisma.CustomerUncheckedUpdateManyWithoutAccountManagerNestedInput
   Quotations?: Prisma.QuotationUncheckedUpdateManyWithoutUserNestedInput
+  salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutUserNestedInput
   Invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutUserNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutUserNestedInput
+  goodsReceipts?: Prisma.GoodsReceiptUncheckedUpdateManyWithoutUserNestedInput
+  deliveryOrders?: Prisma.DeliveryOrderUncheckedUpdateManyWithoutUserNestedInput
   accountingPayments?: Prisma.PaymentUncheckedUpdateManyWithoutCreatedByNestedInput
   journalEntriesCreated?: Prisma.JournalEntryUncheckedUpdateManyWithoutCreatedByNestedInput
   journalEntriesPosted?: Prisma.JournalEntryUncheckedUpdateManyWithoutPostedByNestedInput
   closedPeriods?: Prisma.FiscalPeriodUncheckedUpdateManyWithoutClosedByNestedInput
   vendorBillsCreated?: Prisma.VendorBillUncheckedUpdateManyWithoutCreatedByNestedInput
-  VisitPlans?: Prisma.VisitPlanUncheckedUpdateManyWithoutUserNestedInput
-  Customers?: Prisma.CustomerUncheckedUpdateManyWithoutAccountManagerNestedInput
   approvalItems?: Prisma.ApprovalItemUncheckedUpdateManyWithoutUserNestedInput
-  salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutUserNestedInput
-  purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutUserNestedInput
-  goodsReceipts?: Prisma.GoodsReceiptUncheckedUpdateManyWithoutUserNestedInput
-  deliveryOrders?: Prisma.DeliveryOrderUncheckedUpdateManyWithoutUserNestedInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutApprovalSettingItemInput = {
@@ -2228,38 +2228,38 @@ export type UserCreateWithoutApprovalSettingItemInput = {
   code?: string | null
   email: string
   password: string
-  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   active?: boolean
   bankAccount?: string | null
   currency?: $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
+  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   Bank?: Prisma.BankCreateNestedOneWithoutUserInput
   Department?: Prisma.DepartmentCreateNestedOneWithoutUserInput
+  Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpCreateNestedManyWithoutRequesterInput
-  Tasks?: Prisma.TaskCreateNestedManyWithoutUserInput
-  Interactions?: Prisma.InteractionCreateNestedManyWithoutUserInput
-  CustomerNotes?: Prisma.CustomerNoteCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadCreateNestedManyWithoutUserInput
   Opportunities?: Prisma.OpportunityCreateNestedManyWithoutUserInput
+  Interactions?: Prisma.InteractionCreateNestedManyWithoutUserInput
+  Tasks?: Prisma.TaskCreateNestedManyWithoutUserInput
+  VisitPlans?: Prisma.VisitPlanCreateNestedManyWithoutUserInput
+  CustomerNotes?: Prisma.CustomerNoteCreateNestedManyWithoutUserInput
+  Customers?: Prisma.CustomerCreateNestedManyWithoutAccountManagerInput
   Quotations?: Prisma.QuotationCreateNestedManyWithoutUserInput
+  salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutUserInput
   Invoices?: Prisma.InvoiceCreateNestedManyWithoutUserInput
+  purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutUserInput
+  goodsReceipts?: Prisma.GoodsReceiptCreateNestedManyWithoutUserInput
+  deliveryOrders?: Prisma.DeliveryOrderCreateNestedManyWithoutUserInput
   accountingPayments?: Prisma.PaymentCreateNestedManyWithoutCreatedByInput
   journalEntriesCreated?: Prisma.JournalEntryCreateNestedManyWithoutCreatedByInput
   journalEntriesPosted?: Prisma.JournalEntryCreateNestedManyWithoutPostedByInput
   closedPeriods?: Prisma.FiscalPeriodCreateNestedManyWithoutClosedByInput
   vendorBillsCreated?: Prisma.VendorBillCreateNestedManyWithoutCreatedByInput
   bankTransactions?: Prisma.BankTransactionCreateNestedManyWithoutCreatedByInput
-  VisitPlans?: Prisma.VisitPlanCreateNestedManyWithoutUserInput
-  Customers?: Prisma.CustomerCreateNestedManyWithoutAccountManagerInput
   approvalItems?: Prisma.ApprovalItemCreateNestedManyWithoutUserInput
-  salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutUserInput
-  purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutUserInput
-  goodsReceipts?: Prisma.GoodsReceiptCreateNestedManyWithoutUserInput
-  deliveryOrders?: Prisma.DeliveryOrderCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutApprovalSettingItemInput = {
@@ -2268,38 +2268,38 @@ export type UserUncheckedCreateWithoutApprovalSettingItemInput = {
   code?: string | null
   email: string
   password: string
-  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   active?: boolean
-  bankId?: number | null
   bankAccount?: string | null
   currency?: $Enums.Currency
-  departmentId?: number | null
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  bankId?: number | null
+  departmentId?: number | null
+  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   Balance?: Prisma.UserBalanceUncheckedCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpUncheckedCreateNestedManyWithoutRequesterInput
-  Tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutUserInput
-  Interactions?: Prisma.InteractionUncheckedCreateNestedManyWithoutUserInput
-  CustomerNotes?: Prisma.CustomerNoteUncheckedCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
   Opportunities?: Prisma.OpportunityUncheckedCreateNestedManyWithoutUserInput
+  Interactions?: Prisma.InteractionUncheckedCreateNestedManyWithoutUserInput
+  Tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutUserInput
+  VisitPlans?: Prisma.VisitPlanUncheckedCreateNestedManyWithoutUserInput
+  CustomerNotes?: Prisma.CustomerNoteUncheckedCreateNestedManyWithoutUserInput
+  Customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutAccountManagerInput
   Quotations?: Prisma.QuotationUncheckedCreateNestedManyWithoutUserInput
+  salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutUserInput
   Invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutUserInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutUserInput
+  goodsReceipts?: Prisma.GoodsReceiptUncheckedCreateNestedManyWithoutUserInput
+  deliveryOrders?: Prisma.DeliveryOrderUncheckedCreateNestedManyWithoutUserInput
   accountingPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCreatedByInput
   journalEntriesCreated?: Prisma.JournalEntryUncheckedCreateNestedManyWithoutCreatedByInput
   journalEntriesPosted?: Prisma.JournalEntryUncheckedCreateNestedManyWithoutPostedByInput
   closedPeriods?: Prisma.FiscalPeriodUncheckedCreateNestedManyWithoutClosedByInput
   vendorBillsCreated?: Prisma.VendorBillUncheckedCreateNestedManyWithoutCreatedByInput
   bankTransactions?: Prisma.BankTransactionUncheckedCreateNestedManyWithoutCreatedByInput
-  VisitPlans?: Prisma.VisitPlanUncheckedCreateNestedManyWithoutUserInput
-  Customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutAccountManagerInput
   approvalItems?: Prisma.ApprovalItemUncheckedCreateNestedManyWithoutUserInput
-  salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutUserInput
-  purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutUserInput
-  goodsReceipts?: Prisma.GoodsReceiptUncheckedCreateNestedManyWithoutUserInput
-  deliveryOrders?: Prisma.DeliveryOrderUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutApprovalSettingItemInput = {
@@ -2323,38 +2323,38 @@ export type UserUpdateWithoutApprovalSettingItemInput = {
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
-  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
+  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   Bank?: Prisma.BankUpdateOneWithoutUserNestedInput
   Department?: Prisma.DepartmentUpdateOneWithoutUserNestedInput
+  Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUpdateManyWithoutRequesterNestedInput
-  Tasks?: Prisma.TaskUpdateManyWithoutUserNestedInput
-  Interactions?: Prisma.InteractionUpdateManyWithoutUserNestedInput
-  CustomerNotes?: Prisma.CustomerNoteUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
   Opportunities?: Prisma.OpportunityUpdateManyWithoutUserNestedInput
+  Interactions?: Prisma.InteractionUpdateManyWithoutUserNestedInput
+  Tasks?: Prisma.TaskUpdateManyWithoutUserNestedInput
+  VisitPlans?: Prisma.VisitPlanUpdateManyWithoutUserNestedInput
+  CustomerNotes?: Prisma.CustomerNoteUpdateManyWithoutUserNestedInput
+  Customers?: Prisma.CustomerUpdateManyWithoutAccountManagerNestedInput
   Quotations?: Prisma.QuotationUpdateManyWithoutUserNestedInput
+  salesOrders?: Prisma.SalesOrderUpdateManyWithoutUserNestedInput
   Invoices?: Prisma.InvoiceUpdateManyWithoutUserNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutUserNestedInput
+  goodsReceipts?: Prisma.GoodsReceiptUpdateManyWithoutUserNestedInput
+  deliveryOrders?: Prisma.DeliveryOrderUpdateManyWithoutUserNestedInput
   accountingPayments?: Prisma.PaymentUpdateManyWithoutCreatedByNestedInput
   journalEntriesCreated?: Prisma.JournalEntryUpdateManyWithoutCreatedByNestedInput
   journalEntriesPosted?: Prisma.JournalEntryUpdateManyWithoutPostedByNestedInput
   closedPeriods?: Prisma.FiscalPeriodUpdateManyWithoutClosedByNestedInput
   vendorBillsCreated?: Prisma.VendorBillUpdateManyWithoutCreatedByNestedInput
   bankTransactions?: Prisma.BankTransactionUpdateManyWithoutCreatedByNestedInput
-  VisitPlans?: Prisma.VisitPlanUpdateManyWithoutUserNestedInput
-  Customers?: Prisma.CustomerUpdateManyWithoutAccountManagerNestedInput
   approvalItems?: Prisma.ApprovalItemUpdateManyWithoutUserNestedInput
-  salesOrders?: Prisma.SalesOrderUpdateManyWithoutUserNestedInput
-  purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutUserNestedInput
-  goodsReceipts?: Prisma.GoodsReceiptUpdateManyWithoutUserNestedInput
-  deliveryOrders?: Prisma.DeliveryOrderUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutApprovalSettingItemInput = {
@@ -2363,38 +2363,38 @@ export type UserUncheckedUpdateWithoutApprovalSettingItemInput = {
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
-  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  bankId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
-  departmentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  bankId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  departmentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   Balance?: Prisma.UserBalanceUncheckedUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUncheckedUpdateManyWithoutRequesterNestedInput
-  Tasks?: Prisma.TaskUncheckedUpdateManyWithoutUserNestedInput
-  Interactions?: Prisma.InteractionUncheckedUpdateManyWithoutUserNestedInput
-  CustomerNotes?: Prisma.CustomerNoteUncheckedUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
   Opportunities?: Prisma.OpportunityUncheckedUpdateManyWithoutUserNestedInput
+  Interactions?: Prisma.InteractionUncheckedUpdateManyWithoutUserNestedInput
+  Tasks?: Prisma.TaskUncheckedUpdateManyWithoutUserNestedInput
+  VisitPlans?: Prisma.VisitPlanUncheckedUpdateManyWithoutUserNestedInput
+  CustomerNotes?: Prisma.CustomerNoteUncheckedUpdateManyWithoutUserNestedInput
+  Customers?: Prisma.CustomerUncheckedUpdateManyWithoutAccountManagerNestedInput
   Quotations?: Prisma.QuotationUncheckedUpdateManyWithoutUserNestedInput
+  salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutUserNestedInput
   Invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutUserNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutUserNestedInput
+  goodsReceipts?: Prisma.GoodsReceiptUncheckedUpdateManyWithoutUserNestedInput
+  deliveryOrders?: Prisma.DeliveryOrderUncheckedUpdateManyWithoutUserNestedInput
   accountingPayments?: Prisma.PaymentUncheckedUpdateManyWithoutCreatedByNestedInput
   journalEntriesCreated?: Prisma.JournalEntryUncheckedUpdateManyWithoutCreatedByNestedInput
   journalEntriesPosted?: Prisma.JournalEntryUncheckedUpdateManyWithoutPostedByNestedInput
   closedPeriods?: Prisma.FiscalPeriodUncheckedUpdateManyWithoutClosedByNestedInput
   vendorBillsCreated?: Prisma.VendorBillUncheckedUpdateManyWithoutCreatedByNestedInput
   bankTransactions?: Prisma.BankTransactionUncheckedUpdateManyWithoutCreatedByNestedInput
-  VisitPlans?: Prisma.VisitPlanUncheckedUpdateManyWithoutUserNestedInput
-  Customers?: Prisma.CustomerUncheckedUpdateManyWithoutAccountManagerNestedInput
   approvalItems?: Prisma.ApprovalItemUncheckedUpdateManyWithoutUserNestedInput
-  salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutUserNestedInput
-  purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutUserNestedInput
-  goodsReceipts?: Prisma.GoodsReceiptUncheckedUpdateManyWithoutUserNestedInput
-  deliveryOrders?: Prisma.DeliveryOrderUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutApprovalItemsInput = {
@@ -2402,38 +2402,38 @@ export type UserCreateWithoutApprovalItemsInput = {
   code?: string | null
   email: string
   password: string
-  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   active?: boolean
   bankAccount?: string | null
   currency?: $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
+  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   Bank?: Prisma.BankCreateNestedOneWithoutUserInput
   Department?: Prisma.DepartmentCreateNestedOneWithoutUserInput
+  Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
-  ApprovalSettingItem?: Prisma.ApprovalSettingItemCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpCreateNestedManyWithoutRequesterInput
-  Tasks?: Prisma.TaskCreateNestedManyWithoutUserInput
-  Interactions?: Prisma.InteractionCreateNestedManyWithoutUserInput
-  CustomerNotes?: Prisma.CustomerNoteCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadCreateNestedManyWithoutUserInput
   Opportunities?: Prisma.OpportunityCreateNestedManyWithoutUserInput
+  Interactions?: Prisma.InteractionCreateNestedManyWithoutUserInput
+  Tasks?: Prisma.TaskCreateNestedManyWithoutUserInput
+  VisitPlans?: Prisma.VisitPlanCreateNestedManyWithoutUserInput
+  CustomerNotes?: Prisma.CustomerNoteCreateNestedManyWithoutUserInput
+  Customers?: Prisma.CustomerCreateNestedManyWithoutAccountManagerInput
   Quotations?: Prisma.QuotationCreateNestedManyWithoutUserInput
+  salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutUserInput
   Invoices?: Prisma.InvoiceCreateNestedManyWithoutUserInput
+  purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutUserInput
+  goodsReceipts?: Prisma.GoodsReceiptCreateNestedManyWithoutUserInput
+  deliveryOrders?: Prisma.DeliveryOrderCreateNestedManyWithoutUserInput
   accountingPayments?: Prisma.PaymentCreateNestedManyWithoutCreatedByInput
   journalEntriesCreated?: Prisma.JournalEntryCreateNestedManyWithoutCreatedByInput
   journalEntriesPosted?: Prisma.JournalEntryCreateNestedManyWithoutPostedByInput
   closedPeriods?: Prisma.FiscalPeriodCreateNestedManyWithoutClosedByInput
   vendorBillsCreated?: Prisma.VendorBillCreateNestedManyWithoutCreatedByInput
   bankTransactions?: Prisma.BankTransactionCreateNestedManyWithoutCreatedByInput
-  VisitPlans?: Prisma.VisitPlanCreateNestedManyWithoutUserInput
-  Customers?: Prisma.CustomerCreateNestedManyWithoutAccountManagerInput
-  salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutUserInput
-  purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutUserInput
-  goodsReceipts?: Prisma.GoodsReceiptCreateNestedManyWithoutUserInput
-  deliveryOrders?: Prisma.DeliveryOrderCreateNestedManyWithoutUserInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutApprovalItemsInput = {
@@ -2442,38 +2442,38 @@ export type UserUncheckedCreateWithoutApprovalItemsInput = {
   code?: string | null
   email: string
   password: string
-  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   active?: boolean
-  bankId?: number | null
   bankAccount?: string | null
   currency?: $Enums.Currency
-  departmentId?: number | null
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  bankId?: number | null
+  departmentId?: number | null
+  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   Balance?: Prisma.UserBalanceUncheckedCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
-  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpUncheckedCreateNestedManyWithoutRequesterInput
-  Tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutUserInput
-  Interactions?: Prisma.InteractionUncheckedCreateNestedManyWithoutUserInput
-  CustomerNotes?: Prisma.CustomerNoteUncheckedCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
   Opportunities?: Prisma.OpportunityUncheckedCreateNestedManyWithoutUserInput
+  Interactions?: Prisma.InteractionUncheckedCreateNestedManyWithoutUserInput
+  Tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutUserInput
+  VisitPlans?: Prisma.VisitPlanUncheckedCreateNestedManyWithoutUserInput
+  CustomerNotes?: Prisma.CustomerNoteUncheckedCreateNestedManyWithoutUserInput
+  Customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutAccountManagerInput
   Quotations?: Prisma.QuotationUncheckedCreateNestedManyWithoutUserInput
+  salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutUserInput
   Invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutUserInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutUserInput
+  goodsReceipts?: Prisma.GoodsReceiptUncheckedCreateNestedManyWithoutUserInput
+  deliveryOrders?: Prisma.DeliveryOrderUncheckedCreateNestedManyWithoutUserInput
   accountingPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCreatedByInput
   journalEntriesCreated?: Prisma.JournalEntryUncheckedCreateNestedManyWithoutCreatedByInput
   journalEntriesPosted?: Prisma.JournalEntryUncheckedCreateNestedManyWithoutPostedByInput
   closedPeriods?: Prisma.FiscalPeriodUncheckedCreateNestedManyWithoutClosedByInput
   vendorBillsCreated?: Prisma.VendorBillUncheckedCreateNestedManyWithoutCreatedByInput
   bankTransactions?: Prisma.BankTransactionUncheckedCreateNestedManyWithoutCreatedByInput
-  VisitPlans?: Prisma.VisitPlanUncheckedCreateNestedManyWithoutUserInput
-  Customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutAccountManagerInput
-  salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutUserInput
-  purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutUserInput
-  goodsReceipts?: Prisma.GoodsReceiptUncheckedCreateNestedManyWithoutUserInput
-  deliveryOrders?: Prisma.DeliveryOrderUncheckedCreateNestedManyWithoutUserInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutApprovalItemsInput = {
@@ -2497,38 +2497,38 @@ export type UserUpdateWithoutApprovalItemsInput = {
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
-  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
+  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   Bank?: Prisma.BankUpdateOneWithoutUserNestedInput
   Department?: Prisma.DepartmentUpdateOneWithoutUserNestedInput
+  Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
-  ApprovalSettingItem?: Prisma.ApprovalSettingItemUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUpdateManyWithoutRequesterNestedInput
-  Tasks?: Prisma.TaskUpdateManyWithoutUserNestedInput
-  Interactions?: Prisma.InteractionUpdateManyWithoutUserNestedInput
-  CustomerNotes?: Prisma.CustomerNoteUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
   Opportunities?: Prisma.OpportunityUpdateManyWithoutUserNestedInput
+  Interactions?: Prisma.InteractionUpdateManyWithoutUserNestedInput
+  Tasks?: Prisma.TaskUpdateManyWithoutUserNestedInput
+  VisitPlans?: Prisma.VisitPlanUpdateManyWithoutUserNestedInput
+  CustomerNotes?: Prisma.CustomerNoteUpdateManyWithoutUserNestedInput
+  Customers?: Prisma.CustomerUpdateManyWithoutAccountManagerNestedInput
   Quotations?: Prisma.QuotationUpdateManyWithoutUserNestedInput
+  salesOrders?: Prisma.SalesOrderUpdateManyWithoutUserNestedInput
   Invoices?: Prisma.InvoiceUpdateManyWithoutUserNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutUserNestedInput
+  goodsReceipts?: Prisma.GoodsReceiptUpdateManyWithoutUserNestedInput
+  deliveryOrders?: Prisma.DeliveryOrderUpdateManyWithoutUserNestedInput
   accountingPayments?: Prisma.PaymentUpdateManyWithoutCreatedByNestedInput
   journalEntriesCreated?: Prisma.JournalEntryUpdateManyWithoutCreatedByNestedInput
   journalEntriesPosted?: Prisma.JournalEntryUpdateManyWithoutPostedByNestedInput
   closedPeriods?: Prisma.FiscalPeriodUpdateManyWithoutClosedByNestedInput
   vendorBillsCreated?: Prisma.VendorBillUpdateManyWithoutCreatedByNestedInput
   bankTransactions?: Prisma.BankTransactionUpdateManyWithoutCreatedByNestedInput
-  VisitPlans?: Prisma.VisitPlanUpdateManyWithoutUserNestedInput
-  Customers?: Prisma.CustomerUpdateManyWithoutAccountManagerNestedInput
-  salesOrders?: Prisma.SalesOrderUpdateManyWithoutUserNestedInput
-  purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutUserNestedInput
-  goodsReceipts?: Prisma.GoodsReceiptUpdateManyWithoutUserNestedInput
-  deliveryOrders?: Prisma.DeliveryOrderUpdateManyWithoutUserNestedInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutApprovalItemsInput = {
@@ -2537,38 +2537,38 @@ export type UserUncheckedUpdateWithoutApprovalItemsInput = {
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
-  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  bankId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
-  departmentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  bankId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  departmentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   Balance?: Prisma.UserBalanceUncheckedUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
-  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUncheckedUpdateManyWithoutRequesterNestedInput
-  Tasks?: Prisma.TaskUncheckedUpdateManyWithoutUserNestedInput
-  Interactions?: Prisma.InteractionUncheckedUpdateManyWithoutUserNestedInput
-  CustomerNotes?: Prisma.CustomerNoteUncheckedUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
   Opportunities?: Prisma.OpportunityUncheckedUpdateManyWithoutUserNestedInput
+  Interactions?: Prisma.InteractionUncheckedUpdateManyWithoutUserNestedInput
+  Tasks?: Prisma.TaskUncheckedUpdateManyWithoutUserNestedInput
+  VisitPlans?: Prisma.VisitPlanUncheckedUpdateManyWithoutUserNestedInput
+  CustomerNotes?: Prisma.CustomerNoteUncheckedUpdateManyWithoutUserNestedInput
+  Customers?: Prisma.CustomerUncheckedUpdateManyWithoutAccountManagerNestedInput
   Quotations?: Prisma.QuotationUncheckedUpdateManyWithoutUserNestedInput
+  salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutUserNestedInput
   Invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutUserNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutUserNestedInput
+  goodsReceipts?: Prisma.GoodsReceiptUncheckedUpdateManyWithoutUserNestedInput
+  deliveryOrders?: Prisma.DeliveryOrderUncheckedUpdateManyWithoutUserNestedInput
   accountingPayments?: Prisma.PaymentUncheckedUpdateManyWithoutCreatedByNestedInput
   journalEntriesCreated?: Prisma.JournalEntryUncheckedUpdateManyWithoutCreatedByNestedInput
   journalEntriesPosted?: Prisma.JournalEntryUncheckedUpdateManyWithoutPostedByNestedInput
   closedPeriods?: Prisma.FiscalPeriodUncheckedUpdateManyWithoutClosedByNestedInput
   vendorBillsCreated?: Prisma.VendorBillUncheckedUpdateManyWithoutCreatedByNestedInput
   bankTransactions?: Prisma.BankTransactionUncheckedUpdateManyWithoutCreatedByNestedInput
-  VisitPlans?: Prisma.VisitPlanUncheckedUpdateManyWithoutUserNestedInput
-  Customers?: Prisma.CustomerUncheckedUpdateManyWithoutAccountManagerNestedInput
-  salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutUserNestedInput
-  purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutUserNestedInput
-  goodsReceipts?: Prisma.GoodsReceiptUncheckedUpdateManyWithoutUserNestedInput
-  deliveryOrders?: Prisma.DeliveryOrderUncheckedUpdateManyWithoutUserNestedInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutLeadsInput = {
@@ -2576,38 +2576,38 @@ export type UserCreateWithoutLeadsInput = {
   code?: string | null
   email: string
   password: string
-  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   active?: boolean
   bankAccount?: string | null
   currency?: $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
+  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   Bank?: Prisma.BankCreateNestedOneWithoutUserInput
   Department?: Prisma.DepartmentCreateNestedOneWithoutUserInput
+  Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
-  ApprovalSettingItem?: Prisma.ApprovalSettingItemCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpCreateNestedManyWithoutRequesterInput
-  Tasks?: Prisma.TaskCreateNestedManyWithoutUserInput
-  Interactions?: Prisma.InteractionCreateNestedManyWithoutUserInput
-  CustomerNotes?: Prisma.CustomerNoteCreateNestedManyWithoutUserInput
   Opportunities?: Prisma.OpportunityCreateNestedManyWithoutUserInput
+  Interactions?: Prisma.InteractionCreateNestedManyWithoutUserInput
+  Tasks?: Prisma.TaskCreateNestedManyWithoutUserInput
+  VisitPlans?: Prisma.VisitPlanCreateNestedManyWithoutUserInput
+  CustomerNotes?: Prisma.CustomerNoteCreateNestedManyWithoutUserInput
+  Customers?: Prisma.CustomerCreateNestedManyWithoutAccountManagerInput
   Quotations?: Prisma.QuotationCreateNestedManyWithoutUserInput
+  salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutUserInput
   Invoices?: Prisma.InvoiceCreateNestedManyWithoutUserInput
+  purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutUserInput
+  goodsReceipts?: Prisma.GoodsReceiptCreateNestedManyWithoutUserInput
+  deliveryOrders?: Prisma.DeliveryOrderCreateNestedManyWithoutUserInput
   accountingPayments?: Prisma.PaymentCreateNestedManyWithoutCreatedByInput
   journalEntriesCreated?: Prisma.JournalEntryCreateNestedManyWithoutCreatedByInput
   journalEntriesPosted?: Prisma.JournalEntryCreateNestedManyWithoutPostedByInput
   closedPeriods?: Prisma.FiscalPeriodCreateNestedManyWithoutClosedByInput
   vendorBillsCreated?: Prisma.VendorBillCreateNestedManyWithoutCreatedByInput
   bankTransactions?: Prisma.BankTransactionCreateNestedManyWithoutCreatedByInput
-  VisitPlans?: Prisma.VisitPlanCreateNestedManyWithoutUserInput
-  Customers?: Prisma.CustomerCreateNestedManyWithoutAccountManagerInput
   approvalItems?: Prisma.ApprovalItemCreateNestedManyWithoutUserInput
-  salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutUserInput
-  purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutUserInput
-  goodsReceipts?: Prisma.GoodsReceiptCreateNestedManyWithoutUserInput
-  deliveryOrders?: Prisma.DeliveryOrderCreateNestedManyWithoutUserInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutLeadsInput = {
@@ -2616,38 +2616,38 @@ export type UserUncheckedCreateWithoutLeadsInput = {
   code?: string | null
   email: string
   password: string
-  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   active?: boolean
-  bankId?: number | null
   bankAccount?: string | null
   currency?: $Enums.Currency
-  departmentId?: number | null
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  bankId?: number | null
+  departmentId?: number | null
+  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   Balance?: Prisma.UserBalanceUncheckedCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
-  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpUncheckedCreateNestedManyWithoutRequesterInput
-  Tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutUserInput
-  Interactions?: Prisma.InteractionUncheckedCreateNestedManyWithoutUserInput
-  CustomerNotes?: Prisma.CustomerNoteUncheckedCreateNestedManyWithoutUserInput
   Opportunities?: Prisma.OpportunityUncheckedCreateNestedManyWithoutUserInput
+  Interactions?: Prisma.InteractionUncheckedCreateNestedManyWithoutUserInput
+  Tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutUserInput
+  VisitPlans?: Prisma.VisitPlanUncheckedCreateNestedManyWithoutUserInput
+  CustomerNotes?: Prisma.CustomerNoteUncheckedCreateNestedManyWithoutUserInput
+  Customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutAccountManagerInput
   Quotations?: Prisma.QuotationUncheckedCreateNestedManyWithoutUserInput
+  salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutUserInput
   Invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutUserInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutUserInput
+  goodsReceipts?: Prisma.GoodsReceiptUncheckedCreateNestedManyWithoutUserInput
+  deliveryOrders?: Prisma.DeliveryOrderUncheckedCreateNestedManyWithoutUserInput
   accountingPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCreatedByInput
   journalEntriesCreated?: Prisma.JournalEntryUncheckedCreateNestedManyWithoutCreatedByInput
   journalEntriesPosted?: Prisma.JournalEntryUncheckedCreateNestedManyWithoutPostedByInput
   closedPeriods?: Prisma.FiscalPeriodUncheckedCreateNestedManyWithoutClosedByInput
   vendorBillsCreated?: Prisma.VendorBillUncheckedCreateNestedManyWithoutCreatedByInput
   bankTransactions?: Prisma.BankTransactionUncheckedCreateNestedManyWithoutCreatedByInput
-  VisitPlans?: Prisma.VisitPlanUncheckedCreateNestedManyWithoutUserInput
-  Customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutAccountManagerInput
   approvalItems?: Prisma.ApprovalItemUncheckedCreateNestedManyWithoutUserInput
-  salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutUserInput
-  purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutUserInput
-  goodsReceipts?: Prisma.GoodsReceiptUncheckedCreateNestedManyWithoutUserInput
-  deliveryOrders?: Prisma.DeliveryOrderUncheckedCreateNestedManyWithoutUserInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutLeadsInput = {
@@ -2671,38 +2671,38 @@ export type UserUpdateWithoutLeadsInput = {
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
-  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
+  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   Bank?: Prisma.BankUpdateOneWithoutUserNestedInput
   Department?: Prisma.DepartmentUpdateOneWithoutUserNestedInput
+  Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
-  ApprovalSettingItem?: Prisma.ApprovalSettingItemUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUpdateManyWithoutRequesterNestedInput
-  Tasks?: Prisma.TaskUpdateManyWithoutUserNestedInput
-  Interactions?: Prisma.InteractionUpdateManyWithoutUserNestedInput
-  CustomerNotes?: Prisma.CustomerNoteUpdateManyWithoutUserNestedInput
   Opportunities?: Prisma.OpportunityUpdateManyWithoutUserNestedInput
+  Interactions?: Prisma.InteractionUpdateManyWithoutUserNestedInput
+  Tasks?: Prisma.TaskUpdateManyWithoutUserNestedInput
+  VisitPlans?: Prisma.VisitPlanUpdateManyWithoutUserNestedInput
+  CustomerNotes?: Prisma.CustomerNoteUpdateManyWithoutUserNestedInput
+  Customers?: Prisma.CustomerUpdateManyWithoutAccountManagerNestedInput
   Quotations?: Prisma.QuotationUpdateManyWithoutUserNestedInput
+  salesOrders?: Prisma.SalesOrderUpdateManyWithoutUserNestedInput
   Invoices?: Prisma.InvoiceUpdateManyWithoutUserNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutUserNestedInput
+  goodsReceipts?: Prisma.GoodsReceiptUpdateManyWithoutUserNestedInput
+  deliveryOrders?: Prisma.DeliveryOrderUpdateManyWithoutUserNestedInput
   accountingPayments?: Prisma.PaymentUpdateManyWithoutCreatedByNestedInput
   journalEntriesCreated?: Prisma.JournalEntryUpdateManyWithoutCreatedByNestedInput
   journalEntriesPosted?: Prisma.JournalEntryUpdateManyWithoutPostedByNestedInput
   closedPeriods?: Prisma.FiscalPeriodUpdateManyWithoutClosedByNestedInput
   vendorBillsCreated?: Prisma.VendorBillUpdateManyWithoutCreatedByNestedInput
   bankTransactions?: Prisma.BankTransactionUpdateManyWithoutCreatedByNestedInput
-  VisitPlans?: Prisma.VisitPlanUpdateManyWithoutUserNestedInput
-  Customers?: Prisma.CustomerUpdateManyWithoutAccountManagerNestedInput
   approvalItems?: Prisma.ApprovalItemUpdateManyWithoutUserNestedInput
-  salesOrders?: Prisma.SalesOrderUpdateManyWithoutUserNestedInput
-  purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutUserNestedInput
-  goodsReceipts?: Prisma.GoodsReceiptUpdateManyWithoutUserNestedInput
-  deliveryOrders?: Prisma.DeliveryOrderUpdateManyWithoutUserNestedInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutLeadsInput = {
@@ -2711,38 +2711,38 @@ export type UserUncheckedUpdateWithoutLeadsInput = {
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
-  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  bankId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
-  departmentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  bankId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  departmentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   Balance?: Prisma.UserBalanceUncheckedUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
-  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUncheckedUpdateManyWithoutRequesterNestedInput
-  Tasks?: Prisma.TaskUncheckedUpdateManyWithoutUserNestedInput
-  Interactions?: Prisma.InteractionUncheckedUpdateManyWithoutUserNestedInput
-  CustomerNotes?: Prisma.CustomerNoteUncheckedUpdateManyWithoutUserNestedInput
   Opportunities?: Prisma.OpportunityUncheckedUpdateManyWithoutUserNestedInput
+  Interactions?: Prisma.InteractionUncheckedUpdateManyWithoutUserNestedInput
+  Tasks?: Prisma.TaskUncheckedUpdateManyWithoutUserNestedInput
+  VisitPlans?: Prisma.VisitPlanUncheckedUpdateManyWithoutUserNestedInput
+  CustomerNotes?: Prisma.CustomerNoteUncheckedUpdateManyWithoutUserNestedInput
+  Customers?: Prisma.CustomerUncheckedUpdateManyWithoutAccountManagerNestedInput
   Quotations?: Prisma.QuotationUncheckedUpdateManyWithoutUserNestedInput
+  salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutUserNestedInput
   Invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutUserNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutUserNestedInput
+  goodsReceipts?: Prisma.GoodsReceiptUncheckedUpdateManyWithoutUserNestedInput
+  deliveryOrders?: Prisma.DeliveryOrderUncheckedUpdateManyWithoutUserNestedInput
   accountingPayments?: Prisma.PaymentUncheckedUpdateManyWithoutCreatedByNestedInput
   journalEntriesCreated?: Prisma.JournalEntryUncheckedUpdateManyWithoutCreatedByNestedInput
   journalEntriesPosted?: Prisma.JournalEntryUncheckedUpdateManyWithoutPostedByNestedInput
   closedPeriods?: Prisma.FiscalPeriodUncheckedUpdateManyWithoutClosedByNestedInput
   vendorBillsCreated?: Prisma.VendorBillUncheckedUpdateManyWithoutCreatedByNestedInput
   bankTransactions?: Prisma.BankTransactionUncheckedUpdateManyWithoutCreatedByNestedInput
-  VisitPlans?: Prisma.VisitPlanUncheckedUpdateManyWithoutUserNestedInput
-  Customers?: Prisma.CustomerUncheckedUpdateManyWithoutAccountManagerNestedInput
   approvalItems?: Prisma.ApprovalItemUncheckedUpdateManyWithoutUserNestedInput
-  salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutUserNestedInput
-  purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutUserNestedInput
-  goodsReceipts?: Prisma.GoodsReceiptUncheckedUpdateManyWithoutUserNestedInput
-  deliveryOrders?: Prisma.DeliveryOrderUncheckedUpdateManyWithoutUserNestedInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutOpportunitiesInput = {
@@ -2750,38 +2750,38 @@ export type UserCreateWithoutOpportunitiesInput = {
   code?: string | null
   email: string
   password: string
-  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   active?: boolean
   bankAccount?: string | null
   currency?: $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
+  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   Bank?: Prisma.BankCreateNestedOneWithoutUserInput
   Department?: Prisma.DepartmentCreateNestedOneWithoutUserInput
+  Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
-  ApprovalSettingItem?: Prisma.ApprovalSettingItemCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpCreateNestedManyWithoutRequesterInput
-  Tasks?: Prisma.TaskCreateNestedManyWithoutUserInput
-  Interactions?: Prisma.InteractionCreateNestedManyWithoutUserInput
-  CustomerNotes?: Prisma.CustomerNoteCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadCreateNestedManyWithoutUserInput
+  Interactions?: Prisma.InteractionCreateNestedManyWithoutUserInput
+  Tasks?: Prisma.TaskCreateNestedManyWithoutUserInput
+  VisitPlans?: Prisma.VisitPlanCreateNestedManyWithoutUserInput
+  CustomerNotes?: Prisma.CustomerNoteCreateNestedManyWithoutUserInput
+  Customers?: Prisma.CustomerCreateNestedManyWithoutAccountManagerInput
   Quotations?: Prisma.QuotationCreateNestedManyWithoutUserInput
+  salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutUserInput
   Invoices?: Prisma.InvoiceCreateNestedManyWithoutUserInput
+  purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutUserInput
+  goodsReceipts?: Prisma.GoodsReceiptCreateNestedManyWithoutUserInput
+  deliveryOrders?: Prisma.DeliveryOrderCreateNestedManyWithoutUserInput
   accountingPayments?: Prisma.PaymentCreateNestedManyWithoutCreatedByInput
   journalEntriesCreated?: Prisma.JournalEntryCreateNestedManyWithoutCreatedByInput
   journalEntriesPosted?: Prisma.JournalEntryCreateNestedManyWithoutPostedByInput
   closedPeriods?: Prisma.FiscalPeriodCreateNestedManyWithoutClosedByInput
   vendorBillsCreated?: Prisma.VendorBillCreateNestedManyWithoutCreatedByInput
   bankTransactions?: Prisma.BankTransactionCreateNestedManyWithoutCreatedByInput
-  VisitPlans?: Prisma.VisitPlanCreateNestedManyWithoutUserInput
-  Customers?: Prisma.CustomerCreateNestedManyWithoutAccountManagerInput
   approvalItems?: Prisma.ApprovalItemCreateNestedManyWithoutUserInput
-  salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutUserInput
-  purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutUserInput
-  goodsReceipts?: Prisma.GoodsReceiptCreateNestedManyWithoutUserInput
-  deliveryOrders?: Prisma.DeliveryOrderCreateNestedManyWithoutUserInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutOpportunitiesInput = {
@@ -2790,38 +2790,38 @@ export type UserUncheckedCreateWithoutOpportunitiesInput = {
   code?: string | null
   email: string
   password: string
-  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   active?: boolean
-  bankId?: number | null
   bankAccount?: string | null
   currency?: $Enums.Currency
-  departmentId?: number | null
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  bankId?: number | null
+  departmentId?: number | null
+  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   Balance?: Prisma.UserBalanceUncheckedCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
-  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpUncheckedCreateNestedManyWithoutRequesterInput
-  Tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutUserInput
-  Interactions?: Prisma.InteractionUncheckedCreateNestedManyWithoutUserInput
-  CustomerNotes?: Prisma.CustomerNoteUncheckedCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
+  Interactions?: Prisma.InteractionUncheckedCreateNestedManyWithoutUserInput
+  Tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutUserInput
+  VisitPlans?: Prisma.VisitPlanUncheckedCreateNestedManyWithoutUserInput
+  CustomerNotes?: Prisma.CustomerNoteUncheckedCreateNestedManyWithoutUserInput
+  Customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutAccountManagerInput
   Quotations?: Prisma.QuotationUncheckedCreateNestedManyWithoutUserInput
+  salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutUserInput
   Invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutUserInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutUserInput
+  goodsReceipts?: Prisma.GoodsReceiptUncheckedCreateNestedManyWithoutUserInput
+  deliveryOrders?: Prisma.DeliveryOrderUncheckedCreateNestedManyWithoutUserInput
   accountingPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCreatedByInput
   journalEntriesCreated?: Prisma.JournalEntryUncheckedCreateNestedManyWithoutCreatedByInput
   journalEntriesPosted?: Prisma.JournalEntryUncheckedCreateNestedManyWithoutPostedByInput
   closedPeriods?: Prisma.FiscalPeriodUncheckedCreateNestedManyWithoutClosedByInput
   vendorBillsCreated?: Prisma.VendorBillUncheckedCreateNestedManyWithoutCreatedByInput
   bankTransactions?: Prisma.BankTransactionUncheckedCreateNestedManyWithoutCreatedByInput
-  VisitPlans?: Prisma.VisitPlanUncheckedCreateNestedManyWithoutUserInput
-  Customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutAccountManagerInput
   approvalItems?: Prisma.ApprovalItemUncheckedCreateNestedManyWithoutUserInput
-  salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutUserInput
-  purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutUserInput
-  goodsReceipts?: Prisma.GoodsReceiptUncheckedCreateNestedManyWithoutUserInput
-  deliveryOrders?: Prisma.DeliveryOrderUncheckedCreateNestedManyWithoutUserInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutOpportunitiesInput = {
@@ -2845,38 +2845,38 @@ export type UserUpdateWithoutOpportunitiesInput = {
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
-  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
+  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   Bank?: Prisma.BankUpdateOneWithoutUserNestedInput
   Department?: Prisma.DepartmentUpdateOneWithoutUserNestedInput
+  Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
-  ApprovalSettingItem?: Prisma.ApprovalSettingItemUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUpdateManyWithoutRequesterNestedInput
-  Tasks?: Prisma.TaskUpdateManyWithoutUserNestedInput
-  Interactions?: Prisma.InteractionUpdateManyWithoutUserNestedInput
-  CustomerNotes?: Prisma.CustomerNoteUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
+  Interactions?: Prisma.InteractionUpdateManyWithoutUserNestedInput
+  Tasks?: Prisma.TaskUpdateManyWithoutUserNestedInput
+  VisitPlans?: Prisma.VisitPlanUpdateManyWithoutUserNestedInput
+  CustomerNotes?: Prisma.CustomerNoteUpdateManyWithoutUserNestedInput
+  Customers?: Prisma.CustomerUpdateManyWithoutAccountManagerNestedInput
   Quotations?: Prisma.QuotationUpdateManyWithoutUserNestedInput
+  salesOrders?: Prisma.SalesOrderUpdateManyWithoutUserNestedInput
   Invoices?: Prisma.InvoiceUpdateManyWithoutUserNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutUserNestedInput
+  goodsReceipts?: Prisma.GoodsReceiptUpdateManyWithoutUserNestedInput
+  deliveryOrders?: Prisma.DeliveryOrderUpdateManyWithoutUserNestedInput
   accountingPayments?: Prisma.PaymentUpdateManyWithoutCreatedByNestedInput
   journalEntriesCreated?: Prisma.JournalEntryUpdateManyWithoutCreatedByNestedInput
   journalEntriesPosted?: Prisma.JournalEntryUpdateManyWithoutPostedByNestedInput
   closedPeriods?: Prisma.FiscalPeriodUpdateManyWithoutClosedByNestedInput
   vendorBillsCreated?: Prisma.VendorBillUpdateManyWithoutCreatedByNestedInput
   bankTransactions?: Prisma.BankTransactionUpdateManyWithoutCreatedByNestedInput
-  VisitPlans?: Prisma.VisitPlanUpdateManyWithoutUserNestedInput
-  Customers?: Prisma.CustomerUpdateManyWithoutAccountManagerNestedInput
   approvalItems?: Prisma.ApprovalItemUpdateManyWithoutUserNestedInput
-  salesOrders?: Prisma.SalesOrderUpdateManyWithoutUserNestedInput
-  purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutUserNestedInput
-  goodsReceipts?: Prisma.GoodsReceiptUpdateManyWithoutUserNestedInput
-  deliveryOrders?: Prisma.DeliveryOrderUpdateManyWithoutUserNestedInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutOpportunitiesInput = {
@@ -2885,38 +2885,38 @@ export type UserUncheckedUpdateWithoutOpportunitiesInput = {
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
-  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  bankId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
-  departmentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  bankId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  departmentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   Balance?: Prisma.UserBalanceUncheckedUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
-  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUncheckedUpdateManyWithoutRequesterNestedInput
-  Tasks?: Prisma.TaskUncheckedUpdateManyWithoutUserNestedInput
-  Interactions?: Prisma.InteractionUncheckedUpdateManyWithoutUserNestedInput
-  CustomerNotes?: Prisma.CustomerNoteUncheckedUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
+  Interactions?: Prisma.InteractionUncheckedUpdateManyWithoutUserNestedInput
+  Tasks?: Prisma.TaskUncheckedUpdateManyWithoutUserNestedInput
+  VisitPlans?: Prisma.VisitPlanUncheckedUpdateManyWithoutUserNestedInput
+  CustomerNotes?: Prisma.CustomerNoteUncheckedUpdateManyWithoutUserNestedInput
+  Customers?: Prisma.CustomerUncheckedUpdateManyWithoutAccountManagerNestedInput
   Quotations?: Prisma.QuotationUncheckedUpdateManyWithoutUserNestedInput
+  salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutUserNestedInput
   Invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutUserNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutUserNestedInput
+  goodsReceipts?: Prisma.GoodsReceiptUncheckedUpdateManyWithoutUserNestedInput
+  deliveryOrders?: Prisma.DeliveryOrderUncheckedUpdateManyWithoutUserNestedInput
   accountingPayments?: Prisma.PaymentUncheckedUpdateManyWithoutCreatedByNestedInput
   journalEntriesCreated?: Prisma.JournalEntryUncheckedUpdateManyWithoutCreatedByNestedInput
   journalEntriesPosted?: Prisma.JournalEntryUncheckedUpdateManyWithoutPostedByNestedInput
   closedPeriods?: Prisma.FiscalPeriodUncheckedUpdateManyWithoutClosedByNestedInput
   vendorBillsCreated?: Prisma.VendorBillUncheckedUpdateManyWithoutCreatedByNestedInput
   bankTransactions?: Prisma.BankTransactionUncheckedUpdateManyWithoutCreatedByNestedInput
-  VisitPlans?: Prisma.VisitPlanUncheckedUpdateManyWithoutUserNestedInput
-  Customers?: Prisma.CustomerUncheckedUpdateManyWithoutAccountManagerNestedInput
   approvalItems?: Prisma.ApprovalItemUncheckedUpdateManyWithoutUserNestedInput
-  salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutUserNestedInput
-  purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutUserNestedInput
-  goodsReceipts?: Prisma.GoodsReceiptUncheckedUpdateManyWithoutUserNestedInput
-  deliveryOrders?: Prisma.DeliveryOrderUncheckedUpdateManyWithoutUserNestedInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutTasksInput = {
@@ -2924,38 +2924,38 @@ export type UserCreateWithoutTasksInput = {
   code?: string | null
   email: string
   password: string
-  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   active?: boolean
   bankAccount?: string | null
   currency?: $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
+  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   Bank?: Prisma.BankCreateNestedOneWithoutUserInput
   Department?: Prisma.DepartmentCreateNestedOneWithoutUserInput
+  Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
-  ApprovalSettingItem?: Prisma.ApprovalSettingItemCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpCreateNestedManyWithoutRequesterInput
-  Interactions?: Prisma.InteractionCreateNestedManyWithoutUserInput
-  CustomerNotes?: Prisma.CustomerNoteCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadCreateNestedManyWithoutUserInput
   Opportunities?: Prisma.OpportunityCreateNestedManyWithoutUserInput
+  Interactions?: Prisma.InteractionCreateNestedManyWithoutUserInput
+  VisitPlans?: Prisma.VisitPlanCreateNestedManyWithoutUserInput
+  CustomerNotes?: Prisma.CustomerNoteCreateNestedManyWithoutUserInput
+  Customers?: Prisma.CustomerCreateNestedManyWithoutAccountManagerInput
   Quotations?: Prisma.QuotationCreateNestedManyWithoutUserInput
+  salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutUserInput
   Invoices?: Prisma.InvoiceCreateNestedManyWithoutUserInput
+  purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutUserInput
+  goodsReceipts?: Prisma.GoodsReceiptCreateNestedManyWithoutUserInput
+  deliveryOrders?: Prisma.DeliveryOrderCreateNestedManyWithoutUserInput
   accountingPayments?: Prisma.PaymentCreateNestedManyWithoutCreatedByInput
   journalEntriesCreated?: Prisma.JournalEntryCreateNestedManyWithoutCreatedByInput
   journalEntriesPosted?: Prisma.JournalEntryCreateNestedManyWithoutPostedByInput
   closedPeriods?: Prisma.FiscalPeriodCreateNestedManyWithoutClosedByInput
   vendorBillsCreated?: Prisma.VendorBillCreateNestedManyWithoutCreatedByInput
   bankTransactions?: Prisma.BankTransactionCreateNestedManyWithoutCreatedByInput
-  VisitPlans?: Prisma.VisitPlanCreateNestedManyWithoutUserInput
-  Customers?: Prisma.CustomerCreateNestedManyWithoutAccountManagerInput
   approvalItems?: Prisma.ApprovalItemCreateNestedManyWithoutUserInput
-  salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutUserInput
-  purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutUserInput
-  goodsReceipts?: Prisma.GoodsReceiptCreateNestedManyWithoutUserInput
-  deliveryOrders?: Prisma.DeliveryOrderCreateNestedManyWithoutUserInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutTasksInput = {
@@ -2964,38 +2964,38 @@ export type UserUncheckedCreateWithoutTasksInput = {
   code?: string | null
   email: string
   password: string
-  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   active?: boolean
-  bankId?: number | null
   bankAccount?: string | null
   currency?: $Enums.Currency
-  departmentId?: number | null
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  bankId?: number | null
+  departmentId?: number | null
+  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   Balance?: Prisma.UserBalanceUncheckedCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
-  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpUncheckedCreateNestedManyWithoutRequesterInput
-  Interactions?: Prisma.InteractionUncheckedCreateNestedManyWithoutUserInput
-  CustomerNotes?: Prisma.CustomerNoteUncheckedCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
   Opportunities?: Prisma.OpportunityUncheckedCreateNestedManyWithoutUserInput
+  Interactions?: Prisma.InteractionUncheckedCreateNestedManyWithoutUserInput
+  VisitPlans?: Prisma.VisitPlanUncheckedCreateNestedManyWithoutUserInput
+  CustomerNotes?: Prisma.CustomerNoteUncheckedCreateNestedManyWithoutUserInput
+  Customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutAccountManagerInput
   Quotations?: Prisma.QuotationUncheckedCreateNestedManyWithoutUserInput
+  salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutUserInput
   Invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutUserInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutUserInput
+  goodsReceipts?: Prisma.GoodsReceiptUncheckedCreateNestedManyWithoutUserInput
+  deliveryOrders?: Prisma.DeliveryOrderUncheckedCreateNestedManyWithoutUserInput
   accountingPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCreatedByInput
   journalEntriesCreated?: Prisma.JournalEntryUncheckedCreateNestedManyWithoutCreatedByInput
   journalEntriesPosted?: Prisma.JournalEntryUncheckedCreateNestedManyWithoutPostedByInput
   closedPeriods?: Prisma.FiscalPeriodUncheckedCreateNestedManyWithoutClosedByInput
   vendorBillsCreated?: Prisma.VendorBillUncheckedCreateNestedManyWithoutCreatedByInput
   bankTransactions?: Prisma.BankTransactionUncheckedCreateNestedManyWithoutCreatedByInput
-  VisitPlans?: Prisma.VisitPlanUncheckedCreateNestedManyWithoutUserInput
-  Customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutAccountManagerInput
   approvalItems?: Prisma.ApprovalItemUncheckedCreateNestedManyWithoutUserInput
-  salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutUserInput
-  purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutUserInput
-  goodsReceipts?: Prisma.GoodsReceiptUncheckedCreateNestedManyWithoutUserInput
-  deliveryOrders?: Prisma.DeliveryOrderUncheckedCreateNestedManyWithoutUserInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutTasksInput = {
@@ -3019,38 +3019,38 @@ export type UserUpdateWithoutTasksInput = {
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
-  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
+  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   Bank?: Prisma.BankUpdateOneWithoutUserNestedInput
   Department?: Prisma.DepartmentUpdateOneWithoutUserNestedInput
+  Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
-  ApprovalSettingItem?: Prisma.ApprovalSettingItemUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUpdateManyWithoutRequesterNestedInput
-  Interactions?: Prisma.InteractionUpdateManyWithoutUserNestedInput
-  CustomerNotes?: Prisma.CustomerNoteUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
   Opportunities?: Prisma.OpportunityUpdateManyWithoutUserNestedInput
+  Interactions?: Prisma.InteractionUpdateManyWithoutUserNestedInput
+  VisitPlans?: Prisma.VisitPlanUpdateManyWithoutUserNestedInput
+  CustomerNotes?: Prisma.CustomerNoteUpdateManyWithoutUserNestedInput
+  Customers?: Prisma.CustomerUpdateManyWithoutAccountManagerNestedInput
   Quotations?: Prisma.QuotationUpdateManyWithoutUserNestedInput
+  salesOrders?: Prisma.SalesOrderUpdateManyWithoutUserNestedInput
   Invoices?: Prisma.InvoiceUpdateManyWithoutUserNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutUserNestedInput
+  goodsReceipts?: Prisma.GoodsReceiptUpdateManyWithoutUserNestedInput
+  deliveryOrders?: Prisma.DeliveryOrderUpdateManyWithoutUserNestedInput
   accountingPayments?: Prisma.PaymentUpdateManyWithoutCreatedByNestedInput
   journalEntriesCreated?: Prisma.JournalEntryUpdateManyWithoutCreatedByNestedInput
   journalEntriesPosted?: Prisma.JournalEntryUpdateManyWithoutPostedByNestedInput
   closedPeriods?: Prisma.FiscalPeriodUpdateManyWithoutClosedByNestedInput
   vendorBillsCreated?: Prisma.VendorBillUpdateManyWithoutCreatedByNestedInput
   bankTransactions?: Prisma.BankTransactionUpdateManyWithoutCreatedByNestedInput
-  VisitPlans?: Prisma.VisitPlanUpdateManyWithoutUserNestedInput
-  Customers?: Prisma.CustomerUpdateManyWithoutAccountManagerNestedInput
   approvalItems?: Prisma.ApprovalItemUpdateManyWithoutUserNestedInput
-  salesOrders?: Prisma.SalesOrderUpdateManyWithoutUserNestedInput
-  purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutUserNestedInput
-  goodsReceipts?: Prisma.GoodsReceiptUpdateManyWithoutUserNestedInput
-  deliveryOrders?: Prisma.DeliveryOrderUpdateManyWithoutUserNestedInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutTasksInput = {
@@ -3059,38 +3059,38 @@ export type UserUncheckedUpdateWithoutTasksInput = {
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
-  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  bankId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
-  departmentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  bankId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  departmentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   Balance?: Prisma.UserBalanceUncheckedUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
-  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUncheckedUpdateManyWithoutRequesterNestedInput
-  Interactions?: Prisma.InteractionUncheckedUpdateManyWithoutUserNestedInput
-  CustomerNotes?: Prisma.CustomerNoteUncheckedUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
   Opportunities?: Prisma.OpportunityUncheckedUpdateManyWithoutUserNestedInput
+  Interactions?: Prisma.InteractionUncheckedUpdateManyWithoutUserNestedInput
+  VisitPlans?: Prisma.VisitPlanUncheckedUpdateManyWithoutUserNestedInput
+  CustomerNotes?: Prisma.CustomerNoteUncheckedUpdateManyWithoutUserNestedInput
+  Customers?: Prisma.CustomerUncheckedUpdateManyWithoutAccountManagerNestedInput
   Quotations?: Prisma.QuotationUncheckedUpdateManyWithoutUserNestedInput
+  salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutUserNestedInput
   Invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutUserNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutUserNestedInput
+  goodsReceipts?: Prisma.GoodsReceiptUncheckedUpdateManyWithoutUserNestedInput
+  deliveryOrders?: Prisma.DeliveryOrderUncheckedUpdateManyWithoutUserNestedInput
   accountingPayments?: Prisma.PaymentUncheckedUpdateManyWithoutCreatedByNestedInput
   journalEntriesCreated?: Prisma.JournalEntryUncheckedUpdateManyWithoutCreatedByNestedInput
   journalEntriesPosted?: Prisma.JournalEntryUncheckedUpdateManyWithoutPostedByNestedInput
   closedPeriods?: Prisma.FiscalPeriodUncheckedUpdateManyWithoutClosedByNestedInput
   vendorBillsCreated?: Prisma.VendorBillUncheckedUpdateManyWithoutCreatedByNestedInput
   bankTransactions?: Prisma.BankTransactionUncheckedUpdateManyWithoutCreatedByNestedInput
-  VisitPlans?: Prisma.VisitPlanUncheckedUpdateManyWithoutUserNestedInput
-  Customers?: Prisma.CustomerUncheckedUpdateManyWithoutAccountManagerNestedInput
   approvalItems?: Prisma.ApprovalItemUncheckedUpdateManyWithoutUserNestedInput
-  salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutUserNestedInput
-  purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutUserNestedInput
-  goodsReceipts?: Prisma.GoodsReceiptUncheckedUpdateManyWithoutUserNestedInput
-  deliveryOrders?: Prisma.DeliveryOrderUncheckedUpdateManyWithoutUserNestedInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutInteractionsInput = {
@@ -3098,38 +3098,38 @@ export type UserCreateWithoutInteractionsInput = {
   code?: string | null
   email: string
   password: string
-  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   active?: boolean
   bankAccount?: string | null
   currency?: $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
+  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   Bank?: Prisma.BankCreateNestedOneWithoutUserInput
   Department?: Prisma.DepartmentCreateNestedOneWithoutUserInput
+  Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
-  ApprovalSettingItem?: Prisma.ApprovalSettingItemCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpCreateNestedManyWithoutRequesterInput
-  Tasks?: Prisma.TaskCreateNestedManyWithoutUserInput
-  CustomerNotes?: Prisma.CustomerNoteCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadCreateNestedManyWithoutUserInput
   Opportunities?: Prisma.OpportunityCreateNestedManyWithoutUserInput
+  Tasks?: Prisma.TaskCreateNestedManyWithoutUserInput
+  VisitPlans?: Prisma.VisitPlanCreateNestedManyWithoutUserInput
+  CustomerNotes?: Prisma.CustomerNoteCreateNestedManyWithoutUserInput
+  Customers?: Prisma.CustomerCreateNestedManyWithoutAccountManagerInput
   Quotations?: Prisma.QuotationCreateNestedManyWithoutUserInput
+  salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutUserInput
   Invoices?: Prisma.InvoiceCreateNestedManyWithoutUserInput
+  purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutUserInput
+  goodsReceipts?: Prisma.GoodsReceiptCreateNestedManyWithoutUserInput
+  deliveryOrders?: Prisma.DeliveryOrderCreateNestedManyWithoutUserInput
   accountingPayments?: Prisma.PaymentCreateNestedManyWithoutCreatedByInput
   journalEntriesCreated?: Prisma.JournalEntryCreateNestedManyWithoutCreatedByInput
   journalEntriesPosted?: Prisma.JournalEntryCreateNestedManyWithoutPostedByInput
   closedPeriods?: Prisma.FiscalPeriodCreateNestedManyWithoutClosedByInput
   vendorBillsCreated?: Prisma.VendorBillCreateNestedManyWithoutCreatedByInput
   bankTransactions?: Prisma.BankTransactionCreateNestedManyWithoutCreatedByInput
-  VisitPlans?: Prisma.VisitPlanCreateNestedManyWithoutUserInput
-  Customers?: Prisma.CustomerCreateNestedManyWithoutAccountManagerInput
   approvalItems?: Prisma.ApprovalItemCreateNestedManyWithoutUserInput
-  salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutUserInput
-  purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutUserInput
-  goodsReceipts?: Prisma.GoodsReceiptCreateNestedManyWithoutUserInput
-  deliveryOrders?: Prisma.DeliveryOrderCreateNestedManyWithoutUserInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutInteractionsInput = {
@@ -3138,38 +3138,38 @@ export type UserUncheckedCreateWithoutInteractionsInput = {
   code?: string | null
   email: string
   password: string
-  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   active?: boolean
-  bankId?: number | null
   bankAccount?: string | null
   currency?: $Enums.Currency
-  departmentId?: number | null
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  bankId?: number | null
+  departmentId?: number | null
+  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   Balance?: Prisma.UserBalanceUncheckedCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
-  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpUncheckedCreateNestedManyWithoutRequesterInput
-  Tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutUserInput
-  CustomerNotes?: Prisma.CustomerNoteUncheckedCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
   Opportunities?: Prisma.OpportunityUncheckedCreateNestedManyWithoutUserInput
+  Tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutUserInput
+  VisitPlans?: Prisma.VisitPlanUncheckedCreateNestedManyWithoutUserInput
+  CustomerNotes?: Prisma.CustomerNoteUncheckedCreateNestedManyWithoutUserInput
+  Customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutAccountManagerInput
   Quotations?: Prisma.QuotationUncheckedCreateNestedManyWithoutUserInput
+  salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutUserInput
   Invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutUserInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutUserInput
+  goodsReceipts?: Prisma.GoodsReceiptUncheckedCreateNestedManyWithoutUserInput
+  deliveryOrders?: Prisma.DeliveryOrderUncheckedCreateNestedManyWithoutUserInput
   accountingPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCreatedByInput
   journalEntriesCreated?: Prisma.JournalEntryUncheckedCreateNestedManyWithoutCreatedByInput
   journalEntriesPosted?: Prisma.JournalEntryUncheckedCreateNestedManyWithoutPostedByInput
   closedPeriods?: Prisma.FiscalPeriodUncheckedCreateNestedManyWithoutClosedByInput
   vendorBillsCreated?: Prisma.VendorBillUncheckedCreateNestedManyWithoutCreatedByInput
   bankTransactions?: Prisma.BankTransactionUncheckedCreateNestedManyWithoutCreatedByInput
-  VisitPlans?: Prisma.VisitPlanUncheckedCreateNestedManyWithoutUserInput
-  Customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutAccountManagerInput
   approvalItems?: Prisma.ApprovalItemUncheckedCreateNestedManyWithoutUserInput
-  salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutUserInput
-  purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutUserInput
-  goodsReceipts?: Prisma.GoodsReceiptUncheckedCreateNestedManyWithoutUserInput
-  deliveryOrders?: Prisma.DeliveryOrderUncheckedCreateNestedManyWithoutUserInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutInteractionsInput = {
@@ -3193,38 +3193,38 @@ export type UserUpdateWithoutInteractionsInput = {
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
-  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
+  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   Bank?: Prisma.BankUpdateOneWithoutUserNestedInput
   Department?: Prisma.DepartmentUpdateOneWithoutUserNestedInput
+  Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
-  ApprovalSettingItem?: Prisma.ApprovalSettingItemUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUpdateManyWithoutRequesterNestedInput
-  Tasks?: Prisma.TaskUpdateManyWithoutUserNestedInput
-  CustomerNotes?: Prisma.CustomerNoteUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
   Opportunities?: Prisma.OpportunityUpdateManyWithoutUserNestedInput
+  Tasks?: Prisma.TaskUpdateManyWithoutUserNestedInput
+  VisitPlans?: Prisma.VisitPlanUpdateManyWithoutUserNestedInput
+  CustomerNotes?: Prisma.CustomerNoteUpdateManyWithoutUserNestedInput
+  Customers?: Prisma.CustomerUpdateManyWithoutAccountManagerNestedInput
   Quotations?: Prisma.QuotationUpdateManyWithoutUserNestedInput
+  salesOrders?: Prisma.SalesOrderUpdateManyWithoutUserNestedInput
   Invoices?: Prisma.InvoiceUpdateManyWithoutUserNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutUserNestedInput
+  goodsReceipts?: Prisma.GoodsReceiptUpdateManyWithoutUserNestedInput
+  deliveryOrders?: Prisma.DeliveryOrderUpdateManyWithoutUserNestedInput
   accountingPayments?: Prisma.PaymentUpdateManyWithoutCreatedByNestedInput
   journalEntriesCreated?: Prisma.JournalEntryUpdateManyWithoutCreatedByNestedInput
   journalEntriesPosted?: Prisma.JournalEntryUpdateManyWithoutPostedByNestedInput
   closedPeriods?: Prisma.FiscalPeriodUpdateManyWithoutClosedByNestedInput
   vendorBillsCreated?: Prisma.VendorBillUpdateManyWithoutCreatedByNestedInput
   bankTransactions?: Prisma.BankTransactionUpdateManyWithoutCreatedByNestedInput
-  VisitPlans?: Prisma.VisitPlanUpdateManyWithoutUserNestedInput
-  Customers?: Prisma.CustomerUpdateManyWithoutAccountManagerNestedInput
   approvalItems?: Prisma.ApprovalItemUpdateManyWithoutUserNestedInput
-  salesOrders?: Prisma.SalesOrderUpdateManyWithoutUserNestedInput
-  purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutUserNestedInput
-  goodsReceipts?: Prisma.GoodsReceiptUpdateManyWithoutUserNestedInput
-  deliveryOrders?: Prisma.DeliveryOrderUpdateManyWithoutUserNestedInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutInteractionsInput = {
@@ -3233,38 +3233,38 @@ export type UserUncheckedUpdateWithoutInteractionsInput = {
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
-  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  bankId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
-  departmentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  bankId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  departmentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   Balance?: Prisma.UserBalanceUncheckedUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
-  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUncheckedUpdateManyWithoutRequesterNestedInput
-  Tasks?: Prisma.TaskUncheckedUpdateManyWithoutUserNestedInput
-  CustomerNotes?: Prisma.CustomerNoteUncheckedUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
   Opportunities?: Prisma.OpportunityUncheckedUpdateManyWithoutUserNestedInput
+  Tasks?: Prisma.TaskUncheckedUpdateManyWithoutUserNestedInput
+  VisitPlans?: Prisma.VisitPlanUncheckedUpdateManyWithoutUserNestedInput
+  CustomerNotes?: Prisma.CustomerNoteUncheckedUpdateManyWithoutUserNestedInput
+  Customers?: Prisma.CustomerUncheckedUpdateManyWithoutAccountManagerNestedInput
   Quotations?: Prisma.QuotationUncheckedUpdateManyWithoutUserNestedInput
+  salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutUserNestedInput
   Invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutUserNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutUserNestedInput
+  goodsReceipts?: Prisma.GoodsReceiptUncheckedUpdateManyWithoutUserNestedInput
+  deliveryOrders?: Prisma.DeliveryOrderUncheckedUpdateManyWithoutUserNestedInput
   accountingPayments?: Prisma.PaymentUncheckedUpdateManyWithoutCreatedByNestedInput
   journalEntriesCreated?: Prisma.JournalEntryUncheckedUpdateManyWithoutCreatedByNestedInput
   journalEntriesPosted?: Prisma.JournalEntryUncheckedUpdateManyWithoutPostedByNestedInput
   closedPeriods?: Prisma.FiscalPeriodUncheckedUpdateManyWithoutClosedByNestedInput
   vendorBillsCreated?: Prisma.VendorBillUncheckedUpdateManyWithoutCreatedByNestedInput
   bankTransactions?: Prisma.BankTransactionUncheckedUpdateManyWithoutCreatedByNestedInput
-  VisitPlans?: Prisma.VisitPlanUncheckedUpdateManyWithoutUserNestedInput
-  Customers?: Prisma.CustomerUncheckedUpdateManyWithoutAccountManagerNestedInput
   approvalItems?: Prisma.ApprovalItemUncheckedUpdateManyWithoutUserNestedInput
-  salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutUserNestedInput
-  purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutUserNestedInput
-  goodsReceipts?: Prisma.GoodsReceiptUncheckedUpdateManyWithoutUserNestedInput
-  deliveryOrders?: Prisma.DeliveryOrderUncheckedUpdateManyWithoutUserNestedInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutCustomerNotesInput = {
@@ -3272,38 +3272,38 @@ export type UserCreateWithoutCustomerNotesInput = {
   code?: string | null
   email: string
   password: string
-  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   active?: boolean
   bankAccount?: string | null
   currency?: $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
+  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   Bank?: Prisma.BankCreateNestedOneWithoutUserInput
   Department?: Prisma.DepartmentCreateNestedOneWithoutUserInput
+  Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
-  ApprovalSettingItem?: Prisma.ApprovalSettingItemCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpCreateNestedManyWithoutRequesterInput
-  Tasks?: Prisma.TaskCreateNestedManyWithoutUserInput
-  Interactions?: Prisma.InteractionCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadCreateNestedManyWithoutUserInput
   Opportunities?: Prisma.OpportunityCreateNestedManyWithoutUserInput
+  Interactions?: Prisma.InteractionCreateNestedManyWithoutUserInput
+  Tasks?: Prisma.TaskCreateNestedManyWithoutUserInput
+  VisitPlans?: Prisma.VisitPlanCreateNestedManyWithoutUserInput
+  Customers?: Prisma.CustomerCreateNestedManyWithoutAccountManagerInput
   Quotations?: Prisma.QuotationCreateNestedManyWithoutUserInput
+  salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutUserInput
   Invoices?: Prisma.InvoiceCreateNestedManyWithoutUserInput
+  purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutUserInput
+  goodsReceipts?: Prisma.GoodsReceiptCreateNestedManyWithoutUserInput
+  deliveryOrders?: Prisma.DeliveryOrderCreateNestedManyWithoutUserInput
   accountingPayments?: Prisma.PaymentCreateNestedManyWithoutCreatedByInput
   journalEntriesCreated?: Prisma.JournalEntryCreateNestedManyWithoutCreatedByInput
   journalEntriesPosted?: Prisma.JournalEntryCreateNestedManyWithoutPostedByInput
   closedPeriods?: Prisma.FiscalPeriodCreateNestedManyWithoutClosedByInput
   vendorBillsCreated?: Prisma.VendorBillCreateNestedManyWithoutCreatedByInput
   bankTransactions?: Prisma.BankTransactionCreateNestedManyWithoutCreatedByInput
-  VisitPlans?: Prisma.VisitPlanCreateNestedManyWithoutUserInput
-  Customers?: Prisma.CustomerCreateNestedManyWithoutAccountManagerInput
   approvalItems?: Prisma.ApprovalItemCreateNestedManyWithoutUserInput
-  salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutUserInput
-  purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutUserInput
-  goodsReceipts?: Prisma.GoodsReceiptCreateNestedManyWithoutUserInput
-  deliveryOrders?: Prisma.DeliveryOrderCreateNestedManyWithoutUserInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutCustomerNotesInput = {
@@ -3312,38 +3312,38 @@ export type UserUncheckedCreateWithoutCustomerNotesInput = {
   code?: string | null
   email: string
   password: string
-  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   active?: boolean
-  bankId?: number | null
   bankAccount?: string | null
   currency?: $Enums.Currency
-  departmentId?: number | null
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  bankId?: number | null
+  departmentId?: number | null
+  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   Balance?: Prisma.UserBalanceUncheckedCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
-  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpUncheckedCreateNestedManyWithoutRequesterInput
-  Tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutUserInput
-  Interactions?: Prisma.InteractionUncheckedCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
   Opportunities?: Prisma.OpportunityUncheckedCreateNestedManyWithoutUserInput
+  Interactions?: Prisma.InteractionUncheckedCreateNestedManyWithoutUserInput
+  Tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutUserInput
+  VisitPlans?: Prisma.VisitPlanUncheckedCreateNestedManyWithoutUserInput
+  Customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutAccountManagerInput
   Quotations?: Prisma.QuotationUncheckedCreateNestedManyWithoutUserInput
+  salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutUserInput
   Invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutUserInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutUserInput
+  goodsReceipts?: Prisma.GoodsReceiptUncheckedCreateNestedManyWithoutUserInput
+  deliveryOrders?: Prisma.DeliveryOrderUncheckedCreateNestedManyWithoutUserInput
   accountingPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCreatedByInput
   journalEntriesCreated?: Prisma.JournalEntryUncheckedCreateNestedManyWithoutCreatedByInput
   journalEntriesPosted?: Prisma.JournalEntryUncheckedCreateNestedManyWithoutPostedByInput
   closedPeriods?: Prisma.FiscalPeriodUncheckedCreateNestedManyWithoutClosedByInput
   vendorBillsCreated?: Prisma.VendorBillUncheckedCreateNestedManyWithoutCreatedByInput
   bankTransactions?: Prisma.BankTransactionUncheckedCreateNestedManyWithoutCreatedByInput
-  VisitPlans?: Prisma.VisitPlanUncheckedCreateNestedManyWithoutUserInput
-  Customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutAccountManagerInput
   approvalItems?: Prisma.ApprovalItemUncheckedCreateNestedManyWithoutUserInput
-  salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutUserInput
-  purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutUserInput
-  goodsReceipts?: Prisma.GoodsReceiptUncheckedCreateNestedManyWithoutUserInput
-  deliveryOrders?: Prisma.DeliveryOrderUncheckedCreateNestedManyWithoutUserInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutCustomerNotesInput = {
@@ -3367,38 +3367,38 @@ export type UserUpdateWithoutCustomerNotesInput = {
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
-  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
+  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   Bank?: Prisma.BankUpdateOneWithoutUserNestedInput
   Department?: Prisma.DepartmentUpdateOneWithoutUserNestedInput
+  Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
-  ApprovalSettingItem?: Prisma.ApprovalSettingItemUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUpdateManyWithoutRequesterNestedInput
-  Tasks?: Prisma.TaskUpdateManyWithoutUserNestedInput
-  Interactions?: Prisma.InteractionUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
   Opportunities?: Prisma.OpportunityUpdateManyWithoutUserNestedInput
+  Interactions?: Prisma.InteractionUpdateManyWithoutUserNestedInput
+  Tasks?: Prisma.TaskUpdateManyWithoutUserNestedInput
+  VisitPlans?: Prisma.VisitPlanUpdateManyWithoutUserNestedInput
+  Customers?: Prisma.CustomerUpdateManyWithoutAccountManagerNestedInput
   Quotations?: Prisma.QuotationUpdateManyWithoutUserNestedInput
+  salesOrders?: Prisma.SalesOrderUpdateManyWithoutUserNestedInput
   Invoices?: Prisma.InvoiceUpdateManyWithoutUserNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutUserNestedInput
+  goodsReceipts?: Prisma.GoodsReceiptUpdateManyWithoutUserNestedInput
+  deliveryOrders?: Prisma.DeliveryOrderUpdateManyWithoutUserNestedInput
   accountingPayments?: Prisma.PaymentUpdateManyWithoutCreatedByNestedInput
   journalEntriesCreated?: Prisma.JournalEntryUpdateManyWithoutCreatedByNestedInput
   journalEntriesPosted?: Prisma.JournalEntryUpdateManyWithoutPostedByNestedInput
   closedPeriods?: Prisma.FiscalPeriodUpdateManyWithoutClosedByNestedInput
   vendorBillsCreated?: Prisma.VendorBillUpdateManyWithoutCreatedByNestedInput
   bankTransactions?: Prisma.BankTransactionUpdateManyWithoutCreatedByNestedInput
-  VisitPlans?: Prisma.VisitPlanUpdateManyWithoutUserNestedInput
-  Customers?: Prisma.CustomerUpdateManyWithoutAccountManagerNestedInput
   approvalItems?: Prisma.ApprovalItemUpdateManyWithoutUserNestedInput
-  salesOrders?: Prisma.SalesOrderUpdateManyWithoutUserNestedInput
-  purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutUserNestedInput
-  goodsReceipts?: Prisma.GoodsReceiptUpdateManyWithoutUserNestedInput
-  deliveryOrders?: Prisma.DeliveryOrderUpdateManyWithoutUserNestedInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCustomerNotesInput = {
@@ -3407,38 +3407,38 @@ export type UserUncheckedUpdateWithoutCustomerNotesInput = {
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
-  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  bankId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
-  departmentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  bankId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  departmentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   Balance?: Prisma.UserBalanceUncheckedUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
-  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUncheckedUpdateManyWithoutRequesterNestedInput
-  Tasks?: Prisma.TaskUncheckedUpdateManyWithoutUserNestedInput
-  Interactions?: Prisma.InteractionUncheckedUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
   Opportunities?: Prisma.OpportunityUncheckedUpdateManyWithoutUserNestedInput
+  Interactions?: Prisma.InteractionUncheckedUpdateManyWithoutUserNestedInput
+  Tasks?: Prisma.TaskUncheckedUpdateManyWithoutUserNestedInput
+  VisitPlans?: Prisma.VisitPlanUncheckedUpdateManyWithoutUserNestedInput
+  Customers?: Prisma.CustomerUncheckedUpdateManyWithoutAccountManagerNestedInput
   Quotations?: Prisma.QuotationUncheckedUpdateManyWithoutUserNestedInput
+  salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutUserNestedInput
   Invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutUserNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutUserNestedInput
+  goodsReceipts?: Prisma.GoodsReceiptUncheckedUpdateManyWithoutUserNestedInput
+  deliveryOrders?: Prisma.DeliveryOrderUncheckedUpdateManyWithoutUserNestedInput
   accountingPayments?: Prisma.PaymentUncheckedUpdateManyWithoutCreatedByNestedInput
   journalEntriesCreated?: Prisma.JournalEntryUncheckedUpdateManyWithoutCreatedByNestedInput
   journalEntriesPosted?: Prisma.JournalEntryUncheckedUpdateManyWithoutPostedByNestedInput
   closedPeriods?: Prisma.FiscalPeriodUncheckedUpdateManyWithoutClosedByNestedInput
   vendorBillsCreated?: Prisma.VendorBillUncheckedUpdateManyWithoutCreatedByNestedInput
   bankTransactions?: Prisma.BankTransactionUncheckedUpdateManyWithoutCreatedByNestedInput
-  VisitPlans?: Prisma.VisitPlanUncheckedUpdateManyWithoutUserNestedInput
-  Customers?: Prisma.CustomerUncheckedUpdateManyWithoutAccountManagerNestedInput
   approvalItems?: Prisma.ApprovalItemUncheckedUpdateManyWithoutUserNestedInput
-  salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutUserNestedInput
-  purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutUserNestedInput
-  goodsReceipts?: Prisma.GoodsReceiptUncheckedUpdateManyWithoutUserNestedInput
-  deliveryOrders?: Prisma.DeliveryOrderUncheckedUpdateManyWithoutUserNestedInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutCustomersInput = {
@@ -3446,38 +3446,38 @@ export type UserCreateWithoutCustomersInput = {
   code?: string | null
   email: string
   password: string
-  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   active?: boolean
   bankAccount?: string | null
   currency?: $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
+  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   Bank?: Prisma.BankCreateNestedOneWithoutUserInput
   Department?: Prisma.DepartmentCreateNestedOneWithoutUserInput
+  Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
-  ApprovalSettingItem?: Prisma.ApprovalSettingItemCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpCreateNestedManyWithoutRequesterInput
-  Tasks?: Prisma.TaskCreateNestedManyWithoutUserInput
-  Interactions?: Prisma.InteractionCreateNestedManyWithoutUserInput
-  CustomerNotes?: Prisma.CustomerNoteCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadCreateNestedManyWithoutUserInput
   Opportunities?: Prisma.OpportunityCreateNestedManyWithoutUserInput
+  Interactions?: Prisma.InteractionCreateNestedManyWithoutUserInput
+  Tasks?: Prisma.TaskCreateNestedManyWithoutUserInput
+  VisitPlans?: Prisma.VisitPlanCreateNestedManyWithoutUserInput
+  CustomerNotes?: Prisma.CustomerNoteCreateNestedManyWithoutUserInput
   Quotations?: Prisma.QuotationCreateNestedManyWithoutUserInput
+  salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutUserInput
   Invoices?: Prisma.InvoiceCreateNestedManyWithoutUserInput
+  purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutUserInput
+  goodsReceipts?: Prisma.GoodsReceiptCreateNestedManyWithoutUserInput
+  deliveryOrders?: Prisma.DeliveryOrderCreateNestedManyWithoutUserInput
   accountingPayments?: Prisma.PaymentCreateNestedManyWithoutCreatedByInput
   journalEntriesCreated?: Prisma.JournalEntryCreateNestedManyWithoutCreatedByInput
   journalEntriesPosted?: Prisma.JournalEntryCreateNestedManyWithoutPostedByInput
   closedPeriods?: Prisma.FiscalPeriodCreateNestedManyWithoutClosedByInput
   vendorBillsCreated?: Prisma.VendorBillCreateNestedManyWithoutCreatedByInput
   bankTransactions?: Prisma.BankTransactionCreateNestedManyWithoutCreatedByInput
-  VisitPlans?: Prisma.VisitPlanCreateNestedManyWithoutUserInput
   approvalItems?: Prisma.ApprovalItemCreateNestedManyWithoutUserInput
-  salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutUserInput
-  purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutUserInput
-  goodsReceipts?: Prisma.GoodsReceiptCreateNestedManyWithoutUserInput
-  deliveryOrders?: Prisma.DeliveryOrderCreateNestedManyWithoutUserInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutCustomersInput = {
@@ -3486,38 +3486,38 @@ export type UserUncheckedCreateWithoutCustomersInput = {
   code?: string | null
   email: string
   password: string
-  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   active?: boolean
-  bankId?: number | null
   bankAccount?: string | null
   currency?: $Enums.Currency
-  departmentId?: number | null
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  bankId?: number | null
+  departmentId?: number | null
+  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   Balance?: Prisma.UserBalanceUncheckedCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
-  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpUncheckedCreateNestedManyWithoutRequesterInput
-  Tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutUserInput
-  Interactions?: Prisma.InteractionUncheckedCreateNestedManyWithoutUserInput
-  CustomerNotes?: Prisma.CustomerNoteUncheckedCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
   Opportunities?: Prisma.OpportunityUncheckedCreateNestedManyWithoutUserInput
+  Interactions?: Prisma.InteractionUncheckedCreateNestedManyWithoutUserInput
+  Tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutUserInput
+  VisitPlans?: Prisma.VisitPlanUncheckedCreateNestedManyWithoutUserInput
+  CustomerNotes?: Prisma.CustomerNoteUncheckedCreateNestedManyWithoutUserInput
   Quotations?: Prisma.QuotationUncheckedCreateNestedManyWithoutUserInput
+  salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutUserInput
   Invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutUserInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutUserInput
+  goodsReceipts?: Prisma.GoodsReceiptUncheckedCreateNestedManyWithoutUserInput
+  deliveryOrders?: Prisma.DeliveryOrderUncheckedCreateNestedManyWithoutUserInput
   accountingPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCreatedByInput
   journalEntriesCreated?: Prisma.JournalEntryUncheckedCreateNestedManyWithoutCreatedByInput
   journalEntriesPosted?: Prisma.JournalEntryUncheckedCreateNestedManyWithoutPostedByInput
   closedPeriods?: Prisma.FiscalPeriodUncheckedCreateNestedManyWithoutClosedByInput
   vendorBillsCreated?: Prisma.VendorBillUncheckedCreateNestedManyWithoutCreatedByInput
   bankTransactions?: Prisma.BankTransactionUncheckedCreateNestedManyWithoutCreatedByInput
-  VisitPlans?: Prisma.VisitPlanUncheckedCreateNestedManyWithoutUserInput
   approvalItems?: Prisma.ApprovalItemUncheckedCreateNestedManyWithoutUserInput
-  salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutUserInput
-  purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutUserInput
-  goodsReceipts?: Prisma.GoodsReceiptUncheckedCreateNestedManyWithoutUserInput
-  deliveryOrders?: Prisma.DeliveryOrderUncheckedCreateNestedManyWithoutUserInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutCustomersInput = {
@@ -3541,38 +3541,38 @@ export type UserUpdateWithoutCustomersInput = {
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
-  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
+  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   Bank?: Prisma.BankUpdateOneWithoutUserNestedInput
   Department?: Prisma.DepartmentUpdateOneWithoutUserNestedInput
+  Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
-  ApprovalSettingItem?: Prisma.ApprovalSettingItemUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUpdateManyWithoutRequesterNestedInput
-  Tasks?: Prisma.TaskUpdateManyWithoutUserNestedInput
-  Interactions?: Prisma.InteractionUpdateManyWithoutUserNestedInput
-  CustomerNotes?: Prisma.CustomerNoteUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
   Opportunities?: Prisma.OpportunityUpdateManyWithoutUserNestedInput
+  Interactions?: Prisma.InteractionUpdateManyWithoutUserNestedInput
+  Tasks?: Prisma.TaskUpdateManyWithoutUserNestedInput
+  VisitPlans?: Prisma.VisitPlanUpdateManyWithoutUserNestedInput
+  CustomerNotes?: Prisma.CustomerNoteUpdateManyWithoutUserNestedInput
   Quotations?: Prisma.QuotationUpdateManyWithoutUserNestedInput
+  salesOrders?: Prisma.SalesOrderUpdateManyWithoutUserNestedInput
   Invoices?: Prisma.InvoiceUpdateManyWithoutUserNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutUserNestedInput
+  goodsReceipts?: Prisma.GoodsReceiptUpdateManyWithoutUserNestedInput
+  deliveryOrders?: Prisma.DeliveryOrderUpdateManyWithoutUserNestedInput
   accountingPayments?: Prisma.PaymentUpdateManyWithoutCreatedByNestedInput
   journalEntriesCreated?: Prisma.JournalEntryUpdateManyWithoutCreatedByNestedInput
   journalEntriesPosted?: Prisma.JournalEntryUpdateManyWithoutPostedByNestedInput
   closedPeriods?: Prisma.FiscalPeriodUpdateManyWithoutClosedByNestedInput
   vendorBillsCreated?: Prisma.VendorBillUpdateManyWithoutCreatedByNestedInput
   bankTransactions?: Prisma.BankTransactionUpdateManyWithoutCreatedByNestedInput
-  VisitPlans?: Prisma.VisitPlanUpdateManyWithoutUserNestedInput
   approvalItems?: Prisma.ApprovalItemUpdateManyWithoutUserNestedInput
-  salesOrders?: Prisma.SalesOrderUpdateManyWithoutUserNestedInput
-  purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutUserNestedInput
-  goodsReceipts?: Prisma.GoodsReceiptUpdateManyWithoutUserNestedInput
-  deliveryOrders?: Prisma.DeliveryOrderUpdateManyWithoutUserNestedInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCustomersInput = {
@@ -3581,38 +3581,38 @@ export type UserUncheckedUpdateWithoutCustomersInput = {
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
-  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  bankId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
-  departmentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  bankId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  departmentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   Balance?: Prisma.UserBalanceUncheckedUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
-  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUncheckedUpdateManyWithoutRequesterNestedInput
-  Tasks?: Prisma.TaskUncheckedUpdateManyWithoutUserNestedInput
-  Interactions?: Prisma.InteractionUncheckedUpdateManyWithoutUserNestedInput
-  CustomerNotes?: Prisma.CustomerNoteUncheckedUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
   Opportunities?: Prisma.OpportunityUncheckedUpdateManyWithoutUserNestedInput
+  Interactions?: Prisma.InteractionUncheckedUpdateManyWithoutUserNestedInput
+  Tasks?: Prisma.TaskUncheckedUpdateManyWithoutUserNestedInput
+  VisitPlans?: Prisma.VisitPlanUncheckedUpdateManyWithoutUserNestedInput
+  CustomerNotes?: Prisma.CustomerNoteUncheckedUpdateManyWithoutUserNestedInput
   Quotations?: Prisma.QuotationUncheckedUpdateManyWithoutUserNestedInput
+  salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutUserNestedInput
   Invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutUserNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutUserNestedInput
+  goodsReceipts?: Prisma.GoodsReceiptUncheckedUpdateManyWithoutUserNestedInput
+  deliveryOrders?: Prisma.DeliveryOrderUncheckedUpdateManyWithoutUserNestedInput
   accountingPayments?: Prisma.PaymentUncheckedUpdateManyWithoutCreatedByNestedInput
   journalEntriesCreated?: Prisma.JournalEntryUncheckedUpdateManyWithoutCreatedByNestedInput
   journalEntriesPosted?: Prisma.JournalEntryUncheckedUpdateManyWithoutPostedByNestedInput
   closedPeriods?: Prisma.FiscalPeriodUncheckedUpdateManyWithoutClosedByNestedInput
   vendorBillsCreated?: Prisma.VendorBillUncheckedUpdateManyWithoutCreatedByNestedInput
   bankTransactions?: Prisma.BankTransactionUncheckedUpdateManyWithoutCreatedByNestedInput
-  VisitPlans?: Prisma.VisitPlanUncheckedUpdateManyWithoutUserNestedInput
   approvalItems?: Prisma.ApprovalItemUncheckedUpdateManyWithoutUserNestedInput
-  salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutUserNestedInput
-  purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutUserNestedInput
-  goodsReceipts?: Prisma.GoodsReceiptUncheckedUpdateManyWithoutUserNestedInput
-  deliveryOrders?: Prisma.DeliveryOrderUncheckedUpdateManyWithoutUserNestedInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutDeliveryOrdersInput = {
@@ -3620,38 +3620,38 @@ export type UserCreateWithoutDeliveryOrdersInput = {
   code?: string | null
   email: string
   password: string
-  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   active?: boolean
   bankAccount?: string | null
   currency?: $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
+  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   Bank?: Prisma.BankCreateNestedOneWithoutUserInput
   Department?: Prisma.DepartmentCreateNestedOneWithoutUserInput
+  Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
-  ApprovalSettingItem?: Prisma.ApprovalSettingItemCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpCreateNestedManyWithoutRequesterInput
-  Tasks?: Prisma.TaskCreateNestedManyWithoutUserInput
-  Interactions?: Prisma.InteractionCreateNestedManyWithoutUserInput
-  CustomerNotes?: Prisma.CustomerNoteCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadCreateNestedManyWithoutUserInput
   Opportunities?: Prisma.OpportunityCreateNestedManyWithoutUserInput
+  Interactions?: Prisma.InteractionCreateNestedManyWithoutUserInput
+  Tasks?: Prisma.TaskCreateNestedManyWithoutUserInput
+  VisitPlans?: Prisma.VisitPlanCreateNestedManyWithoutUserInput
+  CustomerNotes?: Prisma.CustomerNoteCreateNestedManyWithoutUserInput
+  Customers?: Prisma.CustomerCreateNestedManyWithoutAccountManagerInput
   Quotations?: Prisma.QuotationCreateNestedManyWithoutUserInput
+  salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutUserInput
   Invoices?: Prisma.InvoiceCreateNestedManyWithoutUserInput
+  purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutUserInput
+  goodsReceipts?: Prisma.GoodsReceiptCreateNestedManyWithoutUserInput
   accountingPayments?: Prisma.PaymentCreateNestedManyWithoutCreatedByInput
   journalEntriesCreated?: Prisma.JournalEntryCreateNestedManyWithoutCreatedByInput
   journalEntriesPosted?: Prisma.JournalEntryCreateNestedManyWithoutPostedByInput
   closedPeriods?: Prisma.FiscalPeriodCreateNestedManyWithoutClosedByInput
   vendorBillsCreated?: Prisma.VendorBillCreateNestedManyWithoutCreatedByInput
   bankTransactions?: Prisma.BankTransactionCreateNestedManyWithoutCreatedByInput
-  VisitPlans?: Prisma.VisitPlanCreateNestedManyWithoutUserInput
-  Customers?: Prisma.CustomerCreateNestedManyWithoutAccountManagerInput
   approvalItems?: Prisma.ApprovalItemCreateNestedManyWithoutUserInput
-  salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutUserInput
-  purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutUserInput
-  goodsReceipts?: Prisma.GoodsReceiptCreateNestedManyWithoutUserInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutDeliveryOrdersInput = {
@@ -3660,38 +3660,38 @@ export type UserUncheckedCreateWithoutDeliveryOrdersInput = {
   code?: string | null
   email: string
   password: string
-  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   active?: boolean
-  bankId?: number | null
   bankAccount?: string | null
   currency?: $Enums.Currency
-  departmentId?: number | null
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  bankId?: number | null
+  departmentId?: number | null
+  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   Balance?: Prisma.UserBalanceUncheckedCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
-  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpUncheckedCreateNestedManyWithoutRequesterInput
-  Tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutUserInput
-  Interactions?: Prisma.InteractionUncheckedCreateNestedManyWithoutUserInput
-  CustomerNotes?: Prisma.CustomerNoteUncheckedCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
   Opportunities?: Prisma.OpportunityUncheckedCreateNestedManyWithoutUserInput
+  Interactions?: Prisma.InteractionUncheckedCreateNestedManyWithoutUserInput
+  Tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutUserInput
+  VisitPlans?: Prisma.VisitPlanUncheckedCreateNestedManyWithoutUserInput
+  CustomerNotes?: Prisma.CustomerNoteUncheckedCreateNestedManyWithoutUserInput
+  Customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutAccountManagerInput
   Quotations?: Prisma.QuotationUncheckedCreateNestedManyWithoutUserInput
+  salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutUserInput
   Invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutUserInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutUserInput
+  goodsReceipts?: Prisma.GoodsReceiptUncheckedCreateNestedManyWithoutUserInput
   accountingPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCreatedByInput
   journalEntriesCreated?: Prisma.JournalEntryUncheckedCreateNestedManyWithoutCreatedByInput
   journalEntriesPosted?: Prisma.JournalEntryUncheckedCreateNestedManyWithoutPostedByInput
   closedPeriods?: Prisma.FiscalPeriodUncheckedCreateNestedManyWithoutClosedByInput
   vendorBillsCreated?: Prisma.VendorBillUncheckedCreateNestedManyWithoutCreatedByInput
   bankTransactions?: Prisma.BankTransactionUncheckedCreateNestedManyWithoutCreatedByInput
-  VisitPlans?: Prisma.VisitPlanUncheckedCreateNestedManyWithoutUserInput
-  Customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutAccountManagerInput
   approvalItems?: Prisma.ApprovalItemUncheckedCreateNestedManyWithoutUserInput
-  salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutUserInput
-  purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutUserInput
-  goodsReceipts?: Prisma.GoodsReceiptUncheckedCreateNestedManyWithoutUserInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutDeliveryOrdersInput = {
@@ -3715,38 +3715,38 @@ export type UserUpdateWithoutDeliveryOrdersInput = {
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
-  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
+  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   Bank?: Prisma.BankUpdateOneWithoutUserNestedInput
   Department?: Prisma.DepartmentUpdateOneWithoutUserNestedInput
+  Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
-  ApprovalSettingItem?: Prisma.ApprovalSettingItemUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUpdateManyWithoutRequesterNestedInput
-  Tasks?: Prisma.TaskUpdateManyWithoutUserNestedInput
-  Interactions?: Prisma.InteractionUpdateManyWithoutUserNestedInput
-  CustomerNotes?: Prisma.CustomerNoteUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
   Opportunities?: Prisma.OpportunityUpdateManyWithoutUserNestedInput
+  Interactions?: Prisma.InteractionUpdateManyWithoutUserNestedInput
+  Tasks?: Prisma.TaskUpdateManyWithoutUserNestedInput
+  VisitPlans?: Prisma.VisitPlanUpdateManyWithoutUserNestedInput
+  CustomerNotes?: Prisma.CustomerNoteUpdateManyWithoutUserNestedInput
+  Customers?: Prisma.CustomerUpdateManyWithoutAccountManagerNestedInput
   Quotations?: Prisma.QuotationUpdateManyWithoutUserNestedInput
+  salesOrders?: Prisma.SalesOrderUpdateManyWithoutUserNestedInput
   Invoices?: Prisma.InvoiceUpdateManyWithoutUserNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutUserNestedInput
+  goodsReceipts?: Prisma.GoodsReceiptUpdateManyWithoutUserNestedInput
   accountingPayments?: Prisma.PaymentUpdateManyWithoutCreatedByNestedInput
   journalEntriesCreated?: Prisma.JournalEntryUpdateManyWithoutCreatedByNestedInput
   journalEntriesPosted?: Prisma.JournalEntryUpdateManyWithoutPostedByNestedInput
   closedPeriods?: Prisma.FiscalPeriodUpdateManyWithoutClosedByNestedInput
   vendorBillsCreated?: Prisma.VendorBillUpdateManyWithoutCreatedByNestedInput
   bankTransactions?: Prisma.BankTransactionUpdateManyWithoutCreatedByNestedInput
-  VisitPlans?: Prisma.VisitPlanUpdateManyWithoutUserNestedInput
-  Customers?: Prisma.CustomerUpdateManyWithoutAccountManagerNestedInput
   approvalItems?: Prisma.ApprovalItemUpdateManyWithoutUserNestedInput
-  salesOrders?: Prisma.SalesOrderUpdateManyWithoutUserNestedInput
-  purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutUserNestedInput
-  goodsReceipts?: Prisma.GoodsReceiptUpdateManyWithoutUserNestedInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutDeliveryOrdersInput = {
@@ -3755,38 +3755,38 @@ export type UserUncheckedUpdateWithoutDeliveryOrdersInput = {
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
-  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  bankId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
-  departmentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  bankId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  departmentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   Balance?: Prisma.UserBalanceUncheckedUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
-  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUncheckedUpdateManyWithoutRequesterNestedInput
-  Tasks?: Prisma.TaskUncheckedUpdateManyWithoutUserNestedInput
-  Interactions?: Prisma.InteractionUncheckedUpdateManyWithoutUserNestedInput
-  CustomerNotes?: Prisma.CustomerNoteUncheckedUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
   Opportunities?: Prisma.OpportunityUncheckedUpdateManyWithoutUserNestedInput
+  Interactions?: Prisma.InteractionUncheckedUpdateManyWithoutUserNestedInput
+  Tasks?: Prisma.TaskUncheckedUpdateManyWithoutUserNestedInput
+  VisitPlans?: Prisma.VisitPlanUncheckedUpdateManyWithoutUserNestedInput
+  CustomerNotes?: Prisma.CustomerNoteUncheckedUpdateManyWithoutUserNestedInput
+  Customers?: Prisma.CustomerUncheckedUpdateManyWithoutAccountManagerNestedInput
   Quotations?: Prisma.QuotationUncheckedUpdateManyWithoutUserNestedInput
+  salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutUserNestedInput
   Invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutUserNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutUserNestedInput
+  goodsReceipts?: Prisma.GoodsReceiptUncheckedUpdateManyWithoutUserNestedInput
   accountingPayments?: Prisma.PaymentUncheckedUpdateManyWithoutCreatedByNestedInput
   journalEntriesCreated?: Prisma.JournalEntryUncheckedUpdateManyWithoutCreatedByNestedInput
   journalEntriesPosted?: Prisma.JournalEntryUncheckedUpdateManyWithoutPostedByNestedInput
   closedPeriods?: Prisma.FiscalPeriodUncheckedUpdateManyWithoutClosedByNestedInput
   vendorBillsCreated?: Prisma.VendorBillUncheckedUpdateManyWithoutCreatedByNestedInput
   bankTransactions?: Prisma.BankTransactionUncheckedUpdateManyWithoutCreatedByNestedInput
-  VisitPlans?: Prisma.VisitPlanUncheckedUpdateManyWithoutUserNestedInput
-  Customers?: Prisma.CustomerUncheckedUpdateManyWithoutAccountManagerNestedInput
   approvalItems?: Prisma.ApprovalItemUncheckedUpdateManyWithoutUserNestedInput
-  salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutUserNestedInput
-  purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutUserNestedInput
-  goodsReceipts?: Prisma.GoodsReceiptUncheckedUpdateManyWithoutUserNestedInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutGoodsReceiptsInput = {
@@ -3794,38 +3794,38 @@ export type UserCreateWithoutGoodsReceiptsInput = {
   code?: string | null
   email: string
   password: string
-  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   active?: boolean
   bankAccount?: string | null
   currency?: $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
+  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   Bank?: Prisma.BankCreateNestedOneWithoutUserInput
   Department?: Prisma.DepartmentCreateNestedOneWithoutUserInput
+  Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
-  ApprovalSettingItem?: Prisma.ApprovalSettingItemCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpCreateNestedManyWithoutRequesterInput
-  Tasks?: Prisma.TaskCreateNestedManyWithoutUserInput
-  Interactions?: Prisma.InteractionCreateNestedManyWithoutUserInput
-  CustomerNotes?: Prisma.CustomerNoteCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadCreateNestedManyWithoutUserInput
   Opportunities?: Prisma.OpportunityCreateNestedManyWithoutUserInput
+  Interactions?: Prisma.InteractionCreateNestedManyWithoutUserInput
+  Tasks?: Prisma.TaskCreateNestedManyWithoutUserInput
+  VisitPlans?: Prisma.VisitPlanCreateNestedManyWithoutUserInput
+  CustomerNotes?: Prisma.CustomerNoteCreateNestedManyWithoutUserInput
+  Customers?: Prisma.CustomerCreateNestedManyWithoutAccountManagerInput
   Quotations?: Prisma.QuotationCreateNestedManyWithoutUserInput
+  salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutUserInput
   Invoices?: Prisma.InvoiceCreateNestedManyWithoutUserInput
+  purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutUserInput
+  deliveryOrders?: Prisma.DeliveryOrderCreateNestedManyWithoutUserInput
   accountingPayments?: Prisma.PaymentCreateNestedManyWithoutCreatedByInput
   journalEntriesCreated?: Prisma.JournalEntryCreateNestedManyWithoutCreatedByInput
   journalEntriesPosted?: Prisma.JournalEntryCreateNestedManyWithoutPostedByInput
   closedPeriods?: Prisma.FiscalPeriodCreateNestedManyWithoutClosedByInput
   vendorBillsCreated?: Prisma.VendorBillCreateNestedManyWithoutCreatedByInput
   bankTransactions?: Prisma.BankTransactionCreateNestedManyWithoutCreatedByInput
-  VisitPlans?: Prisma.VisitPlanCreateNestedManyWithoutUserInput
-  Customers?: Prisma.CustomerCreateNestedManyWithoutAccountManagerInput
   approvalItems?: Prisma.ApprovalItemCreateNestedManyWithoutUserInput
-  salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutUserInput
-  purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutUserInput
-  deliveryOrders?: Prisma.DeliveryOrderCreateNestedManyWithoutUserInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutGoodsReceiptsInput = {
@@ -3834,38 +3834,38 @@ export type UserUncheckedCreateWithoutGoodsReceiptsInput = {
   code?: string | null
   email: string
   password: string
-  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   active?: boolean
-  bankId?: number | null
   bankAccount?: string | null
   currency?: $Enums.Currency
-  departmentId?: number | null
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  bankId?: number | null
+  departmentId?: number | null
+  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   Balance?: Prisma.UserBalanceUncheckedCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
-  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpUncheckedCreateNestedManyWithoutRequesterInput
-  Tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutUserInput
-  Interactions?: Prisma.InteractionUncheckedCreateNestedManyWithoutUserInput
-  CustomerNotes?: Prisma.CustomerNoteUncheckedCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
   Opportunities?: Prisma.OpportunityUncheckedCreateNestedManyWithoutUserInput
+  Interactions?: Prisma.InteractionUncheckedCreateNestedManyWithoutUserInput
+  Tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutUserInput
+  VisitPlans?: Prisma.VisitPlanUncheckedCreateNestedManyWithoutUserInput
+  CustomerNotes?: Prisma.CustomerNoteUncheckedCreateNestedManyWithoutUserInput
+  Customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutAccountManagerInput
   Quotations?: Prisma.QuotationUncheckedCreateNestedManyWithoutUserInput
+  salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutUserInput
   Invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutUserInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutUserInput
+  deliveryOrders?: Prisma.DeliveryOrderUncheckedCreateNestedManyWithoutUserInput
   accountingPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCreatedByInput
   journalEntriesCreated?: Prisma.JournalEntryUncheckedCreateNestedManyWithoutCreatedByInput
   journalEntriesPosted?: Prisma.JournalEntryUncheckedCreateNestedManyWithoutPostedByInput
   closedPeriods?: Prisma.FiscalPeriodUncheckedCreateNestedManyWithoutClosedByInput
   vendorBillsCreated?: Prisma.VendorBillUncheckedCreateNestedManyWithoutCreatedByInput
   bankTransactions?: Prisma.BankTransactionUncheckedCreateNestedManyWithoutCreatedByInput
-  VisitPlans?: Prisma.VisitPlanUncheckedCreateNestedManyWithoutUserInput
-  Customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutAccountManagerInput
   approvalItems?: Prisma.ApprovalItemUncheckedCreateNestedManyWithoutUserInput
-  salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutUserInput
-  purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutUserInput
-  deliveryOrders?: Prisma.DeliveryOrderUncheckedCreateNestedManyWithoutUserInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutGoodsReceiptsInput = {
@@ -3889,38 +3889,38 @@ export type UserUpdateWithoutGoodsReceiptsInput = {
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
-  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
+  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   Bank?: Prisma.BankUpdateOneWithoutUserNestedInput
   Department?: Prisma.DepartmentUpdateOneWithoutUserNestedInput
+  Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
-  ApprovalSettingItem?: Prisma.ApprovalSettingItemUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUpdateManyWithoutRequesterNestedInput
-  Tasks?: Prisma.TaskUpdateManyWithoutUserNestedInput
-  Interactions?: Prisma.InteractionUpdateManyWithoutUserNestedInput
-  CustomerNotes?: Prisma.CustomerNoteUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
   Opportunities?: Prisma.OpportunityUpdateManyWithoutUserNestedInput
+  Interactions?: Prisma.InteractionUpdateManyWithoutUserNestedInput
+  Tasks?: Prisma.TaskUpdateManyWithoutUserNestedInput
+  VisitPlans?: Prisma.VisitPlanUpdateManyWithoutUserNestedInput
+  CustomerNotes?: Prisma.CustomerNoteUpdateManyWithoutUserNestedInput
+  Customers?: Prisma.CustomerUpdateManyWithoutAccountManagerNestedInput
   Quotations?: Prisma.QuotationUpdateManyWithoutUserNestedInput
+  salesOrders?: Prisma.SalesOrderUpdateManyWithoutUserNestedInput
   Invoices?: Prisma.InvoiceUpdateManyWithoutUserNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutUserNestedInput
+  deliveryOrders?: Prisma.DeliveryOrderUpdateManyWithoutUserNestedInput
   accountingPayments?: Prisma.PaymentUpdateManyWithoutCreatedByNestedInput
   journalEntriesCreated?: Prisma.JournalEntryUpdateManyWithoutCreatedByNestedInput
   journalEntriesPosted?: Prisma.JournalEntryUpdateManyWithoutPostedByNestedInput
   closedPeriods?: Prisma.FiscalPeriodUpdateManyWithoutClosedByNestedInput
   vendorBillsCreated?: Prisma.VendorBillUpdateManyWithoutCreatedByNestedInput
   bankTransactions?: Prisma.BankTransactionUpdateManyWithoutCreatedByNestedInput
-  VisitPlans?: Prisma.VisitPlanUpdateManyWithoutUserNestedInput
-  Customers?: Prisma.CustomerUpdateManyWithoutAccountManagerNestedInput
   approvalItems?: Prisma.ApprovalItemUpdateManyWithoutUserNestedInput
-  salesOrders?: Prisma.SalesOrderUpdateManyWithoutUserNestedInput
-  purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutUserNestedInput
-  deliveryOrders?: Prisma.DeliveryOrderUpdateManyWithoutUserNestedInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutGoodsReceiptsInput = {
@@ -3929,38 +3929,38 @@ export type UserUncheckedUpdateWithoutGoodsReceiptsInput = {
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
-  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  bankId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
-  departmentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  bankId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  departmentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   Balance?: Prisma.UserBalanceUncheckedUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
-  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUncheckedUpdateManyWithoutRequesterNestedInput
-  Tasks?: Prisma.TaskUncheckedUpdateManyWithoutUserNestedInput
-  Interactions?: Prisma.InteractionUncheckedUpdateManyWithoutUserNestedInput
-  CustomerNotes?: Prisma.CustomerNoteUncheckedUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
   Opportunities?: Prisma.OpportunityUncheckedUpdateManyWithoutUserNestedInput
+  Interactions?: Prisma.InteractionUncheckedUpdateManyWithoutUserNestedInput
+  Tasks?: Prisma.TaskUncheckedUpdateManyWithoutUserNestedInput
+  VisitPlans?: Prisma.VisitPlanUncheckedUpdateManyWithoutUserNestedInput
+  CustomerNotes?: Prisma.CustomerNoteUncheckedUpdateManyWithoutUserNestedInput
+  Customers?: Prisma.CustomerUncheckedUpdateManyWithoutAccountManagerNestedInput
   Quotations?: Prisma.QuotationUncheckedUpdateManyWithoutUserNestedInput
+  salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutUserNestedInput
   Invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutUserNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutUserNestedInput
+  deliveryOrders?: Prisma.DeliveryOrderUncheckedUpdateManyWithoutUserNestedInput
   accountingPayments?: Prisma.PaymentUncheckedUpdateManyWithoutCreatedByNestedInput
   journalEntriesCreated?: Prisma.JournalEntryUncheckedUpdateManyWithoutCreatedByNestedInput
   journalEntriesPosted?: Prisma.JournalEntryUncheckedUpdateManyWithoutPostedByNestedInput
   closedPeriods?: Prisma.FiscalPeriodUncheckedUpdateManyWithoutClosedByNestedInput
   vendorBillsCreated?: Prisma.VendorBillUncheckedUpdateManyWithoutCreatedByNestedInput
   bankTransactions?: Prisma.BankTransactionUncheckedUpdateManyWithoutCreatedByNestedInput
-  VisitPlans?: Prisma.VisitPlanUncheckedUpdateManyWithoutUserNestedInput
-  Customers?: Prisma.CustomerUncheckedUpdateManyWithoutAccountManagerNestedInput
   approvalItems?: Prisma.ApprovalItemUncheckedUpdateManyWithoutUserNestedInput
-  salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutUserNestedInput
-  purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutUserNestedInput
-  deliveryOrders?: Prisma.DeliveryOrderUncheckedUpdateManyWithoutUserNestedInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutInvoicesInput = {
@@ -3968,38 +3968,38 @@ export type UserCreateWithoutInvoicesInput = {
   code?: string | null
   email: string
   password: string
-  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   active?: boolean
   bankAccount?: string | null
   currency?: $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
+  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   Bank?: Prisma.BankCreateNestedOneWithoutUserInput
   Department?: Prisma.DepartmentCreateNestedOneWithoutUserInput
+  Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
-  ApprovalSettingItem?: Prisma.ApprovalSettingItemCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpCreateNestedManyWithoutRequesterInput
-  Tasks?: Prisma.TaskCreateNestedManyWithoutUserInput
-  Interactions?: Prisma.InteractionCreateNestedManyWithoutUserInput
-  CustomerNotes?: Prisma.CustomerNoteCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadCreateNestedManyWithoutUserInput
   Opportunities?: Prisma.OpportunityCreateNestedManyWithoutUserInput
+  Interactions?: Prisma.InteractionCreateNestedManyWithoutUserInput
+  Tasks?: Prisma.TaskCreateNestedManyWithoutUserInput
+  VisitPlans?: Prisma.VisitPlanCreateNestedManyWithoutUserInput
+  CustomerNotes?: Prisma.CustomerNoteCreateNestedManyWithoutUserInput
+  Customers?: Prisma.CustomerCreateNestedManyWithoutAccountManagerInput
   Quotations?: Prisma.QuotationCreateNestedManyWithoutUserInput
+  salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutUserInput
+  purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutUserInput
+  goodsReceipts?: Prisma.GoodsReceiptCreateNestedManyWithoutUserInput
+  deliveryOrders?: Prisma.DeliveryOrderCreateNestedManyWithoutUserInput
   accountingPayments?: Prisma.PaymentCreateNestedManyWithoutCreatedByInput
   journalEntriesCreated?: Prisma.JournalEntryCreateNestedManyWithoutCreatedByInput
   journalEntriesPosted?: Prisma.JournalEntryCreateNestedManyWithoutPostedByInput
   closedPeriods?: Prisma.FiscalPeriodCreateNestedManyWithoutClosedByInput
   vendorBillsCreated?: Prisma.VendorBillCreateNestedManyWithoutCreatedByInput
   bankTransactions?: Prisma.BankTransactionCreateNestedManyWithoutCreatedByInput
-  VisitPlans?: Prisma.VisitPlanCreateNestedManyWithoutUserInput
-  Customers?: Prisma.CustomerCreateNestedManyWithoutAccountManagerInput
   approvalItems?: Prisma.ApprovalItemCreateNestedManyWithoutUserInput
-  salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutUserInput
-  purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutUserInput
-  goodsReceipts?: Prisma.GoodsReceiptCreateNestedManyWithoutUserInput
-  deliveryOrders?: Prisma.DeliveryOrderCreateNestedManyWithoutUserInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutInvoicesInput = {
@@ -4008,38 +4008,38 @@ export type UserUncheckedCreateWithoutInvoicesInput = {
   code?: string | null
   email: string
   password: string
-  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   active?: boolean
-  bankId?: number | null
   bankAccount?: string | null
   currency?: $Enums.Currency
-  departmentId?: number | null
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  bankId?: number | null
+  departmentId?: number | null
+  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   Balance?: Prisma.UserBalanceUncheckedCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
-  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpUncheckedCreateNestedManyWithoutRequesterInput
-  Tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutUserInput
-  Interactions?: Prisma.InteractionUncheckedCreateNestedManyWithoutUserInput
-  CustomerNotes?: Prisma.CustomerNoteUncheckedCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
   Opportunities?: Prisma.OpportunityUncheckedCreateNestedManyWithoutUserInput
+  Interactions?: Prisma.InteractionUncheckedCreateNestedManyWithoutUserInput
+  Tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutUserInput
+  VisitPlans?: Prisma.VisitPlanUncheckedCreateNestedManyWithoutUserInput
+  CustomerNotes?: Prisma.CustomerNoteUncheckedCreateNestedManyWithoutUserInput
+  Customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutAccountManagerInput
   Quotations?: Prisma.QuotationUncheckedCreateNestedManyWithoutUserInput
+  salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutUserInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutUserInput
+  goodsReceipts?: Prisma.GoodsReceiptUncheckedCreateNestedManyWithoutUserInput
+  deliveryOrders?: Prisma.DeliveryOrderUncheckedCreateNestedManyWithoutUserInput
   accountingPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCreatedByInput
   journalEntriesCreated?: Prisma.JournalEntryUncheckedCreateNestedManyWithoutCreatedByInput
   journalEntriesPosted?: Prisma.JournalEntryUncheckedCreateNestedManyWithoutPostedByInput
   closedPeriods?: Prisma.FiscalPeriodUncheckedCreateNestedManyWithoutClosedByInput
   vendorBillsCreated?: Prisma.VendorBillUncheckedCreateNestedManyWithoutCreatedByInput
   bankTransactions?: Prisma.BankTransactionUncheckedCreateNestedManyWithoutCreatedByInput
-  VisitPlans?: Prisma.VisitPlanUncheckedCreateNestedManyWithoutUserInput
-  Customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutAccountManagerInput
   approvalItems?: Prisma.ApprovalItemUncheckedCreateNestedManyWithoutUserInput
-  salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutUserInput
-  purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutUserInput
-  goodsReceipts?: Prisma.GoodsReceiptUncheckedCreateNestedManyWithoutUserInput
-  deliveryOrders?: Prisma.DeliveryOrderUncheckedCreateNestedManyWithoutUserInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutInvoicesInput = {
@@ -4063,38 +4063,38 @@ export type UserUpdateWithoutInvoicesInput = {
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
-  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
+  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   Bank?: Prisma.BankUpdateOneWithoutUserNestedInput
   Department?: Prisma.DepartmentUpdateOneWithoutUserNestedInput
+  Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
-  ApprovalSettingItem?: Prisma.ApprovalSettingItemUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUpdateManyWithoutRequesterNestedInput
-  Tasks?: Prisma.TaskUpdateManyWithoutUserNestedInput
-  Interactions?: Prisma.InteractionUpdateManyWithoutUserNestedInput
-  CustomerNotes?: Prisma.CustomerNoteUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
   Opportunities?: Prisma.OpportunityUpdateManyWithoutUserNestedInput
+  Interactions?: Prisma.InteractionUpdateManyWithoutUserNestedInput
+  Tasks?: Prisma.TaskUpdateManyWithoutUserNestedInput
+  VisitPlans?: Prisma.VisitPlanUpdateManyWithoutUserNestedInput
+  CustomerNotes?: Prisma.CustomerNoteUpdateManyWithoutUserNestedInput
+  Customers?: Prisma.CustomerUpdateManyWithoutAccountManagerNestedInput
   Quotations?: Prisma.QuotationUpdateManyWithoutUserNestedInput
+  salesOrders?: Prisma.SalesOrderUpdateManyWithoutUserNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutUserNestedInput
+  goodsReceipts?: Prisma.GoodsReceiptUpdateManyWithoutUserNestedInput
+  deliveryOrders?: Prisma.DeliveryOrderUpdateManyWithoutUserNestedInput
   accountingPayments?: Prisma.PaymentUpdateManyWithoutCreatedByNestedInput
   journalEntriesCreated?: Prisma.JournalEntryUpdateManyWithoutCreatedByNestedInput
   journalEntriesPosted?: Prisma.JournalEntryUpdateManyWithoutPostedByNestedInput
   closedPeriods?: Prisma.FiscalPeriodUpdateManyWithoutClosedByNestedInput
   vendorBillsCreated?: Prisma.VendorBillUpdateManyWithoutCreatedByNestedInput
   bankTransactions?: Prisma.BankTransactionUpdateManyWithoutCreatedByNestedInput
-  VisitPlans?: Prisma.VisitPlanUpdateManyWithoutUserNestedInput
-  Customers?: Prisma.CustomerUpdateManyWithoutAccountManagerNestedInput
   approvalItems?: Prisma.ApprovalItemUpdateManyWithoutUserNestedInput
-  salesOrders?: Prisma.SalesOrderUpdateManyWithoutUserNestedInput
-  purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutUserNestedInput
-  goodsReceipts?: Prisma.GoodsReceiptUpdateManyWithoutUserNestedInput
-  deliveryOrders?: Prisma.DeliveryOrderUpdateManyWithoutUserNestedInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutInvoicesInput = {
@@ -4103,38 +4103,38 @@ export type UserUncheckedUpdateWithoutInvoicesInput = {
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
-  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  bankId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
-  departmentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  bankId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  departmentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   Balance?: Prisma.UserBalanceUncheckedUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
-  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUncheckedUpdateManyWithoutRequesterNestedInput
-  Tasks?: Prisma.TaskUncheckedUpdateManyWithoutUserNestedInput
-  Interactions?: Prisma.InteractionUncheckedUpdateManyWithoutUserNestedInput
-  CustomerNotes?: Prisma.CustomerNoteUncheckedUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
   Opportunities?: Prisma.OpportunityUncheckedUpdateManyWithoutUserNestedInput
+  Interactions?: Prisma.InteractionUncheckedUpdateManyWithoutUserNestedInput
+  Tasks?: Prisma.TaskUncheckedUpdateManyWithoutUserNestedInput
+  VisitPlans?: Prisma.VisitPlanUncheckedUpdateManyWithoutUserNestedInput
+  CustomerNotes?: Prisma.CustomerNoteUncheckedUpdateManyWithoutUserNestedInput
+  Customers?: Prisma.CustomerUncheckedUpdateManyWithoutAccountManagerNestedInput
   Quotations?: Prisma.QuotationUncheckedUpdateManyWithoutUserNestedInput
+  salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutUserNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutUserNestedInput
+  goodsReceipts?: Prisma.GoodsReceiptUncheckedUpdateManyWithoutUserNestedInput
+  deliveryOrders?: Prisma.DeliveryOrderUncheckedUpdateManyWithoutUserNestedInput
   accountingPayments?: Prisma.PaymentUncheckedUpdateManyWithoutCreatedByNestedInput
   journalEntriesCreated?: Prisma.JournalEntryUncheckedUpdateManyWithoutCreatedByNestedInput
   journalEntriesPosted?: Prisma.JournalEntryUncheckedUpdateManyWithoutPostedByNestedInput
   closedPeriods?: Prisma.FiscalPeriodUncheckedUpdateManyWithoutClosedByNestedInput
   vendorBillsCreated?: Prisma.VendorBillUncheckedUpdateManyWithoutCreatedByNestedInput
   bankTransactions?: Prisma.BankTransactionUncheckedUpdateManyWithoutCreatedByNestedInput
-  VisitPlans?: Prisma.VisitPlanUncheckedUpdateManyWithoutUserNestedInput
-  Customers?: Prisma.CustomerUncheckedUpdateManyWithoutAccountManagerNestedInput
   approvalItems?: Prisma.ApprovalItemUncheckedUpdateManyWithoutUserNestedInput
-  salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutUserNestedInput
-  purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutUserNestedInput
-  goodsReceipts?: Prisma.GoodsReceiptUncheckedUpdateManyWithoutUserNestedInput
-  deliveryOrders?: Prisma.DeliveryOrderUncheckedUpdateManyWithoutUserNestedInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutNkpInput = {
@@ -4142,38 +4142,38 @@ export type UserCreateWithoutNkpInput = {
   code?: string | null
   email: string
   password: string
-  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   active?: boolean
   bankAccount?: string | null
   currency?: $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
+  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   Bank?: Prisma.BankCreateNestedOneWithoutUserInput
   Department?: Prisma.DepartmentCreateNestedOneWithoutUserInput
+  Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
-  ApprovalSettingItem?: Prisma.ApprovalSettingItemCreateNestedManyWithoutUserInput
   NkpRequest?: Prisma.NkpCreateNestedManyWithoutRequesterInput
-  Tasks?: Prisma.TaskCreateNestedManyWithoutUserInput
-  Interactions?: Prisma.InteractionCreateNestedManyWithoutUserInput
-  CustomerNotes?: Prisma.CustomerNoteCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadCreateNestedManyWithoutUserInput
   Opportunities?: Prisma.OpportunityCreateNestedManyWithoutUserInput
+  Interactions?: Prisma.InteractionCreateNestedManyWithoutUserInput
+  Tasks?: Prisma.TaskCreateNestedManyWithoutUserInput
+  VisitPlans?: Prisma.VisitPlanCreateNestedManyWithoutUserInput
+  CustomerNotes?: Prisma.CustomerNoteCreateNestedManyWithoutUserInput
+  Customers?: Prisma.CustomerCreateNestedManyWithoutAccountManagerInput
   Quotations?: Prisma.QuotationCreateNestedManyWithoutUserInput
+  salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutUserInput
   Invoices?: Prisma.InvoiceCreateNestedManyWithoutUserInput
+  purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutUserInput
+  goodsReceipts?: Prisma.GoodsReceiptCreateNestedManyWithoutUserInput
+  deliveryOrders?: Prisma.DeliveryOrderCreateNestedManyWithoutUserInput
   accountingPayments?: Prisma.PaymentCreateNestedManyWithoutCreatedByInput
   journalEntriesCreated?: Prisma.JournalEntryCreateNestedManyWithoutCreatedByInput
   journalEntriesPosted?: Prisma.JournalEntryCreateNestedManyWithoutPostedByInput
   closedPeriods?: Prisma.FiscalPeriodCreateNestedManyWithoutClosedByInput
   vendorBillsCreated?: Prisma.VendorBillCreateNestedManyWithoutCreatedByInput
   bankTransactions?: Prisma.BankTransactionCreateNestedManyWithoutCreatedByInput
-  VisitPlans?: Prisma.VisitPlanCreateNestedManyWithoutUserInput
-  Customers?: Prisma.CustomerCreateNestedManyWithoutAccountManagerInput
   approvalItems?: Prisma.ApprovalItemCreateNestedManyWithoutUserInput
-  salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutUserInput
-  purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutUserInput
-  goodsReceipts?: Prisma.GoodsReceiptCreateNestedManyWithoutUserInput
-  deliveryOrders?: Prisma.DeliveryOrderCreateNestedManyWithoutUserInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutNkpInput = {
@@ -4182,38 +4182,38 @@ export type UserUncheckedCreateWithoutNkpInput = {
   code?: string | null
   email: string
   password: string
-  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   active?: boolean
-  bankId?: number | null
   bankAccount?: string | null
   currency?: $Enums.Currency
-  departmentId?: number | null
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  bankId?: number | null
+  departmentId?: number | null
+  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   Balance?: Prisma.UserBalanceUncheckedCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
-  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedCreateNestedManyWithoutUserInput
   NkpRequest?: Prisma.NkpUncheckedCreateNestedManyWithoutRequesterInput
-  Tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutUserInput
-  Interactions?: Prisma.InteractionUncheckedCreateNestedManyWithoutUserInput
-  CustomerNotes?: Prisma.CustomerNoteUncheckedCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
   Opportunities?: Prisma.OpportunityUncheckedCreateNestedManyWithoutUserInput
+  Interactions?: Prisma.InteractionUncheckedCreateNestedManyWithoutUserInput
+  Tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutUserInput
+  VisitPlans?: Prisma.VisitPlanUncheckedCreateNestedManyWithoutUserInput
+  CustomerNotes?: Prisma.CustomerNoteUncheckedCreateNestedManyWithoutUserInput
+  Customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutAccountManagerInput
   Quotations?: Prisma.QuotationUncheckedCreateNestedManyWithoutUserInput
+  salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutUserInput
   Invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutUserInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutUserInput
+  goodsReceipts?: Prisma.GoodsReceiptUncheckedCreateNestedManyWithoutUserInput
+  deliveryOrders?: Prisma.DeliveryOrderUncheckedCreateNestedManyWithoutUserInput
   accountingPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCreatedByInput
   journalEntriesCreated?: Prisma.JournalEntryUncheckedCreateNestedManyWithoutCreatedByInput
   journalEntriesPosted?: Prisma.JournalEntryUncheckedCreateNestedManyWithoutPostedByInput
   closedPeriods?: Prisma.FiscalPeriodUncheckedCreateNestedManyWithoutClosedByInput
   vendorBillsCreated?: Prisma.VendorBillUncheckedCreateNestedManyWithoutCreatedByInput
   bankTransactions?: Prisma.BankTransactionUncheckedCreateNestedManyWithoutCreatedByInput
-  VisitPlans?: Prisma.VisitPlanUncheckedCreateNestedManyWithoutUserInput
-  Customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutAccountManagerInput
   approvalItems?: Prisma.ApprovalItemUncheckedCreateNestedManyWithoutUserInput
-  salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutUserInput
-  purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutUserInput
-  goodsReceipts?: Prisma.GoodsReceiptUncheckedCreateNestedManyWithoutUserInput
-  deliveryOrders?: Prisma.DeliveryOrderUncheckedCreateNestedManyWithoutUserInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutNkpInput = {
@@ -4226,38 +4226,38 @@ export type UserCreateWithoutNkpRequestInput = {
   code?: string | null
   email: string
   password: string
-  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   active?: boolean
   bankAccount?: string | null
   currency?: $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
+  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   Bank?: Prisma.BankCreateNestedOneWithoutUserInput
   Department?: Prisma.DepartmentCreateNestedOneWithoutUserInput
+  Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
-  ApprovalSettingItem?: Prisma.ApprovalSettingItemCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
-  Tasks?: Prisma.TaskCreateNestedManyWithoutUserInput
-  Interactions?: Prisma.InteractionCreateNestedManyWithoutUserInput
-  CustomerNotes?: Prisma.CustomerNoteCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadCreateNestedManyWithoutUserInput
   Opportunities?: Prisma.OpportunityCreateNestedManyWithoutUserInput
+  Interactions?: Prisma.InteractionCreateNestedManyWithoutUserInput
+  Tasks?: Prisma.TaskCreateNestedManyWithoutUserInput
+  VisitPlans?: Prisma.VisitPlanCreateNestedManyWithoutUserInput
+  CustomerNotes?: Prisma.CustomerNoteCreateNestedManyWithoutUserInput
+  Customers?: Prisma.CustomerCreateNestedManyWithoutAccountManagerInput
   Quotations?: Prisma.QuotationCreateNestedManyWithoutUserInput
+  salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutUserInput
   Invoices?: Prisma.InvoiceCreateNestedManyWithoutUserInput
+  purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutUserInput
+  goodsReceipts?: Prisma.GoodsReceiptCreateNestedManyWithoutUserInput
+  deliveryOrders?: Prisma.DeliveryOrderCreateNestedManyWithoutUserInput
   accountingPayments?: Prisma.PaymentCreateNestedManyWithoutCreatedByInput
   journalEntriesCreated?: Prisma.JournalEntryCreateNestedManyWithoutCreatedByInput
   journalEntriesPosted?: Prisma.JournalEntryCreateNestedManyWithoutPostedByInput
   closedPeriods?: Prisma.FiscalPeriodCreateNestedManyWithoutClosedByInput
   vendorBillsCreated?: Prisma.VendorBillCreateNestedManyWithoutCreatedByInput
   bankTransactions?: Prisma.BankTransactionCreateNestedManyWithoutCreatedByInput
-  VisitPlans?: Prisma.VisitPlanCreateNestedManyWithoutUserInput
-  Customers?: Prisma.CustomerCreateNestedManyWithoutAccountManagerInput
   approvalItems?: Prisma.ApprovalItemCreateNestedManyWithoutUserInput
-  salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutUserInput
-  purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutUserInput
-  goodsReceipts?: Prisma.GoodsReceiptCreateNestedManyWithoutUserInput
-  deliveryOrders?: Prisma.DeliveryOrderCreateNestedManyWithoutUserInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutNkpRequestInput = {
@@ -4266,38 +4266,38 @@ export type UserUncheckedCreateWithoutNkpRequestInput = {
   code?: string | null
   email: string
   password: string
-  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   active?: boolean
-  bankId?: number | null
   bankAccount?: string | null
   currency?: $Enums.Currency
-  departmentId?: number | null
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  bankId?: number | null
+  departmentId?: number | null
+  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   Balance?: Prisma.UserBalanceUncheckedCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
-  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
-  Tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutUserInput
-  Interactions?: Prisma.InteractionUncheckedCreateNestedManyWithoutUserInput
-  CustomerNotes?: Prisma.CustomerNoteUncheckedCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
   Opportunities?: Prisma.OpportunityUncheckedCreateNestedManyWithoutUserInput
+  Interactions?: Prisma.InteractionUncheckedCreateNestedManyWithoutUserInput
+  Tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutUserInput
+  VisitPlans?: Prisma.VisitPlanUncheckedCreateNestedManyWithoutUserInput
+  CustomerNotes?: Prisma.CustomerNoteUncheckedCreateNestedManyWithoutUserInput
+  Customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutAccountManagerInput
   Quotations?: Prisma.QuotationUncheckedCreateNestedManyWithoutUserInput
+  salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutUserInput
   Invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutUserInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutUserInput
+  goodsReceipts?: Prisma.GoodsReceiptUncheckedCreateNestedManyWithoutUserInput
+  deliveryOrders?: Prisma.DeliveryOrderUncheckedCreateNestedManyWithoutUserInput
   accountingPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCreatedByInput
   journalEntriesCreated?: Prisma.JournalEntryUncheckedCreateNestedManyWithoutCreatedByInput
   journalEntriesPosted?: Prisma.JournalEntryUncheckedCreateNestedManyWithoutPostedByInput
   closedPeriods?: Prisma.FiscalPeriodUncheckedCreateNestedManyWithoutClosedByInput
   vendorBillsCreated?: Prisma.VendorBillUncheckedCreateNestedManyWithoutCreatedByInput
   bankTransactions?: Prisma.BankTransactionUncheckedCreateNestedManyWithoutCreatedByInput
-  VisitPlans?: Prisma.VisitPlanUncheckedCreateNestedManyWithoutUserInput
-  Customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutAccountManagerInput
   approvalItems?: Prisma.ApprovalItemUncheckedCreateNestedManyWithoutUserInput
-  salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutUserInput
-  purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutUserInput
-  goodsReceipts?: Prisma.GoodsReceiptUncheckedCreateNestedManyWithoutUserInput
-  deliveryOrders?: Prisma.DeliveryOrderUncheckedCreateNestedManyWithoutUserInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutNkpRequestInput = {
@@ -4321,38 +4321,38 @@ export type UserUpdateWithoutNkpInput = {
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
-  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
+  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   Bank?: Prisma.BankUpdateOneWithoutUserNestedInput
   Department?: Prisma.DepartmentUpdateOneWithoutUserNestedInput
+  Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
-  ApprovalSettingItem?: Prisma.ApprovalSettingItemUpdateManyWithoutUserNestedInput
   NkpRequest?: Prisma.NkpUpdateManyWithoutRequesterNestedInput
-  Tasks?: Prisma.TaskUpdateManyWithoutUserNestedInput
-  Interactions?: Prisma.InteractionUpdateManyWithoutUserNestedInput
-  CustomerNotes?: Prisma.CustomerNoteUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
   Opportunities?: Prisma.OpportunityUpdateManyWithoutUserNestedInput
+  Interactions?: Prisma.InteractionUpdateManyWithoutUserNestedInput
+  Tasks?: Prisma.TaskUpdateManyWithoutUserNestedInput
+  VisitPlans?: Prisma.VisitPlanUpdateManyWithoutUserNestedInput
+  CustomerNotes?: Prisma.CustomerNoteUpdateManyWithoutUserNestedInput
+  Customers?: Prisma.CustomerUpdateManyWithoutAccountManagerNestedInput
   Quotations?: Prisma.QuotationUpdateManyWithoutUserNestedInput
+  salesOrders?: Prisma.SalesOrderUpdateManyWithoutUserNestedInput
   Invoices?: Prisma.InvoiceUpdateManyWithoutUserNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutUserNestedInput
+  goodsReceipts?: Prisma.GoodsReceiptUpdateManyWithoutUserNestedInput
+  deliveryOrders?: Prisma.DeliveryOrderUpdateManyWithoutUserNestedInput
   accountingPayments?: Prisma.PaymentUpdateManyWithoutCreatedByNestedInput
   journalEntriesCreated?: Prisma.JournalEntryUpdateManyWithoutCreatedByNestedInput
   journalEntriesPosted?: Prisma.JournalEntryUpdateManyWithoutPostedByNestedInput
   closedPeriods?: Prisma.FiscalPeriodUpdateManyWithoutClosedByNestedInput
   vendorBillsCreated?: Prisma.VendorBillUpdateManyWithoutCreatedByNestedInput
   bankTransactions?: Prisma.BankTransactionUpdateManyWithoutCreatedByNestedInput
-  VisitPlans?: Prisma.VisitPlanUpdateManyWithoutUserNestedInput
-  Customers?: Prisma.CustomerUpdateManyWithoutAccountManagerNestedInput
   approvalItems?: Prisma.ApprovalItemUpdateManyWithoutUserNestedInput
-  salesOrders?: Prisma.SalesOrderUpdateManyWithoutUserNestedInput
-  purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutUserNestedInput
-  goodsReceipts?: Prisma.GoodsReceiptUpdateManyWithoutUserNestedInput
-  deliveryOrders?: Prisma.DeliveryOrderUpdateManyWithoutUserNestedInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutNkpInput = {
@@ -4361,38 +4361,38 @@ export type UserUncheckedUpdateWithoutNkpInput = {
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
-  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  bankId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
-  departmentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  bankId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  departmentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   Balance?: Prisma.UserBalanceUncheckedUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
-  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedUpdateManyWithoutUserNestedInput
   NkpRequest?: Prisma.NkpUncheckedUpdateManyWithoutRequesterNestedInput
-  Tasks?: Prisma.TaskUncheckedUpdateManyWithoutUserNestedInput
-  Interactions?: Prisma.InteractionUncheckedUpdateManyWithoutUserNestedInput
-  CustomerNotes?: Prisma.CustomerNoteUncheckedUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
   Opportunities?: Prisma.OpportunityUncheckedUpdateManyWithoutUserNestedInput
+  Interactions?: Prisma.InteractionUncheckedUpdateManyWithoutUserNestedInput
+  Tasks?: Prisma.TaskUncheckedUpdateManyWithoutUserNestedInput
+  VisitPlans?: Prisma.VisitPlanUncheckedUpdateManyWithoutUserNestedInput
+  CustomerNotes?: Prisma.CustomerNoteUncheckedUpdateManyWithoutUserNestedInput
+  Customers?: Prisma.CustomerUncheckedUpdateManyWithoutAccountManagerNestedInput
   Quotations?: Prisma.QuotationUncheckedUpdateManyWithoutUserNestedInput
+  salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutUserNestedInput
   Invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutUserNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutUserNestedInput
+  goodsReceipts?: Prisma.GoodsReceiptUncheckedUpdateManyWithoutUserNestedInput
+  deliveryOrders?: Prisma.DeliveryOrderUncheckedUpdateManyWithoutUserNestedInput
   accountingPayments?: Prisma.PaymentUncheckedUpdateManyWithoutCreatedByNestedInput
   journalEntriesCreated?: Prisma.JournalEntryUncheckedUpdateManyWithoutCreatedByNestedInput
   journalEntriesPosted?: Prisma.JournalEntryUncheckedUpdateManyWithoutPostedByNestedInput
   closedPeriods?: Prisma.FiscalPeriodUncheckedUpdateManyWithoutClosedByNestedInput
   vendorBillsCreated?: Prisma.VendorBillUncheckedUpdateManyWithoutCreatedByNestedInput
   bankTransactions?: Prisma.BankTransactionUncheckedUpdateManyWithoutCreatedByNestedInput
-  VisitPlans?: Prisma.VisitPlanUncheckedUpdateManyWithoutUserNestedInput
-  Customers?: Prisma.CustomerUncheckedUpdateManyWithoutAccountManagerNestedInput
   approvalItems?: Prisma.ApprovalItemUncheckedUpdateManyWithoutUserNestedInput
-  salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutUserNestedInput
-  purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutUserNestedInput
-  goodsReceipts?: Prisma.GoodsReceiptUncheckedUpdateManyWithoutUserNestedInput
-  deliveryOrders?: Prisma.DeliveryOrderUncheckedUpdateManyWithoutUserNestedInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserUpsertWithoutNkpRequestInput = {
@@ -4411,38 +4411,38 @@ export type UserUpdateWithoutNkpRequestInput = {
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
-  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
+  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   Bank?: Prisma.BankUpdateOneWithoutUserNestedInput
   Department?: Prisma.DepartmentUpdateOneWithoutUserNestedInput
+  Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
-  ApprovalSettingItem?: Prisma.ApprovalSettingItemUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
-  Tasks?: Prisma.TaskUpdateManyWithoutUserNestedInput
-  Interactions?: Prisma.InteractionUpdateManyWithoutUserNestedInput
-  CustomerNotes?: Prisma.CustomerNoteUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
   Opportunities?: Prisma.OpportunityUpdateManyWithoutUserNestedInput
+  Interactions?: Prisma.InteractionUpdateManyWithoutUserNestedInput
+  Tasks?: Prisma.TaskUpdateManyWithoutUserNestedInput
+  VisitPlans?: Prisma.VisitPlanUpdateManyWithoutUserNestedInput
+  CustomerNotes?: Prisma.CustomerNoteUpdateManyWithoutUserNestedInput
+  Customers?: Prisma.CustomerUpdateManyWithoutAccountManagerNestedInput
   Quotations?: Prisma.QuotationUpdateManyWithoutUserNestedInput
+  salesOrders?: Prisma.SalesOrderUpdateManyWithoutUserNestedInput
   Invoices?: Prisma.InvoiceUpdateManyWithoutUserNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutUserNestedInput
+  goodsReceipts?: Prisma.GoodsReceiptUpdateManyWithoutUserNestedInput
+  deliveryOrders?: Prisma.DeliveryOrderUpdateManyWithoutUserNestedInput
   accountingPayments?: Prisma.PaymentUpdateManyWithoutCreatedByNestedInput
   journalEntriesCreated?: Prisma.JournalEntryUpdateManyWithoutCreatedByNestedInput
   journalEntriesPosted?: Prisma.JournalEntryUpdateManyWithoutPostedByNestedInput
   closedPeriods?: Prisma.FiscalPeriodUpdateManyWithoutClosedByNestedInput
   vendorBillsCreated?: Prisma.VendorBillUpdateManyWithoutCreatedByNestedInput
   bankTransactions?: Prisma.BankTransactionUpdateManyWithoutCreatedByNestedInput
-  VisitPlans?: Prisma.VisitPlanUpdateManyWithoutUserNestedInput
-  Customers?: Prisma.CustomerUpdateManyWithoutAccountManagerNestedInput
   approvalItems?: Prisma.ApprovalItemUpdateManyWithoutUserNestedInput
-  salesOrders?: Prisma.SalesOrderUpdateManyWithoutUserNestedInput
-  purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutUserNestedInput
-  goodsReceipts?: Prisma.GoodsReceiptUpdateManyWithoutUserNestedInput
-  deliveryOrders?: Prisma.DeliveryOrderUpdateManyWithoutUserNestedInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutNkpRequestInput = {
@@ -4451,38 +4451,38 @@ export type UserUncheckedUpdateWithoutNkpRequestInput = {
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
-  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  bankId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
-  departmentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  bankId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  departmentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   Balance?: Prisma.UserBalanceUncheckedUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
-  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
-  Tasks?: Prisma.TaskUncheckedUpdateManyWithoutUserNestedInput
-  Interactions?: Prisma.InteractionUncheckedUpdateManyWithoutUserNestedInput
-  CustomerNotes?: Prisma.CustomerNoteUncheckedUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
   Opportunities?: Prisma.OpportunityUncheckedUpdateManyWithoutUserNestedInput
+  Interactions?: Prisma.InteractionUncheckedUpdateManyWithoutUserNestedInput
+  Tasks?: Prisma.TaskUncheckedUpdateManyWithoutUserNestedInput
+  VisitPlans?: Prisma.VisitPlanUncheckedUpdateManyWithoutUserNestedInput
+  CustomerNotes?: Prisma.CustomerNoteUncheckedUpdateManyWithoutUserNestedInput
+  Customers?: Prisma.CustomerUncheckedUpdateManyWithoutAccountManagerNestedInput
   Quotations?: Prisma.QuotationUncheckedUpdateManyWithoutUserNestedInput
+  salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutUserNestedInput
   Invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutUserNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutUserNestedInput
+  goodsReceipts?: Prisma.GoodsReceiptUncheckedUpdateManyWithoutUserNestedInput
+  deliveryOrders?: Prisma.DeliveryOrderUncheckedUpdateManyWithoutUserNestedInput
   accountingPayments?: Prisma.PaymentUncheckedUpdateManyWithoutCreatedByNestedInput
   journalEntriesCreated?: Prisma.JournalEntryUncheckedUpdateManyWithoutCreatedByNestedInput
   journalEntriesPosted?: Prisma.JournalEntryUncheckedUpdateManyWithoutPostedByNestedInput
   closedPeriods?: Prisma.FiscalPeriodUncheckedUpdateManyWithoutClosedByNestedInput
   vendorBillsCreated?: Prisma.VendorBillUncheckedUpdateManyWithoutCreatedByNestedInput
   bankTransactions?: Prisma.BankTransactionUncheckedUpdateManyWithoutCreatedByNestedInput
-  VisitPlans?: Prisma.VisitPlanUncheckedUpdateManyWithoutUserNestedInput
-  Customers?: Prisma.CustomerUncheckedUpdateManyWithoutAccountManagerNestedInput
   approvalItems?: Prisma.ApprovalItemUncheckedUpdateManyWithoutUserNestedInput
-  salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutUserNestedInput
-  purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutUserNestedInput
-  goodsReceipts?: Prisma.GoodsReceiptUncheckedUpdateManyWithoutUserNestedInput
-  deliveryOrders?: Prisma.DeliveryOrderUncheckedUpdateManyWithoutUserNestedInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutNkpApprovalInput = {
@@ -4490,38 +4490,38 @@ export type UserCreateWithoutNkpApprovalInput = {
   code?: string | null
   email: string
   password: string
-  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   active?: boolean
   bankAccount?: string | null
   currency?: $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
+  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   Bank?: Prisma.BankCreateNestedOneWithoutUserInput
   Department?: Prisma.DepartmentCreateNestedOneWithoutUserInput
+  Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
-  ApprovalSettingItem?: Prisma.ApprovalSettingItemCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpCreateNestedManyWithoutRequesterInput
-  Tasks?: Prisma.TaskCreateNestedManyWithoutUserInput
-  Interactions?: Prisma.InteractionCreateNestedManyWithoutUserInput
-  CustomerNotes?: Prisma.CustomerNoteCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadCreateNestedManyWithoutUserInput
   Opportunities?: Prisma.OpportunityCreateNestedManyWithoutUserInput
+  Interactions?: Prisma.InteractionCreateNestedManyWithoutUserInput
+  Tasks?: Prisma.TaskCreateNestedManyWithoutUserInput
+  VisitPlans?: Prisma.VisitPlanCreateNestedManyWithoutUserInput
+  CustomerNotes?: Prisma.CustomerNoteCreateNestedManyWithoutUserInput
+  Customers?: Prisma.CustomerCreateNestedManyWithoutAccountManagerInput
   Quotations?: Prisma.QuotationCreateNestedManyWithoutUserInput
+  salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutUserInput
   Invoices?: Prisma.InvoiceCreateNestedManyWithoutUserInput
+  purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutUserInput
+  goodsReceipts?: Prisma.GoodsReceiptCreateNestedManyWithoutUserInput
+  deliveryOrders?: Prisma.DeliveryOrderCreateNestedManyWithoutUserInput
   accountingPayments?: Prisma.PaymentCreateNestedManyWithoutCreatedByInput
   journalEntriesCreated?: Prisma.JournalEntryCreateNestedManyWithoutCreatedByInput
   journalEntriesPosted?: Prisma.JournalEntryCreateNestedManyWithoutPostedByInput
   closedPeriods?: Prisma.FiscalPeriodCreateNestedManyWithoutClosedByInput
   vendorBillsCreated?: Prisma.VendorBillCreateNestedManyWithoutCreatedByInput
   bankTransactions?: Prisma.BankTransactionCreateNestedManyWithoutCreatedByInput
-  VisitPlans?: Prisma.VisitPlanCreateNestedManyWithoutUserInput
-  Customers?: Prisma.CustomerCreateNestedManyWithoutAccountManagerInput
   approvalItems?: Prisma.ApprovalItemCreateNestedManyWithoutUserInput
-  salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutUserInput
-  purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutUserInput
-  goodsReceipts?: Prisma.GoodsReceiptCreateNestedManyWithoutUserInput
-  deliveryOrders?: Prisma.DeliveryOrderCreateNestedManyWithoutUserInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutNkpApprovalInput = {
@@ -4530,38 +4530,38 @@ export type UserUncheckedCreateWithoutNkpApprovalInput = {
   code?: string | null
   email: string
   password: string
-  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   active?: boolean
-  bankId?: number | null
   bankAccount?: string | null
   currency?: $Enums.Currency
-  departmentId?: number | null
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  bankId?: number | null
+  departmentId?: number | null
+  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   Balance?: Prisma.UserBalanceUncheckedCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
-  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpUncheckedCreateNestedManyWithoutRequesterInput
-  Tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutUserInput
-  Interactions?: Prisma.InteractionUncheckedCreateNestedManyWithoutUserInput
-  CustomerNotes?: Prisma.CustomerNoteUncheckedCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
   Opportunities?: Prisma.OpportunityUncheckedCreateNestedManyWithoutUserInput
+  Interactions?: Prisma.InteractionUncheckedCreateNestedManyWithoutUserInput
+  Tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutUserInput
+  VisitPlans?: Prisma.VisitPlanUncheckedCreateNestedManyWithoutUserInput
+  CustomerNotes?: Prisma.CustomerNoteUncheckedCreateNestedManyWithoutUserInput
+  Customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutAccountManagerInput
   Quotations?: Prisma.QuotationUncheckedCreateNestedManyWithoutUserInput
+  salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutUserInput
   Invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutUserInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutUserInput
+  goodsReceipts?: Prisma.GoodsReceiptUncheckedCreateNestedManyWithoutUserInput
+  deliveryOrders?: Prisma.DeliveryOrderUncheckedCreateNestedManyWithoutUserInput
   accountingPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCreatedByInput
   journalEntriesCreated?: Prisma.JournalEntryUncheckedCreateNestedManyWithoutCreatedByInput
   journalEntriesPosted?: Prisma.JournalEntryUncheckedCreateNestedManyWithoutPostedByInput
   closedPeriods?: Prisma.FiscalPeriodUncheckedCreateNestedManyWithoutClosedByInput
   vendorBillsCreated?: Prisma.VendorBillUncheckedCreateNestedManyWithoutCreatedByInput
   bankTransactions?: Prisma.BankTransactionUncheckedCreateNestedManyWithoutCreatedByInput
-  VisitPlans?: Prisma.VisitPlanUncheckedCreateNestedManyWithoutUserInput
-  Customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutAccountManagerInput
   approvalItems?: Prisma.ApprovalItemUncheckedCreateNestedManyWithoutUserInput
-  salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutUserInput
-  purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutUserInput
-  goodsReceipts?: Prisma.GoodsReceiptUncheckedCreateNestedManyWithoutUserInput
-  deliveryOrders?: Prisma.DeliveryOrderUncheckedCreateNestedManyWithoutUserInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutNkpApprovalInput = {
@@ -4585,38 +4585,38 @@ export type UserUpdateWithoutNkpApprovalInput = {
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
-  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
+  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   Bank?: Prisma.BankUpdateOneWithoutUserNestedInput
   Department?: Prisma.DepartmentUpdateOneWithoutUserNestedInput
+  Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
-  ApprovalSettingItem?: Prisma.ApprovalSettingItemUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUpdateManyWithoutRequesterNestedInput
-  Tasks?: Prisma.TaskUpdateManyWithoutUserNestedInput
-  Interactions?: Prisma.InteractionUpdateManyWithoutUserNestedInput
-  CustomerNotes?: Prisma.CustomerNoteUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
   Opportunities?: Prisma.OpportunityUpdateManyWithoutUserNestedInput
+  Interactions?: Prisma.InteractionUpdateManyWithoutUserNestedInput
+  Tasks?: Prisma.TaskUpdateManyWithoutUserNestedInput
+  VisitPlans?: Prisma.VisitPlanUpdateManyWithoutUserNestedInput
+  CustomerNotes?: Prisma.CustomerNoteUpdateManyWithoutUserNestedInput
+  Customers?: Prisma.CustomerUpdateManyWithoutAccountManagerNestedInput
   Quotations?: Prisma.QuotationUpdateManyWithoutUserNestedInput
+  salesOrders?: Prisma.SalesOrderUpdateManyWithoutUserNestedInput
   Invoices?: Prisma.InvoiceUpdateManyWithoutUserNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutUserNestedInput
+  goodsReceipts?: Prisma.GoodsReceiptUpdateManyWithoutUserNestedInput
+  deliveryOrders?: Prisma.DeliveryOrderUpdateManyWithoutUserNestedInput
   accountingPayments?: Prisma.PaymentUpdateManyWithoutCreatedByNestedInput
   journalEntriesCreated?: Prisma.JournalEntryUpdateManyWithoutCreatedByNestedInput
   journalEntriesPosted?: Prisma.JournalEntryUpdateManyWithoutPostedByNestedInput
   closedPeriods?: Prisma.FiscalPeriodUpdateManyWithoutClosedByNestedInput
   vendorBillsCreated?: Prisma.VendorBillUpdateManyWithoutCreatedByNestedInput
   bankTransactions?: Prisma.BankTransactionUpdateManyWithoutCreatedByNestedInput
-  VisitPlans?: Prisma.VisitPlanUpdateManyWithoutUserNestedInput
-  Customers?: Prisma.CustomerUpdateManyWithoutAccountManagerNestedInput
   approvalItems?: Prisma.ApprovalItemUpdateManyWithoutUserNestedInput
-  salesOrders?: Prisma.SalesOrderUpdateManyWithoutUserNestedInput
-  purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutUserNestedInput
-  goodsReceipts?: Prisma.GoodsReceiptUpdateManyWithoutUserNestedInput
-  deliveryOrders?: Prisma.DeliveryOrderUpdateManyWithoutUserNestedInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutNkpApprovalInput = {
@@ -4625,38 +4625,38 @@ export type UserUncheckedUpdateWithoutNkpApprovalInput = {
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
-  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  bankId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
-  departmentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  bankId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  departmentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   Balance?: Prisma.UserBalanceUncheckedUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
-  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUncheckedUpdateManyWithoutRequesterNestedInput
-  Tasks?: Prisma.TaskUncheckedUpdateManyWithoutUserNestedInput
-  Interactions?: Prisma.InteractionUncheckedUpdateManyWithoutUserNestedInput
-  CustomerNotes?: Prisma.CustomerNoteUncheckedUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
   Opportunities?: Prisma.OpportunityUncheckedUpdateManyWithoutUserNestedInput
+  Interactions?: Prisma.InteractionUncheckedUpdateManyWithoutUserNestedInput
+  Tasks?: Prisma.TaskUncheckedUpdateManyWithoutUserNestedInput
+  VisitPlans?: Prisma.VisitPlanUncheckedUpdateManyWithoutUserNestedInput
+  CustomerNotes?: Prisma.CustomerNoteUncheckedUpdateManyWithoutUserNestedInput
+  Customers?: Prisma.CustomerUncheckedUpdateManyWithoutAccountManagerNestedInput
   Quotations?: Prisma.QuotationUncheckedUpdateManyWithoutUserNestedInput
+  salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutUserNestedInput
   Invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutUserNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutUserNestedInput
+  goodsReceipts?: Prisma.GoodsReceiptUncheckedUpdateManyWithoutUserNestedInput
+  deliveryOrders?: Prisma.DeliveryOrderUncheckedUpdateManyWithoutUserNestedInput
   accountingPayments?: Prisma.PaymentUncheckedUpdateManyWithoutCreatedByNestedInput
   journalEntriesCreated?: Prisma.JournalEntryUncheckedUpdateManyWithoutCreatedByNestedInput
   journalEntriesPosted?: Prisma.JournalEntryUncheckedUpdateManyWithoutPostedByNestedInput
   closedPeriods?: Prisma.FiscalPeriodUncheckedUpdateManyWithoutClosedByNestedInput
   vendorBillsCreated?: Prisma.VendorBillUncheckedUpdateManyWithoutCreatedByNestedInput
   bankTransactions?: Prisma.BankTransactionUncheckedUpdateManyWithoutCreatedByNestedInput
-  VisitPlans?: Prisma.VisitPlanUncheckedUpdateManyWithoutUserNestedInput
-  Customers?: Prisma.CustomerUncheckedUpdateManyWithoutAccountManagerNestedInput
   approvalItems?: Prisma.ApprovalItemUncheckedUpdateManyWithoutUserNestedInput
-  salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutUserNestedInput
-  purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutUserNestedInput
-  goodsReceipts?: Prisma.GoodsReceiptUncheckedUpdateManyWithoutUserNestedInput
-  deliveryOrders?: Prisma.DeliveryOrderUncheckedUpdateManyWithoutUserNestedInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutNotificationInput = {
@@ -4664,38 +4664,38 @@ export type UserCreateWithoutNotificationInput = {
   code?: string | null
   email: string
   password: string
-  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   active?: boolean
   bankAccount?: string | null
   currency?: $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
+  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   Bank?: Prisma.BankCreateNestedOneWithoutUserInput
   Department?: Prisma.DepartmentCreateNestedOneWithoutUserInput
+  Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
-  ApprovalSettingItem?: Prisma.ApprovalSettingItemCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpCreateNestedManyWithoutRequesterInput
-  Tasks?: Prisma.TaskCreateNestedManyWithoutUserInput
-  Interactions?: Prisma.InteractionCreateNestedManyWithoutUserInput
-  CustomerNotes?: Prisma.CustomerNoteCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadCreateNestedManyWithoutUserInput
   Opportunities?: Prisma.OpportunityCreateNestedManyWithoutUserInput
+  Interactions?: Prisma.InteractionCreateNestedManyWithoutUserInput
+  Tasks?: Prisma.TaskCreateNestedManyWithoutUserInput
+  VisitPlans?: Prisma.VisitPlanCreateNestedManyWithoutUserInput
+  CustomerNotes?: Prisma.CustomerNoteCreateNestedManyWithoutUserInput
+  Customers?: Prisma.CustomerCreateNestedManyWithoutAccountManagerInput
   Quotations?: Prisma.QuotationCreateNestedManyWithoutUserInput
+  salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutUserInput
   Invoices?: Prisma.InvoiceCreateNestedManyWithoutUserInput
+  purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutUserInput
+  goodsReceipts?: Prisma.GoodsReceiptCreateNestedManyWithoutUserInput
+  deliveryOrders?: Prisma.DeliveryOrderCreateNestedManyWithoutUserInput
   accountingPayments?: Prisma.PaymentCreateNestedManyWithoutCreatedByInput
   journalEntriesCreated?: Prisma.JournalEntryCreateNestedManyWithoutCreatedByInput
   journalEntriesPosted?: Prisma.JournalEntryCreateNestedManyWithoutPostedByInput
   closedPeriods?: Prisma.FiscalPeriodCreateNestedManyWithoutClosedByInput
   vendorBillsCreated?: Prisma.VendorBillCreateNestedManyWithoutCreatedByInput
   bankTransactions?: Prisma.BankTransactionCreateNestedManyWithoutCreatedByInput
-  VisitPlans?: Prisma.VisitPlanCreateNestedManyWithoutUserInput
-  Customers?: Prisma.CustomerCreateNestedManyWithoutAccountManagerInput
   approvalItems?: Prisma.ApprovalItemCreateNestedManyWithoutUserInput
-  salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutUserInput
-  purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutUserInput
-  goodsReceipts?: Prisma.GoodsReceiptCreateNestedManyWithoutUserInput
-  deliveryOrders?: Prisma.DeliveryOrderCreateNestedManyWithoutUserInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutNotificationInput = {
@@ -4704,38 +4704,38 @@ export type UserUncheckedCreateWithoutNotificationInput = {
   code?: string | null
   email: string
   password: string
-  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   active?: boolean
-  bankId?: number | null
   bankAccount?: string | null
   currency?: $Enums.Currency
-  departmentId?: number | null
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  bankId?: number | null
+  departmentId?: number | null
+  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   Balance?: Prisma.UserBalanceUncheckedCreateNestedOneWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
-  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpUncheckedCreateNestedManyWithoutRequesterInput
-  Tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutUserInput
-  Interactions?: Prisma.InteractionUncheckedCreateNestedManyWithoutUserInput
-  CustomerNotes?: Prisma.CustomerNoteUncheckedCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
   Opportunities?: Prisma.OpportunityUncheckedCreateNestedManyWithoutUserInput
+  Interactions?: Prisma.InteractionUncheckedCreateNestedManyWithoutUserInput
+  Tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutUserInput
+  VisitPlans?: Prisma.VisitPlanUncheckedCreateNestedManyWithoutUserInput
+  CustomerNotes?: Prisma.CustomerNoteUncheckedCreateNestedManyWithoutUserInput
+  Customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutAccountManagerInput
   Quotations?: Prisma.QuotationUncheckedCreateNestedManyWithoutUserInput
+  salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutUserInput
   Invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutUserInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutUserInput
+  goodsReceipts?: Prisma.GoodsReceiptUncheckedCreateNestedManyWithoutUserInput
+  deliveryOrders?: Prisma.DeliveryOrderUncheckedCreateNestedManyWithoutUserInput
   accountingPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCreatedByInput
   journalEntriesCreated?: Prisma.JournalEntryUncheckedCreateNestedManyWithoutCreatedByInput
   journalEntriesPosted?: Prisma.JournalEntryUncheckedCreateNestedManyWithoutPostedByInput
   closedPeriods?: Prisma.FiscalPeriodUncheckedCreateNestedManyWithoutClosedByInput
   vendorBillsCreated?: Prisma.VendorBillUncheckedCreateNestedManyWithoutCreatedByInput
   bankTransactions?: Prisma.BankTransactionUncheckedCreateNestedManyWithoutCreatedByInput
-  VisitPlans?: Prisma.VisitPlanUncheckedCreateNestedManyWithoutUserInput
-  Customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutAccountManagerInput
   approvalItems?: Prisma.ApprovalItemUncheckedCreateNestedManyWithoutUserInput
-  salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutUserInput
-  purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutUserInput
-  goodsReceipts?: Prisma.GoodsReceiptUncheckedCreateNestedManyWithoutUserInput
-  deliveryOrders?: Prisma.DeliveryOrderUncheckedCreateNestedManyWithoutUserInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutNotificationInput = {
@@ -4759,38 +4759,38 @@ export type UserUpdateWithoutNotificationInput = {
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
-  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
+  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   Bank?: Prisma.BankUpdateOneWithoutUserNestedInput
   Department?: Prisma.DepartmentUpdateOneWithoutUserNestedInput
+  Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
-  ApprovalSettingItem?: Prisma.ApprovalSettingItemUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUpdateManyWithoutRequesterNestedInput
-  Tasks?: Prisma.TaskUpdateManyWithoutUserNestedInput
-  Interactions?: Prisma.InteractionUpdateManyWithoutUserNestedInput
-  CustomerNotes?: Prisma.CustomerNoteUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
   Opportunities?: Prisma.OpportunityUpdateManyWithoutUserNestedInput
+  Interactions?: Prisma.InteractionUpdateManyWithoutUserNestedInput
+  Tasks?: Prisma.TaskUpdateManyWithoutUserNestedInput
+  VisitPlans?: Prisma.VisitPlanUpdateManyWithoutUserNestedInput
+  CustomerNotes?: Prisma.CustomerNoteUpdateManyWithoutUserNestedInput
+  Customers?: Prisma.CustomerUpdateManyWithoutAccountManagerNestedInput
   Quotations?: Prisma.QuotationUpdateManyWithoutUserNestedInput
+  salesOrders?: Prisma.SalesOrderUpdateManyWithoutUserNestedInput
   Invoices?: Prisma.InvoiceUpdateManyWithoutUserNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutUserNestedInput
+  goodsReceipts?: Prisma.GoodsReceiptUpdateManyWithoutUserNestedInput
+  deliveryOrders?: Prisma.DeliveryOrderUpdateManyWithoutUserNestedInput
   accountingPayments?: Prisma.PaymentUpdateManyWithoutCreatedByNestedInput
   journalEntriesCreated?: Prisma.JournalEntryUpdateManyWithoutCreatedByNestedInput
   journalEntriesPosted?: Prisma.JournalEntryUpdateManyWithoutPostedByNestedInput
   closedPeriods?: Prisma.FiscalPeriodUpdateManyWithoutClosedByNestedInput
   vendorBillsCreated?: Prisma.VendorBillUpdateManyWithoutCreatedByNestedInput
   bankTransactions?: Prisma.BankTransactionUpdateManyWithoutCreatedByNestedInput
-  VisitPlans?: Prisma.VisitPlanUpdateManyWithoutUserNestedInput
-  Customers?: Prisma.CustomerUpdateManyWithoutAccountManagerNestedInput
   approvalItems?: Prisma.ApprovalItemUpdateManyWithoutUserNestedInput
-  salesOrders?: Prisma.SalesOrderUpdateManyWithoutUserNestedInput
-  purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutUserNestedInput
-  goodsReceipts?: Prisma.GoodsReceiptUpdateManyWithoutUserNestedInput
-  deliveryOrders?: Prisma.DeliveryOrderUpdateManyWithoutUserNestedInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutNotificationInput = {
@@ -4799,38 +4799,38 @@ export type UserUncheckedUpdateWithoutNotificationInput = {
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
-  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  bankId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
-  departmentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  bankId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  departmentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   Balance?: Prisma.UserBalanceUncheckedUpdateOneWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
-  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUncheckedUpdateManyWithoutRequesterNestedInput
-  Tasks?: Prisma.TaskUncheckedUpdateManyWithoutUserNestedInput
-  Interactions?: Prisma.InteractionUncheckedUpdateManyWithoutUserNestedInput
-  CustomerNotes?: Prisma.CustomerNoteUncheckedUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
   Opportunities?: Prisma.OpportunityUncheckedUpdateManyWithoutUserNestedInput
+  Interactions?: Prisma.InteractionUncheckedUpdateManyWithoutUserNestedInput
+  Tasks?: Prisma.TaskUncheckedUpdateManyWithoutUserNestedInput
+  VisitPlans?: Prisma.VisitPlanUncheckedUpdateManyWithoutUserNestedInput
+  CustomerNotes?: Prisma.CustomerNoteUncheckedUpdateManyWithoutUserNestedInput
+  Customers?: Prisma.CustomerUncheckedUpdateManyWithoutAccountManagerNestedInput
   Quotations?: Prisma.QuotationUncheckedUpdateManyWithoutUserNestedInput
+  salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutUserNestedInput
   Invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutUserNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutUserNestedInput
+  goodsReceipts?: Prisma.GoodsReceiptUncheckedUpdateManyWithoutUserNestedInput
+  deliveryOrders?: Prisma.DeliveryOrderUncheckedUpdateManyWithoutUserNestedInput
   accountingPayments?: Prisma.PaymentUncheckedUpdateManyWithoutCreatedByNestedInput
   journalEntriesCreated?: Prisma.JournalEntryUncheckedUpdateManyWithoutCreatedByNestedInput
   journalEntriesPosted?: Prisma.JournalEntryUncheckedUpdateManyWithoutPostedByNestedInput
   closedPeriods?: Prisma.FiscalPeriodUncheckedUpdateManyWithoutClosedByNestedInput
   vendorBillsCreated?: Prisma.VendorBillUncheckedUpdateManyWithoutCreatedByNestedInput
   bankTransactions?: Prisma.BankTransactionUncheckedUpdateManyWithoutCreatedByNestedInput
-  VisitPlans?: Prisma.VisitPlanUncheckedUpdateManyWithoutUserNestedInput
-  Customers?: Prisma.CustomerUncheckedUpdateManyWithoutAccountManagerNestedInput
   approvalItems?: Prisma.ApprovalItemUncheckedUpdateManyWithoutUserNestedInput
-  salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutUserNestedInput
-  purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutUserNestedInput
-  goodsReceipts?: Prisma.GoodsReceiptUncheckedUpdateManyWithoutUserNestedInput
-  deliveryOrders?: Prisma.DeliveryOrderUncheckedUpdateManyWithoutUserNestedInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutPurchaseOrdersInput = {
@@ -4838,38 +4838,38 @@ export type UserCreateWithoutPurchaseOrdersInput = {
   code?: string | null
   email: string
   password: string
-  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   active?: boolean
   bankAccount?: string | null
   currency?: $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
+  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   Bank?: Prisma.BankCreateNestedOneWithoutUserInput
   Department?: Prisma.DepartmentCreateNestedOneWithoutUserInput
+  Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
-  ApprovalSettingItem?: Prisma.ApprovalSettingItemCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpCreateNestedManyWithoutRequesterInput
-  Tasks?: Prisma.TaskCreateNestedManyWithoutUserInput
-  Interactions?: Prisma.InteractionCreateNestedManyWithoutUserInput
-  CustomerNotes?: Prisma.CustomerNoteCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadCreateNestedManyWithoutUserInput
   Opportunities?: Prisma.OpportunityCreateNestedManyWithoutUserInput
+  Interactions?: Prisma.InteractionCreateNestedManyWithoutUserInput
+  Tasks?: Prisma.TaskCreateNestedManyWithoutUserInput
+  VisitPlans?: Prisma.VisitPlanCreateNestedManyWithoutUserInput
+  CustomerNotes?: Prisma.CustomerNoteCreateNestedManyWithoutUserInput
+  Customers?: Prisma.CustomerCreateNestedManyWithoutAccountManagerInput
   Quotations?: Prisma.QuotationCreateNestedManyWithoutUserInput
+  salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutUserInput
   Invoices?: Prisma.InvoiceCreateNestedManyWithoutUserInput
+  goodsReceipts?: Prisma.GoodsReceiptCreateNestedManyWithoutUserInput
+  deliveryOrders?: Prisma.DeliveryOrderCreateNestedManyWithoutUserInput
   accountingPayments?: Prisma.PaymentCreateNestedManyWithoutCreatedByInput
   journalEntriesCreated?: Prisma.JournalEntryCreateNestedManyWithoutCreatedByInput
   journalEntriesPosted?: Prisma.JournalEntryCreateNestedManyWithoutPostedByInput
   closedPeriods?: Prisma.FiscalPeriodCreateNestedManyWithoutClosedByInput
   vendorBillsCreated?: Prisma.VendorBillCreateNestedManyWithoutCreatedByInput
   bankTransactions?: Prisma.BankTransactionCreateNestedManyWithoutCreatedByInput
-  VisitPlans?: Prisma.VisitPlanCreateNestedManyWithoutUserInput
-  Customers?: Prisma.CustomerCreateNestedManyWithoutAccountManagerInput
   approvalItems?: Prisma.ApprovalItemCreateNestedManyWithoutUserInput
-  salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutUserInput
-  goodsReceipts?: Prisma.GoodsReceiptCreateNestedManyWithoutUserInput
-  deliveryOrders?: Prisma.DeliveryOrderCreateNestedManyWithoutUserInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutPurchaseOrdersInput = {
@@ -4878,38 +4878,38 @@ export type UserUncheckedCreateWithoutPurchaseOrdersInput = {
   code?: string | null
   email: string
   password: string
-  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   active?: boolean
-  bankId?: number | null
   bankAccount?: string | null
   currency?: $Enums.Currency
-  departmentId?: number | null
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  bankId?: number | null
+  departmentId?: number | null
+  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   Balance?: Prisma.UserBalanceUncheckedCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
-  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpUncheckedCreateNestedManyWithoutRequesterInput
-  Tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutUserInput
-  Interactions?: Prisma.InteractionUncheckedCreateNestedManyWithoutUserInput
-  CustomerNotes?: Prisma.CustomerNoteUncheckedCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
   Opportunities?: Prisma.OpportunityUncheckedCreateNestedManyWithoutUserInput
+  Interactions?: Prisma.InteractionUncheckedCreateNestedManyWithoutUserInput
+  Tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutUserInput
+  VisitPlans?: Prisma.VisitPlanUncheckedCreateNestedManyWithoutUserInput
+  CustomerNotes?: Prisma.CustomerNoteUncheckedCreateNestedManyWithoutUserInput
+  Customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutAccountManagerInput
   Quotations?: Prisma.QuotationUncheckedCreateNestedManyWithoutUserInput
+  salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutUserInput
   Invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutUserInput
+  goodsReceipts?: Prisma.GoodsReceiptUncheckedCreateNestedManyWithoutUserInput
+  deliveryOrders?: Prisma.DeliveryOrderUncheckedCreateNestedManyWithoutUserInput
   accountingPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCreatedByInput
   journalEntriesCreated?: Prisma.JournalEntryUncheckedCreateNestedManyWithoutCreatedByInput
   journalEntriesPosted?: Prisma.JournalEntryUncheckedCreateNestedManyWithoutPostedByInput
   closedPeriods?: Prisma.FiscalPeriodUncheckedCreateNestedManyWithoutClosedByInput
   vendorBillsCreated?: Prisma.VendorBillUncheckedCreateNestedManyWithoutCreatedByInput
   bankTransactions?: Prisma.BankTransactionUncheckedCreateNestedManyWithoutCreatedByInput
-  VisitPlans?: Prisma.VisitPlanUncheckedCreateNestedManyWithoutUserInput
-  Customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutAccountManagerInput
   approvalItems?: Prisma.ApprovalItemUncheckedCreateNestedManyWithoutUserInput
-  salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutUserInput
-  goodsReceipts?: Prisma.GoodsReceiptUncheckedCreateNestedManyWithoutUserInput
-  deliveryOrders?: Prisma.DeliveryOrderUncheckedCreateNestedManyWithoutUserInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutPurchaseOrdersInput = {
@@ -4933,38 +4933,38 @@ export type UserUpdateWithoutPurchaseOrdersInput = {
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
-  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
+  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   Bank?: Prisma.BankUpdateOneWithoutUserNestedInput
   Department?: Prisma.DepartmentUpdateOneWithoutUserNestedInput
+  Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
-  ApprovalSettingItem?: Prisma.ApprovalSettingItemUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUpdateManyWithoutRequesterNestedInput
-  Tasks?: Prisma.TaskUpdateManyWithoutUserNestedInput
-  Interactions?: Prisma.InteractionUpdateManyWithoutUserNestedInput
-  CustomerNotes?: Prisma.CustomerNoteUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
   Opportunities?: Prisma.OpportunityUpdateManyWithoutUserNestedInput
+  Interactions?: Prisma.InteractionUpdateManyWithoutUserNestedInput
+  Tasks?: Prisma.TaskUpdateManyWithoutUserNestedInput
+  VisitPlans?: Prisma.VisitPlanUpdateManyWithoutUserNestedInput
+  CustomerNotes?: Prisma.CustomerNoteUpdateManyWithoutUserNestedInput
+  Customers?: Prisma.CustomerUpdateManyWithoutAccountManagerNestedInput
   Quotations?: Prisma.QuotationUpdateManyWithoutUserNestedInput
+  salesOrders?: Prisma.SalesOrderUpdateManyWithoutUserNestedInput
   Invoices?: Prisma.InvoiceUpdateManyWithoutUserNestedInput
+  goodsReceipts?: Prisma.GoodsReceiptUpdateManyWithoutUserNestedInput
+  deliveryOrders?: Prisma.DeliveryOrderUpdateManyWithoutUserNestedInput
   accountingPayments?: Prisma.PaymentUpdateManyWithoutCreatedByNestedInput
   journalEntriesCreated?: Prisma.JournalEntryUpdateManyWithoutCreatedByNestedInput
   journalEntriesPosted?: Prisma.JournalEntryUpdateManyWithoutPostedByNestedInput
   closedPeriods?: Prisma.FiscalPeriodUpdateManyWithoutClosedByNestedInput
   vendorBillsCreated?: Prisma.VendorBillUpdateManyWithoutCreatedByNestedInput
   bankTransactions?: Prisma.BankTransactionUpdateManyWithoutCreatedByNestedInput
-  VisitPlans?: Prisma.VisitPlanUpdateManyWithoutUserNestedInput
-  Customers?: Prisma.CustomerUpdateManyWithoutAccountManagerNestedInput
   approvalItems?: Prisma.ApprovalItemUpdateManyWithoutUserNestedInput
-  salesOrders?: Prisma.SalesOrderUpdateManyWithoutUserNestedInput
-  goodsReceipts?: Prisma.GoodsReceiptUpdateManyWithoutUserNestedInput
-  deliveryOrders?: Prisma.DeliveryOrderUpdateManyWithoutUserNestedInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPurchaseOrdersInput = {
@@ -4973,38 +4973,38 @@ export type UserUncheckedUpdateWithoutPurchaseOrdersInput = {
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
-  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  bankId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
-  departmentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  bankId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  departmentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   Balance?: Prisma.UserBalanceUncheckedUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
-  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUncheckedUpdateManyWithoutRequesterNestedInput
-  Tasks?: Prisma.TaskUncheckedUpdateManyWithoutUserNestedInput
-  Interactions?: Prisma.InteractionUncheckedUpdateManyWithoutUserNestedInput
-  CustomerNotes?: Prisma.CustomerNoteUncheckedUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
   Opportunities?: Prisma.OpportunityUncheckedUpdateManyWithoutUserNestedInput
+  Interactions?: Prisma.InteractionUncheckedUpdateManyWithoutUserNestedInput
+  Tasks?: Prisma.TaskUncheckedUpdateManyWithoutUserNestedInput
+  VisitPlans?: Prisma.VisitPlanUncheckedUpdateManyWithoutUserNestedInput
+  CustomerNotes?: Prisma.CustomerNoteUncheckedUpdateManyWithoutUserNestedInput
+  Customers?: Prisma.CustomerUncheckedUpdateManyWithoutAccountManagerNestedInput
   Quotations?: Prisma.QuotationUncheckedUpdateManyWithoutUserNestedInput
+  salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutUserNestedInput
   Invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutUserNestedInput
+  goodsReceipts?: Prisma.GoodsReceiptUncheckedUpdateManyWithoutUserNestedInput
+  deliveryOrders?: Prisma.DeliveryOrderUncheckedUpdateManyWithoutUserNestedInput
   accountingPayments?: Prisma.PaymentUncheckedUpdateManyWithoutCreatedByNestedInput
   journalEntriesCreated?: Prisma.JournalEntryUncheckedUpdateManyWithoutCreatedByNestedInput
   journalEntriesPosted?: Prisma.JournalEntryUncheckedUpdateManyWithoutPostedByNestedInput
   closedPeriods?: Prisma.FiscalPeriodUncheckedUpdateManyWithoutClosedByNestedInput
   vendorBillsCreated?: Prisma.VendorBillUncheckedUpdateManyWithoutCreatedByNestedInput
   bankTransactions?: Prisma.BankTransactionUncheckedUpdateManyWithoutCreatedByNestedInput
-  VisitPlans?: Prisma.VisitPlanUncheckedUpdateManyWithoutUserNestedInput
-  Customers?: Prisma.CustomerUncheckedUpdateManyWithoutAccountManagerNestedInput
   approvalItems?: Prisma.ApprovalItemUncheckedUpdateManyWithoutUserNestedInput
-  salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutUserNestedInput
-  goodsReceipts?: Prisma.GoodsReceiptUncheckedUpdateManyWithoutUserNestedInput
-  deliveryOrders?: Prisma.DeliveryOrderUncheckedUpdateManyWithoutUserNestedInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutQuotationsInput = {
@@ -5012,38 +5012,38 @@ export type UserCreateWithoutQuotationsInput = {
   code?: string | null
   email: string
   password: string
-  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   active?: boolean
   bankAccount?: string | null
   currency?: $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
+  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   Bank?: Prisma.BankCreateNestedOneWithoutUserInput
   Department?: Prisma.DepartmentCreateNestedOneWithoutUserInput
+  Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
-  ApprovalSettingItem?: Prisma.ApprovalSettingItemCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpCreateNestedManyWithoutRequesterInput
-  Tasks?: Prisma.TaskCreateNestedManyWithoutUserInput
-  Interactions?: Prisma.InteractionCreateNestedManyWithoutUserInput
-  CustomerNotes?: Prisma.CustomerNoteCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadCreateNestedManyWithoutUserInput
   Opportunities?: Prisma.OpportunityCreateNestedManyWithoutUserInput
+  Interactions?: Prisma.InteractionCreateNestedManyWithoutUserInput
+  Tasks?: Prisma.TaskCreateNestedManyWithoutUserInput
+  VisitPlans?: Prisma.VisitPlanCreateNestedManyWithoutUserInput
+  CustomerNotes?: Prisma.CustomerNoteCreateNestedManyWithoutUserInput
+  Customers?: Prisma.CustomerCreateNestedManyWithoutAccountManagerInput
+  salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutUserInput
   Invoices?: Prisma.InvoiceCreateNestedManyWithoutUserInput
+  purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutUserInput
+  goodsReceipts?: Prisma.GoodsReceiptCreateNestedManyWithoutUserInput
+  deliveryOrders?: Prisma.DeliveryOrderCreateNestedManyWithoutUserInput
   accountingPayments?: Prisma.PaymentCreateNestedManyWithoutCreatedByInput
   journalEntriesCreated?: Prisma.JournalEntryCreateNestedManyWithoutCreatedByInput
   journalEntriesPosted?: Prisma.JournalEntryCreateNestedManyWithoutPostedByInput
   closedPeriods?: Prisma.FiscalPeriodCreateNestedManyWithoutClosedByInput
   vendorBillsCreated?: Prisma.VendorBillCreateNestedManyWithoutCreatedByInput
   bankTransactions?: Prisma.BankTransactionCreateNestedManyWithoutCreatedByInput
-  VisitPlans?: Prisma.VisitPlanCreateNestedManyWithoutUserInput
-  Customers?: Prisma.CustomerCreateNestedManyWithoutAccountManagerInput
   approvalItems?: Prisma.ApprovalItemCreateNestedManyWithoutUserInput
-  salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutUserInput
-  purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutUserInput
-  goodsReceipts?: Prisma.GoodsReceiptCreateNestedManyWithoutUserInput
-  deliveryOrders?: Prisma.DeliveryOrderCreateNestedManyWithoutUserInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutQuotationsInput = {
@@ -5052,38 +5052,38 @@ export type UserUncheckedCreateWithoutQuotationsInput = {
   code?: string | null
   email: string
   password: string
-  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   active?: boolean
-  bankId?: number | null
   bankAccount?: string | null
   currency?: $Enums.Currency
-  departmentId?: number | null
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  bankId?: number | null
+  departmentId?: number | null
+  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   Balance?: Prisma.UserBalanceUncheckedCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
-  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpUncheckedCreateNestedManyWithoutRequesterInput
-  Tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutUserInput
-  Interactions?: Prisma.InteractionUncheckedCreateNestedManyWithoutUserInput
-  CustomerNotes?: Prisma.CustomerNoteUncheckedCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
   Opportunities?: Prisma.OpportunityUncheckedCreateNestedManyWithoutUserInput
+  Interactions?: Prisma.InteractionUncheckedCreateNestedManyWithoutUserInput
+  Tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutUserInput
+  VisitPlans?: Prisma.VisitPlanUncheckedCreateNestedManyWithoutUserInput
+  CustomerNotes?: Prisma.CustomerNoteUncheckedCreateNestedManyWithoutUserInput
+  Customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutAccountManagerInput
+  salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutUserInput
   Invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutUserInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutUserInput
+  goodsReceipts?: Prisma.GoodsReceiptUncheckedCreateNestedManyWithoutUserInput
+  deliveryOrders?: Prisma.DeliveryOrderUncheckedCreateNestedManyWithoutUserInput
   accountingPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCreatedByInput
   journalEntriesCreated?: Prisma.JournalEntryUncheckedCreateNestedManyWithoutCreatedByInput
   journalEntriesPosted?: Prisma.JournalEntryUncheckedCreateNestedManyWithoutPostedByInput
   closedPeriods?: Prisma.FiscalPeriodUncheckedCreateNestedManyWithoutClosedByInput
   vendorBillsCreated?: Prisma.VendorBillUncheckedCreateNestedManyWithoutCreatedByInput
   bankTransactions?: Prisma.BankTransactionUncheckedCreateNestedManyWithoutCreatedByInput
-  VisitPlans?: Prisma.VisitPlanUncheckedCreateNestedManyWithoutUserInput
-  Customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutAccountManagerInput
   approvalItems?: Prisma.ApprovalItemUncheckedCreateNestedManyWithoutUserInput
-  salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutUserInput
-  purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutUserInput
-  goodsReceipts?: Prisma.GoodsReceiptUncheckedCreateNestedManyWithoutUserInput
-  deliveryOrders?: Prisma.DeliveryOrderUncheckedCreateNestedManyWithoutUserInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutQuotationsInput = {
@@ -5107,38 +5107,38 @@ export type UserUpdateWithoutQuotationsInput = {
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
-  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
+  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   Bank?: Prisma.BankUpdateOneWithoutUserNestedInput
   Department?: Prisma.DepartmentUpdateOneWithoutUserNestedInput
+  Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
-  ApprovalSettingItem?: Prisma.ApprovalSettingItemUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUpdateManyWithoutRequesterNestedInput
-  Tasks?: Prisma.TaskUpdateManyWithoutUserNestedInput
-  Interactions?: Prisma.InteractionUpdateManyWithoutUserNestedInput
-  CustomerNotes?: Prisma.CustomerNoteUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
   Opportunities?: Prisma.OpportunityUpdateManyWithoutUserNestedInput
+  Interactions?: Prisma.InteractionUpdateManyWithoutUserNestedInput
+  Tasks?: Prisma.TaskUpdateManyWithoutUserNestedInput
+  VisitPlans?: Prisma.VisitPlanUpdateManyWithoutUserNestedInput
+  CustomerNotes?: Prisma.CustomerNoteUpdateManyWithoutUserNestedInput
+  Customers?: Prisma.CustomerUpdateManyWithoutAccountManagerNestedInput
+  salesOrders?: Prisma.SalesOrderUpdateManyWithoutUserNestedInput
   Invoices?: Prisma.InvoiceUpdateManyWithoutUserNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutUserNestedInput
+  goodsReceipts?: Prisma.GoodsReceiptUpdateManyWithoutUserNestedInput
+  deliveryOrders?: Prisma.DeliveryOrderUpdateManyWithoutUserNestedInput
   accountingPayments?: Prisma.PaymentUpdateManyWithoutCreatedByNestedInput
   journalEntriesCreated?: Prisma.JournalEntryUpdateManyWithoutCreatedByNestedInput
   journalEntriesPosted?: Prisma.JournalEntryUpdateManyWithoutPostedByNestedInput
   closedPeriods?: Prisma.FiscalPeriodUpdateManyWithoutClosedByNestedInput
   vendorBillsCreated?: Prisma.VendorBillUpdateManyWithoutCreatedByNestedInput
   bankTransactions?: Prisma.BankTransactionUpdateManyWithoutCreatedByNestedInput
-  VisitPlans?: Prisma.VisitPlanUpdateManyWithoutUserNestedInput
-  Customers?: Prisma.CustomerUpdateManyWithoutAccountManagerNestedInput
   approvalItems?: Prisma.ApprovalItemUpdateManyWithoutUserNestedInput
-  salesOrders?: Prisma.SalesOrderUpdateManyWithoutUserNestedInput
-  purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutUserNestedInput
-  goodsReceipts?: Prisma.GoodsReceiptUpdateManyWithoutUserNestedInput
-  deliveryOrders?: Prisma.DeliveryOrderUpdateManyWithoutUserNestedInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutQuotationsInput = {
@@ -5147,38 +5147,38 @@ export type UserUncheckedUpdateWithoutQuotationsInput = {
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
-  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  bankId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
-  departmentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  bankId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  departmentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   Balance?: Prisma.UserBalanceUncheckedUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
-  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUncheckedUpdateManyWithoutRequesterNestedInput
-  Tasks?: Prisma.TaskUncheckedUpdateManyWithoutUserNestedInput
-  Interactions?: Prisma.InteractionUncheckedUpdateManyWithoutUserNestedInput
-  CustomerNotes?: Prisma.CustomerNoteUncheckedUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
   Opportunities?: Prisma.OpportunityUncheckedUpdateManyWithoutUserNestedInput
+  Interactions?: Prisma.InteractionUncheckedUpdateManyWithoutUserNestedInput
+  Tasks?: Prisma.TaskUncheckedUpdateManyWithoutUserNestedInput
+  VisitPlans?: Prisma.VisitPlanUncheckedUpdateManyWithoutUserNestedInput
+  CustomerNotes?: Prisma.CustomerNoteUncheckedUpdateManyWithoutUserNestedInput
+  Customers?: Prisma.CustomerUncheckedUpdateManyWithoutAccountManagerNestedInput
+  salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutUserNestedInput
   Invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutUserNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutUserNestedInput
+  goodsReceipts?: Prisma.GoodsReceiptUncheckedUpdateManyWithoutUserNestedInput
+  deliveryOrders?: Prisma.DeliveryOrderUncheckedUpdateManyWithoutUserNestedInput
   accountingPayments?: Prisma.PaymentUncheckedUpdateManyWithoutCreatedByNestedInput
   journalEntriesCreated?: Prisma.JournalEntryUncheckedUpdateManyWithoutCreatedByNestedInput
   journalEntriesPosted?: Prisma.JournalEntryUncheckedUpdateManyWithoutPostedByNestedInput
   closedPeriods?: Prisma.FiscalPeriodUncheckedUpdateManyWithoutClosedByNestedInput
   vendorBillsCreated?: Prisma.VendorBillUncheckedUpdateManyWithoutCreatedByNestedInput
   bankTransactions?: Prisma.BankTransactionUncheckedUpdateManyWithoutCreatedByNestedInput
-  VisitPlans?: Prisma.VisitPlanUncheckedUpdateManyWithoutUserNestedInput
-  Customers?: Prisma.CustomerUncheckedUpdateManyWithoutAccountManagerNestedInput
   approvalItems?: Prisma.ApprovalItemUncheckedUpdateManyWithoutUserNestedInput
-  salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutUserNestedInput
-  purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutUserNestedInput
-  goodsReceipts?: Prisma.GoodsReceiptUncheckedUpdateManyWithoutUserNestedInput
-  deliveryOrders?: Prisma.DeliveryOrderUncheckedUpdateManyWithoutUserNestedInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutSalesOrdersInput = {
@@ -5186,38 +5186,38 @@ export type UserCreateWithoutSalesOrdersInput = {
   code?: string | null
   email: string
   password: string
-  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   active?: boolean
   bankAccount?: string | null
   currency?: $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
+  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   Bank?: Prisma.BankCreateNestedOneWithoutUserInput
   Department?: Prisma.DepartmentCreateNestedOneWithoutUserInput
+  Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
-  ApprovalSettingItem?: Prisma.ApprovalSettingItemCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpCreateNestedManyWithoutRequesterInput
-  Tasks?: Prisma.TaskCreateNestedManyWithoutUserInput
-  Interactions?: Prisma.InteractionCreateNestedManyWithoutUserInput
-  CustomerNotes?: Prisma.CustomerNoteCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadCreateNestedManyWithoutUserInput
   Opportunities?: Prisma.OpportunityCreateNestedManyWithoutUserInput
+  Interactions?: Prisma.InteractionCreateNestedManyWithoutUserInput
+  Tasks?: Prisma.TaskCreateNestedManyWithoutUserInput
+  VisitPlans?: Prisma.VisitPlanCreateNestedManyWithoutUserInput
+  CustomerNotes?: Prisma.CustomerNoteCreateNestedManyWithoutUserInput
+  Customers?: Prisma.CustomerCreateNestedManyWithoutAccountManagerInput
   Quotations?: Prisma.QuotationCreateNestedManyWithoutUserInput
   Invoices?: Prisma.InvoiceCreateNestedManyWithoutUserInput
+  purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutUserInput
+  goodsReceipts?: Prisma.GoodsReceiptCreateNestedManyWithoutUserInput
+  deliveryOrders?: Prisma.DeliveryOrderCreateNestedManyWithoutUserInput
   accountingPayments?: Prisma.PaymentCreateNestedManyWithoutCreatedByInput
   journalEntriesCreated?: Prisma.JournalEntryCreateNestedManyWithoutCreatedByInput
   journalEntriesPosted?: Prisma.JournalEntryCreateNestedManyWithoutPostedByInput
   closedPeriods?: Prisma.FiscalPeriodCreateNestedManyWithoutClosedByInput
   vendorBillsCreated?: Prisma.VendorBillCreateNestedManyWithoutCreatedByInput
   bankTransactions?: Prisma.BankTransactionCreateNestedManyWithoutCreatedByInput
-  VisitPlans?: Prisma.VisitPlanCreateNestedManyWithoutUserInput
-  Customers?: Prisma.CustomerCreateNestedManyWithoutAccountManagerInput
   approvalItems?: Prisma.ApprovalItemCreateNestedManyWithoutUserInput
-  purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutUserInput
-  goodsReceipts?: Prisma.GoodsReceiptCreateNestedManyWithoutUserInput
-  deliveryOrders?: Prisma.DeliveryOrderCreateNestedManyWithoutUserInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutSalesOrdersInput = {
@@ -5226,38 +5226,38 @@ export type UserUncheckedCreateWithoutSalesOrdersInput = {
   code?: string | null
   email: string
   password: string
-  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   active?: boolean
-  bankId?: number | null
   bankAccount?: string | null
   currency?: $Enums.Currency
-  departmentId?: number | null
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  bankId?: number | null
+  departmentId?: number | null
+  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   Balance?: Prisma.UserBalanceUncheckedCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
-  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpUncheckedCreateNestedManyWithoutRequesterInput
-  Tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutUserInput
-  Interactions?: Prisma.InteractionUncheckedCreateNestedManyWithoutUserInput
-  CustomerNotes?: Prisma.CustomerNoteUncheckedCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
   Opportunities?: Prisma.OpportunityUncheckedCreateNestedManyWithoutUserInput
+  Interactions?: Prisma.InteractionUncheckedCreateNestedManyWithoutUserInput
+  Tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutUserInput
+  VisitPlans?: Prisma.VisitPlanUncheckedCreateNestedManyWithoutUserInput
+  CustomerNotes?: Prisma.CustomerNoteUncheckedCreateNestedManyWithoutUserInput
+  Customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutAccountManagerInput
   Quotations?: Prisma.QuotationUncheckedCreateNestedManyWithoutUserInput
   Invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutUserInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutUserInput
+  goodsReceipts?: Prisma.GoodsReceiptUncheckedCreateNestedManyWithoutUserInput
+  deliveryOrders?: Prisma.DeliveryOrderUncheckedCreateNestedManyWithoutUserInput
   accountingPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCreatedByInput
   journalEntriesCreated?: Prisma.JournalEntryUncheckedCreateNestedManyWithoutCreatedByInput
   journalEntriesPosted?: Prisma.JournalEntryUncheckedCreateNestedManyWithoutPostedByInput
   closedPeriods?: Prisma.FiscalPeriodUncheckedCreateNestedManyWithoutClosedByInput
   vendorBillsCreated?: Prisma.VendorBillUncheckedCreateNestedManyWithoutCreatedByInput
   bankTransactions?: Prisma.BankTransactionUncheckedCreateNestedManyWithoutCreatedByInput
-  VisitPlans?: Prisma.VisitPlanUncheckedCreateNestedManyWithoutUserInput
-  Customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutAccountManagerInput
   approvalItems?: Prisma.ApprovalItemUncheckedCreateNestedManyWithoutUserInput
-  purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutUserInput
-  goodsReceipts?: Prisma.GoodsReceiptUncheckedCreateNestedManyWithoutUserInput
-  deliveryOrders?: Prisma.DeliveryOrderUncheckedCreateNestedManyWithoutUserInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutSalesOrdersInput = {
@@ -5281,38 +5281,38 @@ export type UserUpdateWithoutSalesOrdersInput = {
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
-  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
+  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   Bank?: Prisma.BankUpdateOneWithoutUserNestedInput
   Department?: Prisma.DepartmentUpdateOneWithoutUserNestedInput
+  Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
-  ApprovalSettingItem?: Prisma.ApprovalSettingItemUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUpdateManyWithoutRequesterNestedInput
-  Tasks?: Prisma.TaskUpdateManyWithoutUserNestedInput
-  Interactions?: Prisma.InteractionUpdateManyWithoutUserNestedInput
-  CustomerNotes?: Prisma.CustomerNoteUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
   Opportunities?: Prisma.OpportunityUpdateManyWithoutUserNestedInput
+  Interactions?: Prisma.InteractionUpdateManyWithoutUserNestedInput
+  Tasks?: Prisma.TaskUpdateManyWithoutUserNestedInput
+  VisitPlans?: Prisma.VisitPlanUpdateManyWithoutUserNestedInput
+  CustomerNotes?: Prisma.CustomerNoteUpdateManyWithoutUserNestedInput
+  Customers?: Prisma.CustomerUpdateManyWithoutAccountManagerNestedInput
   Quotations?: Prisma.QuotationUpdateManyWithoutUserNestedInput
   Invoices?: Prisma.InvoiceUpdateManyWithoutUserNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutUserNestedInput
+  goodsReceipts?: Prisma.GoodsReceiptUpdateManyWithoutUserNestedInput
+  deliveryOrders?: Prisma.DeliveryOrderUpdateManyWithoutUserNestedInput
   accountingPayments?: Prisma.PaymentUpdateManyWithoutCreatedByNestedInput
   journalEntriesCreated?: Prisma.JournalEntryUpdateManyWithoutCreatedByNestedInput
   journalEntriesPosted?: Prisma.JournalEntryUpdateManyWithoutPostedByNestedInput
   closedPeriods?: Prisma.FiscalPeriodUpdateManyWithoutClosedByNestedInput
   vendorBillsCreated?: Prisma.VendorBillUpdateManyWithoutCreatedByNestedInput
   bankTransactions?: Prisma.BankTransactionUpdateManyWithoutCreatedByNestedInput
-  VisitPlans?: Prisma.VisitPlanUpdateManyWithoutUserNestedInput
-  Customers?: Prisma.CustomerUpdateManyWithoutAccountManagerNestedInput
   approvalItems?: Prisma.ApprovalItemUpdateManyWithoutUserNestedInput
-  purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutUserNestedInput
-  goodsReceipts?: Prisma.GoodsReceiptUpdateManyWithoutUserNestedInput
-  deliveryOrders?: Prisma.DeliveryOrderUpdateManyWithoutUserNestedInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSalesOrdersInput = {
@@ -5321,38 +5321,38 @@ export type UserUncheckedUpdateWithoutSalesOrdersInput = {
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
-  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  bankId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
-  departmentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  bankId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  departmentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   Balance?: Prisma.UserBalanceUncheckedUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
-  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUncheckedUpdateManyWithoutRequesterNestedInput
-  Tasks?: Prisma.TaskUncheckedUpdateManyWithoutUserNestedInput
-  Interactions?: Prisma.InteractionUncheckedUpdateManyWithoutUserNestedInput
-  CustomerNotes?: Prisma.CustomerNoteUncheckedUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
   Opportunities?: Prisma.OpportunityUncheckedUpdateManyWithoutUserNestedInput
+  Interactions?: Prisma.InteractionUncheckedUpdateManyWithoutUserNestedInput
+  Tasks?: Prisma.TaskUncheckedUpdateManyWithoutUserNestedInput
+  VisitPlans?: Prisma.VisitPlanUncheckedUpdateManyWithoutUserNestedInput
+  CustomerNotes?: Prisma.CustomerNoteUncheckedUpdateManyWithoutUserNestedInput
+  Customers?: Prisma.CustomerUncheckedUpdateManyWithoutAccountManagerNestedInput
   Quotations?: Prisma.QuotationUncheckedUpdateManyWithoutUserNestedInput
   Invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutUserNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutUserNestedInput
+  goodsReceipts?: Prisma.GoodsReceiptUncheckedUpdateManyWithoutUserNestedInput
+  deliveryOrders?: Prisma.DeliveryOrderUncheckedUpdateManyWithoutUserNestedInput
   accountingPayments?: Prisma.PaymentUncheckedUpdateManyWithoutCreatedByNestedInput
   journalEntriesCreated?: Prisma.JournalEntryUncheckedUpdateManyWithoutCreatedByNestedInput
   journalEntriesPosted?: Prisma.JournalEntryUncheckedUpdateManyWithoutPostedByNestedInput
   closedPeriods?: Prisma.FiscalPeriodUncheckedUpdateManyWithoutClosedByNestedInput
   vendorBillsCreated?: Prisma.VendorBillUncheckedUpdateManyWithoutCreatedByNestedInput
   bankTransactions?: Prisma.BankTransactionUncheckedUpdateManyWithoutCreatedByNestedInput
-  VisitPlans?: Prisma.VisitPlanUncheckedUpdateManyWithoutUserNestedInput
-  Customers?: Prisma.CustomerUncheckedUpdateManyWithoutAccountManagerNestedInput
   approvalItems?: Prisma.ApprovalItemUncheckedUpdateManyWithoutUserNestedInput
-  purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutUserNestedInput
-  goodsReceipts?: Prisma.GoodsReceiptUncheckedUpdateManyWithoutUserNestedInput
-  deliveryOrders?: Prisma.DeliveryOrderUncheckedUpdateManyWithoutUserNestedInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutDepartmentInput = {
@@ -5360,38 +5360,38 @@ export type UserCreateWithoutDepartmentInput = {
   code?: string | null
   email: string
   password: string
-  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   active?: boolean
   bankAccount?: string | null
   currency?: $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
+  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   Bank?: Prisma.BankCreateNestedOneWithoutUserInput
+  Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
-  ApprovalSettingItem?: Prisma.ApprovalSettingItemCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpCreateNestedManyWithoutRequesterInput
-  Tasks?: Prisma.TaskCreateNestedManyWithoutUserInput
-  Interactions?: Prisma.InteractionCreateNestedManyWithoutUserInput
-  CustomerNotes?: Prisma.CustomerNoteCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadCreateNestedManyWithoutUserInput
   Opportunities?: Prisma.OpportunityCreateNestedManyWithoutUserInput
+  Interactions?: Prisma.InteractionCreateNestedManyWithoutUserInput
+  Tasks?: Prisma.TaskCreateNestedManyWithoutUserInput
+  VisitPlans?: Prisma.VisitPlanCreateNestedManyWithoutUserInput
+  CustomerNotes?: Prisma.CustomerNoteCreateNestedManyWithoutUserInput
+  Customers?: Prisma.CustomerCreateNestedManyWithoutAccountManagerInput
   Quotations?: Prisma.QuotationCreateNestedManyWithoutUserInput
+  salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutUserInput
   Invoices?: Prisma.InvoiceCreateNestedManyWithoutUserInput
+  purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutUserInput
+  goodsReceipts?: Prisma.GoodsReceiptCreateNestedManyWithoutUserInput
+  deliveryOrders?: Prisma.DeliveryOrderCreateNestedManyWithoutUserInput
   accountingPayments?: Prisma.PaymentCreateNestedManyWithoutCreatedByInput
   journalEntriesCreated?: Prisma.JournalEntryCreateNestedManyWithoutCreatedByInput
   journalEntriesPosted?: Prisma.JournalEntryCreateNestedManyWithoutPostedByInput
   closedPeriods?: Prisma.FiscalPeriodCreateNestedManyWithoutClosedByInput
   vendorBillsCreated?: Prisma.VendorBillCreateNestedManyWithoutCreatedByInput
   bankTransactions?: Prisma.BankTransactionCreateNestedManyWithoutCreatedByInput
-  VisitPlans?: Prisma.VisitPlanCreateNestedManyWithoutUserInput
-  Customers?: Prisma.CustomerCreateNestedManyWithoutAccountManagerInput
   approvalItems?: Prisma.ApprovalItemCreateNestedManyWithoutUserInput
-  salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutUserInput
-  purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutUserInput
-  goodsReceipts?: Prisma.GoodsReceiptCreateNestedManyWithoutUserInput
-  deliveryOrders?: Prisma.DeliveryOrderCreateNestedManyWithoutUserInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutDepartmentInput = {
@@ -5400,38 +5400,38 @@ export type UserUncheckedCreateWithoutDepartmentInput = {
   code?: string | null
   email: string
   password: string
-  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   active?: boolean
-  bankId?: number | null
   bankAccount?: string | null
   currency?: $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  bankId?: number | null
+  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   Balance?: Prisma.UserBalanceUncheckedCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
-  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpUncheckedCreateNestedManyWithoutRequesterInput
-  Tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutUserInput
-  Interactions?: Prisma.InteractionUncheckedCreateNestedManyWithoutUserInput
-  CustomerNotes?: Prisma.CustomerNoteUncheckedCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
   Opportunities?: Prisma.OpportunityUncheckedCreateNestedManyWithoutUserInput
+  Interactions?: Prisma.InteractionUncheckedCreateNestedManyWithoutUserInput
+  Tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutUserInput
+  VisitPlans?: Prisma.VisitPlanUncheckedCreateNestedManyWithoutUserInput
+  CustomerNotes?: Prisma.CustomerNoteUncheckedCreateNestedManyWithoutUserInput
+  Customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutAccountManagerInput
   Quotations?: Prisma.QuotationUncheckedCreateNestedManyWithoutUserInput
+  salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutUserInput
   Invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutUserInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutUserInput
+  goodsReceipts?: Prisma.GoodsReceiptUncheckedCreateNestedManyWithoutUserInput
+  deliveryOrders?: Prisma.DeliveryOrderUncheckedCreateNestedManyWithoutUserInput
   accountingPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCreatedByInput
   journalEntriesCreated?: Prisma.JournalEntryUncheckedCreateNestedManyWithoutCreatedByInput
   journalEntriesPosted?: Prisma.JournalEntryUncheckedCreateNestedManyWithoutPostedByInput
   closedPeriods?: Prisma.FiscalPeriodUncheckedCreateNestedManyWithoutClosedByInput
   vendorBillsCreated?: Prisma.VendorBillUncheckedCreateNestedManyWithoutCreatedByInput
   bankTransactions?: Prisma.BankTransactionUncheckedCreateNestedManyWithoutCreatedByInput
-  VisitPlans?: Prisma.VisitPlanUncheckedCreateNestedManyWithoutUserInput
-  Customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutAccountManagerInput
   approvalItems?: Prisma.ApprovalItemUncheckedCreateNestedManyWithoutUserInput
-  salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutUserInput
-  purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutUserInput
-  goodsReceipts?: Prisma.GoodsReceiptUncheckedCreateNestedManyWithoutUserInput
-  deliveryOrders?: Prisma.DeliveryOrderUncheckedCreateNestedManyWithoutUserInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutDepartmentInput = {
@@ -5469,13 +5469,13 @@ export type UserScalarWhereInput = {
   code?: Prisma.StringNullableFilter<"User"> | string | null
   email?: Prisma.StringFilter<"User"> | string
   password?: Prisma.StringFilter<"User"> | string
-  roles?: Prisma.EnumRoleNullableListFilter<"User">
   active?: Prisma.BoolFilter<"User"> | boolean
-  bankId?: Prisma.IntNullableFilter<"User"> | number | null
   bankAccount?: Prisma.StringNullableFilter<"User"> | string | null
   currency?: Prisma.EnumCurrencyFilter<"User"> | $Enums.Currency
-  departmentId?: Prisma.IntNullableFilter<"User"> | number | null
   signatureSpeciment?: Prisma.JsonNullableFilter<"User">
+  bankId?: Prisma.IntNullableFilter<"User"> | number | null
+  departmentId?: Prisma.IntNullableFilter<"User"> | number | null
+  roles?: Prisma.EnumRoleNullableListFilter<"User">
 }
 
 export type UserCreateWithoutBankInput = {
@@ -5483,38 +5483,38 @@ export type UserCreateWithoutBankInput = {
   code?: string | null
   email: string
   password: string
-  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   active?: boolean
   bankAccount?: string | null
   currency?: $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
+  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   Department?: Prisma.DepartmentCreateNestedOneWithoutUserInput
+  Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
-  ApprovalSettingItem?: Prisma.ApprovalSettingItemCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpCreateNestedManyWithoutRequesterInput
-  Tasks?: Prisma.TaskCreateNestedManyWithoutUserInput
-  Interactions?: Prisma.InteractionCreateNestedManyWithoutUserInput
-  CustomerNotes?: Prisma.CustomerNoteCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadCreateNestedManyWithoutUserInput
   Opportunities?: Prisma.OpportunityCreateNestedManyWithoutUserInput
+  Interactions?: Prisma.InteractionCreateNestedManyWithoutUserInput
+  Tasks?: Prisma.TaskCreateNestedManyWithoutUserInput
+  VisitPlans?: Prisma.VisitPlanCreateNestedManyWithoutUserInput
+  CustomerNotes?: Prisma.CustomerNoteCreateNestedManyWithoutUserInput
+  Customers?: Prisma.CustomerCreateNestedManyWithoutAccountManagerInput
   Quotations?: Prisma.QuotationCreateNestedManyWithoutUserInput
+  salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutUserInput
   Invoices?: Prisma.InvoiceCreateNestedManyWithoutUserInput
+  purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutUserInput
+  goodsReceipts?: Prisma.GoodsReceiptCreateNestedManyWithoutUserInput
+  deliveryOrders?: Prisma.DeliveryOrderCreateNestedManyWithoutUserInput
   accountingPayments?: Prisma.PaymentCreateNestedManyWithoutCreatedByInput
   journalEntriesCreated?: Prisma.JournalEntryCreateNestedManyWithoutCreatedByInput
   journalEntriesPosted?: Prisma.JournalEntryCreateNestedManyWithoutPostedByInput
   closedPeriods?: Prisma.FiscalPeriodCreateNestedManyWithoutClosedByInput
   vendorBillsCreated?: Prisma.VendorBillCreateNestedManyWithoutCreatedByInput
   bankTransactions?: Prisma.BankTransactionCreateNestedManyWithoutCreatedByInput
-  VisitPlans?: Prisma.VisitPlanCreateNestedManyWithoutUserInput
-  Customers?: Prisma.CustomerCreateNestedManyWithoutAccountManagerInput
   approvalItems?: Prisma.ApprovalItemCreateNestedManyWithoutUserInput
-  salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutUserInput
-  purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutUserInput
-  goodsReceipts?: Prisma.GoodsReceiptCreateNestedManyWithoutUserInput
-  deliveryOrders?: Prisma.DeliveryOrderCreateNestedManyWithoutUserInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutBankInput = {
@@ -5523,38 +5523,38 @@ export type UserUncheckedCreateWithoutBankInput = {
   code?: string | null
   email: string
   password: string
-  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   active?: boolean
   bankAccount?: string | null
   currency?: $Enums.Currency
-  departmentId?: number | null
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  departmentId?: number | null
+  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   Balance?: Prisma.UserBalanceUncheckedCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
-  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpUncheckedCreateNestedManyWithoutRequesterInput
-  Tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutUserInput
-  Interactions?: Prisma.InteractionUncheckedCreateNestedManyWithoutUserInput
-  CustomerNotes?: Prisma.CustomerNoteUncheckedCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
   Opportunities?: Prisma.OpportunityUncheckedCreateNestedManyWithoutUserInput
+  Interactions?: Prisma.InteractionUncheckedCreateNestedManyWithoutUserInput
+  Tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutUserInput
+  VisitPlans?: Prisma.VisitPlanUncheckedCreateNestedManyWithoutUserInput
+  CustomerNotes?: Prisma.CustomerNoteUncheckedCreateNestedManyWithoutUserInput
+  Customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutAccountManagerInput
   Quotations?: Prisma.QuotationUncheckedCreateNestedManyWithoutUserInput
+  salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutUserInput
   Invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutUserInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutUserInput
+  goodsReceipts?: Prisma.GoodsReceiptUncheckedCreateNestedManyWithoutUserInput
+  deliveryOrders?: Prisma.DeliveryOrderUncheckedCreateNestedManyWithoutUserInput
   accountingPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCreatedByInput
   journalEntriesCreated?: Prisma.JournalEntryUncheckedCreateNestedManyWithoutCreatedByInput
   journalEntriesPosted?: Prisma.JournalEntryUncheckedCreateNestedManyWithoutPostedByInput
   closedPeriods?: Prisma.FiscalPeriodUncheckedCreateNestedManyWithoutClosedByInput
   vendorBillsCreated?: Prisma.VendorBillUncheckedCreateNestedManyWithoutCreatedByInput
   bankTransactions?: Prisma.BankTransactionUncheckedCreateNestedManyWithoutCreatedByInput
-  VisitPlans?: Prisma.VisitPlanUncheckedCreateNestedManyWithoutUserInput
-  Customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutAccountManagerInput
   approvalItems?: Prisma.ApprovalItemUncheckedCreateNestedManyWithoutUserInput
-  salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutUserInput
-  purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutUserInput
-  goodsReceipts?: Prisma.GoodsReceiptUncheckedCreateNestedManyWithoutUserInput
-  deliveryOrders?: Prisma.DeliveryOrderUncheckedCreateNestedManyWithoutUserInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutBankInput = {
@@ -5588,38 +5588,38 @@ export type UserCreateWithoutBalanceInput = {
   code?: string | null
   email: string
   password: string
-  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   active?: boolean
   bankAccount?: string | null
   currency?: $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   Bank?: Prisma.BankCreateNestedOneWithoutUserInput
   Department?: Prisma.DepartmentCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
-  ApprovalSettingItem?: Prisma.ApprovalSettingItemCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpCreateNestedManyWithoutRequesterInput
-  Tasks?: Prisma.TaskCreateNestedManyWithoutUserInput
-  Interactions?: Prisma.InteractionCreateNestedManyWithoutUserInput
-  CustomerNotes?: Prisma.CustomerNoteCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadCreateNestedManyWithoutUserInput
   Opportunities?: Prisma.OpportunityCreateNestedManyWithoutUserInput
+  Interactions?: Prisma.InteractionCreateNestedManyWithoutUserInput
+  Tasks?: Prisma.TaskCreateNestedManyWithoutUserInput
+  VisitPlans?: Prisma.VisitPlanCreateNestedManyWithoutUserInput
+  CustomerNotes?: Prisma.CustomerNoteCreateNestedManyWithoutUserInput
+  Customers?: Prisma.CustomerCreateNestedManyWithoutAccountManagerInput
   Quotations?: Prisma.QuotationCreateNestedManyWithoutUserInput
+  salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutUserInput
   Invoices?: Prisma.InvoiceCreateNestedManyWithoutUserInput
+  purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutUserInput
+  goodsReceipts?: Prisma.GoodsReceiptCreateNestedManyWithoutUserInput
+  deliveryOrders?: Prisma.DeliveryOrderCreateNestedManyWithoutUserInput
   accountingPayments?: Prisma.PaymentCreateNestedManyWithoutCreatedByInput
   journalEntriesCreated?: Prisma.JournalEntryCreateNestedManyWithoutCreatedByInput
   journalEntriesPosted?: Prisma.JournalEntryCreateNestedManyWithoutPostedByInput
   closedPeriods?: Prisma.FiscalPeriodCreateNestedManyWithoutClosedByInput
   vendorBillsCreated?: Prisma.VendorBillCreateNestedManyWithoutCreatedByInput
   bankTransactions?: Prisma.BankTransactionCreateNestedManyWithoutCreatedByInput
-  VisitPlans?: Prisma.VisitPlanCreateNestedManyWithoutUserInput
-  Customers?: Prisma.CustomerCreateNestedManyWithoutAccountManagerInput
   approvalItems?: Prisma.ApprovalItemCreateNestedManyWithoutUserInput
-  salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutUserInput
-  purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutUserInput
-  goodsReceipts?: Prisma.GoodsReceiptCreateNestedManyWithoutUserInput
-  deliveryOrders?: Prisma.DeliveryOrderCreateNestedManyWithoutUserInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutBalanceInput = {
@@ -5628,38 +5628,38 @@ export type UserUncheckedCreateWithoutBalanceInput = {
   code?: string | null
   email: string
   password: string
-  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   active?: boolean
-  bankId?: number | null
   bankAccount?: string | null
   currency?: $Enums.Currency
-  departmentId?: number | null
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  bankId?: number | null
+  departmentId?: number | null
+  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
-  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpUncheckedCreateNestedManyWithoutRequesterInput
-  Tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutUserInput
-  Interactions?: Prisma.InteractionUncheckedCreateNestedManyWithoutUserInput
-  CustomerNotes?: Prisma.CustomerNoteUncheckedCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
   Opportunities?: Prisma.OpportunityUncheckedCreateNestedManyWithoutUserInput
+  Interactions?: Prisma.InteractionUncheckedCreateNestedManyWithoutUserInput
+  Tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutUserInput
+  VisitPlans?: Prisma.VisitPlanUncheckedCreateNestedManyWithoutUserInput
+  CustomerNotes?: Prisma.CustomerNoteUncheckedCreateNestedManyWithoutUserInput
+  Customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutAccountManagerInput
   Quotations?: Prisma.QuotationUncheckedCreateNestedManyWithoutUserInput
+  salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutUserInput
   Invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutUserInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutUserInput
+  goodsReceipts?: Prisma.GoodsReceiptUncheckedCreateNestedManyWithoutUserInput
+  deliveryOrders?: Prisma.DeliveryOrderUncheckedCreateNestedManyWithoutUserInput
   accountingPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCreatedByInput
   journalEntriesCreated?: Prisma.JournalEntryUncheckedCreateNestedManyWithoutCreatedByInput
   journalEntriesPosted?: Prisma.JournalEntryUncheckedCreateNestedManyWithoutPostedByInput
   closedPeriods?: Prisma.FiscalPeriodUncheckedCreateNestedManyWithoutClosedByInput
   vendorBillsCreated?: Prisma.VendorBillUncheckedCreateNestedManyWithoutCreatedByInput
   bankTransactions?: Prisma.BankTransactionUncheckedCreateNestedManyWithoutCreatedByInput
-  VisitPlans?: Prisma.VisitPlanUncheckedCreateNestedManyWithoutUserInput
-  Customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutAccountManagerInput
   approvalItems?: Prisma.ApprovalItemUncheckedCreateNestedManyWithoutUserInput
-  salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutUserInput
-  purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutUserInput
-  goodsReceipts?: Prisma.GoodsReceiptUncheckedCreateNestedManyWithoutUserInput
-  deliveryOrders?: Prisma.DeliveryOrderUncheckedCreateNestedManyWithoutUserInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutBalanceInput = {
@@ -5683,38 +5683,38 @@ export type UserUpdateWithoutBalanceInput = {
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
-  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   Bank?: Prisma.BankUpdateOneWithoutUserNestedInput
   Department?: Prisma.DepartmentUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
-  ApprovalSettingItem?: Prisma.ApprovalSettingItemUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUpdateManyWithoutRequesterNestedInput
-  Tasks?: Prisma.TaskUpdateManyWithoutUserNestedInput
-  Interactions?: Prisma.InteractionUpdateManyWithoutUserNestedInput
-  CustomerNotes?: Prisma.CustomerNoteUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
   Opportunities?: Prisma.OpportunityUpdateManyWithoutUserNestedInput
+  Interactions?: Prisma.InteractionUpdateManyWithoutUserNestedInput
+  Tasks?: Prisma.TaskUpdateManyWithoutUserNestedInput
+  VisitPlans?: Prisma.VisitPlanUpdateManyWithoutUserNestedInput
+  CustomerNotes?: Prisma.CustomerNoteUpdateManyWithoutUserNestedInput
+  Customers?: Prisma.CustomerUpdateManyWithoutAccountManagerNestedInput
   Quotations?: Prisma.QuotationUpdateManyWithoutUserNestedInput
+  salesOrders?: Prisma.SalesOrderUpdateManyWithoutUserNestedInput
   Invoices?: Prisma.InvoiceUpdateManyWithoutUserNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutUserNestedInput
+  goodsReceipts?: Prisma.GoodsReceiptUpdateManyWithoutUserNestedInput
+  deliveryOrders?: Prisma.DeliveryOrderUpdateManyWithoutUserNestedInput
   accountingPayments?: Prisma.PaymentUpdateManyWithoutCreatedByNestedInput
   journalEntriesCreated?: Prisma.JournalEntryUpdateManyWithoutCreatedByNestedInput
   journalEntriesPosted?: Prisma.JournalEntryUpdateManyWithoutPostedByNestedInput
   closedPeriods?: Prisma.FiscalPeriodUpdateManyWithoutClosedByNestedInput
   vendorBillsCreated?: Prisma.VendorBillUpdateManyWithoutCreatedByNestedInput
   bankTransactions?: Prisma.BankTransactionUpdateManyWithoutCreatedByNestedInput
-  VisitPlans?: Prisma.VisitPlanUpdateManyWithoutUserNestedInput
-  Customers?: Prisma.CustomerUpdateManyWithoutAccountManagerNestedInput
   approvalItems?: Prisma.ApprovalItemUpdateManyWithoutUserNestedInput
-  salesOrders?: Prisma.SalesOrderUpdateManyWithoutUserNestedInput
-  purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutUserNestedInput
-  goodsReceipts?: Prisma.GoodsReceiptUpdateManyWithoutUserNestedInput
-  deliveryOrders?: Prisma.DeliveryOrderUpdateManyWithoutUserNestedInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutBalanceInput = {
@@ -5723,38 +5723,38 @@ export type UserUncheckedUpdateWithoutBalanceInput = {
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
-  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  bankId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
-  departmentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  bankId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  departmentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
-  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUncheckedUpdateManyWithoutRequesterNestedInput
-  Tasks?: Prisma.TaskUncheckedUpdateManyWithoutUserNestedInput
-  Interactions?: Prisma.InteractionUncheckedUpdateManyWithoutUserNestedInput
-  CustomerNotes?: Prisma.CustomerNoteUncheckedUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
   Opportunities?: Prisma.OpportunityUncheckedUpdateManyWithoutUserNestedInput
+  Interactions?: Prisma.InteractionUncheckedUpdateManyWithoutUserNestedInput
+  Tasks?: Prisma.TaskUncheckedUpdateManyWithoutUserNestedInput
+  VisitPlans?: Prisma.VisitPlanUncheckedUpdateManyWithoutUserNestedInput
+  CustomerNotes?: Prisma.CustomerNoteUncheckedUpdateManyWithoutUserNestedInput
+  Customers?: Prisma.CustomerUncheckedUpdateManyWithoutAccountManagerNestedInput
   Quotations?: Prisma.QuotationUncheckedUpdateManyWithoutUserNestedInput
+  salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutUserNestedInput
   Invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutUserNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutUserNestedInput
+  goodsReceipts?: Prisma.GoodsReceiptUncheckedUpdateManyWithoutUserNestedInput
+  deliveryOrders?: Prisma.DeliveryOrderUncheckedUpdateManyWithoutUserNestedInput
   accountingPayments?: Prisma.PaymentUncheckedUpdateManyWithoutCreatedByNestedInput
   journalEntriesCreated?: Prisma.JournalEntryUncheckedUpdateManyWithoutCreatedByNestedInput
   journalEntriesPosted?: Prisma.JournalEntryUncheckedUpdateManyWithoutPostedByNestedInput
   closedPeriods?: Prisma.FiscalPeriodUncheckedUpdateManyWithoutClosedByNestedInput
   vendorBillsCreated?: Prisma.VendorBillUncheckedUpdateManyWithoutCreatedByNestedInput
   bankTransactions?: Prisma.BankTransactionUncheckedUpdateManyWithoutCreatedByNestedInput
-  VisitPlans?: Prisma.VisitPlanUncheckedUpdateManyWithoutUserNestedInput
-  Customers?: Prisma.CustomerUncheckedUpdateManyWithoutAccountManagerNestedInput
   approvalItems?: Prisma.ApprovalItemUncheckedUpdateManyWithoutUserNestedInput
-  salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutUserNestedInput
-  purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutUserNestedInput
-  goodsReceipts?: Prisma.GoodsReceiptUncheckedUpdateManyWithoutUserNestedInput
-  deliveryOrders?: Prisma.DeliveryOrderUncheckedUpdateManyWithoutUserNestedInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutVisitPlansInput = {
@@ -5762,38 +5762,38 @@ export type UserCreateWithoutVisitPlansInput = {
   code?: string | null
   email: string
   password: string
-  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   active?: boolean
   bankAccount?: string | null
   currency?: $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
+  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   Bank?: Prisma.BankCreateNestedOneWithoutUserInput
   Department?: Prisma.DepartmentCreateNestedOneWithoutUserInput
+  Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
-  ApprovalSettingItem?: Prisma.ApprovalSettingItemCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpCreateNestedManyWithoutRequesterInput
-  Tasks?: Prisma.TaskCreateNestedManyWithoutUserInput
-  Interactions?: Prisma.InteractionCreateNestedManyWithoutUserInput
-  CustomerNotes?: Prisma.CustomerNoteCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadCreateNestedManyWithoutUserInput
   Opportunities?: Prisma.OpportunityCreateNestedManyWithoutUserInput
+  Interactions?: Prisma.InteractionCreateNestedManyWithoutUserInput
+  Tasks?: Prisma.TaskCreateNestedManyWithoutUserInput
+  CustomerNotes?: Prisma.CustomerNoteCreateNestedManyWithoutUserInput
+  Customers?: Prisma.CustomerCreateNestedManyWithoutAccountManagerInput
   Quotations?: Prisma.QuotationCreateNestedManyWithoutUserInput
+  salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutUserInput
   Invoices?: Prisma.InvoiceCreateNestedManyWithoutUserInput
+  purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutUserInput
+  goodsReceipts?: Prisma.GoodsReceiptCreateNestedManyWithoutUserInput
+  deliveryOrders?: Prisma.DeliveryOrderCreateNestedManyWithoutUserInput
   accountingPayments?: Prisma.PaymentCreateNestedManyWithoutCreatedByInput
   journalEntriesCreated?: Prisma.JournalEntryCreateNestedManyWithoutCreatedByInput
   journalEntriesPosted?: Prisma.JournalEntryCreateNestedManyWithoutPostedByInput
   closedPeriods?: Prisma.FiscalPeriodCreateNestedManyWithoutClosedByInput
   vendorBillsCreated?: Prisma.VendorBillCreateNestedManyWithoutCreatedByInput
   bankTransactions?: Prisma.BankTransactionCreateNestedManyWithoutCreatedByInput
-  Customers?: Prisma.CustomerCreateNestedManyWithoutAccountManagerInput
   approvalItems?: Prisma.ApprovalItemCreateNestedManyWithoutUserInput
-  salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutUserInput
-  purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutUserInput
-  goodsReceipts?: Prisma.GoodsReceiptCreateNestedManyWithoutUserInput
-  deliveryOrders?: Prisma.DeliveryOrderCreateNestedManyWithoutUserInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutVisitPlansInput = {
@@ -5802,38 +5802,38 @@ export type UserUncheckedCreateWithoutVisitPlansInput = {
   code?: string | null
   email: string
   password: string
-  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   active?: boolean
-  bankId?: number | null
   bankAccount?: string | null
   currency?: $Enums.Currency
-  departmentId?: number | null
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  bankId?: number | null
+  departmentId?: number | null
+  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   Balance?: Prisma.UserBalanceUncheckedCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
-  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpUncheckedCreateNestedManyWithoutRequesterInput
-  Tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutUserInput
-  Interactions?: Prisma.InteractionUncheckedCreateNestedManyWithoutUserInput
-  CustomerNotes?: Prisma.CustomerNoteUncheckedCreateNestedManyWithoutUserInput
   Leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
   Opportunities?: Prisma.OpportunityUncheckedCreateNestedManyWithoutUserInput
+  Interactions?: Prisma.InteractionUncheckedCreateNestedManyWithoutUserInput
+  Tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutUserInput
+  CustomerNotes?: Prisma.CustomerNoteUncheckedCreateNestedManyWithoutUserInput
+  Customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutAccountManagerInput
   Quotations?: Prisma.QuotationUncheckedCreateNestedManyWithoutUserInput
+  salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutUserInput
   Invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutUserInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutUserInput
+  goodsReceipts?: Prisma.GoodsReceiptUncheckedCreateNestedManyWithoutUserInput
+  deliveryOrders?: Prisma.DeliveryOrderUncheckedCreateNestedManyWithoutUserInput
   accountingPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCreatedByInput
   journalEntriesCreated?: Prisma.JournalEntryUncheckedCreateNestedManyWithoutCreatedByInput
   journalEntriesPosted?: Prisma.JournalEntryUncheckedCreateNestedManyWithoutPostedByInput
   closedPeriods?: Prisma.FiscalPeriodUncheckedCreateNestedManyWithoutClosedByInput
   vendorBillsCreated?: Prisma.VendorBillUncheckedCreateNestedManyWithoutCreatedByInput
   bankTransactions?: Prisma.BankTransactionUncheckedCreateNestedManyWithoutCreatedByInput
-  Customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutAccountManagerInput
   approvalItems?: Prisma.ApprovalItemUncheckedCreateNestedManyWithoutUserInput
-  salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutUserInput
-  purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutUserInput
-  goodsReceipts?: Prisma.GoodsReceiptUncheckedCreateNestedManyWithoutUserInput
-  deliveryOrders?: Prisma.DeliveryOrderUncheckedCreateNestedManyWithoutUserInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutVisitPlansInput = {
@@ -5857,38 +5857,38 @@ export type UserUpdateWithoutVisitPlansInput = {
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
-  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
+  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   Bank?: Prisma.BankUpdateOneWithoutUserNestedInput
   Department?: Prisma.DepartmentUpdateOneWithoutUserNestedInput
+  Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
-  ApprovalSettingItem?: Prisma.ApprovalSettingItemUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUpdateManyWithoutRequesterNestedInput
-  Tasks?: Prisma.TaskUpdateManyWithoutUserNestedInput
-  Interactions?: Prisma.InteractionUpdateManyWithoutUserNestedInput
-  CustomerNotes?: Prisma.CustomerNoteUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
   Opportunities?: Prisma.OpportunityUpdateManyWithoutUserNestedInput
+  Interactions?: Prisma.InteractionUpdateManyWithoutUserNestedInput
+  Tasks?: Prisma.TaskUpdateManyWithoutUserNestedInput
+  CustomerNotes?: Prisma.CustomerNoteUpdateManyWithoutUserNestedInput
+  Customers?: Prisma.CustomerUpdateManyWithoutAccountManagerNestedInput
   Quotations?: Prisma.QuotationUpdateManyWithoutUserNestedInput
+  salesOrders?: Prisma.SalesOrderUpdateManyWithoutUserNestedInput
   Invoices?: Prisma.InvoiceUpdateManyWithoutUserNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutUserNestedInput
+  goodsReceipts?: Prisma.GoodsReceiptUpdateManyWithoutUserNestedInput
+  deliveryOrders?: Prisma.DeliveryOrderUpdateManyWithoutUserNestedInput
   accountingPayments?: Prisma.PaymentUpdateManyWithoutCreatedByNestedInput
   journalEntriesCreated?: Prisma.JournalEntryUpdateManyWithoutCreatedByNestedInput
   journalEntriesPosted?: Prisma.JournalEntryUpdateManyWithoutPostedByNestedInput
   closedPeriods?: Prisma.FiscalPeriodUpdateManyWithoutClosedByNestedInput
   vendorBillsCreated?: Prisma.VendorBillUpdateManyWithoutCreatedByNestedInput
   bankTransactions?: Prisma.BankTransactionUpdateManyWithoutCreatedByNestedInput
-  Customers?: Prisma.CustomerUpdateManyWithoutAccountManagerNestedInput
   approvalItems?: Prisma.ApprovalItemUpdateManyWithoutUserNestedInput
-  salesOrders?: Prisma.SalesOrderUpdateManyWithoutUserNestedInput
-  purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutUserNestedInput
-  goodsReceipts?: Prisma.GoodsReceiptUpdateManyWithoutUserNestedInput
-  deliveryOrders?: Prisma.DeliveryOrderUpdateManyWithoutUserNestedInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutVisitPlansInput = {
@@ -5897,38 +5897,38 @@ export type UserUncheckedUpdateWithoutVisitPlansInput = {
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
-  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  bankId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
-  departmentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  bankId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  departmentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   Balance?: Prisma.UserBalanceUncheckedUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
-  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUncheckedUpdateManyWithoutRequesterNestedInput
-  Tasks?: Prisma.TaskUncheckedUpdateManyWithoutUserNestedInput
-  Interactions?: Prisma.InteractionUncheckedUpdateManyWithoutUserNestedInput
-  CustomerNotes?: Prisma.CustomerNoteUncheckedUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
   Opportunities?: Prisma.OpportunityUncheckedUpdateManyWithoutUserNestedInput
+  Interactions?: Prisma.InteractionUncheckedUpdateManyWithoutUserNestedInput
+  Tasks?: Prisma.TaskUncheckedUpdateManyWithoutUserNestedInput
+  CustomerNotes?: Prisma.CustomerNoteUncheckedUpdateManyWithoutUserNestedInput
+  Customers?: Prisma.CustomerUncheckedUpdateManyWithoutAccountManagerNestedInput
   Quotations?: Prisma.QuotationUncheckedUpdateManyWithoutUserNestedInput
+  salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutUserNestedInput
   Invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutUserNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutUserNestedInput
+  goodsReceipts?: Prisma.GoodsReceiptUncheckedUpdateManyWithoutUserNestedInput
+  deliveryOrders?: Prisma.DeliveryOrderUncheckedUpdateManyWithoutUserNestedInput
   accountingPayments?: Prisma.PaymentUncheckedUpdateManyWithoutCreatedByNestedInput
   journalEntriesCreated?: Prisma.JournalEntryUncheckedUpdateManyWithoutCreatedByNestedInput
   journalEntriesPosted?: Prisma.JournalEntryUncheckedUpdateManyWithoutPostedByNestedInput
   closedPeriods?: Prisma.FiscalPeriodUncheckedUpdateManyWithoutClosedByNestedInput
   vendorBillsCreated?: Prisma.VendorBillUncheckedUpdateManyWithoutCreatedByNestedInput
   bankTransactions?: Prisma.BankTransactionUncheckedUpdateManyWithoutCreatedByNestedInput
-  Customers?: Prisma.CustomerUncheckedUpdateManyWithoutAccountManagerNestedInput
   approvalItems?: Prisma.ApprovalItemUncheckedUpdateManyWithoutUserNestedInput
-  salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutUserNestedInput
-  purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutUserNestedInput
-  goodsReceipts?: Prisma.GoodsReceiptUncheckedUpdateManyWithoutUserNestedInput
-  deliveryOrders?: Prisma.DeliveryOrderUncheckedUpdateManyWithoutUserNestedInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyDepartmentInput = {
@@ -5937,12 +5937,12 @@ export type UserCreateManyDepartmentInput = {
   code?: string | null
   email: string
   password: string
-  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   active?: boolean
-  bankId?: number | null
   bankAccount?: string | null
   currency?: $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  bankId?: number | null
+  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
 }
 
 export type UserUpdateWithoutDepartmentInput = {
@@ -5950,38 +5950,38 @@ export type UserUpdateWithoutDepartmentInput = {
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
-  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
+  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   Bank?: Prisma.BankUpdateOneWithoutUserNestedInput
+  Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
-  ApprovalSettingItem?: Prisma.ApprovalSettingItemUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUpdateManyWithoutRequesterNestedInput
-  Tasks?: Prisma.TaskUpdateManyWithoutUserNestedInput
-  Interactions?: Prisma.InteractionUpdateManyWithoutUserNestedInput
-  CustomerNotes?: Prisma.CustomerNoteUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
   Opportunities?: Prisma.OpportunityUpdateManyWithoutUserNestedInput
+  Interactions?: Prisma.InteractionUpdateManyWithoutUserNestedInput
+  Tasks?: Prisma.TaskUpdateManyWithoutUserNestedInput
+  VisitPlans?: Prisma.VisitPlanUpdateManyWithoutUserNestedInput
+  CustomerNotes?: Prisma.CustomerNoteUpdateManyWithoutUserNestedInput
+  Customers?: Prisma.CustomerUpdateManyWithoutAccountManagerNestedInput
   Quotations?: Prisma.QuotationUpdateManyWithoutUserNestedInput
+  salesOrders?: Prisma.SalesOrderUpdateManyWithoutUserNestedInput
   Invoices?: Prisma.InvoiceUpdateManyWithoutUserNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutUserNestedInput
+  goodsReceipts?: Prisma.GoodsReceiptUpdateManyWithoutUserNestedInput
+  deliveryOrders?: Prisma.DeliveryOrderUpdateManyWithoutUserNestedInput
   accountingPayments?: Prisma.PaymentUpdateManyWithoutCreatedByNestedInput
   journalEntriesCreated?: Prisma.JournalEntryUpdateManyWithoutCreatedByNestedInput
   journalEntriesPosted?: Prisma.JournalEntryUpdateManyWithoutPostedByNestedInput
   closedPeriods?: Prisma.FiscalPeriodUpdateManyWithoutClosedByNestedInput
   vendorBillsCreated?: Prisma.VendorBillUpdateManyWithoutCreatedByNestedInput
   bankTransactions?: Prisma.BankTransactionUpdateManyWithoutCreatedByNestedInput
-  VisitPlans?: Prisma.VisitPlanUpdateManyWithoutUserNestedInput
-  Customers?: Prisma.CustomerUpdateManyWithoutAccountManagerNestedInput
   approvalItems?: Prisma.ApprovalItemUpdateManyWithoutUserNestedInput
-  salesOrders?: Prisma.SalesOrderUpdateManyWithoutUserNestedInput
-  purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutUserNestedInput
-  goodsReceipts?: Prisma.GoodsReceiptUpdateManyWithoutUserNestedInput
-  deliveryOrders?: Prisma.DeliveryOrderUpdateManyWithoutUserNestedInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutDepartmentInput = {
@@ -5990,38 +5990,38 @@ export type UserUncheckedUpdateWithoutDepartmentInput = {
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
-  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  bankId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  bankId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   Balance?: Prisma.UserBalanceUncheckedUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
-  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUncheckedUpdateManyWithoutRequesterNestedInput
-  Tasks?: Prisma.TaskUncheckedUpdateManyWithoutUserNestedInput
-  Interactions?: Prisma.InteractionUncheckedUpdateManyWithoutUserNestedInput
-  CustomerNotes?: Prisma.CustomerNoteUncheckedUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
   Opportunities?: Prisma.OpportunityUncheckedUpdateManyWithoutUserNestedInput
+  Interactions?: Prisma.InteractionUncheckedUpdateManyWithoutUserNestedInput
+  Tasks?: Prisma.TaskUncheckedUpdateManyWithoutUserNestedInput
+  VisitPlans?: Prisma.VisitPlanUncheckedUpdateManyWithoutUserNestedInput
+  CustomerNotes?: Prisma.CustomerNoteUncheckedUpdateManyWithoutUserNestedInput
+  Customers?: Prisma.CustomerUncheckedUpdateManyWithoutAccountManagerNestedInput
   Quotations?: Prisma.QuotationUncheckedUpdateManyWithoutUserNestedInput
+  salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutUserNestedInput
   Invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutUserNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutUserNestedInput
+  goodsReceipts?: Prisma.GoodsReceiptUncheckedUpdateManyWithoutUserNestedInput
+  deliveryOrders?: Prisma.DeliveryOrderUncheckedUpdateManyWithoutUserNestedInput
   accountingPayments?: Prisma.PaymentUncheckedUpdateManyWithoutCreatedByNestedInput
   journalEntriesCreated?: Prisma.JournalEntryUncheckedUpdateManyWithoutCreatedByNestedInput
   journalEntriesPosted?: Prisma.JournalEntryUncheckedUpdateManyWithoutPostedByNestedInput
   closedPeriods?: Prisma.FiscalPeriodUncheckedUpdateManyWithoutClosedByNestedInput
   vendorBillsCreated?: Prisma.VendorBillUncheckedUpdateManyWithoutCreatedByNestedInput
   bankTransactions?: Prisma.BankTransactionUncheckedUpdateManyWithoutCreatedByNestedInput
-  VisitPlans?: Prisma.VisitPlanUncheckedUpdateManyWithoutUserNestedInput
-  Customers?: Prisma.CustomerUncheckedUpdateManyWithoutAccountManagerNestedInput
   approvalItems?: Prisma.ApprovalItemUncheckedUpdateManyWithoutUserNestedInput
-  salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutUserNestedInput
-  purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutUserNestedInput
-  goodsReceipts?: Prisma.GoodsReceiptUncheckedUpdateManyWithoutUserNestedInput
-  deliveryOrders?: Prisma.DeliveryOrderUncheckedUpdateManyWithoutUserNestedInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateManyWithoutDepartmentInput = {
@@ -6030,12 +6030,12 @@ export type UserUncheckedUpdateManyWithoutDepartmentInput = {
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
-  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  bankId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  bankId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
 }
 
 export type UserCreateManyBankInput = {
@@ -6044,12 +6044,12 @@ export type UserCreateManyBankInput = {
   code?: string | null
   email: string
   password: string
-  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   active?: boolean
   bankAccount?: string | null
   currency?: $Enums.Currency
-  departmentId?: number | null
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  departmentId?: number | null
+  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
 }
 
 export type UserUpdateWithoutBankInput = {
@@ -6057,38 +6057,38 @@ export type UserUpdateWithoutBankInput = {
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
-  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
+  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   Department?: Prisma.DepartmentUpdateOneWithoutUserNestedInput
+  Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
-  ApprovalSettingItem?: Prisma.ApprovalSettingItemUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUpdateManyWithoutRequesterNestedInput
-  Tasks?: Prisma.TaskUpdateManyWithoutUserNestedInput
-  Interactions?: Prisma.InteractionUpdateManyWithoutUserNestedInput
-  CustomerNotes?: Prisma.CustomerNoteUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
   Opportunities?: Prisma.OpportunityUpdateManyWithoutUserNestedInput
+  Interactions?: Prisma.InteractionUpdateManyWithoutUserNestedInput
+  Tasks?: Prisma.TaskUpdateManyWithoutUserNestedInput
+  VisitPlans?: Prisma.VisitPlanUpdateManyWithoutUserNestedInput
+  CustomerNotes?: Prisma.CustomerNoteUpdateManyWithoutUserNestedInput
+  Customers?: Prisma.CustomerUpdateManyWithoutAccountManagerNestedInput
   Quotations?: Prisma.QuotationUpdateManyWithoutUserNestedInput
+  salesOrders?: Prisma.SalesOrderUpdateManyWithoutUserNestedInput
   Invoices?: Prisma.InvoiceUpdateManyWithoutUserNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutUserNestedInput
+  goodsReceipts?: Prisma.GoodsReceiptUpdateManyWithoutUserNestedInput
+  deliveryOrders?: Prisma.DeliveryOrderUpdateManyWithoutUserNestedInput
   accountingPayments?: Prisma.PaymentUpdateManyWithoutCreatedByNestedInput
   journalEntriesCreated?: Prisma.JournalEntryUpdateManyWithoutCreatedByNestedInput
   journalEntriesPosted?: Prisma.JournalEntryUpdateManyWithoutPostedByNestedInput
   closedPeriods?: Prisma.FiscalPeriodUpdateManyWithoutClosedByNestedInput
   vendorBillsCreated?: Prisma.VendorBillUpdateManyWithoutCreatedByNestedInput
   bankTransactions?: Prisma.BankTransactionUpdateManyWithoutCreatedByNestedInput
-  VisitPlans?: Prisma.VisitPlanUpdateManyWithoutUserNestedInput
-  Customers?: Prisma.CustomerUpdateManyWithoutAccountManagerNestedInput
   approvalItems?: Prisma.ApprovalItemUpdateManyWithoutUserNestedInput
-  salesOrders?: Prisma.SalesOrderUpdateManyWithoutUserNestedInput
-  purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutUserNestedInput
-  goodsReceipts?: Prisma.GoodsReceiptUpdateManyWithoutUserNestedInput
-  deliveryOrders?: Prisma.DeliveryOrderUpdateManyWithoutUserNestedInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutBankInput = {
@@ -6097,38 +6097,38 @@ export type UserUncheckedUpdateWithoutBankInput = {
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
-  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
-  departmentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  departmentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   Balance?: Prisma.UserBalanceUncheckedUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
-  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUncheckedUpdateManyWithoutRequesterNestedInput
-  Tasks?: Prisma.TaskUncheckedUpdateManyWithoutUserNestedInput
-  Interactions?: Prisma.InteractionUncheckedUpdateManyWithoutUserNestedInput
-  CustomerNotes?: Prisma.CustomerNoteUncheckedUpdateManyWithoutUserNestedInput
   Leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
   Opportunities?: Prisma.OpportunityUncheckedUpdateManyWithoutUserNestedInput
+  Interactions?: Prisma.InteractionUncheckedUpdateManyWithoutUserNestedInput
+  Tasks?: Prisma.TaskUncheckedUpdateManyWithoutUserNestedInput
+  VisitPlans?: Prisma.VisitPlanUncheckedUpdateManyWithoutUserNestedInput
+  CustomerNotes?: Prisma.CustomerNoteUncheckedUpdateManyWithoutUserNestedInput
+  Customers?: Prisma.CustomerUncheckedUpdateManyWithoutAccountManagerNestedInput
   Quotations?: Prisma.QuotationUncheckedUpdateManyWithoutUserNestedInput
+  salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutUserNestedInput
   Invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutUserNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutUserNestedInput
+  goodsReceipts?: Prisma.GoodsReceiptUncheckedUpdateManyWithoutUserNestedInput
+  deliveryOrders?: Prisma.DeliveryOrderUncheckedUpdateManyWithoutUserNestedInput
   accountingPayments?: Prisma.PaymentUncheckedUpdateManyWithoutCreatedByNestedInput
   journalEntriesCreated?: Prisma.JournalEntryUncheckedUpdateManyWithoutCreatedByNestedInput
   journalEntriesPosted?: Prisma.JournalEntryUncheckedUpdateManyWithoutPostedByNestedInput
   closedPeriods?: Prisma.FiscalPeriodUncheckedUpdateManyWithoutClosedByNestedInput
   vendorBillsCreated?: Prisma.VendorBillUncheckedUpdateManyWithoutCreatedByNestedInput
   bankTransactions?: Prisma.BankTransactionUncheckedUpdateManyWithoutCreatedByNestedInput
-  VisitPlans?: Prisma.VisitPlanUncheckedUpdateManyWithoutUserNestedInput
-  Customers?: Prisma.CustomerUncheckedUpdateManyWithoutAccountManagerNestedInput
   approvalItems?: Prisma.ApprovalItemUncheckedUpdateManyWithoutUserNestedInput
-  salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutUserNestedInput
-  purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutUserNestedInput
-  goodsReceipts?: Prisma.GoodsReceiptUncheckedUpdateManyWithoutUserNestedInput
-  deliveryOrders?: Prisma.DeliveryOrderUncheckedUpdateManyWithoutUserNestedInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateManyWithoutBankInput = {
@@ -6137,12 +6137,12 @@ export type UserUncheckedUpdateManyWithoutBankInput = {
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
-  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
-  departmentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  departmentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
 }
 
 
@@ -6153,57 +6153,57 @@ export type UserUncheckedUpdateManyWithoutBankInput = {
 export type UserCountOutputType = {
   Notification: number
   NkpApproval: number
-  ApprovalSettingItem: number
   Nkp: number
   NkpRequest: number
-  Tasks: number
-  Interactions: number
-  CustomerNotes: number
   Leads: number
   Opportunities: number
+  Interactions: number
+  Tasks: number
+  VisitPlans: number
+  CustomerNotes: number
+  Customers: number
   Quotations: number
+  salesOrders: number
   Invoices: number
+  purchaseOrders: number
+  goodsReceipts: number
+  deliveryOrders: number
   accountingPayments: number
   journalEntriesCreated: number
   journalEntriesPosted: number
   closedPeriods: number
   vendorBillsCreated: number
   bankTransactions: number
-  VisitPlans: number
-  Customers: number
   approvalItems: number
-  salesOrders: number
-  purchaseOrders: number
-  goodsReceipts: number
-  deliveryOrders: number
+  ApprovalSettingItem: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   Notification?: boolean | UserCountOutputTypeCountNotificationArgs
   NkpApproval?: boolean | UserCountOutputTypeCountNkpApprovalArgs
-  ApprovalSettingItem?: boolean | UserCountOutputTypeCountApprovalSettingItemArgs
   Nkp?: boolean | UserCountOutputTypeCountNkpArgs
   NkpRequest?: boolean | UserCountOutputTypeCountNkpRequestArgs
-  Tasks?: boolean | UserCountOutputTypeCountTasksArgs
-  Interactions?: boolean | UserCountOutputTypeCountInteractionsArgs
-  CustomerNotes?: boolean | UserCountOutputTypeCountCustomerNotesArgs
   Leads?: boolean | UserCountOutputTypeCountLeadsArgs
   Opportunities?: boolean | UserCountOutputTypeCountOpportunitiesArgs
+  Interactions?: boolean | UserCountOutputTypeCountInteractionsArgs
+  Tasks?: boolean | UserCountOutputTypeCountTasksArgs
+  VisitPlans?: boolean | UserCountOutputTypeCountVisitPlansArgs
+  CustomerNotes?: boolean | UserCountOutputTypeCountCustomerNotesArgs
+  Customers?: boolean | UserCountOutputTypeCountCustomersArgs
   Quotations?: boolean | UserCountOutputTypeCountQuotationsArgs
+  salesOrders?: boolean | UserCountOutputTypeCountSalesOrdersArgs
   Invoices?: boolean | UserCountOutputTypeCountInvoicesArgs
+  purchaseOrders?: boolean | UserCountOutputTypeCountPurchaseOrdersArgs
+  goodsReceipts?: boolean | UserCountOutputTypeCountGoodsReceiptsArgs
+  deliveryOrders?: boolean | UserCountOutputTypeCountDeliveryOrdersArgs
   accountingPayments?: boolean | UserCountOutputTypeCountAccountingPaymentsArgs
   journalEntriesCreated?: boolean | UserCountOutputTypeCountJournalEntriesCreatedArgs
   journalEntriesPosted?: boolean | UserCountOutputTypeCountJournalEntriesPostedArgs
   closedPeriods?: boolean | UserCountOutputTypeCountClosedPeriodsArgs
   vendorBillsCreated?: boolean | UserCountOutputTypeCountVendorBillsCreatedArgs
   bankTransactions?: boolean | UserCountOutputTypeCountBankTransactionsArgs
-  VisitPlans?: boolean | UserCountOutputTypeCountVisitPlansArgs
-  Customers?: boolean | UserCountOutputTypeCountCustomersArgs
   approvalItems?: boolean | UserCountOutputTypeCountApprovalItemsArgs
-  salesOrders?: boolean | UserCountOutputTypeCountSalesOrdersArgs
-  purchaseOrders?: boolean | UserCountOutputTypeCountPurchaseOrdersArgs
-  goodsReceipts?: boolean | UserCountOutputTypeCountGoodsReceiptsArgs
-  deliveryOrders?: boolean | UserCountOutputTypeCountDeliveryOrdersArgs
+  ApprovalSettingItem?: boolean | UserCountOutputTypeCountApprovalSettingItemArgs
 }
 
 /**
@@ -6233,13 +6233,6 @@ export type UserCountOutputTypeCountNkpApprovalArgs<ExtArgs extends runtime.Type
 /**
  * UserCountOutputType without action
  */
-export type UserCountOutputTypeCountApprovalSettingItemArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.ApprovalSettingItemWhereInput
-}
-
-/**
- * UserCountOutputType without action
- */
 export type UserCountOutputTypeCountNkpArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.NkpWhereInput
 }
@@ -6249,27 +6242,6 @@ export type UserCountOutputTypeCountNkpArgs<ExtArgs extends runtime.Types.Extens
  */
 export type UserCountOutputTypeCountNkpRequestArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.NkpWhereInput
-}
-
-/**
- * UserCountOutputType without action
- */
-export type UserCountOutputTypeCountTasksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.TaskWhereInput
-}
-
-/**
- * UserCountOutputType without action
- */
-export type UserCountOutputTypeCountInteractionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.InteractionWhereInput
-}
-
-/**
- * UserCountOutputType without action
- */
-export type UserCountOutputTypeCountCustomerNotesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.CustomerNoteWhereInput
 }
 
 /**
@@ -6289,6 +6261,41 @@ export type UserCountOutputTypeCountOpportunitiesArgs<ExtArgs extends runtime.Ty
 /**
  * UserCountOutputType without action
  */
+export type UserCountOutputTypeCountInteractionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.InteractionWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountTasksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.TaskWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountVisitPlansArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.VisitPlanWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountCustomerNotesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CustomerNoteWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountCustomersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CustomerWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
 export type UserCountOutputTypeCountQuotationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.QuotationWhereInput
 }
@@ -6296,8 +6303,36 @@ export type UserCountOutputTypeCountQuotationsArgs<ExtArgs extends runtime.Types
 /**
  * UserCountOutputType without action
  */
+export type UserCountOutputTypeCountSalesOrdersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.SalesOrderWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
 export type UserCountOutputTypeCountInvoicesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.InvoiceWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountPurchaseOrdersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PurchaseOrderWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountGoodsReceiptsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.GoodsReceiptWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountDeliveryOrdersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.DeliveryOrderWhereInput
 }
 
 /**
@@ -6345,20 +6380,6 @@ export type UserCountOutputTypeCountBankTransactionsArgs<ExtArgs extends runtime
 /**
  * UserCountOutputType without action
  */
-export type UserCountOutputTypeCountVisitPlansArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.VisitPlanWhereInput
-}
-
-/**
- * UserCountOutputType without action
- */
-export type UserCountOutputTypeCountCustomersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.CustomerWhereInput
-}
-
-/**
- * UserCountOutputType without action
- */
 export type UserCountOutputTypeCountApprovalItemsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.ApprovalItemWhereInput
 }
@@ -6366,29 +6387,8 @@ export type UserCountOutputTypeCountApprovalItemsArgs<ExtArgs extends runtime.Ty
 /**
  * UserCountOutputType without action
  */
-export type UserCountOutputTypeCountSalesOrdersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.SalesOrderWhereInput
-}
-
-/**
- * UserCountOutputType without action
- */
-export type UserCountOutputTypeCountPurchaseOrdersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.PurchaseOrderWhereInput
-}
-
-/**
- * UserCountOutputType without action
- */
-export type UserCountOutputTypeCountGoodsReceiptsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.GoodsReceiptWhereInput
-}
-
-/**
- * UserCountOutputType without action
- */
-export type UserCountOutputTypeCountDeliveryOrdersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.DeliveryOrderWhereInput
+export type UserCountOutputTypeCountApprovalSettingItemArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ApprovalSettingItemWhereInput
 }
 
 
@@ -6398,41 +6398,41 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   code?: boolean
   email?: boolean
   password?: boolean
-  roles?: boolean
   active?: boolean
-  bankId?: boolean
   bankAccount?: boolean
   currency?: boolean
-  departmentId?: boolean
   signatureSpeciment?: boolean
-  Balance?: boolean | Prisma.User$BalanceArgs<ExtArgs>
+  bankId?: boolean
+  departmentId?: boolean
+  roles?: boolean
   Bank?: boolean | Prisma.User$BankArgs<ExtArgs>
   Department?: boolean | Prisma.User$DepartmentArgs<ExtArgs>
+  Balance?: boolean | Prisma.User$BalanceArgs<ExtArgs>
   Notification?: boolean | Prisma.User$NotificationArgs<ExtArgs>
   NkpApproval?: boolean | Prisma.User$NkpApprovalArgs<ExtArgs>
-  ApprovalSettingItem?: boolean | Prisma.User$ApprovalSettingItemArgs<ExtArgs>
   Nkp?: boolean | Prisma.User$NkpArgs<ExtArgs>
   NkpRequest?: boolean | Prisma.User$NkpRequestArgs<ExtArgs>
-  Tasks?: boolean | Prisma.User$TasksArgs<ExtArgs>
-  Interactions?: boolean | Prisma.User$InteractionsArgs<ExtArgs>
-  CustomerNotes?: boolean | Prisma.User$CustomerNotesArgs<ExtArgs>
   Leads?: boolean | Prisma.User$LeadsArgs<ExtArgs>
   Opportunities?: boolean | Prisma.User$OpportunitiesArgs<ExtArgs>
+  Interactions?: boolean | Prisma.User$InteractionsArgs<ExtArgs>
+  Tasks?: boolean | Prisma.User$TasksArgs<ExtArgs>
+  VisitPlans?: boolean | Prisma.User$VisitPlansArgs<ExtArgs>
+  CustomerNotes?: boolean | Prisma.User$CustomerNotesArgs<ExtArgs>
+  Customers?: boolean | Prisma.User$CustomersArgs<ExtArgs>
   Quotations?: boolean | Prisma.User$QuotationsArgs<ExtArgs>
+  salesOrders?: boolean | Prisma.User$salesOrdersArgs<ExtArgs>
   Invoices?: boolean | Prisma.User$InvoicesArgs<ExtArgs>
+  purchaseOrders?: boolean | Prisma.User$purchaseOrdersArgs<ExtArgs>
+  goodsReceipts?: boolean | Prisma.User$goodsReceiptsArgs<ExtArgs>
+  deliveryOrders?: boolean | Prisma.User$deliveryOrdersArgs<ExtArgs>
   accountingPayments?: boolean | Prisma.User$accountingPaymentsArgs<ExtArgs>
   journalEntriesCreated?: boolean | Prisma.User$journalEntriesCreatedArgs<ExtArgs>
   journalEntriesPosted?: boolean | Prisma.User$journalEntriesPostedArgs<ExtArgs>
   closedPeriods?: boolean | Prisma.User$closedPeriodsArgs<ExtArgs>
   vendorBillsCreated?: boolean | Prisma.User$vendorBillsCreatedArgs<ExtArgs>
   bankTransactions?: boolean | Prisma.User$bankTransactionsArgs<ExtArgs>
-  VisitPlans?: boolean | Prisma.User$VisitPlansArgs<ExtArgs>
-  Customers?: boolean | Prisma.User$CustomersArgs<ExtArgs>
   approvalItems?: boolean | Prisma.User$approvalItemsArgs<ExtArgs>
-  salesOrders?: boolean | Prisma.User$salesOrdersArgs<ExtArgs>
-  purchaseOrders?: boolean | Prisma.User$purchaseOrdersArgs<ExtArgs>
-  goodsReceipts?: boolean | Prisma.User$goodsReceiptsArgs<ExtArgs>
-  deliveryOrders?: boolean | Prisma.User$deliveryOrdersArgs<ExtArgs>
+  ApprovalSettingItem?: boolean | Prisma.User$ApprovalSettingItemArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -6442,13 +6442,13 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   code?: boolean
   email?: boolean
   password?: boolean
-  roles?: boolean
   active?: boolean
-  bankId?: boolean
   bankAccount?: boolean
   currency?: boolean
-  departmentId?: boolean
   signatureSpeciment?: boolean
+  bankId?: boolean
+  departmentId?: boolean
+  roles?: boolean
   Bank?: boolean | Prisma.User$BankArgs<ExtArgs>
   Department?: boolean | Prisma.User$DepartmentArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
@@ -6459,13 +6459,13 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   code?: boolean
   email?: boolean
   password?: boolean
-  roles?: boolean
   active?: boolean
-  bankId?: boolean
   bankAccount?: boolean
   currency?: boolean
-  departmentId?: boolean
   signatureSpeciment?: boolean
+  bankId?: boolean
+  departmentId?: boolean
+  roles?: boolean
   Bank?: boolean | Prisma.User$BankArgs<ExtArgs>
   Department?: boolean | Prisma.User$DepartmentArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
@@ -6476,45 +6476,45 @@ export type UserSelectScalar = {
   code?: boolean
   email?: boolean
   password?: boolean
-  roles?: boolean
   active?: boolean
-  bankId?: boolean
   bankAccount?: boolean
   currency?: boolean
-  departmentId?: boolean
   signatureSpeciment?: boolean
+  bankId?: boolean
+  departmentId?: boolean
+  roles?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "code" | "email" | "password" | "roles" | "active" | "bankId" | "bankAccount" | "currency" | "departmentId" | "signatureSpeciment", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "code" | "email" | "password" | "active" | "bankAccount" | "currency" | "signatureSpeciment" | "bankId" | "departmentId" | "roles", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  Balance?: boolean | Prisma.User$BalanceArgs<ExtArgs>
   Bank?: boolean | Prisma.User$BankArgs<ExtArgs>
   Department?: boolean | Prisma.User$DepartmentArgs<ExtArgs>
+  Balance?: boolean | Prisma.User$BalanceArgs<ExtArgs>
   Notification?: boolean | Prisma.User$NotificationArgs<ExtArgs>
   NkpApproval?: boolean | Prisma.User$NkpApprovalArgs<ExtArgs>
-  ApprovalSettingItem?: boolean | Prisma.User$ApprovalSettingItemArgs<ExtArgs>
   Nkp?: boolean | Prisma.User$NkpArgs<ExtArgs>
   NkpRequest?: boolean | Prisma.User$NkpRequestArgs<ExtArgs>
-  Tasks?: boolean | Prisma.User$TasksArgs<ExtArgs>
-  Interactions?: boolean | Prisma.User$InteractionsArgs<ExtArgs>
-  CustomerNotes?: boolean | Prisma.User$CustomerNotesArgs<ExtArgs>
   Leads?: boolean | Prisma.User$LeadsArgs<ExtArgs>
   Opportunities?: boolean | Prisma.User$OpportunitiesArgs<ExtArgs>
+  Interactions?: boolean | Prisma.User$InteractionsArgs<ExtArgs>
+  Tasks?: boolean | Prisma.User$TasksArgs<ExtArgs>
+  VisitPlans?: boolean | Prisma.User$VisitPlansArgs<ExtArgs>
+  CustomerNotes?: boolean | Prisma.User$CustomerNotesArgs<ExtArgs>
+  Customers?: boolean | Prisma.User$CustomersArgs<ExtArgs>
   Quotations?: boolean | Prisma.User$QuotationsArgs<ExtArgs>
+  salesOrders?: boolean | Prisma.User$salesOrdersArgs<ExtArgs>
   Invoices?: boolean | Prisma.User$InvoicesArgs<ExtArgs>
+  purchaseOrders?: boolean | Prisma.User$purchaseOrdersArgs<ExtArgs>
+  goodsReceipts?: boolean | Prisma.User$goodsReceiptsArgs<ExtArgs>
+  deliveryOrders?: boolean | Prisma.User$deliveryOrdersArgs<ExtArgs>
   accountingPayments?: boolean | Prisma.User$accountingPaymentsArgs<ExtArgs>
   journalEntriesCreated?: boolean | Prisma.User$journalEntriesCreatedArgs<ExtArgs>
   journalEntriesPosted?: boolean | Prisma.User$journalEntriesPostedArgs<ExtArgs>
   closedPeriods?: boolean | Prisma.User$closedPeriodsArgs<ExtArgs>
   vendorBillsCreated?: boolean | Prisma.User$vendorBillsCreatedArgs<ExtArgs>
   bankTransactions?: boolean | Prisma.User$bankTransactionsArgs<ExtArgs>
-  VisitPlans?: boolean | Prisma.User$VisitPlansArgs<ExtArgs>
-  Customers?: boolean | Prisma.User$CustomersArgs<ExtArgs>
   approvalItems?: boolean | Prisma.User$approvalItemsArgs<ExtArgs>
-  salesOrders?: boolean | Prisma.User$salesOrdersArgs<ExtArgs>
-  purchaseOrders?: boolean | Prisma.User$purchaseOrdersArgs<ExtArgs>
-  goodsReceipts?: boolean | Prisma.User$goodsReceiptsArgs<ExtArgs>
-  deliveryOrders?: boolean | Prisma.User$deliveryOrdersArgs<ExtArgs>
+  ApprovalSettingItem?: boolean | Prisma.User$ApprovalSettingItemArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -6529,34 +6529,34 @@ export type UserIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
 export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "User"
   objects: {
-    Balance: Prisma.$UserBalancePayload<ExtArgs> | null
     Bank: Prisma.$BankPayload<ExtArgs> | null
     Department: Prisma.$DepartmentPayload<ExtArgs> | null
+    Balance: Prisma.$UserBalancePayload<ExtArgs> | null
     Notification: Prisma.$NotificationPayload<ExtArgs>[]
     NkpApproval: Prisma.$NkpApprovalPayload<ExtArgs>[]
-    ApprovalSettingItem: Prisma.$ApprovalSettingItemPayload<ExtArgs>[]
     Nkp: Prisma.$NkpPayload<ExtArgs>[]
     NkpRequest: Prisma.$NkpPayload<ExtArgs>[]
-    Tasks: Prisma.$TaskPayload<ExtArgs>[]
-    Interactions: Prisma.$InteractionPayload<ExtArgs>[]
-    CustomerNotes: Prisma.$CustomerNotePayload<ExtArgs>[]
     Leads: Prisma.$LeadPayload<ExtArgs>[]
     Opportunities: Prisma.$OpportunityPayload<ExtArgs>[]
+    Interactions: Prisma.$InteractionPayload<ExtArgs>[]
+    Tasks: Prisma.$TaskPayload<ExtArgs>[]
+    VisitPlans: Prisma.$VisitPlanPayload<ExtArgs>[]
+    CustomerNotes: Prisma.$CustomerNotePayload<ExtArgs>[]
+    Customers: Prisma.$CustomerPayload<ExtArgs>[]
     Quotations: Prisma.$QuotationPayload<ExtArgs>[]
+    salesOrders: Prisma.$SalesOrderPayload<ExtArgs>[]
     Invoices: Prisma.$InvoicePayload<ExtArgs>[]
+    purchaseOrders: Prisma.$PurchaseOrderPayload<ExtArgs>[]
+    goodsReceipts: Prisma.$GoodsReceiptPayload<ExtArgs>[]
+    deliveryOrders: Prisma.$DeliveryOrderPayload<ExtArgs>[]
     accountingPayments: Prisma.$PaymentPayload<ExtArgs>[]
     journalEntriesCreated: Prisma.$JournalEntryPayload<ExtArgs>[]
     journalEntriesPosted: Prisma.$JournalEntryPayload<ExtArgs>[]
     closedPeriods: Prisma.$FiscalPeriodPayload<ExtArgs>[]
     vendorBillsCreated: Prisma.$VendorBillPayload<ExtArgs>[]
     bankTransactions: Prisma.$BankTransactionPayload<ExtArgs>[]
-    VisitPlans: Prisma.$VisitPlanPayload<ExtArgs>[]
-    Customers: Prisma.$CustomerPayload<ExtArgs>[]
     approvalItems: Prisma.$ApprovalItemPayload<ExtArgs>[]
-    salesOrders: Prisma.$SalesOrderPayload<ExtArgs>[]
-    purchaseOrders: Prisma.$PurchaseOrderPayload<ExtArgs>[]
-    goodsReceipts: Prisma.$GoodsReceiptPayload<ExtArgs>[]
-    deliveryOrders: Prisma.$DeliveryOrderPayload<ExtArgs>[]
+    ApprovalSettingItem: Prisma.$ApprovalSettingItemPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -6564,13 +6564,13 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     code: string | null
     email: string
     password: string
-    roles: $Enums.Role[]
     active: boolean
-    bankId: number | null
     bankAccount: string | null
     currency: $Enums.Currency
-    departmentId: number | null
     signatureSpeciment: runtime.JsonValue | null
+    bankId: number | null
+    departmentId: number | null
+    roles: $Enums.Role[]
   }, ExtArgs["result"]["user"]>
   composites: {}
 }
@@ -6965,34 +6965,34 @@ readonly fields: UserFieldRefs;
  */
 export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  Balance<T extends Prisma.User$BalanceArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$BalanceArgs<ExtArgs>>): Prisma.Prisma__UserBalanceClient<runtime.Types.Result.GetResult<Prisma.$UserBalancePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   Bank<T extends Prisma.User$BankArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$BankArgs<ExtArgs>>): Prisma.Prisma__BankClient<runtime.Types.Result.GetResult<Prisma.$BankPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   Department<T extends Prisma.User$DepartmentArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$DepartmentArgs<ExtArgs>>): Prisma.Prisma__DepartmentClient<runtime.Types.Result.GetResult<Prisma.$DepartmentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  Balance<T extends Prisma.User$BalanceArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$BalanceArgs<ExtArgs>>): Prisma.Prisma__UserBalanceClient<runtime.Types.Result.GetResult<Prisma.$UserBalancePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   Notification<T extends Prisma.User$NotificationArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$NotificationArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   NkpApproval<T extends Prisma.User$NkpApprovalArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$NkpApprovalArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NkpApprovalPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  ApprovalSettingItem<T extends Prisma.User$ApprovalSettingItemArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$ApprovalSettingItemArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ApprovalSettingItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   Nkp<T extends Prisma.User$NkpArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$NkpArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NkpPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   NkpRequest<T extends Prisma.User$NkpRequestArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$NkpRequestArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NkpPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  Tasks<T extends Prisma.User$TasksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$TasksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TaskPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  Interactions<T extends Prisma.User$InteractionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$InteractionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InteractionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  CustomerNotes<T extends Prisma.User$CustomerNotesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$CustomerNotesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CustomerNotePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   Leads<T extends Prisma.User$LeadsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$LeadsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   Opportunities<T extends Prisma.User$OpportunitiesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$OpportunitiesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OpportunityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  Interactions<T extends Prisma.User$InteractionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$InteractionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InteractionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  Tasks<T extends Prisma.User$TasksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$TasksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TaskPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  VisitPlans<T extends Prisma.User$VisitPlansArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$VisitPlansArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$VisitPlanPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  CustomerNotes<T extends Prisma.User$CustomerNotesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$CustomerNotesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CustomerNotePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  Customers<T extends Prisma.User$CustomersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$CustomersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CustomerPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   Quotations<T extends Prisma.User$QuotationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$QuotationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$QuotationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  salesOrders<T extends Prisma.User$salesOrdersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$salesOrdersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SalesOrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   Invoices<T extends Prisma.User$InvoicesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$InvoicesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InvoicePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  purchaseOrders<T extends Prisma.User$purchaseOrdersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$purchaseOrdersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PurchaseOrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  goodsReceipts<T extends Prisma.User$goodsReceiptsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$goodsReceiptsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$GoodsReceiptPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  deliveryOrders<T extends Prisma.User$deliveryOrdersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$deliveryOrdersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DeliveryOrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   accountingPayments<T extends Prisma.User$accountingPaymentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$accountingPaymentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PaymentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   journalEntriesCreated<T extends Prisma.User$journalEntriesCreatedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$journalEntriesCreatedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$JournalEntryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   journalEntriesPosted<T extends Prisma.User$journalEntriesPostedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$journalEntriesPostedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$JournalEntryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   closedPeriods<T extends Prisma.User$closedPeriodsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$closedPeriodsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FiscalPeriodPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   vendorBillsCreated<T extends Prisma.User$vendorBillsCreatedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$vendorBillsCreatedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$VendorBillPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   bankTransactions<T extends Prisma.User$bankTransactionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$bankTransactionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BankTransactionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  VisitPlans<T extends Prisma.User$VisitPlansArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$VisitPlansArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$VisitPlanPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  Customers<T extends Prisma.User$CustomersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$CustomersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CustomerPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   approvalItems<T extends Prisma.User$approvalItemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$approvalItemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ApprovalItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  salesOrders<T extends Prisma.User$salesOrdersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$salesOrdersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SalesOrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  purchaseOrders<T extends Prisma.User$purchaseOrdersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$purchaseOrdersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PurchaseOrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  goodsReceipts<T extends Prisma.User$goodsReceiptsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$goodsReceiptsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$GoodsReceiptPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  deliveryOrders<T extends Prisma.User$deliveryOrdersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$deliveryOrdersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DeliveryOrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  ApprovalSettingItem<T extends Prisma.User$ApprovalSettingItemArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$ApprovalSettingItemArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ApprovalSettingItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -7027,13 +7027,13 @@ export interface UserFieldRefs {
   readonly code: Prisma.FieldRef<"User", 'String'>
   readonly email: Prisma.FieldRef<"User", 'String'>
   readonly password: Prisma.FieldRef<"User", 'String'>
-  readonly roles: Prisma.FieldRef<"User", 'Role[]'>
   readonly active: Prisma.FieldRef<"User", 'Boolean'>
-  readonly bankId: Prisma.FieldRef<"User", 'Int'>
   readonly bankAccount: Prisma.FieldRef<"User", 'String'>
   readonly currency: Prisma.FieldRef<"User", 'Currency'>
-  readonly departmentId: Prisma.FieldRef<"User", 'Int'>
   readonly signatureSpeciment: Prisma.FieldRef<"User", 'Json'>
+  readonly bankId: Prisma.FieldRef<"User", 'Int'>
+  readonly departmentId: Prisma.FieldRef<"User", 'Int'>
+  readonly roles: Prisma.FieldRef<"User", 'Role[]'>
 }
     
 
@@ -7435,25 +7435,6 @@ export type UserDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Internal
 }
 
 /**
- * User.Balance
- */
-export type User$BalanceArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the UserBalance
-   */
-  select?: Prisma.UserBalanceSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the UserBalance
-   */
-  omit?: Prisma.UserBalanceOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.UserBalanceInclude<ExtArgs> | null
-  where?: Prisma.UserBalanceWhereInput
-}
-
-/**
  * User.Bank
  */
 export type User$BankArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -7489,6 +7470,25 @@ export type User$DepartmentArgs<ExtArgs extends runtime.Types.Extensions.Interna
    */
   include?: Prisma.DepartmentInclude<ExtArgs> | null
   where?: Prisma.DepartmentWhereInput
+}
+
+/**
+ * User.Balance
+ */
+export type User$BalanceArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the UserBalance
+   */
+  select?: Prisma.UserBalanceSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the UserBalance
+   */
+  omit?: Prisma.UserBalanceOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserBalanceInclude<ExtArgs> | null
+  where?: Prisma.UserBalanceWhereInput
 }
 
 /**
@@ -7540,30 +7540,6 @@ export type User$NkpApprovalArgs<ExtArgs extends runtime.Types.Extensions.Intern
 }
 
 /**
- * User.ApprovalSettingItem
- */
-export type User$ApprovalSettingItemArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the ApprovalSettingItem
-   */
-  select?: Prisma.ApprovalSettingItemSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the ApprovalSettingItem
-   */
-  omit?: Prisma.ApprovalSettingItemOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.ApprovalSettingItemInclude<ExtArgs> | null
-  where?: Prisma.ApprovalSettingItemWhereInput
-  orderBy?: Prisma.ApprovalSettingItemOrderByWithRelationInput | Prisma.ApprovalSettingItemOrderByWithRelationInput[]
-  cursor?: Prisma.ApprovalSettingItemWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.ApprovalSettingItemScalarFieldEnum | Prisma.ApprovalSettingItemScalarFieldEnum[]
-}
-
-/**
  * User.Nkp
  */
 export type User$NkpArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -7609,78 +7585,6 @@ export type User$NkpRequestArgs<ExtArgs extends runtime.Types.Extensions.Interna
   take?: number
   skip?: number
   distinct?: Prisma.NkpScalarFieldEnum | Prisma.NkpScalarFieldEnum[]
-}
-
-/**
- * User.Tasks
- */
-export type User$TasksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Task
-   */
-  select?: Prisma.TaskSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Task
-   */
-  omit?: Prisma.TaskOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.TaskInclude<ExtArgs> | null
-  where?: Prisma.TaskWhereInput
-  orderBy?: Prisma.TaskOrderByWithRelationInput | Prisma.TaskOrderByWithRelationInput[]
-  cursor?: Prisma.TaskWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.TaskScalarFieldEnum | Prisma.TaskScalarFieldEnum[]
-}
-
-/**
- * User.Interactions
- */
-export type User$InteractionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Interaction
-   */
-  select?: Prisma.InteractionSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Interaction
-   */
-  omit?: Prisma.InteractionOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.InteractionInclude<ExtArgs> | null
-  where?: Prisma.InteractionWhereInput
-  orderBy?: Prisma.InteractionOrderByWithRelationInput | Prisma.InteractionOrderByWithRelationInput[]
-  cursor?: Prisma.InteractionWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.InteractionScalarFieldEnum | Prisma.InteractionScalarFieldEnum[]
-}
-
-/**
- * User.CustomerNotes
- */
-export type User$CustomerNotesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the CustomerNote
-   */
-  select?: Prisma.CustomerNoteSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the CustomerNote
-   */
-  omit?: Prisma.CustomerNoteOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.CustomerNoteInclude<ExtArgs> | null
-  where?: Prisma.CustomerNoteWhereInput
-  orderBy?: Prisma.CustomerNoteOrderByWithRelationInput | Prisma.CustomerNoteOrderByWithRelationInput[]
-  cursor?: Prisma.CustomerNoteWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.CustomerNoteScalarFieldEnum | Prisma.CustomerNoteScalarFieldEnum[]
 }
 
 /**
@@ -7732,6 +7636,126 @@ export type User$OpportunitiesArgs<ExtArgs extends runtime.Types.Extensions.Inte
 }
 
 /**
+ * User.Interactions
+ */
+export type User$InteractionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Interaction
+   */
+  select?: Prisma.InteractionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Interaction
+   */
+  omit?: Prisma.InteractionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.InteractionInclude<ExtArgs> | null
+  where?: Prisma.InteractionWhereInput
+  orderBy?: Prisma.InteractionOrderByWithRelationInput | Prisma.InteractionOrderByWithRelationInput[]
+  cursor?: Prisma.InteractionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.InteractionScalarFieldEnum | Prisma.InteractionScalarFieldEnum[]
+}
+
+/**
+ * User.Tasks
+ */
+export type User$TasksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Task
+   */
+  select?: Prisma.TaskSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Task
+   */
+  omit?: Prisma.TaskOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TaskInclude<ExtArgs> | null
+  where?: Prisma.TaskWhereInput
+  orderBy?: Prisma.TaskOrderByWithRelationInput | Prisma.TaskOrderByWithRelationInput[]
+  cursor?: Prisma.TaskWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.TaskScalarFieldEnum | Prisma.TaskScalarFieldEnum[]
+}
+
+/**
+ * User.VisitPlans
+ */
+export type User$VisitPlansArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the VisitPlan
+   */
+  select?: Prisma.VisitPlanSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the VisitPlan
+   */
+  omit?: Prisma.VisitPlanOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.VisitPlanInclude<ExtArgs> | null
+  where?: Prisma.VisitPlanWhereInput
+  orderBy?: Prisma.VisitPlanOrderByWithRelationInput | Prisma.VisitPlanOrderByWithRelationInput[]
+  cursor?: Prisma.VisitPlanWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.VisitPlanScalarFieldEnum | Prisma.VisitPlanScalarFieldEnum[]
+}
+
+/**
+ * User.CustomerNotes
+ */
+export type User$CustomerNotesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CustomerNote
+   */
+  select?: Prisma.CustomerNoteSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CustomerNote
+   */
+  omit?: Prisma.CustomerNoteOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CustomerNoteInclude<ExtArgs> | null
+  where?: Prisma.CustomerNoteWhereInput
+  orderBy?: Prisma.CustomerNoteOrderByWithRelationInput | Prisma.CustomerNoteOrderByWithRelationInput[]
+  cursor?: Prisma.CustomerNoteWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CustomerNoteScalarFieldEnum | Prisma.CustomerNoteScalarFieldEnum[]
+}
+
+/**
+ * User.Customers
+ */
+export type User$CustomersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Customer
+   */
+  select?: Prisma.CustomerSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Customer
+   */
+  omit?: Prisma.CustomerOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CustomerInclude<ExtArgs> | null
+  where?: Prisma.CustomerWhereInput
+  orderBy?: Prisma.CustomerOrderByWithRelationInput | Prisma.CustomerOrderByWithRelationInput[]
+  cursor?: Prisma.CustomerWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CustomerScalarFieldEnum | Prisma.CustomerScalarFieldEnum[]
+}
+
+/**
  * User.Quotations
  */
 export type User$QuotationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -7756,6 +7780,30 @@ export type User$QuotationsArgs<ExtArgs extends runtime.Types.Extensions.Interna
 }
 
 /**
+ * User.salesOrders
+ */
+export type User$salesOrdersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the SalesOrder
+   */
+  select?: Prisma.SalesOrderSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the SalesOrder
+   */
+  omit?: Prisma.SalesOrderOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SalesOrderInclude<ExtArgs> | null
+  where?: Prisma.SalesOrderWhereInput
+  orderBy?: Prisma.SalesOrderOrderByWithRelationInput | Prisma.SalesOrderOrderByWithRelationInput[]
+  cursor?: Prisma.SalesOrderWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.SalesOrderScalarFieldEnum | Prisma.SalesOrderScalarFieldEnum[]
+}
+
+/**
  * User.Invoices
  */
 export type User$InvoicesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -7777,6 +7825,78 @@ export type User$InvoicesArgs<ExtArgs extends runtime.Types.Extensions.InternalA
   take?: number
   skip?: number
   distinct?: Prisma.InvoiceScalarFieldEnum | Prisma.InvoiceScalarFieldEnum[]
+}
+
+/**
+ * User.purchaseOrders
+ */
+export type User$purchaseOrdersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PurchaseOrder
+   */
+  select?: Prisma.PurchaseOrderSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the PurchaseOrder
+   */
+  omit?: Prisma.PurchaseOrderOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PurchaseOrderInclude<ExtArgs> | null
+  where?: Prisma.PurchaseOrderWhereInput
+  orderBy?: Prisma.PurchaseOrderOrderByWithRelationInput | Prisma.PurchaseOrderOrderByWithRelationInput[]
+  cursor?: Prisma.PurchaseOrderWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PurchaseOrderScalarFieldEnum | Prisma.PurchaseOrderScalarFieldEnum[]
+}
+
+/**
+ * User.goodsReceipts
+ */
+export type User$goodsReceiptsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the GoodsReceipt
+   */
+  select?: Prisma.GoodsReceiptSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the GoodsReceipt
+   */
+  omit?: Prisma.GoodsReceiptOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.GoodsReceiptInclude<ExtArgs> | null
+  where?: Prisma.GoodsReceiptWhereInput
+  orderBy?: Prisma.GoodsReceiptOrderByWithRelationInput | Prisma.GoodsReceiptOrderByWithRelationInput[]
+  cursor?: Prisma.GoodsReceiptWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.GoodsReceiptScalarFieldEnum | Prisma.GoodsReceiptScalarFieldEnum[]
+}
+
+/**
+ * User.deliveryOrders
+ */
+export type User$deliveryOrdersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the DeliveryOrder
+   */
+  select?: Prisma.DeliveryOrderSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the DeliveryOrder
+   */
+  omit?: Prisma.DeliveryOrderOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DeliveryOrderInclude<ExtArgs> | null
+  where?: Prisma.DeliveryOrderWhereInput
+  orderBy?: Prisma.DeliveryOrderOrderByWithRelationInput | Prisma.DeliveryOrderOrderByWithRelationInput[]
+  cursor?: Prisma.DeliveryOrderWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.DeliveryOrderScalarFieldEnum | Prisma.DeliveryOrderScalarFieldEnum[]
 }
 
 /**
@@ -7924,54 +8044,6 @@ export type User$bankTransactionsArgs<ExtArgs extends runtime.Types.Extensions.I
 }
 
 /**
- * User.VisitPlans
- */
-export type User$VisitPlansArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the VisitPlan
-   */
-  select?: Prisma.VisitPlanSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the VisitPlan
-   */
-  omit?: Prisma.VisitPlanOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.VisitPlanInclude<ExtArgs> | null
-  where?: Prisma.VisitPlanWhereInput
-  orderBy?: Prisma.VisitPlanOrderByWithRelationInput | Prisma.VisitPlanOrderByWithRelationInput[]
-  cursor?: Prisma.VisitPlanWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.VisitPlanScalarFieldEnum | Prisma.VisitPlanScalarFieldEnum[]
-}
-
-/**
- * User.Customers
- */
-export type User$CustomersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Customer
-   */
-  select?: Prisma.CustomerSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Customer
-   */
-  omit?: Prisma.CustomerOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.CustomerInclude<ExtArgs> | null
-  where?: Prisma.CustomerWhereInput
-  orderBy?: Prisma.CustomerOrderByWithRelationInput | Prisma.CustomerOrderByWithRelationInput[]
-  cursor?: Prisma.CustomerWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.CustomerScalarFieldEnum | Prisma.CustomerScalarFieldEnum[]
-}
-
-/**
  * User.approvalItems
  */
 export type User$approvalItemsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -7996,99 +8068,27 @@ export type User$approvalItemsArgs<ExtArgs extends runtime.Types.Extensions.Inte
 }
 
 /**
- * User.salesOrders
+ * User.ApprovalSettingItem
  */
-export type User$salesOrdersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type User$ApprovalSettingItemArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the SalesOrder
+   * Select specific fields to fetch from the ApprovalSettingItem
    */
-  select?: Prisma.SalesOrderSelect<ExtArgs> | null
+  select?: Prisma.ApprovalSettingItemSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the SalesOrder
+   * Omit specific fields from the ApprovalSettingItem
    */
-  omit?: Prisma.SalesOrderOmit<ExtArgs> | null
+  omit?: Prisma.ApprovalSettingItemOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.SalesOrderInclude<ExtArgs> | null
-  where?: Prisma.SalesOrderWhereInput
-  orderBy?: Prisma.SalesOrderOrderByWithRelationInput | Prisma.SalesOrderOrderByWithRelationInput[]
-  cursor?: Prisma.SalesOrderWhereUniqueInput
+  include?: Prisma.ApprovalSettingItemInclude<ExtArgs> | null
+  where?: Prisma.ApprovalSettingItemWhereInput
+  orderBy?: Prisma.ApprovalSettingItemOrderByWithRelationInput | Prisma.ApprovalSettingItemOrderByWithRelationInput[]
+  cursor?: Prisma.ApprovalSettingItemWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.SalesOrderScalarFieldEnum | Prisma.SalesOrderScalarFieldEnum[]
-}
-
-/**
- * User.purchaseOrders
- */
-export type User$purchaseOrdersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the PurchaseOrder
-   */
-  select?: Prisma.PurchaseOrderSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the PurchaseOrder
-   */
-  omit?: Prisma.PurchaseOrderOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.PurchaseOrderInclude<ExtArgs> | null
-  where?: Prisma.PurchaseOrderWhereInput
-  orderBy?: Prisma.PurchaseOrderOrderByWithRelationInput | Prisma.PurchaseOrderOrderByWithRelationInput[]
-  cursor?: Prisma.PurchaseOrderWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.PurchaseOrderScalarFieldEnum | Prisma.PurchaseOrderScalarFieldEnum[]
-}
-
-/**
- * User.goodsReceipts
- */
-export type User$goodsReceiptsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the GoodsReceipt
-   */
-  select?: Prisma.GoodsReceiptSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the GoodsReceipt
-   */
-  omit?: Prisma.GoodsReceiptOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.GoodsReceiptInclude<ExtArgs> | null
-  where?: Prisma.GoodsReceiptWhereInput
-  orderBy?: Prisma.GoodsReceiptOrderByWithRelationInput | Prisma.GoodsReceiptOrderByWithRelationInput[]
-  cursor?: Prisma.GoodsReceiptWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.GoodsReceiptScalarFieldEnum | Prisma.GoodsReceiptScalarFieldEnum[]
-}
-
-/**
- * User.deliveryOrders
- */
-export type User$deliveryOrdersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the DeliveryOrder
-   */
-  select?: Prisma.DeliveryOrderSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the DeliveryOrder
-   */
-  omit?: Prisma.DeliveryOrderOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.DeliveryOrderInclude<ExtArgs> | null
-  where?: Prisma.DeliveryOrderWhereInput
-  orderBy?: Prisma.DeliveryOrderOrderByWithRelationInput | Prisma.DeliveryOrderOrderByWithRelationInput[]
-  cursor?: Prisma.DeliveryOrderWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.DeliveryOrderScalarFieldEnum | Prisma.DeliveryOrderScalarFieldEnum[]
+  distinct?: Prisma.ApprovalSettingItemScalarFieldEnum | Prisma.ApprovalSettingItemScalarFieldEnum[]
 }
 
 /**

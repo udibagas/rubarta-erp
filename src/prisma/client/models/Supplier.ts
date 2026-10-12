@@ -43,6 +43,7 @@ export type SupplierMinAggregateOutputType = {
   address: string | null
   phone: string | null
   email: string | null
+  active: boolean | null
   bankAccount: string | null
   bankAccountHolder: string | null
   currency: $Enums.Currency | null
@@ -56,6 +57,7 @@ export type SupplierMaxAggregateOutputType = {
   address: string | null
   phone: string | null
   email: string | null
+  active: boolean | null
   bankAccount: string | null
   bankAccountHolder: string | null
   currency: $Enums.Currency | null
@@ -69,6 +71,7 @@ export type SupplierCountAggregateOutputType = {
   address: number
   phone: number
   email: number
+  active: number
   bankAccount: number
   bankAccountHolder: number
   currency: number
@@ -94,6 +97,7 @@ export type SupplierMinAggregateInputType = {
   address?: true
   phone?: true
   email?: true
+  active?: true
   bankAccount?: true
   bankAccountHolder?: true
   currency?: true
@@ -107,6 +111,7 @@ export type SupplierMaxAggregateInputType = {
   address?: true
   phone?: true
   email?: true
+  active?: true
   bankAccount?: true
   bankAccountHolder?: true
   currency?: true
@@ -120,6 +125,7 @@ export type SupplierCountAggregateInputType = {
   address?: true
   phone?: true
   email?: true
+  active?: true
   bankAccount?: true
   bankAccountHolder?: true
   currency?: true
@@ -220,6 +226,7 @@ export type SupplierGroupByOutputType = {
   address: string
   phone: string | null
   email: string | null
+  active: boolean
   bankAccount: string
   bankAccountHolder: string | null
   currency: $Enums.Currency
@@ -256,6 +263,7 @@ export type SupplierWhereInput = {
   address?: Prisma.StringFilter<"Supplier"> | string
   phone?: Prisma.StringNullableFilter<"Supplier"> | string | null
   email?: Prisma.StringNullableFilter<"Supplier"> | string | null
+  active?: Prisma.BoolFilter<"Supplier"> | boolean
   bankAccount?: Prisma.StringFilter<"Supplier"> | string
   bankAccountHolder?: Prisma.StringNullableFilter<"Supplier"> | string | null
   currency?: Prisma.EnumCurrencyFilter<"Supplier"> | $Enums.Currency
@@ -276,6 +284,7 @@ export type SupplierOrderByWithRelationInput = {
   address?: Prisma.SortOrder
   phone?: Prisma.SortOrderInput | Prisma.SortOrder
   email?: Prisma.SortOrderInput | Prisma.SortOrder
+  active?: Prisma.SortOrder
   bankAccount?: Prisma.SortOrder
   bankAccountHolder?: Prisma.SortOrderInput | Prisma.SortOrder
   currency?: Prisma.SortOrder
@@ -299,6 +308,7 @@ export type SupplierWhereUniqueInput = Prisma.AtLeast<{
   address?: Prisma.StringFilter<"Supplier"> | string
   phone?: Prisma.StringNullableFilter<"Supplier"> | string | null
   email?: Prisma.StringNullableFilter<"Supplier"> | string | null
+  active?: Prisma.BoolFilter<"Supplier"> | boolean
   bankAccount?: Prisma.StringFilter<"Supplier"> | string
   bankAccountHolder?: Prisma.StringNullableFilter<"Supplier"> | string | null
   currency?: Prisma.EnumCurrencyFilter<"Supplier"> | $Enums.Currency
@@ -319,6 +329,7 @@ export type SupplierOrderByWithAggregationInput = {
   address?: Prisma.SortOrder
   phone?: Prisma.SortOrderInput | Prisma.SortOrder
   email?: Prisma.SortOrderInput | Prisma.SortOrder
+  active?: Prisma.SortOrder
   bankAccount?: Prisma.SortOrder
   bankAccountHolder?: Prisma.SortOrderInput | Prisma.SortOrder
   currency?: Prisma.SortOrder
@@ -340,6 +351,7 @@ export type SupplierScalarWhereWithAggregatesInput = {
   address?: Prisma.StringWithAggregatesFilter<"Supplier"> | string
   phone?: Prisma.StringNullableWithAggregatesFilter<"Supplier"> | string | null
   email?: Prisma.StringNullableWithAggregatesFilter<"Supplier"> | string | null
+  active?: Prisma.BoolWithAggregatesFilter<"Supplier"> | boolean
   bankAccount?: Prisma.StringWithAggregatesFilter<"Supplier"> | string
   bankAccountHolder?: Prisma.StringNullableWithAggregatesFilter<"Supplier"> | string | null
   currency?: Prisma.EnumCurrencyWithAggregatesFilter<"Supplier"> | $Enums.Currency
@@ -352,6 +364,7 @@ export type SupplierCreateInput = {
   address: string
   phone?: string | null
   email?: string | null
+  active?: boolean
   bankAccount: string
   bankAccountHolder?: string | null
   currency: $Enums.Currency
@@ -371,6 +384,7 @@ export type SupplierUncheckedCreateInput = {
   address: string
   phone?: string | null
   email?: string | null
+  active?: boolean
   bankAccount: string
   bankAccountHolder?: string | null
   currency: $Enums.Currency
@@ -389,6 +403,7 @@ export type SupplierUpdateInput = {
   address?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankAccount?: Prisma.StringFieldUpdateOperationsInput | string
   bankAccountHolder?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
@@ -408,6 +423,7 @@ export type SupplierUncheckedUpdateInput = {
   address?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankAccount?: Prisma.StringFieldUpdateOperationsInput | string
   bankAccountHolder?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
@@ -427,6 +443,7 @@ export type SupplierCreateManyInput = {
   address: string
   phone?: string | null
   email?: string | null
+  active?: boolean
   bankAccount: string
   bankAccountHolder?: string | null
   currency: $Enums.Currency
@@ -439,6 +456,7 @@ export type SupplierUpdateManyMutationInput = {
   address?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankAccount?: Prisma.StringFieldUpdateOperationsInput | string
   bankAccountHolder?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
@@ -451,6 +469,7 @@ export type SupplierUncheckedUpdateManyInput = {
   address?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankAccount?: Prisma.StringFieldUpdateOperationsInput | string
   bankAccountHolder?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
@@ -484,6 +503,7 @@ export type SupplierCountOrderByAggregateInput = {
   address?: Prisma.SortOrder
   phone?: Prisma.SortOrder
   email?: Prisma.SortOrder
+  active?: Prisma.SortOrder
   bankAccount?: Prisma.SortOrder
   bankAccountHolder?: Prisma.SortOrder
   currency?: Prisma.SortOrder
@@ -502,6 +522,7 @@ export type SupplierMaxOrderByAggregateInput = {
   address?: Prisma.SortOrder
   phone?: Prisma.SortOrder
   email?: Prisma.SortOrder
+  active?: Prisma.SortOrder
   bankAccount?: Prisma.SortOrder
   bankAccountHolder?: Prisma.SortOrder
   currency?: Prisma.SortOrder
@@ -515,6 +536,7 @@ export type SupplierMinOrderByAggregateInput = {
   address?: Prisma.SortOrder
   phone?: Prisma.SortOrder
   email?: Prisma.SortOrder
+  active?: Prisma.SortOrder
   bankAccount?: Prisma.SortOrder
   bankAccountHolder?: Prisma.SortOrder
   currency?: Prisma.SortOrder
@@ -666,6 +688,7 @@ export type SupplierCreateWithoutVendorBillsInput = {
   address: string
   phone?: string | null
   email?: string | null
+  active?: boolean
   bankAccount: string
   bankAccountHolder?: string | null
   currency: $Enums.Currency
@@ -684,6 +707,7 @@ export type SupplierUncheckedCreateWithoutVendorBillsInput = {
   address: string
   phone?: string | null
   email?: string | null
+  active?: boolean
   bankAccount: string
   bankAccountHolder?: string | null
   currency: $Enums.Currency
@@ -717,6 +741,7 @@ export type SupplierUpdateWithoutVendorBillsInput = {
   address?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankAccount?: Prisma.StringFieldUpdateOperationsInput | string
   bankAccountHolder?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
@@ -735,6 +760,7 @@ export type SupplierUncheckedUpdateWithoutVendorBillsInput = {
   address?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankAccount?: Prisma.StringFieldUpdateOperationsInput | string
   bankAccountHolder?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
@@ -752,6 +778,7 @@ export type SupplierCreateWithoutPaymentsInput = {
   address: string
   phone?: string | null
   email?: string | null
+  active?: boolean
   bankAccount: string
   bankAccountHolder?: string | null
   currency: $Enums.Currency
@@ -770,6 +797,7 @@ export type SupplierUncheckedCreateWithoutPaymentsInput = {
   address: string
   phone?: string | null
   email?: string | null
+  active?: boolean
   bankAccount: string
   bankAccountHolder?: string | null
   currency: $Enums.Currency
@@ -803,6 +831,7 @@ export type SupplierUpdateWithoutPaymentsInput = {
   address?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankAccount?: Prisma.StringFieldUpdateOperationsInput | string
   bankAccountHolder?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
@@ -821,6 +850,7 @@ export type SupplierUncheckedUpdateWithoutPaymentsInput = {
   address?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankAccount?: Prisma.StringFieldUpdateOperationsInput | string
   bankAccountHolder?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
@@ -838,6 +868,7 @@ export type SupplierCreateWithoutGoodsReceiptsInput = {
   address: string
   phone?: string | null
   email?: string | null
+  active?: boolean
   bankAccount: string
   bankAccountHolder?: string | null
   currency: $Enums.Currency
@@ -856,6 +887,7 @@ export type SupplierUncheckedCreateWithoutGoodsReceiptsInput = {
   address: string
   phone?: string | null
   email?: string | null
+  active?: boolean
   bankAccount: string
   bankAccountHolder?: string | null
   currency: $Enums.Currency
@@ -889,6 +921,7 @@ export type SupplierUpdateWithoutGoodsReceiptsInput = {
   address?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankAccount?: Prisma.StringFieldUpdateOperationsInput | string
   bankAccountHolder?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
@@ -907,6 +940,7 @@ export type SupplierUncheckedUpdateWithoutGoodsReceiptsInput = {
   address?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankAccount?: Prisma.StringFieldUpdateOperationsInput | string
   bankAccountHolder?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
@@ -924,6 +958,7 @@ export type SupplierCreateWithoutMaterialInput = {
   address: string
   phone?: string | null
   email?: string | null
+  active?: boolean
   bankAccount: string
   bankAccountHolder?: string | null
   currency: $Enums.Currency
@@ -942,6 +977,7 @@ export type SupplierUncheckedCreateWithoutMaterialInput = {
   address: string
   phone?: string | null
   email?: string | null
+  active?: boolean
   bankAccount: string
   bankAccountHolder?: string | null
   currency: $Enums.Currency
@@ -975,6 +1011,7 @@ export type SupplierUpdateWithoutMaterialInput = {
   address?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankAccount?: Prisma.StringFieldUpdateOperationsInput | string
   bankAccountHolder?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
@@ -993,6 +1030,7 @@ export type SupplierUncheckedUpdateWithoutMaterialInput = {
   address?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankAccount?: Prisma.StringFieldUpdateOperationsInput | string
   bankAccountHolder?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
@@ -1010,6 +1048,7 @@ export type SupplierCreateWithoutNkpInput = {
   address: string
   phone?: string | null
   email?: string | null
+  active?: boolean
   bankAccount: string
   bankAccountHolder?: string | null
   currency: $Enums.Currency
@@ -1028,6 +1067,7 @@ export type SupplierUncheckedCreateWithoutNkpInput = {
   address: string
   phone?: string | null
   email?: string | null
+  active?: boolean
   bankAccount: string
   bankAccountHolder?: string | null
   currency: $Enums.Currency
@@ -1061,6 +1101,7 @@ export type SupplierUpdateWithoutNkpInput = {
   address?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankAccount?: Prisma.StringFieldUpdateOperationsInput | string
   bankAccountHolder?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
@@ -1079,6 +1120,7 @@ export type SupplierUncheckedUpdateWithoutNkpInput = {
   address?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankAccount?: Prisma.StringFieldUpdateOperationsInput | string
   bankAccountHolder?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
@@ -1096,6 +1138,7 @@ export type SupplierCreateWithoutPurchaseOrdersInput = {
   address: string
   phone?: string | null
   email?: string | null
+  active?: boolean
   bankAccount: string
   bankAccountHolder?: string | null
   currency: $Enums.Currency
@@ -1114,6 +1157,7 @@ export type SupplierUncheckedCreateWithoutPurchaseOrdersInput = {
   address: string
   phone?: string | null
   email?: string | null
+  active?: boolean
   bankAccount: string
   bankAccountHolder?: string | null
   currency: $Enums.Currency
@@ -1147,6 +1191,7 @@ export type SupplierUpdateWithoutPurchaseOrdersInput = {
   address?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankAccount?: Prisma.StringFieldUpdateOperationsInput | string
   bankAccountHolder?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
@@ -1165,6 +1210,7 @@ export type SupplierUncheckedUpdateWithoutPurchaseOrdersInput = {
   address?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankAccount?: Prisma.StringFieldUpdateOperationsInput | string
   bankAccountHolder?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
@@ -1182,6 +1228,7 @@ export type SupplierCreateWithoutBankInput = {
   address: string
   phone?: string | null
   email?: string | null
+  active?: boolean
   bankAccount: string
   bankAccountHolder?: string | null
   currency: $Enums.Currency
@@ -1200,6 +1247,7 @@ export type SupplierUncheckedCreateWithoutBankInput = {
   address: string
   phone?: string | null
   email?: string | null
+  active?: boolean
   bankAccount: string
   bankAccountHolder?: string | null
   currency: $Enums.Currency
@@ -1247,6 +1295,7 @@ export type SupplierScalarWhereInput = {
   address?: Prisma.StringFilter<"Supplier"> | string
   phone?: Prisma.StringNullableFilter<"Supplier"> | string | null
   email?: Prisma.StringNullableFilter<"Supplier"> | string | null
+  active?: Prisma.BoolFilter<"Supplier"> | boolean
   bankAccount?: Prisma.StringFilter<"Supplier"> | string
   bankAccountHolder?: Prisma.StringNullableFilter<"Supplier"> | string | null
   currency?: Prisma.EnumCurrencyFilter<"Supplier"> | $Enums.Currency
@@ -1260,6 +1309,7 @@ export type SupplierCreateManyBankInput = {
   address: string
   phone?: string | null
   email?: string | null
+  active?: boolean
   bankAccount: string
   bankAccountHolder?: string | null
   currency: $Enums.Currency
@@ -1271,6 +1321,7 @@ export type SupplierUpdateWithoutBankInput = {
   address?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankAccount?: Prisma.StringFieldUpdateOperationsInput | string
   bankAccountHolder?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
@@ -1289,6 +1340,7 @@ export type SupplierUncheckedUpdateWithoutBankInput = {
   address?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankAccount?: Prisma.StringFieldUpdateOperationsInput | string
   bankAccountHolder?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
@@ -1307,6 +1359,7 @@ export type SupplierUncheckedUpdateManyWithoutBankInput = {
   address?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankAccount?: Prisma.StringFieldUpdateOperationsInput | string
   bankAccountHolder?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
@@ -1395,6 +1448,7 @@ export type SupplierSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   address?: boolean
   phone?: boolean
   email?: boolean
+  active?: boolean
   bankAccount?: boolean
   bankAccountHolder?: boolean
   currency?: boolean
@@ -1416,6 +1470,7 @@ export type SupplierSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
   address?: boolean
   phone?: boolean
   email?: boolean
+  active?: boolean
   bankAccount?: boolean
   bankAccountHolder?: boolean
   currency?: boolean
@@ -1430,6 +1485,7 @@ export type SupplierSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
   address?: boolean
   phone?: boolean
   email?: boolean
+  active?: boolean
   bankAccount?: boolean
   bankAccountHolder?: boolean
   currency?: boolean
@@ -1444,13 +1500,14 @@ export type SupplierSelectScalar = {
   address?: boolean
   phone?: boolean
   email?: boolean
+  active?: boolean
   bankAccount?: boolean
   bankAccountHolder?: boolean
   currency?: boolean
   bankId?: boolean
 }
 
-export type SupplierOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "code" | "name" | "address" | "phone" | "email" | "bankAccount" | "bankAccountHolder" | "currency" | "bankId", ExtArgs["result"]["supplier"]>
+export type SupplierOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "code" | "name" | "address" | "phone" | "email" | "active" | "bankAccount" | "bankAccountHolder" | "currency" | "bankId", ExtArgs["result"]["supplier"]>
 export type SupplierInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   Bank?: boolean | Prisma.BankDefaultArgs<ExtArgs>
   Nkp?: boolean | Prisma.Supplier$NkpArgs<ExtArgs>
@@ -1486,6 +1543,7 @@ export type $SupplierPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     address: string
     phone: string | null
     email: string | null
+    active: boolean
     bankAccount: string
     bankAccountHolder: string | null
     currency: $Enums.Currency
@@ -1926,6 +1984,7 @@ export interface SupplierFieldRefs {
   readonly address: Prisma.FieldRef<"Supplier", 'String'>
   readonly phone: Prisma.FieldRef<"Supplier", 'String'>
   readonly email: Prisma.FieldRef<"Supplier", 'String'>
+  readonly active: Prisma.FieldRef<"Supplier", 'Boolean'>
   readonly bankAccount: Prisma.FieldRef<"Supplier", 'String'>
   readonly bankAccountHolder: Prisma.FieldRef<"Supplier", 'String'>
   readonly currency: Prisma.FieldRef<"Supplier", 'Currency'>

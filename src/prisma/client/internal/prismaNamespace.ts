@@ -4985,6 +4985,7 @@ export const SupplierScalarFieldEnum = {
   address: 'address',
   phone: 'phone',
   email: 'email',
+  active: 'active',
   bankAccount: 'bankAccount',
   bankAccountHolder: 'bankAccountHolder',
   currency: 'currency',
@@ -5000,13 +5001,13 @@ export const UserScalarFieldEnum = {
   code: 'code',
   email: 'email',
   password: 'password',
-  roles: 'roles',
   active: 'active',
-  bankId: 'bankId',
   bankAccount: 'bankAccount',
   currency: 'currency',
+  signatureSpeciment: 'signatureSpeciment',
+  bankId: 'bankId',
   departmentId: 'departmentId',
-  signatureSpeciment: 'signatureSpeciment'
+  roles: 'roles'
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]

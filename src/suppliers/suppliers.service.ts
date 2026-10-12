@@ -1,6 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { Supplier } from '../prisma/client/client';
-import { CreateSupplierDto, UpdateSupplierDto, QuerySupplierDto } from './supplier.dto';
+import {
+  CreateSupplierDto,
+  UpdateSupplierDto,
+  QuerySupplierDto,
+} from './supplier.dto';
 import { PrismaService } from '../prisma/prisma.service';
 import { Prisma } from '../prisma/client/client';
 
@@ -8,8 +12,9 @@ import { Prisma } from '../prisma/client/client';
 export class SuppliersService {
   constructor(private readonly prisma: PrismaService) {}
 
-  async findAll(query: QuerySupplierDto): Promise<Supplier[] | { data: Supplier[]; total: number }> {
-
+  async findAll(
+    query: QuerySupplierDto,
+  ): Promise<Supplier[] | { data: Supplier[]; total: number }> {
     const where: Prisma.SupplierWhereInput = {};
 
     if (query.keyword) {
@@ -20,8 +25,12 @@ export class SuppliersService {
       ];
     }
 
-    const take = query.pageSize ? parseInt(query.pageSize) : undefined;
-    const skip = query.page ? (parseInt(query.page) - 1) * take : undefined;
+    if (query.active !== undefined) {
+      where.active = query.active;
+    }
+
+    const take = query.pageSize;
+    const skip = query.page ? (query.page - 1) * take : undefined;
 
     const data = await this.prisma.supplier.findMany({
       where,
@@ -31,10 +40,9 @@ export class SuppliersService {
     });
 
     if (query.page && query.pageSize) {
-      const total = await this.prisma.supplier.count({ where })
+      const total = await this.prisma.supplier.count({ where });
       return { data, total };
     }
-
 
     return data;
   }

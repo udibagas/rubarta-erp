@@ -1,6 +1,6 @@
 import { ApiProperty, PartialType } from '@nestjs/swagger';
 import { Currency, Role } from '../prisma/client/client';
-import { IsNumberString } from 'class-validator';
+import { IsNumber, IsNumberString } from 'class-validator';
 import { JsonObject } from 'type-fest';
 import {
   ArrayNotEmpty,
@@ -13,6 +13,7 @@ import {
   IsOptional,
   Length,
 } from 'class-validator';
+import { Transform } from 'class-transformer';
 
 export class UserRole {
   @IsNotEmpty()
@@ -73,20 +74,27 @@ export class CreateUserDto {
   active?: boolean;
 }
 
-export class UpdateUserDto extends PartialType(CreateUserDto) { }
+export class UpdateUserDto extends PartialType(CreateUserDto) {}
 
 export class QueryUserDto {
   @ApiProperty({ required: false, example: 'Bagas Udi S.' })
   @IsOptional()
   keyword?: string;
 
+  @ApiProperty({ required: false, example: true })
+  @IsOptional()
+  @IsBoolean({ message: 'Invalid status' })
+  active?: boolean;
+
   @ApiProperty({ required: false, example: 1 })
   @IsOptional()
-  @IsNumberString({}, { message: 'Page must be a number' })
-  page?: string;
+  @Transform(({ value }) => (value ? Number(value) : undefined))
+  @IsNumber({}, { message: 'Page must be a number' })
+  page?: number;
 
   @ApiProperty({ required: false, example: 10 })
   @IsOptional()
-  @IsNumberString({}, { message: 'Page size must be a number' })
-  pageSize?: string;
+  @Transform(({ value }) => (value ? Number(value) : undefined))
+  @IsNumber({}, { message: 'Page size must be a number' })
+  pageSize?: number;
 }

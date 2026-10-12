@@ -1,45 +1,62 @@
 model User {
-  id                 Int          @id @default(autoincrement())
-  name               String       @db.VarChar(50)
-  code               String?      @db.Char(4)
-  email              String       @unique @db.VarChar(50)
-  password           String       @db.VarChar(100)
-  roles              Role[]       @default([USER])
-  active             Boolean      @default(true)
-  Balance            UserBalance?
-  Bank               Bank?        @relation(fields: [bankId], references: [id])
-  bankId             Int?
-  bankAccount        String?      @db.VarChar(30)
-  currency           Currency     @default(IDR)
-  Department         Department?  @relation(fields: [departmentId], references: [id])
-  departmentId       Int?
-  signatureSpeciment Json?        @db.JsonB
+  id                 Int      @id @default(autoincrement())
+  name               String   @db.VarChar(50)
+  code               String?  @db.Char(4)
+  email              String   @unique @db.VarChar(50)
+  password           String   @db.VarChar(100)
+  active             Boolean  @default(true)
+  bankAccount        String?  @db.VarChar(30)
+  currency           Currency @default(IDR)
+  signatureSpeciment Json?    @db.JsonB
 
-  Notification          Notification[]
-  NkpApproval           NkpApproval[]
-  ApprovalSettingItem   ApprovalSettingItem[]
-  Nkp                   Nkp[]                 @relation(name: "Nkp")
-  NkpRequest            Nkp[]                 @relation(name: "NkpRequest")
-  Tasks                 Task[]
-  Interactions          Interaction[]
-  CustomerNotes         CustomerNote[]
-  Leads                 Lead[]
-  Opportunities         Opportunity[]
-  Quotations            Quotation[]
-  Invoices              Invoice[]
+  // Foreign key relations for the User model
+  bankId       Int?
+  departmentId Int?
+
+  // 1:1 relation 
+  Bank       Bank?        @relation(fields: [bankId], references: [id])
+  Department Department?  @relation(fields: [departmentId], references: [id])
+  Balance    UserBalance?
+
+  // 1:many relations with other models
+  roles        Role[]         @default([USER])
+  Notification Notification[]
+
+  // NKP related
+  NkpApproval NkpApproval[]
+  Nkp         Nkp[]         @relation(name: "Nkp")
+  NkpRequest  Nkp[]         @relation(name: "NkpRequest")
+
+  // CRM related
+  Leads         Lead[]
+  Opportunities Opportunity[]
+  Interactions  Interaction[]
+  Tasks         Task[]
+  VisitPlans    VisitPlan[]
+  CustomerNotes CustomerNote[]
+  Customers     Customer[]
+
+  // Sales related
+  Quotations  Quotation[]
+  salesOrders SalesOrder[]
+  Invoices    Invoice[]
+
+  // Purchasing related
+  purchaseOrders PurchaseOrder[]
+  goodsReceipts  GoodsReceipt[]
+  deliveryOrders DeliveryOrder[]
+
+  // Accounting related
   accountingPayments    Payment[]
-  journalEntriesCreated JournalEntry[]        @relation("JournalCreatedBy")
-  journalEntriesPosted  JournalEntry[]        @relation("JournalPostedBy")
-  closedPeriods         FiscalPeriod[]        @relation("PeriodClosedBy")
+  journalEntriesCreated JournalEntry[]    @relation("JournalCreatedBy")
+  journalEntriesPosted  JournalEntry[]    @relation("JournalPostedBy")
+  closedPeriods         FiscalPeriod[]    @relation("PeriodClosedBy")
   vendorBillsCreated    VendorBill[]
   bankTransactions      BankTransaction[]
-  VisitPlans            VisitPlan[]
-  Customers             Customer[]
-  approvalItems         ApprovalItem[]
-  salesOrders           SalesOrder[]
-  purchaseOrders        PurchaseOrder[]
-  goodsReceipts         GoodsReceipt[]
-  deliveryOrders        DeliveryOrder[]
+
+  // Approval related
+  approvalItems       ApprovalItem[]
+  ApprovalSettingItem ApprovalSettingItem[]
 
   @@index([bankId, departmentId])
   @@map("Users")
