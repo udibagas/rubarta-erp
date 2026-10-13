@@ -2,6 +2,8 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateTaskDto, UpdateTaskDto, QueryTaskDto } from './task.dto';
 import { Prisma, TaskStatus, PaymentStatus } from '../prisma/client/client';
+import { NotificationsService } from '../notifications/notifications.service';
+import { Cron, CronExpression } from '@nestjs/schedule';
 
 export interface DraftDocument {
   id: number;
@@ -15,7 +17,10 @@ export interface DraftDocument {
 
 @Injectable()
 export class TasksService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(
+    private readonly prisma: PrismaService,
+    private readonly notificationService: NotificationsService,
+  ) {}
 
   async create(data: CreateTaskDto) {
     return this.prisma.task.create({
@@ -348,5 +353,39 @@ export class TasksService {
     );
 
     return draftDocuments;
+  }
+
+  @Cron(CronExpression.EVERY_DAY_AT_9AM)
+  async overdueTaskReminder() {
+    const overdueTasks = await this.prisma.task.findMany({
+      where: {
+        dueDate: { lt: new Date() },
+        status: {
+          notIn: [
+            TaskStatus.Completed,
+            TaskStatus.Cancelled,
+            TaskStatus.OnHold,
+          ],
+        },
+        deletedAt: null,
+      },
+      select: {
+        id: true,
+        userId: true,
+        title: true,
+        dueDate: true,
+      },
+    });
+
+    await Promise.all(
+      overdueTasks.map((task) =>
+        this.notificationService.notify({
+          userId: task.userId,
+          title: `[Pengingat] Tugas terlambat: ${task.title}`,
+          message: `Tugas "${task.title}" telah melewati tenggat ${task.dueDate.toLocaleDateString('id-ID')}. Silakan tinjau dan selesaikan tugas tersebut.`,
+          redirectUrl: `/crm/tasks`,
+        }),
+      ),
+    );
   }
 }
