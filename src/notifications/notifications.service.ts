@@ -191,4 +191,16 @@ export class NotificationsService {
       });
     }
   }
+
+  @Cron(CronExpression.EVERY_DAY_AT_MIDNIGHT)
+  async deleteOldNotifications() {
+    const thirtyDaysAgo = new Date();
+    thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+
+    await this.prisma.notification.deleteMany({
+      where: {
+        date: { lt: thirtyDaysAgo },
+      },
+    });
+  }
 }
