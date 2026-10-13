@@ -17,6 +17,7 @@ import * as ExcelJS from 'exceljs';
 import PDFDocument from 'pdfkit';
 import { createPdfDocumentWithTables } from 'pdfkit-table';
 import * as fs from 'node:fs';
+import { NotificationsService } from '../notifications/notifications.service';
 
 @Injectable()
 export class InvoicesService {
@@ -24,6 +25,7 @@ export class InvoicesService {
     private readonly prisma: PrismaService,
     private readonly mailerService: MailerService,
     private readonly policy: InvoicesPolicy,
+    private readonly notificationService: NotificationsService,
   ) {}
 
   async create(data: CreateInvoiceDto & { userId: number }, user: User) {
@@ -554,23 +556,30 @@ export class InvoicesService {
   }
 
   @Cron(CronExpression.EVERY_DAY_AT_8AM)
-  async markAsExpired() {
-    await this.prisma.invoice.updateMany({
-      where: {
-        dueDate: { lt: new Date() },
-        status: {
-          notIn: [
-            InvoiceStatus.Draft,
-            InvoiceStatus.Overdue,
-            InvoiceStatus.Paid,
-          ],
-        },
+  async markAsOverdue() {
+    const where: Prisma.InvoiceWhereInput = {
+      dueDate: { lt: new Date() },
+      status: {
+        notIn: [InvoiceStatus.Draft, InvoiceStatus.Overdue, InvoiceStatus.Paid],
       },
+    };
+
+    const overdueInvoices = await this.prisma.invoice.findMany({ where });
+
+    await this.prisma.invoice.updateMany({
+      where,
       data: {
         status: InvoiceStatus.Overdue,
       },
     });
 
-    // TODO: apakah perlu kirim notifikasi ke user & customer bahwa invoice sudah overdue?
+    for (const invoice of overdueInvoices) {
+      await this.notificationService.notify({
+        userId: invoice.userId,
+        title: `Invoice Overdue #${invoice.number}`,
+        message: `Payment for invoice #${invoice.number} was due on ${dayjs(invoice.dueDate).format('DD MMM YYYY')}. Please review the invoice and follow up with the customer to arrange payment.`,
+        redirectUrl: `/sales/invoices/${invoice.id}`,
+      });
+    }
   }
 }
