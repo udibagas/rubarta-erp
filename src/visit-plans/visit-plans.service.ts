@@ -10,10 +10,15 @@ import dayjs from 'dayjs';
 import * as ExcelJS from 'exceljs';
 import PDFDocument from 'pdfkit';
 import { createPdfDocumentWithTables } from 'pdfkit-table';
+import { NotificationsService } from '../notifications/notifications.service';
+import { Cron, CronExpression } from '@nestjs/schedule';
 
 @Injectable()
 export class VisitPlansService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(
+    private readonly prisma: PrismaService,
+    private readonly notificationService: NotificationsService,
+  ) {}
 
   create(data: CreateVisitPlanDto) {
     return this.prisma.visitPlan.create({
@@ -406,5 +411,36 @@ export class VisitPlansService {
         },
       },
     });
+  }
+
+  @Cron(CronExpression.EVERY_DAY_AT_8AM)
+  async sendVisitPlanReminders() {
+    const today = new Date();
+    const visitPlans = await this.prisma.visitPlan.findMany({
+      where: {
+        scheduledDate: {
+          gte: new Date(today.setHours(0, 0, 0, 0)),
+          lt: new Date(today.setHours(23, 59, 59, 999)),
+        },
+        status: {
+          notIn: [VisitPlanStatus.Completed],
+        },
+        deletedAt: null,
+      },
+      include: {
+        User: true,
+      },
+    });
+
+    await Promise.all(
+      visitPlans.map((visitPlan) =>
+        this.notificationService.notify({
+          userId: visitPlan.userId,
+          title: `Pengingat: Rencana Kunjungan Hari Ini`,
+          message: `Anda memiliki rencana kunjungan "${visitPlan.title}" yang dijadwalkan hari ini.`,
+          redirectUrl: `/crm/visit-plan`,
+        }),
+      ),
+    );
   }
 }
