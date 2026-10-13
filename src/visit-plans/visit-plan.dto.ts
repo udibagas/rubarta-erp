@@ -1,6 +1,9 @@
 import { VisitPlanStatus, VisitType } from '../prisma/client/client';
-import { Type, Transform } from 'class-transformer';
+import { Type } from 'class-transformer';
 import {
+  ArrayMaxSize,
+  ArrayMinSize,
+  IsArray,
   IsDate,
   IsEnum,
   IsIn,
@@ -125,14 +128,12 @@ export class QueryVisitPlanDto {
   visitType?: VisitType | VisitType[];
 
   @IsOptional()
+  @IsArray()
+  @ArrayMinSize(2)
+  @ArrayMaxSize(2)
+  @IsDate({ each: true })
   @Type(() => Date)
-  @IsDate()
-  startDate?: Date;
-
-  @IsOptional()
-  @Type(() => Date)
-  @IsDate()
-  endDate?: Date;
+  dateRange?: [Date, Date];
 
   @IsOptional()
   @IsString()

@@ -52,8 +52,7 @@ export class VisitPlansService {
       customerId,
       status,
       visitType,
-      startDate,
-      endDate,
+      dateRange,
       year,
       month,
       keyword,
@@ -119,7 +118,8 @@ export class VisitPlansService {
         gte: start,
         lte: end,
       };
-    } else if (startDate || endDate) {
+    } else if (dateRange) {
+      const [startDate, endDate] = dateRange;
       where.scheduledDate = {};
       if (startDate) {
         where.scheduledDate.gte = startDate;
