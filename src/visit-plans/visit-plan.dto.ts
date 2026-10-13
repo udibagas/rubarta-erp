@@ -1,7 +1,6 @@
 import { VisitPlanStatus, VisitType } from '../prisma/client/client';
 import { Type, Transform } from 'class-transformer';
 import {
-  IsBoolean,
   IsDate,
   IsEnum,
   IsIn,
@@ -49,6 +48,7 @@ export class CreateVisitPlanDto {
   meetingUrl?: string;
 
   @IsNotEmpty({ message: 'Scheduled date is required' })
+  @Type(() => Date)
   scheduledDate: Date;
 
   @IsOptional()
@@ -64,6 +64,7 @@ export class CreateVisitPlanDto {
   status?: VisitPlanStatus;
 
   @IsOptional()
+  @Type(() => Date)
   actualVisitDate?: Date;
 
   @IsOptional()
