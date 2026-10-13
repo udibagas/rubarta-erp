@@ -9,7 +9,7 @@ import {
   IsArray,
   IsNumberString,
 } from 'class-validator';
-import { Transform } from 'class-transformer';
+import { Transform, Type } from 'class-transformer';
 import { TaskStatus, TaskPriority } from '../prisma/client/client';
 
 export class CreateTaskDto {
@@ -47,7 +47,7 @@ export class CreateTaskDto {
 
   @ApiProperty({ example: '2025-06-01' })
   @IsDate({ message: 'Invalid date' })
-  @Transform(({ value }) => (value ? new Date(value) : undefined))
+  @Type(() => Date)
   dueDate: Date;
 
   @ApiProperty({

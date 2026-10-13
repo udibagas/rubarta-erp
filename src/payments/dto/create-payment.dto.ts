@@ -42,7 +42,7 @@ export class CreatePaymentDto {
   direction: PaymentDirection;
 
   @IsDate({ message: 'Invalid date' })
-  @Transform(({ value }) => (value ? new Date(value) : undefined))
+  @Type(() => Date)
   date: Date;
 
   @IsOptional()

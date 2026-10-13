@@ -46,7 +46,7 @@ export class CreateJournalEntryDto {
   number: string;
 
   @IsDate({ message: 'Invalid date' })
-  @Transform(({ value }) => (value ? new Date(value) : undefined))
+  @Type(() => Date)
   date: Date;
 
   @IsString()
@@ -80,7 +80,7 @@ export class ReverseJournalEntryDto {
   number: string;
 
   @IsDate({ message: 'Invalid date' })
-  @Transform(({ value }) => (value ? new Date(value) : undefined))
+  @Type(() => Date)
   date: Date;
 
   @Type(() => Number)

@@ -56,7 +56,7 @@ export class CreateDeliveryOrderDto {
 
   @ApiProperty({ example: '2026-09-12' })
   @IsDate({ message: 'Invalid date' })
-  @Transform(({ value }) => (value ? new Date(value) : undefined))
+  @Type(() => Date)
   date: Date;
 
   @ApiProperty({ example: 1 })

@@ -63,7 +63,7 @@ export class CreateSalesOrderDto {
 
   @ApiProperty({ example: '2025-05-25' })
   @IsDate({ message: 'Invalid date' })
-  @Transform(({ value }) => (value ? new Date(value) : undefined))
+  @Type(() => Date)
   date: Date;
 
   @ApiProperty({ required: true, example: 'Order for office equipment' })
@@ -144,7 +144,7 @@ export class CreateSalesOrderDto {
   @ApiProperty({ required: false, example: '2025-06-01T10:00:00Z' })
   @IsOptional()
   @IsDate({ message: 'Invalid date' })
-  @Transform(({ value }) => (value ? new Date(value) : undefined))
+  @Type(() => Date)
   deliveryDate?: Date;
 
   @ApiProperty({ required: false, example: 'All Sea' })

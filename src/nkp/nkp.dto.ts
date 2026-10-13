@@ -23,7 +23,7 @@ import {
 export class NkpItemDto {
   @ApiProperty({ example: '2024-06-21' })
   @IsDate({ message: 'Invalid date' })
-  @Transform(({ value }) => (value ? new Date(value) : undefined))
+  @Type(() => Date)
   date: Date;
 
   @ApiProperty({ example: 'BBM Pertalite 10 Liter' })

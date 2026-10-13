@@ -37,7 +37,7 @@ export class CreateInteractionDto {
 
   @ApiProperty({ example: '2025-05-25' })
   @IsDate({ message: 'Invalid date' })
-  @Transform(({ value }) => (value ? new Date(value) : undefined))
+  @Type(() => Date)
   date: Date;
 
   @ApiProperty({ required: false, example: 60 })

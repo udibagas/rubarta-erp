@@ -65,7 +65,7 @@ export class CreatePurchaseOrderDto {
 
   @ApiProperty({ example: '2026-09-12' })
   @IsDate({ message: 'Invalid date' })
-  @Transform(({ value }) => (value ? new Date(value) : undefined))
+  @Type(() => Date)
   date: Date;
 
   @ApiProperty({ example: 'PO-REF-001' })
@@ -94,7 +94,7 @@ export class CreatePurchaseOrderDto {
 
   @ApiProperty({ required: false, example: 1 })
   @IsOptional()
-  @Transform(({ value }) => (value ? parseFloat(value) : 0))
+  @Type(() => Number)
   @Min(0)
   @IsNumber()
   currencyRate?: number;
@@ -133,7 +133,7 @@ export class CreatePurchaseOrderDto {
   @ApiProperty({ required: false })
   @IsOptional()
   @IsDate({ message: 'Invalid date' })
-  @Transform(({ value }) => (value ? new Date(value) : undefined))
+  @Type(() => Date)
   deliveryDate?: Date;
 
   @ApiProperty({ required: false })

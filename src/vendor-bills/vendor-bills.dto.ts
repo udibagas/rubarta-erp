@@ -30,11 +30,11 @@ export class CreateVendorBillDto {
   purchaseOrderId?: number;
 
   @IsDate({ message: 'Invalid date' })
-  @Transform(({ value }) => (value ? new Date(value) : undefined))
+  @Type(() => Date)
   date: Date;
 
   @IsDate({ message: 'Invalid date' })
-  @Transform(({ value }) => (value ? new Date(value) : undefined))
+  @Type(() => Date)
   dueDate: Date;
 
   @IsOptional()

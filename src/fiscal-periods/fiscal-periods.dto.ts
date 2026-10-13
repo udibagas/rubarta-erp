@@ -1,4 +1,4 @@
-import { Transform } from 'class-transformer';
+import { Transform, Type } from 'class-transformer';
 import { IsDate, IsString, MinLength } from 'class-validator';
 
 export class CreateFiscalPeriodDto {
@@ -7,10 +7,10 @@ export class CreateFiscalPeriodDto {
   name: string;
 
   @IsDate({ message: 'Invalid date' })
-  @Transform(({ value }) => (value ? new Date(value) : undefined))
+  @Type(() => Date)
   startDate: Date;
 
   @IsDate({ message: 'Invalid date' })
-  @Transform(({ value }) => (value ? new Date(value) : undefined))
+  @Type(() => Date)
   endDate: Date;
 }

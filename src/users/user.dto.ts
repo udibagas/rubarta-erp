@@ -13,7 +13,7 @@ import {
   IsOptional,
   Length,
 } from 'class-validator';
-import { Transform } from 'class-transformer';
+import { Transform, Type } from 'class-transformer';
 
 export class UserRole {
   @IsNotEmpty()
@@ -88,13 +88,13 @@ export class QueryUserDto {
 
   @ApiProperty({ required: false, example: 1 })
   @IsOptional()
-  @Transform(({ value }) => (value ? Number(value) : undefined))
+  @Type(() => Number)
   @IsNumber({}, { message: 'Page must be a number' })
   page?: number;
 
   @ApiProperty({ required: false, example: 10 })
   @IsOptional()
-  @Transform(({ value }) => (value ? Number(value) : undefined))
+  @Type(() => Number)
   @IsNumber({}, { message: 'Page size must be a number' })
   pageSize?: number;
 }

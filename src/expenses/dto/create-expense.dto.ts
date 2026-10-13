@@ -10,7 +10,7 @@ import {
 
 export class CreateExpenseDto {
   @IsDate({ message: 'Invalid date' })
-  @Transform(({ value }) => (value ? new Date(value) : undefined))
+  @Type(() => Date)
   date: Date;
 
   @IsString()

@@ -53,7 +53,7 @@ export class GoodsReceiptItemDto {
 export class CreateGoodsReceiptDto {
   @ApiProperty({ example: '2026-09-12' })
   @IsDate({ message: 'Invalid date' })
-  @Transform(({ value }) => (value ? new Date(value) : undefined))
+  @Type(() => Date)
   date: Date;
 
   @ApiProperty({ example: 1 })
@@ -113,13 +113,13 @@ export class QueryGoodsReceiptDto {
   @ApiProperty({ required: false })
   @IsOptional()
   @IsNumber()
-  @Transform(({ value }) => (value ? Number(value) : undefined))
+  @Type(() => Number)
   page?: number;
 
   @ApiProperty({ required: false })
   @IsOptional()
   @IsNumber()
-  @Transform(({ value }) => (value ? Number(value) : undefined))
+  @Type(() => Number)
   pageSize?: number;
 
   @ApiProperty({ required: false })
@@ -129,12 +129,12 @@ export class QueryGoodsReceiptDto {
 
   @ApiProperty({ required: false })
   @IsOptional()
-  @Transform(({ value }) => (value ? Number(value) : undefined))
+  @Type(() => Number)
   purchaseOrderId?: number;
 
   @ApiProperty({ required: false })
   @IsOptional()
-  @Transform(({ value }) => (value ? Number(value) : undefined))
+  @Type(() => Number)
   @IsNumber()
   supplierId?: number;
 

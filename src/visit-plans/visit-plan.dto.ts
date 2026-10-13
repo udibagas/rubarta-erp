@@ -125,12 +125,12 @@ export class QueryVisitPlanDto {
   visitType?: VisitType | VisitType[];
 
   @IsOptional()
-  @Transform(({ value }) => (value ? new Date(value) : undefined))
+  @Type(() => Date)
   @IsDate()
   startDate?: Date;
 
   @IsOptional()
-  @Transform(({ value }) => (value ? new Date(value) : undefined))
+  @Type(() => Date)
   @IsDate()
   endDate?: Date;
 

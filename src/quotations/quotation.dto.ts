@@ -65,7 +65,7 @@ export class CreateQuotationDto {
 
   @ApiProperty({ example: '2025-06-25' })
   @IsDate({ message: 'Invalid date' })
-  @Transform(({ value }) => (value ? new Date(value) : undefined))
+  @Type(() => Date)
   date: Date;
 
   @ApiProperty({ example: 'Quotation for Office Equipment' })
@@ -100,7 +100,7 @@ export class CreateQuotationDto {
 
   @ApiProperty({ example: '2025-06-25' })
   @IsDate({ message: 'Invalid date' })
-  @Transform(({ value }) => (value ? new Date(value) : undefined))
+  @Type(() => Date)
   validUntil: Date;
 
   @ApiProperty({ required: false, example: true, default: true })
@@ -213,13 +213,13 @@ export class SendQuotationEmailDto {
 export class QueryQuotationDto {
   @ApiProperty({ required: false })
   @IsOptional()
-  @Transform(({ value }) => (value ? Number(value) : undefined))
+  @Type(() => Number)
   @IsNumber()
   page?: number;
 
   @ApiProperty({ required: false })
   @IsOptional()
-  @Transform(({ value }) => (value ? Number(value) : undefined))
+  @Type(() => Number)
   @IsNumber()
   pageSize?: number;
 
@@ -230,13 +230,13 @@ export class QueryQuotationDto {
 
   @ApiProperty({ required: false })
   @IsOptional()
-  @Transform(({ value }) => (value ? Number(value) : undefined))
+  @Type(() => Number)
   @IsNumber()
   customerId?: number;
 
   @ApiProperty({ required: false })
   @IsOptional()
-  @Transform(({ value }) => (value ? Number(value) : undefined))
+  @Type(() => Number)
   @IsNumber()
   opportunityId?: number;
 

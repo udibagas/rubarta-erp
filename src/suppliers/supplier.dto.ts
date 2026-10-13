@@ -8,6 +8,7 @@ import {
   IsString,
   IsBoolean,
 } from 'class-validator';
+import { Type } from 'class-transformer';
 import { ApiProperty } from '@nestjs/swagger';
 import { PartialType } from '@nestjs/mapped-types';
 import { Transform } from 'class-transformer';
@@ -53,12 +54,12 @@ export class UpdateSupplierDto extends PartialType(CreateSupplierDto) {}
 
 export class QuerySupplierDto {
   @IsOptional()
-  @Transform(({ value }) => (value ? Number(value) : undefined))
+  @Type(() => Number)
   @IsNumber()
   page?: number;
 
   @IsOptional()
-  @Transform(({ value }) => (value ? Number(value) : undefined))
+  @Type(() => Number)
   @IsNumber()
   pageSize?: number;
 

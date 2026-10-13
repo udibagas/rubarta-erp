@@ -45,11 +45,11 @@ export class CreateInvoiceDto {
   companyId?: number;
 
   @IsDate({ message: 'Invalid date' })
-  @Transform(({ value }) => (value ? new Date(value) : undefined))
+  @Type(() => Date)
   date: Date;
 
   @IsDate({ message: 'Invalid date' })
-  @Transform(({ value }) => (value ? new Date(value) : undefined))
+  @Type(() => Date)
   dueDate: Date;
 
   @IsOptional()
@@ -142,7 +142,7 @@ export class InvoiceStatusUpdateDto {
 
   @IsOptional()
   @IsDate({ message: 'Invalid date' })
-  @Transform(({ value }) => (value ? new Date(value) : undefined))
+  @Type(() => Date)
   receiptDate?: Date;
 
   @IsOptional()
