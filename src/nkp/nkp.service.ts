@@ -697,7 +697,9 @@ export class NkpService {
     let number = '0001';
 
     if (parentId) {
-      const parent = await this.findOne(parentId);
+      const parent = await this.prisma.nkp.findUniqueOrThrow({
+        where: { id: parentId },
+      });
       number = parent.number.split('/')[0];
     } else {
       const lastData = await this.prisma.nkp.findFirst({
