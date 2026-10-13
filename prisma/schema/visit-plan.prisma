@@ -19,11 +19,11 @@ model VisitPlan {
   address           String?         @db.Text
   contactPerson     String?         @db.VarChar(200) // Fallback if no contactId
   contactPhone      String?         @db.VarChar(50) // Fallback if no contactId
-  deletedAt         DateTime?       @db.Timestamp()
 
   // Timestamps
   createdAt DateTime  @default(now())
   updatedAt DateTime? @updatedAt
+  deletedAt DateTime? @db.Timestamp()
 
   // Relationships
   Customer Customer @relation(fields: [customerId], references: [id], onDelete: Cascade)

@@ -443,4 +443,35 @@ export class VisitPlansService {
       ),
     );
   }
+
+  @Cron(CronExpression.EVERY_DAY_AT_5PM)
+  async reminderToCompleteVisitPlans() {
+    const today = new Date();
+
+    const visitPlans = await this.prisma.visitPlan.findMany({
+      where: {
+        deletedAt: null,
+        status: {
+          notIn: [VisitPlanStatus.Completed, VisitPlanStatus.Cancelled],
+        },
+        scheduledDate: {
+          lte: dayjs(today).endOf('day').toDate(),
+        },
+      },
+      include: {
+        User: true,
+      },
+    });
+
+    await Promise.all(
+      visitPlans.map((visitPlan) =>
+        this.notificationService.notify({
+          userId: visitPlan.userId,
+          title: `Pengingat: Selesaikan Rencana Kunjungan`,
+          message: `Rencana kunjungan "${visitPlan.title}" telah melewati jadwal. Silakan tandai sebagai selesai dan masukkan hasil kunjungan (outcome).`,
+          redirectUrl: `/crm/visit-plan`,
+        }),
+      ),
+    );
+  }
 }
