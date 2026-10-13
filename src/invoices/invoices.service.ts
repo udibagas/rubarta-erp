@@ -577,7 +577,7 @@ export class InvoicesService {
       await this.notificationService.notify({
         userId: invoice.userId,
         title: `Invoice Overdue #${invoice.number}`,
-        message: `Payment for invoice #${invoice.number} was due on ${dayjs(invoice.dueDate).format('DD MMM YYYY')}. Please review the invoice and follow up with the customer to arrange payment.`,
+        message: `Pembayaran untuk invoice #${invoice.number} jatuh tempo pada ${dayjs(invoice.dueDate).format('DD MMM YYYY')}. Mohon tinjau invoice ini dan tindak lanjuti dengan pelanggan untuk mengatur pembayaran.`,
         redirectUrl: `/sales/invoices/${invoice.id}`,
       });
     }
