@@ -37,16 +37,18 @@ export class AuthService {
   ) {
     const user = await this.userService.findByEmail(email);
     if (!user) {
-      this.logger.warn('Failed sign-in: unknown email');
+      this.logger.warn('Failed sign-in: unknown email', { email });
       throw new UnauthorizedException('Invalid email or password');
     }
     if (!user.active) {
-      this.logger.warn(`Failed sign-in: inactive user ${user.id}`);
+      this.logger.warn(`Failed sign-in: inactive user ${user.id}`, { email });
       throw new UnauthorizedException('Invalid email or password');
     }
     const verified = await bcrypt.compare(password, user.password);
     if (!verified) {
-      this.logger.warn(`Failed sign-in: wrong password for user ${user.id}`);
+      this.logger.warn(`Failed sign-in: wrong password for user ${user.id}`, {
+        email,
+      });
       throw new UnauthorizedException('Invalid email or password');
     }
 
@@ -55,11 +57,11 @@ export class AuthService {
       : null;
     if (user.twoFactorEnabled && deviceId === null) {
       const challengeId = await this.createTwoFactorChallenge(user);
-      this.logger.log(`2FA code sent to user ${user.id}`);
+      this.logger.log(`2FA code sent to user ${user.id}`, { email });
       return { twoFactorRequired: true, challengeId };
     }
 
-    this.logger.log(`User ${user.id} signed in`);
+    this.logger.log(`User ${user.id} signed in`, { email });
     return this.issueSession(user, deviceId);
   }
 
