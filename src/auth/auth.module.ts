@@ -6,6 +6,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { AuthGuard } from './auth.guard';
 import { RolesGuard } from './roles.guard';
 import { ConfigService } from '@nestjs/config';
+import { AUTH_TOKEN_TTL_SECONDS } from './auth.constants';
 
 @Module({
   imports: [
@@ -14,7 +15,7 @@ import { ConfigService } from '@nestjs/config';
       global: true,
       useFactory: (configService: ConfigService) => ({
         secret: configService.get<string>('JWT_SECRET'),
-        signOptions: { expiresIn: '7d' },
+        signOptions: { expiresIn: AUTH_TOKEN_TTL_SECONDS },
       }),
       inject: [ConfigService],
     }),

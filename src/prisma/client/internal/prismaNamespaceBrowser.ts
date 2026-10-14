@@ -96,6 +96,7 @@ export const ModelName = {
   Company: 'Company',
   Department: 'Department',
   Bank: 'Bank',
+  AuthSession: 'AuthSession',
   Supplier: 'Supplier',
   User: 'User',
   UserBalance: 'UserBalance',
@@ -966,6 +967,18 @@ export const BankScalarFieldEnum = {
 export type BankScalarFieldEnum = (typeof BankScalarFieldEnum)[keyof typeof BankScalarFieldEnum]
 
 
+export const AuthSessionScalarFieldEnum = {
+  id: 'id',
+  jti: 'jti',
+  userId: 'userId',
+  expiresAt: 'expiresAt',
+  revokedAt: 'revokedAt',
+  createdAt: 'createdAt'
+} as const
+
+export type AuthSessionScalarFieldEnum = (typeof AuthSessionScalarFieldEnum)[keyof typeof AuthSessionScalarFieldEnum]
+
+
 export const SupplierScalarFieldEnum = {
   id: 'id',
   code: 'code',
@@ -1033,9 +1046,9 @@ export const VisitPlanScalarFieldEnum = {
   address: 'address',
   contactPerson: 'contactPerson',
   contactPhone: 'contactPhone',
-  deletedAt: 'deletedAt',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
 } as const
 
 export type VisitPlanScalarFieldEnum = (typeof VisitPlanScalarFieldEnum)[keyof typeof VisitPlanScalarFieldEnum]

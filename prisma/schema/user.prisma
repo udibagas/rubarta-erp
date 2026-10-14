@@ -21,6 +21,7 @@ model User {
   // 1:many relations with other models
   roles        Role[]         @default([USER])
   Notification Notification[]
+  AuthSession  AuthSession[]
 
   // NKP related
   NkpApproval NkpApproval[]

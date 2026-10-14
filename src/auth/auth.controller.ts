@@ -73,7 +73,11 @@ export class AuthController {
   }
 
   @Post('logout')
-  logout(@Res({ passthrough: true }) res: Response) {
+  async logout(
+    @Req() req,
+    @Res({ passthrough: true }) res: Response,
+  ) {
+    await this.authService.revokeSession(req.authSessionId);
     res.clearCookie('token');
     return { message: 'See you next time!' };
   }

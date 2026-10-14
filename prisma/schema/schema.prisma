@@ -80,3 +80,16 @@ enum PaymentType {
   TAX
   BILL
 }
+
+model AuthSession {
+  id        Int       @id @default(autoincrement())
+  jti       String    @unique @db.VarChar(36)
+  userId    Int
+  expiresAt DateTime
+  revokedAt DateTime?
+  createdAt DateTime  @default(now())
+  User      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, expiresAt])
+  @@map("AuthSessions")
+}

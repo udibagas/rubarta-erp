@@ -276,6 +276,7 @@ export type UserWhereInput = {
   Department?: Prisma.XOR<Prisma.DepartmentNullableScalarRelationFilter, Prisma.DepartmentWhereInput> | null
   Balance?: Prisma.XOR<Prisma.UserBalanceNullableScalarRelationFilter, Prisma.UserBalanceWhereInput> | null
   Notification?: Prisma.NotificationListRelationFilter
+  AuthSession?: Prisma.AuthSessionListRelationFilter
   NkpApproval?: Prisma.NkpApprovalListRelationFilter
   Nkp?: Prisma.NkpListRelationFilter
   NkpRequest?: Prisma.NkpListRelationFilter
@@ -319,6 +320,7 @@ export type UserOrderByWithRelationInput = {
   Department?: Prisma.DepartmentOrderByWithRelationInput
   Balance?: Prisma.UserBalanceOrderByWithRelationInput
   Notification?: Prisma.NotificationOrderByRelationAggregateInput
+  AuthSession?: Prisma.AuthSessionOrderByRelationAggregateInput
   NkpApproval?: Prisma.NkpApprovalOrderByRelationAggregateInput
   Nkp?: Prisma.NkpOrderByRelationAggregateInput
   NkpRequest?: Prisma.NkpOrderByRelationAggregateInput
@@ -365,6 +367,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   Department?: Prisma.XOR<Prisma.DepartmentNullableScalarRelationFilter, Prisma.DepartmentWhereInput> | null
   Balance?: Prisma.XOR<Prisma.UserBalanceNullableScalarRelationFilter, Prisma.UserBalanceWhereInput> | null
   Notification?: Prisma.NotificationListRelationFilter
+  AuthSession?: Prisma.AuthSessionListRelationFilter
   NkpApproval?: Prisma.NkpApprovalListRelationFilter
   Nkp?: Prisma.NkpListRelationFilter
   NkpRequest?: Prisma.NkpListRelationFilter
@@ -443,6 +446,7 @@ export type UserCreateInput = {
   Department?: Prisma.DepartmentCreateNestedOneWithoutUserInput
   Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  AuthSession?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpCreateNestedManyWithoutRequesterInput
@@ -484,6 +488,7 @@ export type UserUncheckedCreateInput = {
   roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   Balance?: Prisma.UserBalanceUncheckedCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  AuthSession?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpUncheckedCreateNestedManyWithoutRequesterInput
@@ -524,6 +529,7 @@ export type UserUpdateInput = {
   Department?: Prisma.DepartmentUpdateOneWithoutUserNestedInput
   Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  AuthSession?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUpdateManyWithoutRequesterNestedInput
@@ -565,6 +571,7 @@ export type UserUncheckedUpdateInput = {
   roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   Balance?: Prisma.UserBalanceUncheckedUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  AuthSession?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUncheckedUpdateManyWithoutRequesterNestedInput
@@ -1142,6 +1149,20 @@ export type UserUncheckedUpdateManyWithoutBankNestedInput = {
   deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
 }
 
+export type UserCreateNestedOneWithoutAuthSessionInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutAuthSessionInput, Prisma.UserUncheckedCreateWithoutAuthSessionInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAuthSessionInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutAuthSessionNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutAuthSessionInput, Prisma.UserUncheckedCreateWithoutAuthSessionInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAuthSessionInput
+  upsert?: Prisma.UserUpsertWithoutAuthSessionInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutAuthSessionInput, Prisma.UserUpdateWithoutAuthSessionInput>, Prisma.UserUncheckedUpdateWithoutAuthSessionInput>
+}
+
 export type UserCreaterolesInput = {
   set: $Enums.Role[]
 }
@@ -1193,6 +1214,7 @@ export type UserCreateWithoutClosedPeriodsInput = {
   Department?: Prisma.DepartmentCreateNestedOneWithoutUserInput
   Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  AuthSession?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpCreateNestedManyWithoutRequesterInput
@@ -1233,6 +1255,7 @@ export type UserUncheckedCreateWithoutClosedPeriodsInput = {
   roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   Balance?: Prisma.UserBalanceUncheckedCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  AuthSession?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpUncheckedCreateNestedManyWithoutRequesterInput
@@ -1288,6 +1311,7 @@ export type UserUpdateWithoutClosedPeriodsInput = {
   Department?: Prisma.DepartmentUpdateOneWithoutUserNestedInput
   Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  AuthSession?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUpdateManyWithoutRequesterNestedInput
@@ -1328,6 +1352,7 @@ export type UserUncheckedUpdateWithoutClosedPeriodsInput = {
   roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   Balance?: Prisma.UserBalanceUncheckedUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  AuthSession?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUncheckedUpdateManyWithoutRequesterNestedInput
@@ -1367,6 +1392,7 @@ export type UserCreateWithoutJournalEntriesCreatedInput = {
   Department?: Prisma.DepartmentCreateNestedOneWithoutUserInput
   Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  AuthSession?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpCreateNestedManyWithoutRequesterInput
@@ -1407,6 +1433,7 @@ export type UserUncheckedCreateWithoutJournalEntriesCreatedInput = {
   roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   Balance?: Prisma.UserBalanceUncheckedCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  AuthSession?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpUncheckedCreateNestedManyWithoutRequesterInput
@@ -1451,6 +1478,7 @@ export type UserCreateWithoutJournalEntriesPostedInput = {
   Department?: Prisma.DepartmentCreateNestedOneWithoutUserInput
   Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  AuthSession?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpCreateNestedManyWithoutRequesterInput
@@ -1491,6 +1519,7 @@ export type UserUncheckedCreateWithoutJournalEntriesPostedInput = {
   roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   Balance?: Prisma.UserBalanceUncheckedCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  AuthSession?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpUncheckedCreateNestedManyWithoutRequesterInput
@@ -1546,6 +1575,7 @@ export type UserUpdateWithoutJournalEntriesCreatedInput = {
   Department?: Prisma.DepartmentUpdateOneWithoutUserNestedInput
   Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  AuthSession?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUpdateManyWithoutRequesterNestedInput
@@ -1586,6 +1616,7 @@ export type UserUncheckedUpdateWithoutJournalEntriesCreatedInput = {
   roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   Balance?: Prisma.UserBalanceUncheckedUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  AuthSession?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUncheckedUpdateManyWithoutRequesterNestedInput
@@ -1636,6 +1667,7 @@ export type UserUpdateWithoutJournalEntriesPostedInput = {
   Department?: Prisma.DepartmentUpdateOneWithoutUserNestedInput
   Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  AuthSession?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUpdateManyWithoutRequesterNestedInput
@@ -1676,6 +1708,7 @@ export type UserUncheckedUpdateWithoutJournalEntriesPostedInput = {
   roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   Balance?: Prisma.UserBalanceUncheckedUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  AuthSession?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUncheckedUpdateManyWithoutRequesterNestedInput
@@ -1715,6 +1748,7 @@ export type UserCreateWithoutVendorBillsCreatedInput = {
   Department?: Prisma.DepartmentCreateNestedOneWithoutUserInput
   Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  AuthSession?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpCreateNestedManyWithoutRequesterInput
@@ -1755,6 +1789,7 @@ export type UserUncheckedCreateWithoutVendorBillsCreatedInput = {
   roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   Balance?: Prisma.UserBalanceUncheckedCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  AuthSession?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpUncheckedCreateNestedManyWithoutRequesterInput
@@ -1810,6 +1845,7 @@ export type UserUpdateWithoutVendorBillsCreatedInput = {
   Department?: Prisma.DepartmentUpdateOneWithoutUserNestedInput
   Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  AuthSession?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUpdateManyWithoutRequesterNestedInput
@@ -1850,6 +1886,7 @@ export type UserUncheckedUpdateWithoutVendorBillsCreatedInput = {
   roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   Balance?: Prisma.UserBalanceUncheckedUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  AuthSession?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUncheckedUpdateManyWithoutRequesterNestedInput
@@ -1889,6 +1926,7 @@ export type UserCreateWithoutAccountingPaymentsInput = {
   Department?: Prisma.DepartmentCreateNestedOneWithoutUserInput
   Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  AuthSession?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpCreateNestedManyWithoutRequesterInput
@@ -1929,6 +1967,7 @@ export type UserUncheckedCreateWithoutAccountingPaymentsInput = {
   roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   Balance?: Prisma.UserBalanceUncheckedCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  AuthSession?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpUncheckedCreateNestedManyWithoutRequesterInput
@@ -1984,6 +2023,7 @@ export type UserUpdateWithoutAccountingPaymentsInput = {
   Department?: Prisma.DepartmentUpdateOneWithoutUserNestedInput
   Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  AuthSession?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUpdateManyWithoutRequesterNestedInput
@@ -2024,6 +2064,7 @@ export type UserUncheckedUpdateWithoutAccountingPaymentsInput = {
   roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   Balance?: Prisma.UserBalanceUncheckedUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  AuthSession?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUncheckedUpdateManyWithoutRequesterNestedInput
@@ -2063,6 +2104,7 @@ export type UserCreateWithoutBankTransactionsInput = {
   Department?: Prisma.DepartmentCreateNestedOneWithoutUserInput
   Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  AuthSession?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpCreateNestedManyWithoutRequesterInput
@@ -2103,6 +2145,7 @@ export type UserUncheckedCreateWithoutBankTransactionsInput = {
   roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   Balance?: Prisma.UserBalanceUncheckedCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  AuthSession?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpUncheckedCreateNestedManyWithoutRequesterInput
@@ -2158,6 +2201,7 @@ export type UserUpdateWithoutBankTransactionsInput = {
   Department?: Prisma.DepartmentUpdateOneWithoutUserNestedInput
   Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  AuthSession?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUpdateManyWithoutRequesterNestedInput
@@ -2198,6 +2242,7 @@ export type UserUncheckedUpdateWithoutBankTransactionsInput = {
   roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   Balance?: Prisma.UserBalanceUncheckedUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  AuthSession?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUncheckedUpdateManyWithoutRequesterNestedInput
@@ -2237,6 +2282,7 @@ export type UserCreateWithoutApprovalSettingItemInput = {
   Department?: Prisma.DepartmentCreateNestedOneWithoutUserInput
   Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  AuthSession?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpCreateNestedManyWithoutRequesterInput
@@ -2277,6 +2323,7 @@ export type UserUncheckedCreateWithoutApprovalSettingItemInput = {
   roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   Balance?: Prisma.UserBalanceUncheckedCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  AuthSession?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpUncheckedCreateNestedManyWithoutRequesterInput
@@ -2332,6 +2379,7 @@ export type UserUpdateWithoutApprovalSettingItemInput = {
   Department?: Prisma.DepartmentUpdateOneWithoutUserNestedInput
   Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  AuthSession?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUpdateManyWithoutRequesterNestedInput
@@ -2372,6 +2420,7 @@ export type UserUncheckedUpdateWithoutApprovalSettingItemInput = {
   roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   Balance?: Prisma.UserBalanceUncheckedUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  AuthSession?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUncheckedUpdateManyWithoutRequesterNestedInput
@@ -2411,6 +2460,7 @@ export type UserCreateWithoutApprovalItemsInput = {
   Department?: Prisma.DepartmentCreateNestedOneWithoutUserInput
   Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  AuthSession?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpCreateNestedManyWithoutRequesterInput
@@ -2451,6 +2501,7 @@ export type UserUncheckedCreateWithoutApprovalItemsInput = {
   roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   Balance?: Prisma.UserBalanceUncheckedCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  AuthSession?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpUncheckedCreateNestedManyWithoutRequesterInput
@@ -2506,6 +2557,7 @@ export type UserUpdateWithoutApprovalItemsInput = {
   Department?: Prisma.DepartmentUpdateOneWithoutUserNestedInput
   Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  AuthSession?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUpdateManyWithoutRequesterNestedInput
@@ -2546,6 +2598,7 @@ export type UserUncheckedUpdateWithoutApprovalItemsInput = {
   roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   Balance?: Prisma.UserBalanceUncheckedUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  AuthSession?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUncheckedUpdateManyWithoutRequesterNestedInput
@@ -2585,6 +2638,7 @@ export type UserCreateWithoutLeadsInput = {
   Department?: Prisma.DepartmentCreateNestedOneWithoutUserInput
   Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  AuthSession?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpCreateNestedManyWithoutRequesterInput
@@ -2625,6 +2679,7 @@ export type UserUncheckedCreateWithoutLeadsInput = {
   roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   Balance?: Prisma.UserBalanceUncheckedCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  AuthSession?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpUncheckedCreateNestedManyWithoutRequesterInput
@@ -2680,6 +2735,7 @@ export type UserUpdateWithoutLeadsInput = {
   Department?: Prisma.DepartmentUpdateOneWithoutUserNestedInput
   Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  AuthSession?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUpdateManyWithoutRequesterNestedInput
@@ -2720,6 +2776,7 @@ export type UserUncheckedUpdateWithoutLeadsInput = {
   roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   Balance?: Prisma.UserBalanceUncheckedUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  AuthSession?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUncheckedUpdateManyWithoutRequesterNestedInput
@@ -2759,6 +2816,7 @@ export type UserCreateWithoutOpportunitiesInput = {
   Department?: Prisma.DepartmentCreateNestedOneWithoutUserInput
   Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  AuthSession?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpCreateNestedManyWithoutRequesterInput
@@ -2799,6 +2857,7 @@ export type UserUncheckedCreateWithoutOpportunitiesInput = {
   roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   Balance?: Prisma.UserBalanceUncheckedCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  AuthSession?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpUncheckedCreateNestedManyWithoutRequesterInput
@@ -2854,6 +2913,7 @@ export type UserUpdateWithoutOpportunitiesInput = {
   Department?: Prisma.DepartmentUpdateOneWithoutUserNestedInput
   Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  AuthSession?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUpdateManyWithoutRequesterNestedInput
@@ -2894,6 +2954,7 @@ export type UserUncheckedUpdateWithoutOpportunitiesInput = {
   roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   Balance?: Prisma.UserBalanceUncheckedUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  AuthSession?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUncheckedUpdateManyWithoutRequesterNestedInput
@@ -2933,6 +2994,7 @@ export type UserCreateWithoutTasksInput = {
   Department?: Prisma.DepartmentCreateNestedOneWithoutUserInput
   Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  AuthSession?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpCreateNestedManyWithoutRequesterInput
@@ -2973,6 +3035,7 @@ export type UserUncheckedCreateWithoutTasksInput = {
   roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   Balance?: Prisma.UserBalanceUncheckedCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  AuthSession?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpUncheckedCreateNestedManyWithoutRequesterInput
@@ -3028,6 +3091,7 @@ export type UserUpdateWithoutTasksInput = {
   Department?: Prisma.DepartmentUpdateOneWithoutUserNestedInput
   Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  AuthSession?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUpdateManyWithoutRequesterNestedInput
@@ -3068,6 +3132,7 @@ export type UserUncheckedUpdateWithoutTasksInput = {
   roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   Balance?: Prisma.UserBalanceUncheckedUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  AuthSession?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUncheckedUpdateManyWithoutRequesterNestedInput
@@ -3107,6 +3172,7 @@ export type UserCreateWithoutInteractionsInput = {
   Department?: Prisma.DepartmentCreateNestedOneWithoutUserInput
   Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  AuthSession?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpCreateNestedManyWithoutRequesterInput
@@ -3147,6 +3213,7 @@ export type UserUncheckedCreateWithoutInteractionsInput = {
   roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   Balance?: Prisma.UserBalanceUncheckedCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  AuthSession?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpUncheckedCreateNestedManyWithoutRequesterInput
@@ -3202,6 +3269,7 @@ export type UserUpdateWithoutInteractionsInput = {
   Department?: Prisma.DepartmentUpdateOneWithoutUserNestedInput
   Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  AuthSession?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUpdateManyWithoutRequesterNestedInput
@@ -3242,6 +3310,7 @@ export type UserUncheckedUpdateWithoutInteractionsInput = {
   roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   Balance?: Prisma.UserBalanceUncheckedUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  AuthSession?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUncheckedUpdateManyWithoutRequesterNestedInput
@@ -3281,6 +3350,7 @@ export type UserCreateWithoutCustomerNotesInput = {
   Department?: Prisma.DepartmentCreateNestedOneWithoutUserInput
   Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  AuthSession?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpCreateNestedManyWithoutRequesterInput
@@ -3321,6 +3391,7 @@ export type UserUncheckedCreateWithoutCustomerNotesInput = {
   roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   Balance?: Prisma.UserBalanceUncheckedCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  AuthSession?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpUncheckedCreateNestedManyWithoutRequesterInput
@@ -3376,6 +3447,7 @@ export type UserUpdateWithoutCustomerNotesInput = {
   Department?: Prisma.DepartmentUpdateOneWithoutUserNestedInput
   Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  AuthSession?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUpdateManyWithoutRequesterNestedInput
@@ -3416,6 +3488,7 @@ export type UserUncheckedUpdateWithoutCustomerNotesInput = {
   roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   Balance?: Prisma.UserBalanceUncheckedUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  AuthSession?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUncheckedUpdateManyWithoutRequesterNestedInput
@@ -3455,6 +3528,7 @@ export type UserCreateWithoutCustomersInput = {
   Department?: Prisma.DepartmentCreateNestedOneWithoutUserInput
   Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  AuthSession?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpCreateNestedManyWithoutRequesterInput
@@ -3495,6 +3569,7 @@ export type UserUncheckedCreateWithoutCustomersInput = {
   roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   Balance?: Prisma.UserBalanceUncheckedCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  AuthSession?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpUncheckedCreateNestedManyWithoutRequesterInput
@@ -3550,6 +3625,7 @@ export type UserUpdateWithoutCustomersInput = {
   Department?: Prisma.DepartmentUpdateOneWithoutUserNestedInput
   Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  AuthSession?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUpdateManyWithoutRequesterNestedInput
@@ -3590,6 +3666,7 @@ export type UserUncheckedUpdateWithoutCustomersInput = {
   roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   Balance?: Prisma.UserBalanceUncheckedUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  AuthSession?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUncheckedUpdateManyWithoutRequesterNestedInput
@@ -3629,6 +3706,7 @@ export type UserCreateWithoutDeliveryOrdersInput = {
   Department?: Prisma.DepartmentCreateNestedOneWithoutUserInput
   Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  AuthSession?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpCreateNestedManyWithoutRequesterInput
@@ -3669,6 +3747,7 @@ export type UserUncheckedCreateWithoutDeliveryOrdersInput = {
   roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   Balance?: Prisma.UserBalanceUncheckedCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  AuthSession?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpUncheckedCreateNestedManyWithoutRequesterInput
@@ -3724,6 +3803,7 @@ export type UserUpdateWithoutDeliveryOrdersInput = {
   Department?: Prisma.DepartmentUpdateOneWithoutUserNestedInput
   Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  AuthSession?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUpdateManyWithoutRequesterNestedInput
@@ -3764,6 +3844,7 @@ export type UserUncheckedUpdateWithoutDeliveryOrdersInput = {
   roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   Balance?: Prisma.UserBalanceUncheckedUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  AuthSession?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUncheckedUpdateManyWithoutRequesterNestedInput
@@ -3803,6 +3884,7 @@ export type UserCreateWithoutGoodsReceiptsInput = {
   Department?: Prisma.DepartmentCreateNestedOneWithoutUserInput
   Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  AuthSession?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpCreateNestedManyWithoutRequesterInput
@@ -3843,6 +3925,7 @@ export type UserUncheckedCreateWithoutGoodsReceiptsInput = {
   roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   Balance?: Prisma.UserBalanceUncheckedCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  AuthSession?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpUncheckedCreateNestedManyWithoutRequesterInput
@@ -3898,6 +3981,7 @@ export type UserUpdateWithoutGoodsReceiptsInput = {
   Department?: Prisma.DepartmentUpdateOneWithoutUserNestedInput
   Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  AuthSession?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUpdateManyWithoutRequesterNestedInput
@@ -3938,6 +4022,7 @@ export type UserUncheckedUpdateWithoutGoodsReceiptsInput = {
   roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   Balance?: Prisma.UserBalanceUncheckedUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  AuthSession?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUncheckedUpdateManyWithoutRequesterNestedInput
@@ -3977,6 +4062,7 @@ export type UserCreateWithoutInvoicesInput = {
   Department?: Prisma.DepartmentCreateNestedOneWithoutUserInput
   Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  AuthSession?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpCreateNestedManyWithoutRequesterInput
@@ -4017,6 +4103,7 @@ export type UserUncheckedCreateWithoutInvoicesInput = {
   roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   Balance?: Prisma.UserBalanceUncheckedCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  AuthSession?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpUncheckedCreateNestedManyWithoutRequesterInput
@@ -4072,6 +4159,7 @@ export type UserUpdateWithoutInvoicesInput = {
   Department?: Prisma.DepartmentUpdateOneWithoutUserNestedInput
   Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  AuthSession?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUpdateManyWithoutRequesterNestedInput
@@ -4112,6 +4200,7 @@ export type UserUncheckedUpdateWithoutInvoicesInput = {
   roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   Balance?: Prisma.UserBalanceUncheckedUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  AuthSession?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUncheckedUpdateManyWithoutRequesterNestedInput
@@ -4151,6 +4240,7 @@ export type UserCreateWithoutNkpInput = {
   Department?: Prisma.DepartmentCreateNestedOneWithoutUserInput
   Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  AuthSession?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
   NkpRequest?: Prisma.NkpCreateNestedManyWithoutRequesterInput
   Leads?: Prisma.LeadCreateNestedManyWithoutUserInput
@@ -4191,6 +4281,7 @@ export type UserUncheckedCreateWithoutNkpInput = {
   roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   Balance?: Prisma.UserBalanceUncheckedCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  AuthSession?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
   NkpRequest?: Prisma.NkpUncheckedCreateNestedManyWithoutRequesterInput
   Leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
@@ -4235,6 +4326,7 @@ export type UserCreateWithoutNkpRequestInput = {
   Department?: Prisma.DepartmentCreateNestedOneWithoutUserInput
   Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  AuthSession?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
   Leads?: Prisma.LeadCreateNestedManyWithoutUserInput
@@ -4275,6 +4367,7 @@ export type UserUncheckedCreateWithoutNkpRequestInput = {
   roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   Balance?: Prisma.UserBalanceUncheckedCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  AuthSession?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
   Leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
@@ -4330,6 +4423,7 @@ export type UserUpdateWithoutNkpInput = {
   Department?: Prisma.DepartmentUpdateOneWithoutUserNestedInput
   Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  AuthSession?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
   NkpRequest?: Prisma.NkpUpdateManyWithoutRequesterNestedInput
   Leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
@@ -4370,6 +4464,7 @@ export type UserUncheckedUpdateWithoutNkpInput = {
   roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   Balance?: Prisma.UserBalanceUncheckedUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  AuthSession?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
   NkpRequest?: Prisma.NkpUncheckedUpdateManyWithoutRequesterNestedInput
   Leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
@@ -4420,6 +4515,7 @@ export type UserUpdateWithoutNkpRequestInput = {
   Department?: Prisma.DepartmentUpdateOneWithoutUserNestedInput
   Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  AuthSession?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
   Leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
@@ -4460,6 +4556,7 @@ export type UserUncheckedUpdateWithoutNkpRequestInput = {
   roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   Balance?: Prisma.UserBalanceUncheckedUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  AuthSession?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
   Leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
@@ -4499,6 +4596,7 @@ export type UserCreateWithoutNkpApprovalInput = {
   Department?: Prisma.DepartmentCreateNestedOneWithoutUserInput
   Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  AuthSession?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpCreateNestedManyWithoutRequesterInput
   Leads?: Prisma.LeadCreateNestedManyWithoutUserInput
@@ -4539,6 +4637,7 @@ export type UserUncheckedCreateWithoutNkpApprovalInput = {
   roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   Balance?: Prisma.UserBalanceUncheckedCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  AuthSession?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpUncheckedCreateNestedManyWithoutRequesterInput
   Leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
@@ -4594,6 +4693,7 @@ export type UserUpdateWithoutNkpApprovalInput = {
   Department?: Prisma.DepartmentUpdateOneWithoutUserNestedInput
   Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  AuthSession?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUpdateManyWithoutRequesterNestedInput
   Leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
@@ -4634,6 +4734,7 @@ export type UserUncheckedUpdateWithoutNkpApprovalInput = {
   roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   Balance?: Prisma.UserBalanceUncheckedUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  AuthSession?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUncheckedUpdateManyWithoutRequesterNestedInput
   Leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
@@ -4672,6 +4773,7 @@ export type UserCreateWithoutNotificationInput = {
   Bank?: Prisma.BankCreateNestedOneWithoutUserInput
   Department?: Prisma.DepartmentCreateNestedOneWithoutUserInput
   Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
+  AuthSession?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpCreateNestedManyWithoutRequesterInput
@@ -4712,6 +4814,7 @@ export type UserUncheckedCreateWithoutNotificationInput = {
   departmentId?: number | null
   roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   Balance?: Prisma.UserBalanceUncheckedCreateNestedOneWithoutUserInput
+  AuthSession?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpUncheckedCreateNestedManyWithoutRequesterInput
@@ -4767,6 +4870,7 @@ export type UserUpdateWithoutNotificationInput = {
   Bank?: Prisma.BankUpdateOneWithoutUserNestedInput
   Department?: Prisma.DepartmentUpdateOneWithoutUserNestedInput
   Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
+  AuthSession?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUpdateManyWithoutRequesterNestedInput
@@ -4807,6 +4911,7 @@ export type UserUncheckedUpdateWithoutNotificationInput = {
   departmentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   Balance?: Prisma.UserBalanceUncheckedUpdateOneWithoutUserNestedInput
+  AuthSession?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUncheckedUpdateManyWithoutRequesterNestedInput
@@ -4847,6 +4952,7 @@ export type UserCreateWithoutPurchaseOrdersInput = {
   Department?: Prisma.DepartmentCreateNestedOneWithoutUserInput
   Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  AuthSession?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpCreateNestedManyWithoutRequesterInput
@@ -4887,6 +4993,7 @@ export type UserUncheckedCreateWithoutPurchaseOrdersInput = {
   roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   Balance?: Prisma.UserBalanceUncheckedCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  AuthSession?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpUncheckedCreateNestedManyWithoutRequesterInput
@@ -4942,6 +5049,7 @@ export type UserUpdateWithoutPurchaseOrdersInput = {
   Department?: Prisma.DepartmentUpdateOneWithoutUserNestedInput
   Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  AuthSession?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUpdateManyWithoutRequesterNestedInput
@@ -4982,6 +5090,7 @@ export type UserUncheckedUpdateWithoutPurchaseOrdersInput = {
   roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   Balance?: Prisma.UserBalanceUncheckedUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  AuthSession?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUncheckedUpdateManyWithoutRequesterNestedInput
@@ -5021,6 +5130,7 @@ export type UserCreateWithoutQuotationsInput = {
   Department?: Prisma.DepartmentCreateNestedOneWithoutUserInput
   Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  AuthSession?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpCreateNestedManyWithoutRequesterInput
@@ -5061,6 +5171,7 @@ export type UserUncheckedCreateWithoutQuotationsInput = {
   roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   Balance?: Prisma.UserBalanceUncheckedCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  AuthSession?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpUncheckedCreateNestedManyWithoutRequesterInput
@@ -5116,6 +5227,7 @@ export type UserUpdateWithoutQuotationsInput = {
   Department?: Prisma.DepartmentUpdateOneWithoutUserNestedInput
   Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  AuthSession?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUpdateManyWithoutRequesterNestedInput
@@ -5156,6 +5268,7 @@ export type UserUncheckedUpdateWithoutQuotationsInput = {
   roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   Balance?: Prisma.UserBalanceUncheckedUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  AuthSession?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUncheckedUpdateManyWithoutRequesterNestedInput
@@ -5195,6 +5308,7 @@ export type UserCreateWithoutSalesOrdersInput = {
   Department?: Prisma.DepartmentCreateNestedOneWithoutUserInput
   Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  AuthSession?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpCreateNestedManyWithoutRequesterInput
@@ -5235,6 +5349,7 @@ export type UserUncheckedCreateWithoutSalesOrdersInput = {
   roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   Balance?: Prisma.UserBalanceUncheckedCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  AuthSession?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpUncheckedCreateNestedManyWithoutRequesterInput
@@ -5290,6 +5405,7 @@ export type UserUpdateWithoutSalesOrdersInput = {
   Department?: Prisma.DepartmentUpdateOneWithoutUserNestedInput
   Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  AuthSession?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUpdateManyWithoutRequesterNestedInput
@@ -5330,6 +5446,7 @@ export type UserUncheckedUpdateWithoutSalesOrdersInput = {
   roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   Balance?: Prisma.UserBalanceUncheckedUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  AuthSession?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUncheckedUpdateManyWithoutRequesterNestedInput
@@ -5368,6 +5485,7 @@ export type UserCreateWithoutDepartmentInput = {
   Bank?: Prisma.BankCreateNestedOneWithoutUserInput
   Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  AuthSession?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpCreateNestedManyWithoutRequesterInput
@@ -5408,6 +5526,7 @@ export type UserUncheckedCreateWithoutDepartmentInput = {
   roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   Balance?: Prisma.UserBalanceUncheckedCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  AuthSession?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpUncheckedCreateNestedManyWithoutRequesterInput
@@ -5491,6 +5610,7 @@ export type UserCreateWithoutBankInput = {
   Department?: Prisma.DepartmentCreateNestedOneWithoutUserInput
   Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  AuthSession?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpCreateNestedManyWithoutRequesterInput
@@ -5531,6 +5651,7 @@ export type UserUncheckedCreateWithoutBankInput = {
   roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   Balance?: Prisma.UserBalanceUncheckedCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  AuthSession?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpUncheckedCreateNestedManyWithoutRequesterInput
@@ -5583,6 +5704,184 @@ export type UserUpdateManyWithWhereWithoutBankInput = {
   data: Prisma.XOR<Prisma.UserUpdateManyMutationInput, Prisma.UserUncheckedUpdateManyWithoutBankInput>
 }
 
+export type UserCreateWithoutAuthSessionInput = {
+  name: string
+  code?: string | null
+  email: string
+  password: string
+  active?: boolean
+  bankAccount?: string | null
+  currency?: $Enums.Currency
+  signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
+  Bank?: Prisma.BankCreateNestedOneWithoutUserInput
+  Department?: Prisma.DepartmentCreateNestedOneWithoutUserInput
+  Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
+  Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
+  Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
+  NkpRequest?: Prisma.NkpCreateNestedManyWithoutRequesterInput
+  Leads?: Prisma.LeadCreateNestedManyWithoutUserInput
+  Opportunities?: Prisma.OpportunityCreateNestedManyWithoutUserInput
+  Interactions?: Prisma.InteractionCreateNestedManyWithoutUserInput
+  Tasks?: Prisma.TaskCreateNestedManyWithoutUserInput
+  VisitPlans?: Prisma.VisitPlanCreateNestedManyWithoutUserInput
+  CustomerNotes?: Prisma.CustomerNoteCreateNestedManyWithoutUserInput
+  Customers?: Prisma.CustomerCreateNestedManyWithoutAccountManagerInput
+  Quotations?: Prisma.QuotationCreateNestedManyWithoutUserInput
+  salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutUserInput
+  Invoices?: Prisma.InvoiceCreateNestedManyWithoutUserInput
+  purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutUserInput
+  goodsReceipts?: Prisma.GoodsReceiptCreateNestedManyWithoutUserInput
+  deliveryOrders?: Prisma.DeliveryOrderCreateNestedManyWithoutUserInput
+  accountingPayments?: Prisma.PaymentCreateNestedManyWithoutCreatedByInput
+  journalEntriesCreated?: Prisma.JournalEntryCreateNestedManyWithoutCreatedByInput
+  journalEntriesPosted?: Prisma.JournalEntryCreateNestedManyWithoutPostedByInput
+  closedPeriods?: Prisma.FiscalPeriodCreateNestedManyWithoutClosedByInput
+  vendorBillsCreated?: Prisma.VendorBillCreateNestedManyWithoutCreatedByInput
+  bankTransactions?: Prisma.BankTransactionCreateNestedManyWithoutCreatedByInput
+  approvalItems?: Prisma.ApprovalItemCreateNestedManyWithoutUserInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutAuthSessionInput = {
+  id?: number
+  name: string
+  code?: string | null
+  email: string
+  password: string
+  active?: boolean
+  bankAccount?: string | null
+  currency?: $Enums.Currency
+  signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  bankId?: number | null
+  departmentId?: number | null
+  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
+  Balance?: Prisma.UserBalanceUncheckedCreateNestedOneWithoutUserInput
+  Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
+  Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
+  NkpRequest?: Prisma.NkpUncheckedCreateNestedManyWithoutRequesterInput
+  Leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
+  Opportunities?: Prisma.OpportunityUncheckedCreateNestedManyWithoutUserInput
+  Interactions?: Prisma.InteractionUncheckedCreateNestedManyWithoutUserInput
+  Tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutUserInput
+  VisitPlans?: Prisma.VisitPlanUncheckedCreateNestedManyWithoutUserInput
+  CustomerNotes?: Prisma.CustomerNoteUncheckedCreateNestedManyWithoutUserInput
+  Customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutAccountManagerInput
+  Quotations?: Prisma.QuotationUncheckedCreateNestedManyWithoutUserInput
+  salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutUserInput
+  Invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutUserInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutUserInput
+  goodsReceipts?: Prisma.GoodsReceiptUncheckedCreateNestedManyWithoutUserInput
+  deliveryOrders?: Prisma.DeliveryOrderUncheckedCreateNestedManyWithoutUserInput
+  accountingPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCreatedByInput
+  journalEntriesCreated?: Prisma.JournalEntryUncheckedCreateNestedManyWithoutCreatedByInput
+  journalEntriesPosted?: Prisma.JournalEntryUncheckedCreateNestedManyWithoutPostedByInput
+  closedPeriods?: Prisma.FiscalPeriodUncheckedCreateNestedManyWithoutClosedByInput
+  vendorBillsCreated?: Prisma.VendorBillUncheckedCreateNestedManyWithoutCreatedByInput
+  bankTransactions?: Prisma.BankTransactionUncheckedCreateNestedManyWithoutCreatedByInput
+  approvalItems?: Prisma.ApprovalItemUncheckedCreateNestedManyWithoutUserInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutAuthSessionInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutAuthSessionInput, Prisma.UserUncheckedCreateWithoutAuthSessionInput>
+}
+
+export type UserUpsertWithoutAuthSessionInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutAuthSessionInput, Prisma.UserUncheckedUpdateWithoutAuthSessionInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutAuthSessionInput, Prisma.UserUncheckedCreateWithoutAuthSessionInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutAuthSessionInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutAuthSessionInput, Prisma.UserUncheckedUpdateWithoutAuthSessionInput>
+}
+
+export type UserUpdateWithoutAuthSessionInput = {
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
+  signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
+  Bank?: Prisma.BankUpdateOneWithoutUserNestedInput
+  Department?: Prisma.DepartmentUpdateOneWithoutUserNestedInput
+  Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
+  Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
+  Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
+  NkpRequest?: Prisma.NkpUpdateManyWithoutRequesterNestedInput
+  Leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
+  Opportunities?: Prisma.OpportunityUpdateManyWithoutUserNestedInput
+  Interactions?: Prisma.InteractionUpdateManyWithoutUserNestedInput
+  Tasks?: Prisma.TaskUpdateManyWithoutUserNestedInput
+  VisitPlans?: Prisma.VisitPlanUpdateManyWithoutUserNestedInput
+  CustomerNotes?: Prisma.CustomerNoteUpdateManyWithoutUserNestedInput
+  Customers?: Prisma.CustomerUpdateManyWithoutAccountManagerNestedInput
+  Quotations?: Prisma.QuotationUpdateManyWithoutUserNestedInput
+  salesOrders?: Prisma.SalesOrderUpdateManyWithoutUserNestedInput
+  Invoices?: Prisma.InvoiceUpdateManyWithoutUserNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutUserNestedInput
+  goodsReceipts?: Prisma.GoodsReceiptUpdateManyWithoutUserNestedInput
+  deliveryOrders?: Prisma.DeliveryOrderUpdateManyWithoutUserNestedInput
+  accountingPayments?: Prisma.PaymentUpdateManyWithoutCreatedByNestedInput
+  journalEntriesCreated?: Prisma.JournalEntryUpdateManyWithoutCreatedByNestedInput
+  journalEntriesPosted?: Prisma.JournalEntryUpdateManyWithoutPostedByNestedInput
+  closedPeriods?: Prisma.FiscalPeriodUpdateManyWithoutClosedByNestedInput
+  vendorBillsCreated?: Prisma.VendorBillUpdateManyWithoutCreatedByNestedInput
+  bankTransactions?: Prisma.BankTransactionUpdateManyWithoutCreatedByNestedInput
+  approvalItems?: Prisma.ApprovalItemUpdateManyWithoutUserNestedInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutAuthSessionInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
+  signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  bankId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  departmentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
+  Balance?: Prisma.UserBalanceUncheckedUpdateOneWithoutUserNestedInput
+  Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
+  Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
+  NkpRequest?: Prisma.NkpUncheckedUpdateManyWithoutRequesterNestedInput
+  Leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
+  Opportunities?: Prisma.OpportunityUncheckedUpdateManyWithoutUserNestedInput
+  Interactions?: Prisma.InteractionUncheckedUpdateManyWithoutUserNestedInput
+  Tasks?: Prisma.TaskUncheckedUpdateManyWithoutUserNestedInput
+  VisitPlans?: Prisma.VisitPlanUncheckedUpdateManyWithoutUserNestedInput
+  CustomerNotes?: Prisma.CustomerNoteUncheckedUpdateManyWithoutUserNestedInput
+  Customers?: Prisma.CustomerUncheckedUpdateManyWithoutAccountManagerNestedInput
+  Quotations?: Prisma.QuotationUncheckedUpdateManyWithoutUserNestedInput
+  salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutUserNestedInput
+  Invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutUserNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutUserNestedInput
+  goodsReceipts?: Prisma.GoodsReceiptUncheckedUpdateManyWithoutUserNestedInput
+  deliveryOrders?: Prisma.DeliveryOrderUncheckedUpdateManyWithoutUserNestedInput
+  accountingPayments?: Prisma.PaymentUncheckedUpdateManyWithoutCreatedByNestedInput
+  journalEntriesCreated?: Prisma.JournalEntryUncheckedUpdateManyWithoutCreatedByNestedInput
+  journalEntriesPosted?: Prisma.JournalEntryUncheckedUpdateManyWithoutPostedByNestedInput
+  closedPeriods?: Prisma.FiscalPeriodUncheckedUpdateManyWithoutClosedByNestedInput
+  vendorBillsCreated?: Prisma.VendorBillUncheckedUpdateManyWithoutCreatedByNestedInput
+  bankTransactions?: Prisma.BankTransactionUncheckedUpdateManyWithoutCreatedByNestedInput
+  approvalItems?: Prisma.ApprovalItemUncheckedUpdateManyWithoutUserNestedInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedUpdateManyWithoutUserNestedInput
+}
+
 export type UserCreateWithoutBalanceInput = {
   name: string
   code?: string | null
@@ -5596,6 +5895,7 @@ export type UserCreateWithoutBalanceInput = {
   Bank?: Prisma.BankCreateNestedOneWithoutUserInput
   Department?: Prisma.DepartmentCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  AuthSession?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpCreateNestedManyWithoutRequesterInput
@@ -5636,6 +5936,7 @@ export type UserUncheckedCreateWithoutBalanceInput = {
   departmentId?: number | null
   roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  AuthSession?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpUncheckedCreateNestedManyWithoutRequesterInput
@@ -5691,6 +5992,7 @@ export type UserUpdateWithoutBalanceInput = {
   Bank?: Prisma.BankUpdateOneWithoutUserNestedInput
   Department?: Prisma.DepartmentUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  AuthSession?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUpdateManyWithoutRequesterNestedInput
@@ -5731,6 +6033,7 @@ export type UserUncheckedUpdateWithoutBalanceInput = {
   departmentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  AuthSession?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUncheckedUpdateManyWithoutRequesterNestedInput
@@ -5771,6 +6074,7 @@ export type UserCreateWithoutVisitPlansInput = {
   Department?: Prisma.DepartmentCreateNestedOneWithoutUserInput
   Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  AuthSession?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpCreateNestedManyWithoutRequesterInput
@@ -5811,6 +6115,7 @@ export type UserUncheckedCreateWithoutVisitPlansInput = {
   roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   Balance?: Prisma.UserBalanceUncheckedCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  AuthSession?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpUncheckedCreateNestedManyWithoutRequesterInput
@@ -5866,6 +6171,7 @@ export type UserUpdateWithoutVisitPlansInput = {
   Department?: Prisma.DepartmentUpdateOneWithoutUserNestedInput
   Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  AuthSession?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUpdateManyWithoutRequesterNestedInput
@@ -5906,6 +6212,7 @@ export type UserUncheckedUpdateWithoutVisitPlansInput = {
   roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   Balance?: Prisma.UserBalanceUncheckedUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  AuthSession?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUncheckedUpdateManyWithoutRequesterNestedInput
@@ -5958,6 +6265,7 @@ export type UserUpdateWithoutDepartmentInput = {
   Bank?: Prisma.BankUpdateOneWithoutUserNestedInput
   Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  AuthSession?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUpdateManyWithoutRequesterNestedInput
@@ -5998,6 +6306,7 @@ export type UserUncheckedUpdateWithoutDepartmentInput = {
   roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   Balance?: Prisma.UserBalanceUncheckedUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  AuthSession?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUncheckedUpdateManyWithoutRequesterNestedInput
@@ -6065,6 +6374,7 @@ export type UserUpdateWithoutBankInput = {
   Department?: Prisma.DepartmentUpdateOneWithoutUserNestedInput
   Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  AuthSession?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUpdateManyWithoutRequesterNestedInput
@@ -6105,6 +6415,7 @@ export type UserUncheckedUpdateWithoutBankInput = {
   roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   Balance?: Prisma.UserBalanceUncheckedUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  AuthSession?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUncheckedUpdateManyWithoutRequesterNestedInput
@@ -6152,6 +6463,7 @@ export type UserUncheckedUpdateManyWithoutBankInput = {
 
 export type UserCountOutputType = {
   Notification: number
+  AuthSession: number
   NkpApproval: number
   Nkp: number
   NkpRequest: number
@@ -6180,6 +6492,7 @@ export type UserCountOutputType = {
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   Notification?: boolean | UserCountOutputTypeCountNotificationArgs
+  AuthSession?: boolean | UserCountOutputTypeCountAuthSessionArgs
   NkpApproval?: boolean | UserCountOutputTypeCountNkpApprovalArgs
   Nkp?: boolean | UserCountOutputTypeCountNkpArgs
   NkpRequest?: boolean | UserCountOutputTypeCountNkpRequestArgs
@@ -6221,6 +6534,13 @@ export type UserCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensi
  */
 export type UserCountOutputTypeCountNotificationArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.NotificationWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountAuthSessionArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AuthSessionWhereInput
 }
 
 /**
@@ -6409,6 +6729,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   Department?: boolean | Prisma.User$DepartmentArgs<ExtArgs>
   Balance?: boolean | Prisma.User$BalanceArgs<ExtArgs>
   Notification?: boolean | Prisma.User$NotificationArgs<ExtArgs>
+  AuthSession?: boolean | Prisma.User$AuthSessionArgs<ExtArgs>
   NkpApproval?: boolean | Prisma.User$NkpApprovalArgs<ExtArgs>
   Nkp?: boolean | Prisma.User$NkpArgs<ExtArgs>
   NkpRequest?: boolean | Prisma.User$NkpRequestArgs<ExtArgs>
@@ -6491,6 +6812,7 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   Department?: boolean | Prisma.User$DepartmentArgs<ExtArgs>
   Balance?: boolean | Prisma.User$BalanceArgs<ExtArgs>
   Notification?: boolean | Prisma.User$NotificationArgs<ExtArgs>
+  AuthSession?: boolean | Prisma.User$AuthSessionArgs<ExtArgs>
   NkpApproval?: boolean | Prisma.User$NkpApprovalArgs<ExtArgs>
   Nkp?: boolean | Prisma.User$NkpArgs<ExtArgs>
   NkpRequest?: boolean | Prisma.User$NkpRequestArgs<ExtArgs>
@@ -6533,6 +6855,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     Department: Prisma.$DepartmentPayload<ExtArgs> | null
     Balance: Prisma.$UserBalancePayload<ExtArgs> | null
     Notification: Prisma.$NotificationPayload<ExtArgs>[]
+    AuthSession: Prisma.$AuthSessionPayload<ExtArgs>[]
     NkpApproval: Prisma.$NkpApprovalPayload<ExtArgs>[]
     Nkp: Prisma.$NkpPayload<ExtArgs>[]
     NkpRequest: Prisma.$NkpPayload<ExtArgs>[]
@@ -6969,6 +7292,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   Department<T extends Prisma.User$DepartmentArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$DepartmentArgs<ExtArgs>>): Prisma.Prisma__DepartmentClient<runtime.Types.Result.GetResult<Prisma.$DepartmentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   Balance<T extends Prisma.User$BalanceArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$BalanceArgs<ExtArgs>>): Prisma.Prisma__UserBalanceClient<runtime.Types.Result.GetResult<Prisma.$UserBalancePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   Notification<T extends Prisma.User$NotificationArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$NotificationArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  AuthSession<T extends Prisma.User$AuthSessionArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$AuthSessionArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AuthSessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   NkpApproval<T extends Prisma.User$NkpApprovalArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$NkpApprovalArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NkpApprovalPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   Nkp<T extends Prisma.User$NkpArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$NkpArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NkpPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   NkpRequest<T extends Prisma.User$NkpRequestArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$NkpRequestArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NkpPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -7513,6 +7837,30 @@ export type User$NotificationArgs<ExtArgs extends runtime.Types.Extensions.Inter
   take?: number
   skip?: number
   distinct?: Prisma.NotificationScalarFieldEnum | Prisma.NotificationScalarFieldEnum[]
+}
+
+/**
+ * User.AuthSession
+ */
+export type User$AuthSessionArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the AuthSession
+   */
+  select?: Prisma.AuthSessionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the AuthSession
+   */
+  omit?: Prisma.AuthSessionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AuthSessionInclude<ExtArgs> | null
+  where?: Prisma.AuthSessionWhereInput
+  orderBy?: Prisma.AuthSessionOrderByWithRelationInput | Prisma.AuthSessionOrderByWithRelationInput[]
+  cursor?: Prisma.AuthSessionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.AuthSessionScalarFieldEnum | Prisma.AuthSessionScalarFieldEnum[]
 }
 
 /**

@@ -65,9 +65,9 @@ export type VisitPlanMinAggregateOutputType = {
   address: string | null
   contactPerson: string | null
   contactPhone: string | null
-  deletedAt: Date | null
   createdAt: Date | null
   updatedAt: Date | null
+  deletedAt: Date | null
 }
 
 export type VisitPlanMaxAggregateOutputType = {
@@ -91,9 +91,9 @@ export type VisitPlanMaxAggregateOutputType = {
   address: string | null
   contactPerson: string | null
   contactPhone: string | null
-  deletedAt: Date | null
   createdAt: Date | null
   updatedAt: Date | null
+  deletedAt: Date | null
 }
 
 export type VisitPlanCountAggregateOutputType = {
@@ -117,9 +117,9 @@ export type VisitPlanCountAggregateOutputType = {
   address: number
   contactPerson: number
   contactPhone: number
-  deletedAt: number
   createdAt: number
   updatedAt: number
+  deletedAt: number
   _all: number
 }
 
@@ -163,9 +163,9 @@ export type VisitPlanMinAggregateInputType = {
   address?: true
   contactPerson?: true
   contactPhone?: true
-  deletedAt?: true
   createdAt?: true
   updatedAt?: true
+  deletedAt?: true
 }
 
 export type VisitPlanMaxAggregateInputType = {
@@ -189,9 +189,9 @@ export type VisitPlanMaxAggregateInputType = {
   address?: true
   contactPerson?: true
   contactPhone?: true
-  deletedAt?: true
   createdAt?: true
   updatedAt?: true
+  deletedAt?: true
 }
 
 export type VisitPlanCountAggregateInputType = {
@@ -215,9 +215,9 @@ export type VisitPlanCountAggregateInputType = {
   address?: true
   contactPerson?: true
   contactPhone?: true
-  deletedAt?: true
   createdAt?: true
   updatedAt?: true
+  deletedAt?: true
   _all?: true
 }
 
@@ -328,9 +328,9 @@ export type VisitPlanGroupByOutputType = {
   address: string | null
   contactPerson: string | null
   contactPhone: string | null
-  deletedAt: Date | null
   createdAt: Date
   updatedAt: Date | null
+  deletedAt: Date | null
   _count: VisitPlanCountAggregateOutputType | null
   _avg: VisitPlanAvgAggregateOutputType | null
   _sum: VisitPlanSumAggregateOutputType | null
@@ -377,9 +377,9 @@ export type VisitPlanWhereInput = {
   address?: Prisma.StringNullableFilter<"VisitPlan"> | string | null
   contactPerson?: Prisma.StringNullableFilter<"VisitPlan"> | string | null
   contactPhone?: Prisma.StringNullableFilter<"VisitPlan"> | string | null
-  deletedAt?: Prisma.DateTimeNullableFilter<"VisitPlan"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"VisitPlan"> | Date | string
   updatedAt?: Prisma.DateTimeNullableFilter<"VisitPlan"> | Date | string | null
+  deletedAt?: Prisma.DateTimeNullableFilter<"VisitPlan"> | Date | string | null
   Customer?: Prisma.XOR<Prisma.CustomerScalarRelationFilter, Prisma.CustomerWhereInput>
   User?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   Company?: Prisma.XOR<Prisma.CompanyScalarRelationFilter, Prisma.CompanyWhereInput>
@@ -407,9 +407,9 @@ export type VisitPlanOrderByWithRelationInput = {
   address?: Prisma.SortOrderInput | Prisma.SortOrder
   contactPerson?: Prisma.SortOrderInput | Prisma.SortOrder
   contactPhone?: Prisma.SortOrderInput | Prisma.SortOrder
-  deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   Customer?: Prisma.CustomerOrderByWithRelationInput
   User?: Prisma.UserOrderByWithRelationInput
   Company?: Prisma.CompanyOrderByWithRelationInput
@@ -440,9 +440,9 @@ export type VisitPlanWhereUniqueInput = Prisma.AtLeast<{
   address?: Prisma.StringNullableFilter<"VisitPlan"> | string | null
   contactPerson?: Prisma.StringNullableFilter<"VisitPlan"> | string | null
   contactPhone?: Prisma.StringNullableFilter<"VisitPlan"> | string | null
-  deletedAt?: Prisma.DateTimeNullableFilter<"VisitPlan"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"VisitPlan"> | Date | string
   updatedAt?: Prisma.DateTimeNullableFilter<"VisitPlan"> | Date | string | null
+  deletedAt?: Prisma.DateTimeNullableFilter<"VisitPlan"> | Date | string | null
   Customer?: Prisma.XOR<Prisma.CustomerScalarRelationFilter, Prisma.CustomerWhereInput>
   User?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   Company?: Prisma.XOR<Prisma.CompanyScalarRelationFilter, Prisma.CompanyWhereInput>
@@ -470,9 +470,9 @@ export type VisitPlanOrderByWithAggregationInput = {
   address?: Prisma.SortOrderInput | Prisma.SortOrder
   contactPerson?: Prisma.SortOrderInput | Prisma.SortOrder
   contactPhone?: Prisma.SortOrderInput | Prisma.SortOrder
-  deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.VisitPlanCountOrderByAggregateInput
   _avg?: Prisma.VisitPlanAvgOrderByAggregateInput
   _max?: Prisma.VisitPlanMaxOrderByAggregateInput
@@ -504,9 +504,9 @@ export type VisitPlanScalarWhereWithAggregatesInput = {
   address?: Prisma.StringNullableWithAggregatesFilter<"VisitPlan"> | string | null
   contactPerson?: Prisma.StringNullableWithAggregatesFilter<"VisitPlan"> | string | null
   contactPhone?: Prisma.StringNullableWithAggregatesFilter<"VisitPlan"> | string | null
-  deletedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"VisitPlan"> | Date | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"VisitPlan"> | Date | string
   updatedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"VisitPlan"> | Date | string | null
+  deletedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"VisitPlan"> | Date | string | null
 }
 
 export type VisitPlanCreateInput = {
@@ -525,9 +525,9 @@ export type VisitPlanCreateInput = {
   address?: string | null
   contactPerson?: string | null
   contactPhone?: string | null
-  deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
+  deletedAt?: Date | string | null
   Customer: Prisma.CustomerCreateNestedOneWithoutVisitPlansInput
   User: Prisma.UserCreateNestedOneWithoutVisitPlansInput
   Company: Prisma.CompanyCreateNestedOneWithoutVisitPlansInput
@@ -555,9 +555,9 @@ export type VisitPlanUncheckedCreateInput = {
   address?: string | null
   contactPerson?: string | null
   contactPhone?: string | null
-  deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
+  deletedAt?: Date | string | null
 }
 
 export type VisitPlanUpdateInput = {
@@ -576,9 +576,9 @@ export type VisitPlanUpdateInput = {
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPerson?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Customer?: Prisma.CustomerUpdateOneRequiredWithoutVisitPlansNestedInput
   User?: Prisma.UserUpdateOneRequiredWithoutVisitPlansNestedInput
   Company?: Prisma.CompanyUpdateOneRequiredWithoutVisitPlansNestedInput
@@ -606,9 +606,9 @@ export type VisitPlanUncheckedUpdateInput = {
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPerson?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type VisitPlanCreateManyInput = {
@@ -632,9 +632,9 @@ export type VisitPlanCreateManyInput = {
   address?: string | null
   contactPerson?: string | null
   contactPhone?: string | null
-  deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
+  deletedAt?: Date | string | null
 }
 
 export type VisitPlanUpdateManyMutationInput = {
@@ -653,9 +653,9 @@ export type VisitPlanUpdateManyMutationInput = {
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPerson?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type VisitPlanUncheckedUpdateManyInput = {
@@ -679,9 +679,9 @@ export type VisitPlanUncheckedUpdateManyInput = {
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPerson?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type VisitPlanListRelationFilter = {
@@ -715,9 +715,9 @@ export type VisitPlanCountOrderByAggregateInput = {
   address?: Prisma.SortOrder
   contactPerson?: Prisma.SortOrder
   contactPhone?: Prisma.SortOrder
-  deletedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrder
 }
 
 export type VisitPlanAvgOrderByAggregateInput = {
@@ -750,9 +750,9 @@ export type VisitPlanMaxOrderByAggregateInput = {
   address?: Prisma.SortOrder
   contactPerson?: Prisma.SortOrder
   contactPhone?: Prisma.SortOrder
-  deletedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrder
 }
 
 export type VisitPlanMinOrderByAggregateInput = {
@@ -776,9 +776,9 @@ export type VisitPlanMinOrderByAggregateInput = {
   address?: Prisma.SortOrder
   contactPerson?: Prisma.SortOrder
   contactPhone?: Prisma.SortOrder
-  deletedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrder
 }
 
 export type VisitPlanSumOrderByAggregateInput = {
@@ -982,9 +982,9 @@ export type VisitPlanCreateWithoutCustomerInput = {
   address?: string | null
   contactPerson?: string | null
   contactPhone?: string | null
-  deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
+  deletedAt?: Date | string | null
   User: Prisma.UserCreateNestedOneWithoutVisitPlansInput
   Company: Prisma.CompanyCreateNestedOneWithoutVisitPlansInput
   Contact?: Prisma.ContactCreateNestedOneWithoutVisitPlansInput
@@ -1010,9 +1010,9 @@ export type VisitPlanUncheckedCreateWithoutCustomerInput = {
   address?: string | null
   contactPerson?: string | null
   contactPhone?: string | null
-  deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
+  deletedAt?: Date | string | null
 }
 
 export type VisitPlanCreateOrConnectWithoutCustomerInput = {
@@ -1065,9 +1065,9 @@ export type VisitPlanScalarWhereInput = {
   address?: Prisma.StringNullableFilter<"VisitPlan"> | string | null
   contactPerson?: Prisma.StringNullableFilter<"VisitPlan"> | string | null
   contactPhone?: Prisma.StringNullableFilter<"VisitPlan"> | string | null
-  deletedAt?: Prisma.DateTimeNullableFilter<"VisitPlan"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"VisitPlan"> | Date | string
   updatedAt?: Prisma.DateTimeNullableFilter<"VisitPlan"> | Date | string | null
+  deletedAt?: Prisma.DateTimeNullableFilter<"VisitPlan"> | Date | string | null
 }
 
 export type VisitPlanCreateWithoutContactInput = {
@@ -1086,9 +1086,9 @@ export type VisitPlanCreateWithoutContactInput = {
   address?: string | null
   contactPerson?: string | null
   contactPhone?: string | null
-  deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
+  deletedAt?: Date | string | null
   Customer: Prisma.CustomerCreateNestedOneWithoutVisitPlansInput
   User: Prisma.UserCreateNestedOneWithoutVisitPlansInput
   Company: Prisma.CompanyCreateNestedOneWithoutVisitPlansInput
@@ -1114,9 +1114,9 @@ export type VisitPlanUncheckedCreateWithoutContactInput = {
   address?: string | null
   contactPerson?: string | null
   contactPhone?: string | null
-  deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
+  deletedAt?: Date | string | null
 }
 
 export type VisitPlanCreateOrConnectWithoutContactInput = {
@@ -1161,9 +1161,9 @@ export type VisitPlanCreateWithoutCompanyInput = {
   address?: string | null
   contactPerson?: string | null
   contactPhone?: string | null
-  deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
+  deletedAt?: Date | string | null
   Customer: Prisma.CustomerCreateNestedOneWithoutVisitPlansInput
   User: Prisma.UserCreateNestedOneWithoutVisitPlansInput
   Contact?: Prisma.ContactCreateNestedOneWithoutVisitPlansInput
@@ -1189,9 +1189,9 @@ export type VisitPlanUncheckedCreateWithoutCompanyInput = {
   address?: string | null
   contactPerson?: string | null
   contactPhone?: string | null
-  deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
+  deletedAt?: Date | string | null
 }
 
 export type VisitPlanCreateOrConnectWithoutCompanyInput = {
@@ -1236,9 +1236,9 @@ export type VisitPlanCreateWithoutUserInput = {
   address?: string | null
   contactPerson?: string | null
   contactPhone?: string | null
-  deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
+  deletedAt?: Date | string | null
   Customer: Prisma.CustomerCreateNestedOneWithoutVisitPlansInput
   Company: Prisma.CompanyCreateNestedOneWithoutVisitPlansInput
   Contact?: Prisma.ContactCreateNestedOneWithoutVisitPlansInput
@@ -1264,9 +1264,9 @@ export type VisitPlanUncheckedCreateWithoutUserInput = {
   address?: string | null
   contactPerson?: string | null
   contactPhone?: string | null
-  deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
+  deletedAt?: Date | string | null
 }
 
 export type VisitPlanCreateOrConnectWithoutUserInput = {
@@ -1315,9 +1315,9 @@ export type VisitPlanCreateManyCustomerInput = {
   address?: string | null
   contactPerson?: string | null
   contactPhone?: string | null
-  deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
+  deletedAt?: Date | string | null
 }
 
 export type VisitPlanUpdateWithoutCustomerInput = {
@@ -1336,9 +1336,9 @@ export type VisitPlanUpdateWithoutCustomerInput = {
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPerson?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   User?: Prisma.UserUpdateOneRequiredWithoutVisitPlansNestedInput
   Company?: Prisma.CompanyUpdateOneRequiredWithoutVisitPlansNestedInput
   Contact?: Prisma.ContactUpdateOneWithoutVisitPlansNestedInput
@@ -1364,9 +1364,9 @@ export type VisitPlanUncheckedUpdateWithoutCustomerInput = {
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPerson?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type VisitPlanUncheckedUpdateManyWithoutCustomerInput = {
@@ -1389,9 +1389,9 @@ export type VisitPlanUncheckedUpdateManyWithoutCustomerInput = {
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPerson?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type VisitPlanCreateManyContactInput = {
@@ -1414,9 +1414,9 @@ export type VisitPlanCreateManyContactInput = {
   address?: string | null
   contactPerson?: string | null
   contactPhone?: string | null
-  deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
+  deletedAt?: Date | string | null
 }
 
 export type VisitPlanUpdateWithoutContactInput = {
@@ -1435,9 +1435,9 @@ export type VisitPlanUpdateWithoutContactInput = {
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPerson?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Customer?: Prisma.CustomerUpdateOneRequiredWithoutVisitPlansNestedInput
   User?: Prisma.UserUpdateOneRequiredWithoutVisitPlansNestedInput
   Company?: Prisma.CompanyUpdateOneRequiredWithoutVisitPlansNestedInput
@@ -1463,9 +1463,9 @@ export type VisitPlanUncheckedUpdateWithoutContactInput = {
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPerson?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type VisitPlanUncheckedUpdateManyWithoutContactInput = {
@@ -1488,9 +1488,9 @@ export type VisitPlanUncheckedUpdateManyWithoutContactInput = {
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPerson?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type VisitPlanCreateManyCompanyInput = {
@@ -1513,9 +1513,9 @@ export type VisitPlanCreateManyCompanyInput = {
   address?: string | null
   contactPerson?: string | null
   contactPhone?: string | null
-  deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
+  deletedAt?: Date | string | null
 }
 
 export type VisitPlanUpdateWithoutCompanyInput = {
@@ -1534,9 +1534,9 @@ export type VisitPlanUpdateWithoutCompanyInput = {
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPerson?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Customer?: Prisma.CustomerUpdateOneRequiredWithoutVisitPlansNestedInput
   User?: Prisma.UserUpdateOneRequiredWithoutVisitPlansNestedInput
   Contact?: Prisma.ContactUpdateOneWithoutVisitPlansNestedInput
@@ -1562,9 +1562,9 @@ export type VisitPlanUncheckedUpdateWithoutCompanyInput = {
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPerson?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type VisitPlanUncheckedUpdateManyWithoutCompanyInput = {
@@ -1587,9 +1587,9 @@ export type VisitPlanUncheckedUpdateManyWithoutCompanyInput = {
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPerson?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type VisitPlanCreateManyUserInput = {
@@ -1612,9 +1612,9 @@ export type VisitPlanCreateManyUserInput = {
   address?: string | null
   contactPerson?: string | null
   contactPhone?: string | null
-  deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
+  deletedAt?: Date | string | null
 }
 
 export type VisitPlanUpdateWithoutUserInput = {
@@ -1633,9 +1633,9 @@ export type VisitPlanUpdateWithoutUserInput = {
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPerson?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Customer?: Prisma.CustomerUpdateOneRequiredWithoutVisitPlansNestedInput
   Company?: Prisma.CompanyUpdateOneRequiredWithoutVisitPlansNestedInput
   Contact?: Prisma.ContactUpdateOneWithoutVisitPlansNestedInput
@@ -1661,9 +1661,9 @@ export type VisitPlanUncheckedUpdateWithoutUserInput = {
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPerson?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type VisitPlanUncheckedUpdateManyWithoutUserInput = {
@@ -1686,9 +1686,9 @@ export type VisitPlanUncheckedUpdateManyWithoutUserInput = {
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPerson?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 
@@ -1714,9 +1714,9 @@ export type VisitPlanSelect<ExtArgs extends runtime.Types.Extensions.InternalArg
   address?: boolean
   contactPerson?: boolean
   contactPhone?: boolean
-  deletedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  deletedAt?: boolean
   Customer?: boolean | Prisma.CustomerDefaultArgs<ExtArgs>
   User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   Company?: boolean | Prisma.CompanyDefaultArgs<ExtArgs>
@@ -1744,9 +1744,9 @@ export type VisitPlanSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ext
   address?: boolean
   contactPerson?: boolean
   contactPhone?: boolean
-  deletedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  deletedAt?: boolean
   Customer?: boolean | Prisma.CustomerDefaultArgs<ExtArgs>
   User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   Company?: boolean | Prisma.CompanyDefaultArgs<ExtArgs>
@@ -1774,9 +1774,9 @@ export type VisitPlanSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ext
   address?: boolean
   contactPerson?: boolean
   contactPhone?: boolean
-  deletedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  deletedAt?: boolean
   Customer?: boolean | Prisma.CustomerDefaultArgs<ExtArgs>
   User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   Company?: boolean | Prisma.CompanyDefaultArgs<ExtArgs>
@@ -1804,12 +1804,12 @@ export type VisitPlanSelectScalar = {
   address?: boolean
   contactPerson?: boolean
   contactPhone?: boolean
-  deletedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  deletedAt?: boolean
 }
 
-export type VisitPlanOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "customerId" | "userId" | "companyId" | "contactId" | "title" | "purpose" | "visitType" | "meetingUrl" | "scheduledDate" | "scheduledTime" | "estimatedDuration" | "status" | "actualVisitDate" | "outcome" | "cancelReason" | "notes" | "address" | "contactPerson" | "contactPhone" | "deletedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["visitPlan"]>
+export type VisitPlanOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "customerId" | "userId" | "companyId" | "contactId" | "title" | "purpose" | "visitType" | "meetingUrl" | "scheduledDate" | "scheduledTime" | "estimatedDuration" | "status" | "actualVisitDate" | "outcome" | "cancelReason" | "notes" | "address" | "contactPerson" | "contactPhone" | "createdAt" | "updatedAt" | "deletedAt", ExtArgs["result"]["visitPlan"]>
 export type VisitPlanInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   Customer?: boolean | Prisma.CustomerDefaultArgs<ExtArgs>
   User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -1858,9 +1858,9 @@ export type $VisitPlanPayload<ExtArgs extends runtime.Types.Extensions.InternalA
     address: string | null
     contactPerson: string | null
     contactPhone: string | null
-    deletedAt: Date | null
     createdAt: Date
     updatedAt: Date | null
+    deletedAt: Date | null
   }, ExtArgs["result"]["visitPlan"]>
   composites: {}
 }
@@ -2308,9 +2308,9 @@ export interface VisitPlanFieldRefs {
   readonly address: Prisma.FieldRef<"VisitPlan", 'String'>
   readonly contactPerson: Prisma.FieldRef<"VisitPlan", 'String'>
   readonly contactPhone: Prisma.FieldRef<"VisitPlan", 'String'>
-  readonly deletedAt: Prisma.FieldRef<"VisitPlan", 'DateTime'>
   readonly createdAt: Prisma.FieldRef<"VisitPlan", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"VisitPlan", 'DateTime'>
+  readonly deletedAt: Prisma.FieldRef<"VisitPlan", 'DateTime'>
 }
     
 

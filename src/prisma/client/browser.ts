@@ -243,6 +243,11 @@ export type Department = Prisma.DepartmentModel
  */
 export type Bank = Prisma.BankModel
 /**
+ * Model AuthSession
+ * 
+ */
+export type AuthSession = Prisma.AuthSessionModel
+/**
  * Model Supplier
  * 
  */
