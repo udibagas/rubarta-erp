@@ -11,6 +11,7 @@ import {
 import { AuthService } from './auth.service';
 import { Public } from './public.decorator';
 import { LoginDto } from './login.dto';
+import { ForgotPasswordDto, ResetPasswordDto } from './password-reset.dto';
 import { ToggleTwoFactorDto, VerifyTwoFactorDto } from './two-factor.dto';
 import {
   ApiBearerAuth,
@@ -72,6 +73,25 @@ export class AuthController {
     );
     await this.setSessionCookies(req, res, data.token);
     return data;
+  }
+
+  @Public()
+  @Post('forgot-password')
+  @HttpCode(HttpStatus.OK)
+  @ApiOperation({ summary: 'Email a password reset link' })
+  async forgotPassword(@Body() dto: ForgotPasswordDto) {
+    await this.authService.forgotPassword(dto.email);
+    return {
+      message: 'If the email is registered, a reset link has been sent.',
+    };
+  }
+
+  @Public()
+  @Post('reset-password')
+  @HttpCode(HttpStatus.OK)
+  @ApiOperation({ summary: 'Set a new password using the emailed token' })
+  resetPassword(@Body() dto: ResetPasswordDto) {
+    return this.authService.resetPassword(dto.token, dto.password);
   }
 
   @Post('2fa')

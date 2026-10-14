@@ -275,6 +275,11 @@ export type AuthSession = Prisma.AuthSessionModel
  */
 export type TwoFactorChallenge = Prisma.TwoFactorChallengeModel
 /**
+ * Model PasswordResetToken
+ * 
+ */
+export type PasswordResetToken = Prisma.PasswordResetTokenModel
+/**
  * Model AppLog
  * 
  */

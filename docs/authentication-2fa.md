@@ -164,3 +164,38 @@ async function verifyCode(challengeId: string, code: string) {
 
 - Run `npm run db:push` to add `twoFactorEnabled` and the `TwoFactorChallenges` table.
 - Tokens issued before the session-tracking release are no longer valid; users must sign in again.
+
+---
+
+## Forgot password
+
+Both endpoints are public. Like login, they are `POST` requests and need the CSRF token (call `GET /api/auth/csrf` first).
+
+### 1. Request a reset link
+
+`POST /api/auth/forgot-password`
+
+```json
+{ "email": "user@mail.com" }
+```
+
+Always responds `200` with `{ "message": "If the email is registered, a reset link has been sent." }`, whether or not the email exists (so accounts can't be probed). Show the same neutral message to the user.
+
+The email contains a link to `<FRONTEND_URL>/reset-password?token=<token>`. The link expires in **30 minutes** and works **once**. Requesting again invalidates the previous link.
+
+### 2. Set the new password
+
+Build a `/reset-password` page that reads `token` from the query string.
+
+`POST /api/auth/reset-password`
+
+```json
+{ "token": "<token from the URL>", "password": "newSecret123" }
+```
+
+| Status | Meaning |
+|---|---|
+| `200` | `{ "message": "Password has been reset. Please sign in." }`. Redirect to login. |
+| `400` | Invalid/expired/used link, or password shorter than 8 characters. Offer to request a new link. |
+
+After a reset, **all existing sessions of the user are logged out**, and the user must sign in again (2FA still applies).
