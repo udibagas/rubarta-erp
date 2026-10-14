@@ -20,14 +20,16 @@ export function httpLogger(req: Request, res: Response, next: NextFunction) {
     const status = res.statusCode;
     const userId = (req as Request & { user?: { id: number } }).user?.id;
     const message = `${req.method} ${path} ${status} ${durationMs.toFixed(0)}ms`;
+    const { cookie, ...headers } = req.headers;
+
     const meta = {
       method: req.method,
       path,
       status,
       durationMs: Math.round(durationMs),
       userId,
-      ip: req.ip,
-      headers: req.headers,
+      ip: req.headers['x-real-ip'] || req.headers['x-forwarded-for'] || req.ip,
+      headers,
     };
 
     if (status >= 500) logger.error(message, meta);
