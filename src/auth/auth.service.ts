@@ -50,17 +50,17 @@ export class AuthService {
       throw new UnauthorizedException('Invalid email or password');
     }
 
-    if (
-      user.twoFactorEnabled &&
-      !(await this.isTrustedDevice(user.id, context))
-    ) {
+    const deviceId = user.twoFactorEnabled
+      ? await this.findTrustedDevice(user.id, context)
+      : null;
+    if (user.twoFactorEnabled && deviceId === null) {
       const challengeId = await this.createTwoFactorChallenge(user);
       this.logger.log(`2FA code sent to user ${user.id}`);
       return { twoFactorRequired: true, challengeId };
     }
 
     this.logger.log(`User ${user.id} signed in`);
-    return this.issueSession(user);
+    return this.issueSession(user, deviceId);
   }
 
   async verifyTwoFactor(
@@ -107,32 +107,48 @@ export class AuthService {
     if (consumed.count === 0) throw invalid;
 
     this.logger.log(`User ${challenge.userId} signed in with 2FA`);
-    const deviceToken = await this.trustDevice(challenge.userId, context);
-    return { ...(await this.issueSession(challenge.User)), deviceToken };
+    const device = await this.trustDevice(challenge.userId, context);
+    return {
+      ...(await this.issueSession(challenge.User, device.id)),
+      deviceToken: device.token,
+    };
   }
 
   // A device is trusted when it presents the secret cookie issued after a
   // successful OTP. UA and IP are only recorded for auditing since both can
   // change legitimately (browser updates, mobile networks) or be spoofed.
-  private async isTrustedDevice(
+  private async findTrustedDevice(
     userId: number,
     context: { deviceToken?: string; userAgent?: string; ip?: string },
   ) {
-    if (!context.deviceToken) return false;
+    if (!context.deviceToken) return null;
     const now = new Date();
+    const tokenHash = this.hashToken(context.deviceToken);
     const { count } = await this.prisma.trustedDevice.updateMany({
-      where: {
-        userId,
-        tokenHash: this.hashToken(context.deviceToken),
-        expiresAt: { gt: now },
-      },
+      where: { userId, tokenHash, expiresAt: { gt: now } },
       data: {
         lastUsedAt: now,
         userAgent: context.userAgent?.slice(0, 255),
         ipAddress: context.ip?.slice(0, 64),
       },
     });
-    return count > 0;
+    if (count === 0) return null;
+    const device = await this.prisma.trustedDevice.findUnique({
+      where: { tokenHash },
+      select: { id: true },
+    });
+    return device?.id ?? null;
+  }
+
+  private async revokeDevices(where: { userId: number }) {
+    const now = new Date();
+    await this.prisma.$transaction([
+      this.prisma.authSession.updateMany({
+        where: { Device: { is: where }, revokedAt: null },
+        data: { revokedAt: now },
+      }),
+      this.prisma.trustedDevice.deleteMany({ where }),
+    ]);
   }
 
   private async trustDevice(
@@ -143,7 +159,7 @@ export class AuthService {
     await this.prisma.trustedDevice.deleteMany({
       where: { expiresAt: { lte: new Date() } },
     });
-    await this.prisma.trustedDevice.create({
+    const device = await this.prisma.trustedDevice.create({
       data: {
         userId,
         tokenHash: this.hashToken(deviceToken),
@@ -152,7 +168,7 @@ export class AuthService {
         expiresAt: new Date(Date.now() + TRUSTED_DEVICE_TTL_MS),
       },
     });
-    return deviceToken;
+    return { id: device.id, token: deviceToken };
   }
 
   async setTwoFactor(userId: number, enabled: boolean, password: string) {
@@ -167,22 +183,38 @@ export class AuthService {
       throw new UnauthorizedException('Invalid password');
     }
 
-    await this.prisma.$transaction([
-      this.prisma.user.update({
-        where: { id: userId },
-        data: { twoFactorEnabled: enabled },
-      }),
-      this.prisma.trustedDevice.deleteMany({ where: { userId } }),
-    ]);
+    await this.prisma.user.update({
+      where: { id: userId },
+      data: { twoFactorEnabled: enabled },
+    });
+    await this.revokeDevices({ userId });
     this.logger.log(`User ${userId} ${enabled ? 'enabled' : 'disabled'} 2FA`);
     return { twoFactorEnabled: enabled };
   }
 
   async revokeSession(sessionId: string) {
-    await this.prisma.authSession.updateMany({
-      where: { jti: sessionId, revokedAt: null },
-      data: { revokedAt: new Date() },
+    const session = await this.prisma.authSession.findUnique({
+      where: { jti: sessionId },
+      select: { deviceId: true },
     });
+    const now = new Date();
+    // sign out everything on the same device and forget the device
+    if (session?.deviceId) {
+      await this.prisma.$transaction([
+        this.prisma.authSession.updateMany({
+          where: { deviceId: session.deviceId, revokedAt: null },
+          data: { revokedAt: now },
+        }),
+        this.prisma.trustedDevice.deleteMany({
+          where: { id: session.deviceId },
+        }),
+      ]);
+    } else {
+      await this.prisma.authSession.updateMany({
+        where: { jti: sessionId, revokedAt: null },
+        data: { revokedAt: now },
+      });
+    }
     this.logger.log(`Session ${sessionId} revoked`);
   }
 
@@ -344,13 +376,11 @@ export class AuthService {
         where: { userId: record.userId, revokedAt: null },
         data: { revokedAt: new Date() },
       }),
-      this.prisma.trustedDevice.deleteMany({
-        where: { userId: record.userId },
-      }),
       this.prisma.passwordResetToken.deleteMany({
         where: { userId: record.userId },
       }),
     ]);
+    await this.revokeDevices({ userId: record.userId });
     this.logger.log(`Password reset completed for user ${record.userId}`);
     return { message: 'Password has been reset. Please sign in.' };
   }
@@ -359,12 +389,15 @@ export class AuthService {
     return createHash('sha256').update(token).digest('hex');
   }
 
-  private async issueSession(user: {
-    id: number;
-    name: string;
-    email: string;
-    roles: string[];
-  }) {
+  private async issueSession(
+    user: {
+      id: number;
+      name: string;
+      email: string;
+      roles: string[];
+    },
+    deviceId: number | null = null,
+  ) {
     const { id: sub, name, email, roles } = user;
     const sessionId = randomUUID();
     const token = await this.createAccessToken(user, sessionId);
@@ -377,6 +410,7 @@ export class AuthService {
         jti: sessionId,
         refreshTokenHash: this.hashToken(refreshToken),
         userId: sub,
+        deviceId,
         expiresAt: new Date(Date.now() + REFRESH_TOKEN_TTL_MS),
       },
     });

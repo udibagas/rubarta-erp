@@ -245,6 +245,7 @@ export type TrustedDeviceWhereInput = {
   expiresAt?: Prisma.DateTimeFilter<"TrustedDevice"> | Date | string
   createdAt?: Prisma.DateTimeFilter<"TrustedDevice"> | Date | string
   User?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  AuthSession?: Prisma.AuthSessionListRelationFilter
 }
 
 export type TrustedDeviceOrderByWithRelationInput = {
@@ -257,6 +258,7 @@ export type TrustedDeviceOrderByWithRelationInput = {
   expiresAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   User?: Prisma.UserOrderByWithRelationInput
+  AuthSession?: Prisma.AuthSessionOrderByRelationAggregateInput
 }
 
 export type TrustedDeviceWhereUniqueInput = Prisma.AtLeast<{
@@ -272,6 +274,7 @@ export type TrustedDeviceWhereUniqueInput = Prisma.AtLeast<{
   expiresAt?: Prisma.DateTimeFilter<"TrustedDevice"> | Date | string
   createdAt?: Prisma.DateTimeFilter<"TrustedDevice"> | Date | string
   User?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  AuthSession?: Prisma.AuthSessionListRelationFilter
 }, "id" | "tokenHash">
 
 export type TrustedDeviceOrderByWithAggregationInput = {
@@ -312,6 +315,7 @@ export type TrustedDeviceCreateInput = {
   expiresAt: Date | string
   createdAt?: Date | string
   User: Prisma.UserCreateNestedOneWithoutTrustedDeviceInput
+  AuthSession?: Prisma.AuthSessionCreateNestedManyWithoutDeviceInput
 }
 
 export type TrustedDeviceUncheckedCreateInput = {
@@ -323,6 +327,7 @@ export type TrustedDeviceUncheckedCreateInput = {
   lastUsedAt?: Date | string
   expiresAt: Date | string
   createdAt?: Date | string
+  AuthSession?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutDeviceInput
 }
 
 export type TrustedDeviceUpdateInput = {
@@ -333,6 +338,7 @@ export type TrustedDeviceUpdateInput = {
   expiresAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   User?: Prisma.UserUpdateOneRequiredWithoutTrustedDeviceNestedInput
+  AuthSession?: Prisma.AuthSessionUpdateManyWithoutDeviceNestedInput
 }
 
 export type TrustedDeviceUncheckedUpdateInput = {
@@ -344,6 +350,7 @@ export type TrustedDeviceUncheckedUpdateInput = {
   lastUsedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   expiresAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  AuthSession?: Prisma.AuthSessionUncheckedUpdateManyWithoutDeviceNestedInput
 }
 
 export type TrustedDeviceCreateManyInput = {
@@ -375,6 +382,11 @@ export type TrustedDeviceUncheckedUpdateManyInput = {
   lastUsedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   expiresAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type TrustedDeviceNullableScalarRelationFilter = {
+  is?: Prisma.TrustedDeviceWhereInput | null
+  isNot?: Prisma.TrustedDeviceWhereInput | null
 }
 
 export type TrustedDeviceCountOrderByAggregateInput = {
@@ -430,6 +442,22 @@ export type TrustedDeviceOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
 }
 
+export type TrustedDeviceCreateNestedOneWithoutAuthSessionInput = {
+  create?: Prisma.XOR<Prisma.TrustedDeviceCreateWithoutAuthSessionInput, Prisma.TrustedDeviceUncheckedCreateWithoutAuthSessionInput>
+  connectOrCreate?: Prisma.TrustedDeviceCreateOrConnectWithoutAuthSessionInput
+  connect?: Prisma.TrustedDeviceWhereUniqueInput
+}
+
+export type TrustedDeviceUpdateOneWithoutAuthSessionNestedInput = {
+  create?: Prisma.XOR<Prisma.TrustedDeviceCreateWithoutAuthSessionInput, Prisma.TrustedDeviceUncheckedCreateWithoutAuthSessionInput>
+  connectOrCreate?: Prisma.TrustedDeviceCreateOrConnectWithoutAuthSessionInput
+  upsert?: Prisma.TrustedDeviceUpsertWithoutAuthSessionInput
+  disconnect?: Prisma.TrustedDeviceWhereInput | boolean
+  delete?: Prisma.TrustedDeviceWhereInput | boolean
+  connect?: Prisma.TrustedDeviceWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.TrustedDeviceUpdateToOneWithWhereWithoutAuthSessionInput, Prisma.TrustedDeviceUpdateWithoutAuthSessionInput>, Prisma.TrustedDeviceUncheckedUpdateWithoutAuthSessionInput>
+}
+
 export type TrustedDeviceCreateNestedManyWithoutUserInput = {
   create?: Prisma.XOR<Prisma.TrustedDeviceCreateWithoutUserInput, Prisma.TrustedDeviceUncheckedCreateWithoutUserInput> | Prisma.TrustedDeviceCreateWithoutUserInput[] | Prisma.TrustedDeviceUncheckedCreateWithoutUserInput[]
   connectOrCreate?: Prisma.TrustedDeviceCreateOrConnectWithoutUserInput | Prisma.TrustedDeviceCreateOrConnectWithoutUserInput[]
@@ -472,6 +500,64 @@ export type TrustedDeviceUncheckedUpdateManyWithoutUserNestedInput = {
   deleteMany?: Prisma.TrustedDeviceScalarWhereInput | Prisma.TrustedDeviceScalarWhereInput[]
 }
 
+export type TrustedDeviceCreateWithoutAuthSessionInput = {
+  tokenHash: string
+  userAgent?: string | null
+  ipAddress?: string | null
+  lastUsedAt?: Date | string
+  expiresAt: Date | string
+  createdAt?: Date | string
+  User: Prisma.UserCreateNestedOneWithoutTrustedDeviceInput
+}
+
+export type TrustedDeviceUncheckedCreateWithoutAuthSessionInput = {
+  id?: number
+  userId: number
+  tokenHash: string
+  userAgent?: string | null
+  ipAddress?: string | null
+  lastUsedAt?: Date | string
+  expiresAt: Date | string
+  createdAt?: Date | string
+}
+
+export type TrustedDeviceCreateOrConnectWithoutAuthSessionInput = {
+  where: Prisma.TrustedDeviceWhereUniqueInput
+  create: Prisma.XOR<Prisma.TrustedDeviceCreateWithoutAuthSessionInput, Prisma.TrustedDeviceUncheckedCreateWithoutAuthSessionInput>
+}
+
+export type TrustedDeviceUpsertWithoutAuthSessionInput = {
+  update: Prisma.XOR<Prisma.TrustedDeviceUpdateWithoutAuthSessionInput, Prisma.TrustedDeviceUncheckedUpdateWithoutAuthSessionInput>
+  create: Prisma.XOR<Prisma.TrustedDeviceCreateWithoutAuthSessionInput, Prisma.TrustedDeviceUncheckedCreateWithoutAuthSessionInput>
+  where?: Prisma.TrustedDeviceWhereInput
+}
+
+export type TrustedDeviceUpdateToOneWithWhereWithoutAuthSessionInput = {
+  where?: Prisma.TrustedDeviceWhereInput
+  data: Prisma.XOR<Prisma.TrustedDeviceUpdateWithoutAuthSessionInput, Prisma.TrustedDeviceUncheckedUpdateWithoutAuthSessionInput>
+}
+
+export type TrustedDeviceUpdateWithoutAuthSessionInput = {
+  tokenHash?: Prisma.StringFieldUpdateOperationsInput | string
+  userAgent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ipAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastUsedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  expiresAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  User?: Prisma.UserUpdateOneRequiredWithoutTrustedDeviceNestedInput
+}
+
+export type TrustedDeviceUncheckedUpdateWithoutAuthSessionInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  userId?: Prisma.IntFieldUpdateOperationsInput | number
+  tokenHash?: Prisma.StringFieldUpdateOperationsInput | string
+  userAgent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ipAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastUsedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  expiresAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
 export type TrustedDeviceCreateWithoutUserInput = {
   tokenHash: string
   userAgent?: string | null
@@ -479,6 +565,7 @@ export type TrustedDeviceCreateWithoutUserInput = {
   lastUsedAt?: Date | string
   expiresAt: Date | string
   createdAt?: Date | string
+  AuthSession?: Prisma.AuthSessionCreateNestedManyWithoutDeviceInput
 }
 
 export type TrustedDeviceUncheckedCreateWithoutUserInput = {
@@ -489,6 +576,7 @@ export type TrustedDeviceUncheckedCreateWithoutUserInput = {
   lastUsedAt?: Date | string
   expiresAt: Date | string
   createdAt?: Date | string
+  AuthSession?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutDeviceInput
 }
 
 export type TrustedDeviceCreateOrConnectWithoutUserInput = {
@@ -548,6 +636,7 @@ export type TrustedDeviceUpdateWithoutUserInput = {
   lastUsedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   expiresAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  AuthSession?: Prisma.AuthSessionUpdateManyWithoutDeviceNestedInput
 }
 
 export type TrustedDeviceUncheckedUpdateWithoutUserInput = {
@@ -558,6 +647,7 @@ export type TrustedDeviceUncheckedUpdateWithoutUserInput = {
   lastUsedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   expiresAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  AuthSession?: Prisma.AuthSessionUncheckedUpdateManyWithoutDeviceNestedInput
 }
 
 export type TrustedDeviceUncheckedUpdateManyWithoutUserInput = {
@@ -571,6 +661,35 @@ export type TrustedDeviceUncheckedUpdateManyWithoutUserInput = {
 }
 
 
+/**
+ * Count Type TrustedDeviceCountOutputType
+ */
+
+export type TrustedDeviceCountOutputType = {
+  AuthSession: number
+}
+
+export type TrustedDeviceCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  AuthSession?: boolean | TrustedDeviceCountOutputTypeCountAuthSessionArgs
+}
+
+/**
+ * TrustedDeviceCountOutputType without action
+ */
+export type TrustedDeviceCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the TrustedDeviceCountOutputType
+   */
+  select?: Prisma.TrustedDeviceCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * TrustedDeviceCountOutputType without action
+ */
+export type TrustedDeviceCountOutputTypeCountAuthSessionArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AuthSessionWhereInput
+}
+
 
 export type TrustedDeviceSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -582,6 +701,8 @@ export type TrustedDeviceSelect<ExtArgs extends runtime.Types.Extensions.Interna
   expiresAt?: boolean
   createdAt?: boolean
   User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  AuthSession?: boolean | Prisma.TrustedDevice$AuthSessionArgs<ExtArgs>
+  _count?: boolean | Prisma.TrustedDeviceCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["trustedDevice"]>
 
 export type TrustedDeviceSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -622,6 +743,8 @@ export type TrustedDeviceSelectScalar = {
 export type TrustedDeviceOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "tokenHash" | "userAgent" | "ipAddress" | "lastUsedAt" | "expiresAt" | "createdAt", ExtArgs["result"]["trustedDevice"]>
 export type TrustedDeviceInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  AuthSession?: boolean | Prisma.TrustedDevice$AuthSessionArgs<ExtArgs>
+  _count?: boolean | Prisma.TrustedDeviceCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type TrustedDeviceIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -634,6 +757,7 @@ export type $TrustedDevicePayload<ExtArgs extends runtime.Types.Extensions.Inter
   name: "TrustedDevice"
   objects: {
     User: Prisma.$UserPayload<ExtArgs>
+    AuthSession: Prisma.$AuthSessionPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1039,6 +1163,7 @@ readonly fields: TrustedDeviceFieldRefs;
 export interface Prisma__TrustedDeviceClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   User<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  AuthSession<T extends Prisma.TrustedDevice$AuthSessionArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.TrustedDevice$AuthSessionArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AuthSessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1474,6 +1599,30 @@ export type TrustedDeviceDeleteManyArgs<ExtArgs extends runtime.Types.Extensions
    * Limit how many TrustedDevices to delete.
    */
   limit?: number
+}
+
+/**
+ * TrustedDevice.AuthSession
+ */
+export type TrustedDevice$AuthSessionArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the AuthSession
+   */
+  select?: Prisma.AuthSessionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the AuthSession
+   */
+  omit?: Prisma.AuthSessionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AuthSessionInclude<ExtArgs> | null
+  where?: Prisma.AuthSessionWhereInput
+  orderBy?: Prisma.AuthSessionOrderByWithRelationInput | Prisma.AuthSessionOrderByWithRelationInput[]
+  cursor?: Prisma.AuthSessionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.AuthSessionScalarFieldEnum | Prisma.AuthSessionScalarFieldEnum[]
 }
 
 /**

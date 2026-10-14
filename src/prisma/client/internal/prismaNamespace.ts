@@ -5358,6 +5358,7 @@ export const AuthSessionScalarFieldEnum = {
   jti: 'jti',
   refreshTokenHash: 'refreshTokenHash',
   userId: 'userId',
+  deviceId: 'deviceId',
   expiresAt: 'expiresAt',
   revokedAt: 'revokedAt',
   createdAt: 'createdAt'
