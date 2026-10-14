@@ -4,6 +4,7 @@ import {
   Delete,
   FileTypeValidator,
   Get,
+  Logger,
   MaxFileSizeValidator,
   Param,
   ParseFilePipe,
@@ -42,6 +43,8 @@ import { User } from '../prisma/client/client';
 @ApiBearerAuth()
 @Controller('api/goods-receipts')
 export class GoodsReceiptsController {
+  private readonly logger = new Logger(GoodsReceiptsController.name);
+
   constructor(private readonly goodsReceiptsService: GoodsReceiptsService) {}
 
   @Post()
@@ -173,13 +176,15 @@ export class GoodsReceiptsController {
       this.goodsReceiptsService
         .updatePoItemReceivedQuantities(id)
         .then(() => {
-          console.log(
+          this.logger.log(
             `Successfully updated purchase order item received quantities for goods receipt ID ${id}`,
           );
         })
         .catch((error) => {
-          // Handle any errors that occurred during the update
-          console.error(error);
+          this.logger.error(
+            `Failed to update purchase order item received quantities for goods receipt ID ${id}`,
+            error instanceof Error ? error.stack : String(error),
+          );
         });
     }
 

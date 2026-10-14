@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable, Logger } from '@nestjs/common';
 import { InvoicesPolicy } from './invoices.policy';
 import {
   CreateInvoiceDto,
@@ -21,6 +21,8 @@ import { NotificationsService } from '../notifications/notifications.service';
 
 @Injectable()
 export class InvoicesService {
+  private readonly logger = new Logger(InvoicesService.name);
+
   constructor(
     private readonly prisma: PrismaService,
     private readonly mailerService: MailerService,
@@ -455,9 +457,9 @@ export class InvoicesService {
                 contentType: fileType,
               };
             } catch (error) {
-              console.warn(
+              this.logger.warn(
                 `Skipping invoice attachment for ${invoice.id}: ${filePath}`,
-                error,
+                error instanceof Error ? error.message : String(error),
               );
               return null;
             }

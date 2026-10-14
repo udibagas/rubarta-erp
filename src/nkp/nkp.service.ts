@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { CloseNkpDto, NkpDto, QueryNkpDto } from './nkp.dto';
 import { PrismaService } from '../prisma/prisma.service';
 import {
@@ -25,6 +25,8 @@ import { NkpPolicy } from './nkp.policy';
 
 @Injectable()
 export class NkpService {
+  private readonly logger = new Logger(NkpService.name);
+
   constructor(
     private prisma: PrismaService,
     private eventEmitter: EventEmitter2,
@@ -817,7 +819,7 @@ export class NkpService {
     });
 
     for (const approval of pendingApprovals) {
-      console.log(
+      this.logger.log(
         `Notifying user ${approval.User.name} about pending approval for NKP with document number ${approval.Nkp.number}`,
       );
 

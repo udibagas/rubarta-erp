@@ -2,6 +2,7 @@ import {
   BadRequestException,
   ForbiddenException,
   Injectable,
+  Logger,
   NotFoundException,
 } from '@nestjs/common';
 import { EventEmitter2 } from '@nestjs/event-emitter';
@@ -12,6 +13,8 @@ import { Cron, CronExpression } from '@nestjs/schedule';
 
 @Injectable()
 export class ApprovalService {
+  private readonly logger = new Logger(ApprovalService.name);
+
   constructor(
     private readonly prisma: PrismaService,
     private readonly notification: NotificationsService,
@@ -433,7 +436,7 @@ export class ApprovalService {
         });
       }
 
-      console.log(
+      this.logger.log(
         `Notifying user ${item.user.name} about pending approval for ${documentType} with document number ${document.number}`,
       );
 

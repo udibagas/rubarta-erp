@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { UsersModule } from './users/users.module';
 import { PrismaModule } from './prisma/prisma.module';
+import { LoggingModule } from './logging/logging.module';
 import { ConfigModule } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
 import { BanksModule } from './banks/banks.module';
@@ -99,6 +100,7 @@ import { AccountingReportsModule } from './accounting-reports/accounting-reports
     }),
     UsersModule,
     PrismaModule,
+    LoggingModule,
     GoodsReceiptsModule,
     AuthModule,
     BanksModule,

@@ -5,6 +5,7 @@ model User {
   email              String   @unique @db.VarChar(50)
   password           String   @db.VarChar(100)
   active             Boolean  @default(true)
+  twoFactorEnabled   Boolean  @default(false)
   bankAccount        String?  @db.VarChar(30)
   currency           Currency @default(IDR)
   signatureSpeciment Json?    @db.JsonB
@@ -22,6 +23,7 @@ model User {
   roles        Role[]         @default([USER])
   Notification Notification[]
   AuthSession  AuthSession[]
+  TwoFactorChallenge TwoFactorChallenge[]
 
   // NKP related
   NkpApproval NkpApproval[]

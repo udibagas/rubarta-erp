@@ -248,6 +248,16 @@ export type Bank = Prisma.BankModel
  */
 export type AuthSession = Prisma.AuthSessionModel
 /**
+ * Model TwoFactorChallenge
+ * 
+ */
+export type TwoFactorChallenge = Prisma.TwoFactorChallengeModel
+/**
+ * Model AppLog
+ * 
+ */
+export type AppLog = Prisma.AppLogModel
+/**
  * Model Supplier
  * 
  */

@@ -97,6 +97,8 @@ export const ModelName = {
   Department: 'Department',
   Bank: 'Bank',
   AuthSession: 'AuthSession',
+  TwoFactorChallenge: 'TwoFactorChallenge',
+  AppLog: 'AppLog',
   Supplier: 'Supplier',
   User: 'User',
   UserBalance: 'UserBalance',
@@ -979,6 +981,31 @@ export const AuthSessionScalarFieldEnum = {
 export type AuthSessionScalarFieldEnum = (typeof AuthSessionScalarFieldEnum)[keyof typeof AuthSessionScalarFieldEnum]
 
 
+export const TwoFactorChallengeScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  codeHash: 'codeHash',
+  attempts: 'attempts',
+  expiresAt: 'expiresAt',
+  createdAt: 'createdAt'
+} as const
+
+export type TwoFactorChallengeScalarFieldEnum = (typeof TwoFactorChallengeScalarFieldEnum)[keyof typeof TwoFactorChallengeScalarFieldEnum]
+
+
+export const AppLogScalarFieldEnum = {
+  id: 'id',
+  level: 'level',
+  context: 'context',
+  message: 'message',
+  stack: 'stack',
+  meta: 'meta',
+  createdAt: 'createdAt'
+} as const
+
+export type AppLogScalarFieldEnum = (typeof AppLogScalarFieldEnum)[keyof typeof AppLogScalarFieldEnum]
+
+
 export const SupplierScalarFieldEnum = {
   id: 'id',
   code: 'code',
@@ -1003,6 +1030,7 @@ export const UserScalarFieldEnum = {
   email: 'email',
   password: 'password',
   active: 'active',
+  twoFactorEnabled: 'twoFactorEnabled',
   bankAccount: 'bankAccount',
   currency: 'currency',
   signatureSpeciment: 'signatureSpeciment',

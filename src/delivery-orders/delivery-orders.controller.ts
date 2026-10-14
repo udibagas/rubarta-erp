@@ -3,6 +3,7 @@ import {
   Controller,
   Delete,
   Get,
+  Logger,
   Param,
   ParseIntPipe,
   Patch,
@@ -32,6 +33,8 @@ import { User } from '../prisma/client/client';
 @ApiBearerAuth()
 @Controller('api/delivery-orders')
 export class DeliveryOrdersController {
+  private readonly logger = new Logger(DeliveryOrdersController.name);
+
   constructor(private readonly deliveryOrdersService: DeliveryOrdersService) {}
 
   @Post()
@@ -124,13 +127,15 @@ export class DeliveryOrdersController {
       this.deliveryOrdersService
         .updateSoItemReceivedQuantities(id)
         .then(() => {
-          console.log(
+          this.logger.log(
             `Successfully updated sales order item delivered quantities for delivery order ID ${id}`,
           );
         })
         .catch((error) => {
-          // Handle any errors that occurred during the update
-          console.error(error);
+          this.logger.error(
+            `Failed to update sales order item delivered quantities for delivery order ID ${id}`,
+            error instanceof Error ? error.stack : String(error),
+          );
         });
     }
 

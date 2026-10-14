@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { SalesOrdersPolicy } from './sales-orders.policy';
 import { PrismaService } from '../prisma/prisma.service';
 import {
@@ -19,6 +19,8 @@ import * as fs from 'node:fs';
 
 @Injectable()
 export class SalesOrdersService {
+  private readonly logger = new Logger(SalesOrdersService.name);
+
   constructor(
     private readonly prisma: PrismaService,
     private readonly mailerService: MailerService,
@@ -616,9 +618,9 @@ export class SalesOrdersService {
                 contentType: fileType,
               };
             } catch (error) {
-              console.warn(
+              this.logger.warn(
                 `Skipping Sales Order attachment for ${salesOrder.id}: ${filePath}`,
-                error,
+                error instanceof Error ? error.message : String(error),
               );
               return null;
             }

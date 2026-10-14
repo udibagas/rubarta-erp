@@ -443,6 +443,8 @@ export const ModelName = {
   Department: 'Department',
   Bank: 'Bank',
   AuthSession: 'AuthSession',
+  TwoFactorChallenge: 'TwoFactorChallenge',
+  AppLog: 'AppLog',
   Supplier: 'Supplier',
   User: 'User',
   UserBalance: 'UserBalance',
@@ -462,7 +464,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "account" | "accountBalance" | "fiscalPeriod" | "journalEntry" | "journalLine" | "vendorBill" | "payment" | "paymentAllocation" | "cashBankAccount" | "bankTransaction" | "taxRate" | "expense" | "approvalSetting" | "approvalSettingItem" | "approval" | "approvalItem" | "lead" | "opportunity" | "task" | "interaction" | "customerNote" | "customerFile" | "customer" | "contact" | "deliveryOrder" | "deliveryOrderItem" | "goodsReceipt" | "goodsReceiptItem" | "invoice" | "invoiceItem" | "material" | "nkp" | "nkpItem" | "nkpApproval" | "nkpAttachment" | "notification" | "purchaseOrder" | "purchaseOrderItem" | "quotation" | "quotationItem" | "salesOrder" | "salesOrderItem" | "company" | "department" | "bank" | "authSession" | "supplier" | "user" | "userBalance" | "visitPlan"
+    modelProps: "account" | "accountBalance" | "fiscalPeriod" | "journalEntry" | "journalLine" | "vendorBill" | "payment" | "paymentAllocation" | "cashBankAccount" | "bankTransaction" | "taxRate" | "expense" | "approvalSetting" | "approvalSettingItem" | "approval" | "approvalItem" | "lead" | "opportunity" | "task" | "interaction" | "customerNote" | "customerFile" | "customer" | "contact" | "deliveryOrder" | "deliveryOrderItem" | "goodsReceipt" | "goodsReceiptItem" | "invoice" | "invoiceItem" | "material" | "nkp" | "nkpItem" | "nkpApproval" | "nkpAttachment" | "notification" | "purchaseOrder" | "purchaseOrderItem" | "quotation" | "quotationItem" | "salesOrder" | "salesOrderItem" | "company" | "department" | "bank" | "authSession" | "twoFactorChallenge" | "appLog" | "supplier" | "user" | "userBalance" | "visitPlan"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -3870,6 +3872,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    TwoFactorChallenge: {
+      payload: Prisma.$TwoFactorChallengePayload<ExtArgs>
+      fields: Prisma.TwoFactorChallengeFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.TwoFactorChallengeFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TwoFactorChallengePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.TwoFactorChallengeFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TwoFactorChallengePayload>
+        }
+        findFirst: {
+          args: Prisma.TwoFactorChallengeFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TwoFactorChallengePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.TwoFactorChallengeFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TwoFactorChallengePayload>
+        }
+        findMany: {
+          args: Prisma.TwoFactorChallengeFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TwoFactorChallengePayload>[]
+        }
+        create: {
+          args: Prisma.TwoFactorChallengeCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TwoFactorChallengePayload>
+        }
+        createMany: {
+          args: Prisma.TwoFactorChallengeCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.TwoFactorChallengeCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TwoFactorChallengePayload>[]
+        }
+        delete: {
+          args: Prisma.TwoFactorChallengeDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TwoFactorChallengePayload>
+        }
+        update: {
+          args: Prisma.TwoFactorChallengeUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TwoFactorChallengePayload>
+        }
+        deleteMany: {
+          args: Prisma.TwoFactorChallengeDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.TwoFactorChallengeUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.TwoFactorChallengeUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TwoFactorChallengePayload>[]
+        }
+        upsert: {
+          args: Prisma.TwoFactorChallengeUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TwoFactorChallengePayload>
+        }
+        aggregate: {
+          args: Prisma.TwoFactorChallengeAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateTwoFactorChallenge>
+        }
+        groupBy: {
+          args: Prisma.TwoFactorChallengeGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TwoFactorChallengeGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.TwoFactorChallengeCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TwoFactorChallengeCountAggregateOutputType> | number
+        }
+      }
+    }
+    AppLog: {
+      payload: Prisma.$AppLogPayload<ExtArgs>
+      fields: Prisma.AppLogFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.AppLogFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AppLogPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.AppLogFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AppLogPayload>
+        }
+        findFirst: {
+          args: Prisma.AppLogFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AppLogPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.AppLogFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AppLogPayload>
+        }
+        findMany: {
+          args: Prisma.AppLogFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AppLogPayload>[]
+        }
+        create: {
+          args: Prisma.AppLogCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AppLogPayload>
+        }
+        createMany: {
+          args: Prisma.AppLogCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.AppLogCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AppLogPayload>[]
+        }
+        delete: {
+          args: Prisma.AppLogDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AppLogPayload>
+        }
+        update: {
+          args: Prisma.AppLogUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AppLogPayload>
+        }
+        deleteMany: {
+          args: Prisma.AppLogDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.AppLogUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.AppLogUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AppLogPayload>[]
+        }
+        upsert: {
+          args: Prisma.AppLogUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AppLogPayload>
+        }
+        aggregate: {
+          args: Prisma.AppLogAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateAppLog>
+        }
+        groupBy: {
+          args: Prisma.AppLogGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AppLogGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.AppLogCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AppLogCountAggregateOutputType> | number
+        }
+      }
+    }
     Supplier: {
       payload: Prisma.$SupplierPayload<ExtArgs>
       fields: Prisma.SupplierFieldRefs
@@ -5065,6 +5215,31 @@ export const AuthSessionScalarFieldEnum = {
 export type AuthSessionScalarFieldEnum = (typeof AuthSessionScalarFieldEnum)[keyof typeof AuthSessionScalarFieldEnum]
 
 
+export const TwoFactorChallengeScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  codeHash: 'codeHash',
+  attempts: 'attempts',
+  expiresAt: 'expiresAt',
+  createdAt: 'createdAt'
+} as const
+
+export type TwoFactorChallengeScalarFieldEnum = (typeof TwoFactorChallengeScalarFieldEnum)[keyof typeof TwoFactorChallengeScalarFieldEnum]
+
+
+export const AppLogScalarFieldEnum = {
+  id: 'id',
+  level: 'level',
+  context: 'context',
+  message: 'message',
+  stack: 'stack',
+  meta: 'meta',
+  createdAt: 'createdAt'
+} as const
+
+export type AppLogScalarFieldEnum = (typeof AppLogScalarFieldEnum)[keyof typeof AppLogScalarFieldEnum]
+
+
 export const SupplierScalarFieldEnum = {
   id: 'id',
   code: 'code',
@@ -5089,6 +5264,7 @@ export const UserScalarFieldEnum = {
   email: 'email',
   password: 'password',
   active: 'active',
+  twoFactorEnabled: 'twoFactorEnabled',
   bankAccount: 'bankAccount',
   currency: 'currency',
   signatureSpeciment: 'signatureSpeciment',
@@ -5692,6 +5868,20 @@ export type ListJsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel
 
 
 /**
+ * Reference to a field of type 'BigInt'
+ */
+export type BigIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BigInt'>
+    
+
+
+/**
+ * Reference to a field of type 'BigInt[]'
+ */
+export type ListBigIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BigInt[]'>
+    
+
+
+/**
  * Reference to a field of type 'Role[]'
  */
 export type ListEnumRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Role[]'>
@@ -5929,6 +6119,8 @@ export type GlobalOmitConfig = {
   department?: Prisma.DepartmentOmit
   bank?: Prisma.BankOmit
   authSession?: Prisma.AuthSessionOmit
+  twoFactorChallenge?: Prisma.TwoFactorChallengeOmit
+  appLog?: Prisma.AppLogOmit
   supplier?: Prisma.SupplierOmit
   user?: Prisma.UserOmit
   userBalance?: Prisma.UserBalanceOmit

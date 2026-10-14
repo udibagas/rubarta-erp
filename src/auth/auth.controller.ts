@@ -11,6 +11,7 @@ import {
 import { AuthService } from './auth.service';
 import { Public } from './public.decorator';
 import { LoginDto } from './login.dto';
+import { ToggleTwoFactorDto, VerifyTwoFactorDto } from './two-factor.dto';
 import {
   ApiBearerAuth,
   ApiOkResponse,
@@ -46,15 +47,50 @@ export class AuthController {
       credential.password,
     );
 
+    if ('twoFactorRequired' in data) {
+      res.cookie('_csrf', req.csrfToken());
+      return data;
+    }
+
+    await this.setSessionCookies(req, res, data.token);
+    return data;
+  }
+
+  @Public()
+  @Post('2fa/verify')
+  @HttpCode(HttpStatus.OK)
+  @ApiOperation({ summary: 'Complete sign in with the emailed code' })
+  @ApiOkResponse({ type: AuthEntity })
+  async verifyTwoFactor(
+    @Req() req,
+    @Body() dto: VerifyTwoFactorDto,
+    @Res({ passthrough: true }) res: Response,
+  ): Promise<AuthEntity> {
+    const data = await this.authService.verifyTwoFactor(
+      dto.challengeId,
+      dto.code,
+    );
+    await this.setSessionCookies(req, res, data.token);
+    return data;
+  }
+
+  @Post('2fa')
+  @HttpCode(HttpStatus.OK)
+  @ApiBearerAuth()
+  @ApiOperation({ summary: 'Enable or disable two-factor authentication' })
+  toggleTwoFactor(@Auth() user: User, @Body() dto: ToggleTwoFactorDto) {
+    return this.authService.setTwoFactor(user.id, dto.enabled, dto.password);
+  }
+
+  private async setSessionCookies(req, res: Response, token: string) {
     const company = await this.prisma.company.findFirst({
       where: {
         isDefault: true,
       },
     });
     if (company) res.cookie('companyId', company.id);
-    res.cookie('token', data.token);
+    res.cookie('token', token);
     res.cookie('_csrf', req.csrfToken());
-    return data;
   }
 
   @Get('me')
@@ -73,10 +109,7 @@ export class AuthController {
   }
 
   @Post('logout')
-  async logout(
-    @Req() req,
-    @Res({ passthrough: true }) res: Response,
-  ) {
+  async logout(@Req() req, @Res({ passthrough: true }) res: Response) {
     await this.authService.revokeSession(req.authSessionId);
     res.clearCookie('token');
     return { message: 'See you next time!' };

@@ -45,6 +45,7 @@ export type UserMinAggregateOutputType = {
   email: string | null
   password: string | null
   active: boolean | null
+  twoFactorEnabled: boolean | null
   bankAccount: string | null
   currency: $Enums.Currency | null
   bankId: number | null
@@ -58,6 +59,7 @@ export type UserMaxAggregateOutputType = {
   email: string | null
   password: string | null
   active: boolean | null
+  twoFactorEnabled: boolean | null
   bankAccount: string | null
   currency: $Enums.Currency | null
   bankId: number | null
@@ -71,6 +73,7 @@ export type UserCountAggregateOutputType = {
   email: number
   password: number
   active: number
+  twoFactorEnabled: number
   bankAccount: number
   currency: number
   signatureSpeciment: number
@@ -100,6 +103,7 @@ export type UserMinAggregateInputType = {
   email?: true
   password?: true
   active?: true
+  twoFactorEnabled?: true
   bankAccount?: true
   currency?: true
   bankId?: true
@@ -113,6 +117,7 @@ export type UserMaxAggregateInputType = {
   email?: true
   password?: true
   active?: true
+  twoFactorEnabled?: true
   bankAccount?: true
   currency?: true
   bankId?: true
@@ -126,6 +131,7 @@ export type UserCountAggregateInputType = {
   email?: true
   password?: true
   active?: true
+  twoFactorEnabled?: true
   bankAccount?: true
   currency?: true
   signatureSpeciment?: true
@@ -228,6 +234,7 @@ export type UserGroupByOutputType = {
   email: string
   password: string
   active: boolean
+  twoFactorEnabled: boolean
   bankAccount: string | null
   currency: $Enums.Currency
   signatureSpeciment: runtime.JsonValue | null
@@ -266,6 +273,7 @@ export type UserWhereInput = {
   email?: Prisma.StringFilter<"User"> | string
   password?: Prisma.StringFilter<"User"> | string
   active?: Prisma.BoolFilter<"User"> | boolean
+  twoFactorEnabled?: Prisma.BoolFilter<"User"> | boolean
   bankAccount?: Prisma.StringNullableFilter<"User"> | string | null
   currency?: Prisma.EnumCurrencyFilter<"User"> | $Enums.Currency
   signatureSpeciment?: Prisma.JsonNullableFilter<"User">
@@ -277,6 +285,7 @@ export type UserWhereInput = {
   Balance?: Prisma.XOR<Prisma.UserBalanceNullableScalarRelationFilter, Prisma.UserBalanceWhereInput> | null
   Notification?: Prisma.NotificationListRelationFilter
   AuthSession?: Prisma.AuthSessionListRelationFilter
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeListRelationFilter
   NkpApproval?: Prisma.NkpApprovalListRelationFilter
   Nkp?: Prisma.NkpListRelationFilter
   NkpRequest?: Prisma.NkpListRelationFilter
@@ -310,6 +319,7 @@ export type UserOrderByWithRelationInput = {
   email?: Prisma.SortOrder
   password?: Prisma.SortOrder
   active?: Prisma.SortOrder
+  twoFactorEnabled?: Prisma.SortOrder
   bankAccount?: Prisma.SortOrderInput | Prisma.SortOrder
   currency?: Prisma.SortOrder
   signatureSpeciment?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -321,6 +331,7 @@ export type UserOrderByWithRelationInput = {
   Balance?: Prisma.UserBalanceOrderByWithRelationInput
   Notification?: Prisma.NotificationOrderByRelationAggregateInput
   AuthSession?: Prisma.AuthSessionOrderByRelationAggregateInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeOrderByRelationAggregateInput
   NkpApproval?: Prisma.NkpApprovalOrderByRelationAggregateInput
   Nkp?: Prisma.NkpOrderByRelationAggregateInput
   NkpRequest?: Prisma.NkpOrderByRelationAggregateInput
@@ -357,6 +368,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   code?: Prisma.StringNullableFilter<"User"> | string | null
   password?: Prisma.StringFilter<"User"> | string
   active?: Prisma.BoolFilter<"User"> | boolean
+  twoFactorEnabled?: Prisma.BoolFilter<"User"> | boolean
   bankAccount?: Prisma.StringNullableFilter<"User"> | string | null
   currency?: Prisma.EnumCurrencyFilter<"User"> | $Enums.Currency
   signatureSpeciment?: Prisma.JsonNullableFilter<"User">
@@ -368,6 +380,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   Balance?: Prisma.XOR<Prisma.UserBalanceNullableScalarRelationFilter, Prisma.UserBalanceWhereInput> | null
   Notification?: Prisma.NotificationListRelationFilter
   AuthSession?: Prisma.AuthSessionListRelationFilter
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeListRelationFilter
   NkpApproval?: Prisma.NkpApprovalListRelationFilter
   Nkp?: Prisma.NkpListRelationFilter
   NkpRequest?: Prisma.NkpListRelationFilter
@@ -401,6 +414,7 @@ export type UserOrderByWithAggregationInput = {
   email?: Prisma.SortOrder
   password?: Prisma.SortOrder
   active?: Prisma.SortOrder
+  twoFactorEnabled?: Prisma.SortOrder
   bankAccount?: Prisma.SortOrderInput | Prisma.SortOrder
   currency?: Prisma.SortOrder
   signatureSpeciment?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -424,6 +438,7 @@ export type UserScalarWhereWithAggregatesInput = {
   email?: Prisma.StringWithAggregatesFilter<"User"> | string
   password?: Prisma.StringWithAggregatesFilter<"User"> | string
   active?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
+  twoFactorEnabled?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
   bankAccount?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   currency?: Prisma.EnumCurrencyWithAggregatesFilter<"User"> | $Enums.Currency
   signatureSpeciment?: Prisma.JsonNullableWithAggregatesFilter<"User">
@@ -438,6 +453,7 @@ export type UserCreateInput = {
   email: string
   password: string
   active?: boolean
+  twoFactorEnabled?: boolean
   bankAccount?: string | null
   currency?: $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -447,6 +463,7 @@ export type UserCreateInput = {
   Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
   AuthSession?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpCreateNestedManyWithoutRequesterInput
@@ -480,6 +497,7 @@ export type UserUncheckedCreateInput = {
   email: string
   password: string
   active?: boolean
+  twoFactorEnabled?: boolean
   bankAccount?: string | null
   currency?: $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -489,6 +507,7 @@ export type UserUncheckedCreateInput = {
   Balance?: Prisma.UserBalanceUncheckedCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   AuthSession?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpUncheckedCreateNestedManyWithoutRequesterInput
@@ -521,6 +540,7 @@ export type UserUpdateInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -530,6 +550,7 @@ export type UserUpdateInput = {
   Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUpdateManyWithoutRequesterNestedInput
@@ -563,6 +584,7 @@ export type UserUncheckedUpdateInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -572,6 +594,7 @@ export type UserUncheckedUpdateInput = {
   Balance?: Prisma.UserBalanceUncheckedUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUncheckedUpdateManyWithoutRequesterNestedInput
@@ -605,6 +628,7 @@ export type UserCreateManyInput = {
   email: string
   password: string
   active?: boolean
+  twoFactorEnabled?: boolean
   bankAccount?: string | null
   currency?: $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -619,6 +643,7 @@ export type UserUpdateManyMutationInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -632,6 +657,7 @@ export type UserUncheckedUpdateManyInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -675,6 +701,7 @@ export type UserCountOrderByAggregateInput = {
   email?: Prisma.SortOrder
   password?: Prisma.SortOrder
   active?: Prisma.SortOrder
+  twoFactorEnabled?: Prisma.SortOrder
   bankAccount?: Prisma.SortOrder
   currency?: Prisma.SortOrder
   signatureSpeciment?: Prisma.SortOrder
@@ -696,6 +723,7 @@ export type UserMaxOrderByAggregateInput = {
   email?: Prisma.SortOrder
   password?: Prisma.SortOrder
   active?: Prisma.SortOrder
+  twoFactorEnabled?: Prisma.SortOrder
   bankAccount?: Prisma.SortOrder
   currency?: Prisma.SortOrder
   bankId?: Prisma.SortOrder
@@ -709,6 +737,7 @@ export type UserMinOrderByAggregateInput = {
   email?: Prisma.SortOrder
   password?: Prisma.SortOrder
   active?: Prisma.SortOrder
+  twoFactorEnabled?: Prisma.SortOrder
   bankAccount?: Prisma.SortOrder
   currency?: Prisma.SortOrder
   bankId?: Prisma.SortOrder
@@ -1163,6 +1192,20 @@ export type UserUpdateOneRequiredWithoutAuthSessionNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutAuthSessionInput, Prisma.UserUpdateWithoutAuthSessionInput>, Prisma.UserUncheckedUpdateWithoutAuthSessionInput>
 }
 
+export type UserCreateNestedOneWithoutTwoFactorChallengeInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutTwoFactorChallengeInput, Prisma.UserUncheckedCreateWithoutTwoFactorChallengeInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutTwoFactorChallengeInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutTwoFactorChallengeNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutTwoFactorChallengeInput, Prisma.UserUncheckedCreateWithoutTwoFactorChallengeInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutTwoFactorChallengeInput
+  upsert?: Prisma.UserUpsertWithoutTwoFactorChallengeInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutTwoFactorChallengeInput, Prisma.UserUpdateWithoutTwoFactorChallengeInput>, Prisma.UserUncheckedUpdateWithoutTwoFactorChallengeInput>
+}
+
 export type UserCreaterolesInput = {
   set: $Enums.Role[]
 }
@@ -1206,6 +1249,7 @@ export type UserCreateWithoutClosedPeriodsInput = {
   email: string
   password: string
   active?: boolean
+  twoFactorEnabled?: boolean
   bankAccount?: string | null
   currency?: $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -1215,6 +1259,7 @@ export type UserCreateWithoutClosedPeriodsInput = {
   Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
   AuthSession?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpCreateNestedManyWithoutRequesterInput
@@ -1247,6 +1292,7 @@ export type UserUncheckedCreateWithoutClosedPeriodsInput = {
   email: string
   password: string
   active?: boolean
+  twoFactorEnabled?: boolean
   bankAccount?: string | null
   currency?: $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -1256,6 +1302,7 @@ export type UserUncheckedCreateWithoutClosedPeriodsInput = {
   Balance?: Prisma.UserBalanceUncheckedCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   AuthSession?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpUncheckedCreateNestedManyWithoutRequesterInput
@@ -1303,6 +1350,7 @@ export type UserUpdateWithoutClosedPeriodsInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -1312,6 +1360,7 @@ export type UserUpdateWithoutClosedPeriodsInput = {
   Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUpdateManyWithoutRequesterNestedInput
@@ -1344,6 +1393,7 @@ export type UserUncheckedUpdateWithoutClosedPeriodsInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -1353,6 +1403,7 @@ export type UserUncheckedUpdateWithoutClosedPeriodsInput = {
   Balance?: Prisma.UserBalanceUncheckedUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUncheckedUpdateManyWithoutRequesterNestedInput
@@ -1384,6 +1435,7 @@ export type UserCreateWithoutJournalEntriesCreatedInput = {
   email: string
   password: string
   active?: boolean
+  twoFactorEnabled?: boolean
   bankAccount?: string | null
   currency?: $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -1393,6 +1445,7 @@ export type UserCreateWithoutJournalEntriesCreatedInput = {
   Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
   AuthSession?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpCreateNestedManyWithoutRequesterInput
@@ -1425,6 +1478,7 @@ export type UserUncheckedCreateWithoutJournalEntriesCreatedInput = {
   email: string
   password: string
   active?: boolean
+  twoFactorEnabled?: boolean
   bankAccount?: string | null
   currency?: $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -1434,6 +1488,7 @@ export type UserUncheckedCreateWithoutJournalEntriesCreatedInput = {
   Balance?: Prisma.UserBalanceUncheckedCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   AuthSession?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpUncheckedCreateNestedManyWithoutRequesterInput
@@ -1470,6 +1525,7 @@ export type UserCreateWithoutJournalEntriesPostedInput = {
   email: string
   password: string
   active?: boolean
+  twoFactorEnabled?: boolean
   bankAccount?: string | null
   currency?: $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -1479,6 +1535,7 @@ export type UserCreateWithoutJournalEntriesPostedInput = {
   Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
   AuthSession?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpCreateNestedManyWithoutRequesterInput
@@ -1511,6 +1568,7 @@ export type UserUncheckedCreateWithoutJournalEntriesPostedInput = {
   email: string
   password: string
   active?: boolean
+  twoFactorEnabled?: boolean
   bankAccount?: string | null
   currency?: $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -1520,6 +1578,7 @@ export type UserUncheckedCreateWithoutJournalEntriesPostedInput = {
   Balance?: Prisma.UserBalanceUncheckedCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   AuthSession?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpUncheckedCreateNestedManyWithoutRequesterInput
@@ -1567,6 +1626,7 @@ export type UserUpdateWithoutJournalEntriesCreatedInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -1576,6 +1636,7 @@ export type UserUpdateWithoutJournalEntriesCreatedInput = {
   Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUpdateManyWithoutRequesterNestedInput
@@ -1608,6 +1669,7 @@ export type UserUncheckedUpdateWithoutJournalEntriesCreatedInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -1617,6 +1679,7 @@ export type UserUncheckedUpdateWithoutJournalEntriesCreatedInput = {
   Balance?: Prisma.UserBalanceUncheckedUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUncheckedUpdateManyWithoutRequesterNestedInput
@@ -1659,6 +1722,7 @@ export type UserUpdateWithoutJournalEntriesPostedInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -1668,6 +1732,7 @@ export type UserUpdateWithoutJournalEntriesPostedInput = {
   Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUpdateManyWithoutRequesterNestedInput
@@ -1700,6 +1765,7 @@ export type UserUncheckedUpdateWithoutJournalEntriesPostedInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -1709,6 +1775,7 @@ export type UserUncheckedUpdateWithoutJournalEntriesPostedInput = {
   Balance?: Prisma.UserBalanceUncheckedUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUncheckedUpdateManyWithoutRequesterNestedInput
@@ -1740,6 +1807,7 @@ export type UserCreateWithoutVendorBillsCreatedInput = {
   email: string
   password: string
   active?: boolean
+  twoFactorEnabled?: boolean
   bankAccount?: string | null
   currency?: $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -1749,6 +1817,7 @@ export type UserCreateWithoutVendorBillsCreatedInput = {
   Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
   AuthSession?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpCreateNestedManyWithoutRequesterInput
@@ -1781,6 +1850,7 @@ export type UserUncheckedCreateWithoutVendorBillsCreatedInput = {
   email: string
   password: string
   active?: boolean
+  twoFactorEnabled?: boolean
   bankAccount?: string | null
   currency?: $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -1790,6 +1860,7 @@ export type UserUncheckedCreateWithoutVendorBillsCreatedInput = {
   Balance?: Prisma.UserBalanceUncheckedCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   AuthSession?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpUncheckedCreateNestedManyWithoutRequesterInput
@@ -1837,6 +1908,7 @@ export type UserUpdateWithoutVendorBillsCreatedInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -1846,6 +1918,7 @@ export type UserUpdateWithoutVendorBillsCreatedInput = {
   Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUpdateManyWithoutRequesterNestedInput
@@ -1878,6 +1951,7 @@ export type UserUncheckedUpdateWithoutVendorBillsCreatedInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -1887,6 +1961,7 @@ export type UserUncheckedUpdateWithoutVendorBillsCreatedInput = {
   Balance?: Prisma.UserBalanceUncheckedUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUncheckedUpdateManyWithoutRequesterNestedInput
@@ -1918,6 +1993,7 @@ export type UserCreateWithoutAccountingPaymentsInput = {
   email: string
   password: string
   active?: boolean
+  twoFactorEnabled?: boolean
   bankAccount?: string | null
   currency?: $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -1927,6 +2003,7 @@ export type UserCreateWithoutAccountingPaymentsInput = {
   Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
   AuthSession?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpCreateNestedManyWithoutRequesterInput
@@ -1959,6 +2036,7 @@ export type UserUncheckedCreateWithoutAccountingPaymentsInput = {
   email: string
   password: string
   active?: boolean
+  twoFactorEnabled?: boolean
   bankAccount?: string | null
   currency?: $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -1968,6 +2046,7 @@ export type UserUncheckedCreateWithoutAccountingPaymentsInput = {
   Balance?: Prisma.UserBalanceUncheckedCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   AuthSession?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpUncheckedCreateNestedManyWithoutRequesterInput
@@ -2015,6 +2094,7 @@ export type UserUpdateWithoutAccountingPaymentsInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -2024,6 +2104,7 @@ export type UserUpdateWithoutAccountingPaymentsInput = {
   Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUpdateManyWithoutRequesterNestedInput
@@ -2056,6 +2137,7 @@ export type UserUncheckedUpdateWithoutAccountingPaymentsInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -2065,6 +2147,7 @@ export type UserUncheckedUpdateWithoutAccountingPaymentsInput = {
   Balance?: Prisma.UserBalanceUncheckedUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUncheckedUpdateManyWithoutRequesterNestedInput
@@ -2096,6 +2179,7 @@ export type UserCreateWithoutBankTransactionsInput = {
   email: string
   password: string
   active?: boolean
+  twoFactorEnabled?: boolean
   bankAccount?: string | null
   currency?: $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -2105,6 +2189,7 @@ export type UserCreateWithoutBankTransactionsInput = {
   Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
   AuthSession?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpCreateNestedManyWithoutRequesterInput
@@ -2137,6 +2222,7 @@ export type UserUncheckedCreateWithoutBankTransactionsInput = {
   email: string
   password: string
   active?: boolean
+  twoFactorEnabled?: boolean
   bankAccount?: string | null
   currency?: $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -2146,6 +2232,7 @@ export type UserUncheckedCreateWithoutBankTransactionsInput = {
   Balance?: Prisma.UserBalanceUncheckedCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   AuthSession?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpUncheckedCreateNestedManyWithoutRequesterInput
@@ -2193,6 +2280,7 @@ export type UserUpdateWithoutBankTransactionsInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -2202,6 +2290,7 @@ export type UserUpdateWithoutBankTransactionsInput = {
   Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUpdateManyWithoutRequesterNestedInput
@@ -2234,6 +2323,7 @@ export type UserUncheckedUpdateWithoutBankTransactionsInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -2243,6 +2333,7 @@ export type UserUncheckedUpdateWithoutBankTransactionsInput = {
   Balance?: Prisma.UserBalanceUncheckedUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUncheckedUpdateManyWithoutRequesterNestedInput
@@ -2274,6 +2365,7 @@ export type UserCreateWithoutApprovalSettingItemInput = {
   email: string
   password: string
   active?: boolean
+  twoFactorEnabled?: boolean
   bankAccount?: string | null
   currency?: $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -2283,6 +2375,7 @@ export type UserCreateWithoutApprovalSettingItemInput = {
   Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
   AuthSession?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpCreateNestedManyWithoutRequesterInput
@@ -2315,6 +2408,7 @@ export type UserUncheckedCreateWithoutApprovalSettingItemInput = {
   email: string
   password: string
   active?: boolean
+  twoFactorEnabled?: boolean
   bankAccount?: string | null
   currency?: $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -2324,6 +2418,7 @@ export type UserUncheckedCreateWithoutApprovalSettingItemInput = {
   Balance?: Prisma.UserBalanceUncheckedCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   AuthSession?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpUncheckedCreateNestedManyWithoutRequesterInput
@@ -2371,6 +2466,7 @@ export type UserUpdateWithoutApprovalSettingItemInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -2380,6 +2476,7 @@ export type UserUpdateWithoutApprovalSettingItemInput = {
   Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUpdateManyWithoutRequesterNestedInput
@@ -2412,6 +2509,7 @@ export type UserUncheckedUpdateWithoutApprovalSettingItemInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -2421,6 +2519,7 @@ export type UserUncheckedUpdateWithoutApprovalSettingItemInput = {
   Balance?: Prisma.UserBalanceUncheckedUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUncheckedUpdateManyWithoutRequesterNestedInput
@@ -2452,6 +2551,7 @@ export type UserCreateWithoutApprovalItemsInput = {
   email: string
   password: string
   active?: boolean
+  twoFactorEnabled?: boolean
   bankAccount?: string | null
   currency?: $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -2461,6 +2561,7 @@ export type UserCreateWithoutApprovalItemsInput = {
   Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
   AuthSession?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpCreateNestedManyWithoutRequesterInput
@@ -2493,6 +2594,7 @@ export type UserUncheckedCreateWithoutApprovalItemsInput = {
   email: string
   password: string
   active?: boolean
+  twoFactorEnabled?: boolean
   bankAccount?: string | null
   currency?: $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -2502,6 +2604,7 @@ export type UserUncheckedCreateWithoutApprovalItemsInput = {
   Balance?: Prisma.UserBalanceUncheckedCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   AuthSession?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpUncheckedCreateNestedManyWithoutRequesterInput
@@ -2549,6 +2652,7 @@ export type UserUpdateWithoutApprovalItemsInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -2558,6 +2662,7 @@ export type UserUpdateWithoutApprovalItemsInput = {
   Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUpdateManyWithoutRequesterNestedInput
@@ -2590,6 +2695,7 @@ export type UserUncheckedUpdateWithoutApprovalItemsInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -2599,6 +2705,7 @@ export type UserUncheckedUpdateWithoutApprovalItemsInput = {
   Balance?: Prisma.UserBalanceUncheckedUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUncheckedUpdateManyWithoutRequesterNestedInput
@@ -2630,6 +2737,7 @@ export type UserCreateWithoutLeadsInput = {
   email: string
   password: string
   active?: boolean
+  twoFactorEnabled?: boolean
   bankAccount?: string | null
   currency?: $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -2639,6 +2747,7 @@ export type UserCreateWithoutLeadsInput = {
   Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
   AuthSession?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpCreateNestedManyWithoutRequesterInput
@@ -2671,6 +2780,7 @@ export type UserUncheckedCreateWithoutLeadsInput = {
   email: string
   password: string
   active?: boolean
+  twoFactorEnabled?: boolean
   bankAccount?: string | null
   currency?: $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -2680,6 +2790,7 @@ export type UserUncheckedCreateWithoutLeadsInput = {
   Balance?: Prisma.UserBalanceUncheckedCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   AuthSession?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpUncheckedCreateNestedManyWithoutRequesterInput
@@ -2727,6 +2838,7 @@ export type UserUpdateWithoutLeadsInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -2736,6 +2848,7 @@ export type UserUpdateWithoutLeadsInput = {
   Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUpdateManyWithoutRequesterNestedInput
@@ -2768,6 +2881,7 @@ export type UserUncheckedUpdateWithoutLeadsInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -2777,6 +2891,7 @@ export type UserUncheckedUpdateWithoutLeadsInput = {
   Balance?: Prisma.UserBalanceUncheckedUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUncheckedUpdateManyWithoutRequesterNestedInput
@@ -2808,6 +2923,7 @@ export type UserCreateWithoutOpportunitiesInput = {
   email: string
   password: string
   active?: boolean
+  twoFactorEnabled?: boolean
   bankAccount?: string | null
   currency?: $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -2817,6 +2933,7 @@ export type UserCreateWithoutOpportunitiesInput = {
   Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
   AuthSession?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpCreateNestedManyWithoutRequesterInput
@@ -2849,6 +2966,7 @@ export type UserUncheckedCreateWithoutOpportunitiesInput = {
   email: string
   password: string
   active?: boolean
+  twoFactorEnabled?: boolean
   bankAccount?: string | null
   currency?: $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -2858,6 +2976,7 @@ export type UserUncheckedCreateWithoutOpportunitiesInput = {
   Balance?: Prisma.UserBalanceUncheckedCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   AuthSession?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpUncheckedCreateNestedManyWithoutRequesterInput
@@ -2905,6 +3024,7 @@ export type UserUpdateWithoutOpportunitiesInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -2914,6 +3034,7 @@ export type UserUpdateWithoutOpportunitiesInput = {
   Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUpdateManyWithoutRequesterNestedInput
@@ -2946,6 +3067,7 @@ export type UserUncheckedUpdateWithoutOpportunitiesInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -2955,6 +3077,7 @@ export type UserUncheckedUpdateWithoutOpportunitiesInput = {
   Balance?: Prisma.UserBalanceUncheckedUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUncheckedUpdateManyWithoutRequesterNestedInput
@@ -2986,6 +3109,7 @@ export type UserCreateWithoutTasksInput = {
   email: string
   password: string
   active?: boolean
+  twoFactorEnabled?: boolean
   bankAccount?: string | null
   currency?: $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -2995,6 +3119,7 @@ export type UserCreateWithoutTasksInput = {
   Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
   AuthSession?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpCreateNestedManyWithoutRequesterInput
@@ -3027,6 +3152,7 @@ export type UserUncheckedCreateWithoutTasksInput = {
   email: string
   password: string
   active?: boolean
+  twoFactorEnabled?: boolean
   bankAccount?: string | null
   currency?: $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -3036,6 +3162,7 @@ export type UserUncheckedCreateWithoutTasksInput = {
   Balance?: Prisma.UserBalanceUncheckedCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   AuthSession?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpUncheckedCreateNestedManyWithoutRequesterInput
@@ -3083,6 +3210,7 @@ export type UserUpdateWithoutTasksInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -3092,6 +3220,7 @@ export type UserUpdateWithoutTasksInput = {
   Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUpdateManyWithoutRequesterNestedInput
@@ -3124,6 +3253,7 @@ export type UserUncheckedUpdateWithoutTasksInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -3133,6 +3263,7 @@ export type UserUncheckedUpdateWithoutTasksInput = {
   Balance?: Prisma.UserBalanceUncheckedUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUncheckedUpdateManyWithoutRequesterNestedInput
@@ -3164,6 +3295,7 @@ export type UserCreateWithoutInteractionsInput = {
   email: string
   password: string
   active?: boolean
+  twoFactorEnabled?: boolean
   bankAccount?: string | null
   currency?: $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -3173,6 +3305,7 @@ export type UserCreateWithoutInteractionsInput = {
   Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
   AuthSession?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpCreateNestedManyWithoutRequesterInput
@@ -3205,6 +3338,7 @@ export type UserUncheckedCreateWithoutInteractionsInput = {
   email: string
   password: string
   active?: boolean
+  twoFactorEnabled?: boolean
   bankAccount?: string | null
   currency?: $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -3214,6 +3348,7 @@ export type UserUncheckedCreateWithoutInteractionsInput = {
   Balance?: Prisma.UserBalanceUncheckedCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   AuthSession?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpUncheckedCreateNestedManyWithoutRequesterInput
@@ -3261,6 +3396,7 @@ export type UserUpdateWithoutInteractionsInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -3270,6 +3406,7 @@ export type UserUpdateWithoutInteractionsInput = {
   Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUpdateManyWithoutRequesterNestedInput
@@ -3302,6 +3439,7 @@ export type UserUncheckedUpdateWithoutInteractionsInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -3311,6 +3449,7 @@ export type UserUncheckedUpdateWithoutInteractionsInput = {
   Balance?: Prisma.UserBalanceUncheckedUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUncheckedUpdateManyWithoutRequesterNestedInput
@@ -3342,6 +3481,7 @@ export type UserCreateWithoutCustomerNotesInput = {
   email: string
   password: string
   active?: boolean
+  twoFactorEnabled?: boolean
   bankAccount?: string | null
   currency?: $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -3351,6 +3491,7 @@ export type UserCreateWithoutCustomerNotesInput = {
   Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
   AuthSession?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpCreateNestedManyWithoutRequesterInput
@@ -3383,6 +3524,7 @@ export type UserUncheckedCreateWithoutCustomerNotesInput = {
   email: string
   password: string
   active?: boolean
+  twoFactorEnabled?: boolean
   bankAccount?: string | null
   currency?: $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -3392,6 +3534,7 @@ export type UserUncheckedCreateWithoutCustomerNotesInput = {
   Balance?: Prisma.UserBalanceUncheckedCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   AuthSession?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpUncheckedCreateNestedManyWithoutRequesterInput
@@ -3439,6 +3582,7 @@ export type UserUpdateWithoutCustomerNotesInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -3448,6 +3592,7 @@ export type UserUpdateWithoutCustomerNotesInput = {
   Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUpdateManyWithoutRequesterNestedInput
@@ -3480,6 +3625,7 @@ export type UserUncheckedUpdateWithoutCustomerNotesInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -3489,6 +3635,7 @@ export type UserUncheckedUpdateWithoutCustomerNotesInput = {
   Balance?: Prisma.UserBalanceUncheckedUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUncheckedUpdateManyWithoutRequesterNestedInput
@@ -3520,6 +3667,7 @@ export type UserCreateWithoutCustomersInput = {
   email: string
   password: string
   active?: boolean
+  twoFactorEnabled?: boolean
   bankAccount?: string | null
   currency?: $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -3529,6 +3677,7 @@ export type UserCreateWithoutCustomersInput = {
   Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
   AuthSession?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpCreateNestedManyWithoutRequesterInput
@@ -3561,6 +3710,7 @@ export type UserUncheckedCreateWithoutCustomersInput = {
   email: string
   password: string
   active?: boolean
+  twoFactorEnabled?: boolean
   bankAccount?: string | null
   currency?: $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -3570,6 +3720,7 @@ export type UserUncheckedCreateWithoutCustomersInput = {
   Balance?: Prisma.UserBalanceUncheckedCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   AuthSession?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpUncheckedCreateNestedManyWithoutRequesterInput
@@ -3617,6 +3768,7 @@ export type UserUpdateWithoutCustomersInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -3626,6 +3778,7 @@ export type UserUpdateWithoutCustomersInput = {
   Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUpdateManyWithoutRequesterNestedInput
@@ -3658,6 +3811,7 @@ export type UserUncheckedUpdateWithoutCustomersInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -3667,6 +3821,7 @@ export type UserUncheckedUpdateWithoutCustomersInput = {
   Balance?: Prisma.UserBalanceUncheckedUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUncheckedUpdateManyWithoutRequesterNestedInput
@@ -3698,6 +3853,7 @@ export type UserCreateWithoutDeliveryOrdersInput = {
   email: string
   password: string
   active?: boolean
+  twoFactorEnabled?: boolean
   bankAccount?: string | null
   currency?: $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -3707,6 +3863,7 @@ export type UserCreateWithoutDeliveryOrdersInput = {
   Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
   AuthSession?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpCreateNestedManyWithoutRequesterInput
@@ -3739,6 +3896,7 @@ export type UserUncheckedCreateWithoutDeliveryOrdersInput = {
   email: string
   password: string
   active?: boolean
+  twoFactorEnabled?: boolean
   bankAccount?: string | null
   currency?: $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -3748,6 +3906,7 @@ export type UserUncheckedCreateWithoutDeliveryOrdersInput = {
   Balance?: Prisma.UserBalanceUncheckedCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   AuthSession?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpUncheckedCreateNestedManyWithoutRequesterInput
@@ -3795,6 +3954,7 @@ export type UserUpdateWithoutDeliveryOrdersInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -3804,6 +3964,7 @@ export type UserUpdateWithoutDeliveryOrdersInput = {
   Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUpdateManyWithoutRequesterNestedInput
@@ -3836,6 +3997,7 @@ export type UserUncheckedUpdateWithoutDeliveryOrdersInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -3845,6 +4007,7 @@ export type UserUncheckedUpdateWithoutDeliveryOrdersInput = {
   Balance?: Prisma.UserBalanceUncheckedUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUncheckedUpdateManyWithoutRequesterNestedInput
@@ -3876,6 +4039,7 @@ export type UserCreateWithoutGoodsReceiptsInput = {
   email: string
   password: string
   active?: boolean
+  twoFactorEnabled?: boolean
   bankAccount?: string | null
   currency?: $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -3885,6 +4049,7 @@ export type UserCreateWithoutGoodsReceiptsInput = {
   Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
   AuthSession?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpCreateNestedManyWithoutRequesterInput
@@ -3917,6 +4082,7 @@ export type UserUncheckedCreateWithoutGoodsReceiptsInput = {
   email: string
   password: string
   active?: boolean
+  twoFactorEnabled?: boolean
   bankAccount?: string | null
   currency?: $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -3926,6 +4092,7 @@ export type UserUncheckedCreateWithoutGoodsReceiptsInput = {
   Balance?: Prisma.UserBalanceUncheckedCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   AuthSession?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpUncheckedCreateNestedManyWithoutRequesterInput
@@ -3973,6 +4140,7 @@ export type UserUpdateWithoutGoodsReceiptsInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -3982,6 +4150,7 @@ export type UserUpdateWithoutGoodsReceiptsInput = {
   Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUpdateManyWithoutRequesterNestedInput
@@ -4014,6 +4183,7 @@ export type UserUncheckedUpdateWithoutGoodsReceiptsInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -4023,6 +4193,7 @@ export type UserUncheckedUpdateWithoutGoodsReceiptsInput = {
   Balance?: Prisma.UserBalanceUncheckedUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUncheckedUpdateManyWithoutRequesterNestedInput
@@ -4054,6 +4225,7 @@ export type UserCreateWithoutInvoicesInput = {
   email: string
   password: string
   active?: boolean
+  twoFactorEnabled?: boolean
   bankAccount?: string | null
   currency?: $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -4063,6 +4235,7 @@ export type UserCreateWithoutInvoicesInput = {
   Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
   AuthSession?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpCreateNestedManyWithoutRequesterInput
@@ -4095,6 +4268,7 @@ export type UserUncheckedCreateWithoutInvoicesInput = {
   email: string
   password: string
   active?: boolean
+  twoFactorEnabled?: boolean
   bankAccount?: string | null
   currency?: $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -4104,6 +4278,7 @@ export type UserUncheckedCreateWithoutInvoicesInput = {
   Balance?: Prisma.UserBalanceUncheckedCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   AuthSession?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpUncheckedCreateNestedManyWithoutRequesterInput
@@ -4151,6 +4326,7 @@ export type UserUpdateWithoutInvoicesInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -4160,6 +4336,7 @@ export type UserUpdateWithoutInvoicesInput = {
   Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUpdateManyWithoutRequesterNestedInput
@@ -4192,6 +4369,7 @@ export type UserUncheckedUpdateWithoutInvoicesInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -4201,6 +4379,7 @@ export type UserUncheckedUpdateWithoutInvoicesInput = {
   Balance?: Prisma.UserBalanceUncheckedUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUncheckedUpdateManyWithoutRequesterNestedInput
@@ -4232,6 +4411,7 @@ export type UserCreateWithoutNkpInput = {
   email: string
   password: string
   active?: boolean
+  twoFactorEnabled?: boolean
   bankAccount?: string | null
   currency?: $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -4241,6 +4421,7 @@ export type UserCreateWithoutNkpInput = {
   Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
   AuthSession?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
   NkpRequest?: Prisma.NkpCreateNestedManyWithoutRequesterInput
   Leads?: Prisma.LeadCreateNestedManyWithoutUserInput
@@ -4273,6 +4454,7 @@ export type UserUncheckedCreateWithoutNkpInput = {
   email: string
   password: string
   active?: boolean
+  twoFactorEnabled?: boolean
   bankAccount?: string | null
   currency?: $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -4282,6 +4464,7 @@ export type UserUncheckedCreateWithoutNkpInput = {
   Balance?: Prisma.UserBalanceUncheckedCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   AuthSession?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
   NkpRequest?: Prisma.NkpUncheckedCreateNestedManyWithoutRequesterInput
   Leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
@@ -4318,6 +4501,7 @@ export type UserCreateWithoutNkpRequestInput = {
   email: string
   password: string
   active?: boolean
+  twoFactorEnabled?: boolean
   bankAccount?: string | null
   currency?: $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -4327,6 +4511,7 @@ export type UserCreateWithoutNkpRequestInput = {
   Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
   AuthSession?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
   Leads?: Prisma.LeadCreateNestedManyWithoutUserInput
@@ -4359,6 +4544,7 @@ export type UserUncheckedCreateWithoutNkpRequestInput = {
   email: string
   password: string
   active?: boolean
+  twoFactorEnabled?: boolean
   bankAccount?: string | null
   currency?: $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -4368,6 +4554,7 @@ export type UserUncheckedCreateWithoutNkpRequestInput = {
   Balance?: Prisma.UserBalanceUncheckedCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   AuthSession?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
   Leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
@@ -4415,6 +4602,7 @@ export type UserUpdateWithoutNkpInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -4424,6 +4612,7 @@ export type UserUpdateWithoutNkpInput = {
   Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
   NkpRequest?: Prisma.NkpUpdateManyWithoutRequesterNestedInput
   Leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
@@ -4456,6 +4645,7 @@ export type UserUncheckedUpdateWithoutNkpInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -4465,6 +4655,7 @@ export type UserUncheckedUpdateWithoutNkpInput = {
   Balance?: Prisma.UserBalanceUncheckedUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
   NkpRequest?: Prisma.NkpUncheckedUpdateManyWithoutRequesterNestedInput
   Leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
@@ -4507,6 +4698,7 @@ export type UserUpdateWithoutNkpRequestInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -4516,6 +4708,7 @@ export type UserUpdateWithoutNkpRequestInput = {
   Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
   Leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
@@ -4548,6 +4741,7 @@ export type UserUncheckedUpdateWithoutNkpRequestInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -4557,6 +4751,7 @@ export type UserUncheckedUpdateWithoutNkpRequestInput = {
   Balance?: Prisma.UserBalanceUncheckedUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
   Leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
@@ -4588,6 +4783,7 @@ export type UserCreateWithoutNkpApprovalInput = {
   email: string
   password: string
   active?: boolean
+  twoFactorEnabled?: boolean
   bankAccount?: string | null
   currency?: $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -4597,6 +4793,7 @@ export type UserCreateWithoutNkpApprovalInput = {
   Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
   AuthSession?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpCreateNestedManyWithoutRequesterInput
   Leads?: Prisma.LeadCreateNestedManyWithoutUserInput
@@ -4629,6 +4826,7 @@ export type UserUncheckedCreateWithoutNkpApprovalInput = {
   email: string
   password: string
   active?: boolean
+  twoFactorEnabled?: boolean
   bankAccount?: string | null
   currency?: $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -4638,6 +4836,7 @@ export type UserUncheckedCreateWithoutNkpApprovalInput = {
   Balance?: Prisma.UserBalanceUncheckedCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   AuthSession?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpUncheckedCreateNestedManyWithoutRequesterInput
   Leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
@@ -4685,6 +4884,7 @@ export type UserUpdateWithoutNkpApprovalInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -4694,6 +4894,7 @@ export type UserUpdateWithoutNkpApprovalInput = {
   Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUpdateManyWithoutRequesterNestedInput
   Leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
@@ -4726,6 +4927,7 @@ export type UserUncheckedUpdateWithoutNkpApprovalInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -4735,6 +4937,7 @@ export type UserUncheckedUpdateWithoutNkpApprovalInput = {
   Balance?: Prisma.UserBalanceUncheckedUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUncheckedUpdateManyWithoutRequesterNestedInput
   Leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
@@ -4766,6 +4969,7 @@ export type UserCreateWithoutNotificationInput = {
   email: string
   password: string
   active?: boolean
+  twoFactorEnabled?: boolean
   bankAccount?: string | null
   currency?: $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -4774,6 +4978,7 @@ export type UserCreateWithoutNotificationInput = {
   Department?: Prisma.DepartmentCreateNestedOneWithoutUserInput
   Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
   AuthSession?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpCreateNestedManyWithoutRequesterInput
@@ -4807,6 +5012,7 @@ export type UserUncheckedCreateWithoutNotificationInput = {
   email: string
   password: string
   active?: boolean
+  twoFactorEnabled?: boolean
   bankAccount?: string | null
   currency?: $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -4815,6 +5021,7 @@ export type UserUncheckedCreateWithoutNotificationInput = {
   roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   Balance?: Prisma.UserBalanceUncheckedCreateNestedOneWithoutUserInput
   AuthSession?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpUncheckedCreateNestedManyWithoutRequesterInput
@@ -4863,6 +5070,7 @@ export type UserUpdateWithoutNotificationInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -4871,6 +5079,7 @@ export type UserUpdateWithoutNotificationInput = {
   Department?: Prisma.DepartmentUpdateOneWithoutUserNestedInput
   Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUpdateManyWithoutRequesterNestedInput
@@ -4904,6 +5113,7 @@ export type UserUncheckedUpdateWithoutNotificationInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -4912,6 +5122,7 @@ export type UserUncheckedUpdateWithoutNotificationInput = {
   roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   Balance?: Prisma.UserBalanceUncheckedUpdateOneWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUncheckedUpdateManyWithoutRequesterNestedInput
@@ -4944,6 +5155,7 @@ export type UserCreateWithoutPurchaseOrdersInput = {
   email: string
   password: string
   active?: boolean
+  twoFactorEnabled?: boolean
   bankAccount?: string | null
   currency?: $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -4953,6 +5165,7 @@ export type UserCreateWithoutPurchaseOrdersInput = {
   Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
   AuthSession?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpCreateNestedManyWithoutRequesterInput
@@ -4985,6 +5198,7 @@ export type UserUncheckedCreateWithoutPurchaseOrdersInput = {
   email: string
   password: string
   active?: boolean
+  twoFactorEnabled?: boolean
   bankAccount?: string | null
   currency?: $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -4994,6 +5208,7 @@ export type UserUncheckedCreateWithoutPurchaseOrdersInput = {
   Balance?: Prisma.UserBalanceUncheckedCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   AuthSession?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpUncheckedCreateNestedManyWithoutRequesterInput
@@ -5041,6 +5256,7 @@ export type UserUpdateWithoutPurchaseOrdersInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -5050,6 +5266,7 @@ export type UserUpdateWithoutPurchaseOrdersInput = {
   Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUpdateManyWithoutRequesterNestedInput
@@ -5082,6 +5299,7 @@ export type UserUncheckedUpdateWithoutPurchaseOrdersInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -5091,6 +5309,7 @@ export type UserUncheckedUpdateWithoutPurchaseOrdersInput = {
   Balance?: Prisma.UserBalanceUncheckedUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUncheckedUpdateManyWithoutRequesterNestedInput
@@ -5122,6 +5341,7 @@ export type UserCreateWithoutQuotationsInput = {
   email: string
   password: string
   active?: boolean
+  twoFactorEnabled?: boolean
   bankAccount?: string | null
   currency?: $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -5131,6 +5351,7 @@ export type UserCreateWithoutQuotationsInput = {
   Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
   AuthSession?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpCreateNestedManyWithoutRequesterInput
@@ -5163,6 +5384,7 @@ export type UserUncheckedCreateWithoutQuotationsInput = {
   email: string
   password: string
   active?: boolean
+  twoFactorEnabled?: boolean
   bankAccount?: string | null
   currency?: $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -5172,6 +5394,7 @@ export type UserUncheckedCreateWithoutQuotationsInput = {
   Balance?: Prisma.UserBalanceUncheckedCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   AuthSession?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpUncheckedCreateNestedManyWithoutRequesterInput
@@ -5219,6 +5442,7 @@ export type UserUpdateWithoutQuotationsInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -5228,6 +5452,7 @@ export type UserUpdateWithoutQuotationsInput = {
   Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUpdateManyWithoutRequesterNestedInput
@@ -5260,6 +5485,7 @@ export type UserUncheckedUpdateWithoutQuotationsInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -5269,6 +5495,7 @@ export type UserUncheckedUpdateWithoutQuotationsInput = {
   Balance?: Prisma.UserBalanceUncheckedUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUncheckedUpdateManyWithoutRequesterNestedInput
@@ -5300,6 +5527,7 @@ export type UserCreateWithoutSalesOrdersInput = {
   email: string
   password: string
   active?: boolean
+  twoFactorEnabled?: boolean
   bankAccount?: string | null
   currency?: $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -5309,6 +5537,7 @@ export type UserCreateWithoutSalesOrdersInput = {
   Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
   AuthSession?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpCreateNestedManyWithoutRequesterInput
@@ -5341,6 +5570,7 @@ export type UserUncheckedCreateWithoutSalesOrdersInput = {
   email: string
   password: string
   active?: boolean
+  twoFactorEnabled?: boolean
   bankAccount?: string | null
   currency?: $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -5350,6 +5580,7 @@ export type UserUncheckedCreateWithoutSalesOrdersInput = {
   Balance?: Prisma.UserBalanceUncheckedCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   AuthSession?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpUncheckedCreateNestedManyWithoutRequesterInput
@@ -5397,6 +5628,7 @@ export type UserUpdateWithoutSalesOrdersInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -5406,6 +5638,7 @@ export type UserUpdateWithoutSalesOrdersInput = {
   Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUpdateManyWithoutRequesterNestedInput
@@ -5438,6 +5671,7 @@ export type UserUncheckedUpdateWithoutSalesOrdersInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -5447,6 +5681,7 @@ export type UserUncheckedUpdateWithoutSalesOrdersInput = {
   Balance?: Prisma.UserBalanceUncheckedUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUncheckedUpdateManyWithoutRequesterNestedInput
@@ -5478,6 +5713,7 @@ export type UserCreateWithoutDepartmentInput = {
   email: string
   password: string
   active?: boolean
+  twoFactorEnabled?: boolean
   bankAccount?: string | null
   currency?: $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -5486,6 +5722,7 @@ export type UserCreateWithoutDepartmentInput = {
   Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
   AuthSession?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpCreateNestedManyWithoutRequesterInput
@@ -5519,6 +5756,7 @@ export type UserUncheckedCreateWithoutDepartmentInput = {
   email: string
   password: string
   active?: boolean
+  twoFactorEnabled?: boolean
   bankAccount?: string | null
   currency?: $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -5527,6 +5765,7 @@ export type UserUncheckedCreateWithoutDepartmentInput = {
   Balance?: Prisma.UserBalanceUncheckedCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   AuthSession?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpUncheckedCreateNestedManyWithoutRequesterInput
@@ -5589,6 +5828,7 @@ export type UserScalarWhereInput = {
   email?: Prisma.StringFilter<"User"> | string
   password?: Prisma.StringFilter<"User"> | string
   active?: Prisma.BoolFilter<"User"> | boolean
+  twoFactorEnabled?: Prisma.BoolFilter<"User"> | boolean
   bankAccount?: Prisma.StringNullableFilter<"User"> | string | null
   currency?: Prisma.EnumCurrencyFilter<"User"> | $Enums.Currency
   signatureSpeciment?: Prisma.JsonNullableFilter<"User">
@@ -5603,6 +5843,7 @@ export type UserCreateWithoutBankInput = {
   email: string
   password: string
   active?: boolean
+  twoFactorEnabled?: boolean
   bankAccount?: string | null
   currency?: $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -5611,6 +5852,7 @@ export type UserCreateWithoutBankInput = {
   Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
   AuthSession?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpCreateNestedManyWithoutRequesterInput
@@ -5644,6 +5886,7 @@ export type UserUncheckedCreateWithoutBankInput = {
   email: string
   password: string
   active?: boolean
+  twoFactorEnabled?: boolean
   bankAccount?: string | null
   currency?: $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -5652,6 +5895,7 @@ export type UserUncheckedCreateWithoutBankInput = {
   Balance?: Prisma.UserBalanceUncheckedCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   AuthSession?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpUncheckedCreateNestedManyWithoutRequesterInput
@@ -5710,6 +5954,7 @@ export type UserCreateWithoutAuthSessionInput = {
   email: string
   password: string
   active?: boolean
+  twoFactorEnabled?: boolean
   bankAccount?: string | null
   currency?: $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -5718,6 +5963,7 @@ export type UserCreateWithoutAuthSessionInput = {
   Department?: Prisma.DepartmentCreateNestedOneWithoutUserInput
   Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpCreateNestedManyWithoutRequesterInput
@@ -5751,6 +5997,7 @@ export type UserUncheckedCreateWithoutAuthSessionInput = {
   email: string
   password: string
   active?: boolean
+  twoFactorEnabled?: boolean
   bankAccount?: string | null
   currency?: $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -5759,6 +6006,7 @@ export type UserUncheckedCreateWithoutAuthSessionInput = {
   roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   Balance?: Prisma.UserBalanceUncheckedCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpUncheckedCreateNestedManyWithoutRequesterInput
@@ -5807,6 +6055,7 @@ export type UserUpdateWithoutAuthSessionInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -5815,6 +6064,7 @@ export type UserUpdateWithoutAuthSessionInput = {
   Department?: Prisma.DepartmentUpdateOneWithoutUserNestedInput
   Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUpdateManyWithoutRequesterNestedInput
@@ -5848,6 +6098,7 @@ export type UserUncheckedUpdateWithoutAuthSessionInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -5856,6 +6107,193 @@ export type UserUncheckedUpdateWithoutAuthSessionInput = {
   roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   Balance?: Prisma.UserBalanceUncheckedUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedUpdateManyWithoutUserNestedInput
+  NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
+  Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
+  NkpRequest?: Prisma.NkpUncheckedUpdateManyWithoutRequesterNestedInput
+  Leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
+  Opportunities?: Prisma.OpportunityUncheckedUpdateManyWithoutUserNestedInput
+  Interactions?: Prisma.InteractionUncheckedUpdateManyWithoutUserNestedInput
+  Tasks?: Prisma.TaskUncheckedUpdateManyWithoutUserNestedInput
+  VisitPlans?: Prisma.VisitPlanUncheckedUpdateManyWithoutUserNestedInput
+  CustomerNotes?: Prisma.CustomerNoteUncheckedUpdateManyWithoutUserNestedInput
+  Customers?: Prisma.CustomerUncheckedUpdateManyWithoutAccountManagerNestedInput
+  Quotations?: Prisma.QuotationUncheckedUpdateManyWithoutUserNestedInput
+  salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutUserNestedInput
+  Invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutUserNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutUserNestedInput
+  goodsReceipts?: Prisma.GoodsReceiptUncheckedUpdateManyWithoutUserNestedInput
+  deliveryOrders?: Prisma.DeliveryOrderUncheckedUpdateManyWithoutUserNestedInput
+  accountingPayments?: Prisma.PaymentUncheckedUpdateManyWithoutCreatedByNestedInput
+  journalEntriesCreated?: Prisma.JournalEntryUncheckedUpdateManyWithoutCreatedByNestedInput
+  journalEntriesPosted?: Prisma.JournalEntryUncheckedUpdateManyWithoutPostedByNestedInput
+  closedPeriods?: Prisma.FiscalPeriodUncheckedUpdateManyWithoutClosedByNestedInput
+  vendorBillsCreated?: Prisma.VendorBillUncheckedUpdateManyWithoutCreatedByNestedInput
+  bankTransactions?: Prisma.BankTransactionUncheckedUpdateManyWithoutCreatedByNestedInput
+  approvalItems?: Prisma.ApprovalItemUncheckedUpdateManyWithoutUserNestedInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutTwoFactorChallengeInput = {
+  name: string
+  code?: string | null
+  email: string
+  password: string
+  active?: boolean
+  twoFactorEnabled?: boolean
+  bankAccount?: string | null
+  currency?: $Enums.Currency
+  signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
+  Bank?: Prisma.BankCreateNestedOneWithoutUserInput
+  Department?: Prisma.DepartmentCreateNestedOneWithoutUserInput
+  Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
+  Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  AuthSession?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
+  NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
+  Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
+  NkpRequest?: Prisma.NkpCreateNestedManyWithoutRequesterInput
+  Leads?: Prisma.LeadCreateNestedManyWithoutUserInput
+  Opportunities?: Prisma.OpportunityCreateNestedManyWithoutUserInput
+  Interactions?: Prisma.InteractionCreateNestedManyWithoutUserInput
+  Tasks?: Prisma.TaskCreateNestedManyWithoutUserInput
+  VisitPlans?: Prisma.VisitPlanCreateNestedManyWithoutUserInput
+  CustomerNotes?: Prisma.CustomerNoteCreateNestedManyWithoutUserInput
+  Customers?: Prisma.CustomerCreateNestedManyWithoutAccountManagerInput
+  Quotations?: Prisma.QuotationCreateNestedManyWithoutUserInput
+  salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutUserInput
+  Invoices?: Prisma.InvoiceCreateNestedManyWithoutUserInput
+  purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutUserInput
+  goodsReceipts?: Prisma.GoodsReceiptCreateNestedManyWithoutUserInput
+  deliveryOrders?: Prisma.DeliveryOrderCreateNestedManyWithoutUserInput
+  accountingPayments?: Prisma.PaymentCreateNestedManyWithoutCreatedByInput
+  journalEntriesCreated?: Prisma.JournalEntryCreateNestedManyWithoutCreatedByInput
+  journalEntriesPosted?: Prisma.JournalEntryCreateNestedManyWithoutPostedByInput
+  closedPeriods?: Prisma.FiscalPeriodCreateNestedManyWithoutClosedByInput
+  vendorBillsCreated?: Prisma.VendorBillCreateNestedManyWithoutCreatedByInput
+  bankTransactions?: Prisma.BankTransactionCreateNestedManyWithoutCreatedByInput
+  approvalItems?: Prisma.ApprovalItemCreateNestedManyWithoutUserInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutTwoFactorChallengeInput = {
+  id?: number
+  name: string
+  code?: string | null
+  email: string
+  password: string
+  active?: boolean
+  twoFactorEnabled?: boolean
+  bankAccount?: string | null
+  currency?: $Enums.Currency
+  signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  bankId?: number | null
+  departmentId?: number | null
+  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
+  Balance?: Prisma.UserBalanceUncheckedCreateNestedOneWithoutUserInput
+  Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  AuthSession?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
+  NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
+  Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
+  NkpRequest?: Prisma.NkpUncheckedCreateNestedManyWithoutRequesterInput
+  Leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
+  Opportunities?: Prisma.OpportunityUncheckedCreateNestedManyWithoutUserInput
+  Interactions?: Prisma.InteractionUncheckedCreateNestedManyWithoutUserInput
+  Tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutUserInput
+  VisitPlans?: Prisma.VisitPlanUncheckedCreateNestedManyWithoutUserInput
+  CustomerNotes?: Prisma.CustomerNoteUncheckedCreateNestedManyWithoutUserInput
+  Customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutAccountManagerInput
+  Quotations?: Prisma.QuotationUncheckedCreateNestedManyWithoutUserInput
+  salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutUserInput
+  Invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutUserInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutUserInput
+  goodsReceipts?: Prisma.GoodsReceiptUncheckedCreateNestedManyWithoutUserInput
+  deliveryOrders?: Prisma.DeliveryOrderUncheckedCreateNestedManyWithoutUserInput
+  accountingPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCreatedByInput
+  journalEntriesCreated?: Prisma.JournalEntryUncheckedCreateNestedManyWithoutCreatedByInput
+  journalEntriesPosted?: Prisma.JournalEntryUncheckedCreateNestedManyWithoutPostedByInput
+  closedPeriods?: Prisma.FiscalPeriodUncheckedCreateNestedManyWithoutClosedByInput
+  vendorBillsCreated?: Prisma.VendorBillUncheckedCreateNestedManyWithoutCreatedByInput
+  bankTransactions?: Prisma.BankTransactionUncheckedCreateNestedManyWithoutCreatedByInput
+  approvalItems?: Prisma.ApprovalItemUncheckedCreateNestedManyWithoutUserInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutTwoFactorChallengeInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutTwoFactorChallengeInput, Prisma.UserUncheckedCreateWithoutTwoFactorChallengeInput>
+}
+
+export type UserUpsertWithoutTwoFactorChallengeInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutTwoFactorChallengeInput, Prisma.UserUncheckedUpdateWithoutTwoFactorChallengeInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutTwoFactorChallengeInput, Prisma.UserUncheckedCreateWithoutTwoFactorChallengeInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutTwoFactorChallengeInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutTwoFactorChallengeInput, Prisma.UserUncheckedUpdateWithoutTwoFactorChallengeInput>
+}
+
+export type UserUpdateWithoutTwoFactorChallengeInput = {
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
+  signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
+  Bank?: Prisma.BankUpdateOneWithoutUserNestedInput
+  Department?: Prisma.DepartmentUpdateOneWithoutUserNestedInput
+  Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
+  Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  AuthSession?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
+  NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
+  Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
+  NkpRequest?: Prisma.NkpUpdateManyWithoutRequesterNestedInput
+  Leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
+  Opportunities?: Prisma.OpportunityUpdateManyWithoutUserNestedInput
+  Interactions?: Prisma.InteractionUpdateManyWithoutUserNestedInput
+  Tasks?: Prisma.TaskUpdateManyWithoutUserNestedInput
+  VisitPlans?: Prisma.VisitPlanUpdateManyWithoutUserNestedInput
+  CustomerNotes?: Prisma.CustomerNoteUpdateManyWithoutUserNestedInput
+  Customers?: Prisma.CustomerUpdateManyWithoutAccountManagerNestedInput
+  Quotations?: Prisma.QuotationUpdateManyWithoutUserNestedInput
+  salesOrders?: Prisma.SalesOrderUpdateManyWithoutUserNestedInput
+  Invoices?: Prisma.InvoiceUpdateManyWithoutUserNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutUserNestedInput
+  goodsReceipts?: Prisma.GoodsReceiptUpdateManyWithoutUserNestedInput
+  deliveryOrders?: Prisma.DeliveryOrderUpdateManyWithoutUserNestedInput
+  accountingPayments?: Prisma.PaymentUpdateManyWithoutCreatedByNestedInput
+  journalEntriesCreated?: Prisma.JournalEntryUpdateManyWithoutCreatedByNestedInput
+  journalEntriesPosted?: Prisma.JournalEntryUpdateManyWithoutPostedByNestedInput
+  closedPeriods?: Prisma.FiscalPeriodUpdateManyWithoutClosedByNestedInput
+  vendorBillsCreated?: Prisma.VendorBillUpdateManyWithoutCreatedByNestedInput
+  bankTransactions?: Prisma.BankTransactionUpdateManyWithoutCreatedByNestedInput
+  approvalItems?: Prisma.ApprovalItemUpdateManyWithoutUserNestedInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutTwoFactorChallengeInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
+  signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  bankId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  departmentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
+  Balance?: Prisma.UserBalanceUncheckedUpdateOneWithoutUserNestedInput
+  Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  AuthSession?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUncheckedUpdateManyWithoutRequesterNestedInput
@@ -5888,6 +6326,7 @@ export type UserCreateWithoutBalanceInput = {
   email: string
   password: string
   active?: boolean
+  twoFactorEnabled?: boolean
   bankAccount?: string | null
   currency?: $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -5896,6 +6335,7 @@ export type UserCreateWithoutBalanceInput = {
   Department?: Prisma.DepartmentCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
   AuthSession?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpCreateNestedManyWithoutRequesterInput
@@ -5929,6 +6369,7 @@ export type UserUncheckedCreateWithoutBalanceInput = {
   email: string
   password: string
   active?: boolean
+  twoFactorEnabled?: boolean
   bankAccount?: string | null
   currency?: $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -5937,6 +6378,7 @@ export type UserUncheckedCreateWithoutBalanceInput = {
   roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   AuthSession?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpUncheckedCreateNestedManyWithoutRequesterInput
@@ -5985,6 +6427,7 @@ export type UserUpdateWithoutBalanceInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -5993,6 +6436,7 @@ export type UserUpdateWithoutBalanceInput = {
   Department?: Prisma.DepartmentUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUpdateManyWithoutRequesterNestedInput
@@ -6026,6 +6470,7 @@ export type UserUncheckedUpdateWithoutBalanceInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -6034,6 +6479,7 @@ export type UserUncheckedUpdateWithoutBalanceInput = {
   roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUncheckedUpdateManyWithoutRequesterNestedInput
@@ -6066,6 +6512,7 @@ export type UserCreateWithoutVisitPlansInput = {
   email: string
   password: string
   active?: boolean
+  twoFactorEnabled?: boolean
   bankAccount?: string | null
   currency?: $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -6075,6 +6522,7 @@ export type UserCreateWithoutVisitPlansInput = {
   Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
   AuthSession?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpCreateNestedManyWithoutRequesterInput
@@ -6107,6 +6555,7 @@ export type UserUncheckedCreateWithoutVisitPlansInput = {
   email: string
   password: string
   active?: boolean
+  twoFactorEnabled?: boolean
   bankAccount?: string | null
   currency?: $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -6116,6 +6565,7 @@ export type UserUncheckedCreateWithoutVisitPlansInput = {
   Balance?: Prisma.UserBalanceUncheckedCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   AuthSession?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpUncheckedCreateNestedManyWithoutRequesterInput
@@ -6163,6 +6613,7 @@ export type UserUpdateWithoutVisitPlansInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -6172,6 +6623,7 @@ export type UserUpdateWithoutVisitPlansInput = {
   Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUpdateManyWithoutRequesterNestedInput
@@ -6204,6 +6656,7 @@ export type UserUncheckedUpdateWithoutVisitPlansInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -6213,6 +6666,7 @@ export type UserUncheckedUpdateWithoutVisitPlansInput = {
   Balance?: Prisma.UserBalanceUncheckedUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUncheckedUpdateManyWithoutRequesterNestedInput
@@ -6245,6 +6699,7 @@ export type UserCreateManyDepartmentInput = {
   email: string
   password: string
   active?: boolean
+  twoFactorEnabled?: boolean
   bankAccount?: string | null
   currency?: $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -6258,6 +6713,7 @@ export type UserUpdateWithoutDepartmentInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -6266,6 +6722,7 @@ export type UserUpdateWithoutDepartmentInput = {
   Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUpdateManyWithoutRequesterNestedInput
@@ -6299,6 +6756,7 @@ export type UserUncheckedUpdateWithoutDepartmentInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -6307,6 +6765,7 @@ export type UserUncheckedUpdateWithoutDepartmentInput = {
   Balance?: Prisma.UserBalanceUncheckedUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUncheckedUpdateManyWithoutRequesterNestedInput
@@ -6340,6 +6799,7 @@ export type UserUncheckedUpdateManyWithoutDepartmentInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -6354,6 +6814,7 @@ export type UserCreateManyBankInput = {
   email: string
   password: string
   active?: boolean
+  twoFactorEnabled?: boolean
   bankAccount?: string | null
   currency?: $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -6367,6 +6828,7 @@ export type UserUpdateWithoutBankInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -6375,6 +6837,7 @@ export type UserUpdateWithoutBankInput = {
   Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUpdateManyWithoutRequesterNestedInput
@@ -6408,6 +6871,7 @@ export type UserUncheckedUpdateWithoutBankInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -6416,6 +6880,7 @@ export type UserUncheckedUpdateWithoutBankInput = {
   Balance?: Prisma.UserBalanceUncheckedUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUncheckedUpdateManyWithoutRequesterNestedInput
@@ -6449,6 +6914,7 @@ export type UserUncheckedUpdateManyWithoutBankInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
   signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -6464,6 +6930,7 @@ export type UserUncheckedUpdateManyWithoutBankInput = {
 export type UserCountOutputType = {
   Notification: number
   AuthSession: number
+  TwoFactorChallenge: number
   NkpApproval: number
   Nkp: number
   NkpRequest: number
@@ -6493,6 +6960,7 @@ export type UserCountOutputType = {
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   Notification?: boolean | UserCountOutputTypeCountNotificationArgs
   AuthSession?: boolean | UserCountOutputTypeCountAuthSessionArgs
+  TwoFactorChallenge?: boolean | UserCountOutputTypeCountTwoFactorChallengeArgs
   NkpApproval?: boolean | UserCountOutputTypeCountNkpApprovalArgs
   Nkp?: boolean | UserCountOutputTypeCountNkpArgs
   NkpRequest?: boolean | UserCountOutputTypeCountNkpRequestArgs
@@ -6541,6 +7009,13 @@ export type UserCountOutputTypeCountNotificationArgs<ExtArgs extends runtime.Typ
  */
 export type UserCountOutputTypeCountAuthSessionArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.AuthSessionWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountTwoFactorChallengeArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.TwoFactorChallengeWhereInput
 }
 
 /**
@@ -6719,6 +7194,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   email?: boolean
   password?: boolean
   active?: boolean
+  twoFactorEnabled?: boolean
   bankAccount?: boolean
   currency?: boolean
   signatureSpeciment?: boolean
@@ -6730,6 +7206,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   Balance?: boolean | Prisma.User$BalanceArgs<ExtArgs>
   Notification?: boolean | Prisma.User$NotificationArgs<ExtArgs>
   AuthSession?: boolean | Prisma.User$AuthSessionArgs<ExtArgs>
+  TwoFactorChallenge?: boolean | Prisma.User$TwoFactorChallengeArgs<ExtArgs>
   NkpApproval?: boolean | Prisma.User$NkpApprovalArgs<ExtArgs>
   Nkp?: boolean | Prisma.User$NkpArgs<ExtArgs>
   NkpRequest?: boolean | Prisma.User$NkpRequestArgs<ExtArgs>
@@ -6764,6 +7241,7 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   email?: boolean
   password?: boolean
   active?: boolean
+  twoFactorEnabled?: boolean
   bankAccount?: boolean
   currency?: boolean
   signatureSpeciment?: boolean
@@ -6781,6 +7259,7 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   email?: boolean
   password?: boolean
   active?: boolean
+  twoFactorEnabled?: boolean
   bankAccount?: boolean
   currency?: boolean
   signatureSpeciment?: boolean
@@ -6798,6 +7277,7 @@ export type UserSelectScalar = {
   email?: boolean
   password?: boolean
   active?: boolean
+  twoFactorEnabled?: boolean
   bankAccount?: boolean
   currency?: boolean
   signatureSpeciment?: boolean
@@ -6806,13 +7286,14 @@ export type UserSelectScalar = {
   roles?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "code" | "email" | "password" | "active" | "bankAccount" | "currency" | "signatureSpeciment" | "bankId" | "departmentId" | "roles", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "code" | "email" | "password" | "active" | "twoFactorEnabled" | "bankAccount" | "currency" | "signatureSpeciment" | "bankId" | "departmentId" | "roles", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   Bank?: boolean | Prisma.User$BankArgs<ExtArgs>
   Department?: boolean | Prisma.User$DepartmentArgs<ExtArgs>
   Balance?: boolean | Prisma.User$BalanceArgs<ExtArgs>
   Notification?: boolean | Prisma.User$NotificationArgs<ExtArgs>
   AuthSession?: boolean | Prisma.User$AuthSessionArgs<ExtArgs>
+  TwoFactorChallenge?: boolean | Prisma.User$TwoFactorChallengeArgs<ExtArgs>
   NkpApproval?: boolean | Prisma.User$NkpApprovalArgs<ExtArgs>
   Nkp?: boolean | Prisma.User$NkpArgs<ExtArgs>
   NkpRequest?: boolean | Prisma.User$NkpRequestArgs<ExtArgs>
@@ -6856,6 +7337,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     Balance: Prisma.$UserBalancePayload<ExtArgs> | null
     Notification: Prisma.$NotificationPayload<ExtArgs>[]
     AuthSession: Prisma.$AuthSessionPayload<ExtArgs>[]
+    TwoFactorChallenge: Prisma.$TwoFactorChallengePayload<ExtArgs>[]
     NkpApproval: Prisma.$NkpApprovalPayload<ExtArgs>[]
     Nkp: Prisma.$NkpPayload<ExtArgs>[]
     NkpRequest: Prisma.$NkpPayload<ExtArgs>[]
@@ -6888,6 +7370,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     email: string
     password: string
     active: boolean
+    twoFactorEnabled: boolean
     bankAccount: string | null
     currency: $Enums.Currency
     signatureSpeciment: runtime.JsonValue | null
@@ -7293,6 +7776,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   Balance<T extends Prisma.User$BalanceArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$BalanceArgs<ExtArgs>>): Prisma.Prisma__UserBalanceClient<runtime.Types.Result.GetResult<Prisma.$UserBalancePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   Notification<T extends Prisma.User$NotificationArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$NotificationArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   AuthSession<T extends Prisma.User$AuthSessionArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$AuthSessionArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AuthSessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  TwoFactorChallenge<T extends Prisma.User$TwoFactorChallengeArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$TwoFactorChallengeArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TwoFactorChallengePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   NkpApproval<T extends Prisma.User$NkpApprovalArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$NkpApprovalArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NkpApprovalPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   Nkp<T extends Prisma.User$NkpArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$NkpArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NkpPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   NkpRequest<T extends Prisma.User$NkpRequestArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$NkpRequestArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NkpPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -7352,6 +7836,7 @@ export interface UserFieldRefs {
   readonly email: Prisma.FieldRef<"User", 'String'>
   readonly password: Prisma.FieldRef<"User", 'String'>
   readonly active: Prisma.FieldRef<"User", 'Boolean'>
+  readonly twoFactorEnabled: Prisma.FieldRef<"User", 'Boolean'>
   readonly bankAccount: Prisma.FieldRef<"User", 'String'>
   readonly currency: Prisma.FieldRef<"User", 'Currency'>
   readonly signatureSpeciment: Prisma.FieldRef<"User", 'Json'>
@@ -7861,6 +8346,30 @@ export type User$AuthSessionArgs<ExtArgs extends runtime.Types.Extensions.Intern
   take?: number
   skip?: number
   distinct?: Prisma.AuthSessionScalarFieldEnum | Prisma.AuthSessionScalarFieldEnum[]
+}
+
+/**
+ * User.TwoFactorChallenge
+ */
+export type User$TwoFactorChallengeArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the TwoFactorChallenge
+   */
+  select?: Prisma.TwoFactorChallengeSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the TwoFactorChallenge
+   */
+  omit?: Prisma.TwoFactorChallengeOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TwoFactorChallengeInclude<ExtArgs> | null
+  where?: Prisma.TwoFactorChallengeWhereInput
+  orderBy?: Prisma.TwoFactorChallengeOrderByWithRelationInput | Prisma.TwoFactorChallengeOrderByWithRelationInput[]
+  cursor?: Prisma.TwoFactorChallengeWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.TwoFactorChallengeScalarFieldEnum | Prisma.TwoFactorChallengeScalarFieldEnum[]
 }
 
 /**

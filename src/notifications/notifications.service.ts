@@ -1,11 +1,13 @@
 import { NotificationDto, DraftDocument } from './notification.dto';
 import { MailerService } from '@nestjs-modules/mailer';
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { Prisma } from '../prisma/client/client';
 import { Cron, CronExpression } from '@nestjs/schedule';
 @Injectable()
 export class NotificationsService {
+  private readonly logger = new Logger(NotificationsService.name);
+
   constructor(
     private readonly mailerService: MailerService,
     private readonly prisma: PrismaService,
@@ -105,7 +107,12 @@ export class NotificationsService {
 
   async notify(notificationDto: NotificationDto) {
     await this.create(notificationDto);
-    this.send(notificationDto);
+    this.send(notificationDto).catch((error) =>
+      this.logger.error(
+        `Failed to send notification email to user ${notificationDto.userId}`,
+        error instanceof Error ? error.stack : String(error),
+      ),
+    );
   }
 
   @Cron(CronExpression.EVERY_DAY_AT_9AM)
@@ -179,7 +186,7 @@ export class NotificationsService {
     ];
 
     for (const doc of allDraftDocuments) {
-      console.log(
+      this.logger.log(
         `Notifying user ${doc.User.name} about draft document #${doc.number}`,
       );
 
