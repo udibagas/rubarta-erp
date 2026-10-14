@@ -444,6 +444,7 @@ export const ModelName = {
   Bank: 'Bank',
   AuthSession: 'AuthSession',
   TwoFactorChallenge: 'TwoFactorChallenge',
+  TrustedDevice: 'TrustedDevice',
   PasswordResetToken: 'PasswordResetToken',
   AppLog: 'AppLog',
   Supplier: 'Supplier',
@@ -465,7 +466,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "account" | "accountBalance" | "fiscalPeriod" | "journalEntry" | "journalLine" | "vendorBill" | "payment" | "paymentAllocation" | "cashBankAccount" | "bankTransaction" | "taxRate" | "expense" | "approvalSetting" | "approvalSettingItem" | "approval" | "approvalItem" | "lead" | "opportunity" | "task" | "interaction" | "customerNote" | "customerFile" | "customer" | "contact" | "deliveryOrder" | "deliveryOrderItem" | "goodsReceipt" | "goodsReceiptItem" | "invoice" | "invoiceItem" | "material" | "nkp" | "nkpItem" | "nkpApproval" | "nkpAttachment" | "notification" | "purchaseOrder" | "purchaseOrderItem" | "quotation" | "quotationItem" | "salesOrder" | "salesOrderItem" | "company" | "department" | "bank" | "authSession" | "twoFactorChallenge" | "passwordResetToken" | "appLog" | "supplier" | "user" | "userBalance" | "visitPlan"
+    modelProps: "account" | "accountBalance" | "fiscalPeriod" | "journalEntry" | "journalLine" | "vendorBill" | "payment" | "paymentAllocation" | "cashBankAccount" | "bankTransaction" | "taxRate" | "expense" | "approvalSetting" | "approvalSettingItem" | "approval" | "approvalItem" | "lead" | "opportunity" | "task" | "interaction" | "customerNote" | "customerFile" | "customer" | "contact" | "deliveryOrder" | "deliveryOrderItem" | "goodsReceipt" | "goodsReceiptItem" | "invoice" | "invoiceItem" | "material" | "nkp" | "nkpItem" | "nkpApproval" | "nkpAttachment" | "notification" | "purchaseOrder" | "purchaseOrderItem" | "quotation" | "quotationItem" | "salesOrder" | "salesOrderItem" | "company" | "department" | "bank" | "authSession" | "twoFactorChallenge" | "trustedDevice" | "passwordResetToken" | "appLog" | "supplier" | "user" | "userBalance" | "visitPlan"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -3947,6 +3948,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    TrustedDevice: {
+      payload: Prisma.$TrustedDevicePayload<ExtArgs>
+      fields: Prisma.TrustedDeviceFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.TrustedDeviceFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrustedDevicePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.TrustedDeviceFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrustedDevicePayload>
+        }
+        findFirst: {
+          args: Prisma.TrustedDeviceFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrustedDevicePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.TrustedDeviceFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrustedDevicePayload>
+        }
+        findMany: {
+          args: Prisma.TrustedDeviceFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrustedDevicePayload>[]
+        }
+        create: {
+          args: Prisma.TrustedDeviceCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrustedDevicePayload>
+        }
+        createMany: {
+          args: Prisma.TrustedDeviceCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.TrustedDeviceCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrustedDevicePayload>[]
+        }
+        delete: {
+          args: Prisma.TrustedDeviceDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrustedDevicePayload>
+        }
+        update: {
+          args: Prisma.TrustedDeviceUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrustedDevicePayload>
+        }
+        deleteMany: {
+          args: Prisma.TrustedDeviceDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.TrustedDeviceUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.TrustedDeviceUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrustedDevicePayload>[]
+        }
+        upsert: {
+          args: Prisma.TrustedDeviceUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrustedDevicePayload>
+        }
+        aggregate: {
+          args: Prisma.TrustedDeviceAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateTrustedDevice>
+        }
+        groupBy: {
+          args: Prisma.TrustedDeviceGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TrustedDeviceGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.TrustedDeviceCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TrustedDeviceCountAggregateOutputType> | number
+        }
+      }
+    }
     PasswordResetToken: {
       payload: Prisma.$PasswordResetTokenPayload<ExtArgs>
       fields: Prisma.PasswordResetTokenFieldRefs
@@ -5303,6 +5378,20 @@ export const TwoFactorChallengeScalarFieldEnum = {
 export type TwoFactorChallengeScalarFieldEnum = (typeof TwoFactorChallengeScalarFieldEnum)[keyof typeof TwoFactorChallengeScalarFieldEnum]
 
 
+export const TrustedDeviceScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  tokenHash: 'tokenHash',
+  userAgent: 'userAgent',
+  ipAddress: 'ipAddress',
+  lastUsedAt: 'lastUsedAt',
+  expiresAt: 'expiresAt',
+  createdAt: 'createdAt'
+} as const
+
+export type TrustedDeviceScalarFieldEnum = (typeof TrustedDeviceScalarFieldEnum)[keyof typeof TrustedDeviceScalarFieldEnum]
+
+
 export const PasswordResetTokenScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
@@ -6208,6 +6297,7 @@ export type GlobalOmitConfig = {
   bank?: Prisma.BankOmit
   authSession?: Prisma.AuthSessionOmit
   twoFactorChallenge?: Prisma.TwoFactorChallengeOmit
+  trustedDevice?: Prisma.TrustedDeviceOmit
   passwordResetToken?: Prisma.PasswordResetTokenOmit
   appLog?: Prisma.AppLogOmit
   supplier?: Prisma.SupplierOmit

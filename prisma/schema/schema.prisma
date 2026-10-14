@@ -108,6 +108,21 @@ model TwoFactorChallenge {
   @@map("TwoFactorChallenges")
 }
 
+model TrustedDevice {
+  id         Int      @id @default(autoincrement())
+  userId     Int
+  tokenHash  String   @unique @db.VarChar(64)
+  userAgent  String?  @db.VarChar(255)
+  ipAddress  String?  @db.VarChar(64)
+  lastUsedAt DateTime @default(now())
+  expiresAt  DateTime
+  createdAt  DateTime @default(now())
+  User       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, expiresAt])
+  @@map("TrustedDevices")
+}
+
 model PasswordResetToken {
   id        Int       @id @default(autoincrement())
   userId    Int

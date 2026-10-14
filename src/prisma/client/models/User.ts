@@ -286,6 +286,7 @@ export type UserWhereInput = {
   Notification?: Prisma.NotificationListRelationFilter
   AuthSession?: Prisma.AuthSessionListRelationFilter
   TwoFactorChallenge?: Prisma.TwoFactorChallengeListRelationFilter
+  TrustedDevice?: Prisma.TrustedDeviceListRelationFilter
   PasswordResetToken?: Prisma.PasswordResetTokenListRelationFilter
   NkpApproval?: Prisma.NkpApprovalListRelationFilter
   Nkp?: Prisma.NkpListRelationFilter
@@ -333,6 +334,7 @@ export type UserOrderByWithRelationInput = {
   Notification?: Prisma.NotificationOrderByRelationAggregateInput
   AuthSession?: Prisma.AuthSessionOrderByRelationAggregateInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeOrderByRelationAggregateInput
+  TrustedDevice?: Prisma.TrustedDeviceOrderByRelationAggregateInput
   PasswordResetToken?: Prisma.PasswordResetTokenOrderByRelationAggregateInput
   NkpApproval?: Prisma.NkpApprovalOrderByRelationAggregateInput
   Nkp?: Prisma.NkpOrderByRelationAggregateInput
@@ -383,6 +385,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   Notification?: Prisma.NotificationListRelationFilter
   AuthSession?: Prisma.AuthSessionListRelationFilter
   TwoFactorChallenge?: Prisma.TwoFactorChallengeListRelationFilter
+  TrustedDevice?: Prisma.TrustedDeviceListRelationFilter
   PasswordResetToken?: Prisma.PasswordResetTokenListRelationFilter
   NkpApproval?: Prisma.NkpApprovalListRelationFilter
   Nkp?: Prisma.NkpListRelationFilter
@@ -467,6 +470,7 @@ export type UserCreateInput = {
   Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
   AuthSession?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeCreateNestedManyWithoutUserInput
+  TrustedDevice?: Prisma.TrustedDeviceCreateNestedManyWithoutUserInput
   PasswordResetToken?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
@@ -512,6 +516,7 @@ export type UserUncheckedCreateInput = {
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   AuthSession?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedCreateNestedManyWithoutUserInput
+  TrustedDevice?: Prisma.TrustedDeviceUncheckedCreateNestedManyWithoutUserInput
   PasswordResetToken?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
@@ -556,6 +561,7 @@ export type UserUpdateInput = {
   Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeUpdateManyWithoutUserNestedInput
+  TrustedDevice?: Prisma.TrustedDeviceUpdateManyWithoutUserNestedInput
   PasswordResetToken?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
@@ -601,6 +607,7 @@ export type UserUncheckedUpdateInput = {
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedUpdateManyWithoutUserNestedInput
+  TrustedDevice?: Prisma.TrustedDeviceUncheckedUpdateManyWithoutUserNestedInput
   PasswordResetToken?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
@@ -1213,6 +1220,20 @@ export type UserUpdateOneRequiredWithoutTwoFactorChallengeNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutTwoFactorChallengeInput, Prisma.UserUpdateWithoutTwoFactorChallengeInput>, Prisma.UserUncheckedUpdateWithoutTwoFactorChallengeInput>
 }
 
+export type UserCreateNestedOneWithoutTrustedDeviceInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutTrustedDeviceInput, Prisma.UserUncheckedCreateWithoutTrustedDeviceInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutTrustedDeviceInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutTrustedDeviceNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutTrustedDeviceInput, Prisma.UserUncheckedCreateWithoutTrustedDeviceInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutTrustedDeviceInput
+  upsert?: Prisma.UserUpsertWithoutTrustedDeviceInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutTrustedDeviceInput, Prisma.UserUpdateWithoutTrustedDeviceInput>, Prisma.UserUncheckedUpdateWithoutTrustedDeviceInput>
+}
+
 export type UserCreateNestedOneWithoutPasswordResetTokenInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutPasswordResetTokenInput, Prisma.UserUncheckedCreateWithoutPasswordResetTokenInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutPasswordResetTokenInput
@@ -1281,6 +1302,7 @@ export type UserCreateWithoutClosedPeriodsInput = {
   Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
   AuthSession?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeCreateNestedManyWithoutUserInput
+  TrustedDevice?: Prisma.TrustedDeviceCreateNestedManyWithoutUserInput
   PasswordResetToken?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
@@ -1325,6 +1347,7 @@ export type UserUncheckedCreateWithoutClosedPeriodsInput = {
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   AuthSession?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedCreateNestedManyWithoutUserInput
+  TrustedDevice?: Prisma.TrustedDeviceUncheckedCreateNestedManyWithoutUserInput
   PasswordResetToken?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
@@ -1384,6 +1407,7 @@ export type UserUpdateWithoutClosedPeriodsInput = {
   Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeUpdateManyWithoutUserNestedInput
+  TrustedDevice?: Prisma.TrustedDeviceUpdateManyWithoutUserNestedInput
   PasswordResetToken?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
@@ -1428,6 +1452,7 @@ export type UserUncheckedUpdateWithoutClosedPeriodsInput = {
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedUpdateManyWithoutUserNestedInput
+  TrustedDevice?: Prisma.TrustedDeviceUncheckedUpdateManyWithoutUserNestedInput
   PasswordResetToken?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
@@ -1471,6 +1496,7 @@ export type UserCreateWithoutJournalEntriesCreatedInput = {
   Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
   AuthSession?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeCreateNestedManyWithoutUserInput
+  TrustedDevice?: Prisma.TrustedDeviceCreateNestedManyWithoutUserInput
   PasswordResetToken?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
@@ -1515,6 +1541,7 @@ export type UserUncheckedCreateWithoutJournalEntriesCreatedInput = {
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   AuthSession?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedCreateNestedManyWithoutUserInput
+  TrustedDevice?: Prisma.TrustedDeviceUncheckedCreateNestedManyWithoutUserInput
   PasswordResetToken?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
@@ -1563,6 +1590,7 @@ export type UserCreateWithoutJournalEntriesPostedInput = {
   Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
   AuthSession?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeCreateNestedManyWithoutUserInput
+  TrustedDevice?: Prisma.TrustedDeviceCreateNestedManyWithoutUserInput
   PasswordResetToken?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
@@ -1607,6 +1635,7 @@ export type UserUncheckedCreateWithoutJournalEntriesPostedInput = {
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   AuthSession?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedCreateNestedManyWithoutUserInput
+  TrustedDevice?: Prisma.TrustedDeviceUncheckedCreateNestedManyWithoutUserInput
   PasswordResetToken?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
@@ -1666,6 +1695,7 @@ export type UserUpdateWithoutJournalEntriesCreatedInput = {
   Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeUpdateManyWithoutUserNestedInput
+  TrustedDevice?: Prisma.TrustedDeviceUpdateManyWithoutUserNestedInput
   PasswordResetToken?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
@@ -1710,6 +1740,7 @@ export type UserUncheckedUpdateWithoutJournalEntriesCreatedInput = {
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedUpdateManyWithoutUserNestedInput
+  TrustedDevice?: Prisma.TrustedDeviceUncheckedUpdateManyWithoutUserNestedInput
   PasswordResetToken?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
@@ -1764,6 +1795,7 @@ export type UserUpdateWithoutJournalEntriesPostedInput = {
   Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeUpdateManyWithoutUserNestedInput
+  TrustedDevice?: Prisma.TrustedDeviceUpdateManyWithoutUserNestedInput
   PasswordResetToken?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
@@ -1808,6 +1840,7 @@ export type UserUncheckedUpdateWithoutJournalEntriesPostedInput = {
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedUpdateManyWithoutUserNestedInput
+  TrustedDevice?: Prisma.TrustedDeviceUncheckedUpdateManyWithoutUserNestedInput
   PasswordResetToken?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
@@ -1851,6 +1884,7 @@ export type UserCreateWithoutVendorBillsCreatedInput = {
   Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
   AuthSession?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeCreateNestedManyWithoutUserInput
+  TrustedDevice?: Prisma.TrustedDeviceCreateNestedManyWithoutUserInput
   PasswordResetToken?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
@@ -1895,6 +1929,7 @@ export type UserUncheckedCreateWithoutVendorBillsCreatedInput = {
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   AuthSession?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedCreateNestedManyWithoutUserInput
+  TrustedDevice?: Prisma.TrustedDeviceUncheckedCreateNestedManyWithoutUserInput
   PasswordResetToken?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
@@ -1954,6 +1989,7 @@ export type UserUpdateWithoutVendorBillsCreatedInput = {
   Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeUpdateManyWithoutUserNestedInput
+  TrustedDevice?: Prisma.TrustedDeviceUpdateManyWithoutUserNestedInput
   PasswordResetToken?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
@@ -1998,6 +2034,7 @@ export type UserUncheckedUpdateWithoutVendorBillsCreatedInput = {
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedUpdateManyWithoutUserNestedInput
+  TrustedDevice?: Prisma.TrustedDeviceUncheckedUpdateManyWithoutUserNestedInput
   PasswordResetToken?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
@@ -2041,6 +2078,7 @@ export type UserCreateWithoutAccountingPaymentsInput = {
   Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
   AuthSession?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeCreateNestedManyWithoutUserInput
+  TrustedDevice?: Prisma.TrustedDeviceCreateNestedManyWithoutUserInput
   PasswordResetToken?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
@@ -2085,6 +2123,7 @@ export type UserUncheckedCreateWithoutAccountingPaymentsInput = {
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   AuthSession?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedCreateNestedManyWithoutUserInput
+  TrustedDevice?: Prisma.TrustedDeviceUncheckedCreateNestedManyWithoutUserInput
   PasswordResetToken?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
@@ -2144,6 +2183,7 @@ export type UserUpdateWithoutAccountingPaymentsInput = {
   Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeUpdateManyWithoutUserNestedInput
+  TrustedDevice?: Prisma.TrustedDeviceUpdateManyWithoutUserNestedInput
   PasswordResetToken?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
@@ -2188,6 +2228,7 @@ export type UserUncheckedUpdateWithoutAccountingPaymentsInput = {
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedUpdateManyWithoutUserNestedInput
+  TrustedDevice?: Prisma.TrustedDeviceUncheckedUpdateManyWithoutUserNestedInput
   PasswordResetToken?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
@@ -2231,6 +2272,7 @@ export type UserCreateWithoutBankTransactionsInput = {
   Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
   AuthSession?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeCreateNestedManyWithoutUserInput
+  TrustedDevice?: Prisma.TrustedDeviceCreateNestedManyWithoutUserInput
   PasswordResetToken?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
@@ -2275,6 +2317,7 @@ export type UserUncheckedCreateWithoutBankTransactionsInput = {
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   AuthSession?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedCreateNestedManyWithoutUserInput
+  TrustedDevice?: Prisma.TrustedDeviceUncheckedCreateNestedManyWithoutUserInput
   PasswordResetToken?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
@@ -2334,6 +2377,7 @@ export type UserUpdateWithoutBankTransactionsInput = {
   Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeUpdateManyWithoutUserNestedInput
+  TrustedDevice?: Prisma.TrustedDeviceUpdateManyWithoutUserNestedInput
   PasswordResetToken?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
@@ -2378,6 +2422,7 @@ export type UserUncheckedUpdateWithoutBankTransactionsInput = {
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedUpdateManyWithoutUserNestedInput
+  TrustedDevice?: Prisma.TrustedDeviceUncheckedUpdateManyWithoutUserNestedInput
   PasswordResetToken?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
@@ -2421,6 +2466,7 @@ export type UserCreateWithoutApprovalSettingItemInput = {
   Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
   AuthSession?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeCreateNestedManyWithoutUserInput
+  TrustedDevice?: Prisma.TrustedDeviceCreateNestedManyWithoutUserInput
   PasswordResetToken?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
@@ -2465,6 +2511,7 @@ export type UserUncheckedCreateWithoutApprovalSettingItemInput = {
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   AuthSession?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedCreateNestedManyWithoutUserInput
+  TrustedDevice?: Prisma.TrustedDeviceUncheckedCreateNestedManyWithoutUserInput
   PasswordResetToken?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
@@ -2524,6 +2571,7 @@ export type UserUpdateWithoutApprovalSettingItemInput = {
   Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeUpdateManyWithoutUserNestedInput
+  TrustedDevice?: Prisma.TrustedDeviceUpdateManyWithoutUserNestedInput
   PasswordResetToken?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
@@ -2568,6 +2616,7 @@ export type UserUncheckedUpdateWithoutApprovalSettingItemInput = {
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedUpdateManyWithoutUserNestedInput
+  TrustedDevice?: Prisma.TrustedDeviceUncheckedUpdateManyWithoutUserNestedInput
   PasswordResetToken?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
@@ -2611,6 +2660,7 @@ export type UserCreateWithoutApprovalItemsInput = {
   Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
   AuthSession?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeCreateNestedManyWithoutUserInput
+  TrustedDevice?: Prisma.TrustedDeviceCreateNestedManyWithoutUserInput
   PasswordResetToken?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
@@ -2655,6 +2705,7 @@ export type UserUncheckedCreateWithoutApprovalItemsInput = {
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   AuthSession?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedCreateNestedManyWithoutUserInput
+  TrustedDevice?: Prisma.TrustedDeviceUncheckedCreateNestedManyWithoutUserInput
   PasswordResetToken?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
@@ -2714,6 +2765,7 @@ export type UserUpdateWithoutApprovalItemsInput = {
   Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeUpdateManyWithoutUserNestedInput
+  TrustedDevice?: Prisma.TrustedDeviceUpdateManyWithoutUserNestedInput
   PasswordResetToken?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
@@ -2758,6 +2810,7 @@ export type UserUncheckedUpdateWithoutApprovalItemsInput = {
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedUpdateManyWithoutUserNestedInput
+  TrustedDevice?: Prisma.TrustedDeviceUncheckedUpdateManyWithoutUserNestedInput
   PasswordResetToken?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
@@ -2801,6 +2854,7 @@ export type UserCreateWithoutLeadsInput = {
   Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
   AuthSession?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeCreateNestedManyWithoutUserInput
+  TrustedDevice?: Prisma.TrustedDeviceCreateNestedManyWithoutUserInput
   PasswordResetToken?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
@@ -2845,6 +2899,7 @@ export type UserUncheckedCreateWithoutLeadsInput = {
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   AuthSession?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedCreateNestedManyWithoutUserInput
+  TrustedDevice?: Prisma.TrustedDeviceUncheckedCreateNestedManyWithoutUserInput
   PasswordResetToken?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
@@ -2904,6 +2959,7 @@ export type UserUpdateWithoutLeadsInput = {
   Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeUpdateManyWithoutUserNestedInput
+  TrustedDevice?: Prisma.TrustedDeviceUpdateManyWithoutUserNestedInput
   PasswordResetToken?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
@@ -2948,6 +3004,7 @@ export type UserUncheckedUpdateWithoutLeadsInput = {
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedUpdateManyWithoutUserNestedInput
+  TrustedDevice?: Prisma.TrustedDeviceUncheckedUpdateManyWithoutUserNestedInput
   PasswordResetToken?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
@@ -2991,6 +3048,7 @@ export type UserCreateWithoutOpportunitiesInput = {
   Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
   AuthSession?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeCreateNestedManyWithoutUserInput
+  TrustedDevice?: Prisma.TrustedDeviceCreateNestedManyWithoutUserInput
   PasswordResetToken?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
@@ -3035,6 +3093,7 @@ export type UserUncheckedCreateWithoutOpportunitiesInput = {
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   AuthSession?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedCreateNestedManyWithoutUserInput
+  TrustedDevice?: Prisma.TrustedDeviceUncheckedCreateNestedManyWithoutUserInput
   PasswordResetToken?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
@@ -3094,6 +3153,7 @@ export type UserUpdateWithoutOpportunitiesInput = {
   Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeUpdateManyWithoutUserNestedInput
+  TrustedDevice?: Prisma.TrustedDeviceUpdateManyWithoutUserNestedInput
   PasswordResetToken?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
@@ -3138,6 +3198,7 @@ export type UserUncheckedUpdateWithoutOpportunitiesInput = {
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedUpdateManyWithoutUserNestedInput
+  TrustedDevice?: Prisma.TrustedDeviceUncheckedUpdateManyWithoutUserNestedInput
   PasswordResetToken?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
@@ -3181,6 +3242,7 @@ export type UserCreateWithoutTasksInput = {
   Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
   AuthSession?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeCreateNestedManyWithoutUserInput
+  TrustedDevice?: Prisma.TrustedDeviceCreateNestedManyWithoutUserInput
   PasswordResetToken?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
@@ -3225,6 +3287,7 @@ export type UserUncheckedCreateWithoutTasksInput = {
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   AuthSession?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedCreateNestedManyWithoutUserInput
+  TrustedDevice?: Prisma.TrustedDeviceUncheckedCreateNestedManyWithoutUserInput
   PasswordResetToken?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
@@ -3284,6 +3347,7 @@ export type UserUpdateWithoutTasksInput = {
   Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeUpdateManyWithoutUserNestedInput
+  TrustedDevice?: Prisma.TrustedDeviceUpdateManyWithoutUserNestedInput
   PasswordResetToken?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
@@ -3328,6 +3392,7 @@ export type UserUncheckedUpdateWithoutTasksInput = {
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedUpdateManyWithoutUserNestedInput
+  TrustedDevice?: Prisma.TrustedDeviceUncheckedUpdateManyWithoutUserNestedInput
   PasswordResetToken?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
@@ -3371,6 +3436,7 @@ export type UserCreateWithoutInteractionsInput = {
   Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
   AuthSession?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeCreateNestedManyWithoutUserInput
+  TrustedDevice?: Prisma.TrustedDeviceCreateNestedManyWithoutUserInput
   PasswordResetToken?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
@@ -3415,6 +3481,7 @@ export type UserUncheckedCreateWithoutInteractionsInput = {
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   AuthSession?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedCreateNestedManyWithoutUserInput
+  TrustedDevice?: Prisma.TrustedDeviceUncheckedCreateNestedManyWithoutUserInput
   PasswordResetToken?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
@@ -3474,6 +3541,7 @@ export type UserUpdateWithoutInteractionsInput = {
   Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeUpdateManyWithoutUserNestedInput
+  TrustedDevice?: Prisma.TrustedDeviceUpdateManyWithoutUserNestedInput
   PasswordResetToken?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
@@ -3518,6 +3586,7 @@ export type UserUncheckedUpdateWithoutInteractionsInput = {
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedUpdateManyWithoutUserNestedInput
+  TrustedDevice?: Prisma.TrustedDeviceUncheckedUpdateManyWithoutUserNestedInput
   PasswordResetToken?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
@@ -3561,6 +3630,7 @@ export type UserCreateWithoutCustomerNotesInput = {
   Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
   AuthSession?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeCreateNestedManyWithoutUserInput
+  TrustedDevice?: Prisma.TrustedDeviceCreateNestedManyWithoutUserInput
   PasswordResetToken?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
@@ -3605,6 +3675,7 @@ export type UserUncheckedCreateWithoutCustomerNotesInput = {
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   AuthSession?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedCreateNestedManyWithoutUserInput
+  TrustedDevice?: Prisma.TrustedDeviceUncheckedCreateNestedManyWithoutUserInput
   PasswordResetToken?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
@@ -3664,6 +3735,7 @@ export type UserUpdateWithoutCustomerNotesInput = {
   Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeUpdateManyWithoutUserNestedInput
+  TrustedDevice?: Prisma.TrustedDeviceUpdateManyWithoutUserNestedInput
   PasswordResetToken?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
@@ -3708,6 +3780,7 @@ export type UserUncheckedUpdateWithoutCustomerNotesInput = {
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedUpdateManyWithoutUserNestedInput
+  TrustedDevice?: Prisma.TrustedDeviceUncheckedUpdateManyWithoutUserNestedInput
   PasswordResetToken?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
@@ -3751,6 +3824,7 @@ export type UserCreateWithoutCustomersInput = {
   Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
   AuthSession?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeCreateNestedManyWithoutUserInput
+  TrustedDevice?: Prisma.TrustedDeviceCreateNestedManyWithoutUserInput
   PasswordResetToken?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
@@ -3795,6 +3869,7 @@ export type UserUncheckedCreateWithoutCustomersInput = {
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   AuthSession?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedCreateNestedManyWithoutUserInput
+  TrustedDevice?: Prisma.TrustedDeviceUncheckedCreateNestedManyWithoutUserInput
   PasswordResetToken?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
@@ -3854,6 +3929,7 @@ export type UserUpdateWithoutCustomersInput = {
   Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeUpdateManyWithoutUserNestedInput
+  TrustedDevice?: Prisma.TrustedDeviceUpdateManyWithoutUserNestedInput
   PasswordResetToken?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
@@ -3898,6 +3974,7 @@ export type UserUncheckedUpdateWithoutCustomersInput = {
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedUpdateManyWithoutUserNestedInput
+  TrustedDevice?: Prisma.TrustedDeviceUncheckedUpdateManyWithoutUserNestedInput
   PasswordResetToken?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
@@ -3941,6 +4018,7 @@ export type UserCreateWithoutDeliveryOrdersInput = {
   Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
   AuthSession?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeCreateNestedManyWithoutUserInput
+  TrustedDevice?: Prisma.TrustedDeviceCreateNestedManyWithoutUserInput
   PasswordResetToken?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
@@ -3985,6 +4063,7 @@ export type UserUncheckedCreateWithoutDeliveryOrdersInput = {
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   AuthSession?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedCreateNestedManyWithoutUserInput
+  TrustedDevice?: Prisma.TrustedDeviceUncheckedCreateNestedManyWithoutUserInput
   PasswordResetToken?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
@@ -4044,6 +4123,7 @@ export type UserUpdateWithoutDeliveryOrdersInput = {
   Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeUpdateManyWithoutUserNestedInput
+  TrustedDevice?: Prisma.TrustedDeviceUpdateManyWithoutUserNestedInput
   PasswordResetToken?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
@@ -4088,6 +4168,7 @@ export type UserUncheckedUpdateWithoutDeliveryOrdersInput = {
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedUpdateManyWithoutUserNestedInput
+  TrustedDevice?: Prisma.TrustedDeviceUncheckedUpdateManyWithoutUserNestedInput
   PasswordResetToken?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
@@ -4131,6 +4212,7 @@ export type UserCreateWithoutGoodsReceiptsInput = {
   Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
   AuthSession?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeCreateNestedManyWithoutUserInput
+  TrustedDevice?: Prisma.TrustedDeviceCreateNestedManyWithoutUserInput
   PasswordResetToken?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
@@ -4175,6 +4257,7 @@ export type UserUncheckedCreateWithoutGoodsReceiptsInput = {
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   AuthSession?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedCreateNestedManyWithoutUserInput
+  TrustedDevice?: Prisma.TrustedDeviceUncheckedCreateNestedManyWithoutUserInput
   PasswordResetToken?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
@@ -4234,6 +4317,7 @@ export type UserUpdateWithoutGoodsReceiptsInput = {
   Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeUpdateManyWithoutUserNestedInput
+  TrustedDevice?: Prisma.TrustedDeviceUpdateManyWithoutUserNestedInput
   PasswordResetToken?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
@@ -4278,6 +4362,7 @@ export type UserUncheckedUpdateWithoutGoodsReceiptsInput = {
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedUpdateManyWithoutUserNestedInput
+  TrustedDevice?: Prisma.TrustedDeviceUncheckedUpdateManyWithoutUserNestedInput
   PasswordResetToken?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
@@ -4321,6 +4406,7 @@ export type UserCreateWithoutInvoicesInput = {
   Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
   AuthSession?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeCreateNestedManyWithoutUserInput
+  TrustedDevice?: Prisma.TrustedDeviceCreateNestedManyWithoutUserInput
   PasswordResetToken?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
@@ -4365,6 +4451,7 @@ export type UserUncheckedCreateWithoutInvoicesInput = {
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   AuthSession?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedCreateNestedManyWithoutUserInput
+  TrustedDevice?: Prisma.TrustedDeviceUncheckedCreateNestedManyWithoutUserInput
   PasswordResetToken?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
@@ -4424,6 +4511,7 @@ export type UserUpdateWithoutInvoicesInput = {
   Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeUpdateManyWithoutUserNestedInput
+  TrustedDevice?: Prisma.TrustedDeviceUpdateManyWithoutUserNestedInput
   PasswordResetToken?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
@@ -4468,6 +4556,7 @@ export type UserUncheckedUpdateWithoutInvoicesInput = {
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedUpdateManyWithoutUserNestedInput
+  TrustedDevice?: Prisma.TrustedDeviceUncheckedUpdateManyWithoutUserNestedInput
   PasswordResetToken?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
@@ -4511,6 +4600,7 @@ export type UserCreateWithoutNkpInput = {
   Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
   AuthSession?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeCreateNestedManyWithoutUserInput
+  TrustedDevice?: Prisma.TrustedDeviceCreateNestedManyWithoutUserInput
   PasswordResetToken?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
   NkpRequest?: Prisma.NkpCreateNestedManyWithoutRequesterInput
@@ -4555,6 +4645,7 @@ export type UserUncheckedCreateWithoutNkpInput = {
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   AuthSession?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedCreateNestedManyWithoutUserInput
+  TrustedDevice?: Prisma.TrustedDeviceUncheckedCreateNestedManyWithoutUserInput
   PasswordResetToken?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
   NkpRequest?: Prisma.NkpUncheckedCreateNestedManyWithoutRequesterInput
@@ -4603,6 +4694,7 @@ export type UserCreateWithoutNkpRequestInput = {
   Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
   AuthSession?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeCreateNestedManyWithoutUserInput
+  TrustedDevice?: Prisma.TrustedDeviceCreateNestedManyWithoutUserInput
   PasswordResetToken?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
@@ -4647,6 +4739,7 @@ export type UserUncheckedCreateWithoutNkpRequestInput = {
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   AuthSession?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedCreateNestedManyWithoutUserInput
+  TrustedDevice?: Prisma.TrustedDeviceUncheckedCreateNestedManyWithoutUserInput
   PasswordResetToken?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
@@ -4706,6 +4799,7 @@ export type UserUpdateWithoutNkpInput = {
   Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeUpdateManyWithoutUserNestedInput
+  TrustedDevice?: Prisma.TrustedDeviceUpdateManyWithoutUserNestedInput
   PasswordResetToken?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
   NkpRequest?: Prisma.NkpUpdateManyWithoutRequesterNestedInput
@@ -4750,6 +4844,7 @@ export type UserUncheckedUpdateWithoutNkpInput = {
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedUpdateManyWithoutUserNestedInput
+  TrustedDevice?: Prisma.TrustedDeviceUncheckedUpdateManyWithoutUserNestedInput
   PasswordResetToken?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
   NkpRequest?: Prisma.NkpUncheckedUpdateManyWithoutRequesterNestedInput
@@ -4804,6 +4899,7 @@ export type UserUpdateWithoutNkpRequestInput = {
   Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeUpdateManyWithoutUserNestedInput
+  TrustedDevice?: Prisma.TrustedDeviceUpdateManyWithoutUserNestedInput
   PasswordResetToken?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
@@ -4848,6 +4944,7 @@ export type UserUncheckedUpdateWithoutNkpRequestInput = {
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedUpdateManyWithoutUserNestedInput
+  TrustedDevice?: Prisma.TrustedDeviceUncheckedUpdateManyWithoutUserNestedInput
   PasswordResetToken?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
@@ -4891,6 +4988,7 @@ export type UserCreateWithoutNkpApprovalInput = {
   Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
   AuthSession?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeCreateNestedManyWithoutUserInput
+  TrustedDevice?: Prisma.TrustedDeviceCreateNestedManyWithoutUserInput
   PasswordResetToken?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpCreateNestedManyWithoutRequesterInput
@@ -4935,6 +5033,7 @@ export type UserUncheckedCreateWithoutNkpApprovalInput = {
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   AuthSession?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedCreateNestedManyWithoutUserInput
+  TrustedDevice?: Prisma.TrustedDeviceUncheckedCreateNestedManyWithoutUserInput
   PasswordResetToken?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpUncheckedCreateNestedManyWithoutRequesterInput
@@ -4994,6 +5093,7 @@ export type UserUpdateWithoutNkpApprovalInput = {
   Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeUpdateManyWithoutUserNestedInput
+  TrustedDevice?: Prisma.TrustedDeviceUpdateManyWithoutUserNestedInput
   PasswordResetToken?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUpdateManyWithoutRequesterNestedInput
@@ -5038,6 +5138,7 @@ export type UserUncheckedUpdateWithoutNkpApprovalInput = {
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedUpdateManyWithoutUserNestedInput
+  TrustedDevice?: Prisma.TrustedDeviceUncheckedUpdateManyWithoutUserNestedInput
   PasswordResetToken?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUncheckedUpdateManyWithoutRequesterNestedInput
@@ -5080,6 +5181,7 @@ export type UserCreateWithoutNotificationInput = {
   Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
   AuthSession?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeCreateNestedManyWithoutUserInput
+  TrustedDevice?: Prisma.TrustedDeviceCreateNestedManyWithoutUserInput
   PasswordResetToken?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
@@ -5124,6 +5226,7 @@ export type UserUncheckedCreateWithoutNotificationInput = {
   Balance?: Prisma.UserBalanceUncheckedCreateNestedOneWithoutUserInput
   AuthSession?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedCreateNestedManyWithoutUserInput
+  TrustedDevice?: Prisma.TrustedDeviceUncheckedCreateNestedManyWithoutUserInput
   PasswordResetToken?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
@@ -5183,6 +5286,7 @@ export type UserUpdateWithoutNotificationInput = {
   Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeUpdateManyWithoutUserNestedInput
+  TrustedDevice?: Prisma.TrustedDeviceUpdateManyWithoutUserNestedInput
   PasswordResetToken?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
@@ -5227,6 +5331,7 @@ export type UserUncheckedUpdateWithoutNotificationInput = {
   Balance?: Prisma.UserBalanceUncheckedUpdateOneWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedUpdateManyWithoutUserNestedInput
+  TrustedDevice?: Prisma.TrustedDeviceUncheckedUpdateManyWithoutUserNestedInput
   PasswordResetToken?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
@@ -5271,6 +5376,7 @@ export type UserCreateWithoutPurchaseOrdersInput = {
   Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
   AuthSession?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeCreateNestedManyWithoutUserInput
+  TrustedDevice?: Prisma.TrustedDeviceCreateNestedManyWithoutUserInput
   PasswordResetToken?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
@@ -5315,6 +5421,7 @@ export type UserUncheckedCreateWithoutPurchaseOrdersInput = {
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   AuthSession?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedCreateNestedManyWithoutUserInput
+  TrustedDevice?: Prisma.TrustedDeviceUncheckedCreateNestedManyWithoutUserInput
   PasswordResetToken?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
@@ -5374,6 +5481,7 @@ export type UserUpdateWithoutPurchaseOrdersInput = {
   Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeUpdateManyWithoutUserNestedInput
+  TrustedDevice?: Prisma.TrustedDeviceUpdateManyWithoutUserNestedInput
   PasswordResetToken?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
@@ -5418,6 +5526,7 @@ export type UserUncheckedUpdateWithoutPurchaseOrdersInput = {
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedUpdateManyWithoutUserNestedInput
+  TrustedDevice?: Prisma.TrustedDeviceUncheckedUpdateManyWithoutUserNestedInput
   PasswordResetToken?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
@@ -5461,6 +5570,7 @@ export type UserCreateWithoutQuotationsInput = {
   Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
   AuthSession?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeCreateNestedManyWithoutUserInput
+  TrustedDevice?: Prisma.TrustedDeviceCreateNestedManyWithoutUserInput
   PasswordResetToken?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
@@ -5505,6 +5615,7 @@ export type UserUncheckedCreateWithoutQuotationsInput = {
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   AuthSession?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedCreateNestedManyWithoutUserInput
+  TrustedDevice?: Prisma.TrustedDeviceUncheckedCreateNestedManyWithoutUserInput
   PasswordResetToken?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
@@ -5564,6 +5675,7 @@ export type UserUpdateWithoutQuotationsInput = {
   Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeUpdateManyWithoutUserNestedInput
+  TrustedDevice?: Prisma.TrustedDeviceUpdateManyWithoutUserNestedInput
   PasswordResetToken?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
@@ -5608,6 +5720,7 @@ export type UserUncheckedUpdateWithoutQuotationsInput = {
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedUpdateManyWithoutUserNestedInput
+  TrustedDevice?: Prisma.TrustedDeviceUncheckedUpdateManyWithoutUserNestedInput
   PasswordResetToken?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
@@ -5651,6 +5764,7 @@ export type UserCreateWithoutSalesOrdersInput = {
   Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
   AuthSession?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeCreateNestedManyWithoutUserInput
+  TrustedDevice?: Prisma.TrustedDeviceCreateNestedManyWithoutUserInput
   PasswordResetToken?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
@@ -5695,6 +5809,7 @@ export type UserUncheckedCreateWithoutSalesOrdersInput = {
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   AuthSession?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedCreateNestedManyWithoutUserInput
+  TrustedDevice?: Prisma.TrustedDeviceUncheckedCreateNestedManyWithoutUserInput
   PasswordResetToken?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
@@ -5754,6 +5869,7 @@ export type UserUpdateWithoutSalesOrdersInput = {
   Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeUpdateManyWithoutUserNestedInput
+  TrustedDevice?: Prisma.TrustedDeviceUpdateManyWithoutUserNestedInput
   PasswordResetToken?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
@@ -5798,6 +5914,7 @@ export type UserUncheckedUpdateWithoutSalesOrdersInput = {
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedUpdateManyWithoutUserNestedInput
+  TrustedDevice?: Prisma.TrustedDeviceUncheckedUpdateManyWithoutUserNestedInput
   PasswordResetToken?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
@@ -5840,6 +5957,7 @@ export type UserCreateWithoutDepartmentInput = {
   Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
   AuthSession?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeCreateNestedManyWithoutUserInput
+  TrustedDevice?: Prisma.TrustedDeviceCreateNestedManyWithoutUserInput
   PasswordResetToken?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
@@ -5884,6 +6002,7 @@ export type UserUncheckedCreateWithoutDepartmentInput = {
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   AuthSession?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedCreateNestedManyWithoutUserInput
+  TrustedDevice?: Prisma.TrustedDeviceUncheckedCreateNestedManyWithoutUserInput
   PasswordResetToken?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
@@ -5972,6 +6091,7 @@ export type UserCreateWithoutBankInput = {
   Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
   AuthSession?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeCreateNestedManyWithoutUserInput
+  TrustedDevice?: Prisma.TrustedDeviceCreateNestedManyWithoutUserInput
   PasswordResetToken?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
@@ -6016,6 +6136,7 @@ export type UserUncheckedCreateWithoutBankInput = {
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   AuthSession?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedCreateNestedManyWithoutUserInput
+  TrustedDevice?: Prisma.TrustedDeviceUncheckedCreateNestedManyWithoutUserInput
   PasswordResetToken?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
@@ -6085,6 +6206,7 @@ export type UserCreateWithoutAuthSessionInput = {
   Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeCreateNestedManyWithoutUserInput
+  TrustedDevice?: Prisma.TrustedDeviceCreateNestedManyWithoutUserInput
   PasswordResetToken?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
@@ -6129,6 +6251,7 @@ export type UserUncheckedCreateWithoutAuthSessionInput = {
   Balance?: Prisma.UserBalanceUncheckedCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedCreateNestedManyWithoutUserInput
+  TrustedDevice?: Prisma.TrustedDeviceUncheckedCreateNestedManyWithoutUserInput
   PasswordResetToken?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
@@ -6188,6 +6311,7 @@ export type UserUpdateWithoutAuthSessionInput = {
   Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeUpdateManyWithoutUserNestedInput
+  TrustedDevice?: Prisma.TrustedDeviceUpdateManyWithoutUserNestedInput
   PasswordResetToken?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
@@ -6232,6 +6356,7 @@ export type UserUncheckedUpdateWithoutAuthSessionInput = {
   Balance?: Prisma.UserBalanceUncheckedUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedUpdateManyWithoutUserNestedInput
+  TrustedDevice?: Prisma.TrustedDeviceUncheckedUpdateManyWithoutUserNestedInput
   PasswordResetToken?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
@@ -6275,6 +6400,7 @@ export type UserCreateWithoutTwoFactorChallengeInput = {
   Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
   AuthSession?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
+  TrustedDevice?: Prisma.TrustedDeviceCreateNestedManyWithoutUserInput
   PasswordResetToken?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
@@ -6319,6 +6445,7 @@ export type UserUncheckedCreateWithoutTwoFactorChallengeInput = {
   Balance?: Prisma.UserBalanceUncheckedCreateNestedOneWithoutUserInput
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   AuthSession?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
+  TrustedDevice?: Prisma.TrustedDeviceUncheckedCreateNestedManyWithoutUserInput
   PasswordResetToken?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
@@ -6378,6 +6505,7 @@ export type UserUpdateWithoutTwoFactorChallengeInput = {
   Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
+  TrustedDevice?: Prisma.TrustedDeviceUpdateManyWithoutUserNestedInput
   PasswordResetToken?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
@@ -6422,6 +6550,201 @@ export type UserUncheckedUpdateWithoutTwoFactorChallengeInput = {
   Balance?: Prisma.UserBalanceUncheckedUpdateOneWithoutUserNestedInput
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
+  TrustedDevice?: Prisma.TrustedDeviceUncheckedUpdateManyWithoutUserNestedInput
+  PasswordResetToken?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
+  Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
+  NkpRequest?: Prisma.NkpUncheckedUpdateManyWithoutRequesterNestedInput
+  Leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
+  Opportunities?: Prisma.OpportunityUncheckedUpdateManyWithoutUserNestedInput
+  Interactions?: Prisma.InteractionUncheckedUpdateManyWithoutUserNestedInput
+  Tasks?: Prisma.TaskUncheckedUpdateManyWithoutUserNestedInput
+  VisitPlans?: Prisma.VisitPlanUncheckedUpdateManyWithoutUserNestedInput
+  CustomerNotes?: Prisma.CustomerNoteUncheckedUpdateManyWithoutUserNestedInput
+  Customers?: Prisma.CustomerUncheckedUpdateManyWithoutAccountManagerNestedInput
+  Quotations?: Prisma.QuotationUncheckedUpdateManyWithoutUserNestedInput
+  salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutUserNestedInput
+  Invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutUserNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutUserNestedInput
+  goodsReceipts?: Prisma.GoodsReceiptUncheckedUpdateManyWithoutUserNestedInput
+  deliveryOrders?: Prisma.DeliveryOrderUncheckedUpdateManyWithoutUserNestedInput
+  accountingPayments?: Prisma.PaymentUncheckedUpdateManyWithoutCreatedByNestedInput
+  journalEntriesCreated?: Prisma.JournalEntryUncheckedUpdateManyWithoutCreatedByNestedInput
+  journalEntriesPosted?: Prisma.JournalEntryUncheckedUpdateManyWithoutPostedByNestedInput
+  closedPeriods?: Prisma.FiscalPeriodUncheckedUpdateManyWithoutClosedByNestedInput
+  vendorBillsCreated?: Prisma.VendorBillUncheckedUpdateManyWithoutCreatedByNestedInput
+  bankTransactions?: Prisma.BankTransactionUncheckedUpdateManyWithoutCreatedByNestedInput
+  approvalItems?: Prisma.ApprovalItemUncheckedUpdateManyWithoutUserNestedInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutTrustedDeviceInput = {
+  name: string
+  code?: string | null
+  email: string
+  password: string
+  active?: boolean
+  twoFactorEnabled?: boolean
+  bankAccount?: string | null
+  currency?: $Enums.Currency
+  signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
+  Bank?: Prisma.BankCreateNestedOneWithoutUserInput
+  Department?: Prisma.DepartmentCreateNestedOneWithoutUserInput
+  Balance?: Prisma.UserBalanceCreateNestedOneWithoutUserInput
+  Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  AuthSession?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeCreateNestedManyWithoutUserInput
+  PasswordResetToken?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
+  Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
+  NkpRequest?: Prisma.NkpCreateNestedManyWithoutRequesterInput
+  Leads?: Prisma.LeadCreateNestedManyWithoutUserInput
+  Opportunities?: Prisma.OpportunityCreateNestedManyWithoutUserInput
+  Interactions?: Prisma.InteractionCreateNestedManyWithoutUserInput
+  Tasks?: Prisma.TaskCreateNestedManyWithoutUserInput
+  VisitPlans?: Prisma.VisitPlanCreateNestedManyWithoutUserInput
+  CustomerNotes?: Prisma.CustomerNoteCreateNestedManyWithoutUserInput
+  Customers?: Prisma.CustomerCreateNestedManyWithoutAccountManagerInput
+  Quotations?: Prisma.QuotationCreateNestedManyWithoutUserInput
+  salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutUserInput
+  Invoices?: Prisma.InvoiceCreateNestedManyWithoutUserInput
+  purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutUserInput
+  goodsReceipts?: Prisma.GoodsReceiptCreateNestedManyWithoutUserInput
+  deliveryOrders?: Prisma.DeliveryOrderCreateNestedManyWithoutUserInput
+  accountingPayments?: Prisma.PaymentCreateNestedManyWithoutCreatedByInput
+  journalEntriesCreated?: Prisma.JournalEntryCreateNestedManyWithoutCreatedByInput
+  journalEntriesPosted?: Prisma.JournalEntryCreateNestedManyWithoutPostedByInput
+  closedPeriods?: Prisma.FiscalPeriodCreateNestedManyWithoutClosedByInput
+  vendorBillsCreated?: Prisma.VendorBillCreateNestedManyWithoutCreatedByInput
+  bankTransactions?: Prisma.BankTransactionCreateNestedManyWithoutCreatedByInput
+  approvalItems?: Prisma.ApprovalItemCreateNestedManyWithoutUserInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutTrustedDeviceInput = {
+  id?: number
+  name: string
+  code?: string | null
+  email: string
+  password: string
+  active?: boolean
+  twoFactorEnabled?: boolean
+  bankAccount?: string | null
+  currency?: $Enums.Currency
+  signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  bankId?: number | null
+  departmentId?: number | null
+  roles?: Prisma.UserCreaterolesInput | $Enums.Role[]
+  Balance?: Prisma.UserBalanceUncheckedCreateNestedOneWithoutUserInput
+  Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  AuthSession?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedCreateNestedManyWithoutUserInput
+  PasswordResetToken?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
+  Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
+  NkpRequest?: Prisma.NkpUncheckedCreateNestedManyWithoutRequesterInput
+  Leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
+  Opportunities?: Prisma.OpportunityUncheckedCreateNestedManyWithoutUserInput
+  Interactions?: Prisma.InteractionUncheckedCreateNestedManyWithoutUserInput
+  Tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutUserInput
+  VisitPlans?: Prisma.VisitPlanUncheckedCreateNestedManyWithoutUserInput
+  CustomerNotes?: Prisma.CustomerNoteUncheckedCreateNestedManyWithoutUserInput
+  Customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutAccountManagerInput
+  Quotations?: Prisma.QuotationUncheckedCreateNestedManyWithoutUserInput
+  salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutUserInput
+  Invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutUserInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutUserInput
+  goodsReceipts?: Prisma.GoodsReceiptUncheckedCreateNestedManyWithoutUserInput
+  deliveryOrders?: Prisma.DeliveryOrderUncheckedCreateNestedManyWithoutUserInput
+  accountingPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCreatedByInput
+  journalEntriesCreated?: Prisma.JournalEntryUncheckedCreateNestedManyWithoutCreatedByInput
+  journalEntriesPosted?: Prisma.JournalEntryUncheckedCreateNestedManyWithoutPostedByInput
+  closedPeriods?: Prisma.FiscalPeriodUncheckedCreateNestedManyWithoutClosedByInput
+  vendorBillsCreated?: Prisma.VendorBillUncheckedCreateNestedManyWithoutCreatedByInput
+  bankTransactions?: Prisma.BankTransactionUncheckedCreateNestedManyWithoutCreatedByInput
+  approvalItems?: Prisma.ApprovalItemUncheckedCreateNestedManyWithoutUserInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutTrustedDeviceInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutTrustedDeviceInput, Prisma.UserUncheckedCreateWithoutTrustedDeviceInput>
+}
+
+export type UserUpsertWithoutTrustedDeviceInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutTrustedDeviceInput, Prisma.UserUncheckedUpdateWithoutTrustedDeviceInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutTrustedDeviceInput, Prisma.UserUncheckedCreateWithoutTrustedDeviceInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutTrustedDeviceInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutTrustedDeviceInput, Prisma.UserUncheckedUpdateWithoutTrustedDeviceInput>
+}
+
+export type UserUpdateWithoutTrustedDeviceInput = {
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
+  signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
+  Bank?: Prisma.BankUpdateOneWithoutUserNestedInput
+  Department?: Prisma.DepartmentUpdateOneWithoutUserNestedInput
+  Balance?: Prisma.UserBalanceUpdateOneWithoutUserNestedInput
+  Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  AuthSession?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeUpdateManyWithoutUserNestedInput
+  PasswordResetToken?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
+  Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
+  NkpRequest?: Prisma.NkpUpdateManyWithoutRequesterNestedInput
+  Leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
+  Opportunities?: Prisma.OpportunityUpdateManyWithoutUserNestedInput
+  Interactions?: Prisma.InteractionUpdateManyWithoutUserNestedInput
+  Tasks?: Prisma.TaskUpdateManyWithoutUserNestedInput
+  VisitPlans?: Prisma.VisitPlanUpdateManyWithoutUserNestedInput
+  CustomerNotes?: Prisma.CustomerNoteUpdateManyWithoutUserNestedInput
+  Customers?: Prisma.CustomerUpdateManyWithoutAccountManagerNestedInput
+  Quotations?: Prisma.QuotationUpdateManyWithoutUserNestedInput
+  salesOrders?: Prisma.SalesOrderUpdateManyWithoutUserNestedInput
+  Invoices?: Prisma.InvoiceUpdateManyWithoutUserNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutUserNestedInput
+  goodsReceipts?: Prisma.GoodsReceiptUpdateManyWithoutUserNestedInput
+  deliveryOrders?: Prisma.DeliveryOrderUpdateManyWithoutUserNestedInput
+  accountingPayments?: Prisma.PaymentUpdateManyWithoutCreatedByNestedInput
+  journalEntriesCreated?: Prisma.JournalEntryUpdateManyWithoutCreatedByNestedInput
+  journalEntriesPosted?: Prisma.JournalEntryUpdateManyWithoutPostedByNestedInput
+  closedPeriods?: Prisma.FiscalPeriodUpdateManyWithoutClosedByNestedInput
+  vendorBillsCreated?: Prisma.VendorBillUpdateManyWithoutCreatedByNestedInput
+  bankTransactions?: Prisma.BankTransactionUpdateManyWithoutCreatedByNestedInput
+  approvalItems?: Prisma.ApprovalItemUpdateManyWithoutUserNestedInput
+  ApprovalSettingItem?: Prisma.ApprovalSettingItemUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutTrustedDeviceInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currency?: Prisma.EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
+  signatureSpeciment?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  bankId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  departmentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  roles?: Prisma.UserUpdaterolesInput | $Enums.Role[]
+  Balance?: Prisma.UserBalanceUncheckedUpdateOneWithoutUserNestedInput
+  Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  AuthSession?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
+  TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedUpdateManyWithoutUserNestedInput
   PasswordResetToken?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
@@ -6466,6 +6789,7 @@ export type UserCreateWithoutPasswordResetTokenInput = {
   Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
   AuthSession?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeCreateNestedManyWithoutUserInput
+  TrustedDevice?: Prisma.TrustedDeviceCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpCreateNestedManyWithoutRequesterInput
@@ -6510,6 +6834,7 @@ export type UserUncheckedCreateWithoutPasswordResetTokenInput = {
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   AuthSession?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedCreateNestedManyWithoutUserInput
+  TrustedDevice?: Prisma.TrustedDeviceUncheckedCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
   NkpRequest?: Prisma.NkpUncheckedCreateNestedManyWithoutRequesterInput
@@ -6569,6 +6894,7 @@ export type UserUpdateWithoutPasswordResetTokenInput = {
   Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeUpdateManyWithoutUserNestedInput
+  TrustedDevice?: Prisma.TrustedDeviceUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUpdateManyWithoutRequesterNestedInput
@@ -6613,6 +6939,7 @@ export type UserUncheckedUpdateWithoutPasswordResetTokenInput = {
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedUpdateManyWithoutUserNestedInput
+  TrustedDevice?: Prisma.TrustedDeviceUncheckedUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
   NkpRequest?: Prisma.NkpUncheckedUpdateManyWithoutRequesterNestedInput
@@ -6655,6 +6982,7 @@ export type UserCreateWithoutBalanceInput = {
   Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
   AuthSession?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeCreateNestedManyWithoutUserInput
+  TrustedDevice?: Prisma.TrustedDeviceCreateNestedManyWithoutUserInput
   PasswordResetToken?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
@@ -6699,6 +7027,7 @@ export type UserUncheckedCreateWithoutBalanceInput = {
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   AuthSession?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedCreateNestedManyWithoutUserInput
+  TrustedDevice?: Prisma.TrustedDeviceUncheckedCreateNestedManyWithoutUserInput
   PasswordResetToken?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
@@ -6758,6 +7087,7 @@ export type UserUpdateWithoutBalanceInput = {
   Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeUpdateManyWithoutUserNestedInput
+  TrustedDevice?: Prisma.TrustedDeviceUpdateManyWithoutUserNestedInput
   PasswordResetToken?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
@@ -6802,6 +7132,7 @@ export type UserUncheckedUpdateWithoutBalanceInput = {
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedUpdateManyWithoutUserNestedInput
+  TrustedDevice?: Prisma.TrustedDeviceUncheckedUpdateManyWithoutUserNestedInput
   PasswordResetToken?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
@@ -6846,6 +7177,7 @@ export type UserCreateWithoutVisitPlansInput = {
   Notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
   AuthSession?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeCreateNestedManyWithoutUserInput
+  TrustedDevice?: Prisma.TrustedDeviceCreateNestedManyWithoutUserInput
   PasswordResetToken?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpCreateNestedManyWithoutEmployeeInput
@@ -6890,6 +7222,7 @@ export type UserUncheckedCreateWithoutVisitPlansInput = {
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   AuthSession?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedCreateNestedManyWithoutUserInput
+  TrustedDevice?: Prisma.TrustedDeviceUncheckedCreateNestedManyWithoutUserInput
   PasswordResetToken?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   NkpApproval?: Prisma.NkpApprovalUncheckedCreateNestedManyWithoutUserInput
   Nkp?: Prisma.NkpUncheckedCreateNestedManyWithoutEmployeeInput
@@ -6949,6 +7282,7 @@ export type UserUpdateWithoutVisitPlansInput = {
   Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeUpdateManyWithoutUserNestedInput
+  TrustedDevice?: Prisma.TrustedDeviceUpdateManyWithoutUserNestedInput
   PasswordResetToken?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
@@ -6993,6 +7327,7 @@ export type UserUncheckedUpdateWithoutVisitPlansInput = {
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedUpdateManyWithoutUserNestedInput
+  TrustedDevice?: Prisma.TrustedDeviceUncheckedUpdateManyWithoutUserNestedInput
   PasswordResetToken?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
@@ -7050,6 +7385,7 @@ export type UserUpdateWithoutDepartmentInput = {
   Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeUpdateManyWithoutUserNestedInput
+  TrustedDevice?: Prisma.TrustedDeviceUpdateManyWithoutUserNestedInput
   PasswordResetToken?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
@@ -7094,6 +7430,7 @@ export type UserUncheckedUpdateWithoutDepartmentInput = {
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedUpdateManyWithoutUserNestedInput
+  TrustedDevice?: Prisma.TrustedDeviceUncheckedUpdateManyWithoutUserNestedInput
   PasswordResetToken?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
@@ -7167,6 +7504,7 @@ export type UserUpdateWithoutBankInput = {
   Notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeUpdateManyWithoutUserNestedInput
+  TrustedDevice?: Prisma.TrustedDeviceUpdateManyWithoutUserNestedInput
   PasswordResetToken?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUpdateManyWithoutEmployeeNestedInput
@@ -7211,6 +7549,7 @@ export type UserUncheckedUpdateWithoutBankInput = {
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   AuthSession?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
   TwoFactorChallenge?: Prisma.TwoFactorChallengeUncheckedUpdateManyWithoutUserNestedInput
+  TrustedDevice?: Prisma.TrustedDeviceUncheckedUpdateManyWithoutUserNestedInput
   PasswordResetToken?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   NkpApproval?: Prisma.NkpApprovalUncheckedUpdateManyWithoutUserNestedInput
   Nkp?: Prisma.NkpUncheckedUpdateManyWithoutEmployeeNestedInput
@@ -7262,6 +7601,7 @@ export type UserCountOutputType = {
   Notification: number
   AuthSession: number
   TwoFactorChallenge: number
+  TrustedDevice: number
   PasswordResetToken: number
   NkpApproval: number
   Nkp: number
@@ -7293,6 +7633,7 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   Notification?: boolean | UserCountOutputTypeCountNotificationArgs
   AuthSession?: boolean | UserCountOutputTypeCountAuthSessionArgs
   TwoFactorChallenge?: boolean | UserCountOutputTypeCountTwoFactorChallengeArgs
+  TrustedDevice?: boolean | UserCountOutputTypeCountTrustedDeviceArgs
   PasswordResetToken?: boolean | UserCountOutputTypeCountPasswordResetTokenArgs
   NkpApproval?: boolean | UserCountOutputTypeCountNkpApprovalArgs
   Nkp?: boolean | UserCountOutputTypeCountNkpArgs
@@ -7349,6 +7690,13 @@ export type UserCountOutputTypeCountAuthSessionArgs<ExtArgs extends runtime.Type
  */
 export type UserCountOutputTypeCountTwoFactorChallengeArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.TwoFactorChallengeWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountTrustedDeviceArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.TrustedDeviceWhereInput
 }
 
 /**
@@ -7547,6 +7895,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   Notification?: boolean | Prisma.User$NotificationArgs<ExtArgs>
   AuthSession?: boolean | Prisma.User$AuthSessionArgs<ExtArgs>
   TwoFactorChallenge?: boolean | Prisma.User$TwoFactorChallengeArgs<ExtArgs>
+  TrustedDevice?: boolean | Prisma.User$TrustedDeviceArgs<ExtArgs>
   PasswordResetToken?: boolean | Prisma.User$PasswordResetTokenArgs<ExtArgs>
   NkpApproval?: boolean | Prisma.User$NkpApprovalArgs<ExtArgs>
   Nkp?: boolean | Prisma.User$NkpArgs<ExtArgs>
@@ -7635,6 +7984,7 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   Notification?: boolean | Prisma.User$NotificationArgs<ExtArgs>
   AuthSession?: boolean | Prisma.User$AuthSessionArgs<ExtArgs>
   TwoFactorChallenge?: boolean | Prisma.User$TwoFactorChallengeArgs<ExtArgs>
+  TrustedDevice?: boolean | Prisma.User$TrustedDeviceArgs<ExtArgs>
   PasswordResetToken?: boolean | Prisma.User$PasswordResetTokenArgs<ExtArgs>
   NkpApproval?: boolean | Prisma.User$NkpApprovalArgs<ExtArgs>
   Nkp?: boolean | Prisma.User$NkpArgs<ExtArgs>
@@ -7680,6 +8030,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     Notification: Prisma.$NotificationPayload<ExtArgs>[]
     AuthSession: Prisma.$AuthSessionPayload<ExtArgs>[]
     TwoFactorChallenge: Prisma.$TwoFactorChallengePayload<ExtArgs>[]
+    TrustedDevice: Prisma.$TrustedDevicePayload<ExtArgs>[]
     PasswordResetToken: Prisma.$PasswordResetTokenPayload<ExtArgs>[]
     NkpApproval: Prisma.$NkpApprovalPayload<ExtArgs>[]
     Nkp: Prisma.$NkpPayload<ExtArgs>[]
@@ -8120,6 +8471,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   Notification<T extends Prisma.User$NotificationArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$NotificationArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   AuthSession<T extends Prisma.User$AuthSessionArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$AuthSessionArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AuthSessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   TwoFactorChallenge<T extends Prisma.User$TwoFactorChallengeArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$TwoFactorChallengeArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TwoFactorChallengePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  TrustedDevice<T extends Prisma.User$TrustedDeviceArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$TrustedDeviceArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TrustedDevicePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   PasswordResetToken<T extends Prisma.User$PasswordResetTokenArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$PasswordResetTokenArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PasswordResetTokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   NkpApproval<T extends Prisma.User$NkpApprovalArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$NkpApprovalArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NkpApprovalPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   Nkp<T extends Prisma.User$NkpArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$NkpArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NkpPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -8714,6 +9066,30 @@ export type User$TwoFactorChallengeArgs<ExtArgs extends runtime.Types.Extensions
   take?: number
   skip?: number
   distinct?: Prisma.TwoFactorChallengeScalarFieldEnum | Prisma.TwoFactorChallengeScalarFieldEnum[]
+}
+
+/**
+ * User.TrustedDevice
+ */
+export type User$TrustedDeviceArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the TrustedDevice
+   */
+  select?: Prisma.TrustedDeviceSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the TrustedDevice
+   */
+  omit?: Prisma.TrustedDeviceOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TrustedDeviceInclude<ExtArgs> | null
+  where?: Prisma.TrustedDeviceWhereInput
+  orderBy?: Prisma.TrustedDeviceOrderByWithRelationInput | Prisma.TrustedDeviceOrderByWithRelationInput[]
+  cursor?: Prisma.TrustedDeviceWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.TrustedDeviceScalarFieldEnum | Prisma.TrustedDeviceScalarFieldEnum[]
 }
 
 /**

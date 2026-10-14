@@ -253,6 +253,11 @@ export type AuthSession = Prisma.AuthSessionModel
  */
 export type TwoFactorChallenge = Prisma.TwoFactorChallengeModel
 /**
+ * Model TrustedDevice
+ * 
+ */
+export type TrustedDevice = Prisma.TrustedDeviceModel
+/**
  * Model PasswordResetToken
  * 
  */

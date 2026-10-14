@@ -98,6 +98,7 @@ export const ModelName = {
   Bank: 'Bank',
   AuthSession: 'AuthSession',
   TwoFactorChallenge: 'TwoFactorChallenge',
+  TrustedDevice: 'TrustedDevice',
   PasswordResetToken: 'PasswordResetToken',
   AppLog: 'AppLog',
   Supplier: 'Supplier',
@@ -993,6 +994,20 @@ export const TwoFactorChallengeScalarFieldEnum = {
 } as const
 
 export type TwoFactorChallengeScalarFieldEnum = (typeof TwoFactorChallengeScalarFieldEnum)[keyof typeof TwoFactorChallengeScalarFieldEnum]
+
+
+export const TrustedDeviceScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  tokenHash: 'tokenHash',
+  userAgent: 'userAgent',
+  ipAddress: 'ipAddress',
+  lastUsedAt: 'lastUsedAt',
+  expiresAt: 'expiresAt',
+  createdAt: 'createdAt'
+} as const
+
+export type TrustedDeviceScalarFieldEnum = (typeof TrustedDeviceScalarFieldEnum)[keyof typeof TrustedDeviceScalarFieldEnum]
 
 
 export const PasswordResetTokenScalarFieldEnum = {

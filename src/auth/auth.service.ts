@@ -15,6 +15,7 @@ import {
   PASSWORD_RESET_TTL_MS,
   REFRESH_TOKEN_TTL_MS,
   TWO_FACTOR_CODE_TTL_MS,
+  TRUSTED_DEVICE_TTL_MS,
   TWO_FACTOR_MAX_ATTEMPTS,
 } from './auth.constants';
 
@@ -29,7 +30,11 @@ export class AuthService {
     private readonly mailerService: MailerService,
   ) {}
 
-  async signIn(email: string, password: string) {
+  async signIn(
+    email: string,
+    password: string,
+    context: { deviceToken?: string; userAgent?: string; ip?: string } = {},
+  ) {
     const user = await this.userService.findByEmail(email);
     if (!user) {
       this.logger.warn('Failed sign-in: unknown email');
@@ -45,7 +50,10 @@ export class AuthService {
       throw new UnauthorizedException('Invalid email or password');
     }
 
-    if (user.twoFactorEnabled) {
+    if (
+      user.twoFactorEnabled &&
+      !(await this.isTrustedDevice(user.id, context))
+    ) {
       const challengeId = await this.createTwoFactorChallenge(user);
       this.logger.log(`2FA code sent to user ${user.id}`);
       return { twoFactorRequired: true, challengeId };
@@ -55,7 +63,11 @@ export class AuthService {
     return this.issueSession(user);
   }
 
-  async verifyTwoFactor(challengeId: string, code: string) {
+  async verifyTwoFactor(
+    challengeId: string,
+    code: string,
+    context: { userAgent?: string; ip?: string } = {},
+  ) {
     const invalid = new UnauthorizedException('Invalid or expired code');
     const challenge = await this.prisma.twoFactorChallenge.findUnique({
       where: { id: challengeId },
@@ -95,7 +107,52 @@ export class AuthService {
     if (consumed.count === 0) throw invalid;
 
     this.logger.log(`User ${challenge.userId} signed in with 2FA`);
-    return this.issueSession(challenge.User);
+    const deviceToken = await this.trustDevice(challenge.userId, context);
+    return { ...(await this.issueSession(challenge.User)), deviceToken };
+  }
+
+  // A device is trusted when it presents the secret cookie issued after a
+  // successful OTP. UA and IP are only recorded for auditing since both can
+  // change legitimately (browser updates, mobile networks) or be spoofed.
+  private async isTrustedDevice(
+    userId: number,
+    context: { deviceToken?: string; userAgent?: string; ip?: string },
+  ) {
+    if (!context.deviceToken) return false;
+    const now = new Date();
+    const { count } = await this.prisma.trustedDevice.updateMany({
+      where: {
+        userId,
+        tokenHash: this.hashToken(context.deviceToken),
+        expiresAt: { gt: now },
+      },
+      data: {
+        lastUsedAt: now,
+        userAgent: context.userAgent?.slice(0, 255),
+        ipAddress: context.ip?.slice(0, 64),
+      },
+    });
+    return count > 0;
+  }
+
+  private async trustDevice(
+    userId: number,
+    context: { userAgent?: string; ip?: string },
+  ) {
+    const deviceToken = randomBytes(32).toString('hex');
+    await this.prisma.trustedDevice.deleteMany({
+      where: { expiresAt: { lte: new Date() } },
+    });
+    await this.prisma.trustedDevice.create({
+      data: {
+        userId,
+        tokenHash: this.hashToken(deviceToken),
+        userAgent: context.userAgent?.slice(0, 255),
+        ipAddress: context.ip?.slice(0, 64),
+        expiresAt: new Date(Date.now() + TRUSTED_DEVICE_TTL_MS),
+      },
+    });
+    return deviceToken;
   }
 
   async setTwoFactor(userId: number, enabled: boolean, password: string) {
@@ -110,10 +167,13 @@ export class AuthService {
       throw new UnauthorizedException('Invalid password');
     }
 
-    await this.prisma.user.update({
-      where: { id: userId },
-      data: { twoFactorEnabled: enabled },
-    });
+    await this.prisma.$transaction([
+      this.prisma.user.update({
+        where: { id: userId },
+        data: { twoFactorEnabled: enabled },
+      }),
+      this.prisma.trustedDevice.deleteMany({ where: { userId } }),
+    ]);
     this.logger.log(`User ${userId} ${enabled ? 'enabled' : 'disabled'} 2FA`);
     return { twoFactorEnabled: enabled };
   }
@@ -283,6 +343,9 @@ export class AuthService {
       this.prisma.authSession.updateMany({
         where: { userId: record.userId, revokedAt: null },
         data: { revokedAt: new Date() },
+      }),
+      this.prisma.trustedDevice.deleteMany({
+        where: { userId: record.userId },
       }),
       this.prisma.passwordResetToken.deleteMany({
         where: { userId: record.userId },

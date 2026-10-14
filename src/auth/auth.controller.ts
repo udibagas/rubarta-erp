@@ -25,7 +25,11 @@ import { Auth } from './auth.decorator';
 import { User } from '../prisma/client/client';
 import { Response } from 'express';
 import { PrismaService } from '../prisma/prisma.service';
-import { REFRESH_TOKEN_TTL_MS } from './auth.constants';
+import {
+  REFRESH_TOKEN_TTL_MS,
+  TRUSTED_DEVICE_COOKIE,
+  TRUSTED_DEVICE_TTL_MS,
+} from './auth.constants';
 
 @ApiTags('Auth')
 @Controller('api/auth')
@@ -48,6 +52,11 @@ export class AuthController {
     const data = await this.authService.signIn(
       credential.email,
       credential.password,
+      {
+        deviceToken: req.cookies?.[TRUSTED_DEVICE_COOKIE],
+        userAgent: req.headers['user-agent'],
+        ip: req.ip,
+      },
     );
 
     if ('twoFactorRequired' in data) {
@@ -72,7 +81,15 @@ export class AuthController {
     const data = await this.authService.verifyTwoFactor(
       dto.challengeId,
       dto.code,
+      { userAgent: req.headers['user-agent'], ip: req.ip },
     );
+    res.cookie(TRUSTED_DEVICE_COOKIE, data.deviceToken, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'lax',
+      path: '/api/auth/login',
+      maxAge: TRUSTED_DEVICE_TTL_MS,
+    });
     await this.setSessionCookies(req, res, data.token, data.refreshToken);
     return { token: data.token, user: data.user };
   }
