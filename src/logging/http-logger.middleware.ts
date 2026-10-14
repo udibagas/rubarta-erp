@@ -21,6 +21,8 @@ export function httpLogger(req: Request, res: Response, next: NextFunction) {
     const userId = (req as Request & { user?: { id: number } }).user?.id;
     const message = `${req.method} ${path} ${status} ${durationMs.toFixed(0)}ms`;
     const { cookie, ...headers } = req.headers;
+    const ip =
+      req.headers['x-real-ip'] || req.headers['x-forwarded-for'] || req.ip;
 
     const meta = {
       method: req.method,
@@ -28,7 +30,7 @@ export function httpLogger(req: Request, res: Response, next: NextFunction) {
       status,
       durationMs: Math.round(durationMs),
       userId,
-      ip: req.headers['x-real-ip'] || req.headers['x-forwarded-for'] || req.ip,
+      ip,
       headers,
     };
 
