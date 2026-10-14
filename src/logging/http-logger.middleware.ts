@@ -27,7 +27,7 @@ export function httpLogger(req: Request, res: Response, next: NextFunction) {
       durationMs: Math.round(durationMs),
       userId,
       ip: req.ip,
-      ips: req.ips,
+      headers: req.headers,
     };
 
     if (status >= 500) logger.error(message, meta);
