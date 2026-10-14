@@ -198,15 +198,12 @@ export class AuthService {
       select: { deviceId: true },
     });
     const now = new Date();
-    // sign out everything on the same device and forget the device
+    // sign out everything on the same device
     if (session?.deviceId) {
       await this.prisma.$transaction([
         this.prisma.authSession.updateMany({
           where: { deviceId: session.deviceId, revokedAt: null },
           data: { revokedAt: now },
-        }),
-        this.prisma.trustedDevice.deleteMany({
-          where: { id: session.deviceId },
         }),
       ]);
     } else {
