@@ -13,6 +13,7 @@ import { PrismaService } from '../prisma/prisma.service';
 import {
   AUTH_TOKEN_TTL_SECONDS,
   PASSWORD_RESET_TTL_MS,
+  REFRESH_TOKEN_TTL_MS,
   TWO_FACTOR_CODE_TTL_MS,
   TWO_FACTOR_MAX_ATTEMPTS,
 } from './auth.constants';
@@ -123,6 +124,51 @@ export class AuthService {
       data: { revokedAt: new Date() },
     });
     this.logger.log(`Session ${sessionId} revoked`);
+  }
+
+  async refreshSession(refreshToken: string) {
+    const invalid = new UnauthorizedException(
+      'Invalid or expired refresh token',
+    );
+    const now = new Date();
+    const expiresAt = new Date(now.getTime() + REFRESH_TOKEN_TTL_MS);
+    const session = await this.prisma.authSession.findFirst({
+      where: {
+        refreshTokenHash: this.hashToken(refreshToken),
+        revokedAt: null,
+        expiresAt: { gt: now },
+      },
+      include: { User: true },
+    });
+
+    if (!session || !session.User.active) throw invalid;
+
+    const nextRefreshToken = randomBytes(32).toString('hex');
+    const token = await this.createAccessToken(session.User, session.jti);
+    const rotated = await this.prisma.authSession.updateMany({
+      where: {
+        id: session.id,
+        refreshTokenHash: this.hashToken(refreshToken),
+        revokedAt: null,
+        expiresAt: { gt: now },
+      },
+      data: {
+        refreshTokenHash: this.hashToken(nextRefreshToken),
+        expiresAt,
+      },
+    });
+    if (rotated.count === 0) throw invalid;
+
+    return {
+      token,
+      refreshToken: nextRefreshToken,
+      user: {
+        id: session.User.id,
+        name: session.User.name,
+        email: session.User.email,
+        roles: session.User.roles,
+      },
+    };
   }
 
   private async createTwoFactorChallenge(user: {
@@ -258,20 +304,34 @@ export class AuthService {
   }) {
     const { id: sub, name, email, roles } = user;
     const sessionId = randomUUID();
-    const token = await this.jwtService.signAsync(
-      { sub, name, email, roles },
-      { jwtid: sessionId, expiresIn: AUTH_TOKEN_TTL_SECONDS },
-    );
+    const token = await this.createAccessToken(user, sessionId);
+    const refreshToken = randomBytes(32).toString('hex');
     await this.prisma.authSession.deleteMany({
       where: { expiresAt: { lte: new Date() } },
     });
     await this.prisma.authSession.create({
       data: {
         jti: sessionId,
+        refreshTokenHash: this.hashToken(refreshToken),
         userId: sub,
-        expiresAt: new Date(Date.now() + AUTH_TOKEN_TTL_SECONDS * 1000),
+        expiresAt: new Date(Date.now() + REFRESH_TOKEN_TTL_MS),
       },
     });
-    return { token, user: { id: sub, name, email, roles } };
+    return {
+      token,
+      refreshToken,
+      user: { id: sub, name, email, roles },
+    };
+  }
+
+  private createAccessToken(
+    user: { id: number; name: string; email: string; roles: string[] },
+    sessionId: string,
+  ) {
+    const { id: sub, name, email, roles } = user;
+    return this.jwtService.signAsync(
+      { sub, name, email, roles },
+      { jwtid: sessionId, expiresIn: AUTH_TOKEN_TTL_SECONDS },
+    );
   }
 }

@@ -4,6 +4,7 @@ import {
   Get,
   HttpCode,
   HttpStatus,
+  UnauthorizedException,
   Post,
   Req,
   Res,
@@ -24,6 +25,7 @@ import { Auth } from './auth.decorator';
 import { User } from '../prisma/client/client';
 import { Response } from 'express';
 import { PrismaService } from '../prisma/prisma.service';
+import { REFRESH_TOKEN_TTL_MS } from './auth.constants';
 
 @ApiTags('Auth')
 @Controller('api/auth')
@@ -53,8 +55,8 @@ export class AuthController {
       return data;
     }
 
-    await this.setSessionCookies(req, res, data.token);
-    return data;
+    await this.setSessionCookies(req, res, data.token, data.refreshToken);
+    return { token: data.token, user: data.user };
   }
 
   @Public()
@@ -71,8 +73,8 @@ export class AuthController {
       dto.challengeId,
       dto.code,
     );
-    await this.setSessionCookies(req, res, data.token);
-    return data;
+    await this.setSessionCookies(req, res, data.token, data.refreshToken);
+    return { token: data.token, user: data.user };
   }
 
   @Public()
@@ -102,7 +104,31 @@ export class AuthController {
     return this.authService.setTwoFactor(user.id, dto.enabled, dto.password);
   }
 
-  private async setSessionCookies(req, res: Response, token: string) {
+  @Public()
+  @Post('refresh')
+  @HttpCode(HttpStatus.OK)
+  @ApiOperation({ summary: 'Refresh the access token' })
+  @ApiOkResponse({ type: AuthEntity })
+  async refresh(
+    @Req() req,
+    @Res({ passthrough: true }) res: Response,
+  ): Promise<AuthEntity> {
+    const refreshToken = req.cookies?.refreshToken;
+    if (typeof refreshToken !== 'string') {
+      throw new UnauthorizedException('Refresh token is required');
+    }
+
+    const data = await this.authService.refreshSession(refreshToken);
+    await this.setSessionCookies(req, res, data.token, data.refreshToken);
+    return { token: data.token, user: data.user };
+  }
+
+  private async setSessionCookies(
+    req,
+    res: Response,
+    token: string,
+    refreshToken: string,
+  ) {
     const company = await this.prisma.company.findFirst({
       where: {
         isDefault: true,
@@ -110,6 +136,13 @@ export class AuthController {
     });
     if (company) res.cookie('companyId', company.id);
     res.cookie('token', token);
+    res.cookie('refreshToken', refreshToken, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'lax',
+      path: '/api/auth/refresh',
+      maxAge: REFRESH_TOKEN_TTL_MS,
+    });
     res.cookie('_csrf', req.csrfToken());
   }
 
@@ -132,6 +165,7 @@ export class AuthController {
   async logout(@Req() req, @Res({ passthrough: true }) res: Response) {
     await this.authService.revokeSession(req.authSessionId);
     res.clearCookie('token');
+    res.clearCookie('refreshToken', { path: '/api/auth/refresh' });
     return { message: 'See you next time!' };
   }
 }

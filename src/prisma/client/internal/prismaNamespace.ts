@@ -5281,6 +5281,7 @@ export type BankScalarFieldEnum = (typeof BankScalarFieldEnum)[keyof typeof Bank
 export const AuthSessionScalarFieldEnum = {
   id: 'id',
   jti: 'jti',
+  refreshTokenHash: 'refreshTokenHash',
   userId: 'userId',
   expiresAt: 'expiresAt',
   revokedAt: 'revokedAt',
