@@ -3,7 +3,7 @@ import { NextFunction, Request, Response } from 'express';
 
 const logger = new Logger('HTTP');
 const SLOW_REQUEST_MS = 1000;
-const IGNORED_PATHS = ['/uploads', '/css', '/favicon.ico'];
+const IGNORED_PATHS = ['/uploads', '/css', '/favicon.ico', '/api/logs'];
 
 /**
  * Logs one line per completed request. Only metadata is logged: never
