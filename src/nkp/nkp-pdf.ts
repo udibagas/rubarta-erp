@@ -56,6 +56,30 @@ export function generateNkpPdf(data: any): Promise<Buffer> {
     const currency = data.currency || 'IDR';
     const decimals = currency === 'IDR' ? 0 : 2;
 
+    const partyLabel = data.paymentType;
+    const partyName =
+      data.paymentType === 'EMPLOYEE'
+        ? data.Employee?.name?.toUpperCase()
+        : data.Supplier?.name?.toUpperCase();
+
+    const detailRows: [string, string][] = [
+      ['COMPANY', data.Company?.name || '-'],
+      ['TYPE', `${data.paymentType} / ${data.nkpType}`],
+      [partyLabel, partyName || '-'],
+      ['BANK NAME', `${data.Bank?.code || ''} - ${data.Bank?.name || ''}`],
+      ['CURRENCY', currency],
+      ['BANK ACCOUNT', data.bankAccount || '-'],
+      [
+        'ACCOUNT HOLDER',
+        data.bankAccountHolder ||
+          data.Employee?.name ||
+          data.Supplier?.name ||
+          '-',
+      ],
+      ['BANK REF NO', data.bankRefNo || '-'],
+      ['DESCRIPTION', data.description || '-'],
+    ];
+
     const drawPageHeader = () => {
       const top = doc.page.margins.top;
 
@@ -108,66 +132,44 @@ export function generateNkpPdf(data: any): Promise<Buffer> {
       );
 
       doc.y = contentTop;
+
+      const detailTop = doc.y;
+
+      doc
+        .lineWidth(0.5)
+        .strokeColor('#808181')
+        .rect(left, detailTop - 2.9, width, detailRows.length * 16)
+        .stroke();
+
+      doc.table(
+        {
+          headers: [
+            {
+              label: 'Property',
+              property: 'property',
+              width: 120,
+              padding: [0, 0, 0, 5],
+            },
+            {
+              label: 'Value',
+              property: 'value',
+              width: width - 120,
+              padding: [0, 0, 0, 5],
+            },
+          ],
+          data: detailRows.map(([label, value]) => ({
+            property: `bold:${label}`,
+            value: `: ${value}`,
+          })),
+        },
+        { x: left, y: detailTop, width, hideHeader: true },
+      );
+
+      doc.moveDown(0.8);
     };
 
     drawPageHeader();
     doc.on('pageAdded', drawPageHeader);
-
-    const partyLabel = data.paymentType;
-    const partyName =
-      data.paymentType === 'EMPLOYEE'
-        ? data.Employee?.name?.toUpperCase()
-        : data.Supplier?.name?.toUpperCase();
-
-    const detailRows: [string, string][] = [
-      ['COMPANY', data.Company?.name || '-'],
-      ['TYPE', `${data.paymentType} / ${data.nkpType}`],
-      [partyLabel, partyName || '-'],
-      ['BANK NAME', `${data.Bank?.code || ''} - ${data.Bank?.name || ''}`],
-      ['CURRENCY', currency],
-      ['BANK ACCOUNT', data.bankAccount || '-'],
-      [
-        'ACCOUNT HOLDER',
-        data.bankAccountHolder ||
-          data.Employee?.name ||
-          data.Supplier?.name ||
-          '-',
-      ],
-      ['BANK REF NO', data.bankRefNo || '-'],
-      ['DESCRIPTION', data.description || '-'],
-    ];
-
-    const detailTop = doc.y;
-
-    doc
-      .lineWidth(0.5)
-      .strokeColor('#808181')
-      .rect(left, detailTop - 2.9, width, detailRows.length * 16)
-      .stroke();
-
-    doc.table(
-      {
-        headers: [
-          {
-            label: 'Property',
-            property: 'property',
-            width: 120,
-            padding: [0, 0, 0, 5],
-          },
-          {
-            label: 'Value',
-            property: 'value',
-            width: width - 120,
-            padding: [0, 0, 0, 5],
-          },
-        ],
-        data: detailRows.map(([label, value]) => ({
-          property: `bold:${label}`,
-          value: `: ${value}`,
-        })),
-      },
-      { x: left, y: detailTop, width, hideHeader: true },
-    );
 
     doc.moveDown(0.8);
 
@@ -178,24 +180,28 @@ export function generateNkpPdf(data: any): Promise<Buffer> {
         label: 'DATE',
         width: 70,
         align: 'center' as const,
+        verticalAlign: 'middle' as const,
       },
       {
         property: 'description',
         label: 'DESCRIPTION',
         width: width - 30 - 70 - 90 - 55,
         align: 'left' as const,
+        verticalAlign: 'middle' as const,
       },
       {
         property: 'amount',
         label: 'AMOUNT',
         width: 90,
         align: 'right' as const,
+        verticalAlign: 'middle' as const,
       },
       {
         property: 'currency',
         label: 'CURR',
         width: 55,
         align: 'center' as const,
+        verticalAlign: 'middle' as const,
       },
     ];
 
@@ -253,6 +259,10 @@ export function generateNkpPdf(data: any): Promise<Buffer> {
 
     const totalsWidth = width / 2;
     const totalsX = right - totalsWidth;
+    const totalsPageBottom = doc.page.height - doc.page.margins.bottom;
+    if (totalsPageBottom - doc.y < Math.max(150, totalsRows.length * 16 + 40)) {
+      doc.addPage();
+    }
     const totalsTop = doc.y;
 
     doc
