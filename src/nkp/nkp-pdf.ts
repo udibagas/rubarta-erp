@@ -303,6 +303,10 @@ export function generateNkpPdf(data: any): Promise<Buffer> {
     if (approvals.length) {
       doc.moveDown(1.5);
       const boxHeight = 110;
+      const pageBottom = doc.page.height - doc.page.margins.bottom;
+      if (pageBottom - doc.y < 150) {
+        doc.addPage();
+      }
       const boxWidth = width / approvals.length;
       const boxTop = doc.y;
 
