@@ -152,27 +152,27 @@ export class NkpController {
     @Res() res: Response,
   ) {
     const data = await this.nkpService.findOne(id, user);
-    // const buffer = await generateNkpPdf(data);
-    // const filename = `${data.number || 'NKP'}.pdf`;
+    const buffer = await generateNkpPdf(data);
+    const filename = `${data.number || 'NKP'}.pdf`;
 
-    // res.setHeader('Content-Type', 'application/pdf');
-    // res.setHeader('Content-Disposition', `inline; filename="${filename}"`);
-    // res.send(buffer);
+    res.setHeader('Content-Type', 'application/pdf');
+    res.setHeader('Content-Disposition', `inline; filename="${filename}"`);
+    res.send(buffer);
 
-    const actions = {
-      APPROVAL: 'APPROVED BY',
-      VERIFICATION: 'VERIFIED BY',
-      AUTHORIZATION: 'AUTHORIZED BY',
-    };
+    // const actions = {
+    //   APPROVAL: 'APPROVED BY',
+    //   VERIFICATION: 'VERIFIED BY',
+    //   AUTHORIZATION: 'AUTHORIZED BY',
+    // };
 
-    res.render('nkp/show', {
-      data,
-      toCurrency,
-      formatDate,
-      formatDateNumeric,
-      toDecimal,
-      terbilang,
-      actions,
-    });
+    // res.render('nkp/show', {
+    //   data,
+    //   toCurrency,
+    //   formatDate,
+    //   formatDateNumeric,
+    //   toDecimal,
+    //   terbilang,
+    //   actions,
+    // });
   }
 }

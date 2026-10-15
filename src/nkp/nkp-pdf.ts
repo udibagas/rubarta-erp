@@ -76,16 +76,9 @@ export function generateNkpPdf(data: any): Promise<Buffer> {
         });
 
       doc
-        .moveTo(left, top + 42)
-        .lineTo(right, top + 42)
-        .lineWidth(1)
-        .strokeColor('#808181')
-        .stroke();
-
-      doc
         .lineWidth(0.5)
         .strokeColor('#808181')
-        .rect(left, top + 48.5, 250, 32)
+        .rect(left, top + 48.5, 220, 32)
         .stroke();
 
       doc.table(
@@ -95,13 +88,12 @@ export function generateNkpPdf(data: any): Promise<Buffer> {
               label: 'Property',
               property: 'property',
               width: 70,
-              padding: [0, 2, 0, 2],
+              padding: [0, 0, 0, 5],
             },
             {
               label: 'Value',
               property: 'value',
-              width: 180,
-              padding: [0, 2, 0, 2],
+              width: 150,
             },
           ],
           data: [
@@ -134,6 +126,13 @@ export function generateNkpPdf(data: any): Promise<Buffer> {
       ['BANK NAME', `${data.Bank?.code || ''} - ${data.Bank?.name || ''}`],
       ['CURRENCY', currency],
       ['BANK ACCOUNT', data.bankAccount || '-'],
+      [
+        'ACCOUNT HOLDER',
+        data.bankAccountHolder ||
+          data.Employee?.name ||
+          data.Supplier?.name ||
+          '-',
+      ],
       ['BANK REF NO', data.bankRefNo || '-'],
       ['DESCRIPTION', data.description || '-'],
     ];
@@ -216,37 +215,40 @@ export function generateNkpPdf(data: any): Promise<Buffer> {
 
     doc.moveDown(0.5);
 
-    const totalsRows: [string, number][] = [['GRAND TOTAL', data.grandTotal]];
+    const totalsRows: [string, number][] = [['GRAND TOTAL :', data.grandTotal]];
 
     if (data.paymentType === 'VENDOR') {
-      totalsRows.push(['TAX', data.tax]);
-      totalsRows.push(['DEDUCTION', data.deduction]);
-      totalsRows.push(['NET AMOUNT', data.netAmount]);
+      totalsRows.push(['TAX :', data.tax]);
+      totalsRows.push(['DEDUCTION :', data.deduction]);
+      totalsRows.push(['NET AMOUNT :', data.netAmount]);
 
       if (data.nkpType === 'SETTLEMENT') {
-        totalsRows.push(['DOWN PAYMENT', data.downPayment]);
+        totalsRows.push(['DOWN PAYMENT :', data.downPayment]);
       }
     }
 
     if (data.paymentType === 'EMPLOYEE') {
       if (data.cashAdvanceBalance) {
-        totalsRows.push(['CASH ADVANCE BALANCE', data.cashAdvanceBalance]);
+        totalsRows.push(['CASH ADVANCE BALANCE :', data.cashAdvanceBalance]);
       }
 
       if (data.nkpType === 'CASH_ADVANCE') {
-        totalsRows.push(['TRANSFER KE KARYAWAN', Math.abs(data.finalPayment)]);
+        totalsRows.push([
+          'TRANSFER KE KARYAWAN :',
+          Math.abs(data.finalPayment),
+        ]);
       }
 
       if (data.nkpType === 'DECLARATION') {
         totalsRows.push([
-          `KEMBALI KE ${data.finalPayment > 0 ? 'KARYAWAN' : 'PERUSAHAAN'}`,
+          `KEMBALI KE ${data.finalPayment > 0 ? 'KARYAWAN' : 'PERUSAHAAN'} :`,
           Math.abs(data.finalPayment),
         ]);
       }
     }
 
     if (data.paymentType === 'VENDOR') {
-      totalsRows.push(['FINAL PAYMENT', data.finalPayment]);
+      totalsRows.push(['FINAL PAYMENT :', data.finalPayment]);
     }
 
     const totalsWidth = width / 2;
@@ -331,12 +333,17 @@ export function generateNkpPdf(data: any): Promise<Buffer> {
         doc
           .font('Helvetica')
           .fontSize(8)
+          .fillColor(
+            approval.approvalStatus === 'APPROVED' ? '#008000' : '#FF0000',
+          )
           .text(
             approval.approvalStatus === 'APPROVED' ? 'APPROVED' : 'PENDING',
             boxX,
             boxTop + 50,
             { width: boxWidth, align: 'center' },
           );
+
+        doc.fillColor('#000000');
 
         doc
           .fontSize(7)
