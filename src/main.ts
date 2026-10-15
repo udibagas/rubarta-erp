@@ -78,6 +78,10 @@ async function bootstrap() {
         useDefaults: false,
         directives: {
           defaultSrc: ["'self'"],
+          // hash of the inline `window.print()` script in views/nkp/show.ejs
+          scriptSrc: ["'self'", "'sha256-vEVrFjWxPOA4Cp9lV2pBeOOkPadpKGalKgyPlWXx9BQ='"],
+          // print views (views/nkp, _approval) use <style> blocks and style attributes
+          styleSrc: ["'self'", "'unsafe-inline'"],
           frameAncestors: [
             "'self'",
             'http://localhost:4000',
