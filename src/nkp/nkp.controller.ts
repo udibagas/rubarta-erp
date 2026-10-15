@@ -153,7 +153,7 @@ export class NkpController {
   ) {
     const data = await this.nkpService.findOne(id, user);
     const buffer = await generateNkpPdf(data);
-    const filename = `${data.number || 'NKP'}.pdf`;
+    const filename = `${data.number?.replace(/\//g, '_') || 'NKP'}.pdf`;
 
     res.setHeader('Content-Type', 'application/pdf');
     res.setHeader('Content-Disposition', `inline; filename="${filename}"`);
