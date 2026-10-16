@@ -427,7 +427,29 @@ export function generateInvoicePdf(invoice: any): Promise<Buffer> {
     // ---------- Signature ----------
     const signatureWidth = 220;
     const signatureX = right - signatureWidth;
-    let signatureY = doc.y + 20;
+    const signatureTopPadding = 20;
+    const signatureGap = 100;
+    const companyNameHeight = doc
+      .font('Helvetica-Bold')
+      .fontSize(9)
+      .heightOfString(COMPANY.name, { width: signatureWidth });
+    const signerName = `( ${(invoice.User?.name || '-').toUpperCase()} )`;
+    const signerNameHeight = doc.heightOfString(signerName, {
+      width: signatureWidth,
+    });
+    const signatureHeight = Math.max(
+      companyNameHeight,
+      signatureGap + signerNameHeight,
+    );
+
+    if (
+      doc.y + signatureTopPadding + signatureHeight >
+      doc.page.height - doc.page.margins.bottom
+    ) {
+      doc.addPage();
+    }
+
+    let signatureY = doc.y + signatureTopPadding;
 
     doc
       .font('Helvetica-Bold')
@@ -438,13 +460,13 @@ export function generateInvoicePdf(invoice: any): Promise<Buffer> {
         align: 'center',
       });
 
-    signatureY += 100;
+    signatureY += signatureGap;
 
     doc
       .font('Helvetica-Bold')
       .fontSize(9)
       .text(
-        `( ${(invoice.User?.name || '-').toUpperCase()} )`,
+        signerName,
         signatureX,
         signatureY,
         { width: signatureWidth, align: 'center' },
