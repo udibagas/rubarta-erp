@@ -139,6 +139,7 @@ export class GoodsReceiptsService {
     Supplier: true,
     PurchaseOrder: true,
     Company: { select: { id: true, name: true, address: true } },
+    User: { select: { id: true, name: true } },
   } satisfies Prisma.GoodsReceiptInclude;
 
   async create(data: CreateGoodsReceiptDto & { userId: number }) {
