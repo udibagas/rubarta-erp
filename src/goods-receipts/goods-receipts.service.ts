@@ -231,6 +231,7 @@ export class GoodsReceiptsService {
       include: {
         Supplier: { select: { id: true, name: true } },
         PurchaseOrder: { select: { id: true, number: true, title: true } },
+        User: { select: { id: true, name: true } },
         _count: { select: { GoodsReceiptItems: true } },
       },
     });
