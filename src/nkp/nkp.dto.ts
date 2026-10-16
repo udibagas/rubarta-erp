@@ -13,7 +13,6 @@ import {
   IsEnum,
   IsNotEmpty,
   IsNumber,
-  IsNumberString,
   IsOptional,
   IsString,
   MaxLength,
@@ -204,12 +203,14 @@ export class CloseNkpDto {
 
 export class QueryNkpDto {
   @IsOptional()
-  @IsNumberString()
-  page?: string;
+  @Type(() => Number)
+  @IsNumber()
+  page?: number;
 
   @IsOptional()
-  @IsNumberString()
-  pageSize?: string;
+  @Type(() => Number)
+  @IsNumber()
+  pageSize?: number;
 
   @IsOptional()
   keyword?: string;
@@ -218,8 +219,9 @@ export class QueryNkpDto {
   status?: PaymentStatus | PaymentStatus[];
 
   @IsOptional()
-  @IsNumberString()
-  companyId?: string;
+  @Type(() => Number)
+  @IsNumber()
+  companyId?: number;
 
   @IsOptional()
   @IsEnum([...Object.values(PaymentType), 'ALL'])

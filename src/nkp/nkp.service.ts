@@ -82,7 +82,7 @@ export class NkpService {
     const where: Prisma.NkpWhereInput = {};
 
     if (companyId) {
-      where.companyId = +companyId;
+      where.companyId = companyId;
     }
 
     if (Array.isArray(status) && status.length > 0) {
@@ -164,12 +164,15 @@ export class NkpService {
     };
 
     if (!action || action == 'report') {
-      options.take = Number(pageSize);
-      options.skip = (Number(page) - 1) * Number(pageSize);
+      options.take = pageSize;
+      options.skip = (page - 1) * pageSize;
     }
 
-    const data = await this.prisma.nkp.findMany(options);
-    const total = await this.prisma.nkp.count({ where });
+    const [data, total] = await Promise.all([
+      this.prisma.nkp.findMany(options),
+      this.prisma.nkp.count({ where }),
+    ]);
+
     return { data, page, total };
   }
 
