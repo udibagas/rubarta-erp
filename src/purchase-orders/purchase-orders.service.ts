@@ -1,8 +1,4 @@
-import {
-  BadRequestException,
-  Injectable,
-  NotFoundException,
-} from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { User } from '../prisma/client/client';
 import { MailerService } from '@nestjs-modules/mailer';
 import { ApprovalService } from '../approval/approval.service';
@@ -38,23 +34,11 @@ export class PurchaseOrdersService {
   async create(data: CreatePurchaseOrderDto & { userId: number }, user: User) {
     this.policy.can('create', null, user);
 
-    const existingSalesOrder = await this.prisma.salesOrder.findUnique({
-      where: { id: data.salesOrderId },
+    const existingPurchaseOrder = await this.prisma.purchaseOrder.findFirst({
+      where: { salesOrderId: data.salesOrderId },
     });
 
-    if (!existingSalesOrder) {
-      throw new BadRequestException({
-        message: 'Sales order not found',
-        errors: [
-          {
-            property: 'salesOrderId',
-            error: 'Sales order not found',
-          },
-        ],
-      });
-    }
-
-    if (existingSalesOrder) {
+    if (existingPurchaseOrder) {
       throw new BadRequestException({
         message: 'Sales order has already been processed',
         errors: [
