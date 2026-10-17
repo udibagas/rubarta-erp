@@ -321,16 +321,16 @@ export class MaterialsService {
           currentStock: row.getCell(15).value
             ? parseInt(row.getCell(15).value.toString())
             : 0,
-          leadTime: row.getCell(16).value
-            ? parseInt(row.getCell(16).value.toString())
+          leadTime: row.getCell(17).value
+            ? parseInt(row.getCell(17).value.toString())
             : null,
-          isActive: row.getCell(17).value
-            ? row.getCell(17).value.toString().toLowerCase() === 'true'
+          isActive: row.getCell(18).value
+            ? row.getCell(18).value.toString().toLowerCase() === 'true'
             : true,
         };
 
-        // Handle supplier by name (if provided in column 17)
-        const supplierName = row.getCell(18).value?.toString();
+        // Handle supplier by name (if provided in column 16)
+        const supplierName = row.getCell(16).value?.toString();
         if (supplierName) {
           // Store supplier name temporarily, will be resolved later
           material.supplierName = supplierName;
@@ -436,6 +436,11 @@ export class MaterialsService {
     // Define columns
     worksheet.columns = [
       { header: 'Part Number *', key: 'partNumber', width: 15 },
+      {
+        header: 'Interchange Part Number *',
+        key: 'interchangeNumber',
+        width: 15,
+      },
       { header: 'Name *', key: 'name', width: 30 },
       { header: 'Model', key: 'model', width: 15 },
       { header: 'Description', key: 'description', width: 40 },
@@ -466,6 +471,7 @@ export class MaterialsService {
     // Add sample data
     worksheet.addRow({
       partNumber: 'PART-001',
+      interchangeNumber: 'INTER-001',
       name: 'Sample Material',
       model: 'MODEL-A',
       description: 'Sample description',
