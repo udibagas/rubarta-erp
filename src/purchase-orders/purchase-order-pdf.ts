@@ -99,14 +99,16 @@ export function generatePurchaseOrderPdf(order: any): Promise<Buffer> {
       const status = String(order?.status ?? '')
         .trim()
         .toUpperCase();
-      if (!['DRAFT'].includes(status)) {
+      if (!['DRAFT', 'CANCELLED'].includes(status)) {
         return;
       }
 
       const centerX = doc.page.width / 2;
       const centerY = doc.page.height / 2;
 
-      const strokeColor = status === 'DRAFT' ? '#FF0000' : '#008000';
+      const strokeColor = ['DRAFT', 'CANCELLED'].includes(status)
+        ? '#FF0000'
+        : '#008000';
 
       doc
         .save()
