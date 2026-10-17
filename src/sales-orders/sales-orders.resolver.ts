@@ -1,16 +1,11 @@
 import { Resolver, Query, Args, Int } from '@nestjs/graphql';
-import { SalesOrdersService } from './sales-orders.service';
 import { SalesOrderType } from './sales-order.type';
 import { Prisma, SalesOrderStatus } from '../prisma/client/client';
 import { PrismaService } from '../prisma/prisma.service';
-import { NotFoundException } from '@nestjs/common';
 
 @Resolver(() => SalesOrderType)
 export class SalesOrdersResolver {
-  constructor(
-    private readonly salesOrdersService: SalesOrdersService,
-    private readonly prisma: PrismaService,
-  ) {}
+  constructor(private readonly prisma: PrismaService) {}
 
   @Query(() => [SalesOrderType], {
     name: 'salesOrders',
@@ -21,6 +16,8 @@ export class SalesOrdersResolver {
     customerId?: number,
     @Args('status', { type: () => [SalesOrderStatus], nullable: true })
     status?: SalesOrderStatus[],
+    @Args('unProcessed', { type: () => Boolean, nullable: true })
+    unProcessed?: boolean,
   ) {
     const where: Prisma.SalesOrderWhereInput = {
       deletedAt: null,
@@ -34,40 +31,32 @@ export class SalesOrdersResolver {
       where.status = { in: status };
     }
 
-    return this.prisma.salesOrder.findMany({
+    const data = await this.prisma.salesOrder.findMany({
       where,
       orderBy: { date: 'desc' },
       include: {
         Customer: { select: { id: true, name: true } },
         SalesOrderItems: true,
-      },
-    });
-  }
-
-  @Query(() => SalesOrderType, {
-    name: 'salesOrder',
-    description: 'Get sales order by ID',
-  })
-  async findOne(@Args('id', { type: () => Int }) id: number) {
-    const salesOrder = await this.prisma.salesOrder.findFirst({
-      where: { id, deletedAt: null },
-      include: {
-        SalesOrderItems: {
-          orderBy: { sortOrder: 'asc' },
-        },
-        Customer: {
-          select: { id: true, name: true },
-        },
-        User: {
-          select: { id: true, name: true, email: true },
+        _count: {
+          select: {
+            PurchaseOrders: {
+              where: {
+                deletedAt: null,
+              },
+            },
+          },
         },
       },
     });
 
-    if (!salesOrder) {
-      throw new NotFoundException(`Order with ID ${id} not found`);
+    if (unProcessed !== undefined) {
+      return data.filter((order) =>
+        unProcessed
+          ? order._count.PurchaseOrders === 0
+          : order._count.PurchaseOrders > 0,
+      );
     }
 
-    return salesOrder;
+    return data;
   }
 }
