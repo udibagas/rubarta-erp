@@ -37,6 +37,35 @@ export class PurchaseOrdersService {
 
   async create(data: CreatePurchaseOrderDto & { userId: number }, user: User) {
     this.policy.can('create', null, user);
+
+    const existingSalesOrder = await this.prisma.salesOrder.findUnique({
+      where: { id: data.salesOrderId },
+    });
+
+    if (!existingSalesOrder) {
+      throw new BadRequestException({
+        message: 'Sales order not found',
+        errors: [
+          {
+            property: 'salesOrderId',
+            error: 'Sales order not found',
+          },
+        ],
+      });
+    }
+
+    if (existingSalesOrder) {
+      throw new BadRequestException({
+        message: 'Sales order has already been processed',
+        errors: [
+          {
+            property: 'salesOrderId',
+            error: 'Sales order has already been processed',
+          },
+        ],
+      });
+    }
+
     const { items, ...purchaseOrderData } = data;
     const number = await this.generateNumber();
     const totalAmount = items.reduce(
