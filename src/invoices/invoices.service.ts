@@ -161,7 +161,7 @@ export class InvoicesService {
       where,
       take,
       skip,
-      orderBy: { date: 'desc' },
+      orderBy: { createdAt: 'desc' },
       include: {
         Customer: {
           select: {

@@ -194,7 +194,7 @@ export class DeliveryOrdersService {
 
     const data = await this.prisma.deliveryOrder.findMany({
       where,
-      orderBy: { date: 'desc' },
+      orderBy: { createdAt: 'desc' },
       take,
       skip,
       include: {

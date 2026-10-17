@@ -103,7 +103,7 @@ export class SalesOrdersService {
 
     const data = await this.prisma.salesOrder.findMany({
       where,
-      orderBy: { date: 'desc' },
+      orderBy: { createdAt: 'desc' },
       skip,
       take,
       include: {

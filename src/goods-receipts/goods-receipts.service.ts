@@ -226,7 +226,7 @@ export class GoodsReceiptsService {
 
     const data = await this.prisma.goodsReceipt.findMany({
       where,
-      orderBy: { date: 'desc' },
+      orderBy: { createdAt: 'desc' },
       take,
       skip,
       include: {
