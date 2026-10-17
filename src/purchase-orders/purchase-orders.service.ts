@@ -106,7 +106,7 @@ export class PurchaseOrdersService {
       where,
       skip,
       take,
-      orderBy: { date: 'desc' },
+      orderBy: { createdAt: 'desc' },
       include: {
         Supplier: { select: { id: true, name: true } },
         User: { select: { id: true, name: true } },
