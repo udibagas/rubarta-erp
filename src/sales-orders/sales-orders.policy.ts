@@ -27,7 +27,16 @@ export class SalesOrdersPolicy extends BasePolicy {
   }
 
   delete(model: SalesOrder, user: User) {
-    return this.authorizeDraftMutation(model, user);
+    if (['Draft', 'Cancelled'].includes(model.status)) {
+      throw new ForbiddenException();
+    }
+
+    if (user.roles.includes('ADMIN')) return true;
+    if (user.roles.includes('SALES_REP') && model.userId === user.id) {
+      return true;
+    }
+
+    throw new ForbiddenException();
   }
 
   submit(model: SalesOrder, user: User) {
