@@ -196,6 +196,17 @@ export class CreatePurchaseOrderDto {
   @IsOptional()
   @IsEnum(PurchaseOrderStatus)
   status?: PurchaseOrderStatus;
+
+  @ApiProperty({ required: false, enum: PaymentStatus })
+  @IsOptional()
+  @IsEnum(PaymentStatus)
+  paymentStatus?: PaymentStatus;
+
+  @ApiProperty({ required: false, example: 0 })
+  @IsOptional()
+  @IsNumber()
+  @Min(0)
+  paymentAmount?: number;
 }
 
 export class UpdatePurchaseOrderDto extends PartialType(
