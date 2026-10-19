@@ -222,9 +222,22 @@ export class PurchaseOrdersService {
 
     this.policy.can('updateStatus', order, user);
 
-    return this.prisma.purchaseOrder.update({
-      where: { id },
-      data: { paymentStatus, paymentAmount: paymentAmount ?? order.grandTotal },
+    return this.prisma.$transaction(async (tx) => {
+      const data = await tx.purchaseOrder.update({
+        where: { id },
+        data: {
+          paymentStatus,
+          paymentAmount: paymentAmount ?? order.grandTotal,
+        },
+      });
+
+      // update GR payment status
+      await tx.goodsReceipt.updateMany({
+        where: { purchaseOrderId: id },
+        data: { paymentStatus },
+      });
+
+      return data;
     });
   }
 
