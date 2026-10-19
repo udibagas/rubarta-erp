@@ -27,6 +27,8 @@ import {
   QueryPurchaseOrderDto,
   SendPurchaseOrderEmailDto,
   UpdatePurchaseOrderDto,
+  UpdatePurchaseOrderPaymentStatusDto,
+  UpdatePurchaseOrderStatusDto,
 } from './purchase-order.dto';
 
 @ApiTags('Purchase Orders')
@@ -183,6 +185,33 @@ export class PurchaseOrdersController {
     @Auth() user: User,
   ) {
     return this.purchaseOrdersService.update(id, dto, user);
+  }
+
+  @Patch(':id/status')
+  @ApiOperation({ summary: 'Update purchase order status' })
+  updateStatus(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() dto: UpdatePurchaseOrderStatusDto,
+    @Auth() user: User,
+  ) {
+    const { status } = dto;
+    return this.purchaseOrdersService.updateStatus(id, status, user);
+  }
+
+  @Patch(':id/payment-status')
+  @ApiOperation({ summary: 'Update purchase order payment status' })
+  updatePaymentStatus(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() dto: UpdatePurchaseOrderPaymentStatusDto,
+    @Auth() user: User,
+  ) {
+    const { paymentStatus, paymentAmount } = dto;
+    return this.purchaseOrdersService.updatePaymentStatus(
+      id,
+      paymentStatus,
+      user,
+      paymentAmount,
+    );
   }
 
   @Post(':id/submit')

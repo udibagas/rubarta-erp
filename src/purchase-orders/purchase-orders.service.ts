@@ -1,5 +1,5 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
-import { User } from '../prisma/client/client';
+import { PaymentStatus, User } from '../prisma/client/client';
 import { MailerService } from '@nestjs-modules/mailer';
 import { ApprovalService } from '../approval/approval.service';
 import { PrismaService } from '../prisma/prisma.service';
@@ -194,6 +194,37 @@ export class PurchaseOrdersService {
       where: { id },
       data: purchaseOrderData,
       include: { PurchaseOrderItems: true, Supplier: true },
+    });
+  }
+
+  async updateStatus(id: number, status: PurchaseOrderStatus, user: User) {
+    const order = await this.prisma.purchaseOrder.findUniqueOrThrow({
+      where: { id, deletedAt: null },
+    });
+
+    this.policy.can('updateStatus', order, user);
+
+    return this.prisma.purchaseOrder.update({
+      where: { id },
+      data: { status },
+    });
+  }
+
+  async updatePaymentStatus(
+    id: number,
+    paymentStatus: PaymentStatus,
+    user: User,
+    paymentAmount?: number,
+  ) {
+    const order = await this.prisma.purchaseOrder.findUniqueOrThrow({
+      where: { id, deletedAt: null },
+    });
+
+    this.policy.can('updateStatus', order, user);
+
+    return this.prisma.purchaseOrder.update({
+      where: { id },
+      data: { paymentStatus, paymentAmount: paymentAmount ?? order.grandTotal },
     });
   }
 
