@@ -1,6 +1,6 @@
 import { ApiProperty, PartialType } from '@nestjs/swagger';
 import { Currency, Role } from '../prisma/client/client';
-import { IsNumber, IsNumberString } from 'class-validator';
+import { IsNumber } from 'class-validator';
 import { JsonObject } from 'type-fest';
 import {
   ArrayNotEmpty,
@@ -13,7 +13,7 @@ import {
   IsOptional,
   Length,
 } from 'class-validator';
-import { Transform, Type } from 'class-transformer';
+import { Type } from 'class-transformer';
 
 export class UserRole {
   @IsNotEmpty()
