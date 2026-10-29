@@ -1,4 +1,4 @@
-import { Injectable, Logger } from '@nestjs/common';
+import { Injectable, Logger, BadRequestException } from '@nestjs/common';
 import { CloseNkpDto, NkpDto, QueryNkpDto } from './nkp.dto';
 import { PrismaService } from '../prisma/prisma.service';
 import {
@@ -38,6 +38,25 @@ export class NkpService {
     this.policy.can('create', null, user);
     const { NkpItem: items, NkpAttachment: attachments, ...data } = dto;
     const { companyId, paymentType, nkpType, parentId } = data;
+
+    const existingNkp = await this.prisma.nkp.findFirst({
+      where: {
+        supplierId: data.supplierId,
+        invoiceNumber: data.invoiceNumber,
+      },
+    });
+
+    if (existingNkp) {
+      throw new BadRequestException({
+        message: 'Invoice sudah diproses',
+        errors: [
+          {
+            property: 'invoiceNumber',
+            error: 'Nomor invoice untuk supplier ini sudah ada',
+          },
+        ],
+      });
+    }
 
     let number = await this.generateNumber({
       companyId,
@@ -394,6 +413,27 @@ export class NkpService {
     this.policy.can('update', nkp, user);
 
     const { NkpItem: items, NkpAttachment: attachments, ...data } = dto;
+
+    const existingNkp = await this.prisma.nkp.findFirst({
+      where: {
+        supplierId: data.supplierId,
+        invoiceNumber: data.invoiceNumber,
+        id: { not: id },
+      },
+    });
+
+    if (existingNkp) {
+      throw new BadRequestException({
+        message: 'Invoice sudah diproses',
+        errors: [
+          {
+            property: 'invoiceNumber',
+            error: 'Nomor invoice untuk supplier ini sudah ada',
+          },
+        ],
+      });
+    }
+
     const savedData = await this.prisma.nkp.update({
       where: { id },
       data: {
