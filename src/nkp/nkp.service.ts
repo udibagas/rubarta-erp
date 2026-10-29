@@ -58,6 +58,29 @@ export class NkpService {
       });
     }
 
+    const thirtyDaysAgo = new Date();
+    thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+    const existingNkpWithAmount = await this.prisma.nkp.findFirst({
+      where: {
+        supplierId: data.supplierId,
+        finalPayment: data.finalPayment,
+        date: { gte: thirtyDaysAgo },
+      },
+    });
+
+    if (existingNkpWithAmount) {
+      throw new BadRequestException({
+        message: 'Invoice sudah diproses',
+        errors: [
+          {
+            property: 'invoiceNumber',
+            error:
+              'Nomor invoice untuk supplier ini dengan jumlah yang sama sudah ada dalam 30 hari terakhir',
+          },
+        ],
+      });
+    }
+
     let number = await this.generateNumber({
       companyId,
       paymentType,
@@ -429,6 +452,30 @@ export class NkpService {
           {
             property: 'invoiceNumber',
             error: 'Nomor invoice untuk supplier ini sudah ada',
+          },
+        ],
+      });
+    }
+
+    const thirtyDaysAgo = new Date();
+    thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+    const existingNkpWithAmount = await this.prisma.nkp.findFirst({
+      where: {
+        supplierId: data.supplierId,
+        finalPayment: data.finalPayment,
+        date: { gte: thirtyDaysAgo },
+        id: { not: id },
+      },
+    });
+
+    if (existingNkpWithAmount) {
+      throw new BadRequestException({
+        message: 'Invoice sudah diproses',
+        errors: [
+          {
+            property: 'invoiceNumber',
+            error:
+              'Nomor invoice untuk supplier ini dengan jumlah yang sama sudah ada dalam 30 hari terakhir',
           },
         ],
       });
