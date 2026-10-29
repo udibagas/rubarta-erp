@@ -203,6 +203,7 @@ export class SalesOrdersService {
       SELECT
         so.id AS "soId",
         so."number" AS "soNumber",
+        so."referenceNumber" AS "referenceNumber",
         c.name AS "customerName",
         COUNT(soi.id)::int AS "itemCount",
         SUM(soi."quantity")::int AS "orderedQty",
@@ -216,7 +217,7 @@ export class SalesOrdersService {
         AND so.status NOT IN ('Draft', 'Completed', 'Cancelled')
         AND soi."deliveredQuantity" < soi."quantity"
         ${customerFilter}
-      GROUP BY so.id, so."number", c.name
+      GROUP BY so.id, so."number", so."referenceNumber", c.name
     `;
     }
 
@@ -228,6 +229,7 @@ export class SalesOrdersService {
         soi."description" AS "description",
         so.id AS "soId",
         so."number" AS "soNumber",
+        so."referenceNumber" AS "referenceNumber",
         c.name AS "customerName",
         soi."quantity"::int AS "orderedQty",
         soi."deliveredQuantity"::int AS "deliveredQty",
@@ -240,7 +242,7 @@ export class SalesOrdersService {
         AND so.status NOT IN ('Draft', 'Completed', 'Cancelled')
         AND soi."deliveredQuantity" < soi."quantity"
         ${customerFilter}
-      GROUP BY soi.id, soi."partNumber", soi."description", so.id, so."number", c.name
+      GROUP BY soi.id, soi."partNumber", soi."description", so.id, so."number", so."referenceNumber", c.name
     `;
     }
 
