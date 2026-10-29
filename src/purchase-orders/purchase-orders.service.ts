@@ -347,6 +347,7 @@ export class PurchaseOrdersService {
       SELECT 
         po.id AS "poId",
         po."number" AS "poNumber",
+        po."referenceNumber" AS "referenceNumber",
         s.name AS "supplierName",
         COUNT(poi.id)::int AS "itemCount",
         SUM(poi."quantity")::int AS "orderedQty",
@@ -360,7 +361,7 @@ export class PurchaseOrdersService {
         AND po.status NOT IN ('Draft', 'Completed', 'Cancelled')
         AND poi."receivedQuantity" < poi."quantity"
         ${supplierFilter}
-      GROUP BY po.id, po."number", s.name
+      GROUP BY po.id, po."number", po."referenceNumber", s.name
     `;
     }
 
@@ -372,6 +373,7 @@ export class PurchaseOrdersService {
         poi."description" AS "description",
         po.id AS "poId",
         po."number" AS "poNumber",
+        po."referenceNumber" AS "referenceNumber",
         s.name AS "supplierName",
         poi."quantity"::int AS "orderedQty",
         poi."receivedQuantity"::int AS "receivedQty",
@@ -384,7 +386,7 @@ export class PurchaseOrdersService {
         AND po.status NOT IN ('Draft', 'Completed', 'Cancelled')
         AND poi."receivedQuantity" < poi."quantity"
         ${supplierFilter}
-      GROUP BY poi.id, poi."partNumber", poi."description", po.id, po."number", s.name
+      GROUP BY poi.id, poi."partNumber", poi."description", po.id, po."number", po."referenceNumber", s.name
     `;
     }
 
