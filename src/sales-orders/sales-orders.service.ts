@@ -1,4 +1,4 @@
-import { Injectable, Logger } from '@nestjs/common';
+import { Injectable, Logger, BadRequestException } from '@nestjs/common';
 import { SalesOrdersPolicy } from './sales-orders.policy';
 import { PrismaService } from '../prisma/prisma.service';
 import {
@@ -30,6 +30,22 @@ export class SalesOrdersService {
   async create(data: CreateSalesOrderDto & { userId: number }, user: User) {
     this.policy.can('create', null, user);
     const { items, ...salesOrderData } = data;
+
+    const partNumbers = items.map((item) => item.partNumber);
+    const uniquePartNumbers = new Set(partNumbers);
+    if (partNumbers.length !== uniquePartNumbers.size) {
+      throw new BadRequestException({
+        message: 'Invalid Sales Order Items',
+        errors: [
+          {
+            property: 'partNumber',
+            error:
+              'Duplicate part numbers are not allowed in sales order items.',
+          },
+        ],
+      });
+    }
+
     const number = await this.generateNumber();
 
     const totalAmount = items.reduce(
@@ -413,6 +429,21 @@ export class SalesOrdersService {
 
     // If items are provided, recalculate totals
     if (items) {
+      const partNumbers = items.map((item) => item.partNumber);
+      const uniquePartNumbers = new Set(partNumbers);
+      if (partNumbers.length !== uniquePartNumbers.size) {
+        throw new BadRequestException({
+          message: 'Invalid Sales Order Items',
+          errors: [
+            {
+              property: 'partNumber',
+              error:
+                'Duplicate part numbers are not allowed in sales order items.',
+            },
+          ],
+        });
+      }
+
       const totalAmount = items.reduce(
         (sum, item) => sum + item.quantity * item.unitPrice,
         0,
