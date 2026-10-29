@@ -51,6 +51,22 @@ export class PurchaseOrdersService {
     }
 
     const { items, ...purchaseOrderData } = data;
+
+    const partNumbers = items.map((item) => item.partNumber);
+    const uniquePartNumbers = new Set(partNumbers);
+    if (partNumbers.length !== uniquePartNumbers.size) {
+      throw new BadRequestException({
+        message: 'Invalid Purchase Order Items',
+        errors: [
+          {
+            property: 'partNumber',
+            error:
+              'Duplicate part numbers are not allowed in purchase order items.',
+          },
+        ],
+      });
+    }
+
     const number = await this.generateNumber();
     const totalAmount = items.reduce(
       (sum, item) => sum + item.quantity * item.unitPrice,
@@ -165,6 +181,21 @@ export class PurchaseOrdersService {
 
     const { items, ...purchaseOrderData } = data;
     if (items) {
+      const partNumbers = items.map((item) => item.partNumber);
+      const uniquePartNumbers = new Set(partNumbers);
+      if (partNumbers.length !== uniquePartNumbers.size) {
+        throw new BadRequestException({
+          message: 'Invalid Purchase Order Items',
+          errors: [
+            {
+              property: 'partNumber',
+              error:
+                'Duplicate part numbers are not allowed in purchase order items.',
+            },
+          ],
+        });
+      }
+
       const totalAmount = items.reduce(
         (sum, item) => sum + item.quantity * item.unitPrice,
         0,

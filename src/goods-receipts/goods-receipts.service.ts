@@ -144,6 +144,22 @@ export class GoodsReceiptsService {
 
   async create(data: CreateGoodsReceiptDto & { userId: number }) {
     const { items, ...goodsReceiptData } = data;
+
+    const partNumbers = items.map((item) => item.partNumber);
+    const uniquePartNumbers = new Set(partNumbers);
+    if (partNumbers.length !== uniquePartNumbers.size) {
+      throw new BadRequestException({
+        message: 'Invalid Goods Receipt Items',
+        errors: [
+          {
+            property: 'partNumber',
+            error:
+              'Duplicate part numbers are not allowed in goods receipt items.',
+          },
+        ],
+      });
+    }
+
     const number = await this.generateNumber();
 
     return this.prisma.goodsReceipt.create({
@@ -263,6 +279,21 @@ export class GoodsReceiptsService {
     const { items, ...goodsReceiptData } = data;
 
     if (items) {
+      const partNumbers = items.map((item) => item.partNumber);
+      const uniquePartNumbers = new Set(partNumbers);
+      if (partNumbers.length !== uniquePartNumbers.size) {
+        throw new BadRequestException({
+          message: 'Invalid Goods Receipt Items',
+          errors: [
+            {
+              property: 'partNumber',
+              error:
+                'Duplicate part numbers are not allowed in goods receipt items.',
+            },
+          ],
+        });
+      }
+
       return this.prisma.$transaction(async (transaction) => {
         await transaction.goodsReceiptItem.deleteMany({
           where: { goodsReceiptId: id },

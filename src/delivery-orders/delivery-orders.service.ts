@@ -144,6 +144,22 @@ export class DeliveryOrdersService {
 
   async create(data: CreateDeliveryOrderDto & { userId: number }) {
     const { items, ...deliveryOrderData } = data;
+
+    const partNumbers = items.map((item) => item.partNumber);
+    const uniquePartNumbers = new Set(partNumbers);
+    if (partNumbers.length !== uniquePartNumbers.size) {
+      throw new BadRequestException({
+        message: 'Invalid Delivery Order Items',
+        errors: [
+          {
+            property: 'partNumber',
+            error:
+              'Duplicate part numbers are not allowed in delivery order items.',
+          },
+        ],
+      });
+    }
+
     const number = await this.generateNumber();
 
     return this.prisma.deliveryOrder.create({
@@ -233,6 +249,21 @@ export class DeliveryOrdersService {
     const { items, ...deliveryOrderData } = data;
 
     if (items) {
+      const partNumbers = items.map((item) => item.partNumber);
+      const uniquePartNumbers = new Set(partNumbers);
+      if (partNumbers.length !== uniquePartNumbers.size) {
+        throw new BadRequestException({
+          message: 'Invalid Delivery Order Items',
+          errors: [
+            {
+              property: 'partNumber',
+              error:
+                'Duplicate part numbers are not allowed in delivery order items.',
+            },
+          ],
+        });
+      }
+
       return this.prisma.$transaction(async (transaction) => {
         await transaction.deliveryOrderItem.deleteMany({
           where: { deliveryOrderId: id },

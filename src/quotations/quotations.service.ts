@@ -35,6 +35,22 @@ export class QuotationsService {
   async create(data: CreateQuotationDto & { userId: number }, user: User) {
     this.policy.can('create', null, user);
     const { items, ...quotationData } = data;
+
+    const partNumbers = items.map((item) => item.partNumber);
+    const uniquePartNumbers = new Set(partNumbers);
+    if (partNumbers.length !== uniquePartNumbers.size) {
+      throw new BadRequestException({
+        message: 'Invalid Quotation Items',
+        errors: [
+          {
+            property: 'partNumber',
+            error:
+              'Duplicate part numbers are not allowed in quotation items.',
+          },
+        ],
+      });
+    }
+
     const number = await this.generateNumber();
 
     const totalAmount = items.reduce(
@@ -159,6 +175,21 @@ export class QuotationsService {
 
     // If items are provided, recalculate totals
     if (items) {
+      const partNumbers = items.map((item) => item.partNumber);
+      const uniquePartNumbers = new Set(partNumbers);
+      if (partNumbers.length !== uniquePartNumbers.size) {
+        throw new BadRequestException({
+          message: 'Invalid Quotation Items',
+          errors: [
+            {
+              property: 'partNumber',
+              error:
+                'Duplicate part numbers are not allowed in quotation items.',
+            },
+          ],
+        });
+      }
+
       const totalAmount = items.reduce(
         (sum, item) => sum + item.quantity * item.unitPrice,
         0,
