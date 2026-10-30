@@ -15,17 +15,18 @@ import {
   IsDate,
   IsNotEmpty,
 } from 'class-validator';
-import { Transform, Type } from 'class-transformer';
+import { Type } from 'class-transformer';
 import { QuotationStatus, Currency } from '../prisma/client/client';
 export class QuotationItemDto {
   @ApiProperty({ example: 'PART-001' })
   @IsString()
-  @IsNotEmpty()
+  @IsNotEmpty({ message: 'Part number is required' })
   @MaxLength(100)
   partNumber: string;
 
   @ApiProperty({ example: 'Product Name' })
   @IsString()
+  @IsNotEmpty({ message: 'Name is required' })
   name: string;
 
   @ApiProperty({ example: 'Product Model' })
@@ -39,19 +40,20 @@ export class QuotationItemDto {
   description: string;
 
   @ApiProperty({ example: 10 })
-  @IsInt()
-  @Min(1)
+  @IsInt({ message: 'Quantity must be an integer' })
+  @Min(1, { message: 'Quantity must be at least 1' })
+  @IsNotEmpty({ message: 'Quantity is required' })
   quantity: number;
 
   @ApiProperty({ required: false, example: 1, default: 1 })
   @IsOptional()
-  @IsInt()
+  @IsInt({ message: 'MOQ must be an integer' })
   @Min(0)
   moq?: number;
 
   @ApiProperty({ example: 100000 })
   @IsNumber()
-  @Min(0)
+  @Min(1, { message: 'Unit price must be at least 1' })
   unitPrice: number;
 
   @ApiProperty({ required: false, example: 0, default: 0 })
