@@ -39,48 +39,50 @@ export class NkpService {
     const { NkpItem: items, NkpAttachment: attachments, ...data } = dto;
     const { companyId, paymentType, nkpType, parentId } = data;
 
-    const existingNkp = await this.prisma.nkp.findFirst({
-      where: {
-        supplierId: data.supplierId,
-        invoiceNumber: data.invoiceNumber,
-        paymentType: 'VENDOR',
-      },
-    });
-
-    if (existingNkp) {
-      throw new BadRequestException({
-        message: 'Invoice sudah diproses',
-        errors: [
-          {
-            property: 'invoiceNumber',
-            error: 'Nomor invoice untuk supplier ini sudah ada',
-          },
-        ],
+    if (data.supplierId && data.paymentType === 'VENDOR') {
+      const existingNkp = await this.prisma.nkp.findFirst({
+        where: {
+          supplierId: data.supplierId,
+          invoiceNumber: data.invoiceNumber,
+          paymentType: 'VENDOR',
+        },
       });
-    }
 
-    const thirtyDaysAgo = new Date();
-    thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
-    const existingNkpWithAmount = await this.prisma.nkp.findFirst({
-      where: {
-        supplierId: data.supplierId,
-        finalPayment: data.finalPayment,
-        date: { gte: thirtyDaysAgo },
-        paymentType: 'VENDOR',
-      },
-    });
+      if (existingNkp) {
+        throw new BadRequestException({
+          message: 'Invoice sudah diproses',
+          errors: [
+            {
+              property: 'invoiceNumber',
+              error: 'Nomor invoice untuk supplier ini sudah ada',
+            },
+          ],
+        });
+      }
 
-    if (existingNkpWithAmount) {
-      throw new BadRequestException({
-        message: 'Invoice sudah diproses',
-        errors: [
-          {
-            property: 'invoiceNumber',
-            error:
-              'Nomor invoice untuk supplier ini dengan jumlah yang sama sudah ada dalam 30 hari terakhir',
-          },
-        ],
+      const thirtyDaysAgo = new Date();
+      thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+      const existingNkpWithAmount = await this.prisma.nkp.findFirst({
+        where: {
+          supplierId: data.supplierId,
+          finalPayment: data.finalPayment,
+          date: { gte: thirtyDaysAgo },
+          paymentType: 'VENDOR',
+        },
       });
+
+      if (existingNkpWithAmount) {
+        throw new BadRequestException({
+          message: 'Invoice sudah diproses',
+          errors: [
+            {
+              property: 'invoiceNumber',
+              error:
+                'Nomor invoice untuk supplier ini dengan jumlah yang sama sudah ada dalam 30 hari terakhir',
+            },
+          ],
+        });
+      }
     }
 
     let number = await this.generateNumber({
@@ -431,58 +433,56 @@ export class NkpService {
   }
 
   async update(id: number, dto: NkpDto, user: User) {
-    const nkp = await this.prisma.nkp.findUniqueOrThrow({
-      where: { id },
-    });
-
+    const nkp = await this.prisma.nkp.findUniqueOrThrow({ where: { id } });
     this.policy.can('update', nkp, user);
-
     const { NkpItem: items, NkpAttachment: attachments, ...data } = dto;
 
-    const existingNkp = await this.prisma.nkp.findFirst({
-      where: {
-        supplierId: data.supplierId,
-        invoiceNumber: data.invoiceNumber,
-        id: { not: id },
-        paymentType: 'VENDOR',
-      },
-    });
-
-    if (existingNkp) {
-      throw new BadRequestException({
-        message: 'Invoice sudah diproses',
-        errors: [
-          {
-            property: 'invoiceNumber',
-            error: 'Nomor invoice untuk supplier ini sudah ada',
-          },
-        ],
+    if (data.supplierId && data.paymentType === 'VENDOR') {
+      const existingNkp = await this.prisma.nkp.findFirst({
+        where: {
+          supplierId: data.supplierId,
+          invoiceNumber: data.invoiceNumber,
+          id: { not: id },
+          paymentType: 'VENDOR',
+        },
       });
-    }
 
-    const thirtyDaysAgo = new Date();
-    thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
-    const existingNkpWithAmount = await this.prisma.nkp.findFirst({
-      where: {
-        supplierId: data.supplierId,
-        finalPayment: data.finalPayment,
-        date: { gte: thirtyDaysAgo },
-        id: { not: id },
-        paymentType: 'VENDOR',
-      },
-    });
+      if (existingNkp) {
+        throw new BadRequestException({
+          message: 'Invoice sudah diproses',
+          errors: [
+            {
+              property: 'invoiceNumber',
+              error: 'Nomor invoice untuk supplier ini sudah ada',
+            },
+          ],
+        });
+      }
 
-    if (existingNkpWithAmount) {
-      throw new BadRequestException({
-        message: 'Invoice sudah diproses',
-        errors: [
-          {
-            property: 'invoiceNumber',
-            error:
-              'Nomor invoice untuk supplier ini dengan jumlah yang sama sudah ada dalam 30 hari terakhir',
-          },
-        ],
+      const thirtyDaysAgo = new Date();
+      thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+      const existingNkpWithAmount = await this.prisma.nkp.findFirst({
+        where: {
+          supplierId: data.supplierId,
+          finalPayment: data.finalPayment,
+          date: { gte: thirtyDaysAgo },
+          id: { not: id },
+          paymentType: 'VENDOR',
+        },
       });
+
+      if (existingNkpWithAmount) {
+        throw new BadRequestException({
+          message: 'Invoice sudah diproses',
+          errors: [
+            {
+              property: 'invoiceNumber',
+              error:
+                'Nomor invoice untuk supplier ini dengan jumlah yang sama sudah ada dalam 30 hari terakhir',
+            },
+          ],
+        });
+      }
     }
 
     const savedData = await this.prisma.nkp.update({
