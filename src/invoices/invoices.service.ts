@@ -1,4 +1,5 @@
 import { BadRequestException, Injectable, Logger } from '@nestjs/common';
+import { assertNoDuplicatePartNumbers } from '../helpers/items';
 import { InvoicesPolicy } from './invoices.policy';
 import {
   CreateInvoiceDto,
@@ -33,6 +34,8 @@ export class InvoicesService {
   async create(data: CreateInvoiceDto & { userId: number }, user: User) {
     this.policy.can('create', null, user);
     const { items, attachments, ...invoiceFields } = data;
+
+    assertNoDuplicatePartNumbers(items, 'Invoice');
 
     const doExists = await this.prisma.invoice.findUnique({
       where: { deliveryOrderId: invoiceFields.deliveryOrderId },
@@ -259,6 +262,7 @@ export class InvoicesService {
     }
 
     if (items) {
+      assertNoDuplicatePartNumbers(items, 'Invoice');
       const totals = this.calculateTotals(
         items,
         invoiceData.discount ?? invoice.discount,

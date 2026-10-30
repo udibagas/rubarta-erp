@@ -1,4 +1,5 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
+import { assertNoDuplicatePartNumbers } from '../helpers/items';
 import { PaymentStatus, User } from '../prisma/client/client';
 import { MailerService } from '@nestjs-modules/mailer';
 import { ApprovalService } from '../approval/approval.service';
@@ -52,20 +53,7 @@ export class PurchaseOrdersService {
 
     const { items, ...purchaseOrderData } = data;
 
-    const partNumbers = items.map((item) => item.partNumber);
-    const uniquePartNumbers = new Set(partNumbers);
-    if (partNumbers.length !== uniquePartNumbers.size) {
-      throw new BadRequestException({
-        message: 'Invalid Purchase Order Items',
-        errors: [
-          {
-            property: 'partNumber',
-            error:
-              'Duplicate part numbers are not allowed in purchase order items.',
-          },
-        ],
-      });
-    }
+    assertNoDuplicatePartNumbers(items, 'Purchase Order');
 
     const number = await this.generateNumber();
     const totalAmount = items.reduce(
@@ -181,20 +169,7 @@ export class PurchaseOrdersService {
 
     const { items, ...purchaseOrderData } = data;
     if (items) {
-      const partNumbers = items.map((item) => item.partNumber);
-      const uniquePartNumbers = new Set(partNumbers);
-      if (partNumbers.length !== uniquePartNumbers.size) {
-        throw new BadRequestException({
-          message: 'Invalid Purchase Order Items',
-          errors: [
-            {
-              property: 'partNumber',
-              error:
-                'Duplicate part numbers are not allowed in purchase order items.',
-            },
-          ],
-        });
-      }
+      assertNoDuplicatePartNumbers(items, 'Purchase Order');
 
       const totalAmount = items.reduce(
         (sum, item) => sum + item.quantity * item.unitPrice,

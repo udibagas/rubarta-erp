@@ -1,4 +1,5 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
+import { assertNoDuplicatePartNumbers } from '../helpers/items';
 import { ApprovalService } from '../approval/approval.service';
 import { PrismaService } from '../prisma/prisma.service';
 import { QuotationsPolicy } from './quotations.policy';
@@ -36,20 +37,7 @@ export class QuotationsService {
     this.policy.can('create', null, user);
     const { items, ...quotationData } = data;
 
-    const partNumbers = items.map((item) => item.partNumber);
-    const uniquePartNumbers = new Set(partNumbers);
-    if (partNumbers.length !== uniquePartNumbers.size) {
-      throw new BadRequestException({
-        message: 'Invalid Quotation Items',
-        errors: [
-          {
-            property: 'partNumber',
-            error:
-              'Duplicate part numbers are not allowed in quotation items.',
-          },
-        ],
-      });
-    }
+    assertNoDuplicatePartNumbers(items, 'Quotation');
 
     const number = await this.generateNumber();
 
@@ -175,20 +163,7 @@ export class QuotationsService {
 
     // If items are provided, recalculate totals
     if (items) {
-      const partNumbers = items.map((item) => item.partNumber);
-      const uniquePartNumbers = new Set(partNumbers);
-      if (partNumbers.length !== uniquePartNumbers.size) {
-        throw new BadRequestException({
-          message: 'Invalid Quotation Items',
-          errors: [
-            {
-              property: 'partNumber',
-              error:
-                'Duplicate part numbers are not allowed in quotation items.',
-            },
-          ],
-        });
-      }
+      assertNoDuplicatePartNumbers(items, 'Quotation');
 
       const totalAmount = items.reduce(
         (sum, item) => sum + item.quantity * item.unitPrice,

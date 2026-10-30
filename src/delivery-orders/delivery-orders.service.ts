@@ -3,6 +3,7 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
+import { assertNoDuplicatePartNumbers } from '../helpers/items';
 import {
   Prisma,
   SalesOrderStatus,
@@ -145,20 +146,7 @@ export class DeliveryOrdersService {
   async create(data: CreateDeliveryOrderDto & { userId: number }) {
     const { items, ...deliveryOrderData } = data;
 
-    const partNumbers = items.map((item) => item.partNumber);
-    const uniquePartNumbers = new Set(partNumbers);
-    if (partNumbers.length !== uniquePartNumbers.size) {
-      throw new BadRequestException({
-        message: 'Invalid Delivery Order Items',
-        errors: [
-          {
-            property: 'partNumber',
-            error:
-              'Duplicate part numbers are not allowed in delivery order items.',
-          },
-        ],
-      });
-    }
+    assertNoDuplicatePartNumbers(items, 'Delivery Order');
 
     const number = await this.generateNumber();
 
@@ -249,20 +237,7 @@ export class DeliveryOrdersService {
     const { items, ...deliveryOrderData } = data;
 
     if (items) {
-      const partNumbers = items.map((item) => item.partNumber);
-      const uniquePartNumbers = new Set(partNumbers);
-      if (partNumbers.length !== uniquePartNumbers.size) {
-        throw new BadRequestException({
-          message: 'Invalid Delivery Order Items',
-          errors: [
-            {
-              property: 'partNumber',
-              error:
-                'Duplicate part numbers are not allowed in delivery order items.',
-            },
-          ],
-        });
-      }
+      assertNoDuplicatePartNumbers(items, 'Delivery Order');
 
       return this.prisma.$transaction(async (transaction) => {
         await transaction.deliveryOrderItem.deleteMany({
