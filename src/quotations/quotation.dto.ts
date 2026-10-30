@@ -1,5 +1,6 @@
 import { ApiProperty, PartialType } from '@nestjs/swagger';
 import {
+  ArrayMinSize,
   IsString,
   IsInt,
   IsNumber,
@@ -10,15 +11,16 @@ import {
   MaxLength,
   Min,
   IsEmail,
-  IsNumberString,
   IsBoolean,
   IsDate,
+  IsNotEmpty,
 } from 'class-validator';
 import { Transform, Type } from 'class-transformer';
 import { QuotationStatus, Currency } from '../prisma/client/client';
 export class QuotationItemDto {
   @ApiProperty({ example: 'PART-001' })
   @IsString()
+  @IsNotEmpty()
   @MaxLength(100)
   partNumber: string;
 
@@ -169,6 +171,7 @@ export class CreateQuotationDto {
 
   @ApiProperty({ type: [QuotationItemDto] })
   @IsArray()
+  @ArrayMinSize(1)
   @ValidateNested({ each: true })
   @Type(() => QuotationItemDto)
   items: QuotationItemDto[];
