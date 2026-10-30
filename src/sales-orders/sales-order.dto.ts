@@ -22,7 +22,7 @@ import { JsonArray } from '@prisma/client/runtime/client';
 export class SalesOrderItemDto {
   @ApiProperty({ example: 'PART-001' })
   @IsString({ message: 'Part number is required and must be a string' })
-  @MaxLength(100)
+  @MaxLength(100, { message: 'Part number must be at most 100 characters' })
   partNumber: string;
 
   @ApiProperty({ example: 'Product description' })
@@ -31,22 +31,22 @@ export class SalesOrderItemDto {
 
   @ApiProperty({ example: 10 })
   @IsInt({ message: 'Quantity is required and must be an integer' })
-  @Min(1)
+  @Min(1, { message: 'Quantity must be at least 1' })
   quantity: number;
 
   @ApiProperty({ required: false, example: 0, default: 0 })
   @IsOptional()
-  @IsInt()
+  @IsInt({ message: 'Delivered quantity must be an integer' })
   deliveredQuantity?: number;
 
   @ApiProperty({ example: 100000 })
   @IsNumber({}, { message: 'Unit price is required and must be a number' })
-  @Min(0)
+  @Min(0, { message: 'Unit price must be at least 0' })
   unitPrice: number;
 
   @ApiProperty({ required: false, example: 0, default: 0 })
   @IsOptional()
-  @IsInt()
+  @IsInt({ message: 'Sort order must be an integer' })
   sortOrder?: number;
 }
 
@@ -87,7 +87,7 @@ export class CreateSalesOrderDto {
   @ApiProperty({ required: false, example: 0, default: 0 })
   @IsOptional()
   @IsNumber({}, { message: 'Discount must be a number' })
-  @Min(0)
+  @Min(0, { message: 'Discount must be at least 0' })
   discount?: number;
 
   @ApiProperty({ enum: SalesOrderStatus, example: SalesOrderStatus.Pending })
@@ -129,7 +129,7 @@ export class CreateSalesOrderDto {
 
   @ApiProperty({ enum: Currency, example: Currency.IDR, default: Currency.IDR })
   @IsOptional()
-  @IsEnum(Currency)
+  @IsEnum(Currency, { message: 'Invalid currency' })
   currency?: Currency;
 
   @ApiProperty({
@@ -158,8 +158,8 @@ export class CreateSalesOrderDto {
   notes?: string;
 
   @ApiProperty({ type: [SalesOrderItemDto] })
-  @IsArray()
-  @ValidateNested({ each: true })
+  @IsArray({ message: 'Items must be an array' })
+  @ValidateNested({ each: true, message: 'Each item must be valid' })
   @Type(() => SalesOrderItemDto)
   items: SalesOrderItemDto[];
 
@@ -189,7 +189,7 @@ export class CreateSalesOrderDto {
 
   @ApiProperty({ example: { files: [] }, type: Object })
   @IsOptional()
-  @IsObject({ each: true })
+  @IsObject({ each: true, message: 'Each attachment must be an object' })
   attachments?: JsonArray;
 }
 
@@ -197,18 +197,18 @@ export class UpdateSalesOrderDto extends PartialType(CreateSalesOrderDto) {}
 
 export class SendSalesOrderEmailDto {
   @ApiProperty({ example: 'Sales order SO092026-1 for your review' })
-  @IsString()
-  @MaxLength(200)
+  @IsString({ message: 'Subject must be a string' })
+  @MaxLength(200, { message: 'Subject must be at most 200 characters' })
   subject: string;
 
   @ApiProperty({
     example: '<p>Dear customer, please find attached our sales order.</p>',
   })
-  @IsString()
+  @IsString({ message: 'Body must be a string' })
   body: string;
 
   @ApiProperty({ example: 'john.doe@example.com' })
-  @IsEmail()
+  @IsEmail({}, { message: 'Recipient must be a valid email address' })
   to: string;
 
   @ApiProperty({
@@ -217,30 +217,33 @@ export class SendSalesOrderEmailDto {
     example: ['manager@example.com'],
   })
   @IsOptional()
-  @IsArray()
-  @IsEmail({}, { each: true })
+  @IsArray({ message: 'CC must be an array' })
+  @IsEmail(
+    {},
+    { each: true, message: 'Each CC address must be a valid email address' },
+  )
   cc?: string[];
 }
 
 export class QuerySalesOrderDto {
   @ApiProperty({ required: false })
   @IsOptional()
-  @IsNumberString()
+  @IsNumberString({}, { message: 'Page must be a numeric string' })
   page?: string;
 
   @ApiProperty({ required: false })
   @IsOptional()
-  @IsNumberString()
+  @IsNumberString({}, { message: 'Page size must be a numeric string' })
   pageSize?: string;
 
   @ApiProperty({ required: false })
   @IsOptional()
-  @IsString()
+  @IsString({ message: 'Keyword must be a string' })
   keyword?: string;
 
   @ApiProperty({ required: false })
   @IsOptional()
-  @IsNumberString()
+  @IsNumberString({}, { message: 'Customer ID must be a numeric string' })
   customerId?: string;
 
   @ApiProperty({
@@ -249,8 +252,8 @@ export class QuerySalesOrderDto {
     example: ['2024-01-01', '2024-12-31'],
   })
   @IsOptional()
-  @IsArray()
-  @IsString({ each: true })
+  @IsArray({ message: 'Date range must be an array' })
+  @IsString({ each: true, message: 'Each date range value must be a string' })
   dateRange?: string[];
 
   @ApiProperty({ required: false, enum: SalesOrderStatus })

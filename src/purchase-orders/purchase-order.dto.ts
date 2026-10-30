@@ -23,32 +23,32 @@ import {
 
 export class PurchaseOrderItemDto {
   @ApiProperty({ example: 'PART-001' })
-  @IsString()
-  @MaxLength(100)
+  @IsString({ message: 'Part number must be a string' })
+  @MaxLength(100, { message: 'Part number must be at most 100 characters' })
   partNumber: string;
 
   @ApiProperty({ example: 'Product description' })
-  @IsString()
+  @IsString({ message: 'Description must be a string' })
   description: string;
 
   @ApiProperty({ example: 10 })
-  @IsInt()
-  @Min(1)
+  @IsInt({ message: 'Quantity must be an integer' })
+  @Min(1, { message: 'Quantity must be at least 1' })
   quantity: number;
 
   @ApiProperty({ required: false, example: 0, default: 0 })
   @IsOptional()
-  @IsInt()
+  @IsInt({ message: 'Received quantity must be an integer' })
   receivedQuantity?: number;
 
   @ApiProperty({ example: 100000 })
-  @IsNumber()
-  @Min(0)
+  @IsNumber({}, { message: 'Unit price must be a number' })
+  @Min(0, { message: 'Unit price must be at least 0' })
   unitPrice: number;
 
   @ApiProperty({ required: false, example: 0 })
   @IsOptional()
-  @IsInt()
+  @IsInt({ message: 'Sort order must be an integer' })
   sortOrder?: number;
 }
 
@@ -60,7 +60,7 @@ export class CreatePurchaseOrderDto {
 
   @ApiProperty({ required: false, example: 'Stock Order' })
   @IsOptional()
-  @IsString()
+  @IsString({ message: 'Order type must be a string' })
   orderType?: string;
 
   @ApiProperty({ example: '2026-09-12' })
@@ -69,65 +69,65 @@ export class CreatePurchaseOrderDto {
   date: Date;
 
   @ApiProperty({ example: 'PO-REF-001' })
-  @IsString()
+  @IsString({ message: 'Reference number must be a string' })
   referenceNumber: string;
 
   @ApiProperty({ example: 'Purchase of office equipment' })
-  @IsString()
-  @MaxLength(200)
+  @IsString({ message: 'Title must be a string' })
+  @MaxLength(200, { message: 'Title must be at most 200 characters' })
   title: string;
 
   @ApiProperty({ required: false })
   @IsOptional()
-  @IsString()
+  @IsString({ message: 'Description must be a string' })
   description?: string;
 
   @ApiProperty({ required: false, example: 'IDR' })
   @IsOptional()
-  @IsEnum(Currency)
+  @IsEnum(Currency, { message: 'Invalid currency' })
   currency?: Currency;
 
   @ApiProperty({ required: false, example: true })
   @IsOptional()
-  @IsBoolean()
+  @IsBoolean({ message: 'Apply VAT must be a boolean' })
   applyVat?: boolean;
 
   @ApiProperty({ required: false, example: 1 })
   @IsOptional()
   @Type(() => Number)
-  @Min(0)
-  @IsNumber()
+  @Min(0, { message: 'Currency rate must be at least 0' })
+  @IsNumber({}, { message: 'Currency rate must be a number' })
   currencyRate?: number;
 
   @ApiProperty({ required: false, example: 0 })
   @IsOptional()
-  @IsNumber()
-  @Min(0)
+  @IsNumber({}, { message: 'Discount must be a number' })
+  @Min(0, { message: 'Discount must be at least 0' })
   discount?: number;
 
   @ApiProperty({ required: false })
   @IsOptional()
-  @IsString()
+  @IsString({ message: 'Delivery method must be a string' })
   deliveryMethod?: string;
 
   @ApiProperty({ required: false })
   @IsOptional()
-  @IsString()
+  @IsString({ message: 'Destination must be a string' })
   destination?: string;
 
   @ApiProperty({ required: false })
   @IsOptional()
-  @IsString()
+  @IsString({ message: 'Warehouse must be a string' })
   warehouse?: string;
 
   @ApiProperty({ required: false })
   @IsOptional()
-  @IsString()
+  @IsString({ message: 'Packing condition must be a string' })
   packingCondition?: string;
 
   @ApiProperty({ required: false })
   @IsOptional()
-  @IsString()
+  @IsString({ message: 'Shipping address must be a string' })
   shippingAddress?: string;
 
   @ApiProperty({ required: false })
@@ -138,47 +138,47 @@ export class CreatePurchaseOrderDto {
 
   @ApiProperty({ required: false })
   @IsOptional()
-  @IsString()
+  @IsString({ message: 'Term of delivery must be a string' })
   termOfDelivery?: string;
 
   @ApiProperty({ required: false })
   @IsOptional()
-  @IsBoolean()
+  @IsBoolean({ message: 'Partial shipment must be a boolean' })
   partialShipment?: boolean;
 
   @ApiProperty({ required: false })
   @IsOptional()
-  @IsString()
+  @IsString({ message: 'Payment method must be a string' })
   paymentMethod?: string;
 
   @ApiProperty({ required: false })
   @IsOptional()
-  @IsString()
+  @IsString({ message: 'Term of payment must be a string' })
   termOfPayment?: string;
 
   @ApiProperty({ required: false })
   @IsOptional()
-  @IsString()
+  @IsString({ message: 'Supplier address must be a string' })
   supplierAddress?: string;
 
   @ApiProperty({ required: false })
   @IsOptional()
-  @IsString()
+  @IsString({ message: 'Billing address must be a string' })
   billingAddress?: string;
 
   @ApiProperty({ required: false })
   @IsOptional()
-  @IsString()
+  @IsString({ message: 'Terms and conditions must be a string' })
   termsAndConditions?: string;
 
   @ApiProperty({ required: false })
   @IsOptional()
-  @IsString()
+  @IsString({ message: 'Notes must be a string' })
   notes?: string;
 
   @ApiProperty({ required: false, example: 1 })
   @IsOptional()
-  @IsInt()
+  @IsInt({ message: 'Invalid supplier' })
   supplierId?: number;
 
   @ApiProperty({ example: 1 })
@@ -187,25 +187,25 @@ export class CreatePurchaseOrderDto {
   companyId: number;
 
   @ApiProperty({ type: [PurchaseOrderItemDto] })
-  @IsArray()
-  @ValidateNested({ each: true })
+  @IsArray({ message: 'Items must be an array' })
+  @ValidateNested({ each: true, message: 'Each item must be valid' })
   @Type(() => PurchaseOrderItemDto)
   items: PurchaseOrderItemDto[];
 
   @ApiProperty({ enum: PurchaseOrderStatus, required: false })
   @IsOptional()
-  @IsEnum(PurchaseOrderStatus)
+  @IsEnum(PurchaseOrderStatus, { message: 'Invalid purchase order status' })
   status?: PurchaseOrderStatus;
 
   @ApiProperty({ required: false, enum: PaymentStatus })
   @IsOptional()
-  @IsEnum(PaymentStatus)
+  @IsEnum(PaymentStatus, { message: 'Invalid purchase order payment status' })
   paymentStatus?: PaymentStatus;
 
   @ApiProperty({ required: false, example: 0 })
   @IsOptional()
-  @IsNumber()
-  @Min(0)
+  @IsNumber({}, { message: 'Payment amount must be a number' })
+  @Min(0, { message: 'Payment amount must be at least 0' })
   paymentAmount?: number;
 }
 
@@ -215,41 +215,41 @@ export class UpdatePurchaseOrderDto extends PartialType(
 
 export class UpdatePurchaseOrderStatusDto {
   @ApiProperty({ enum: PurchaseOrderStatus })
-  @IsEnum(PurchaseOrderStatus)
+  @IsEnum(PurchaseOrderStatus, { message: 'Invalid purchase order status' })
   status: PurchaseOrderStatus;
 }
 
 export class UpdatePurchaseOrderPaymentStatusDto {
   @ApiProperty({ enum: PaymentStatus })
-  @IsEnum(PaymentStatus)
+  @IsEnum(PaymentStatus, { message: 'Invalid purchase order payment status' })
   paymentStatus: PaymentStatus;
 
   @ApiProperty({ required: false, example: 0 })
   @IsOptional()
-  @IsNumber()
-  @Min(0)
+  @IsNumber({}, { message: 'Payment amount must be a number' })
+  @Min(0, { message: 'Payment amount must be at least 0' })
   paymentAmount?: number;
 }
 
 export class QueryPurchaseOrderDto {
   @ApiProperty({ required: false })
   @IsOptional()
-  @IsNumberString()
+  @IsNumberString({}, { message: 'Page must be a numeric string' })
   page?: string;
 
   @ApiProperty({ required: false })
   @IsOptional()
-  @IsNumberString()
+  @IsNumberString({}, { message: 'Page size must be a numeric string' })
   pageSize?: string;
 
   @ApiProperty({ required: false })
   @IsOptional()
-  @IsString()
+  @IsString({ message: 'Keyword must be a string' })
   keyword?: string;
 
   @ApiProperty({ required: false })
   @IsOptional()
-  @IsNumberString()
+  @IsNumberString({}, { message: 'Supplier ID must be a numeric string' })
   supplierId?: string;
 
   @ApiProperty({
@@ -258,8 +258,8 @@ export class QueryPurchaseOrderDto {
     example: ['2024-01-01', '2024-12-31'],
   })
   @IsOptional()
-  @IsArray()
-  @IsString({ each: true })
+  @IsArray({ message: 'Date range must be an array' })
+  @IsString({ each: true, message: 'Each date range value must be a string' })
   dateRange?: string[];
 
   @ApiProperty({ required: false, enum: PurchaseOrderStatus })
@@ -281,21 +281,24 @@ export class QueryPurchaseOrderDto {
 
 export class SendPurchaseOrderEmailDto {
   @ApiProperty({ example: 'Purchase order PO092026-1' })
-  @IsString()
-  @MaxLength(200)
+  @IsString({ message: 'Subject must be a string' })
+  @MaxLength(200, { message: 'Subject must be at most 200 characters' })
   subject: string;
 
   @ApiProperty({ example: '<p>Please find our purchase order attached.</p>' })
-  @IsString()
+  @IsString({ message: 'Body must be a string' })
   body: string;
 
   @ApiProperty({ example: 'supplier@example.com' })
-  @IsEmail()
+  @IsEmail({}, { message: 'Recipient must be a valid email address' })
   to: string;
 
   @ApiProperty({ required: false, type: [String] })
   @IsOptional()
-  @IsArray()
-  @IsEmail({}, { each: true })
+  @IsArray({ message: 'CC must be an array' })
+  @IsEmail(
+    {},
+    { each: true, message: 'Each CC address must be a valid email address' },
+  )
   cc?: string[];
 }

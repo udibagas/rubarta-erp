@@ -22,19 +22,19 @@ import { JsonArray, JsonObject } from '@prisma/client/runtime/client';
 
 export class InvoiceItemDto {
   @IsNotEmpty({ message: 'Part number is required' })
-  @IsString()
+  @IsString({ message: 'Part number must be a string' })
   partNumber: string;
 
   @IsNotEmpty({ message: 'Description is required' })
-  @IsString()
+  @IsString({ message: 'Description must be a string' })
   description: string;
 
   @IsNotEmpty({ message: 'Quantity is required' })
-  @IsInt()
+  @IsInt({ message: 'Quantity must be an integer' })
   quantity: number;
 
-  @IsNumber()
-  @Min(0)
+  @IsNumber({}, { message: 'Unit price must be a number' })
+  @Min(0, { message: 'Unit price must be at least 0' })
   unitPrice: number;
 }
 
@@ -53,79 +53,79 @@ export class CreateInvoiceDto {
   dueDate: Date;
 
   @IsOptional()
-  @IsString()
+  @IsString({ message: 'Reference number must be a string' })
   referenceNumber?: string;
 
-  @IsInt()
+  @IsInt({ message: 'Invalid sales order' })
   salesOrderId: number;
 
-  @IsInt()
+  @IsInt({ message: 'Invalid delivery order' })
   deliveryOrderId: number;
 
-  @IsInt()
+  @IsInt({ message: 'Invalid customer' })
   customerId: number;
 
   @IsOptional()
-  @IsEnum(InvoiceStatus)
+  @IsEnum(InvoiceStatus, { message: 'Invalid invoice status' })
   status?: InvoiceStatus;
 
   @IsOptional()
-  @IsString()
+  @IsString({ message: 'Currency must be a string' })
   currency?: Currency;
 
   @ApiProperty({ type: Object })
   @IsOptional()
-  @IsObject()
+  @IsObject({ message: 'Bank details must be an object' })
   bank?: JsonObject;
 
   @IsOptional()
-  @IsNumber()
-  @Min(0)
+  @IsNumber({}, { message: 'Discount must be a number' })
+  @Min(0, { message: 'Discount must be at least 0' })
   discount?: number;
 
   @IsOptional()
-  @IsBoolean()
+  @IsBoolean({ message: 'With tax invoice must be a boolean' })
   withTaxInvoice?: boolean;
 
   @IsOptional()
-  @IsString()
+  @IsString({ message: 'Tax invoice number must be a string' })
   taxInvoiceNumber?: string;
 
   @ApiProperty({ example: { files: [] }, type: Object })
   @IsOptional()
-  @IsObject({ each: true })
+  @IsObject({ each: true, message: 'Each attachment must be an object' })
   attachments?: JsonArray;
 
   @IsOptional()
-  @IsString()
+  @IsString({ message: 'Payment method must be a string' })
   paymentMethod?: string;
 
   @IsOptional()
-  @IsString()
+  @IsString({ message: 'Term of payment must be a string' })
   termOfPayment?: string;
 
   @IsOptional()
-  @IsString()
+  @IsString({ message: 'Contact person must be a string' })
   contactPerson?: string;
 
   @IsOptional()
-  @IsString()
+  @IsString({ message: 'Contact phone must be a string' })
   contactPhone?: string;
 
   @IsOptional()
-  @IsString()
+  @IsString({ message: 'Contact email must be a string' })
   contactEmail?: string;
 
   @IsOptional()
-  @IsString()
+  @IsString({ message: 'Billing address must be a string' })
   billingAddress?: string;
 
   @IsOptional()
-  @IsString()
+  @IsString({ message: 'Shipping address must be a string' })
   shippingAddress?: string;
 
-  @IsArray()
-  @ValidateNested({ each: true })
+  @IsArray({ message: 'Items must be an array' })
+  @ValidateNested({ each: true, message: 'Each item must be valid' })
   @Type(() => InvoiceItemDto)
   items: InvoiceItemDto[];
 }
@@ -133,11 +133,11 @@ export class CreateInvoiceDto {
 export class UpdateInvoiceDto extends PartialType(CreateInvoiceDto) {}
 
 export class InvoiceStatusUpdateDto {
-  @IsEnum(InvoiceStatus)
+  @IsEnum(InvoiceStatus, { message: 'Invalid invoice status' })
   status: InvoiceStatus;
 
   @IsOptional()
-  @IsString()
+  @IsString({ message: 'Receipt number must be a string' })
   receiptNumber?: string;
 
   @IsOptional()
@@ -146,24 +146,24 @@ export class InvoiceStatusUpdateDto {
   receiptDate?: Date;
 
   @IsOptional()
-  @IsObject({ each: true })
+  @IsObject({ each: true, message: 'Each receipt file must be an object' })
   receiptFile?: JsonArray;
 }
 
 export class SendInvoiceEmailDto {
   @ApiProperty({ example: 'Invoice INV092026-1 for your review' })
-  @IsString()
-  @MaxLength(200)
+  @IsString({ message: 'Subject must be a string' })
+  @MaxLength(200, { message: 'Subject must be at most 200 characters' })
   subject: string;
 
   @ApiProperty({
     example: '<p>Dear customer, please find attached our invoice.</p>',
   })
-  @IsString()
+  @IsString({ message: 'Body must be a string' })
   body: string;
 
   @ApiProperty({ example: 'john.doe@example.com' })
-  @IsEmail()
+  @IsEmail({}, { message: 'Recipient must be a valid email address' })
   to: string;
 
   @ApiProperty({
@@ -172,18 +172,21 @@ export class SendInvoiceEmailDto {
     example: ['manager@example.com'],
   })
   @IsOptional()
-  @IsArray()
-  @IsEmail({}, { each: true })
+  @IsArray({ message: 'CC must be an array' })
+  @IsEmail(
+    {},
+    { each: true, message: 'Each CC address must be a valid email address' },
+  )
   cc?: string[];
 }
 
 export class QueryInvoiceDto {
   @IsOptional()
-  @IsNumberString()
+  @IsNumberString({}, { message: 'Page must be a numeric string' })
   page?: string;
 
   @IsOptional()
-  @IsNumberString()
+  @IsNumberString({}, { message: 'Page size must be a numeric string' })
   pageSize?: string;
 
   @IsOptional()
@@ -191,17 +194,17 @@ export class QueryInvoiceDto {
   status?: InvoiceStatus | InvoiceStatus[];
 
   @IsOptional()
-  @IsString()
+  @IsString({ message: 'Keyword must be a string' })
   keyword?: string;
 
   @ApiProperty({ required: false })
   @IsOptional()
-  @IsNumberString()
+  @IsNumberString({}, { message: 'Customer ID must be a numeric string' })
   customerId?: string;
 
   @ApiProperty({ required: false })
   @IsOptional()
-  @IsNumberString()
+  @IsNumberString({}, { message: 'Sales order ID must be a numeric string' })
   salesOrderId?: string;
 
   @ApiProperty({
@@ -210,7 +213,7 @@ export class QueryInvoiceDto {
     example: ['2024-01-01', '2024-12-31'],
   })
   @IsOptional()
-  @IsArray()
-  @IsString({ each: true })
+  @IsArray({ message: 'Date range must be an array' })
+  @IsString({ each: true, message: 'Each date range value must be a string' })
   dateRange?: string[];
 }

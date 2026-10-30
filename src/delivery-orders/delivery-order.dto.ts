@@ -35,7 +35,7 @@ export class DeliveryOrderItemDto {
   partNumberSupply: string;
 
   @ApiProperty({ example: 'Product description' })
-  @IsString()
+  @IsString({ message: 'Description must be a string' })
   description: string;
 
   @ApiProperty({ example: 10 })
@@ -72,43 +72,46 @@ export class CreateDeliveryOrderDto {
   goodsReceiptId: number;
 
   @ApiProperty({ required: false, example: 'John Doe' })
-  @IsString()
+  @IsString({ message: 'Sender must be a string' })
   @IsOptional()
   sender?: string | null;
 
   @ApiProperty({ required: false, example: 'RCPT-001' })
-  @IsString()
+  @IsString({ message: 'Receipt number must be a string' })
   @IsOptional()
   receiptNumber?: string | null;
 
   @ApiProperty({ required: false, example: 'REF-001' })
-  @IsString()
+  @IsString({ message: 'Reference number must be a string' })
   @IsOptional()
   referenceNumber?: string | null;
 
   @ApiProperty({ required: false, example: 'John Doe' })
-  @IsString()
+  @IsString({ message: 'Pickup by must be a string' })
   @IsOptional()
   pickUpBy?: string | null;
 
   @ApiProperty({ required: false, example: 'Jane Doe' })
-  @IsString()
+  @IsString({ message: 'Pickup name must be a string' })
   @IsOptional()
   pickUpName?: string | null;
 
   @ApiProperty({ required: false, example: '+1 555 0100' })
-  @IsString()
+  @IsString({ message: 'Pickup contact must be a string' })
   @IsOptional()
   pickUpContact?: string | null;
 
   @ApiProperty({ example: { files: [] }, type: Object })
   @IsOptional()
-  @IsObject({ each: true })
+  @IsObject({
+    each: true,
+    message: 'Each supporting document must be an object',
+  })
   supportingDocument?: JsonArray;
 
   @ApiProperty({ required: false, example: 'Delivered in good condition' })
   @IsOptional()
-  @IsString()
+  @IsString({ message: 'Notes must be a string' })
   notes?: string | null;
 
   @ApiProperty({ example: 'Draft' })
@@ -117,8 +120,8 @@ export class CreateDeliveryOrderDto {
   status: 'Draft' | 'Confirmed';
 
   @ApiProperty({ type: [DeliveryOrderItemDto] })
-  @IsArray()
-  @ValidateNested({ each: true })
+  @IsArray({ message: 'Items must be an array' })
+  @ValidateNested({ each: true, message: 'Each item must be valid' })
   @Type(() => DeliveryOrderItemDto)
   items: DeliveryOrderItemDto[];
 }
@@ -130,27 +133,27 @@ export class UpdateDeliveryOrderDto extends PartialType(
 export class QueryDeliveryOrderDto {
   @ApiProperty({ required: false })
   @IsOptional()
-  @IsNumberString()
+  @IsNumberString({}, { message: 'Page must be a numeric string' })
   page?: string;
 
   @ApiProperty({ required: false })
   @IsOptional()
-  @IsNumberString()
+  @IsNumberString({}, { message: 'Page size must be a numeric string' })
   pageSize?: string;
 
   @ApiProperty({ required: false })
   @IsOptional()
-  @IsString()
+  @IsString({ message: 'Keyword must be a string' })
   keyword?: string;
 
   @ApiProperty({ required: false })
   @IsOptional()
-  @IsNumberString()
+  @IsNumberString({}, { message: 'Sales order ID must be a numeric string' })
   salesOrderId?: string;
 
   @ApiProperty({ required: false })
   @IsOptional()
-  @IsNumberString()
+  @IsNumberString({}, { message: 'Customer ID must be a numeric string' })
   customerId?: string;
 
   @ApiProperty({
@@ -159,8 +162,8 @@ export class QueryDeliveryOrderDto {
     example: ['2024-01-01', '2024-12-31'],
   })
   @IsOptional()
-  @IsArray()
-  @IsString({ each: true })
+  @IsArray({ message: 'Date range must be an array' })
+  @IsString({ each: true, message: 'Each date range value must be a string' })
   dateRange?: string[];
 
   @ApiProperty({ required: false, enum: DeliveryOrderStatus })

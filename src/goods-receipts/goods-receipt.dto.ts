@@ -79,12 +79,15 @@ export class CreateGoodsReceiptDto {
 
   @ApiProperty({ example: { files: [] }, type: Object })
   @IsOptional()
-  @IsObject({ each: true })
+  @IsObject({
+    each: true,
+    message: 'Each supporting document must be an object',
+  })
   supportingDocument?: JsonArray;
 
   @ApiProperty({ example: 'Received in good condition', required: false })
   @IsOptional()
-  @IsString()
+  @IsString({ message: 'Notes must be a string' })
   notes?: string;
 
   @ApiProperty({ example: 'INV-001', required: false })
@@ -101,8 +104,8 @@ export class CreateGoodsReceiptDto {
   status: 'Draft' | 'Confirmed';
 
   @ApiProperty({ type: [GoodsReceiptItemDto] })
-  @IsArray()
-  @ValidateNested({ each: true })
+  @IsArray({ message: 'Items must be an array' })
+  @ValidateNested({ each: true, message: 'Each item must be valid' })
   @Type(() => GoodsReceiptItemDto)
   items: GoodsReceiptItemDto[];
 }
@@ -112,19 +115,19 @@ export class UpdateGoodsReceiptDto extends PartialType(CreateGoodsReceiptDto) {}
 export class QueryGoodsReceiptDto {
   @ApiProperty({ required: false })
   @IsOptional()
-  @IsNumber()
+  @IsNumber({}, { message: 'Page must be a number' })
   @Type(() => Number)
   page?: number;
 
   @ApiProperty({ required: false })
   @IsOptional()
-  @IsNumber()
+  @IsNumber({}, { message: 'Page size must be a number' })
   @Type(() => Number)
   pageSize?: number;
 
   @ApiProperty({ required: false })
   @IsOptional()
-  @IsString()
+  @IsString({ message: 'Keyword must be a string' })
   keyword?: string;
 
   @ApiProperty({ required: false })
@@ -135,7 +138,7 @@ export class QueryGoodsReceiptDto {
   @ApiProperty({ required: false })
   @IsOptional()
   @Type(() => Number)
-  @IsNumber()
+  @IsNumber({}, { message: 'Supplier ID must be a number' })
   supplierId?: number;
 
   @ApiProperty({
@@ -144,8 +147,8 @@ export class QueryGoodsReceiptDto {
     example: ['2024-01-01', '2024-12-31'],
   })
   @IsOptional()
-  @IsArray()
-  @IsString({ each: true })
+  @IsArray({ message: 'Date range must be an array' })
+  @IsString({ each: true, message: 'Each date range value must be a string' })
   dateRange?: string[];
 
   @ApiProperty({ required: false, enum: GoodsReceiptStatus })
