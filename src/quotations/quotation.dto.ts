@@ -74,6 +74,7 @@ export class CreateQuotationDto {
 
   @ApiProperty({ example: 'Quotation for Office Equipment' })
   @IsString()
+  @IsNotEmpty({ message: 'Title is required' })
   @MaxLength(200)
   title: string;
 
@@ -83,7 +84,7 @@ export class CreateQuotationDto {
   description?: string;
 
   @ApiProperty({ example: 1 })
-  @IsInt()
+  @IsInt({ message: 'Invalid customer' })
   customerId: number;
 
   @ApiProperty({ required: false, example: 1 })
@@ -93,7 +94,7 @@ export class CreateQuotationDto {
 
   @ApiProperty({ enum: Currency, example: Currency.IDR, default: Currency.IDR })
   @IsOptional()
-  @IsEnum(Currency)
+  @IsEnum(Currency, { message: 'Invalid currency' })
   currency?: Currency;
 
   @ApiProperty({ required: false, example: 30, default: 30 })
