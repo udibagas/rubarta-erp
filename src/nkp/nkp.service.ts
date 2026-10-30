@@ -43,6 +43,7 @@ export class NkpService {
       where: {
         supplierId: data.supplierId,
         invoiceNumber: data.invoiceNumber,
+        paymentType: 'VENDOR',
       },
     });
 
@@ -65,6 +66,7 @@ export class NkpService {
         supplierId: data.supplierId,
         finalPayment: data.finalPayment,
         date: { gte: thirtyDaysAgo },
+        paymentType: 'VENDOR',
       },
     });
 
@@ -442,6 +444,7 @@ export class NkpService {
         supplierId: data.supplierId,
         invoiceNumber: data.invoiceNumber,
         id: { not: id },
+        paymentType: 'VENDOR',
       },
     });
 
@@ -465,6 +468,7 @@ export class NkpService {
         finalPayment: data.finalPayment,
         date: { gte: thirtyDaysAgo },
         id: { not: id },
+        paymentType: 'VENDOR',
       },
     });
 
