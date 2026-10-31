@@ -1,15 +1,15 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
+import { BankTransaction } from '../cash-bank/bank-transaction.entity';
+import { FiscalPeriod } from '../fiscal-periods/fiscal-period.entity';
+import { Payment } from '../payments/entities/payment.entity';
 import {
-  BankTransaction as BankTransactionModel,
-  FiscalPeriod as FiscalPeriodModel,
-  JournalEntry as JournalEntryModel,
   JournalSource,
   JournalStatus,
-  Payment as PaymentModel,
   User as UserModel,
-  VendorBill as VendorBillModel,
 } from '../prisma/client/client';
+import { VendorBill } from '../vendor-bills/vendor-bill.entity';
+import { JournalLine } from './journal-line.entity';
 
 export class JournalEntry {
   @ApiProperty()
@@ -30,19 +30,19 @@ export class JournalEntry {
   @ApiProperty({ enum: JournalSource })
   source: JournalSource;
 
-  @ApiProperty({ nullable: true })
+  @ApiProperty({ nullable: true, type: Number })
   sourceId: number | null;
 
   @ApiProperty()
   periodId: number;
 
-  @ApiProperty({ nullable: true })
+  @ApiProperty({ nullable: true, type: Number })
   reversalOfId: number | null;
 
   @ApiProperty()
   createdById: number;
 
-  @ApiProperty({ nullable: true })
+  @ApiProperty({ nullable: true, type: Number })
   postedById: number | null;
 
   @ApiProperty({ nullable: true, type: Date })
@@ -54,14 +54,17 @@ export class JournalEntry {
   @ApiProperty({ type: Date })
   updatedAt: Date;
 
-  @ApiPropertyOptional({ type: Object })
-  period?: FiscalPeriodModel;
+  @ApiPropertyOptional({ type: () => FiscalPeriod })
+  @Type(() => FiscalPeriod)
+  period?: FiscalPeriod;
 
-  @ApiPropertyOptional({ type: Object, nullable: true })
-  reversalOf?: JournalEntryModel | null;
+  @ApiPropertyOptional({ type: () => JournalEntry, nullable: true })
+  @Type(() => JournalEntry)
+  reversalOf?: JournalEntry | null;
 
-  @ApiPropertyOptional({ type: Object, nullable: true })
-  reversedBy?: JournalEntryModel | null;
+  @ApiPropertyOptional({ type: () => JournalEntry, nullable: true })
+  @Type(() => JournalEntry)
+  reversedBy?: JournalEntry | null;
 
   @ApiPropertyOptional({ type: Object })
   createdBy?: UserModel;
@@ -69,41 +72,19 @@ export class JournalEntry {
   @ApiPropertyOptional({ type: Object, nullable: true })
   postedBy?: UserModel | null;
 
-  @ApiPropertyOptional({ type: [Object] })
+  @ApiPropertyOptional({ type: () => [JournalLine] })
   @Type(() => JournalLine)
   lines?: JournalLine[];
 
-  @ApiPropertyOptional({ type: Object, nullable: true })
-  vendorBill?: VendorBillModel | null;
+  @ApiPropertyOptional({ type: () => VendorBill, nullable: true })
+  @Type(() => VendorBill)
+  vendorBill?: VendorBill | null;
 
-  @ApiPropertyOptional({ type: Object, nullable: true })
-  payment?: PaymentModel | null;
+  @ApiPropertyOptional({ type: () => Payment, nullable: true })
+  @Type(() => Payment)
+  payment?: Payment | null;
 
-  @ApiPropertyOptional({ type: Object, nullable: true })
-  bankTransaction?: BankTransactionModel | null;
-}
-
-class JournalLine {
-  @ApiProperty()
-  id: number;
-
-  @ApiProperty()
-  journalEntryId: number;
-
-  @ApiProperty()
-  accountId: number;
-
-  @ApiProperty()
-  @Type(() => Number)
-  debit: number;
-
-  @ApiProperty()
-  @Type(() => Number)
-  credit: number;
-
-  @ApiProperty({ type: Date })
-  createdAt: Date;
-
-  @ApiProperty({ type: Date })
-  updatedAt: Date;
+  @ApiPropertyOptional({ type: () => BankTransaction, nullable: true })
+  @Type(() => BankTransaction)
+  bankTransaction?: BankTransaction | null;
 }

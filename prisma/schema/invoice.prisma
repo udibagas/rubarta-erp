@@ -47,8 +47,9 @@ model Invoice {
   InvoiceItems       InvoiceItem[]
 
   // Timestamps
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt              DateTime                @default(now())
+  updatedAt              DateTime                @updatedAt
+  invoiceSubmissionItems InvoiceSubmissionItem[]
 
   @@map("Invoices")
 }
@@ -68,6 +69,50 @@ model InvoiceItem {
   @@map("InvoiceItems")
 }
 
+model InvoiceSubmission {
+  id          Int                     @id @default(autoincrement())
+  number      String                  @unique
+  date        DateTime
+  amount      Decimal                 @db.Decimal(18, 2)
+  description String?
+  status      InvoiceSubmissionStatus @default(Draft)
+
+  // Timestamps for the InvoiceSubmission model
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  submittedAt DateTime?
+  receivedAt  DateTime?
+  paidAt      DateTime?
+
+  // Foreign key relations for the InvoiceSubmission model
+  userId     Int
+  customerId Int
+
+  // Relationships
+  User                   User                    @relation(fields: [userId], references: [id])
+  Customer               Customer                @relation(fields: [customerId], references: [id])
+  invoiceSubmissionItems InvoiceSubmissionItem[]
+
+  @@index([userId])
+  @@index([customerId])
+  @@map("InvoiceSubmissions")
+}
+
+model InvoiceSubmissionItem {
+  id                  Int @id @default(autoincrement())
+  invoiceSubmissionId Int
+  invoiceId           Int
+
+  // Relationships
+  InvoiceSubmission InvoiceSubmission @relation(fields: [invoiceSubmissionId], references: [id], onDelete: Cascade)
+  Invoice           Invoice           @relation(fields: [invoiceId], references: [id])
+
+  @@index([invoiceSubmissionId])
+  @@index([invoiceId])
+  @@index([invoiceSubmissionId, invoiceId])
+  @@map("InvoiceSubmissionItems")
+}
+
 enum InvoiceStatus {
   Draft
   Confirmed
@@ -75,4 +120,11 @@ enum InvoiceStatus {
   Pending
   Paid
   Overdue
+}
+
+enum InvoiceSubmissionStatus {
+  Draft
+  Submitted
+  Received
+  Paid
 }

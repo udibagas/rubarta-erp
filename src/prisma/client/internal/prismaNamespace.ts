@@ -427,6 +427,8 @@ export const ModelName = {
   GoodsReceiptItem: 'GoodsReceiptItem',
   Invoice: 'Invoice',
   InvoiceItem: 'InvoiceItem',
+  InvoiceSubmission: 'InvoiceSubmission',
+  InvoiceSubmissionItem: 'InvoiceSubmissionItem',
   Material: 'Material',
   Nkp: 'Nkp',
   NkpItem: 'NkpItem',
@@ -466,7 +468,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "account" | "accountBalance" | "fiscalPeriod" | "journalEntry" | "journalLine" | "vendorBill" | "payment" | "paymentAllocation" | "cashBankAccount" | "bankTransaction" | "taxRate" | "expense" | "approvalSetting" | "approvalSettingItem" | "approval" | "approvalItem" | "lead" | "opportunity" | "task" | "interaction" | "customerNote" | "customerFile" | "customer" | "contact" | "deliveryOrder" | "deliveryOrderItem" | "goodsReceipt" | "goodsReceiptItem" | "invoice" | "invoiceItem" | "material" | "nkp" | "nkpItem" | "nkpApproval" | "nkpAttachment" | "notification" | "purchaseOrder" | "purchaseOrderItem" | "quotation" | "quotationItem" | "salesOrder" | "salesOrderItem" | "company" | "department" | "bank" | "authSession" | "twoFactorChallenge" | "trustedDevice" | "passwordResetToken" | "appLog" | "supplier" | "user" | "userBalance" | "visitPlan"
+    modelProps: "account" | "accountBalance" | "fiscalPeriod" | "journalEntry" | "journalLine" | "vendorBill" | "payment" | "paymentAllocation" | "cashBankAccount" | "bankTransaction" | "taxRate" | "expense" | "approvalSetting" | "approvalSettingItem" | "approval" | "approvalItem" | "lead" | "opportunity" | "task" | "interaction" | "customerNote" | "customerFile" | "customer" | "contact" | "deliveryOrder" | "deliveryOrderItem" | "goodsReceipt" | "goodsReceiptItem" | "invoice" | "invoiceItem" | "invoiceSubmission" | "invoiceSubmissionItem" | "material" | "nkp" | "nkpItem" | "nkpApproval" | "nkpAttachment" | "notification" | "purchaseOrder" | "purchaseOrderItem" | "quotation" | "quotationItem" | "salesOrder" | "salesOrderItem" | "company" | "department" | "bank" | "authSession" | "twoFactorChallenge" | "trustedDevice" | "passwordResetToken" | "appLog" | "supplier" | "user" | "userBalance" | "visitPlan"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -2687,6 +2689,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.InvoiceItemCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.InvoiceItemCountAggregateOutputType> | number
+        }
+      }
+    }
+    InvoiceSubmission: {
+      payload: Prisma.$InvoiceSubmissionPayload<ExtArgs>
+      fields: Prisma.InvoiceSubmissionFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.InvoiceSubmissionFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InvoiceSubmissionPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.InvoiceSubmissionFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InvoiceSubmissionPayload>
+        }
+        findFirst: {
+          args: Prisma.InvoiceSubmissionFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InvoiceSubmissionPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.InvoiceSubmissionFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InvoiceSubmissionPayload>
+        }
+        findMany: {
+          args: Prisma.InvoiceSubmissionFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InvoiceSubmissionPayload>[]
+        }
+        create: {
+          args: Prisma.InvoiceSubmissionCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InvoiceSubmissionPayload>
+        }
+        createMany: {
+          args: Prisma.InvoiceSubmissionCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.InvoiceSubmissionCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InvoiceSubmissionPayload>[]
+        }
+        delete: {
+          args: Prisma.InvoiceSubmissionDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InvoiceSubmissionPayload>
+        }
+        update: {
+          args: Prisma.InvoiceSubmissionUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InvoiceSubmissionPayload>
+        }
+        deleteMany: {
+          args: Prisma.InvoiceSubmissionDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.InvoiceSubmissionUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.InvoiceSubmissionUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InvoiceSubmissionPayload>[]
+        }
+        upsert: {
+          args: Prisma.InvoiceSubmissionUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InvoiceSubmissionPayload>
+        }
+        aggregate: {
+          args: Prisma.InvoiceSubmissionAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateInvoiceSubmission>
+        }
+        groupBy: {
+          args: Prisma.InvoiceSubmissionGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.InvoiceSubmissionGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.InvoiceSubmissionCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.InvoiceSubmissionCountAggregateOutputType> | number
+        }
+      }
+    }
+    InvoiceSubmissionItem: {
+      payload: Prisma.$InvoiceSubmissionItemPayload<ExtArgs>
+      fields: Prisma.InvoiceSubmissionItemFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.InvoiceSubmissionItemFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InvoiceSubmissionItemPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.InvoiceSubmissionItemFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InvoiceSubmissionItemPayload>
+        }
+        findFirst: {
+          args: Prisma.InvoiceSubmissionItemFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InvoiceSubmissionItemPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.InvoiceSubmissionItemFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InvoiceSubmissionItemPayload>
+        }
+        findMany: {
+          args: Prisma.InvoiceSubmissionItemFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InvoiceSubmissionItemPayload>[]
+        }
+        create: {
+          args: Prisma.InvoiceSubmissionItemCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InvoiceSubmissionItemPayload>
+        }
+        createMany: {
+          args: Prisma.InvoiceSubmissionItemCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.InvoiceSubmissionItemCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InvoiceSubmissionItemPayload>[]
+        }
+        delete: {
+          args: Prisma.InvoiceSubmissionItemDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InvoiceSubmissionItemPayload>
+        }
+        update: {
+          args: Prisma.InvoiceSubmissionItemUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InvoiceSubmissionItemPayload>
+        }
+        deleteMany: {
+          args: Prisma.InvoiceSubmissionItemDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.InvoiceSubmissionItemUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.InvoiceSubmissionItemUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InvoiceSubmissionItemPayload>[]
+        }
+        upsert: {
+          args: Prisma.InvoiceSubmissionItemUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InvoiceSubmissionItemPayload>
+        }
+        aggregate: {
+          args: Prisma.InvoiceSubmissionItemAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateInvoiceSubmissionItem>
+        }
+        groupBy: {
+          args: Prisma.InvoiceSubmissionItemGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.InvoiceSubmissionItemGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.InvoiceSubmissionItemCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.InvoiceSubmissionItemCountAggregateOutputType> | number
         }
       }
     }
@@ -5031,6 +5181,34 @@ export const InvoiceItemScalarFieldEnum = {
 export type InvoiceItemScalarFieldEnum = (typeof InvoiceItemScalarFieldEnum)[keyof typeof InvoiceItemScalarFieldEnum]
 
 
+export const InvoiceSubmissionScalarFieldEnum = {
+  id: 'id',
+  number: 'number',
+  date: 'date',
+  amount: 'amount',
+  description: 'description',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  submittedAt: 'submittedAt',
+  receivedAt: 'receivedAt',
+  paidAt: 'paidAt',
+  userId: 'userId',
+  customerId: 'customerId'
+} as const
+
+export type InvoiceSubmissionScalarFieldEnum = (typeof InvoiceSubmissionScalarFieldEnum)[keyof typeof InvoiceSubmissionScalarFieldEnum]
+
+
+export const InvoiceSubmissionItemScalarFieldEnum = {
+  id: 'id',
+  invoiceSubmissionId: 'invoiceSubmissionId',
+  invoiceId: 'invoiceId'
+} as const
+
+export type InvoiceSubmissionItemScalarFieldEnum = (typeof InvoiceSubmissionItemScalarFieldEnum)[keyof typeof InvoiceSubmissionItemScalarFieldEnum]
+
+
 export const MaterialScalarFieldEnum = {
   id: 'id',
   partNumber: 'partNumber',
@@ -5997,6 +6175,20 @@ export type ListEnumCurrencyFieldRefInput<$PrismaModel> = FieldRefInputType<$Pri
 
 
 /**
+ * Reference to a field of type 'InvoiceSubmissionStatus'
+ */
+export type EnumInvoiceSubmissionStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'InvoiceSubmissionStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'InvoiceSubmissionStatus[]'
+ */
+export type ListEnumInvoiceSubmissionStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'InvoiceSubmissionStatus[]'>
+    
+
+
+/**
  * Reference to a field of type 'PurchaseOrderStatus'
  */
 export type EnumPurchaseOrderStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PurchaseOrderStatus'>
@@ -6281,6 +6473,8 @@ export type GlobalOmitConfig = {
   goodsReceiptItem?: Prisma.GoodsReceiptItemOmit
   invoice?: Prisma.InvoiceOmit
   invoiceItem?: Prisma.InvoiceItemOmit
+  invoiceSubmission?: Prisma.InvoiceSubmissionOmit
+  invoiceSubmissionItem?: Prisma.InvoiceSubmissionItemOmit
   material?: Prisma.MaterialOmit
   nkp?: Prisma.NkpOmit
   nkpItem?: Prisma.NkpItemOmit

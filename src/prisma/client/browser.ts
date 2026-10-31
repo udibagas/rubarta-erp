@@ -168,6 +168,16 @@ export type Invoice = Prisma.InvoiceModel
  */
 export type InvoiceItem = Prisma.InvoiceItemModel
 /**
+ * Model InvoiceSubmission
+ * 
+ */
+export type InvoiceSubmission = Prisma.InvoiceSubmissionModel
+/**
+ * Model InvoiceSubmissionItem
+ * 
+ */
+export type InvoiceSubmissionItem = Prisma.InvoiceSubmissionItemModel
+/**
  * Model Material
  * 
  */

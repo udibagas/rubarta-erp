@@ -40,6 +40,7 @@ export class JournalEntriesController {
   }
 
   @Get(':id')
+  @SerializeOptions({ type: JournalEntry })
   findOne(@Param('id', ParseIntPipe) id: number) {
     return this.service.findOne(id);
   }

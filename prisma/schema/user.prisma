@@ -20,11 +20,11 @@ model User {
   Balance    UserBalance?
 
   // 1:many relations with other models
-  roles        Role[]         @default([USER])
-  Notification Notification[]
-  AuthSession  AuthSession[]
+  roles              Role[]               @default([USER])
+  Notification       Notification[]
+  AuthSession        AuthSession[]
   TwoFactorChallenge TwoFactorChallenge[]
-  TrustedDevice TrustedDevice[]
+  TrustedDevice      TrustedDevice[]
   PasswordResetToken PasswordResetToken[]
 
   // NKP related
@@ -62,6 +62,7 @@ model User {
   // Approval related
   approvalItems       ApprovalItem[]
   ApprovalSettingItem ApprovalSettingItem[]
+  invoiceSubmissions  InvoiceSubmission[]
 
   @@index([bankId, departmentId])
   @@map("Users")

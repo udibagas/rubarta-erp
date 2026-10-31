@@ -19,7 +19,7 @@ model Customer {
   updatedAt DateTime? @updatedAt
 
   // Relations
-  accountManager     User?           @relation(fields: [accountManagerId], references: [id])
+  accountManager     User?               @relation(fields: [accountManagerId], references: [id])
   Invoices           Invoice[]
   accountingPayments Payment[]
   Contacts           Contact[]
@@ -32,6 +32,7 @@ model Customer {
   Quotations         Quotation[]
   VisitPlans         VisitPlan[]
   Tasks              Task[]
+  invoiceSubmissions InvoiceSubmission[]
 
   @@index([email])
   @@index([isActive])

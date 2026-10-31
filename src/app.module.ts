@@ -48,6 +48,7 @@ import { VendorBillsModule } from './vendor-bills/vendor-bills.module';
 import { CashBankModule } from './cash-bank/cash-bank.module';
 import { TaxRatesModule } from './tax-rates/tax-rates.module';
 import { AccountingReportsModule } from './accounting-reports/accounting-reports.module';
+import { InvoiceSubmissionsModule } from './invoice-submissions/invoice-submissions.module';
 
 @Module({
   imports: [
@@ -138,6 +139,7 @@ import { AccountingReportsModule } from './accounting-reports/accounting-reports
     CashBankModule,
     TaxRatesModule,
     AccountingReportsModule,
+    InvoiceSubmissionsModule,
   ],
   providers: [],
 })

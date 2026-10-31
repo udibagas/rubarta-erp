@@ -262,6 +262,16 @@ export const InvoiceStatus = {
 export type InvoiceStatus = (typeof InvoiceStatus)[keyof typeof InvoiceStatus]
 
 
+export const InvoiceSubmissionStatus = {
+  Draft: 'Draft',
+  Submitted: 'Submitted',
+  Received: 'Received',
+  Paid: 'Paid'
+} as const
+
+export type InvoiceSubmissionStatus = (typeof InvoiceSubmissionStatus)[keyof typeof InvoiceSubmissionStatus]
+
+
 export const NkpType = {
   CASH_ADVANCE: 'CASH_ADVANCE',
   DECLARATION: 'DECLARATION',

@@ -81,6 +81,8 @@ export const ModelName = {
   GoodsReceiptItem: 'GoodsReceiptItem',
   Invoice: 'Invoice',
   InvoiceItem: 'InvoiceItem',
+  InvoiceSubmission: 'InvoiceSubmission',
+  InvoiceSubmissionItem: 'InvoiceSubmissionItem',
   Material: 'Material',
   Nkp: 'Nkp',
   NkpItem: 'NkpItem',
@@ -647,6 +649,34 @@ export const InvoiceItemScalarFieldEnum = {
 } as const
 
 export type InvoiceItemScalarFieldEnum = (typeof InvoiceItemScalarFieldEnum)[keyof typeof InvoiceItemScalarFieldEnum]
+
+
+export const InvoiceSubmissionScalarFieldEnum = {
+  id: 'id',
+  number: 'number',
+  date: 'date',
+  amount: 'amount',
+  description: 'description',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  submittedAt: 'submittedAt',
+  receivedAt: 'receivedAt',
+  paidAt: 'paidAt',
+  userId: 'userId',
+  customerId: 'customerId'
+} as const
+
+export type InvoiceSubmissionScalarFieldEnum = (typeof InvoiceSubmissionScalarFieldEnum)[keyof typeof InvoiceSubmissionScalarFieldEnum]
+
+
+export const InvoiceSubmissionItemScalarFieldEnum = {
+  id: 'id',
+  invoiceSubmissionId: 'invoiceSubmissionId',
+  invoiceId: 'invoiceId'
+} as const
+
+export type InvoiceSubmissionItemScalarFieldEnum = (typeof InvoiceSubmissionItemScalarFieldEnum)[keyof typeof InvoiceSubmissionItemScalarFieldEnum]
 
 
 export const MaterialScalarFieldEnum = {

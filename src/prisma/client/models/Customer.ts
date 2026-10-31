@@ -321,6 +321,7 @@ export type CustomerWhereInput = {
   Quotations?: Prisma.QuotationListRelationFilter
   VisitPlans?: Prisma.VisitPlanListRelationFilter
   Tasks?: Prisma.TaskListRelationFilter
+  invoiceSubmissions?: Prisma.InvoiceSubmissionListRelationFilter
 }
 
 export type CustomerOrderByWithRelationInput = {
@@ -353,6 +354,7 @@ export type CustomerOrderByWithRelationInput = {
   Quotations?: Prisma.QuotationOrderByRelationAggregateInput
   VisitPlans?: Prisma.VisitPlanOrderByRelationAggregateInput
   Tasks?: Prisma.TaskOrderByRelationAggregateInput
+  invoiceSubmissions?: Prisma.InvoiceSubmissionOrderByRelationAggregateInput
 }
 
 export type CustomerWhereUniqueInput = Prisma.AtLeast<{
@@ -388,6 +390,7 @@ export type CustomerWhereUniqueInput = Prisma.AtLeast<{
   Quotations?: Prisma.QuotationListRelationFilter
   VisitPlans?: Prisma.VisitPlanListRelationFilter
   Tasks?: Prisma.TaskListRelationFilter
+  invoiceSubmissions?: Prisma.InvoiceSubmissionListRelationFilter
 }, "id" | "email">
 
 export type CustomerOrderByWithAggregationInput = {
@@ -464,6 +467,7 @@ export type CustomerCreateInput = {
   Quotations?: Prisma.QuotationCreateNestedManyWithoutCustomerInput
   VisitPlans?: Prisma.VisitPlanCreateNestedManyWithoutCustomerInput
   Tasks?: Prisma.TaskCreateNestedManyWithoutCustomerInput
+  invoiceSubmissions?: Prisma.InvoiceSubmissionCreateNestedManyWithoutCustomerInput
 }
 
 export type CustomerUncheckedCreateInput = {
@@ -495,6 +499,7 @@ export type CustomerUncheckedCreateInput = {
   Quotations?: Prisma.QuotationUncheckedCreateNestedManyWithoutCustomerInput
   VisitPlans?: Prisma.VisitPlanUncheckedCreateNestedManyWithoutCustomerInput
   Tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutCustomerInput
+  invoiceSubmissions?: Prisma.InvoiceSubmissionUncheckedCreateNestedManyWithoutCustomerInput
 }
 
 export type CustomerUpdateInput = {
@@ -525,6 +530,7 @@ export type CustomerUpdateInput = {
   Quotations?: Prisma.QuotationUpdateManyWithoutCustomerNestedInput
   VisitPlans?: Prisma.VisitPlanUpdateManyWithoutCustomerNestedInput
   Tasks?: Prisma.TaskUpdateManyWithoutCustomerNestedInput
+  invoiceSubmissions?: Prisma.InvoiceSubmissionUpdateManyWithoutCustomerNestedInput
 }
 
 export type CustomerUncheckedUpdateInput = {
@@ -556,6 +562,7 @@ export type CustomerUncheckedUpdateInput = {
   Quotations?: Prisma.QuotationUncheckedUpdateManyWithoutCustomerNestedInput
   VisitPlans?: Prisma.VisitPlanUncheckedUpdateManyWithoutCustomerNestedInput
   Tasks?: Prisma.TaskUncheckedUpdateManyWithoutCustomerNestedInput
+  invoiceSubmissions?: Prisma.InvoiceSubmissionUncheckedUpdateManyWithoutCustomerNestedInput
 }
 
 export type CustomerCreateManyInput = {
@@ -849,6 +856,20 @@ export type CustomerUpdateOneRequiredWithoutInvoicesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.CustomerUpdateToOneWithWhereWithoutInvoicesInput, Prisma.CustomerUpdateWithoutInvoicesInput>, Prisma.CustomerUncheckedUpdateWithoutInvoicesInput>
 }
 
+export type CustomerCreateNestedOneWithoutInvoiceSubmissionsInput = {
+  create?: Prisma.XOR<Prisma.CustomerCreateWithoutInvoiceSubmissionsInput, Prisma.CustomerUncheckedCreateWithoutInvoiceSubmissionsInput>
+  connectOrCreate?: Prisma.CustomerCreateOrConnectWithoutInvoiceSubmissionsInput
+  connect?: Prisma.CustomerWhereUniqueInput
+}
+
+export type CustomerUpdateOneRequiredWithoutInvoiceSubmissionsNestedInput = {
+  create?: Prisma.XOR<Prisma.CustomerCreateWithoutInvoiceSubmissionsInput, Prisma.CustomerUncheckedCreateWithoutInvoiceSubmissionsInput>
+  connectOrCreate?: Prisma.CustomerCreateOrConnectWithoutInvoiceSubmissionsInput
+  upsert?: Prisma.CustomerUpsertWithoutInvoiceSubmissionsInput
+  connect?: Prisma.CustomerWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CustomerUpdateToOneWithWhereWithoutInvoiceSubmissionsInput, Prisma.CustomerUpdateWithoutInvoiceSubmissionsInput>, Prisma.CustomerUncheckedUpdateWithoutInvoiceSubmissionsInput>
+}
+
 export type CustomerCreateNestedOneWithoutQuotationsInput = {
   create?: Prisma.XOR<Prisma.CustomerCreateWithoutQuotationsInput, Prisma.CustomerUncheckedCreateWithoutQuotationsInput>
   connectOrCreate?: Prisma.CustomerCreateOrConnectWithoutQuotationsInput
@@ -960,6 +981,7 @@ export type CustomerCreateWithoutAccountingPaymentsInput = {
   Quotations?: Prisma.QuotationCreateNestedManyWithoutCustomerInput
   VisitPlans?: Prisma.VisitPlanCreateNestedManyWithoutCustomerInput
   Tasks?: Prisma.TaskCreateNestedManyWithoutCustomerInput
+  invoiceSubmissions?: Prisma.InvoiceSubmissionCreateNestedManyWithoutCustomerInput
 }
 
 export type CustomerUncheckedCreateWithoutAccountingPaymentsInput = {
@@ -990,6 +1012,7 @@ export type CustomerUncheckedCreateWithoutAccountingPaymentsInput = {
   Quotations?: Prisma.QuotationUncheckedCreateNestedManyWithoutCustomerInput
   VisitPlans?: Prisma.VisitPlanUncheckedCreateNestedManyWithoutCustomerInput
   Tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutCustomerInput
+  invoiceSubmissions?: Prisma.InvoiceSubmissionUncheckedCreateNestedManyWithoutCustomerInput
 }
 
 export type CustomerCreateOrConnectWithoutAccountingPaymentsInput = {
@@ -1035,6 +1058,7 @@ export type CustomerUpdateWithoutAccountingPaymentsInput = {
   Quotations?: Prisma.QuotationUpdateManyWithoutCustomerNestedInput
   VisitPlans?: Prisma.VisitPlanUpdateManyWithoutCustomerNestedInput
   Tasks?: Prisma.TaskUpdateManyWithoutCustomerNestedInput
+  invoiceSubmissions?: Prisma.InvoiceSubmissionUpdateManyWithoutCustomerNestedInput
 }
 
 export type CustomerUncheckedUpdateWithoutAccountingPaymentsInput = {
@@ -1065,6 +1089,7 @@ export type CustomerUncheckedUpdateWithoutAccountingPaymentsInput = {
   Quotations?: Prisma.QuotationUncheckedUpdateManyWithoutCustomerNestedInput
   VisitPlans?: Prisma.VisitPlanUncheckedUpdateManyWithoutCustomerNestedInput
   Tasks?: Prisma.TaskUncheckedUpdateManyWithoutCustomerNestedInput
+  invoiceSubmissions?: Prisma.InvoiceSubmissionUncheckedUpdateManyWithoutCustomerNestedInput
 }
 
 export type CustomerCreateWithoutLeadsInput = {
@@ -1094,6 +1119,7 @@ export type CustomerCreateWithoutLeadsInput = {
   Quotations?: Prisma.QuotationCreateNestedManyWithoutCustomerInput
   VisitPlans?: Prisma.VisitPlanCreateNestedManyWithoutCustomerInput
   Tasks?: Prisma.TaskCreateNestedManyWithoutCustomerInput
+  invoiceSubmissions?: Prisma.InvoiceSubmissionCreateNestedManyWithoutCustomerInput
 }
 
 export type CustomerUncheckedCreateWithoutLeadsInput = {
@@ -1124,6 +1150,7 @@ export type CustomerUncheckedCreateWithoutLeadsInput = {
   Quotations?: Prisma.QuotationUncheckedCreateNestedManyWithoutCustomerInput
   VisitPlans?: Prisma.VisitPlanUncheckedCreateNestedManyWithoutCustomerInput
   Tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutCustomerInput
+  invoiceSubmissions?: Prisma.InvoiceSubmissionUncheckedCreateNestedManyWithoutCustomerInput
 }
 
 export type CustomerCreateOrConnectWithoutLeadsInput = {
@@ -1169,6 +1196,7 @@ export type CustomerUpdateWithoutLeadsInput = {
   Quotations?: Prisma.QuotationUpdateManyWithoutCustomerNestedInput
   VisitPlans?: Prisma.VisitPlanUpdateManyWithoutCustomerNestedInput
   Tasks?: Prisma.TaskUpdateManyWithoutCustomerNestedInput
+  invoiceSubmissions?: Prisma.InvoiceSubmissionUpdateManyWithoutCustomerNestedInput
 }
 
 export type CustomerUncheckedUpdateWithoutLeadsInput = {
@@ -1199,6 +1227,7 @@ export type CustomerUncheckedUpdateWithoutLeadsInput = {
   Quotations?: Prisma.QuotationUncheckedUpdateManyWithoutCustomerNestedInput
   VisitPlans?: Prisma.VisitPlanUncheckedUpdateManyWithoutCustomerNestedInput
   Tasks?: Prisma.TaskUncheckedUpdateManyWithoutCustomerNestedInput
+  invoiceSubmissions?: Prisma.InvoiceSubmissionUncheckedUpdateManyWithoutCustomerNestedInput
 }
 
 export type CustomerCreateWithoutOpportunitiesInput = {
@@ -1228,6 +1257,7 @@ export type CustomerCreateWithoutOpportunitiesInput = {
   Quotations?: Prisma.QuotationCreateNestedManyWithoutCustomerInput
   VisitPlans?: Prisma.VisitPlanCreateNestedManyWithoutCustomerInput
   Tasks?: Prisma.TaskCreateNestedManyWithoutCustomerInput
+  invoiceSubmissions?: Prisma.InvoiceSubmissionCreateNestedManyWithoutCustomerInput
 }
 
 export type CustomerUncheckedCreateWithoutOpportunitiesInput = {
@@ -1258,6 +1288,7 @@ export type CustomerUncheckedCreateWithoutOpportunitiesInput = {
   Quotations?: Prisma.QuotationUncheckedCreateNestedManyWithoutCustomerInput
   VisitPlans?: Prisma.VisitPlanUncheckedCreateNestedManyWithoutCustomerInput
   Tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutCustomerInput
+  invoiceSubmissions?: Prisma.InvoiceSubmissionUncheckedCreateNestedManyWithoutCustomerInput
 }
 
 export type CustomerCreateOrConnectWithoutOpportunitiesInput = {
@@ -1303,6 +1334,7 @@ export type CustomerUpdateWithoutOpportunitiesInput = {
   Quotations?: Prisma.QuotationUpdateManyWithoutCustomerNestedInput
   VisitPlans?: Prisma.VisitPlanUpdateManyWithoutCustomerNestedInput
   Tasks?: Prisma.TaskUpdateManyWithoutCustomerNestedInput
+  invoiceSubmissions?: Prisma.InvoiceSubmissionUpdateManyWithoutCustomerNestedInput
 }
 
 export type CustomerUncheckedUpdateWithoutOpportunitiesInput = {
@@ -1333,6 +1365,7 @@ export type CustomerUncheckedUpdateWithoutOpportunitiesInput = {
   Quotations?: Prisma.QuotationUncheckedUpdateManyWithoutCustomerNestedInput
   VisitPlans?: Prisma.VisitPlanUncheckedUpdateManyWithoutCustomerNestedInput
   Tasks?: Prisma.TaskUncheckedUpdateManyWithoutCustomerNestedInput
+  invoiceSubmissions?: Prisma.InvoiceSubmissionUncheckedUpdateManyWithoutCustomerNestedInput
 }
 
 export type CustomerCreateWithoutTasksInput = {
@@ -1362,6 +1395,7 @@ export type CustomerCreateWithoutTasksInput = {
   CustomerFiles?: Prisma.CustomerFileCreateNestedManyWithoutCustomerInput
   Quotations?: Prisma.QuotationCreateNestedManyWithoutCustomerInput
   VisitPlans?: Prisma.VisitPlanCreateNestedManyWithoutCustomerInput
+  invoiceSubmissions?: Prisma.InvoiceSubmissionCreateNestedManyWithoutCustomerInput
 }
 
 export type CustomerUncheckedCreateWithoutTasksInput = {
@@ -1392,6 +1426,7 @@ export type CustomerUncheckedCreateWithoutTasksInput = {
   CustomerFiles?: Prisma.CustomerFileUncheckedCreateNestedManyWithoutCustomerInput
   Quotations?: Prisma.QuotationUncheckedCreateNestedManyWithoutCustomerInput
   VisitPlans?: Prisma.VisitPlanUncheckedCreateNestedManyWithoutCustomerInput
+  invoiceSubmissions?: Prisma.InvoiceSubmissionUncheckedCreateNestedManyWithoutCustomerInput
 }
 
 export type CustomerCreateOrConnectWithoutTasksInput = {
@@ -1437,6 +1472,7 @@ export type CustomerUpdateWithoutTasksInput = {
   CustomerFiles?: Prisma.CustomerFileUpdateManyWithoutCustomerNestedInput
   Quotations?: Prisma.QuotationUpdateManyWithoutCustomerNestedInput
   VisitPlans?: Prisma.VisitPlanUpdateManyWithoutCustomerNestedInput
+  invoiceSubmissions?: Prisma.InvoiceSubmissionUpdateManyWithoutCustomerNestedInput
 }
 
 export type CustomerUncheckedUpdateWithoutTasksInput = {
@@ -1467,6 +1503,7 @@ export type CustomerUncheckedUpdateWithoutTasksInput = {
   CustomerFiles?: Prisma.CustomerFileUncheckedUpdateManyWithoutCustomerNestedInput
   Quotations?: Prisma.QuotationUncheckedUpdateManyWithoutCustomerNestedInput
   VisitPlans?: Prisma.VisitPlanUncheckedUpdateManyWithoutCustomerNestedInput
+  invoiceSubmissions?: Prisma.InvoiceSubmissionUncheckedUpdateManyWithoutCustomerNestedInput
 }
 
 export type CustomerCreateWithoutCustomerNotesInput = {
@@ -1496,6 +1533,7 @@ export type CustomerCreateWithoutCustomerNotesInput = {
   Quotations?: Prisma.QuotationCreateNestedManyWithoutCustomerInput
   VisitPlans?: Prisma.VisitPlanCreateNestedManyWithoutCustomerInput
   Tasks?: Prisma.TaskCreateNestedManyWithoutCustomerInput
+  invoiceSubmissions?: Prisma.InvoiceSubmissionCreateNestedManyWithoutCustomerInput
 }
 
 export type CustomerUncheckedCreateWithoutCustomerNotesInput = {
@@ -1526,6 +1564,7 @@ export type CustomerUncheckedCreateWithoutCustomerNotesInput = {
   Quotations?: Prisma.QuotationUncheckedCreateNestedManyWithoutCustomerInput
   VisitPlans?: Prisma.VisitPlanUncheckedCreateNestedManyWithoutCustomerInput
   Tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutCustomerInput
+  invoiceSubmissions?: Prisma.InvoiceSubmissionUncheckedCreateNestedManyWithoutCustomerInput
 }
 
 export type CustomerCreateOrConnectWithoutCustomerNotesInput = {
@@ -1571,6 +1610,7 @@ export type CustomerUpdateWithoutCustomerNotesInput = {
   Quotations?: Prisma.QuotationUpdateManyWithoutCustomerNestedInput
   VisitPlans?: Prisma.VisitPlanUpdateManyWithoutCustomerNestedInput
   Tasks?: Prisma.TaskUpdateManyWithoutCustomerNestedInput
+  invoiceSubmissions?: Prisma.InvoiceSubmissionUpdateManyWithoutCustomerNestedInput
 }
 
 export type CustomerUncheckedUpdateWithoutCustomerNotesInput = {
@@ -1601,6 +1641,7 @@ export type CustomerUncheckedUpdateWithoutCustomerNotesInput = {
   Quotations?: Prisma.QuotationUncheckedUpdateManyWithoutCustomerNestedInput
   VisitPlans?: Prisma.VisitPlanUncheckedUpdateManyWithoutCustomerNestedInput
   Tasks?: Prisma.TaskUncheckedUpdateManyWithoutCustomerNestedInput
+  invoiceSubmissions?: Prisma.InvoiceSubmissionUncheckedUpdateManyWithoutCustomerNestedInput
 }
 
 export type CustomerCreateWithoutCustomerFilesInput = {
@@ -1630,6 +1671,7 @@ export type CustomerCreateWithoutCustomerFilesInput = {
   Quotations?: Prisma.QuotationCreateNestedManyWithoutCustomerInput
   VisitPlans?: Prisma.VisitPlanCreateNestedManyWithoutCustomerInput
   Tasks?: Prisma.TaskCreateNestedManyWithoutCustomerInput
+  invoiceSubmissions?: Prisma.InvoiceSubmissionCreateNestedManyWithoutCustomerInput
 }
 
 export type CustomerUncheckedCreateWithoutCustomerFilesInput = {
@@ -1660,6 +1702,7 @@ export type CustomerUncheckedCreateWithoutCustomerFilesInput = {
   Quotations?: Prisma.QuotationUncheckedCreateNestedManyWithoutCustomerInput
   VisitPlans?: Prisma.VisitPlanUncheckedCreateNestedManyWithoutCustomerInput
   Tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutCustomerInput
+  invoiceSubmissions?: Prisma.InvoiceSubmissionUncheckedCreateNestedManyWithoutCustomerInput
 }
 
 export type CustomerCreateOrConnectWithoutCustomerFilesInput = {
@@ -1705,6 +1748,7 @@ export type CustomerUpdateWithoutCustomerFilesInput = {
   Quotations?: Prisma.QuotationUpdateManyWithoutCustomerNestedInput
   VisitPlans?: Prisma.VisitPlanUpdateManyWithoutCustomerNestedInput
   Tasks?: Prisma.TaskUpdateManyWithoutCustomerNestedInput
+  invoiceSubmissions?: Prisma.InvoiceSubmissionUpdateManyWithoutCustomerNestedInput
 }
 
 export type CustomerUncheckedUpdateWithoutCustomerFilesInput = {
@@ -1735,6 +1779,7 @@ export type CustomerUncheckedUpdateWithoutCustomerFilesInput = {
   Quotations?: Prisma.QuotationUncheckedUpdateManyWithoutCustomerNestedInput
   VisitPlans?: Prisma.VisitPlanUncheckedUpdateManyWithoutCustomerNestedInput
   Tasks?: Prisma.TaskUncheckedUpdateManyWithoutCustomerNestedInput
+  invoiceSubmissions?: Prisma.InvoiceSubmissionUncheckedUpdateManyWithoutCustomerNestedInput
 }
 
 export type CustomerCreateWithoutContactsInput = {
@@ -1764,6 +1809,7 @@ export type CustomerCreateWithoutContactsInput = {
   Quotations?: Prisma.QuotationCreateNestedManyWithoutCustomerInput
   VisitPlans?: Prisma.VisitPlanCreateNestedManyWithoutCustomerInput
   Tasks?: Prisma.TaskCreateNestedManyWithoutCustomerInput
+  invoiceSubmissions?: Prisma.InvoiceSubmissionCreateNestedManyWithoutCustomerInput
 }
 
 export type CustomerUncheckedCreateWithoutContactsInput = {
@@ -1794,6 +1840,7 @@ export type CustomerUncheckedCreateWithoutContactsInput = {
   Quotations?: Prisma.QuotationUncheckedCreateNestedManyWithoutCustomerInput
   VisitPlans?: Prisma.VisitPlanUncheckedCreateNestedManyWithoutCustomerInput
   Tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutCustomerInput
+  invoiceSubmissions?: Prisma.InvoiceSubmissionUncheckedCreateNestedManyWithoutCustomerInput
 }
 
 export type CustomerCreateOrConnectWithoutContactsInput = {
@@ -1839,6 +1886,7 @@ export type CustomerUpdateWithoutContactsInput = {
   Quotations?: Prisma.QuotationUpdateManyWithoutCustomerNestedInput
   VisitPlans?: Prisma.VisitPlanUpdateManyWithoutCustomerNestedInput
   Tasks?: Prisma.TaskUpdateManyWithoutCustomerNestedInput
+  invoiceSubmissions?: Prisma.InvoiceSubmissionUpdateManyWithoutCustomerNestedInput
 }
 
 export type CustomerUncheckedUpdateWithoutContactsInput = {
@@ -1869,6 +1917,7 @@ export type CustomerUncheckedUpdateWithoutContactsInput = {
   Quotations?: Prisma.QuotationUncheckedUpdateManyWithoutCustomerNestedInput
   VisitPlans?: Prisma.VisitPlanUncheckedUpdateManyWithoutCustomerNestedInput
   Tasks?: Prisma.TaskUncheckedUpdateManyWithoutCustomerNestedInput
+  invoiceSubmissions?: Prisma.InvoiceSubmissionUncheckedUpdateManyWithoutCustomerNestedInput
 }
 
 export type CustomerCreateWithoutDeliveryOrdersInput = {
@@ -1898,6 +1947,7 @@ export type CustomerCreateWithoutDeliveryOrdersInput = {
   Quotations?: Prisma.QuotationCreateNestedManyWithoutCustomerInput
   VisitPlans?: Prisma.VisitPlanCreateNestedManyWithoutCustomerInput
   Tasks?: Prisma.TaskCreateNestedManyWithoutCustomerInput
+  invoiceSubmissions?: Prisma.InvoiceSubmissionCreateNestedManyWithoutCustomerInput
 }
 
 export type CustomerUncheckedCreateWithoutDeliveryOrdersInput = {
@@ -1928,6 +1978,7 @@ export type CustomerUncheckedCreateWithoutDeliveryOrdersInput = {
   Quotations?: Prisma.QuotationUncheckedCreateNestedManyWithoutCustomerInput
   VisitPlans?: Prisma.VisitPlanUncheckedCreateNestedManyWithoutCustomerInput
   Tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutCustomerInput
+  invoiceSubmissions?: Prisma.InvoiceSubmissionUncheckedCreateNestedManyWithoutCustomerInput
 }
 
 export type CustomerCreateOrConnectWithoutDeliveryOrdersInput = {
@@ -1973,6 +2024,7 @@ export type CustomerUpdateWithoutDeliveryOrdersInput = {
   Quotations?: Prisma.QuotationUpdateManyWithoutCustomerNestedInput
   VisitPlans?: Prisma.VisitPlanUpdateManyWithoutCustomerNestedInput
   Tasks?: Prisma.TaskUpdateManyWithoutCustomerNestedInput
+  invoiceSubmissions?: Prisma.InvoiceSubmissionUpdateManyWithoutCustomerNestedInput
 }
 
 export type CustomerUncheckedUpdateWithoutDeliveryOrdersInput = {
@@ -2003,6 +2055,7 @@ export type CustomerUncheckedUpdateWithoutDeliveryOrdersInput = {
   Quotations?: Prisma.QuotationUncheckedUpdateManyWithoutCustomerNestedInput
   VisitPlans?: Prisma.VisitPlanUncheckedUpdateManyWithoutCustomerNestedInput
   Tasks?: Prisma.TaskUncheckedUpdateManyWithoutCustomerNestedInput
+  invoiceSubmissions?: Prisma.InvoiceSubmissionUncheckedUpdateManyWithoutCustomerNestedInput
 }
 
 export type CustomerCreateWithoutInvoicesInput = {
@@ -2032,6 +2085,7 @@ export type CustomerCreateWithoutInvoicesInput = {
   Quotations?: Prisma.QuotationCreateNestedManyWithoutCustomerInput
   VisitPlans?: Prisma.VisitPlanCreateNestedManyWithoutCustomerInput
   Tasks?: Prisma.TaskCreateNestedManyWithoutCustomerInput
+  invoiceSubmissions?: Prisma.InvoiceSubmissionCreateNestedManyWithoutCustomerInput
 }
 
 export type CustomerUncheckedCreateWithoutInvoicesInput = {
@@ -2062,6 +2116,7 @@ export type CustomerUncheckedCreateWithoutInvoicesInput = {
   Quotations?: Prisma.QuotationUncheckedCreateNestedManyWithoutCustomerInput
   VisitPlans?: Prisma.VisitPlanUncheckedCreateNestedManyWithoutCustomerInput
   Tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutCustomerInput
+  invoiceSubmissions?: Prisma.InvoiceSubmissionUncheckedCreateNestedManyWithoutCustomerInput
 }
 
 export type CustomerCreateOrConnectWithoutInvoicesInput = {
@@ -2107,6 +2162,7 @@ export type CustomerUpdateWithoutInvoicesInput = {
   Quotations?: Prisma.QuotationUpdateManyWithoutCustomerNestedInput
   VisitPlans?: Prisma.VisitPlanUpdateManyWithoutCustomerNestedInput
   Tasks?: Prisma.TaskUpdateManyWithoutCustomerNestedInput
+  invoiceSubmissions?: Prisma.InvoiceSubmissionUpdateManyWithoutCustomerNestedInput
 }
 
 export type CustomerUncheckedUpdateWithoutInvoicesInput = {
@@ -2126,6 +2182,145 @@ export type CustomerUncheckedUpdateWithoutInvoicesInput = {
   preferredBank?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  accountingPayments?: Prisma.PaymentUncheckedUpdateManyWithoutCustomerNestedInput
+  Contacts?: Prisma.ContactUncheckedUpdateManyWithoutCustomerNestedInput
+  Leads?: Prisma.LeadUncheckedUpdateManyWithoutCustomerNestedInput
+  Opportunities?: Prisma.OpportunityUncheckedUpdateManyWithoutCustomerNestedInput
+  SalesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutCustomerNestedInput
+  DeliveryOrders?: Prisma.DeliveryOrderUncheckedUpdateManyWithoutCustomerNestedInput
+  CustomerNotes?: Prisma.CustomerNoteUncheckedUpdateManyWithoutCustomerNestedInput
+  CustomerFiles?: Prisma.CustomerFileUncheckedUpdateManyWithoutCustomerNestedInput
+  Quotations?: Prisma.QuotationUncheckedUpdateManyWithoutCustomerNestedInput
+  VisitPlans?: Prisma.VisitPlanUncheckedUpdateManyWithoutCustomerNestedInput
+  Tasks?: Prisma.TaskUncheckedUpdateManyWithoutCustomerNestedInput
+  invoiceSubmissions?: Prisma.InvoiceSubmissionUncheckedUpdateManyWithoutCustomerNestedInput
+}
+
+export type CustomerCreateWithoutInvoiceSubmissionsInput = {
+  name: string
+  address: string
+  phone: string
+  email: string
+  website?: string | null
+  industry?: string | null
+  employeeCount?: number | null
+  revenue?: number | null
+  tags?: Prisma.CustomerCreatetagsInput | string[]
+  isActive?: boolean
+  deletedAt?: Date | string | null
+  preferredBank?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  createdAt?: Date | string
+  updatedAt?: Date | string | null
+  accountManager?: Prisma.UserCreateNestedOneWithoutCustomersInput
+  Invoices?: Prisma.InvoiceCreateNestedManyWithoutCustomerInput
+  accountingPayments?: Prisma.PaymentCreateNestedManyWithoutCustomerInput
+  Contacts?: Prisma.ContactCreateNestedManyWithoutCustomerInput
+  Leads?: Prisma.LeadCreateNestedManyWithoutCustomerInput
+  Opportunities?: Prisma.OpportunityCreateNestedManyWithoutCustomerInput
+  SalesOrders?: Prisma.SalesOrderCreateNestedManyWithoutCustomerInput
+  DeliveryOrders?: Prisma.DeliveryOrderCreateNestedManyWithoutCustomerInput
+  CustomerNotes?: Prisma.CustomerNoteCreateNestedManyWithoutCustomerInput
+  CustomerFiles?: Prisma.CustomerFileCreateNestedManyWithoutCustomerInput
+  Quotations?: Prisma.QuotationCreateNestedManyWithoutCustomerInput
+  VisitPlans?: Prisma.VisitPlanCreateNestedManyWithoutCustomerInput
+  Tasks?: Prisma.TaskCreateNestedManyWithoutCustomerInput
+}
+
+export type CustomerUncheckedCreateWithoutInvoiceSubmissionsInput = {
+  id?: number
+  name: string
+  address: string
+  phone: string
+  email: string
+  website?: string | null
+  industry?: string | null
+  employeeCount?: number | null
+  revenue?: number | null
+  tags?: Prisma.CustomerCreatetagsInput | string[]
+  accountManagerId?: number | null
+  isActive?: boolean
+  deletedAt?: Date | string | null
+  preferredBank?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  createdAt?: Date | string
+  updatedAt?: Date | string | null
+  Invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutCustomerInput
+  accountingPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCustomerInput
+  Contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutCustomerInput
+  Leads?: Prisma.LeadUncheckedCreateNestedManyWithoutCustomerInput
+  Opportunities?: Prisma.OpportunityUncheckedCreateNestedManyWithoutCustomerInput
+  SalesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutCustomerInput
+  DeliveryOrders?: Prisma.DeliveryOrderUncheckedCreateNestedManyWithoutCustomerInput
+  CustomerNotes?: Prisma.CustomerNoteUncheckedCreateNestedManyWithoutCustomerInput
+  CustomerFiles?: Prisma.CustomerFileUncheckedCreateNestedManyWithoutCustomerInput
+  Quotations?: Prisma.QuotationUncheckedCreateNestedManyWithoutCustomerInput
+  VisitPlans?: Prisma.VisitPlanUncheckedCreateNestedManyWithoutCustomerInput
+  Tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutCustomerInput
+}
+
+export type CustomerCreateOrConnectWithoutInvoiceSubmissionsInput = {
+  where: Prisma.CustomerWhereUniqueInput
+  create: Prisma.XOR<Prisma.CustomerCreateWithoutInvoiceSubmissionsInput, Prisma.CustomerUncheckedCreateWithoutInvoiceSubmissionsInput>
+}
+
+export type CustomerUpsertWithoutInvoiceSubmissionsInput = {
+  update: Prisma.XOR<Prisma.CustomerUpdateWithoutInvoiceSubmissionsInput, Prisma.CustomerUncheckedUpdateWithoutInvoiceSubmissionsInput>
+  create: Prisma.XOR<Prisma.CustomerCreateWithoutInvoiceSubmissionsInput, Prisma.CustomerUncheckedCreateWithoutInvoiceSubmissionsInput>
+  where?: Prisma.CustomerWhereInput
+}
+
+export type CustomerUpdateToOneWithWhereWithoutInvoiceSubmissionsInput = {
+  where?: Prisma.CustomerWhereInput
+  data: Prisma.XOR<Prisma.CustomerUpdateWithoutInvoiceSubmissionsInput, Prisma.CustomerUncheckedUpdateWithoutInvoiceSubmissionsInput>
+}
+
+export type CustomerUpdateWithoutInvoiceSubmissionsInput = {
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  industry?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  employeeCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  revenue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  tags?: Prisma.CustomerUpdatetagsInput | string[]
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  preferredBank?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  accountManager?: Prisma.UserUpdateOneWithoutCustomersNestedInput
+  Invoices?: Prisma.InvoiceUpdateManyWithoutCustomerNestedInput
+  accountingPayments?: Prisma.PaymentUpdateManyWithoutCustomerNestedInput
+  Contacts?: Prisma.ContactUpdateManyWithoutCustomerNestedInput
+  Leads?: Prisma.LeadUpdateManyWithoutCustomerNestedInput
+  Opportunities?: Prisma.OpportunityUpdateManyWithoutCustomerNestedInput
+  SalesOrders?: Prisma.SalesOrderUpdateManyWithoutCustomerNestedInput
+  DeliveryOrders?: Prisma.DeliveryOrderUpdateManyWithoutCustomerNestedInput
+  CustomerNotes?: Prisma.CustomerNoteUpdateManyWithoutCustomerNestedInput
+  CustomerFiles?: Prisma.CustomerFileUpdateManyWithoutCustomerNestedInput
+  Quotations?: Prisma.QuotationUpdateManyWithoutCustomerNestedInput
+  VisitPlans?: Prisma.VisitPlanUpdateManyWithoutCustomerNestedInput
+  Tasks?: Prisma.TaskUpdateManyWithoutCustomerNestedInput
+}
+
+export type CustomerUncheckedUpdateWithoutInvoiceSubmissionsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  industry?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  employeeCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  revenue?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  tags?: Prisma.CustomerUpdatetagsInput | string[]
+  accountManagerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  preferredBank?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  Invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutCustomerNestedInput
   accountingPayments?: Prisma.PaymentUncheckedUpdateManyWithoutCustomerNestedInput
   Contacts?: Prisma.ContactUncheckedUpdateManyWithoutCustomerNestedInput
   Leads?: Prisma.LeadUncheckedUpdateManyWithoutCustomerNestedInput
@@ -2166,6 +2361,7 @@ export type CustomerCreateWithoutQuotationsInput = {
   CustomerFiles?: Prisma.CustomerFileCreateNestedManyWithoutCustomerInput
   VisitPlans?: Prisma.VisitPlanCreateNestedManyWithoutCustomerInput
   Tasks?: Prisma.TaskCreateNestedManyWithoutCustomerInput
+  invoiceSubmissions?: Prisma.InvoiceSubmissionCreateNestedManyWithoutCustomerInput
 }
 
 export type CustomerUncheckedCreateWithoutQuotationsInput = {
@@ -2196,6 +2392,7 @@ export type CustomerUncheckedCreateWithoutQuotationsInput = {
   CustomerFiles?: Prisma.CustomerFileUncheckedCreateNestedManyWithoutCustomerInput
   VisitPlans?: Prisma.VisitPlanUncheckedCreateNestedManyWithoutCustomerInput
   Tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutCustomerInput
+  invoiceSubmissions?: Prisma.InvoiceSubmissionUncheckedCreateNestedManyWithoutCustomerInput
 }
 
 export type CustomerCreateOrConnectWithoutQuotationsInput = {
@@ -2241,6 +2438,7 @@ export type CustomerUpdateWithoutQuotationsInput = {
   CustomerFiles?: Prisma.CustomerFileUpdateManyWithoutCustomerNestedInput
   VisitPlans?: Prisma.VisitPlanUpdateManyWithoutCustomerNestedInput
   Tasks?: Prisma.TaskUpdateManyWithoutCustomerNestedInput
+  invoiceSubmissions?: Prisma.InvoiceSubmissionUpdateManyWithoutCustomerNestedInput
 }
 
 export type CustomerUncheckedUpdateWithoutQuotationsInput = {
@@ -2271,6 +2469,7 @@ export type CustomerUncheckedUpdateWithoutQuotationsInput = {
   CustomerFiles?: Prisma.CustomerFileUncheckedUpdateManyWithoutCustomerNestedInput
   VisitPlans?: Prisma.VisitPlanUncheckedUpdateManyWithoutCustomerNestedInput
   Tasks?: Prisma.TaskUncheckedUpdateManyWithoutCustomerNestedInput
+  invoiceSubmissions?: Prisma.InvoiceSubmissionUncheckedUpdateManyWithoutCustomerNestedInput
 }
 
 export type CustomerCreateWithoutSalesOrdersInput = {
@@ -2300,6 +2499,7 @@ export type CustomerCreateWithoutSalesOrdersInput = {
   Quotations?: Prisma.QuotationCreateNestedManyWithoutCustomerInput
   VisitPlans?: Prisma.VisitPlanCreateNestedManyWithoutCustomerInput
   Tasks?: Prisma.TaskCreateNestedManyWithoutCustomerInput
+  invoiceSubmissions?: Prisma.InvoiceSubmissionCreateNestedManyWithoutCustomerInput
 }
 
 export type CustomerUncheckedCreateWithoutSalesOrdersInput = {
@@ -2330,6 +2530,7 @@ export type CustomerUncheckedCreateWithoutSalesOrdersInput = {
   Quotations?: Prisma.QuotationUncheckedCreateNestedManyWithoutCustomerInput
   VisitPlans?: Prisma.VisitPlanUncheckedCreateNestedManyWithoutCustomerInput
   Tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutCustomerInput
+  invoiceSubmissions?: Prisma.InvoiceSubmissionUncheckedCreateNestedManyWithoutCustomerInput
 }
 
 export type CustomerCreateOrConnectWithoutSalesOrdersInput = {
@@ -2375,6 +2576,7 @@ export type CustomerUpdateWithoutSalesOrdersInput = {
   Quotations?: Prisma.QuotationUpdateManyWithoutCustomerNestedInput
   VisitPlans?: Prisma.VisitPlanUpdateManyWithoutCustomerNestedInput
   Tasks?: Prisma.TaskUpdateManyWithoutCustomerNestedInput
+  invoiceSubmissions?: Prisma.InvoiceSubmissionUpdateManyWithoutCustomerNestedInput
 }
 
 export type CustomerUncheckedUpdateWithoutSalesOrdersInput = {
@@ -2405,6 +2607,7 @@ export type CustomerUncheckedUpdateWithoutSalesOrdersInput = {
   Quotations?: Prisma.QuotationUncheckedUpdateManyWithoutCustomerNestedInput
   VisitPlans?: Prisma.VisitPlanUncheckedUpdateManyWithoutCustomerNestedInput
   Tasks?: Prisma.TaskUncheckedUpdateManyWithoutCustomerNestedInput
+  invoiceSubmissions?: Prisma.InvoiceSubmissionUncheckedUpdateManyWithoutCustomerNestedInput
 }
 
 export type CustomerCreateWithoutAccountManagerInput = {
@@ -2434,6 +2637,7 @@ export type CustomerCreateWithoutAccountManagerInput = {
   Quotations?: Prisma.QuotationCreateNestedManyWithoutCustomerInput
   VisitPlans?: Prisma.VisitPlanCreateNestedManyWithoutCustomerInput
   Tasks?: Prisma.TaskCreateNestedManyWithoutCustomerInput
+  invoiceSubmissions?: Prisma.InvoiceSubmissionCreateNestedManyWithoutCustomerInput
 }
 
 export type CustomerUncheckedCreateWithoutAccountManagerInput = {
@@ -2464,6 +2668,7 @@ export type CustomerUncheckedCreateWithoutAccountManagerInput = {
   Quotations?: Prisma.QuotationUncheckedCreateNestedManyWithoutCustomerInput
   VisitPlans?: Prisma.VisitPlanUncheckedCreateNestedManyWithoutCustomerInput
   Tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutCustomerInput
+  invoiceSubmissions?: Prisma.InvoiceSubmissionUncheckedCreateNestedManyWithoutCustomerInput
 }
 
 export type CustomerCreateOrConnectWithoutAccountManagerInput = {
@@ -2541,6 +2746,7 @@ export type CustomerCreateWithoutVisitPlansInput = {
   CustomerFiles?: Prisma.CustomerFileCreateNestedManyWithoutCustomerInput
   Quotations?: Prisma.QuotationCreateNestedManyWithoutCustomerInput
   Tasks?: Prisma.TaskCreateNestedManyWithoutCustomerInput
+  invoiceSubmissions?: Prisma.InvoiceSubmissionCreateNestedManyWithoutCustomerInput
 }
 
 export type CustomerUncheckedCreateWithoutVisitPlansInput = {
@@ -2571,6 +2777,7 @@ export type CustomerUncheckedCreateWithoutVisitPlansInput = {
   CustomerFiles?: Prisma.CustomerFileUncheckedCreateNestedManyWithoutCustomerInput
   Quotations?: Prisma.QuotationUncheckedCreateNestedManyWithoutCustomerInput
   Tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutCustomerInput
+  invoiceSubmissions?: Prisma.InvoiceSubmissionUncheckedCreateNestedManyWithoutCustomerInput
 }
 
 export type CustomerCreateOrConnectWithoutVisitPlansInput = {
@@ -2616,6 +2823,7 @@ export type CustomerUpdateWithoutVisitPlansInput = {
   CustomerFiles?: Prisma.CustomerFileUpdateManyWithoutCustomerNestedInput
   Quotations?: Prisma.QuotationUpdateManyWithoutCustomerNestedInput
   Tasks?: Prisma.TaskUpdateManyWithoutCustomerNestedInput
+  invoiceSubmissions?: Prisma.InvoiceSubmissionUpdateManyWithoutCustomerNestedInput
 }
 
 export type CustomerUncheckedUpdateWithoutVisitPlansInput = {
@@ -2646,6 +2854,7 @@ export type CustomerUncheckedUpdateWithoutVisitPlansInput = {
   CustomerFiles?: Prisma.CustomerFileUncheckedUpdateManyWithoutCustomerNestedInput
   Quotations?: Prisma.QuotationUncheckedUpdateManyWithoutCustomerNestedInput
   Tasks?: Prisma.TaskUncheckedUpdateManyWithoutCustomerNestedInput
+  invoiceSubmissions?: Prisma.InvoiceSubmissionUncheckedUpdateManyWithoutCustomerNestedInput
 }
 
 export type CustomerCreateManyAccountManagerInput = {
@@ -2693,6 +2902,7 @@ export type CustomerUpdateWithoutAccountManagerInput = {
   Quotations?: Prisma.QuotationUpdateManyWithoutCustomerNestedInput
   VisitPlans?: Prisma.VisitPlanUpdateManyWithoutCustomerNestedInput
   Tasks?: Prisma.TaskUpdateManyWithoutCustomerNestedInput
+  invoiceSubmissions?: Prisma.InvoiceSubmissionUpdateManyWithoutCustomerNestedInput
 }
 
 export type CustomerUncheckedUpdateWithoutAccountManagerInput = {
@@ -2723,6 +2933,7 @@ export type CustomerUncheckedUpdateWithoutAccountManagerInput = {
   Quotations?: Prisma.QuotationUncheckedUpdateManyWithoutCustomerNestedInput
   VisitPlans?: Prisma.VisitPlanUncheckedUpdateManyWithoutCustomerNestedInput
   Tasks?: Prisma.TaskUncheckedUpdateManyWithoutCustomerNestedInput
+  invoiceSubmissions?: Prisma.InvoiceSubmissionUncheckedUpdateManyWithoutCustomerNestedInput
 }
 
 export type CustomerUncheckedUpdateManyWithoutAccountManagerInput = {
@@ -2761,6 +2972,7 @@ export type CustomerCountOutputType = {
   Quotations: number
   VisitPlans: number
   Tasks: number
+  invoiceSubmissions: number
 }
 
 export type CustomerCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2776,6 +2988,7 @@ export type CustomerCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensio
   Quotations?: boolean | CustomerCountOutputTypeCountQuotationsArgs
   VisitPlans?: boolean | CustomerCountOutputTypeCountVisitPlansArgs
   Tasks?: boolean | CustomerCountOutputTypeCountTasksArgs
+  invoiceSubmissions?: boolean | CustomerCountOutputTypeCountInvoiceSubmissionsArgs
 }
 
 /**
@@ -2872,6 +3085,13 @@ export type CustomerCountOutputTypeCountTasksArgs<ExtArgs extends runtime.Types.
   where?: Prisma.TaskWhereInput
 }
 
+/**
+ * CustomerCountOutputType without action
+ */
+export type CustomerCountOutputTypeCountInvoiceSubmissionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.InvoiceSubmissionWhereInput
+}
+
 
 export type CustomerSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -2903,6 +3123,7 @@ export type CustomerSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   Quotations?: boolean | Prisma.Customer$QuotationsArgs<ExtArgs>
   VisitPlans?: boolean | Prisma.Customer$VisitPlansArgs<ExtArgs>
   Tasks?: boolean | Prisma.Customer$TasksArgs<ExtArgs>
+  invoiceSubmissions?: boolean | Prisma.Customer$invoiceSubmissionsArgs<ExtArgs>
   _count?: boolean | Prisma.CustomerCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["customer"]>
 
@@ -2980,6 +3201,7 @@ export type CustomerInclude<ExtArgs extends runtime.Types.Extensions.InternalArg
   Quotations?: boolean | Prisma.Customer$QuotationsArgs<ExtArgs>
   VisitPlans?: boolean | Prisma.Customer$VisitPlansArgs<ExtArgs>
   Tasks?: boolean | Prisma.Customer$TasksArgs<ExtArgs>
+  invoiceSubmissions?: boolean | Prisma.Customer$invoiceSubmissionsArgs<ExtArgs>
   _count?: boolean | Prisma.CustomerCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type CustomerIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -3005,6 +3227,7 @@ export type $CustomerPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     Quotations: Prisma.$QuotationPayload<ExtArgs>[]
     VisitPlans: Prisma.$VisitPlanPayload<ExtArgs>[]
     Tasks: Prisma.$TaskPayload<ExtArgs>[]
+    invoiceSubmissions: Prisma.$InvoiceSubmissionPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -3430,6 +3653,7 @@ export interface Prisma__CustomerClient<T, Null = never, ExtArgs extends runtime
   Quotations<T extends Prisma.Customer$QuotationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Customer$QuotationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$QuotationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   VisitPlans<T extends Prisma.Customer$VisitPlansArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Customer$VisitPlansArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$VisitPlanPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   Tasks<T extends Prisma.Customer$TasksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Customer$TasksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TaskPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  invoiceSubmissions<T extends Prisma.Customer$invoiceSubmissionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Customer$invoiceSubmissionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InvoiceSubmissionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4180,6 +4404,30 @@ export type Customer$TasksArgs<ExtArgs extends runtime.Types.Extensions.Internal
   take?: number
   skip?: number
   distinct?: Prisma.TaskScalarFieldEnum | Prisma.TaskScalarFieldEnum[]
+}
+
+/**
+ * Customer.invoiceSubmissions
+ */
+export type Customer$invoiceSubmissionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the InvoiceSubmission
+   */
+  select?: Prisma.InvoiceSubmissionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the InvoiceSubmission
+   */
+  omit?: Prisma.InvoiceSubmissionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.InvoiceSubmissionInclude<ExtArgs> | null
+  where?: Prisma.InvoiceSubmissionWhereInput
+  orderBy?: Prisma.InvoiceSubmissionOrderByWithRelationInput | Prisma.InvoiceSubmissionOrderByWithRelationInput[]
+  cursor?: Prisma.InvoiceSubmissionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.InvoiceSubmissionScalarFieldEnum | Prisma.InvoiceSubmissionScalarFieldEnum[]
 }
 
 /**
