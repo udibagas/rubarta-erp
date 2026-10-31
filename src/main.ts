@@ -18,6 +18,11 @@ import { createLogger } from './logging/logger.config';
 import { DatabaseLogger } from './logging/database-logger';
 import { PrismaService } from './prisma/prisma.service';
 import { httpLogger } from './logging/http-logger.middleware';
+
+const corsOrigins = process.env.CORS_ORIGINS?.split(',')
+  .map((origin) => origin.trim())
+  .filter(Boolean) ?? ['http://localhost:4000', 'https://erp.rubarta.co.id'];
+
 function parseValidationError(errors: ValidationError[]) {
   return errors.map((error) => {
     const e = { property: error.property, error: '', children: [] };
@@ -39,13 +44,7 @@ async function bootstrap() {
     bufferLogs: true,
     cors: {
       credentials: true,
-      origin: [
-        'http://localhost:4000',
-        'http://erp.rubarta.co.id',
-        'http://nkp.rubarta.co.id',
-        'https://erp.rubarta.co.id',
-        'https://nkp.rubarta.co.id',
-      ],
+      origin: corsOrigins,
     },
   });
 
