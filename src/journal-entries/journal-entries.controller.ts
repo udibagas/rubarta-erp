@@ -9,6 +9,7 @@ import {
   Patch,
   Post,
   Query,
+  SerializeOptions,
 } from '@nestjs/common';
 import { Auth } from '../auth/auth.decorator';
 import { JournalStatus, User } from '../prisma/client/client';
@@ -17,6 +18,7 @@ import {
   ReverseJournalEntryDto,
 } from './journal-entries.dto';
 import { JournalEntriesService } from './journal-entries.service';
+import { JournalEntry } from './journal-entry.entity';
 
 @Controller('api/accounting/journals')
 export class JournalEntriesController {
@@ -28,6 +30,7 @@ export class JournalEntriesController {
   }
 
   @Get()
+  @SerializeOptions({ type: JournalEntry })
   findAll(
     @Query('periodId', new ParseIntPipe({ optional: true })) periodId?: number,
     @Query('status', new ParseEnumPipe(JournalStatus, { optional: true }))
