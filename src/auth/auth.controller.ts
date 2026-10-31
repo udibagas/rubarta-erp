@@ -151,15 +151,25 @@ export class AuthController {
         isDefault: true,
       },
     });
+
     if (company) res.cookie('companyId', company.id);
-    res.cookie('token', token);
+
+    res.cookie('token', token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
+      path: '/',
+      maxAge: TRUSTED_DEVICE_TTL_MS,
+    });
+
     res.cookie('refreshToken', refreshToken, {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
-      sameSite: 'lax',
+      sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
       path: '/api/auth/refresh',
       maxAge: REFRESH_TOKEN_TTL_MS,
     });
+
     res.cookie('_csrf', req.csrfToken());
   }
 
