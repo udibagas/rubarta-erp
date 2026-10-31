@@ -23,6 +23,14 @@ const corsOrigins = process.env.CORS_ORIGINS?.split(',')
   .map((origin) => origin.trim())
   .filter(Boolean) ?? ['http://localhost:4000', 'https://erp.rubarta.co.id'];
 
+const cspFrameAncestors = process.env.CSP_FRAME_ANCESTORS?.split(',')
+  .map((origin) => origin.trim())
+  .filter(Boolean) ?? [
+  'http://localhost:4000',
+  'https://erp.rubarta.co.id',
+  'https://nkp.rubarta.co.id',
+];
+
 function parseValidationError(errors: ValidationError[]) {
   return errors.map((error) => {
     const e = { property: error.property, error: '', children: [] };
@@ -79,12 +87,7 @@ async function bootstrap() {
           defaultSrc: ["'self'"],
           scriptSrc: ["'self'", "'unsafe-inline'"],
           styleSrc: ["'self'", "'unsafe-inline'"],
-          frameAncestors: [
-            "'self'",
-            'http://localhost:4000',
-            'https://erp.rubarta.co.id',
-            'https://nkp.rubarta.co.id',
-          ],
+          frameAncestors: ["'self'", ...cspFrameAncestors],
         },
       },
     }),
