@@ -34,6 +34,25 @@ $ npm install
 
 ## Running the app
 
+Set `CORS_ORIGINS` in `.env` to a comma-separated list of allowed frontend
+origins, for example:
+
+```env
+CORS_ORIGINS=http://localhost:4000,https://erp.rubarta.co.id,https://nkp.rubarta.co.id
+```
+
+If `CORS_ORIGINS` is unset, the application uses its existing default origins.
+
+Set `CSP_FRAME_ANCESTORS` in `.env` to a comma-separated list of origins
+allowed to embed the application. The `'self'` source is always included.
+
+```env
+CSP_FRAME_ANCESTORS=http://localhost:4000,https://erp.rubarta.co.id,https://nkp.rubarta.co.id
+```
+
+If `CSP_FRAME_ANCESTORS` is unset, the application uses its existing default
+origins.
+
 ```bash
 # development
 $ npm run start
