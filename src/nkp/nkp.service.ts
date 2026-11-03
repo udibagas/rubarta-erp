@@ -1,6 +1,6 @@
-import { Injectable, Logger, BadRequestException } from '@nestjs/common';
-import { CloseNkpDto, NkpDto, QueryNkpDto } from './nkp.dto';
-import { PrismaService } from '../prisma/prisma.service';
+import { Injectable, Logger, BadRequestException } from "@nestjs/common";
+import { CloseNkpDto, NkpDto, QueryNkpDto } from "./nkp.dto";
+import { PrismaService } from "../prisma/prisma.service";
 import {
   ApprovalStatus,
   ApprovalType,
@@ -12,16 +12,16 @@ import {
   Prisma,
   Role,
   User,
-} from '../prisma/client/client';
-import { EventEmitter2, OnEvent } from '@nestjs/event-emitter';
-import { NotificationsService } from '../notifications/notifications.service';
-import * as ExcelJS from 'exceljs';
-import PDFDocument from 'pdfkit';
-import { createPdfDocumentWithTables } from 'pdfkit-table';
-import { formatDateNumeric } from '../helpers/date';
-import { toDecimal } from '../helpers/number';
-import { Cron, CronExpression } from '@nestjs/schedule';
-import { NkpPolicy } from './nkp.policy';
+} from "../prisma/client/client";
+import { EventEmitter2, OnEvent } from "@nestjs/event-emitter";
+import { NotificationsService } from "../notifications/notifications.service";
+import * as ExcelJS from "exceljs";
+import PDFDocument from "pdfkit";
+import { createPdfDocumentWithTables } from "pdfkit-table";
+import { formatDateNumeric } from "../helpers/date";
+import { toDecimal } from "../helpers/number";
+import { Cron, CronExpression } from "@nestjs/schedule";
+import { NkpPolicy } from "./nkp.policy";
 
 @Injectable()
 export class NkpService {
@@ -35,31 +35,29 @@ export class NkpService {
   ) {}
 
   async create(dto: NkpDto, user: User) {
-    this.policy.can('create', null, user);
+    this.policy.can("create", null, user);
     const { NkpItem: items, NkpAttachment: attachments, ...data } = dto;
     const { companyId, paymentType, nkpType, parentId } = data;
 
-    if (data.supplierId && data.paymentType === 'VENDOR') {
-      const existingNkp = await this.prisma.nkp.findFirst({
-        where: {
-          supplierId: data.supplierId,
-          invoiceNumber: data.invoiceNumber,
-          paymentType: 'VENDOR',
-        },
-      });
-
-      if (existingNkp) {
-        throw new BadRequestException({
-          message: 'Invoice sudah diproses',
-          errors: [
-            {
-              property: 'invoiceNumber',
-              error: 'Nomor invoice untuk supplier ini sudah ada',
-            },
-          ],
-        });
-      }
-
+    if (data.supplierId && data.paymentType === "VENDOR") {
+      // const existingNkp = await this.prisma.nkp.findFirst({
+      //   where: {
+      //     supplierId: data.supplierId,
+      //     invoiceNumber: data.invoiceNumber,
+      //     paymentType: 'VENDOR',
+      //   },
+      // });
+      // if (existingNkp) {
+      //   throw new BadRequestException({
+      //     message: 'Invoice sudah diproses',
+      //     errors: [
+      //       {
+      //         property: 'invoiceNumber',
+      //         error: 'Nomor invoice untuk supplier ini sudah ada',
+      //       },
+      //     ],
+      //   });
+      // }
       // const thirtyDaysAgo = new Date();
       // thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
       // const existingNkpWithAmount = await this.prisma.nkp.findFirst({
@@ -70,7 +68,6 @@ export class NkpService {
       //     paymentType: 'VENDOR',
       //   },
       // });
-
       // if (existingNkpWithAmount) {
       //   throw new BadRequestException({
       //     message: 'Invoice sudah diproses',
@@ -104,14 +101,14 @@ export class NkpService {
     });
 
     if (savedData.status == PaymentStatus.SUBMITTED) {
-      this.eventEmitter.emit('nkp.submitted', savedData);
+      this.eventEmitter.emit("nkp.submitted", savedData);
     }
 
     return savedData;
   }
 
   async findAll(params: QueryNkpDto, user?: User) {
-    this.policy.can('viewAny', null, user);
+    this.policy.can("viewAny", null, user);
     const {
       page,
       pageSize,
@@ -121,8 +118,8 @@ export class NkpService {
       paymentType,
       dateRange,
       action,
-      orderBy = 'updatedAt',
-      orderDirection = 'desc',
+      orderBy = "updatedAt",
+      orderDirection = "desc",
     } = params;
 
     const where: Prisma.NkpWhereInput = {};
@@ -135,7 +132,7 @@ export class NkpService {
       where.status = { in: status };
     }
 
-    if (status && typeof status == 'string') {
+    if (status && typeof status == "string") {
       where.status = status;
     }
 
@@ -157,31 +154,31 @@ export class NkpService {
       where.paymentType = paymentType as PaymentType;
     }
 
-    if (dateRange && dateRange !== 'null') {
+    if (dateRange && dateRange !== "null") {
       const [start, end] =
-        typeof dateRange == 'object' ? dateRange : dateRange.split(',');
+        typeof dateRange == "object" ? dateRange : dateRange.split(",");
       where.date = { gte: new Date(start), lte: new Date(end) };
     }
 
     // kalau ga ada page asumsi dari report
     if (action) {
-      where.status = { not: 'DRAFT' };
+      where.status = { not: "DRAFT" };
     }
 
     if (keyword) {
       where.OR = [
-        { number: { contains: keyword, mode: 'insensitive' } },
-        { description: { contains: keyword, mode: 'insensitive' } },
-        { bankRefNo: { contains: keyword, mode: 'insensitive' } },
-        { invoiceNumber: { contains: keyword, mode: 'insensitive' } },
+        { number: { contains: keyword, mode: "insensitive" } },
+        { description: { contains: keyword, mode: "insensitive" } },
+        { bankRefNo: { contains: keyword, mode: "insensitive" } },
+        { invoiceNumber: { contains: keyword, mode: "insensitive" } },
         {
           Employee: {
-            name: { contains: keyword, mode: 'insensitive' },
+            name: { contains: keyword, mode: "insensitive" },
           },
         },
         {
           Supplier: {
-            name: { contains: keyword, mode: 'insensitive' },
+            name: { contains: keyword, mode: "insensitive" },
           },
         },
       ];
@@ -209,7 +206,7 @@ export class NkpService {
       },
     };
 
-    if (!action || action == 'report') {
+    if (!action || action == "report") {
       options.take = pageSize;
       options.skip = (page - 1) * pageSize;
     }
@@ -226,9 +223,9 @@ export class NkpService {
     const result = await this.findAll(
       {
         ...params,
-        orderBy: 'number',
-        orderDirection: 'asc',
-        action: 'download',
+        orderBy: "number",
+        orderDirection: "asc",
+        action: "download",
       },
       user,
     );
@@ -237,40 +234,40 @@ export class NkpService {
     });
     const PDFDocumentWithTables = createPdfDocumentWithTables(PDFDocument);
     const doc = new PDFDocumentWithTables({
-      size: 'A4',
+      size: "A4",
       margin: 40,
-      layout: 'landscape',
+      layout: "landscape",
     });
     const headers = [
-      { label: 'NO', property: 'no', align: 'center' as const, width: 35 },
-      { label: 'DATE', property: 'date', align: 'center' as const, width: 65 },
+      { label: "NO", property: "no", align: "center" as const, width: 35 },
+      { label: "DATE", property: "date", align: "center" as const, width: 65 },
       {
-        label: 'NUMBER',
-        property: 'number',
-        align: 'center' as const,
+        label: "NUMBER",
+        property: "number",
+        align: "center" as const,
         width: 115,
       },
       {
-        label: 'BANK REF NO',
-        property: 'bankRefNo',
+        label: "BANK REF NO",
+        property: "bankRefNo",
         width: 105,
       },
       {
-        label: 'DESCRIPTION',
-        property: 'description',
-        align: 'left' as const,
+        label: "DESCRIPTION",
+        property: "description",
+        align: "left" as const,
         width: 230,
       },
       {
-        label: 'AMOUNT',
-        property: 'amount',
-        align: 'right' as const,
+        label: "AMOUNT",
+        property: "amount",
+        align: "right" as const,
         width: 90,
       },
       {
-        label: 'CURR',
-        property: 'currency',
-        align: 'center' as const,
+        label: "CURR",
+        property: "currency",
+        align: "center" as const,
         width: 45,
       },
     ];
@@ -281,32 +278,32 @@ export class NkpService {
     const availableWidth = doc.page.width - 80;
     const rows = result.data.map((item, index) => ({
       no: index + 1,
-      date: item.date ? formatDateNumeric(item.date) : '',
-      number: item.number || '',
-      bankRefNo: item.bankRefNo || '',
-      description: item.description || '',
+      date: item.date ? formatDateNumeric(item.date) : "",
+      number: item.number || "",
+      bankRefNo: item.bankRefNo || "",
+      description: item.description || "",
       amount: toDecimal(
         item.finalPayment > 0 ? item.finalPayment : item.grandTotal,
       ),
-      currency: item.currency || '',
+      currency: item.currency || "",
     }));
 
     return new Promise((resolve, reject) => {
       const chunks: Buffer[] = [];
-      doc.on('data', (chunk) => chunks.push(chunk));
-      doc.on('end', () => resolve(Buffer.concat(chunks)));
-      doc.on('error', reject);
+      doc.on("data", (chunk) => chunks.push(chunk));
+      doc.on("end", () => resolve(Buffer.concat(chunks)));
+      doc.on("error", reject);
 
       doc
-        .font('Helvetica-Bold')
+        .font("Helvetica-Bold")
         .fontSize(16)
-        .text('LAPORAN NKP', { align: 'center' });
+        .text("LAPORAN NKP", { align: "center" });
       doc.moveDown(0.3);
-      doc.fontSize(12).text(company.name.toUpperCase(), { align: 'center' });
+      doc.fontSize(12).text(company.name.toUpperCase(), { align: "center" });
       doc.moveDown(0.8);
-      doc.font('Helvetica').fontSize(10);
-      doc.text(`TYPE: ${params.paymentType || 'ALL'}`);
-      doc.text(`DATE: ${params.dateRange || ''}`);
+      doc.font("Helvetica").fontSize(10);
+      doc.text(`TYPE: ${params.paymentType || "ALL"}`);
+      doc.text(`DATE: ${params.dateRange || ""}`);
       doc.moveDown(0.8);
       doc.table(
         {
@@ -326,51 +323,51 @@ export class NkpService {
     const result = await this.findAll(
       {
         ...params,
-        orderBy: 'number',
-        orderDirection: 'asc',
-        action: 'download',
+        orderBy: "number",
+        orderDirection: "asc",
+        action: "download",
       },
       user,
     );
     const workbook = new ExcelJS.Workbook();
-    const worksheet = workbook.addWorksheet('NKP Report');
+    const worksheet = workbook.addWorksheet("NKP Report");
 
     worksheet.columns = [
-      { header: 'No', key: 'no', width: 5 },
-      { header: 'Date', key: 'date', width: 15 },
-      { header: 'Number', key: 'number', width: 30 },
-      { header: 'Type', key: 'type', width: 30 },
-      { header: 'Bank Ref No.', key: 'bankRefNo', width: 30 },
-      { header: 'Invoice No.', key: 'invoiceNumber', width: 30 },
-      { header: 'Description', key: 'description', width: 50 },
-      { header: 'Amount', key: 'amount', width: 15 },
-      { header: 'Curr', key: 'curr', width: 10 },
+      { header: "No", key: "no", width: 5 },
+      { header: "Date", key: "date", width: 15 },
+      { header: "Number", key: "number", width: 30 },
+      { header: "Type", key: "type", width: 30 },
+      { header: "Bank Ref No.", key: "bankRefNo", width: 30 },
+      { header: "Invoice No.", key: "invoiceNumber", width: 30 },
+      { header: "Description", key: "description", width: 50 },
+      { header: "Amount", key: "amount", width: 15 },
+      { header: "Curr", key: "curr", width: 10 },
     ];
     worksheet.getRow(1).font = { bold: true };
     worksheet.getRow(1).fill = {
-      type: 'pattern',
-      pattern: 'solid',
-      fgColor: { argb: 'FFD3D3D3' },
+      type: "pattern",
+      pattern: "solid",
+      fgColor: { argb: "FFD3D3D3" },
     };
 
     result.data.forEach((item, index) => {
       const row = worksheet.addRow({
         no: index + 1,
-        date: item.createdAt ? formatDateNumeric(item.createdAt) : '',
-        number: item.number || '',
+        date: item.createdAt ? formatDateNumeric(item.createdAt) : "",
+        number: item.number || "",
         type: `${item.paymentType} / ${item.nkpType}`,
-        bankRefNo: item.bankRefNo || '',
-        invoiceNumber: item.invoiceNumber || '',
-        description: item.description || '',
+        bankRefNo: item.bankRefNo || "",
+        invoiceNumber: item.invoiceNumber || "",
+        description: item.description || "",
         amount: item.finalPayment > 0 ? item.finalPayment : item.grandTotal,
-        curr: item.currency || '',
+        curr: item.currency || "",
       });
 
       if (index % 2 === 1) {
         row.fill = {
-          type: 'pattern',
-          pattern: 'solid',
-          fgColor: { argb: 'FFF5F5F5' },
+          type: "pattern",
+          pattern: "solid",
+          fgColor: { argb: "FFF5F5F5" },
         };
       }
     });
@@ -380,15 +377,15 @@ export class NkpService {
 
   async findOne(id: any, user?: User) {
     const where: Prisma.NkpWhereInput = {};
-    if (typeof id == 'number') where.id = id;
-    if (typeof id == 'string') where.number = id;
+    if (typeof id == "number") where.id = id;
+    if (typeof id == "string") where.number = id;
 
     const nkp = await this.prisma.nkp.findFirstOrThrow({
       where,
       include: {
         NkpItem: true,
         NkpApproval: {
-          orderBy: { level: 'asc' },
+          orderBy: { level: "asc" },
           include: {
             User: {
               select: { name: true, signatureSpeciment: true },
@@ -428,37 +425,35 @@ export class NkpService {
       },
     });
 
-    this.policy.can('view', nkp, user);
+    this.policy.can("view", nkp, user);
     return nkp;
   }
 
   async update(id: number, dto: NkpDto, user: User) {
     const nkp = await this.prisma.nkp.findUniqueOrThrow({ where: { id } });
-    this.policy.can('update', nkp, user);
+    this.policy.can("update", nkp, user);
     const { NkpItem: items, NkpAttachment: attachments, ...data } = dto;
 
-    if (data.supplierId && data.paymentType === 'VENDOR') {
-      const existingNkp = await this.prisma.nkp.findFirst({
-        where: {
-          supplierId: data.supplierId,
-          invoiceNumber: data.invoiceNumber,
-          id: { not: id },
-          paymentType: 'VENDOR',
-        },
-      });
-
-      if (existingNkp) {
-        throw new BadRequestException({
-          message: 'Invoice sudah diproses',
-          errors: [
-            {
-              property: 'invoiceNumber',
-              error: 'Nomor invoice untuk supplier ini sudah ada',
-            },
-          ],
-        });
-      }
-
+    if (data.supplierId && data.paymentType === "VENDOR") {
+      // const existingNkp = await this.prisma.nkp.findFirst({
+      //   where: {
+      //     supplierId: data.supplierId,
+      //     invoiceNumber: data.invoiceNumber,
+      //     id: { not: id },
+      //     paymentType: "VENDOR",
+      //   },
+      // });
+      // if (existingNkp) {
+      //   throw new BadRequestException({
+      //     message: "Invoice sudah diproses",
+      //     errors: [
+      //       {
+      //         property: "invoiceNumber",
+      //         error: "Nomor invoice untuk supplier ini sudah ada",
+      //       },
+      //     ],
+      //   });
+      // }
       // const thirtyDaysAgo = new Date();
       // thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
       // const existingNkpWithAmount = await this.prisma.nkp.findFirst({
@@ -470,7 +465,6 @@ export class NkpService {
       //     paymentType: 'VENDOR',
       //   },
       // });
-
       // if (existingNkpWithAmount) {
       //   throw new BadRequestException({
       //     message: 'Invoice sudah diproses',
@@ -499,7 +493,7 @@ export class NkpService {
     });
 
     if (savedData.status == PaymentStatus.SUBMITTED) {
-      this.eventEmitter.emit('nkp.submitted', savedData);
+      this.eventEmitter.emit("nkp.submitted", savedData);
     }
 
     return savedData;
@@ -510,7 +504,7 @@ export class NkpService {
       where: { id },
     });
 
-    this.policy.can('update', nkp, user);
+    this.policy.can("update", nkp, user);
     const { companyId, paymentType, nkpType, parentId } = nkp;
     const number = await this.generateNumber({
       companyId,
@@ -527,7 +521,7 @@ export class NkpService {
       },
     });
 
-    this.eventEmitter.emit('nkp.submitted', savedData);
+    this.eventEmitter.emit("nkp.submitted", savedData);
     return savedData;
   }
 
@@ -536,7 +530,7 @@ export class NkpService {
       where: { id },
     });
 
-    this.policy.can('delete', nkp, user);
+    this.policy.can("delete", nkp, user);
 
     return this.prisma.nkp.delete({
       where: { id },
@@ -548,7 +542,7 @@ export class NkpService {
       where: { id },
     });
 
-    this.policy.can('delete', nkp, user);
+    this.policy.can("delete", nkp, user);
     return this.prisma.nkpItem.delete({
       where: { id: itemId },
     });
@@ -585,7 +579,7 @@ export class NkpService {
     const { paymentType, employeeId, requesterId } = approval.Nkp;
 
     this.notification.notify({
-      userId: paymentType == 'EMPLOYEE' ? employeeId : requesterId,
+      userId: paymentType == "EMPLOYEE" ? employeeId : requesterId,
       title: `NKP Nomor ${request.number} Telah Disetujui`,
       message: `NKP Nomor ${request.number} telah disetujui oleh ${approval.User.name}`,
       redirectUrl: `https://erp.rubarta.co.id/nkp?number=${request.number}`,
@@ -594,7 +588,7 @@ export class NkpService {
     if (!pendingApprovalCount) {
       // NOTIFIKASI KE EMPLOYEE ATAU KE REQUESTER
       this.notification.notify({
-        userId: paymentType == 'EMPLOYEE' ? employeeId : requesterId,
+        userId: paymentType == "EMPLOYEE" ? employeeId : requesterId,
         title: `NKP Nomor ${request.number} Telah Disetujui Sepenuhnya`,
         message: `NKP Nomor ${request.number} telah disetujui sepenuhnya. Proses pembayaran akan segera diproses. Mohon tunggu.`,
         redirectUrl: `https://erp.rubarta.co.id/nkp?number=${request.number}`,
@@ -633,7 +627,7 @@ export class NkpService {
       where: { id },
     });
 
-    this.policy.can('close', existingNkp, user);
+    this.policy.can("close", existingNkp, user);
     const { bankRefNo, attachments } = data;
 
     const request = await this.prisma.nkp.update({
@@ -649,7 +643,7 @@ export class NkpService {
 
     this.notification.notify({
       userId:
-        request.paymentType == 'EMPLOYEE'
+        request.paymentType == "EMPLOYEE"
           ? request.employeeId
           : request.requesterId,
       title: `NKP Nomor ${request.number} Telah Selesai Diproses`,
@@ -743,7 +737,7 @@ export class NkpService {
       return (
         await this.prisma.nkp.aggregate({
           _sum: { finalPayment: true },
-          where: { number: nkp.number, nkpType: 'DOWN_PAYMENT' },
+          where: { number: nkp.number, nkpType: "DOWN_PAYMENT" },
         })
       )._sum.finalPayment;
     }
@@ -769,37 +763,37 @@ export class NkpService {
     // const bank = 'DNM'; // TODO: apakah harusnya dinamis? DNM = Bank Danamon
 
     const paymentTypes = {
-      [PaymentType.EMPLOYEE]: 'EMP',
-      [PaymentType.VENDOR]: 'VEN',
+      [PaymentType.EMPLOYEE]: "EMP",
+      [PaymentType.VENDOR]: "VEN",
     };
 
     const nkpTypes = {
-      [NkpType.CASH_ADVANCE]: 'CA',
-      [NkpType.DECLARATION]: 'DCL',
-      [NkpType.SALARY]: 'SLR',
-      [NkpType.DOWN_PAYMENT]: 'DP',
-      [NkpType.SETTLEMENT]: 'STL',
+      [NkpType.CASH_ADVANCE]: "CA",
+      [NkpType.DECLARATION]: "DCL",
+      [NkpType.SALARY]: "SLR",
+      [NkpType.DOWN_PAYMENT]: "DP",
+      [NkpType.SETTLEMENT]: "STL",
     };
 
     const type = `${paymentTypes[paymentType]}-${nkpTypes[nkpType]}`;
 
     const [month, year] = new Date()
-      .toLocaleString('id-ID', {
-        month: 'numeric',
-        year: 'numeric',
+      .toLocaleString("id-ID", {
+        month: "numeric",
+        year: "numeric",
       })
-      .split('/');
+      .split("/");
 
-    let number = '0001';
+    let number = "0001";
 
     if (parentId) {
       const parent = await this.prisma.nkp.findUniqueOrThrow({
         where: { id: parentId },
       });
-      number = parent.number.split('/')[0];
+      number = parent.number.split("/")[0];
     } else {
       const lastData = await this.prisma.nkp.findFirst({
-        orderBy: { number: 'desc' },
+        orderBy: { number: "desc" },
         where: {
           companyId,
           number: { endsWith: year },
@@ -807,31 +801,31 @@ export class NkpService {
       });
 
       if (lastData) {
-        const [lastNumber] = lastData.number.split('/');
-        number = (Number(lastNumber) + 1).toString().padStart(4, '0');
+        const [lastNumber] = lastData.number.split("/");
+        number = (Number(lastNumber) + 1).toString().padStart(4, "0");
       }
     }
 
     const romanMonth = [
-      '',
-      'I',
-      'II',
-      'III',
-      'IV',
-      'V',
-      'VI',
-      'VII',
-      'VIII',
-      'IX',
-      'X',
-      'XI',
-      'XII',
+      "",
+      "I",
+      "II",
+      "III",
+      "IV",
+      "V",
+      "VI",
+      "VII",
+      "VIII",
+      "IX",
+      "X",
+      "XI",
+      "XII",
     ][+month];
 
     return `${number}/NKP-${type}-${code}/${romanMonth}/${year}`;
   }
 
-  @OnEvent('nkp.submitted', { async: true })
+  @OnEvent("nkp.submitted", { async: true })
   async requestForApproval(data: Nkp) {
     const approval = await this.prisma.approvalSetting.findFirst({
       where: {
@@ -864,7 +858,7 @@ export class NkpService {
 
     if (firstLevelApprovals.length > 0) {
       firstLevelApprovals.forEach((approval) => {
-        this.eventEmitter.emit('nkp.notify', {
+        this.eventEmitter.emit("nkp.notify", {
           data,
           approval,
         });
@@ -872,13 +866,13 @@ export class NkpService {
     }
   }
 
-  @OnEvent('nkp.notify', { async: true })
+  @OnEvent("nkp.notify", { async: true })
   sendNotification(params: { data: Nkp; approval: NkpApproval }) {
     const { data, approval } = params;
     const approvalAction = {
-      APPROVAL: 'Persetujuan',
-      VERIFICATION: 'Verifikasi',
-      AUTHORIZATION: 'Otorisasi',
+      APPROVAL: "Persetujuan",
+      VERIFICATION: "Verifikasi",
+      AUTHORIZATION: "Otorisasi",
     };
 
     const action = `${approvalAction[approval.approvalActionType]}`;
