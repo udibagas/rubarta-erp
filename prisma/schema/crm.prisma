@@ -27,19 +27,6 @@ enum OpportunityStages {
   Closed_Lost // Opportunity has been lost
 }
 
-enum QuotationStatus {
-  Draft // Quotation is being prepared
-  Cancelled // Quotation has been cancelled
-  Submitted // Quotation is submitted for internal approval
-  PartiallyApproved // Quotation is partially approved
-  Approved // Quotation is internally approved
-  Declined // Quotation is internally declined
-  Sent // Quotation has been sent to the customer
-  Accepted // Customer has accepted the quotation
-  Rejected // Customer has rejected the quotation
-  Expired // Quotation validity period has expired
-}
-
 enum TaskStatus {
   Todo
   InProgress

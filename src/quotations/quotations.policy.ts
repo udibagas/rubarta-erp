@@ -23,7 +23,13 @@ export class QuotationsPolicy extends BasePolicy {
   }
 
   protected update(model: Quotation, user: User) {
-    return this.authorizeDraftMutation(model, user);
+    const forbiddenStages = ['Sent', 'Accepted', 'Rejected', 'Expired'];
+    if (forbiddenStages.includes(model.status)) throw new ForbiddenException();
+    if (user.roles.includes('ADMIN')) return true;
+    if (user.roles.includes('SALES_REP') && model.userId === user.id) {
+      return true;
+    }
+    throw new ForbiddenException();
   }
 
   protected updateStatus(model: Quotation, user: User) {
