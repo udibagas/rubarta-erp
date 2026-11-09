@@ -40,11 +40,13 @@ export class GoodsReceiptItemDto {
   description: string;
 
   @ApiProperty({ example: 10 })
+  @Type(() => Number)
   @IsInt({ message: 'Invalid quantity order' })
   @Min(1, { message: 'Quantity order must be at least 1' })
   quantityOrder: number;
 
   @ApiProperty({ example: 10 })
+  @Type(() => Number)
   @IsInt({ message: 'Invalid quantity received' })
   @Min(1, { message: 'Quantity received must be at least 1' })
   quantityReceived: number;
