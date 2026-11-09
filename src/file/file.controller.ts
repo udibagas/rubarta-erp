@@ -65,8 +65,12 @@ export class FileController {
 
   @Delete()
   async removeFile(@Query('path') path: string) {
-    await fs.unlink(path);
-    return { message: 'File has beed deleted' };
+    try {
+      await fs.unlink(path);
+      return { message: 'File has been deleted' };
+    } catch (error) {
+      return { message: `Failed to delete file. ${(error as Error).message}` };
+    }
   }
 
   @Post('move-file')
