@@ -323,7 +323,7 @@ export function generatePurchaseOrderPdf(order: any): Promise<Buffer> {
       },
     ];
 
-    const summaryTableHeight = summaryData.length * 24 + 10;
+    const summaryTableHeight = summaryData.length * 30 + 10;
     const availableSpace = doc.page.height - doc.page.margins.bottom - doc.y;
 
     if (availableSpace < summaryTableHeight) {
