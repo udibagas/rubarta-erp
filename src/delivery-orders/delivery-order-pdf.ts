@@ -273,6 +273,17 @@ export function generateDeliveryOrderPdf(deliveryOrder: any): Promise<Buffer> {
       .fontSize(9)
       .text(`Notes: ${deliveryOrder.notes || '-'}`);
 
+    const signatureBlockHeight = 110; // Total height needed for signature block
+    const signatureSpacing = 30;
+    const requiredSpaceForSignatures = signatureBlockHeight + signatureSpacing;
+    const pageBottom = doc.page.height - doc.page.margins.bottom;
+
+    // Check if there's enough space for signature columns
+    // If not, move to a new page
+    if (doc.y + requiredSpaceForSignatures > pageBottom) {
+      doc.addPage();
+    }
+
     const signatureTop = doc.y + 30;
     const signatureColumnWidth = width / 3;
     const signatureColumns = [
