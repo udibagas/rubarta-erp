@@ -299,34 +299,45 @@ export function generatePurchaseOrderPdf(order: any): Promise<Buffer> {
       order.discount && order.totalAmount
         ? Math.round((order.discount / order.totalAmount) * 100)
         : 0;
+
+    const summaryData = [
+      {
+        label: 'bold:SUBTOTAL',
+        value: `bold:${formatAmount(order.totalAmount)}`,
+      },
+      {
+        label: `bold:DISCOUNT (${discountPct}%)`,
+        value: `bold:${formatAmount(order.discount || 0)}`,
+      },
+      ...(order.vatAmount
+        ? [
+            {
+              label: 'bold:VAT',
+              value: `bold:${formatAmount(order.vatAmount)}`,
+            },
+          ]
+        : []),
+      {
+        label: 'bold:GRAND TOTAL',
+        value: `bold:${formatAmount(order.grandTotal)}`,
+      },
+    ];
+
+    const summaryTableHeight = summaryData.length * 20 + 10;
+    const availableSpace =
+      doc.page.height - doc.page.margins.bottom - doc.y;
+
+    if (availableSpace < summaryTableHeight) {
+      doc.addPage();
+    }
+
     doc.table(
       {
         headers: [
           { label: 'Label', property: 'label' },
           { label: 'Value', property: 'value', align: 'right' },
         ],
-        data: [
-          {
-            label: 'bold:SUBTOTAL',
-            value: `bold:${formatAmount(order.totalAmount)}`,
-          },
-          {
-            label: `bold:DISCOUNT (${discountPct}%)`,
-            value: `bold:${formatAmount(order.discount || 0)}`,
-          },
-          ...(order.vatAmount
-            ? [
-                {
-                  label: 'bold:VAT',
-                  value: `bold:${formatAmount(order.vatAmount)}`,
-                },
-              ]
-            : []),
-          {
-            label: 'bold:GRAND TOTAL',
-            value: `bold:${formatAmount(order.grandTotal)}`,
-          },
-        ],
+        data: summaryData,
       },
       { hideHeader: true, x: right - 200, width: 200 },
     );
