@@ -326,10 +326,7 @@ export function generateInvoicePdf(invoice: any): Promise<Buffer> {
     const commentsPadding = 7;
     const commentsTextWidth = commentsWidth - commentsPadding * 2;
 
-    if (
-      summaryY + commentsHeight >
-      doc.page.height - doc.page.margins.bottom
-    ) {
+    if (summaryY + commentsHeight > doc.page.height - doc.page.margins.bottom) {
       doc.addPage();
       summaryY = doc.y + 16;
     }
@@ -414,11 +411,11 @@ export function generateInvoicePdf(invoice: any): Promise<Buffer> {
           },
           {
             label: 'bold:VAT',
-            value: `bold:${formatAmount(Math.ceil(invoice.vatAmount), invoice.currency)}`,
+            value: `bold:${formatAmount(Math.round(invoice.vatAmount), invoice.currency)}`,
           },
           {
             label: 'bold:GRAND TOTAL',
-            value: `bold:${formatAmount(Math.ceil(invoice.grandTotal), invoice.currency)}`,
+            value: `bold:${formatAmount(Math.round(invoice.grandTotal), invoice.currency)}`,
           },
         ],
       },
