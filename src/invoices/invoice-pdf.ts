@@ -424,6 +424,7 @@ export function generateInvoicePdf(invoice: any): Promise<Buffer> {
         x: right - 220,
         y: summaryY,
         width: 220,
+        absolutePosition: true,
       },
     );
 
