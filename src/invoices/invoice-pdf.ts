@@ -331,6 +331,40 @@ export function generateInvoicePdf(invoice: any): Promise<Buffer> {
       summaryY = doc.y + 16;
     }
 
+    doc.table(
+      {
+        headers: [
+          { label: 'Label', property: 'label' },
+          { label: 'Value', property: 'value', align: 'right' },
+        ],
+        data: [
+          {
+            label: 'bold:SUBTOTAL',
+            value: `bold:${formatAmount(invoice.totalAmount, invoice.currency)}`,
+          },
+          {
+            label: 'bold:DISCOUNT',
+            value: `bold:${formatAmount(invoice.discount, invoice.currency)}`,
+          },
+          {
+            label: 'bold:VAT',
+            value: `bold:${formatAmount(Math.round(invoice.vatAmount), invoice.currency)}`,
+          },
+          {
+            label: 'bold:GRAND TOTAL',
+            value: `bold:${formatAmount(Math.round(invoice.grandTotal), invoice.currency)}`,
+          },
+        ],
+      },
+      {
+        hideHeader: true,
+        x: right - 220,
+        y: summaryY,
+        width: 220,
+        absolutePosition: true,
+      },
+    );
+
     doc
       .lineWidth(0.75)
       .strokeColor(COLORS.gray)
@@ -393,40 +427,6 @@ export function generateInvoicePdf(invoice: any): Promise<Buffer> {
     doc.text('Put Invoice No. for reference.', commentX, summaryY + 108, {
       width: commentsTextWidth,
     });
-
-    doc.table(
-      {
-        headers: [
-          { label: 'Label', property: 'label' },
-          { label: 'Value', property: 'value', align: 'right' },
-        ],
-        data: [
-          {
-            label: 'bold:SUBTOTAL',
-            value: `bold:${formatAmount(invoice.totalAmount, invoice.currency)}`,
-          },
-          {
-            label: 'bold:DISCOUNT',
-            value: `bold:${formatAmount(invoice.discount, invoice.currency)}`,
-          },
-          {
-            label: 'bold:VAT',
-            value: `bold:${formatAmount(Math.round(invoice.vatAmount), invoice.currency)}`,
-          },
-          {
-            label: 'bold:GRAND TOTAL',
-            value: `bold:${formatAmount(Math.round(invoice.grandTotal), invoice.currency)}`,
-          },
-        ],
-      },
-      {
-        hideHeader: true,
-        x: right - 220,
-        y: summaryY,
-        width: 220,
-        absolutePosition: true,
-      },
-    );
 
     y = Math.max(doc.y, summaryY + 126);
 
