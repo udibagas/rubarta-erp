@@ -406,11 +406,11 @@ export function generateInvoicePdf(invoice: any): Promise<Buffer> {
           },
           {
             label: 'bold:VAT',
-            value: `bold:${formatAmount(invoice.vatAmount, invoice.currency)}`,
+            value: `bold:${formatAmount(Math.ceil(invoice.vatAmount), invoice.currency)}`,
           },
           {
             label: 'bold:GRAND TOTAL',
-            value: `bold:${formatAmount(invoice.grandTotal, invoice.currency)}`,
+            value: `bold:${formatAmount(Math.ceil(invoice.grandTotal), invoice.currency)}`,
           },
         ],
       },
@@ -465,12 +465,10 @@ export function generateInvoicePdf(invoice: any): Promise<Buffer> {
     doc
       .font('Helvetica-Bold')
       .fontSize(9)
-      .text(
-        signerName,
-        signatureX,
-        signatureY,
-        { width: signatureWidth, align: 'center' },
-      );
+      .text(signerName, signatureX, signatureY, {
+        width: signatureWidth,
+        align: 'center',
+      });
 
     doc.end();
   });
