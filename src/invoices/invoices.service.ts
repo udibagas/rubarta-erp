@@ -298,8 +298,10 @@ export class InvoicesService {
     });
 
     this.policy.can('delete', invoice, user);
-    return this.prisma.invoice.delete({
-      where: { id },
+
+    return this.prisma.$transaction(async (tx) => {
+      await tx.invoiceItem.deleteMany({ where: { invoiceId: id } });
+      await tx.invoice.delete({ where: { id } });
     });
   }
 
