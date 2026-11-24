@@ -320,11 +320,19 @@ export function generateInvoicePdf(invoice: any): Promise<Buffer> {
       { y: y + 20, x: left, absolutePosition: true },
     );
 
-    const summaryY = doc.y + 16;
+    let summaryY = doc.y + 16;
     const commentsWidth = width - 240;
     const commentsHeight = 126;
     const commentsPadding = 7;
     const commentsTextWidth = commentsWidth - commentsPadding * 2;
+
+    if (
+      summaryY + commentsHeight >
+      doc.page.height - doc.page.margins.bottom
+    ) {
+      doc.addPage();
+      summaryY = doc.y + 16;
+    }
 
     doc
       .lineWidth(0.75)
