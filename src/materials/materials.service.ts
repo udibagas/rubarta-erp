@@ -61,9 +61,6 @@ export class MaterialsService {
         },
         { name: { contains: query.keyword, mode: 'insensitive' } },
         { description: { contains: query.keyword, mode: 'insensitive' } },
-        {
-          Supplier: { name: { contains: query.keyword, mode: 'insensitive' } },
-        },
       ];
     }
 
@@ -72,7 +69,7 @@ export class MaterialsService {
     }
 
     if (query.supplierId) {
-      where.supplierId = query.supplierId;
+      where.SupplierMaterial = { some: { supplierId: query.supplierId } };
     }
 
     if (query.isActive !== undefined) {
