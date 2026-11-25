@@ -84,6 +84,7 @@ export const ModelName = {
   InvoiceSubmission: 'InvoiceSubmission',
   InvoiceSubmissionItem: 'InvoiceSubmissionItem',
   Material: 'Material',
+  SupplierMaterial: 'SupplierMaterial',
   Nkp: 'Nkp',
   NkpItem: 'NkpItem',
   NkpApproval: 'NkpApproval',
@@ -705,6 +706,15 @@ export const MaterialScalarFieldEnum = {
 } as const
 
 export type MaterialScalarFieldEnum = (typeof MaterialScalarFieldEnum)[keyof typeof MaterialScalarFieldEnum]
+
+
+export const SupplierMaterialScalarFieldEnum = {
+  id: 'id',
+  supplierId: 'supplierId',
+  materialId: 'materialId'
+} as const
+
+export type SupplierMaterialScalarFieldEnum = (typeof SupplierMaterialScalarFieldEnum)[keyof typeof SupplierMaterialScalarFieldEnum]
 
 
 export const NkpScalarFieldEnum = {

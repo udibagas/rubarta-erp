@@ -26,10 +26,24 @@ model Material {
 
   // Relationships
   Supplier Supplier? @relation(fields: [supplierId], references: [id])
+  SupplierMaterial SupplierMaterial[]
 
   @@index([partNumber])
   @@index([supplierId])
   @@index([isActive])
   @@index([deletedAt])
   @@map("Materials")
+}
+
+model SupplierMaterial {
+  id         Int      @id @default(autoincrement())
+  supplierId Int
+  materialId Int
+
+  // Relationships
+  Supplier Supplier @relation(fields: [supplierId], references: [id])
+  Material Material @relation(fields: [materialId], references: [id])
+
+  @@unique([supplierId, materialId])
+  @@map("SupplierMaterials")
 }

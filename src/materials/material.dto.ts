@@ -107,6 +107,11 @@ export class CreateMaterialDto {
   @IsInt()
   supplierId?: number;
 
+  @ApiProperty({ required: false, example: [1, 2, 3] })
+  @IsOptional()
+  @IsInt({ each: true })
+  supplierIds?: number[];
+
   @ApiProperty({ required: false, example: 7 })
   @IsOptional()
   @IsInt()

@@ -183,22 +183,6 @@ export const OpportunityStages = {
 export type OpportunityStages = (typeof OpportunityStages)[keyof typeof OpportunityStages]
 
 
-export const QuotationStatus = {
-  Draft: 'Draft',
-  Cancelled: 'Cancelled',
-  Submitted: 'Submitted',
-  PartiallyApproved: 'PartiallyApproved',
-  Approved: 'Approved',
-  Declined: 'Declined',
-  Sent: 'Sent',
-  Accepted: 'Accepted',
-  Rejected: 'Rejected',
-  Expired: 'Expired'
-} as const
-
-export type QuotationStatus = (typeof QuotationStatus)[keyof typeof QuotationStatus]
-
-
 export const TaskStatus = {
   Todo: 'Todo',
   InProgress: 'InProgress',
@@ -299,6 +283,22 @@ export const PurchaseOrderStatus = {
 } as const
 
 export type PurchaseOrderStatus = (typeof PurchaseOrderStatus)[keyof typeof PurchaseOrderStatus]
+
+
+export const QuotationStatus = {
+  Draft: 'Draft',
+  Cancelled: 'Cancelled',
+  Submitted: 'Submitted',
+  PartiallyApproved: 'PartiallyApproved',
+  Approved: 'Approved',
+  Declined: 'Declined',
+  Sent: 'Sent',
+  Accepted: 'Accepted',
+  Rejected: 'Rejected',
+  Expired: 'Expired'
+} as const
+
+export type QuotationStatus = (typeof QuotationStatus)[keyof typeof QuotationStatus]
 
 
 export const SalesOrderStatus = {

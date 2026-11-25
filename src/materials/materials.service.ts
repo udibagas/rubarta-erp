@@ -29,12 +29,24 @@ export class MaterialsService {
       );
     }
 
-    return this.prisma.material.create({
+    const material = await this.prisma.material.create({
       data,
       include: {
         Supplier: { select: { id: true, name: true } },
       },
     });
+
+    if (data.supplierIds && data.supplierIds.length > 0) {
+      await this.prisma.supplierMaterial.createMany({
+        data: data.supplierIds.map((supplierId) => ({
+          supplierId,
+          materialId: material.id,
+        })),
+        skipDuplicates: true,
+      });
+    }
+
+    return material;
   }
 
   async findAll(query: QueryMaterialDto) {
@@ -157,13 +169,25 @@ export class MaterialsService {
       }
     }
 
-    return this.prisma.material.update({
+    const material = await this.prisma.material.update({
       where: { id },
       data,
       include: {
         Supplier: { select: { id: true, name: true } },
       },
     });
+
+    if (data.supplierIds && data.supplierIds.length > 0) {
+      await this.prisma.supplierMaterial.createMany({
+        data: data.supplierIds.map((supplierId) => ({
+          supplierId,
+          materialId: material.id,
+        })),
+        skipDuplicates: true,
+      });
+    }
+
+    return material;
   }
 
   async remove(id: number) {

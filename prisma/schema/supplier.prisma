@@ -23,6 +23,7 @@ model Supplier {
   goodsReceipts  GoodsReceipt[]
   vendorBills    VendorBill[]
   payments       Payment[]
+  SupplierMaterial SupplierMaterial[]
 
   @@map("Suppliers")
 }

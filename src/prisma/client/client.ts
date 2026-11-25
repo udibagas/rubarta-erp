@@ -205,6 +205,11 @@ export type InvoiceSubmissionItem = Prisma.InvoiceSubmissionItemModel
  */
 export type Material = Prisma.MaterialModel
 /**
+ * Model SupplierMaterial
+ * 
+ */
+export type SupplierMaterial = Prisma.SupplierMaterialModel
+/**
  * Model Nkp
  * 
  */
