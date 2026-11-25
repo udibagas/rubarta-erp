@@ -29,16 +29,12 @@ export class MaterialsService {
       );
     }
 
-    const material = await this.prisma.material.create({
-      data,
-      include: {
-        Supplier: { select: { id: true, name: true } },
-      },
-    });
+    const { supplierId, supplierIds, ...materialData } = data;
+    const material = await this.prisma.material.create({ data: materialData });
 
-    if (data.supplierIds && data.supplierIds.length > 0) {
+    if (supplierIds && supplierIds.length > 0) {
       await this.prisma.supplierMaterial.createMany({
-        data: data.supplierIds.map((supplierId) => ({
+        data: supplierIds.map((supplierId) => ({
           supplierId,
           materialId: material.id,
         })),
@@ -101,10 +97,24 @@ export class MaterialsService {
         take: limit,
         include: {
           Supplier: { select: { id: true, name: true } },
+          SupplierMaterial: {
+            select: {
+              supplierId: true,
+              Supplier: { select: { name: true } },
+            },
+          },
         },
       });
 
-      return { data: materials, page, total };
+      return {
+        data: materials.map((material) => ({
+          ...material,
+          supplierIds: material.SupplierMaterial.map((sm) => sm.supplierId),
+          suppliers: material.SupplierMaterial.map((sm) => sm.Supplier.name),
+        })),
+        page,
+        total,
+      };
     }
 
     let materials = await this.prisma.material.findMany({
@@ -112,10 +122,20 @@ export class MaterialsService {
       orderBy: { name: 'asc' },
       include: {
         Supplier: { select: { id: true, name: true } },
+        SupplierMaterial: {
+          select: {
+            supplierId: true,
+            Supplier: { select: { name: true } },
+          },
+        },
       },
     });
 
-    return materials;
+    return materials.map((material) => ({
+      ...material,
+      supplierIds: material.SupplierMaterial.map((sm) => sm.supplierId),
+      suppliers: material.SupplierMaterial.map((sm) => sm.Supplier.name),
+    }));
   }
 
   async findOne(id: number) {
@@ -169,17 +189,15 @@ export class MaterialsService {
       }
     }
 
+    const { supplierId, supplierIds, ...materialData } = data;
     const material = await this.prisma.material.update({
       where: { id },
-      data,
-      include: {
-        Supplier: { select: { id: true, name: true } },
-      },
+      data: materialData,
     });
 
-    if (data.supplierIds && data.supplierIds.length > 0) {
+    if (supplierIds && supplierIds.length > 0) {
       await this.prisma.supplierMaterial.createMany({
-        data: data.supplierIds.map((supplierId) => ({
+        data: supplierIds.map((supplierId) => ({
           supplierId,
           materialId: material.id,
         })),
