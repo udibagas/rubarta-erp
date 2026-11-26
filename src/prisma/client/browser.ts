@@ -188,6 +188,11 @@ export type Material = Prisma.MaterialModel
  */
 export type SupplierMaterial = Prisma.SupplierMaterialModel
 /**
+ * Model MaterialPrice
+ * 
+ */
+export type MaterialPrice = Prisma.MaterialPriceModel
+/**
  * Model Nkp
  * 
  */

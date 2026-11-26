@@ -29,13 +29,23 @@ export class MaterialsService {
       );
     }
 
-    const { supplierId, supplierIds, ...materialData } = data;
+    const { supplierId, supplierIds, materialPrices, ...materialData } = data;
     const material = await this.prisma.material.create({ data: materialData });
 
     if (supplierIds && supplierIds.length > 0) {
       await this.prisma.supplierMaterial.createMany({
         data: supplierIds.map((supplierId) => ({
           supplierId,
+          materialId: material.id,
+        })),
+        skipDuplicates: true,
+      });
+    }
+
+    if (materialPrices && materialPrices.length > 0) {
+      await this.prisma.materialPrice.createMany({
+        data: materialPrices.map((price) => ({
+          ...price,
           materialId: material.id,
         })),
         skipDuplicates: true,
@@ -186,7 +196,7 @@ export class MaterialsService {
       }
     }
 
-    const { supplierId, supplierIds, ...materialData } = data;
+    const { supplierId, supplierIds, materialPrices, ...materialData } = data;
     const material = await this.prisma.material.update({
       where: { id },
       data: materialData,
@@ -196,6 +206,16 @@ export class MaterialsService {
       await this.prisma.supplierMaterial.createMany({
         data: supplierIds.map((supplierId) => ({
           supplierId,
+          materialId: material.id,
+        })),
+        skipDuplicates: true,
+      });
+    }
+
+    if (materialPrices && materialPrices.length > 0) {
+      await this.prisma.materialPrice.createMany({
+        data: materialPrices.map((price) => ({
+          ...price,
           materialId: material.id,
         })),
         skipDuplicates: true,

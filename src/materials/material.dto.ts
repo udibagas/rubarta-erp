@@ -8,7 +8,34 @@ import {
   IsBoolean,
   MaxLength,
   Min,
+  ValidateNested,
 } from 'class-validator';
+
+export class MaterialPriceDto {
+  @ApiProperty({ example: 1 })
+  @IsInt()
+  supplierId: number;
+
+  @ApiProperty({ example: 100000 })
+  @IsNumber()
+  @Min(0)
+  purchasePrice: number;
+
+  @ApiProperty({ example: 'USD' })
+  @IsString()
+  @MaxLength(3)
+  currency: string;
+
+  @ApiProperty({ required: false, example: '2024-01-01T00:00:00Z' })
+  @IsOptional()
+  @Type(() => Date)
+  startDate?: Date;
+
+  @ApiProperty({ required: false, example: '2024-12-31T00:00:00Z' })
+  @IsOptional()
+  @Type(() => Date)
+  endDate?: Date;
+}
 
 export class CreateMaterialDto {
   @ApiProperty({ example: 'PART-001' })
@@ -117,6 +144,12 @@ export class CreateMaterialDto {
   @IsInt()
   @Min(0)
   leadTime?: number;
+
+  @ApiProperty({ required: false, type: [MaterialPriceDto] })
+  @IsOptional()
+  @ValidateNested({ each: true })
+  @Type(() => MaterialPriceDto)
+  materialPrices?: MaterialPriceDto[];
 }
 
 export class UpdateMaterialDto extends PartialType(CreateMaterialDto) {}

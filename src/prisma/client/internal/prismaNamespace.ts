@@ -431,6 +431,7 @@ export const ModelName = {
   InvoiceSubmissionItem: 'InvoiceSubmissionItem',
   Material: 'Material',
   SupplierMaterial: 'SupplierMaterial',
+  MaterialPrice: 'MaterialPrice',
   Nkp: 'Nkp',
   NkpItem: 'NkpItem',
   NkpApproval: 'NkpApproval',
@@ -469,7 +470,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "account" | "accountBalance" | "fiscalPeriod" | "journalEntry" | "journalLine" | "vendorBill" | "payment" | "paymentAllocation" | "cashBankAccount" | "bankTransaction" | "taxRate" | "expense" | "approvalSetting" | "approvalSettingItem" | "approval" | "approvalItem" | "lead" | "opportunity" | "task" | "interaction" | "customerNote" | "customerFile" | "customer" | "contact" | "deliveryOrder" | "deliveryOrderItem" | "goodsReceipt" | "goodsReceiptItem" | "invoice" | "invoiceItem" | "invoiceSubmission" | "invoiceSubmissionItem" | "material" | "supplierMaterial" | "nkp" | "nkpItem" | "nkpApproval" | "nkpAttachment" | "notification" | "purchaseOrder" | "purchaseOrderItem" | "quotation" | "quotationItem" | "salesOrder" | "salesOrderItem" | "company" | "department" | "bank" | "authSession" | "twoFactorChallenge" | "trustedDevice" | "passwordResetToken" | "appLog" | "supplier" | "user" | "userBalance" | "visitPlan"
+    modelProps: "account" | "accountBalance" | "fiscalPeriod" | "journalEntry" | "journalLine" | "vendorBill" | "payment" | "paymentAllocation" | "cashBankAccount" | "bankTransaction" | "taxRate" | "expense" | "approvalSetting" | "approvalSettingItem" | "approval" | "approvalItem" | "lead" | "opportunity" | "task" | "interaction" | "customerNote" | "customerFile" | "customer" | "contact" | "deliveryOrder" | "deliveryOrderItem" | "goodsReceipt" | "goodsReceiptItem" | "invoice" | "invoiceItem" | "invoiceSubmission" | "invoiceSubmissionItem" | "material" | "supplierMaterial" | "materialPrice" | "nkp" | "nkpItem" | "nkpApproval" | "nkpAttachment" | "notification" | "purchaseOrder" | "purchaseOrderItem" | "quotation" | "quotationItem" | "salesOrder" | "salesOrderItem" | "company" | "department" | "bank" | "authSession" | "twoFactorChallenge" | "trustedDevice" | "passwordResetToken" | "appLog" | "supplier" | "user" | "userBalance" | "visitPlan"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -2989,6 +2990,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    MaterialPrice: {
+      payload: Prisma.$MaterialPricePayload<ExtArgs>
+      fields: Prisma.MaterialPriceFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.MaterialPriceFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MaterialPricePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.MaterialPriceFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MaterialPricePayload>
+        }
+        findFirst: {
+          args: Prisma.MaterialPriceFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MaterialPricePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.MaterialPriceFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MaterialPricePayload>
+        }
+        findMany: {
+          args: Prisma.MaterialPriceFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MaterialPricePayload>[]
+        }
+        create: {
+          args: Prisma.MaterialPriceCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MaterialPricePayload>
+        }
+        createMany: {
+          args: Prisma.MaterialPriceCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.MaterialPriceCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MaterialPricePayload>[]
+        }
+        delete: {
+          args: Prisma.MaterialPriceDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MaterialPricePayload>
+        }
+        update: {
+          args: Prisma.MaterialPriceUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MaterialPricePayload>
+        }
+        deleteMany: {
+          args: Prisma.MaterialPriceDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.MaterialPriceUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.MaterialPriceUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MaterialPricePayload>[]
+        }
+        upsert: {
+          args: Prisma.MaterialPriceUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MaterialPricePayload>
+        }
+        aggregate: {
+          args: Prisma.MaterialPriceAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateMaterialPrice>
+        }
+        groupBy: {
+          args: Prisma.MaterialPriceGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.MaterialPriceGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.MaterialPriceCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.MaterialPriceCountAggregateOutputType> | number
+        }
+      }
+    }
     Nkp: {
       payload: Prisma.$NkpPayload<ExtArgs>
       fields: Prisma.NkpFieldRefs
@@ -5321,6 +5396,21 @@ export const SupplierMaterialScalarFieldEnum = {
 export type SupplierMaterialScalarFieldEnum = (typeof SupplierMaterialScalarFieldEnum)[keyof typeof SupplierMaterialScalarFieldEnum]
 
 
+export const MaterialPriceScalarFieldEnum = {
+  id: 'id',
+  supplierId: 'supplierId',
+  materialId: 'materialId',
+  purchasePrice: 'purchasePrice',
+  currency: 'currency',
+  startDate: 'startDate',
+  endDate: 'endDate',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type MaterialPriceScalarFieldEnum = (typeof MaterialPriceScalarFieldEnum)[keyof typeof MaterialPriceScalarFieldEnum]
+
+
 export const NkpScalarFieldEnum = {
   id: 'id',
   date: 'date',
@@ -6561,6 +6651,7 @@ export type GlobalOmitConfig = {
   invoiceSubmissionItem?: Prisma.InvoiceSubmissionItemOmit
   material?: Prisma.MaterialOmit
   supplierMaterial?: Prisma.SupplierMaterialOmit
+  materialPrice?: Prisma.MaterialPriceOmit
   nkp?: Prisma.NkpOmit
   nkpItem?: Prisma.NkpItemOmit
   nkpApproval?: Prisma.NkpApprovalOmit

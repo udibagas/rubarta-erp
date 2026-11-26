@@ -16,14 +16,15 @@ model Supplier {
   bankId Int
 
   // Relations
-  Bank           Bank            @relation(fields: [bankId], references: [id])
-  Nkp            Nkp[]
-  Material       Material[]
-  purchaseOrders PurchaseOrder[]
-  goodsReceipts  GoodsReceipt[]
-  vendorBills    VendorBill[]
-  payments       Payment[]
+  Bank             Bank               @relation(fields: [bankId], references: [id])
+  Nkp              Nkp[]
+  Material         Material[]
+  purchaseOrders   PurchaseOrder[]
+  goodsReceipts    GoodsReceipt[]
+  vendorBills      VendorBill[]
+  payments         Payment[]
   SupplierMaterial SupplierMaterial[]
+  materialPrices   MaterialPrice[]
 
   @@map("Suppliers")
 }

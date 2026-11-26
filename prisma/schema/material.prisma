@@ -25,8 +25,9 @@ model Material {
   updatedAt DateTime? @updatedAt
 
   // Relationships
-  Supplier Supplier? @relation(fields: [supplierId], references: [id])
+  Supplier         Supplier?          @relation(fields: [supplierId], references: [id])
   SupplierMaterial SupplierMaterial[]
+  materialPrices   MaterialPrice[]
 
   @@index([partNumber])
   @@index([supplierId])
@@ -36,7 +37,7 @@ model Material {
 }
 
 model SupplierMaterial {
-  id         Int      @id @default(autoincrement())
+  id         Int @id @default(autoincrement())
   supplierId Int
   materialId Int
 
@@ -46,4 +47,26 @@ model SupplierMaterial {
 
   @@unique([supplierId, materialId])
   @@map("SupplierMaterials")
+}
+
+model MaterialPrice {
+  id            Int       @id @default(autoincrement())
+  supplierId    Int
+  materialId    Int
+  purchasePrice Decimal   @db.Decimal(10, 2)
+  currency      String    @db.Char(3) // ISO 4217 currency code
+  startDate     DateTime? @db.Timestamp()
+  endDate       DateTime? @db.Timestamp()
+
+  // Timestamps
+  createdAt DateTime  @default(now())
+  updatedAt DateTime? @updatedAt
+
+  // Relationships
+  Material Material @relation(fields: [materialId], references: [id])
+  Supplier Supplier @relation(fields: [supplierId], references: [id])
+
+  @@index([materialId])
+  @@index([supplierId])
+  @@map("MaterialPrices")
 }
