@@ -259,12 +259,18 @@ export class MaterialsService {
     }
 
     if (materialPrices && materialPrices.length > 0) {
-      await this.prisma.materialPrice.createMany({
-        data: materialPrices.map((price) => ({
-          ...price,
-          materialId: material.id,
-        })),
-        skipDuplicates: true,
+      await this.prisma.$transaction(async (t) => {
+        await t.materialPrice.deleteMany({
+          where: { materialId: material.id },
+        });
+
+        await t.materialPrice.createMany({
+          data: materialPrices.map((price) => ({
+            ...price,
+            materialId: material.id,
+          })),
+          skipDuplicates: true,
+        });
       });
     }
 
