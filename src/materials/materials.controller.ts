@@ -16,7 +16,9 @@ import {
   FileTypeValidator,
   Res,
   StreamableFile,
+  SerializeOptions,
 } from '@nestjs/common';
+import { Material } from './material.entity';
 import {
   ApiTags,
   ApiBearerAuth,
@@ -51,6 +53,7 @@ export class MaterialsController {
   @Get()
   @ApiOperation({ summary: 'Get all materials' })
   @ApiOkResponse({ description: 'List of materials' })
+  // @SerializeOptions({ type: Material })
   findAll(@Query() query: QueryMaterialDto) {
     return this.materialsService.findAll(query);
   }
@@ -65,6 +68,7 @@ export class MaterialsController {
   @Get(':id')
   @ApiOperation({ summary: 'Get material by ID' })
   @ApiOkResponse({ description: 'Material details' })
+  // @SerializeOptions({ type: Material })
   findOne(@Param('id', ParseIntPipe) id: number) {
     return this.materialsService.findOne(id);
   }

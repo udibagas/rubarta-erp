@@ -112,6 +112,7 @@ export class MaterialsService {
           },
           materialPrices: {
             select: {
+              supplierId: true,
               currency: true,
               purchasePrice: true,
               Supplier: { select: { name: true } },
@@ -125,6 +126,10 @@ export class MaterialsService {
           ...material,
           supplierIds: material.SupplierMaterial.map((sm) => sm.supplierId),
           suppliers: material.SupplierMaterial.map((sm) => sm.Supplier.name),
+          materialPrices: material.materialPrices.map((mp) => ({
+            ...mp,
+            purchasePrice: Number(mp.purchasePrice),
+          })),
         })),
         page,
         total,
@@ -144,6 +149,7 @@ export class MaterialsService {
         },
         materialPrices: {
           select: {
+            supplierId: true,
             currency: true,
             purchasePrice: true,
             Supplier: { select: { name: true } },
@@ -156,6 +162,10 @@ export class MaterialsService {
       ...material,
       supplierIds: material.SupplierMaterial.map((sm) => sm.supplierId),
       suppliers: material.SupplierMaterial.map((sm) => sm.Supplier.name),
+      materialPrices: material.materialPrices.map((mp) => ({
+        ...mp,
+        purchasePrice: Number(mp.purchasePrice),
+      })),
     }));
   }
 
@@ -172,6 +182,7 @@ export class MaterialsService {
         },
         materialPrices: {
           select: {
+            supplierId: true,
             currency: true,
             purchasePrice: true,
             Supplier: { select: { name: true } },
@@ -188,6 +199,10 @@ export class MaterialsService {
       ...material,
       supplierIds: material.SupplierMaterial.map((sm) => sm.supplierId),
       suppliers: material.SupplierMaterial.map((sm) => sm.Supplier.name),
+      materialPrices: material.materialPrices.map((mp) => ({
+        ...mp,
+        purchasePrice: Number(mp.purchasePrice),
+      })),
     };
   }
 
