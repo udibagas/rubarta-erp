@@ -110,6 +110,13 @@ export class MaterialsService {
               Supplier: { select: { name: true } },
             },
           },
+          materialPrices: {
+            select: {
+              currency: true,
+              purchasePrice: true,
+              Supplier: { select: { name: true } },
+            },
+          },
         },
       });
 
@@ -135,6 +142,13 @@ export class MaterialsService {
             Supplier: { select: { name: true } },
           },
         },
+        materialPrices: {
+          select: {
+            currency: true,
+            purchasePrice: true,
+            Supplier: { select: { name: true } },
+          },
+        },
       },
     });
 
@@ -149,7 +163,20 @@ export class MaterialsService {
     const material = await this.prisma.material.findFirst({
       where: { id, deletedAt: null },
       include: {
-        Supplier: true,
+        Supplier: { select: { id: true, name: true } },
+        SupplierMaterial: {
+          select: {
+            supplierId: true,
+            Supplier: { select: { name: true } },
+          },
+        },
+        materialPrices: {
+          select: {
+            currency: true,
+            purchasePrice: true,
+            Supplier: { select: { name: true } },
+          },
+        },
       },
     });
 
@@ -157,7 +184,11 @@ export class MaterialsService {
       throw new NotFoundException(`Material with ID ${id} not found`);
     }
 
-    return material;
+    return {
+      ...material,
+      supplierIds: material.SupplierMaterial.map((sm) => sm.supplierId),
+      suppliers: material.SupplierMaterial.map((sm) => sm.Supplier.name),
+    };
   }
 
   async findByPartNumber(partNumber: string) {
